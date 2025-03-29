@@ -47,9 +47,43 @@ from "dbo"."BorrowTransactions" "BorrowTransactions"
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="Status" type="String" readOnly="true" label="Status" computed="true">
+      <formula>CASE 
+      WHEN ReturnDate IS NOT NULL AND ReturnDate &gt; DueDate THEN 'Overdue'
+      WHEN DueDate &lt; GETDATE() AND ReturnDate IS NULL THEN 'Overdue'
+      ELSE 'Not Overdue'
+END</formula>
+    </field>
+    <field name="OverduePeriod" type="Int32" readOnly="true" label="Overdue Period" computed="true">
+      <formula>CASE 
+       WHEN ReturnDate IS NOT NULL AND ReturnDate &gt; DueDate THEN DATEDIFF(day, DueDate, ReturnDate)
+        WHEN DueDate &lt; GETDATE() AND ReturnDate IS NULL THEN DATEDIFF(day, DueDate, GETDATE())
+        ELSE 0
+    END
+    </formula>
+    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Lending Activities" sortExpression="BorrowDate DESC">
+    <view id="grid1" type="Grid" commandId="command1" label="Lending Activities" sortExpression="BorrowDate DESC" filter="(DueDate &lt; GETDATE() AND ReturnDate IS NULL) OR (ReturnDate IS NOT NULL AND ReturnDate &gt; DueDate)">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="BookID" aliasFieldName="BookTitle" />
+        <dataField fieldName="BookAuthor" columns="40" />
+        <dataField fieldName="MemberID" aliasFieldName="MemberName" />
+        <dataField fieldName="BorrowDate" columns="20" />
+        <dataField fieldName="DueDate" columns="20" />
+        <dataField fieldName="ReturnDate" columns="10" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="20" hidden="true">
+          <headerText>Issued By</headerText>
+        </dataField>
+        <dataField fieldName="ModifiedBy" columns="20" hidden="true" />
+        <dataField fieldName="Status" columns="10" />
+        <dataField fieldName="OverduePeriod" columns="15" />
+      </dataFields>
+    </view>
+    <view id="grid1_all_lendings" type="Grid" commandId="command1" label="All Lending Activities" sortExpression="BorrowDate DESC">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="BookID" aliasFieldName="BookTitle" />
@@ -64,6 +98,8 @@ from "dbo"."BorrowTransactions" "BorrowTransactions"
           <headerText>Issued By</headerText>
         </dataField>
         <dataField fieldName="ModifiedBy" columns="20" hidden="true" />
+        <dataField fieldName="Status" />
+        <dataField fieldName="OverduePeriod" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Lending Transaction">
@@ -78,6 +114,8 @@ from "dbo"."BorrowTransactions" "BorrowTransactions"
             <dataField fieldName="BorrowDate" columns="10" />
             <dataField fieldName="DueDate" columns="10" />
             <dataField fieldName="ReturnDate" columns="10" />
+            <dataField fieldName="Status" />
+            <dataField fieldName="OverduePeriod" columns="15" />
           </dataFields>
         </category>
         <category id="c2" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
@@ -107,6 +145,8 @@ from "dbo"."BorrowTransactions" "BorrowTransactions"
             <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
             <dataField fieldName="CreatedBy" columns="50" hidden="true" />
             <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+            <dataField fieldName="Status" />
+            <dataField fieldName="OverduePeriod" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -145,10 +185,13 @@ from "dbo"."BorrowTransactions" "BorrowTransactions"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a100" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a102" commandName="ReportAsWord" headerText="Export To Word" />
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" />
-      <action id="a4" commandName="ExportRss" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send to RSS API" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -159,12 +202,6 @@ from "dbo"."BorrowTransactions" "BorrowTransactions"
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
-    </actionGroup>
-    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" />
-      <action id="a2" commandName="ReportAsImage" />
-      <action id="a3" commandName="ReportAsExcel" />
-      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
