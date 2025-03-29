@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkbenchFeeBilling" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="StudentFees" type="DataView" label="Student Fees">
+      <dataView controller="StudentFees" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="BillingDashboard" type="Form" label="Fees &amp; Bills Workbench" tags="Fee">
+      <headerText>&lt;strong&gt;The FMW screen allows accounts staff, and other authorised personnel to oversee and manage various aspects fee management process. &lt;/strong&gt;</headerText>
+      <categories>
+        <category tab="FEE BILLING" id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="StudentFees" columns="15" tag="modal-never">
+              <headerText>Fees &amp; Billing</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Fees Action" flat="false" />
+  </actions>
+</dataController>

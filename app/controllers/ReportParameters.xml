@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ReportParameters" conflictDetection="overwriteChanges" label="Report Parameters" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"ReportParameters"."ReportID" "ReportID"
+	,"ReportParameters"."ReportName" "ReportName"
+	,"ReportParameters"."Code" "Code"
+	,"ReportParameters"."Attribute1" "Attribute1"
+	,"ReportParameters"."Attribute2" "Attribute2"
+	,"ReportParameters"."Attribute3" "Attribute3"
+	,"ReportParameters"."Attribute4" "Attribute4"
+	,"ReportParameters"."Attribute5" "Attribute5"
+	,"ReportParameters"."Attribute6" "Attribute6"
+	,"ReportParameters"."ShowOnReport" "ShowOnReport"
+from "dbo"."ReportParameters" "ReportParameters"
+]]></text>
+    </command>
+    <command id="ReportIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ReportID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="ReportID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Report ID" readOnly="true" />
+    <field name="ReportName" type="String" label="Report Name" length="50" showInSummary="true" />
+    <field name="Code" type="String" label="Code" length="10" showInSummary="true" />
+    <field name="Attribute1" type="String" allowQBE="false" allowSorting="false" label="Attribute1" showInSummary="true" />
+    <field name="Attribute2" type="String" label="Attribute2" length="1024" showInSummary="true" />
+    <field name="Attribute3" type="String" label="Attribute3" length="500" showInSummary="true" />
+    <field name="Attribute4" type="String" label="Attribute4" length="500" />
+    <field name="Attribute5" type="String" label="Attribute5" length="500" />
+    <field name="Attribute6" type="String" label="Attribute6" length="500" />
+    <field name="ShowOnReport" type="Boolean" default="((1))" label="Show On Report" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Report Parameters">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ReportName" columns="50" />
+        <dataField fieldName="Code" columns="10" />
+        <dataField fieldName="Attribute1" rows="5" textMode="RichText" />
+        <dataField fieldName="Attribute2" textMode="RichText" />
+        <dataField fieldName="Attribute3" />
+        <dataField fieldName="Attribute4" />
+        <dataField fieldName="Attribute5" />
+        <dataField fieldName="Attribute6" />
+        <dataField fieldName="ShowOnReport" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Report Parameters">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ReportName" columns="50" />
+            <dataField fieldName="Code" columns="10" />
+            <dataField fieldName="Attribute1" rows="5" textMode="RichText" />
+            <dataField fieldName="Attribute2" textMode="RichText" />
+            <dataField fieldName="Attribute3" textMode="RichText" />
+            <dataField fieldName="Attribute4" textMode="RichText" />
+            <dataField fieldName="Attribute5" textMode="RichText" />
+            <dataField fieldName="Attribute6" textMode="RichText" />
+            <dataField fieldName="ShowOnReport" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Report Parameter">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ReportName" columns="50" />
+            <dataField fieldName="Code" columns="10" />
+            <dataField fieldName="Attribute1" rows="5" textMode="RichText" />
+            <dataField fieldName="Attribute2" textMode="RichText" />
+            <dataField fieldName="Attribute3" textMode="RichText" />
+            <dataField fieldName="Attribute4" textMode="RichText" />
+            <dataField fieldName="Attribute5" textMode="RichText" />
+            <dataField fieldName="Attribute6" textMode="RichText" />
+            <dataField fieldName="ShowOnReport" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

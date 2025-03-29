@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PersonAddress" alias="PersonAddress" created="2024-02-09T09:39:23" modified="2024-02-09T09:41:01" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="430" y="20">
+      <foreignKeyColumn columnName="PersonId" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="RefPersonLocationType" parentTableSchema="dbo" parentTableName="zlkpPersonLocationType" x="430" y="480">
+      <foreignKeyColumn columnName="RefPersonLocationTypeId" parentColumnName="LocationTypeID" />
+    </foreignKey>
+    <foreignKey id="RefState" parentTableSchema="dbo" parentTableName="zlkpState" x="430" y="680">
+      <foreignKeyColumn columnName="RefStateId" parentColumnName="RefStateId" />
+    </foreignKey>
+    <foreignKey id="RefCountry" parentTableSchema="dbo" parentTableName="zlkpCountry" x="430" y="841">
+      <foreignKeyColumn columnName="RefCountryId" parentColumnName="CountryID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="PersonAddressId" fieldName="PersonAddressID" label="Person Address Id" />
+    <column name="PersonId" fieldName="PersonID" label="Person Id" aliasColumnName="IdentificationCode" aliasForeignKey="Person" />
+    <column name="IdentificationCode" fieldName="PersonIdentificationCode" label="Person Identification Code" foreignKey="Person" />
+    <column name="FirstName" fieldName="PersonFirstName" label="Person First Name" foreignKey="Person" />
+    <column name="LastName" fieldName="PersonLastName" label="Person Last Name" foreignKey="Person" />
+    <column name="RefPersonLocationTypeId" fieldName="RefPersonLocationTypeID" label="Ref Person Location Type Id" aliasColumnName="Description" aliasForeignKey="RefPersonLocationType" />
+    <column name="Description" fieldName="LocationType" label="Location Type" foreignKey="RefPersonLocationType" />
+    <column name="StreetNumberAndName" fieldName="Address" label="Address" />
+    <column name="City" fieldName="City" label="City" />
+    <column name="RefStateId" fieldName="RefStateID" label="Ref State Id" aliasColumnName="Description" aliasForeignKey="RefState" />
+    <column name="Description" fieldName="TownCity" label="Town City" foreignKey="RefState" />
+    <column name="PostalCode" fieldName="PostalCode" label="Postal Code" />
+    <column name="District" fieldName="District" label="District" />
+    <column name="RefCountryId" fieldName="RefCountryID" label="Ref Country Id" aliasColumnName="Description" aliasForeignKey="RefCountry" />
+    <column name="Description" fieldName="Country" label="Country" foreignKey="RefCountry" />
+    <column name="Latitude" fieldName="Latitude" label="Latitude" />
+    <column name="Longitude" fieldName="Longitude" label="Longitude" />
+    <column fieldName="Fullname" type="nvarchar(71)" dataType="String" label="Fullname">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </column>
+  </columns>
+</dataModel>

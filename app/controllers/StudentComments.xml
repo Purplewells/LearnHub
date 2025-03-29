@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="StudentComments" conflictDetection="overwriteChanges" label="Student Comments" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"StudentRemarks"."RemarkID" "RemarkID"
+	,"StudentRemarks"."StudentEnrollmentID" "StudentEnrollmentID"
+	,"StudentEnrollment"."CreatedBy" "StudentEnrollmentCreatedBy"
+	,"StudentRemarks"."Note" "Note"
+	,"StudentRemarks"."CalendarSessionID" "CalendarSessionID"
+	,"CalendarSession"."SessionCode" "Session"
+	,"CalendarSession"."IsActive" "SSIA"
+	,"StudentRemarks"."GradeLevelID" "GradeLevelID"
+	,"StudentRemarks"."PersonID" "PersonID"
+	,"StudentRemarks"."SessionCode" "SessionCode"
+	,"StudentRemarks"."IsSessionActive" "CSIA"
+	,"StudentRemarks"."GLSO" "GLSO"
+	,"StudentRemarks"."GL" "GL"
+	,"StudentRemarks"."extFirstName" "ExtFirstName"
+	,"StudentRemarks"."extLastName" "ExtLastName"
+	,"StudentRemarks"."Stream" "Stream"
+	,"StudentRemarks"."CreatedDate" "CreatedDate"
+	,"StudentRemarks"."ModifiedDate" "ModifiedDate"
+	,"StudentRemarks"."ModifiedBy" "ModifiedBy"
+	,"StudentRemarks"."CreatedBy" "CreatedBy"
+	,"Person"."IdentificationCode" "UPN"
+	,"Person"."FirstName" "Firstname"
+	,"Person"."LastName" "Lastname"
+from "dbo"."StudentRemarks" "StudentRemarks"
+	left join "dbo"."StudentSchoolAssociation" "StudentEnrollment" on "StudentRemarks"."StudentEnrollmentID" = "StudentEnrollment"."StudentEnrollmentID"
+	left join "dbo"."OrganizationPersonRole" "OrganizationPersonRole" on "StudentEnrollment"."OrganizationPersonRoleID" = "OrganizationPersonRole"."OrganizationPersonRoleID"
+	left join "dbo"."Person" "Person" on "OrganizationPersonRole"."PersonID" = "Person"."PersonID"
+	left join "dbo"."Session" "CalendarSession" on "StudentRemarks"."CalendarSessionID" = "CalendarSession"."CalendarSessionID"
+]]></text>
+    </command>
+    <command id="RemarkIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="RemarkID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="RemarkID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Remark ID" readOnly="true" />
+    <field name="StudentEnrollmentID" type="Int32" label="Student Enrollment ID" showInSummary="true">
+      <items style="Lookup" dataController="StudentSchoolAssociation" newDataView="createForm1" dataValueField="StudentEnrollmentID" dataTextField="CreatedBy" copy="UPN=UPN, Firstname=Firstname, Lastname=Lastname" />
+    </field>
+    <field name="StudentEnrollmentCreatedBy" type="String" readOnly="true" label="Student Enrollment Created By" length="50" />
+    <field name="Note" type="String" label="Note" length="1024" showInSummary="true" />
+    <field name="CalendarSessionID" type="Int32" label="Calendar Session ID" showInSummary="true">
+      <items style="Lookup" dataController="Session" newDataView="createForm1" dataValueField="CalendarSessionID" dataTextField="SessionCode" copy="SSIA=IsActive" />
+    </field>
+    <field name="Session" type="String" readOnly="true" label="Session" length="15" />
+    <field name="SSIA" type="Boolean" readOnly="true" label="SSIA" />
+    <field name="GradeLevelID" type="Int32" label="Grade Level ID" showInSummary="true" />
+    <field name="PersonID" type="Int32" label="Person ID" showInSummary="true" />
+    <field name="SessionCode" type="String" label="Session Code" length="20" />
+    <field name="CSIA" type="Boolean" label="CSIA" />
+    <field name="GLSO" type="Decimal" label="GLSO" />
+    <field name="GL" type="String" label="GL" length="10" />
+    <field name="ExtFirstName" type="String" label="ext First Name" length="35" />
+    <field name="ExtLastName" type="String" label="ext Last Name" length="35" />
+    <field name="Stream" type="String" label="Stream" length="15" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Modified Date" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
+    <field name="Firstname" type="String" readOnly="true" label="Firstname" length="35" />
+    <field name="Lastname" type="String" readOnly="true" label="Lastname" length="35" />
+    <field name="Fullname" type="String" readOnly="true" label="Fullname" computed="true">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Student Comments" filter="SSIA = 1">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Firstname" columns="18" />
+        <dataField fieldName="Lastname" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="GL" columns="5" />
+        <dataField fieldName="Stream" columns="8" />
+        <dataField fieldName="Note" hidden="true" />
+        <dataField fieldName="CalendarSessionID" aliasFieldName="Session" columns="15" />
+        <dataField fieldName="SSIA" />
+        <dataField fieldName="CSIA" />
+        <dataField fieldName="GradeLevelID" columns="15" hidden="true" />
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="SessionCode" columns="20" hidden="true" />
+        <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="ExtFirstName" columns="35" hidden="true" />
+        <dataField fieldName="ExtLastName" columns="35" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="Fullname" hidden="true" tag="header-text" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Comment">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" wrap="true" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="Note" rows="5" textMode="Note" watermark="Please write your comments here ..." />
+            <dataField fieldName="SessionCode" columns="20" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Notes" collapsed="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="StudentEnrollmentID" aliasFieldName="StudentEnrollmentCreatedBy" hidden="true" />
+            <dataField fieldName="CalendarSessionID" aliasFieldName="Session" hidden="true" />
+            <dataField fieldName="CSIA" />
+            <dataField fieldName="SSIA" />
+            <dataField fieldName="GL" columns="10" />
+            <dataField fieldName="Stream" columns="15" />
+            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+            <dataField fieldName="UPN" columns="10" hidden="true" />
+            <dataField fieldName="Firstname" columns="35" hidden="true" />
+            <dataField fieldName="Lastname" columns="35" hidden="true" />
+            <dataField fieldName="Fullname" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Student Comments">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" wrap="true" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="Note" rows="5" textMode="Note" watermark="Please write your comments here ..." />
+            <dataField fieldName="SSIA" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Notes" collapsed="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="StudentEnrollmentID" aliasFieldName="StudentEnrollmentCreatedBy" hidden="true" />
+            <dataField fieldName="CalendarSessionID" aliasFieldName="Session" hidden="true" />
+            <dataField fieldName="SessionCode" columns="20" />
+            <dataField fieldName="CSIA" />
+            <dataField fieldName="GL" columns="10" />
+            <dataField fieldName="Stream" columns="15" />
+            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+            <dataField fieldName="UPN" columns="10" hidden="true" />
+            <dataField fieldName="Firstname" columns="35" hidden="true" />
+            <dataField fieldName="Lastname" columns="35" hidden="true" />
+            <dataField fieldName="Fullname" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action commandName="SQL" headerText="Generate Coments Stub" cssClass="material-icon-event_note" id="a100">
+        <data><![CDATA[EXEC [dbo].[usp_merge_available_student_comments]]]></data>
+      </action>
+      <action id="a2" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a101" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a3" commandName="ExportRowset" headerText="Export As IPY" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" whenView="grid100" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="OnboardReset" conflictDetection="overwriteChanges" label="Onboard Reset" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"OrganizationPersonRole"."OrganizationPersonRoleID" "OrganizationPersonRoleID"
+	,"OrganizationPersonRole"."OrganisationID" "OrganisationID"
+	,"Organisation"."Name" "Organisation"
+	,"OrganizationPersonRole"."PersonID" "PersonID"
+	,"Person"."IdentificationCode" "UPN"
+	,"Person"."FirstName" "FirstName"
+	,"Person"."LastName" "LastName"
+	,"OrganizationPersonRole"."EntryDate" "EntryDate"
+	,"OrganizationPersonRole"."ExitDate" "ExitDate"
+	,"OrganizationPersonRole"."RoleID" "RoleID"
+	,"Role"."RoleName" "RoleName"
+from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
+	left join "dbo"."Organisation" "Organisation" on "OrganizationPersonRole"."OrganisationID" = "Organisation"."OrganizationID"
+	left join "dbo"."Person" "Person" on "OrganizationPersonRole"."PersonID" = "Person"."PersonID"
+	left join "dbo"."zlkpRole" "Role" on "OrganizationPersonRole"."RoleID" = "Role"."RoleId"
+]]></text>
+    </command>
+    <command id="OrganizationPersonRoleIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="OrganizationPersonRoleID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="OrganizationPersonRoleID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Organization Person Role ID" readOnly="true" />
+    <field name="OrganisationID" type="Int32" label="Organisation ID" showInSummary="true">
+      <items style="Lookup" dataController="Organisation" newDataView="createForm1" dataValueField="OrganizationID" dataTextField="Name" />
+    </field>
+    <field name="Organisation" type="String" readOnly="true" label="Organisation" length="25" />
+    <field name="PersonID" type="Int32" label="Person ID" showInSummary="true">
+      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="UPN" copy="FirstName=FirstName, LastName=LastName" />
+    </field>
+    <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
+    <field name="FirstName" type="String" readOnly="true" label="First Name" length="35" />
+    <field name="LastName" type="String" readOnly="true" label="Last Name" length="35" />
+    <field name="EntryDate" type="DateTime" label="Admission Date" showInSummary="true" />
+    <field name="ExitDate" type="DateTime" label="Exit Date" showInSummary="true" />
+    <field name="RoleID" type="Int32" label="Role ID" showInSummary="true">
+      <items style="Lookup" dataController="Role" newDataView="createForm1" dataValueField="RoleID" dataTextField="RoleName" />
+    </field>
+    <field name="RoleName" type="String" readOnly="true" label="Role Name" length="12" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Onboard Reset">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="PersonID" aliasFieldName="UPN" columns="10" />
+        <dataField fieldName="EntryDate" columns="20" />
+        <dataField fieldName="ExitDate" columns="18" />
+        <dataField fieldName="RoleID" aliasFieldName="RoleName" />
+        <dataField fieldName="OrganisationID" aliasFieldName="Organisation" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Onboard Reset">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="EntryDate" columns="10" />
+            <dataField fieldName="ExitDate" columns="10" />
+            <dataField fieldName="PersonID" aliasFieldName="UPN" />
+            <dataField fieldName="OrganisationID" aliasFieldName="Organisation" />
+            <dataField fieldName="RoleID" aliasFieldName="RoleName" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Onboard Reset">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="OrganisationID" aliasFieldName="Organisation" />
+            <dataField fieldName="PersonID" aliasFieldName="UPN" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="EntryDate" columns="10" />
+            <dataField fieldName="ExitDate" columns="10" />
+            <dataField fieldName="RoleID" aliasFieldName="RoleName" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

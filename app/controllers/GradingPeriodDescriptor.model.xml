@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="GradingPeriodDescriptor" alias="GradingPeriodDescriptor" created="2024-01-28T00:47:07" modified="2024-01-28T00:47:40" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="GradingPeriodDescriptorID" fieldName="GradingPeriodDescriptorID" label="Grading Period Descriptor ID" />
+    <column name="ShortDescription" fieldName="ShortDescription" label="Short Description" />
+    <column name="EffectiveStartDate" fieldName="EffectiveStartDate" label="Effective Start Date" />
+    <column name="EffectiveEndDate" fieldName="EffectiveEndDate" label="Effective End Date" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+  </columns>
+</dataModel>

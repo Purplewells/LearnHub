@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="OrganizationPersonRole" alias="OrganizationPersonRole" created="2024-02-03T22:45:19" modified="2024-02-07T07:40:37" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Organisation" parentTableSchema="dbo" parentTableName="Organisation" x="367" y="20">
+      <foreignKeyColumn columnName="OrganisationID" parentColumnName="OrganizationID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="367" y="204">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="Role" parentTableSchema="dbo" parentTableName="zlkpRole" x="367" y="664">
+      <foreignKeyColumn columnName="RoleID" parentColumnName="RoleId" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="OrganizationPersonRoleID" fieldName="OrganizationPersonRoleID" label="Organization Person Role ID" />
+    <column name="OrganisationID" fieldName="OrganisationID" label="Organisation ID" aliasColumnName="Name" aliasForeignKey="Organisation" />
+    <column name="Name" fieldName="Organisation" label="Organisation" foreignKey="Organisation" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="IdentificationCode" aliasForeignKey="Person" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" foreignKey="Person" />
+    <column name="LastName" fieldName="LastName" label="Last Name" foreignKey="Person" />
+    <column name="EntryDate" fieldName="EntryDate" label="Admission Date" />
+    <column name="ExitDate" fieldName="ExitDate" label="Exit Date" />
+    <column name="RoleID" fieldName="RoleID" label="Role ID" aliasColumnName="RoleName" aliasForeignKey="Role" />
+    <column name="RoleName" fieldName="RoleName" label="Role Name" foreignKey="Role" />
+  </columns>
+</dataModel>

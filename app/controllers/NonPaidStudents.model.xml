@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="vw_fee_collection_summaries_no_payment_latest" alias="vw_fee_collection_summaries_no_payment_latest" created="2024-02-20T18:29:37" modified="2024-02-20T18:31:19" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="FullName" fieldName="FullName" label="Fullname" />
+    <column name="YearGroup" fieldName="YearGroup" label="CYG" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="FeeType" fieldName="FeeType" label="Fee Type" />
+    <column name="EffectiveFrom" fieldName="EffectiveFrom" label="Effective From" />
+    <column name="Debit" fieldName="Debit" label="Debit" format="c" />
+    <column name="Credit" fieldName="Credit" label="Credit" format="c" />
+    <column name="Balance" fieldName="Balance" label="Balance" format="c" />
+    <column name="GuardianName" fieldName="GuardianName" label="Guardian" />
+    <column name="ContactPoint" fieldName="ContactPoint" label="Contact No." />
+    <column name="HowRelated" fieldName="HowRelated" label="How Related" />
+    <column name="IsPrimary" fieldName="IsPrimary" label="Default" />
+  </columns>
+</dataModel>

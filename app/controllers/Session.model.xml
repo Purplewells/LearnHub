@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Session" alias="Session" created="2024-01-27T23:32:21" modified="2025-03-14T06:06:47" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="RefSessionType" parentTableSchema="dbo" parentTableName="zlkpSessionType" x="359" y="20">
+      <foreignKeyColumn columnName="RefSessionTypeId" parentColumnName="RefSessionTypeId" />
+    </foreignKey>
+    <foreignKey id="OrganizationCalendar" parentTableSchema="dbo" parentTableName="Calendar" x="359" y="181">
+      <foreignKeyColumn columnName="OrganizationCalendarID" parentColumnName="OrganizationCalendarId" />
+    </foreignKey>
+    <foreignKey id="TermDescriptor" parentTableSchema="dbo" parentTableName="zlkpTermDescriptor" x="359" y="365">
+      <foreignKeyColumn columnName="TermDescriptorID" parentColumnName="TermDescriptorID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="CalendarSessionID" fieldName="CalendarSessionID" label="Calendar Session ID" />
+    <column name="SessionName" fieldName="SessionName" label="Session" />
+    <column name="SessionCode" fieldName="SessionCode" label="Code" />
+    <column name="StartDate" fieldName="StartDate" label="Start Date" />
+    <column name="EndDate" fieldName="EndDate" label="End Date" />
+    <column name="RefSessionTypeId" fieldName="RefSessionTypeID" label="Ref Session Type Id" aliasColumnName="Description" aliasForeignKey="RefSessionType" />
+    <column name="Description" fieldName="RefSessionTypeDescription" label="Session Type" foreignKey="RefSessionType" />
+    <column name="TotalInstructionDays" fieldName="TotalInstructionDays" label="No. of Days" />
+    <column name="OrganizationCalendarID" fieldName="OrganizationCalendarID" label="Organization Calendar ID" aliasColumnName="CalendarCode" aliasForeignKey="OrganizationCalendar" />
+    <column name="CalendarCode" fieldName="CalendarCode" label="Calendar Code" foreignKey="OrganizationCalendar" />
+    <column name="TermDescriptorID" fieldName="TermDescriptorID" label="Term Descriptor ID" aliasColumnName="Description" aliasForeignKey="TermDescriptor" />
+    <column name="Description" fieldName="TermDescriptor" label="Term Descriptor" foreignKey="TermDescriptor" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="NextSessionEndDate" fieldName="NextSessionEndDate" label="This Session End" />
+    <column name="NextSessionStartDate" fieldName="NextSessionStartDate" label="Next Session Start" />
+    <column name="HasNextTerm" fieldName="HasNextTerm" label="Has Next Term" />
+    <column fieldName="SEQ" type="int" dataType="Int32" label="SEQ">
+      <formula>Session.CalendarSessionID</formula>
+    </column>
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="LastModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+  <details>
+    <detail fieldName="GradingPeriod" model="GradingPeriod" filterFields="CalendarSessionID" create="true" edit="true" />
+  </details>
+</dataModel>

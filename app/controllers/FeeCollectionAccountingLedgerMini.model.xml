@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="vw_fee_collection_accounting_ledger_mini" alias="vw_fee_collection_accounting_ledger_mini" created="2024-01-29T21:27:36" modified="2024-12-05T21:26:49" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" primaryKey="true" />
+    <column name="Fullname" fieldName="Fullname" label="Fullname" />
+    <column name="UPN" fieldName="UPN" label="UPN" />
+    <column name="NameOfPayee" fieldName="NameOfPayee" label="Payee" />
+    <column name="YearGroup" fieldName="YearGroup" label="GL" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="FeeType" fieldName="FeeType" label="Fee Type" />
+    <column name="TransactionDate" fieldName="TransactionDate" label="Trans Date" />
+    <column name="Debit" fieldName="Debit" label="Debit" format="N" />
+    <column name="Credit" fieldName="Credit" label="Credit" format="N" />
+    <column name="Balance" fieldName="Balance" label="Balance" format="N" />
+    <column name="Currency" fieldName="Currency" label="CURR" />
+    <column name="FeeNote" fieldName="ReceiptNo" label="Receipt No." />
+    <column name="CalendarCode" fieldName="CalendarCode" label="Year" />
+    <column fieldName="Name" type="nvarchar(71)" dataType="String" label="Name">
+      <formula>vw_fee_collection_accounting_ledger_mini.Fullname</formula>
+    </column>
+  </columns>
+</dataModel>

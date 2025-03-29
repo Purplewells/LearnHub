@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="manual_account_journal_entries" alias="manual_account_journal_entries" created="2025-02-23T21:01:56" modified="2025-02-23T21:03:35" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="DebitAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="326" y="20">
+      <foreignKeyColumn columnName="DebitAccountID" parentColumnName="AccountID" />
+    </foreignKey>
+    <foreignKey id="DebitAccountType" parentTableSchema="dbo" parentTableName="account_type" baseForeignKey="DebitAccount" x="625" y="20">
+      <foreignKeyColumn columnName="AccountTypeID" parentColumnName="AccountTypeID" />
+    </foreignKey>
+    <foreignKey id="CreditAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="326" y="204">
+      <foreignKeyColumn columnName="CreditAccountID" parentColumnName="AccountID" />
+    </foreignKey>
+    <foreignKey id="CreditAccountType" parentTableSchema="dbo" parentTableName="account_type" baseForeignKey="CreditAccount" x="618" y="310">
+      <foreignKeyColumn columnName="AccountTypeID" parentColumnName="AccountTypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="JournalEntryID" fieldName="JournalEntryID" label="Journal Entry ID" />
+    <column name="TransactionDate" fieldName="TransactionDate" label="Transaction Date" />
+    <column name="DebitAccountID" fieldName="DebitAccountID" label="Debit Account ID" aliasColumnName="AccountName" aliasForeignKey="DebitAccount" />
+    <column name="AccountName" fieldName="DebitAccountName" label="Debit Account" foreignKey="DebitAccount" />
+    <column name="AccountType" fieldName="DebitAccountType" label="Debit Account Type" foreignKey="DebitAccountType" />
+    <column name="CreditAccountID" fieldName="CreditAccountID" label="Credit Account ID" aliasColumnName="AccountName" aliasForeignKey="CreditAccount" />
+    <column name="AccountName" fieldName="CreditAccountName" label="Credit Account" foreignKey="CreditAccount" />
+    <column name="AccountType" fieldName="CreditAccountType" label="Credit Account Type" foreignKey="CreditAccountType" />
+    <column name="Amount" fieldName="Amount" label="Amount" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="EnteredBy" fieldName="EnteredBy" label="Entered By" />
+    <column name="CreatedAt" fieldName="CreatedDate" label="Created Date" format="d" />
+  </columns>
+</dataModel>

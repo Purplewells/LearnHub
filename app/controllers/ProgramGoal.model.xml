@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="ProgramGoal" alias="ProgramGoal" created="2024-01-28T17:25:21" modified="2024-01-28T17:25:26" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="GoalID" fieldName="GoalID" label="Goal ID" />
+    <column name="Goal" fieldName="Goal" label="Goal" />
+    <column name="CodeValue" fieldName="CodeValue" label="Code Value" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

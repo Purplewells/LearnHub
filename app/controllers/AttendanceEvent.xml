@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="AttendanceEvent" conflictDetection="overwriteChanges" label="Attendance Event" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"AttendanceEvent"."AttendanceEventID" "AttendanceEventID"
+	,"AttendanceEvent"."AttendanceEventCategoryID" "AttendanceEventCategoryID"
+	,"AttendanceEventCategory"."AttendanceEventCategory" "EventCategory"
+	,"AttendanceEvent"."RefGradeLevelId" "RefGradeLevelID"
+	,"RefGradeLevel"."Description" "GradeLevel"
+	,"AttendanceEvent"."EventDate" "EventDate"
+	,"AttendanceEvent"."AttendanceEventReasonID" "AttendanceEventReasonID"
+	,"AttendanceEventReason"."AttendanceEventReason" "EventReason"
+	,"AttendanceEvent"."RefSchoolStreamID" "RefSchoolStreamID"
+	,"RefSchoolStream"."Description" "Stream"
+	,"AttendanceEvent"."CourseSectionID" "CourseSectionID"
+	,"CourseSection"."SectionName" "SectionName"
+	,"CourseSection"."SectionNo" "SectionNo"
+	,"AttendanceEvent"."CreatedDate" "CreatedDate"
+	,"AttendanceEvent"."ModifiedDate" "ModifiedDate"
+	,"AttendanceEvent"."CreatedBy" "CreatedBy"
+	,"AttendanceEvent"."ModifiedBy" "ModifiedBy"
+from "dbo"."AttendanceEvent" "AttendanceEvent"
+	left join "dbo"."zlkp_AttendanceEventCategory" "AttendanceEventCategory" on "AttendanceEvent"."AttendanceEventCategoryID" = "AttendanceEventCategory"."AttendanceEventCategoryID"
+	left join "dbo"."zlkpGradeLevel" "RefGradeLevel" on "AttendanceEvent"."RefGradeLevelId" = "RefGradeLevel"."RefGradeLevelId"
+	left join "dbo"."CourseSection" "CourseSection" on "AttendanceEvent"."CourseSectionID" = "CourseSection"."CourseSectionID"
+	left join "dbo"."zlkp_AttendanceEventReason" "AttendanceEventReason" on "AttendanceEvent"."AttendanceEventReasonID" = "AttendanceEventReason"."AttendanceEventReasonID"
+	left join "dbo"."zlkpSchoolStream" "RefSchoolStream" on "AttendanceEvent"."RefSchoolStreamID" = "RefSchoolStream"."RefSchoolStreamID"
+]]></text>
+    </command>
+    <command id="AttendanceEventIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="AttendanceEventID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="AttendanceEventID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Attendance Event ID" readOnly="true" />
+    <field name="AttendanceEventCategoryID" type="Int32" label="Attendance Event Category ID" showInSummary="true">
+      <items style="RadioButtonList" dataController="AttendanceCategory" dataValueField="AttendanceEventCategoryID" dataTextField="AttendanceEventCategory" dataView="grid1" />
+    </field>
+    <field name="EventCategory" type="String" readOnly="true" label="Event Category" length="20" />
+    <field name="RefGradeLevelID" type="Int32" label="Ref Grade Level Id" showInSummary="true" allowLEV="true">
+      <items style="RadioButtonList" dataController="GradeLevel" dataValueField="RefGradeLevelID" dataTextField="Description" dataView="grid1" />
+    </field>
+    <field name="GradeLevel" type="String" readOnly="true" label="GL" length="5" />
+    <field name="EventDate" type="DateTime" allowNulls="false" label="Event Date" showInSummary="true" />
+    <field name="AttendanceEventReasonID" type="Int32" label="Attendance Event Reason ID" showInSummary="true">
+      <items style="RadioButtonList" dataController="AttendanceReason" dataValueField="AttendanceEventReasonID" dataTextField="AttendanceEventReason" dataView="grid1" />
+    </field>
+    <field name="EventReason" type="String" readOnly="true" label="Event Reason" length="20" />
+    <field name="RefSchoolStreamID" type="Int32" label="Ref School Stream ID" showInSummary="true">
+      <items style="RadioButtonList" dataController="SchoolStream" dataValueField="RefSchoolStreamID" dataTextField="Description" />
+    </field>
+    <field name="Stream" type="String" readOnly="true" label="Stream" length="10" />
+    <field name="CourseSectionID" type="Int32" label="Course Section ID">
+      <items style="Lookup" dataController="CourseSection" newDataView="createForm1" dataValueField="CourseSectionID" dataTextField="SectionName" copy="SectionNo=SectionNo" />
+    </field>
+    <field name="SectionName" type="String" readOnly="true" label="Section Name" length="50" />
+    <field name="SectionNo" type="String" readOnly="true" label="Section No" length="50" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="StudentSectionAttendanceEvents" type="DataView" label="Attendance Event Logs">
+      <dataView controller="StudentSectionAttendanceEvents" view="grid1" filterFields="AttendanceEventID" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Attendance Event" filter="EVENTDATE &gt;= CAST(GETDATE() AS DATE)">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="AttendanceEventCategoryID" aliasFieldName="EventCategory" />
+        <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" tag="pivot1-row1-column-top10-other-sortbyvalue&#xD;&#xA;pivot1-title:&quot;What is the distribution of attendance&quot;" />
+        <dataField fieldName="EventDate" columns="18" tag="pivot2-row1-column-year&#xD;&#xA;pivot2-title:&quot;What is the distribution of attendance check by week&quot;" />
+        <dataField fieldName="AttendanceEventReasonID" aliasFieldName="EventReason" hidden="true" />
+        <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" />
+        <dataField fieldName="CourseSectionID" aliasFieldName="SectionName" hidden="true" />
+        <dataField fieldName="SectionNo" columns="50" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_historical_events" type="Grid" commandId="command1" label="Historical Events" sortExpression="EventDate DESC">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="AttendanceEventCategoryID" aliasFieldName="EventCategory" />
+        <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" tag="pivot1-row1-column-top10-other-sortbyvalue&#xD;&#xA;pivot1-title:&quot;What is the distribution of attendance&quot;&#xD;&#xA;&#xD;&#xA;pivot2-col1" />
+        <dataField fieldName="EventDate" columns="20" tag="pivot2-row1-columnstacked-year&#xD;&#xA;pivot2-title:&quot;What is the distribution of attendance check by week&quot;&#xD;&#xA;&#xD;&#xA;pivot4-row1-columnstacked-date&#xD;&#xA;pivot4-title:&quot;What is the comparative attendance by Stream&quot;" />
+        <dataField fieldName="AttendanceEventReasonID" aliasFieldName="EventReason" hidden="true" />
+        <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" columns="10" tag="pivot3-row1-columnstacked&#xD;&#xA;pivot3-title:&quot;What is the distribution of attendance by Stream&quot;&#xD;&#xA;&#xD;&#xA;pivot4-col1" />
+        <dataField fieldName="CourseSectionID" aliasFieldName="SectionName" hidden="true" />
+        <dataField fieldName="SectionNo" columns="50" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Attendance Event">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="EventDate" columns="10" />
+            <dataField fieldName="AttendanceEventCategoryID" aliasFieldName="EventCategory" />
+            <dataField fieldName="AttendanceEventReasonID" aliasFieldName="EventReason" />
+            <dataField fieldName="CourseSectionID" aliasFieldName="SectionName" hidden="true" />
+            <dataField fieldName="SectionNo" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c3" wrap="true" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" columns="4" />
+            <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" columns="3" />
+          </dataFields>
+        </category>
+        <category id="d1" tab="ATTENDANCE LOGS" flow="NewRow">
+          <dataFields>
+            <dataField fieldName="StudentSectionAttendanceEvents" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;content-stub-none">
+              <headerText>Attendance Takes</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="c2" headerText="AuditLine" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Attendance Event">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="EventDate" columns="10" />
+            <dataField fieldName="AttendanceEventCategoryID" aliasFieldName="EventCategory" columns="2" />
+            <dataField fieldName="AttendanceEventReasonID" aliasFieldName="EventReason" columns="3" />
+            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2">
+          <description />
+          <dataFields>
+            <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" />
+            <dataField fieldName="CourseSectionID" aliasFieldName="SectionName" hidden="true" />
+            <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" columns="3" />
+          </dataFields>
+        </category>
+        <category id="d1" tab="ATTENDANCE LOGS" flow="NewRow">
+          <dataFields />
+        </category>
+      </categories>
+    </view>
+    <view id="createSectionForm1" type="Form" commandId="command1" label="New Attendance Event">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="EventDate" columns="10" />
+            <dataField fieldName="AttendanceEventCategoryID" aliasFieldName="EventCategory" />
+            <dataField fieldName="AttendanceEventReasonID" aliasFieldName="EventReason" />
+            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2">
+          <description />
+          <dataFields>
+            <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" />
+            <dataField fieldName="CourseSectionID" aliasFieldName="SectionName" />
+            <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" columns="3" />
+          </dataFields>
+        </category>
+        <category id="d1" tab="ATTENDANCE LOGS" flow="NewRow">
+          <dataFields />
+        </category>
+      </categories>
+    </view>
+    <view id="createSecondForm1" type="Form" commandId="command1" label="New Attendance Event">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="EventDate" columns="10" />
+            <dataField fieldName="AttendanceEventCategoryID" aliasFieldName="EventCategory" />
+            <dataField fieldName="AttendanceEventReasonID" aliasFieldName="EventReason" />
+            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2">
+          <description />
+          <dataFields>
+            <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" />
+            <dataField fieldName="CourseSectionID" aliasFieldName="SectionName" />
+            <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" columns="3" />
+          </dataFields>
+        </category>
+        <category id="d1" tab="ATTENDANCE LOGS" flow="NewRow">
+          <dataFields />
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action commandName="SQL" cssClass="material-icon-domain_verification" id="a100" headerText="Activate ATP" whenLastCommandName="Any">
+        <data><![CDATA[/*
+Name : usp_merge_automated_attendance_process
+Author : Benjamin Ohene-Adu
+Version : Date              Desc
+-- 0.1      08/06/2021   This process automates and simplifies attendance capture based  on EventDate, GradeLevel and Stream
+
+*/
+
+EXEC dbo.[usp_merge_automated_attendance_process] 
+@EventDate, 
+@GradeLevel, 
+@RefSchoolStreamID
+
+SET @Result_Refresh = 1
+SET @Result_RefreshChildren = 1]]></data>
+      </action>
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a103" commandName="New" commandArgument="createSectionForm1" cssClass="material-icon-add_circle" headerText="New Section Attendance" />
+      <action id="a105" commandName="New" commandArgument="createSecondForm1" cssClass="material-icon-verified_user" headerText="New Expanded Attendance" />
+      <action id="a104" />
+      <action commandName="Navigate" commandArgument="attendance-audit" headerText="Go to Attendance Audit" id="a106" cssClass="material-icon-assistant_direction" confirmation="This action would take user to the Attendance Audit Screen. Do you want to continue ?" />
+      <action id="a107" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a100" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a102" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send To RSS" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+      <action commandName="Custom" commandArgument="GoToAttendanceAudit" headerText="Go To Attendance Audits" id="a108" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r101" commandName="New" type="Sql" phase="Execute" name="setEventDate"><![CDATA[SET @EventDate = GETDATE()]]></rule>
+  </businessRules>
+</dataController>

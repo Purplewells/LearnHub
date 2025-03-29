@@ -1,0 +1,111 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Carousal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/carousal.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .masonry-container {
+            column-count: 4; /* Adjust the number of columns as needed */
+            column-gap: 20px; /* Adjust the gap between columns */
+            margin: 0 auto;
+            max-width: 1200px; /* Set your desired maximum width */
+        }
+
+        .masonry-item {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 20px; /* Adjust the spacing between items */
+            break-inside: avoid; /* Prevent items from breaking across columns */
+        }
+
+            .masonry-item img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+    </style>
+</head>
+  <body data-authorize-roles="*"><div data-app-role="page" data-content-framework="bootstrap">
+    <!--<div class="masonry">
+        <div class="masonry-item"><img src="https://unsplash.it/700/800?image=1" alt="Masonry Brick #1" class="masonry-content">Test</div>
+        <div class="masonry-item"><img src="https://unsplash.it/700/600?image=2" alt="Masonry Brick #2" class="masonry-content">Test3</div>
+        <div class="masonry-item"><img src="https://unsplash.it/700/400?image=3" alt="Masonry Brick #3" class="masonry-content"></div>
+        <div class="masonry-item"><img src="https://unsplash.it/700/500?image=4" alt="Masonry Brick #4" class="masonry-content"></div>
+        <div class="masonry-item"><img src="https://unsplash.it/700/700?image=5" alt="Masonry Brick #5" class="masonry-content"></div>
+        <div class="masonry-item"><img src="https://unsplash.it/700/300?image=6" alt="Masonry Brick #6" class="masonry-content"></div>
+        <div class="masonry-item"><img src="https://unsplash.it/700/500?image=7" alt="Masonry Brick #7" class="masonry-content"></div>
+        <div class="masonry-item"><img src="https://unsplash.it/700/650?image=8" alt="Masonry Brick #8" class="masonry-content"></div>-->
+    <!--<div class="masonry-item"><img src="https://unsplash.it/700/350?image=9" alt="Masonry Brick #9" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/420?image=10" alt="Masonry Brick #10" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/300?image=11" alt="Masonry Brick #11" class="masonry-content"></div>-->
+    <!--<div class="masonry-item"><img src="https://unsplash.it/700/500?image=12" alt="Masonry Brick #12" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/550?image=13" alt="Masonry Brick #13" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/900?image=14" alt="Masonry Brick #14" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/800?image=15" alt="Masonry Brick #15" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/400?image=16" alt="Masonry Brick #16" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/500?image=17" alt="Masonry Brick #17" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/650?image=18" alt="Masonry Brick #18" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/550?image=19" alt="Masonry Brick #19" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/440?image=20" alt="Masonry Brick #20" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/480?image=21" alt="Masonry Brick #21" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/680?image=22" alt="Masonry Brick #22" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/920?image=23" alt="Masonry Brick #23" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/650?image=24" alt="Masonry Brick #24" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/350?image=25" alt="Masonry Brick #25" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/425?image=26" alt="Masonry Brick #26" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/500?image=27" alt="Masonry Brick #27" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/450?image=28" alt="Masonry Brick #28" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/350?image=29" alt="Masonry Brick #29" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/900?image=30" alt="Masonry Brick #30" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/520?image=31" alt="Masonry Brick #31" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/650?image=32" alt="Masonry Brick #32" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/750?image=33" alt="Masonry Brick #33" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/800?image=34" alt="Masonry Brick #34" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/900?image=35" alt="Masonry Brick #35" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/420?image=36" alt="Masonry Brick #36" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/350?image=37" alt="Masonry Brick #37" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/600?image=38" alt="Masonry Brick #38" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/480?image=39" alt="Masonry Brick #39" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/640?image=40" alt="Masonry Brick #40" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/350?image=41" alt="Masonry Brick #41" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/380?image=42" alt="Masonry Brick #42" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/420?image=43" alt="Masonry Brick #43" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/500?image=44" alt="Masonry Brick #44" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/640?image=45" alt="Masonry Brick #45" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/680?image=46" alt="Masonry Brick #46" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/700?image=47" alt="Masonry Brick #47" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/350?image=48" alt="Masonry Brick #48" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/400?image=49" alt="Masonry Brick #49" class="masonry-content"></div>
+    <div class="masonry-item"><img src="https://unsplash.it/700/800?image=50" alt="Masonry Brick #50" class="masonry-content"></div>-->
+    <!--</div>
+
+
+    <script src="~/js/carousal_script.js"></script>-->
+    <!-- /.container -->
+
+    <div class="masonry-container">
+        <div class="masonry-item">
+            <img src="image1.jpg" alt="Image 1">
+        </div>
+        <div class="masonry-item">
+            <img src="image2.jpg" alt="Image 2">
+        </div>
+        <!-- Add more masonry items here -->
+        <!-- Example: -->
+        <div class="masonry-item">
+            <img src="image3.jpg" alt="Image 3">
+        </div>
+        <!-- Repeat for images 4 to 10 -->
+    </div>
+</div>
+
+  </body>
+</html>

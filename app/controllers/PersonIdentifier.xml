@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="PersonIdentifier" conflictDetection="overwriteChanges" label="Person Identifier" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"PersonIdentifier"."PersonIdentifierId" "PersonIdentifierID"
+	,"PersonIdentifier"."Identifier" "Identifier"
+	,"PersonIdentifier"."RefPersonIdentificationSystemId" "RefPersonIdentificationSystemID"
+	,"RefPersonIdentificationSystem"."Description" "IdentificationSystem"
+	,"PersonIdentifier"."RefPersonalInformationVerificationId" "RefPersonalInformationVerificationID"
+	,"RefPersonalInformationVerification"."Description" "PIN"
+	,"PersonIdentifier"."IsActive" "IsActive"
+	,"PersonIdentifier"."PersonID" "PersonID"
+	,"Person"."IdentificationCode" "UPN"
+	,"Person"."FirstName" "Firstname"
+	,"Person"."LastName" "Lastname"
+from "dbo"."PersonIdentifier" "PersonIdentifier"
+	left join "dbo"."zlkpPersonIdentificationSystem" "RefPersonIdentificationSystem" on "PersonIdentifier"."RefPersonIdentificationSystemId" = "RefPersonIdentificationSystem"."RefPersonIdentificationSystemId"
+	left join "dbo"."zlkpPersonalInformationVerification" "RefPersonalInformationVerification" on "PersonIdentifier"."RefPersonalInformationVerificationId" = "RefPersonalInformationVerification"."RefPersonalInformationVerificationId"
+	left join "dbo"."Person" "Person" on "PersonIdentifier"."PersonID" = "Person"."PersonID"
+]]></text>
+    </command>
+    <command id="PersonIdentifierIdIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="PersonIdentifierID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonIdentifierID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Person Identifier Id" readOnly="true" />
+    <field name="Identifier" type="String" label="Identifier" length="40" showInSummary="true" />
+    <field name="RefPersonIdentificationSystemID" type="Int32" allowNulls="false" label="Ref Person Identification System Id" showInSummary="true">
+      <items style="Lookup" dataController="PersonIdentificationSystem" newDataView="createForm1" dataValueField="RefPersonIdentificationSystemID" dataTextField="Description" />
+    </field>
+    <field name="IdentificationSystem" type="String" readOnly="true" label="Identification System" length="100" />
+    <field name="RefPersonalInformationVerificationID" type="Int32" label="Ref Personal Information Verification Id" showInSummary="true">
+      <items style="Lookup" dataController="InformationVerification" newDataView="createForm1" dataValueField="RefPersonalInformationVerificationID" dataTextField="Description" />
+    </field>
+    <field name="PIN" type="String" readOnly="true" label="PIN" length="100" />
+    <field name="IsActive" type="Boolean" default="((1))" label="Is Active" showInSummary="true" />
+    <field name="PersonID" type="Int32" allowNulls="false" label="Person ID" showInSummary="true">
+      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="UPN" copy="Firstname=FirstName, Lastname=LastName" />
+    </field>
+    <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
+    <field name="Firstname" type="String" readOnly="true" label="Firstname" length="35" />
+    <field name="Lastname" type="String" readOnly="true" label="Lastname" length="35" />
+    <field name="Fullname" type="String" readOnly="true" label="Fullname" computed="true">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Person Identifier">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Identifier" columns="40" />
+        <dataField fieldName="RefPersonIdentificationSystemID" aliasFieldName="IdentificationSystem" />
+        <dataField fieldName="RefPersonalInformationVerificationID" aliasFieldName="PIN" hidden="true" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="PersonID" aliasFieldName="UPN" />
+        <dataField fieldName="Firstname" columns="35" />
+        <dataField fieldName="Lastname" columns="35" />
+        <dataField fieldName="Fullname" hidden="true" tag="header-text" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Identifier">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RefPersonIdentificationSystemID" aliasFieldName="IdentificationSystem" />
+            <dataField fieldName="RefPersonalInformationVerificationID" aliasFieldName="PIN" hidden="true" />
+            <dataField fieldName="Identifier" columns="40" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="PersonID" aliasFieldName="UPN" />
+            <dataField fieldName="Firstname" columns="35" />
+            <dataField fieldName="Lastname" columns="35" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Identifier">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RefPersonIdentificationSystemID" aliasFieldName="IdentificationSystem" />
+            <dataField fieldName="RefPersonalInformationVerificationID" aliasFieldName="PIN" hidden="true" />
+            <dataField fieldName="Identifier" columns="40" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="PersonID" aliasFieldName="UPN" />
+            <dataField fieldName="Firstname" columns="35" />
+            <dataField fieldName="Lastname" columns="35" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

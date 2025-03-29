@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="SalaryBasis" conflictDetection="overwriteChanges" label="Salary Basis" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"salary_basis"."SalaryBasisID" "SalaryBasisID"
+	,"salary_basis"."BasisName" "BasisName"
+	,"salary_basis"."Code" "Code"
+	,"salary_basis"."SalaryBasisTypeID" "SalaryBasisTypeID"
+	,"SalaryBasisType"."SalaryBasisType" "SalaryBasisType"
+	,"salary_basis"."InputValueID" "InputValueID"
+	,"InputValue"."InputName" "InputName"
+	,"salary_basis"."EffectiveFrom" "EffectiveFrom"
+	,"salary_basis"."EffectiveTo" "EffectiveTo"
+	,"salary_basis"."GradeStepRateID" "GradeStepRateID"
+	,"salary_basis"."StatusID" "StatusID"
+	,"Status"."Status" "Status"
+	,"salary_basis"."IsAction" "IsActive"
+	,"salary_basis"."BaseAmount" "BaseAmount"
+	,"salary_basis"."AnnualisationFactor" "AnnualisationFactor"
+	,"salary_basis"."FrequencyID" "FrequencyID"
+	,"Frequency"."Frequency" "Frequency"
+	,"salary_basis"."CreatedDate" "CreatedDate"
+	,"salary_basis"."ModifiedDate" "ModifiedDate"
+	,"salary_basis"."CreatedBy" "CreatedBy"
+	,"salary_basis"."ModifiefBy" "ModifiefBy"
+	,"salary_basis"."ComponentsUsage" "ComponentsUsage"
+from "dbo"."salary_basis" "salary_basis"
+	left join "dbo"."zlkpSalaryBasisType" "SalaryBasisType" on "salary_basis"."SalaryBasisTypeID" = "SalaryBasisType"."SalaryBasisTypeID"
+	left join "dbo"."zlkpInputValues" "InputValue" on "salary_basis"."InputValueID" = "InputValue"."InputValueID"
+	left join "dbo"."zlkpSalaryStatus" "Status" on "salary_basis"."StatusID" = "Status"."StatusID"
+	left join "dbo"."zlkpSalaryBasisFrequency" "Frequency" on "salary_basis"."FrequencyID" = "Frequency"."FrequencyID"
+]]></text>
+    </command>
+    <command id="SalaryBasisIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="SalaryBasisID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="SalaryBasisID" type="Int32" allowNulls="false" isPrimaryKey="true" dataFormatString="c" label="Salary Basis ID" readOnly="true" />
+    <field name="BasisName" type="String" label="Basis Name" length="50" showInSummary="true" />
+    <field name="Code" type="String" label="Code" length="10" showInSummary="true" />
+    <field name="SalaryBasisTypeID" type="Int32" dataFormatString="c" label="Salary Basis Type ID" showInSummary="true">
+      <items style="Lookup" dataController="SalaryBasisType" newDataView="createForm1" dataValueField="SalaryBasisTypeID" dataTextField="SalaryBasisType" />
+    </field>
+    <field name="SalaryBasisType" type="String" readOnly="true" dataFormatString="c" label="Salary Basis Type" length="20" />
+    <field name="InputValueID" type="Int32" label="Input Value ID" showInSummary="true" />
+    <field name="InputName" type="String" readOnly="true" label="Input Name" length="50" />
+    <field name="EffectiveFrom" type="DateTime" label="Effective From" showInSummary="true" />
+    <field name="EffectiveTo" type="DateTime" label="Effective To" />
+    <field name="GradeStepRateID" type="Int32" label="Grade Step Rate ID" />
+    <field name="StatusID" type="Int32" label="Status ID">
+      <items style="Lookup" dataController="SalaryStatus" newDataView="createForm1" dataValueField="StatusID" dataTextField="Status" />
+    </field>
+    <field name="Status" type="String" readOnly="true" label="Status" length="10" />
+    <field name="IsActive" type="Boolean" default="((1))" label="Is Active" />
+    <field name="BaseAmount" type="Decimal" dataFormatString="c" label="Base Amount" />
+    <field name="AnnualisationFactor" type="Decimal" label="Annualisation Factor" />
+    <field name="FrequencyID" type="Int32" label="Frequency ID">
+      <items style="Lookup" dataController="SalaryBasisFrequency" newDataView="createForm1" dataValueField="FrequencyID" dataTextField="Frequency" />
+    </field>
+    <field name="Frequency" type="String" readOnly="true" label="Frequency" length="18" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiefBy" type="String" label="Modifief By" length="50" />
+    <field name="ComponentsUsage" type="String" label="Components Usage" length="10" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Salary Basis">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="BasisName" columns="50" />
+        <dataField fieldName="Code" columns="10" />
+        <dataField fieldName="SalaryBasisTypeID" aliasFieldName="SalaryBasisType" />
+        <dataField fieldName="InputValueID" aliasFieldName="InputName" hidden="true" />
+        <dataField fieldName="EffectiveFrom" columns="10" />
+        <dataField fieldName="EffectiveTo" columns="10" />
+        <dataField fieldName="GradeStepRateID" columns="15" hidden="true" />
+        <dataField fieldName="StatusID" aliasFieldName="Status" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="BaseAmount" columns="15" />
+        <dataField fieldName="AnnualisationFactor" columns="15" />
+        <dataField fieldName="FrequencyID" aliasFieldName="Frequency" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiefBy" columns="50" hidden="true" />
+        <dataField fieldName="ComponentsUsage" columns="10" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Salary Basis">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="BasisName" columns="50" />
+            <dataField fieldName="Code" columns="10" />
+            <dataField fieldName="SalaryBasisTypeID" aliasFieldName="SalaryBasisType" />
+            <dataField fieldName="InputValueID" aliasFieldName="InputName" />
+            <dataField fieldName="EffectiveFrom" columns="10" />
+            <dataField fieldName="EffectiveTo" columns="10" />
+            <dataField fieldName="StatusID" aliasFieldName="Status" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="BaseAmount" columns="15" />
+            <dataField fieldName="AnnualisationFactor" columns="15" />
+            <dataField fieldName="FrequencyID" aliasFieldName="Frequency" />
+            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+            <dataField fieldName="ModifiefBy" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Salary Basis">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="BasisName" columns="50" />
+            <dataField fieldName="Code" columns="10" />
+            <dataField fieldName="SalaryBasisTypeID" aliasFieldName="SalaryBasisType" />
+            <dataField fieldName="InputValueID" aliasFieldName="InputName" />
+            <dataField fieldName="EffectiveFrom" columns="10" />
+            <dataField fieldName="EffectiveTo" columns="10" />
+            <dataField fieldName="GradeStepRateID" columns="15" />
+            <dataField fieldName="StatusID" aliasFieldName="Status" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="BaseAmount" columns="15" />
+            <dataField fieldName="AnnualisationFactor" columns="15" />
+            <dataField fieldName="FrequencyID" aliasFieldName="Frequency" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiefBy" columns="50" />
+            <dataField fieldName="ComponentsUsage" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

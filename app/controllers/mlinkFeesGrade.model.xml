@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="mlinkFeesGrade" alias="mlinkFeesGrade" created="2024-01-28T01:28:55" modified="2024-02-05T18:37:56" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Fee" parentTableSchema="dbo" parentTableName="Fees" x="289" y="20">
+      <foreignKeyColumn columnName="FeeID" parentColumnName="FeeID" />
+    </foreignKey>
+    <foreignKey id="RefGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="289" y="250">
+      <foreignKeyColumn columnName="RefGradeLevelId" parentColumnName="RefGradeLevelId" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="FeeID" fieldName="FeeID" label="Fee ID" aliasColumnName="Description" aliasForeignKey="Fee" />
+    <column name="Description" fieldName="FeeDescription" label="Fee Description" foreignKey="Fee" />
+    <column name="RefGradeLevelId" fieldName="RefGradeLevelID" label="Ref Grade Level Id" aliasColumnName="Description" aliasForeignKey="RefGradeLevel" />
+    <column name="Description" fieldName="GradeLevel" label="Grade Level" foreignKey="RefGradeLevel" />
+    <column name="SortOrder" fieldName="GLSO" label="GLSO" foreignKey="RefGradeLevel" sortType="Ascending" sortOrder="1" />
+  </columns>
+</dataModel>

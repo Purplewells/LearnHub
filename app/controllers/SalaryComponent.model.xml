@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpSalaryComponents" alias="zlkpSalaryComponents" created="2024-01-28T12:09:46" modified="2024-03-30T20:48:36" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="ComponentType" parentTableSchema="dbo" parentTableName="zlkpSalaryComponentType" x="332" y="20">
+      <foreignKeyColumn columnName="ComponentTypeID" parentColumnName="ComponentTypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ElementID" fieldName="ElementID" label="Element ID" />
+    <column name="ElementName" fieldName="ElementName" label="Element Name" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="ComponentTypeID" fieldName="ComponentTypeID" label="Component Type ID" aliasColumnName="ComponentType" aliasForeignKey="ComponentType" />
+    <column name="ComponentType" fieldName="ComponentType" label="Component Type" foreignKey="ComponentType" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

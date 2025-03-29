@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dwh" baseTable="pbi_vw_metric_student_profile_healthalert" alias="pbi_vw_metric_student_profile_healthalert" created="2024-02-22T08:49:07" modified="2024-02-22T08:50:43" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="StudentName" fieldName="StudentName" label="Student Name" />
+    <column name="GradeLevel" fieldName="GL" label="GL" />
+    <column name="Gender" fieldName="Gender" label="Sex" />
+    <column name="Ethnic" fieldName="Ethnic" label="Ethnic" />
+    <column name="AllergyType" fieldName="AllergyType" label="Allergy Type" />
+    <column name="ReactionDescription" fieldName="ReactionDescription" label="Reaction" />
+    <column name="NoOfAllergies" fieldName="NoOfAllergies" label="Allergies" />
+    <column name="CalendarYear" fieldName="CalendarYear" label="Year" />
+    <column name="CSY" fieldName="CSY" label="CSY" />
+  </columns>
+</dataModel>

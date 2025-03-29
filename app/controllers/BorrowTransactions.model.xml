@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="BorrowTransactions" alias="BorrowTransactions" created="2024-08-01T14:46:40" modified="2024-08-01T14:51:42" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Book" parentTableSchema="dbo" parentTableName="Books" x="267" y="20">
+      <foreignKeyColumn columnName="BookID" parentColumnName="BookID" />
+    </foreignKey>
+    <foreignKey id="Member" parentTableSchema="dbo" parentTableName="Members" x="271" y="299">
+      <foreignKeyColumn columnName="MemberID" parentColumnName="MemberID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="transaction_id" fieldName="TransactionID" label="Transaction Id" />
+    <column name="BookID" fieldName="BookID" label="Book ID" aliasColumnName="Title" aliasForeignKey="Book" />
+    <column name="Title" fieldName="BookTitle" label="Book Title" foreignKey="Book" />
+    <column name="Author" fieldName="BookAuthor" label="Author" foreignKey="Book" />
+    <column name="MemberID" fieldName="MemberID" label="Member ID" aliasColumnName="Name" aliasForeignKey="Member" />
+    <column name="Name" fieldName="MemberName" label="Member Name" foreignKey="Member" />
+    <column name="BorrowDate" fieldName="BorrowDate" label="Borrow Date" />
+    <column name="DueDate" fieldName="DueDate" label="Due Date" />
+    <column name="ReturnDate" fieldName="ReturnDate" label="Return Date" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

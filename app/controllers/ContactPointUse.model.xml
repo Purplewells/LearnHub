@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkp_contact_point_use" alias="zlkp_contact_point_use" created="2024-02-07T22:51:21" modified="2024-02-07T22:51:27" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="UseCode" fieldName="UseCode" label="Use Code" />
+    <column name="UseCodeValue" fieldName="UseCodeValue" label="Use Code Value" />
+  </columns>
+</dataModel>

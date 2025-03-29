@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Program" alias="Program" created="2024-11-22T14:45:37" modified="2024-11-22T14:46:40" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="ProgramType" parentTableSchema="dbo" parentTableName="zlkpProgramType" x="323" y="161">
+      <foreignKeyColumn columnName="ProgramTypeID" parentColumnName="RefProgramTypeId" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ProgramID" fieldName="ProgramID" label="Program ID" />
+    <column name="ProgramName" fieldName="ProgramName" label="Program Name" />
+    <column name="ProgramTypeID" fieldName="ProgramTypeID" label="Program Type ID" aliasColumnName="Description" aliasForeignKey="ProgramType" />
+    <column name="Description" fieldName="ProgramType" label="Program Type" foreignKey="ProgramType" />
+    <column name="Characteristics" fieldName="Characteristics" label="Characteristics" />
+    <column name="CreditsRequired" fieldName="CreditsRequired" label="Credits Required" />
+    <column name="Sponsor" fieldName="Sponsor" label="Sponsor" />
+  </columns>
+</dataModel>

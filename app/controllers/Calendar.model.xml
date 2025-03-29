@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Calendar" alias="Calendar" created="2024-01-27T23:30:36" modified="2025-03-14T06:04:59" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="School" parentTableSchema="dbo" parentTableName="School" x="361" y="20">
+      <foreignKeyColumn columnName="SchoolID" parentColumnName="OrganizationID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="OrganizationCalendarId" fieldName="OrganizationCalendarID" label="Organization Calendar Id" />
+    <column name="CalendarCode" fieldName="CalendarCode" label="Code" />
+    <column name="CalendarDescription" fieldName="Description" label="Description" />
+    <column name="CalendarYear" fieldName="Year" label="Year" />
+    <column name="SchoolYearStartDate" fieldName="YearStartDate" label="Year Start Date" />
+    <column name="SchoolYearEndDate" fieldName="YearEndDate" label="Year End Date" />
+    <column name="CurrentSchoolYear" fieldName="CSY" label="CSY" />
+    <column name="SchoolID" fieldName="SchoolID" label="School ID" aliasColumnName="SchoolName" aliasForeignKey="School" />
+    <column name="SchoolName" fieldName="School" label="School" foreignKey="School" />
+    <column name="AcademicYearLength" fieldName="AcademicYearLength" label="No. of Days" />
+    <column name="Sequence" fieldName="Sequence" label="SEQ" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+  <details>
+    <detail fieldName="Session" model="Session" filterFields="OrganizationCalendarID" create="true" edit="true" />
+  </details>
+</dataModel>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StudentDisciplineIncidentAssociation" alias="StudentDisciplineIncidentAssociation" created="2024-02-03T10:39:55" modified="2024-02-03T12:32:11" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="DisciplineIncident" parentTableSchema="dbo" parentTableName="DisciplineIncident" x="375" y="20">
+      <foreignKeyColumn columnName="DisciplineIncidentID" parentColumnName="DisciplineIncidentID" />
+    </foreignKey>
+    <foreignKey id="Student" parentTableSchema="dbo" parentTableName="Person" x="375" y="434">
+      <foreignKeyColumn columnName="StudentID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="IncidentParticipation" parentTableSchema="dbo" parentTableName="zlkpIncidentParticipation" x="31" y="345">
+      <foreignKeyColumn columnName="IncidentParticipationID" parentColumnName="IncidentParticipationID" />
+    </foreignKey>
+    <foreignKey id="BehaviourCategoryType" parentTableSchema="dbo" parentTableName="zlkpBehaviourCategory" x="842" y="20">
+      <foreignKeyColumn columnName="BehaviourCategoryTypeID" parentColumnName="BehaviourCategoryTypeID" />
+    </foreignKey>
+    <foreignKey id="ActionTaken" parentTableSchema="dbo" parentTableName="zlkpActionTaken" x="842" y="204">
+      <foreignKeyColumn columnName="ActionTakenID" parentColumnName="ActionTakenID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="842" y="367">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="StudentDisciplineIncidentID" fieldName="StudentDisciplineIncidentID" label="Student Discipline Incident ID" />
+    <column name="DisciplineIncidentID" fieldName="DisciplineIncidentID" label="Discipline Incident ID" aliasColumnName="Code" aliasForeignKey="DisciplineIncident" />
+    <column name="Code" fieldName="DisciplineIncidentCode" label="Discipline Incident Code" foreignKey="DisciplineIncident" />
+    <column name="StudentID" fieldName="StudentID" label="Student ID" aliasColumnName="IdentificationCode" aliasForeignKey="Student" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Student" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" foreignKey="Student" />
+    <column name="LastName" fieldName="LastName" label="Last Name" foreignKey="Student" />
+    <column name="IncidentParticipationID" fieldName="IncidentParticipationID" label="Incident Participation ID" aliasColumnName="ParticipationDescription" aliasForeignKey="IncidentParticipation" />
+    <column name="ParticipationDescription" fieldName="IncidentParticipationDescription" label="Incident Involvement" foreignKey="IncidentParticipation" />
+    <column name="BehaviourCategoryTypeID" fieldName="BehaviourCategoryTypeID" label="Behaviour Category Type ID" aliasColumnName="CategoryType" aliasForeignKey="BehaviourCategoryType" />
+    <column name="CategoryType" fieldName="BehaviourCategoryType" label="Behaviour Category Type" foreignKey="BehaviourCategoryType" />
+    <column name="Points" fieldName="BehaviourCategoryTypePoints" label="Points" foreignKey="BehaviourCategoryType" />
+    <column name="ActionTakenID" fieldName="ActionTakenID" label="Action Taken ID" aliasColumnName="ActionTaken" aliasForeignKey="ActionTaken" />
+    <column name="ActionTaken" fieldName="ActionTaken" label="Action Taken" foreignKey="ActionTaken" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="FirstName" aliasForeignKey="Person" />
+    <column name="FirstName" fieldName="StaffFirstName" label="Staff First Name" foreignKey="Person" />
+    <column name="LastName" fieldName="StaffLastName" label="Staff Last Name" foreignKey="Person" />
+    <column fieldName="StaffName" type="nvarchar(71)" dataType="String" label="Staff Name">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </column>
+    <column fieldName="Fullname" type="nvarchar(71)" dataType="String" label="Fullname">
+      <formula>Student.FirstName + ' ' + Student.LastName</formula>
+    </column>
+  </columns>
+</dataModel>

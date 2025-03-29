@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkbenchAdvancement" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="PromotionScheme" type="DataView" label="Promotion Scheme">
+      <dataView controller="PromotionScheme" view="grid1" />
+    </field>
+    <field name="SessionEnrollmentScheme" type="DataView" label="Session Enrollment Scheme">
+      <dataView controller="SessionEnrollmentScheme" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="Advancement" type="Form" label="PROGRESSION WORKBENCH">
+      <headerText>The progression workbench helps users configure students' progression from one grade level to another. </headerText>
+      <categories>
+        <category tab="SESSION ADVANCEMENT" id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="SessionEnrollmentScheme" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content">
+              <headerText>Session Advancment</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="GRADE ADVANCEMENT" id="c2">
+          <dataFields>
+            <dataField fieldName="PromotionScheme" columns="15" tag="modal-max-sm&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Scheme Actions" flat="false" />
+  </actions>
+</dataController>

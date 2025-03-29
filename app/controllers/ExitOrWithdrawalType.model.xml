@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpExitOrWithdrawalType" alias="zlkpExitOrWithdrawalType" created="2024-01-28T17:27:32" modified="2024-07-07T14:02:40" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="RefExitOrWithdrawalTypeId" fieldName="RefExitOrWithdrawalTypeID" label="Ref Exit Or Withdrawal Type Id" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+    <column name="DefaultValue" fieldName="DefaultValue" label="Default Value" />
+  </columns>
+</dataModel>

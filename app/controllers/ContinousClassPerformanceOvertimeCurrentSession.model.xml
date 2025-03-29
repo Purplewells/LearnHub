@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dwh" baseTable="pbi_vw_metric_student_class_performance_overtime_current_session" alias="pbi_vw_metric_student_class_performance_overtime_current_session" created="2024-02-07T08:03:30" modified="2024-02-07T08:07:23" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" primaryKey="true" />
+    <column name="FirstName" fieldName="FirstName" label="Firstname" />
+    <column name="LastName" fieldName="LastName" label="Lastname" />
+    <column name="FullName" fieldName="FullName" label="Fullname" />
+    <column name="UPN" fieldName="UPN" label="UPN" />
+    <column name="GradeLevel" fieldName="GL" label="GL" />
+    <column name="Stream" fieldName="Stream" label="Stream" />
+    <column name="CourseTitle" fieldName="Course" label="Course" />
+    <column name="GradeBooktitle" fieldName="GradeBook" label="Grade Book" />
+    <column name="SubmittedDate" fieldName="SubmittedDate" label="Submitted" />
+    <column name="calYear" fieldName="CalYear" label="Year" />
+    <column name="Term" fieldName="Term" label="Term" />
+    <column name="Points" fieldName="Points" label="PTS" />
+    <column name="MPP" fieldName="MPP" label="MPP" />
+    <column name="CWS" fieldName="CWS" label="CWS" />
+    <column name="calcScore" fieldName="CalcScore" label="Score" />
+    <column name="GradeType" fieldName="GradeType" label="ASTY" />
+    <column name="SchoolName" fieldName="SchoolName" label="School" />
+    <column name="Address" fieldName="Address" label="Address" />
+    <column name="CSY" fieldName="CSY" label="CSY" />
+    <column name="SessionCode" fieldName="Session" label="Session" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Passing" fieldName="Passing" label="PSN" />
+  </columns>
+</dataModel>

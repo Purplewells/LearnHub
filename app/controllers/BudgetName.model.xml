@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpBudgetName" alias="zlkpBudgetName" created="2024-01-28T19:17:39" modified="2024-01-28T19:17:52" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="BudgetType" parentTableSchema="dbo" parentTableName="zlkpBudgetType" x="321" y="20">
+      <foreignKeyColumn columnName="BudgetTypeID" parentColumnName="BudgetTypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="BudgetNameID" fieldName="BudgetNameID" label="Budget Name ID" />
+    <column name="BudgetName" fieldName="BudgetName" label="Budget Name" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="BudgetTypeID" fieldName="BudgetTypeID" label="Budget Type ID" aliasColumnName="BudgetType" aliasForeignKey="BudgetType" />
+    <column name="BudgetType" fieldName="BudgetType" label="Budget Type" foreignKey="BudgetType" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+  </columns>
+</dataModel>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpMedicalAlertIndicator" alias="zlkpMedicalAlertIndicator" created="2024-02-07T22:48:14" modified="2024-02-07T22:48:24" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="RefMedicalAlertIndicatorId" fieldName="RefMedicalAlertIndicatorID" label="Ref Medical Alert Indicator Id" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

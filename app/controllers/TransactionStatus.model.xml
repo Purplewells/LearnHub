@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpTransactionStatus" alias="zlkpTransactionStatus" created="2024-01-29T09:25:41" modified="2025-03-16T11:31:11" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="TransactionStatusID" fieldName="TransactionStatusID" label="Transaction Status ID" />
+    <column name="TransactionStatus" fieldName="TransactionStatus" label="Transaction Status" />
+    <column name="TransactionStatusCode" fieldName="TransactionStatusCode" label="Code" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+  </columns>
+</dataModel>

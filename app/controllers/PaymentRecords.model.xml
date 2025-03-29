@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PaymentRecords" alias="PaymentRecords" created="2024-01-30T21:24:46" modified="2024-09-17T08:15:38" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="EmployeeID" fieldName="EmployeeID" label="Employee ID" />
+    <column name="PeriodType" fieldName="PeriodType" label="Period Type" />
+    <column name="FirstName" fieldName="FirstName" label="Firstname" />
+    <column name="LastName" fieldName="LastName" label="Lastname" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" />
+    <column name="SSNo" fieldName="Ssno" label="SSNo" />
+    <column name="PaymentDate" fieldName="PaymentDate" label="Paid Date" />
+    <column name="BaseSalary" fieldName="BaseSalary" label="Base Salary" format="c" />
+    <column name="TotalEarnings" fieldName="TotalEarnings" label="Earnings" format="c" />
+    <column name="GrossEarnings" fieldName="GrossEarnings" label="Gross Earnings" format="c" />
+    <column name="TaxAmount" fieldName="TaxAmount" label="Tax Amount" format="c" />
+    <column name="TotalDeductions" fieldName="TotalDeductions" label="Deductions" format="c" />
+    <column name="NetSalary" fieldName="NetSalary" label="Net Salary" format="c" />
+    <column name="NextRunDate" fieldName="NextRunDate" label="Next Run" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="IsCurrent" fieldName="IsCurrent" label="Is Current" />
+    <column name="BatchID" fieldName="BatchID" label="Batch ID" />
+  </columns>
+</dataModel>

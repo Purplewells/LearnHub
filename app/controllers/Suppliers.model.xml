@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Suppliers" alias="Suppliers" created="2024-07-12T08:17:30" modified="2024-07-12T08:26:09" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="SupplierID" fieldName="SupplierID" label="Supplier ID" />
+    <column name="SupplierName" fieldName="SupplierName" label="Supplier" />
+    <column name="Address" fieldName="Address" label="Address" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="ContactName" fieldName="ContactName" label="Contact Name" />
+    <column name="ContactEmail" fieldName="ContactEmail" label="Email" />
+    <column name="ContactPhone" fieldName="ContactPhone" label="Phone" />
+    <column name="City" fieldName="City" label="City" />
+    <column name="State" fieldName="State" label="State" />
+    <column name="PostalCode" fieldName="PostalCode" label="Postal Code" />
+    <column name="Country" fieldName="Country" label="Country" />
+    <column name="Website" fieldName="Website" label="Website" />
+  </columns>
+</dataModel>

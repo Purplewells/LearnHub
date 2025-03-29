@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="LearningObjective" conflictDetection="overwriteChanges" label="Learning Objective" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"LearningObjective"."LearningObjectiveID" "LearningObjectiveID"
+	,"LearningObjective"."ItemCode" "ItemCode"
+	,"LearningObjective"."ContentDescription" "Content"
+	,"LearningObjective"."Indicator" "Indicator"
+	,"LearningObjective"."CourseSectionID" "CourseSectionID"
+	,"CourseSection"."SectionNo" "SectionNo"
+	,"LearningObjective"."LearningObjectiveEntryTypeID" "LearningObjectiveEntryTypeID"
+	,"LearningObjectiveEntryType"."GradeBookEntryType" "AssessmentType"
+	,"LearningObjective"."IsActive" "IsActive"
+	,"LearningObjective"."MaxScore" "MaxScore"
+	,"LearningObjective"."SubmittedDate" "SubmittedDate"
+	,"LearningObjective"."GradingPeriodID" "GradingPeriodID"
+	,"GradingPeriod"."GradingPeriod" "GradingPeriod"
+	,"LearningObjective"."PostToStudentAccess" "PSTA"
+	,"LearningObjective"."PublishItem" "PUIT"
+	,"LearningObjective"."PublishResult" "PURE"
+	,"LearningObjective"."WeightMultiplier" "WeightMultiplier"
+	,"LearningObjective"."CreatedDate" "CreatedDate"
+	,"LearningObjective"."ModifiedDate" "ModifiedDate"
+	,"LearningObjective"."CreatedBy" "CreatedBy"
+	,"LearningObjective"."ModifiedBy" "ModifiedBy"
+	,"LearningObjective"."UserID" "UserID"
+	,"LearningObjective"."PerformanceIndicatorID" "PerformanceIndicatorID"
+	,"PerformanceIndicator"."Code" "IndicatorCode"
+	,"PerformanceIndicator"."PerformanceDescription" "PerformanceDescription"
+	,"PerformanceIndicator"."Strand" "Strand"
+	,"PerformanceIndicator"."Substrand" "Substrand"
+	,"PerformanceIndicator"."extSubject" "Subject"
+	,"LearningObjective"."AssessmentCategoryID" "AssessmentCategoryID"
+	,"AssessmentCategory"."Category" "Category"
+	,"LearningObjective"."Owner" "Owner"
+	,"LearningObjective"."RefSchoolStreamID" "RefSchoolStreamID"
+	,"RefSchoolStream"."Description" "STM"
+	,"RefGradeLevel"."Description" "GL"
+	,"RefGradeLevel"."SortOrder" "GLSO"
+	,"CalendarSession"."SessionCode" "Session"
+	,"CalendarSession"."IsActive" "SSIA"
+from "dbo"."LearningObjective" "LearningObjective"
+	left join "dbo"."CourseSection" "CourseSection" on "LearningObjective"."CourseSectionID" = "CourseSection"."CourseSectionID"
+	left join "dbo"."Course" "Course" on "CourseSection"."CourseID" = "Course"."CourseID"
+	left join "dbo"."zlkpGradeLevel" "RefGradeLevel" on "Course"."RefGradeLevelId" = "RefGradeLevel"."RefGradeLevelId"
+	left join "dbo"."Session" "CalendarSession" on "CourseSection"."CalendarSessionID" = "CalendarSession"."CalendarSessionID"
+	left join "dbo"."zlkp_LearningObjectiveEntryType" "LearningObjectiveEntryType" on "LearningObjective"."LearningObjectiveEntryTypeID" = "LearningObjectiveEntryType"."LearningObjectiveEntryTypeID"
+	left join "dbo"."GradingPeriod" "GradingPeriod" on "LearningObjective"."GradingPeriodID" = "GradingPeriod"."GradingPeriodID"
+	left join "dbo"."PerformanceIndicator" "PerformanceIndicator" on "LearningObjective"."PerformanceIndicatorID" = "PerformanceIndicator"."PerformanceIndicatorID"
+	left join "dbo"."zlkp_AssessmentCategory" "AssessmentCategory" on "LearningObjective"."AssessmentCategoryID" = "AssessmentCategory"."AssessmentCategoryID"
+	left join "dbo"."zlkpSchoolStream" "RefSchoolStream" on "LearningObjective"."RefSchoolStreamID" = "RefSchoolStream"."RefSchoolStreamID"
+]]></text>
+    </command>
+    <command id="LearningObjectiveIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="LearningObjectiveID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="LearningObjectiveID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Learning Objective ID" readOnly="true" />
+    <field name="ItemCode" type="String" label="SBL Title" length="12" showInSummary="true" />
+    <field name="Content" type="String" label="Content" length="500" showInSummary="true" />
+    <field name="Indicator" type="String" label="Indicator" length="500" showInSummary="true" />
+    <field name="CourseSectionID" type="Int32" label="Course Section ID" showInSummary="true">
+      <items style="Lookup" dataController="CourseSection" newDataView="createForm1" dataValueField="CourseSectionID" dataTextField="SectionNo" copy="GL=GL, GLSO=GLSO, Session=SessionCode, " />
+    </field>
+    <field name="SectionNo" type="String" readOnly="true" label="Section No" length="20" />
+    <field name="LearningObjectiveEntryTypeID" type="Int32" label="Learning Objective Entry Type ID" showInSummary="true">
+      <items style="Lookup" dataController="LearningObjectiveEntry" newDataView="createForm1" dataValueField="LearningObjectiveEntryTypeID" dataTextField="GradeBookEntryType" />
+    </field>
+    <field name="AssessmentType" type="String" readOnly="true" label="Type" length="20" />
+    <field name="IsActive" type="Boolean" label="Active" />
+    <field name="MaxScore" type="Decimal" label="MPP" />
+    <field name="SubmittedDate" type="DateTime" label="Submitted Date" />
+    <field name="GradingPeriodID" type="Int32" label="Grading Period ID">
+      <items style="Lookup" dataController="GradingPeriod" newDataView="createForm1" dataValueField="GradingPeriodID" dataTextField="GradingPeriod" />
+    </field>
+    <field name="GradingPeriod" type="String" readOnly="true" label="GP" length="15" />
+    <field name="PSTA" type="Boolean" label="PSTA" />
+    <field name="PUIT" type="Boolean" label="PUIT" />
+    <field name="PURE" type="Boolean" label="PURE" />
+    <field name="WeightMultiplier" type="Decimal" label="% Wt" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="PerformanceIndicatorID" type="Int32" label="Performance Indicator ID">
+      <items style="DropDownList" dataController="PerformanceIndicator" dataValueField="PerformanceIndicatorID" dataTextField="SubjectLearningOutcome" copy="PerformanceDescription=PerformanceDescription, Strand=Strand, Substrand=Substrand, Subject=Subject" dataView="grid1" />
+    </field>
+    <field name="IndicatorCode" type="String" readOnly="true" label="Learning Standard" length="25" />
+    <field name="PerformanceDescription" type="String" readOnly="true" allowQBE="false" allowSorting="false" label="Performance Description" length="2048" />
+    <field name="Strand" type="String" readOnly="true" label="Strand" length="150" />
+    <field name="Substrand" type="String" readOnly="true" label="Substrand" length="150" />
+    <field name="Subject" type="String" readOnly="true" label="Subject" length="50" />
+    <field name="AssessmentCategoryID" type="Int32" label="Assessment Category ID">
+      <items style="Lookup" dataController="AssessmentCategory" newDataView="createForm1" dataValueField="AssessmentCategoryID" dataTextField="Category" />
+    </field>
+    <field name="Category" type="String" readOnly="true" label="Category" length="25" />
+    <field name="UserID" type="Guid" label="User ID">
+      <items style="UserIdLookup" />
+    </field>
+    <field name="Owner" type="String" label="Owner" length="50">
+      <items style="UserNameLookup" />
+    </field>
+    <field name="RefSchoolStreamID" type="Int32" label="Ref School Stream ID">
+      <items style="Lookup" dataController="SchoolStream" newDataView="createForm1" dataValueField="RefSchoolStreamID" dataTextField="Description" />
+    </field>
+    <field name="STM" type="String" readOnly="true" label="STM" length="8" />
+    <field name="GL" type="String" readOnly="true" label="GL" length="100" />
+    <field name="GLSO" type="Decimal" readOnly="true" label="GLSO" />
+    <field name="Session" type="String" readOnly="true" label="Session" length="20" />
+    <field name="SSIA" type="Boolean" readOnly="true" label="SSIA" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="SBL Plan" sortExpression="GLSO ASC" groupExpression="Subject">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PerformanceIndicatorID" aliasFieldName="IndicatorCode" hidden="true" />
+        <dataField fieldName="ItemCode" columns="18" />
+        <dataField fieldName="Subject" columns="20" />
+        <dataField fieldName="CourseSectionID" aliasFieldName="SectionNo" />
+        <dataField fieldName="LearningObjectiveEntryTypeID" aliasFieldName="AssessmentType" />
+        <dataField fieldName="AssessmentCategoryID" aliasFieldName="Category" />
+        <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" />
+        <dataField fieldName="GL" columns="5" />
+        <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" />
+        <dataField fieldName="MaxScore" columns="5" />
+        <dataField fieldName="WeightMultiplier" columns="5" />
+        <dataField fieldName="SubmittedDate" columns="20" />
+        <dataField fieldName="Session" columns="20" />
+        <dataField fieldName="Strand" columns="25" tag="header-text" />
+        <dataField fieldName="Substrand" />
+        <dataField fieldName="Content" hidden="true" />
+        <dataField fieldName="Indicator" hidden="true" />
+        <dataField fieldName="IsActive" hidden="true" />
+        <dataField fieldName="PSTA" hidden="true" />
+        <dataField fieldName="PUIT" hidden="true" />
+        <dataField fieldName="PURE" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="PerformanceDescription" hidden="true" />
+        <dataField fieldName="UserID" columns="15" hidden="true" />
+        <dataField fieldName="Owner" columns="50" hidden="true" />
+        <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="SSIA" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Enter &amp; Maintain Assessment Standard">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="PerformanceIndicatorID" aliasFieldName="IndicatorCode" />
+            <dataField fieldName="CourseSectionID" aliasFieldName="SectionNo" />
+            <dataField fieldName="LearningObjectiveEntryTypeID" aliasFieldName="AssessmentType" />
+            <dataField fieldName="AssessmentCategoryID" aliasFieldName="Category" />
+            <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" />
+            <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" />
+            <dataField fieldName="GL" />
+            <dataField fieldName="GLSO" columns="15" hidden="true" />
+            <dataField fieldName="Session" columns="20" />
+            <dataField fieldName="SSIA" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="ItemCode" columns="12" />
+            <dataField fieldName="WeightMultiplier" columns="15" />
+            <dataField fieldName="MaxScore" columns="15" />
+            <dataField fieldName="SubmittedDate" columns="10" />
+            <dataField fieldName="Substrand" />
+            <dataField fieldName="Strand" />
+            <dataField fieldName="Subject" columns="50" />
+            <dataField fieldName="Content" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Other Attributes" collapsed="true" wrap="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="Indicator" />
+            <dataField fieldName="PerformanceDescription" rows="5" />
+          </dataFields>
+        </category>
+        <category id="c5" headerText="Publishing Controls" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="PSTA" />
+            <dataField fieldName="PUIT" />
+            <dataField fieldName="PURE" />
+            <dataField fieldName="IsActive" />
+          </dataFields>
+        </category>
+        <category id="c6" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="UserID" columns="15" aliasFieldName="CreatedBy" />
+            <dataField fieldName="Owner" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Assessment">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Assessment Standard" wrap="true" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="PerformanceIndicatorID" aliasFieldName="IndicatorCode">
+              <headerText>Learning Standard</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="c3" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="CourseSectionID" aliasFieldName="SectionNo" />
+            <dataField fieldName="LearningObjectiveEntryTypeID" aliasFieldName="AssessmentType" />
+            <dataField fieldName="AssessmentCategoryID" aliasFieldName="Category" />
+            <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" />
+            <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" />
+            <dataField fieldName="GL" />
+            <dataField fieldName="GLSO" columns="15" hidden="true" />
+            <dataField fieldName="Session" columns="20" />
+            <dataField fieldName="SSIA" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="ItemCode" columns="12" />
+            <dataField fieldName="WeightMultiplier" columns="15" />
+            <dataField fieldName="MaxScore" columns="15" />
+            <dataField fieldName="SubmittedDate" columns="10" />
+            <dataField fieldName="Subject" columns="50" />
+            <dataField fieldName="Strand" />
+            <dataField fieldName="Substrand" />
+            <dataField fieldName="Content" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Other Attributes" collapsed="true" wrap="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="Indicator" />
+            <dataField fieldName="PerformanceDescription" rows="5" />
+          </dataFields>
+        </category>
+        <category id="c5" headerText="Publishing Controls" collapsed="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="PSTA" />
+            <dataField fieldName="PUIT" />
+            <dataField fieldName="PURE" />
+            <dataField fieldName="IsActive" />
+          </dataFields>
+        </category>
+        <category id="c6" headerText="Audit" collapsed="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="UserID" columns="15" aliasFieldName="CreatedBy" />
+            <dataField fieldName="Owner" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute" name="setDefaultValues"><![CDATA[Set @PSTA = 1
+Set @PUIT = 1
+Set @PURE = 1
+SET @IsActive=1
+SET @MaxScore = 100]]></rule>
+    <rule id="r101" commandName="New|Insert|Update" type="Sql" phase="After" name="setItemCode"><![CDATA[/*
+	Author : Benjamon Ohene-Adu
+	Date   : 08 March 2021
+	Desc   : Populates the ItemCode fields using the lookup from the Performance Indicator table
+
+*/
+
+UPDATE lo
+	SET 
+	[ItemCode] = pi.[Code] ,
+	Indicator = CONCAT(pi.CODE, '-', pi.extSubject,' - ', PI.PerformanceDescription),
+	ContentDescription = pi.SuccessStatement
+	
+FROM [LearningObjective] [lo]
+INNER JOIN [PerformanceIndicator] [pi]
+	ON [lo].[PerformanceIndicatorID] = [pi].[PerformanceIndicatorID]
+WHERE [lo].[PerformanceIndicatorID] = @PerformanceIndicatorID]]></rule>
+    <rule id="r102" commandName="New|Update" type="Sql" phase="Execute" name="setOwnerAssignment"><![CDATA[-- Revised Date : 23rd Feb 2020
+-- First set the username to the data entry person
+SET @CreatedBy = @BusinessRules_UserName
+-- if the Owner field is not selected or filled up then set that to current user
+IF (@Owner IS NULL)
+     SET @Owner = @BusinessRules_UserName
+
+-- Additional rule to set UserID 
+SET @UserID = @BusinessRules_UserId ]]></rule>
+    <rule id="r103" commandName="Update" type="Sql" phase="After" name="setRecordModifierUserName"><![CDATA[SET @ModifiedBy = @BusinessRules_UserName]]></rule>
+    <rule id="r104" commandName="Insert" type="Email" phase="After" name="sendAssessmentNotificationOnCreation"><![CDATA[Host: mail.ntchosting.com
+Port: 25
+UserName: b.adu@dekakis.com
+Password: nanakillo,1970
+EnableSSL: false
+
+From: "Standard Based Plan Created" b.adu@dekakis.com
+To:   {@BusinessRules_UserEmail}
+BCC: ben.aduohene@gmail.com
+
+Subject:  Standard Based Plan for {ItemCode} in {SectionNo}
+<br/>
+<span>Thank you for creating  {ItemCode} mastery assessment for {SectionNo} regarding indicator :{PerformanceDescription}.</span>
+Please be reminded the schedule is as follows </br>
+
+</br>
+<table style="width: 80%;" cellpadding="1">
+<tbody>
+<tr>
+<td></td>
+<td>Assessment Date</td>
+<td>Category</td>
+<td>Weight</td>
+</tr>
+<tr>
+<td>&nbsp;<strong>{ItemCode}</strong></td>
+<td>&nbsp;{AssessmentDate}</td>
+<td>&nbsp;{Category}</td>
+<td>&nbsp;{WeightMultiplier}%</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<!-- DivTable.com -->
+
+
+Please be aware creating assessment plan ahead of schedule enhances your endeavour in informed teaching.
+Please do well to update your scoresheet as soon as assessment scores are available. <br/>
+<div> </div>
+<table>
+<tbody>
+<tr>
+<td>{SchoolName},</td>
+</tr>
+<tr>
+<td>Subject Instructor, &nbsp;{Owner}</td>
+</tr>
+</tbody>
+</table>
+<!-- DivTable.com -->]]></rule>
+    <rule id="r105" commandName="Update" type="Email" phase="After" name="sendAssessmentNotificationOnUpdate"><![CDATA[Host: mail.ntchosting.com
+Port: 25
+UserName: b.adu@dekakis.com
+Password: nanakillo,1970
+EnableSSL: false
+
+From: "Standards Based Plan Update" b.adu@dekakis.com
+To: {@BusinessRules_UserEmail}, ben.aduohene@gmail.com
+BCC: ben.aduohene@gmail.com
+Subject:  Standards Based Plan for {ItemCode} in {SectionNo}
+
+<span>{ItemCode} standards based plan has been updated for {SectionNo} students in {Stream}.</span>
+Please be reminded the schedule is as follows </br>
+
+</br>
+<table style="width: 80%;" cellpadding="1">
+<tbody>
+<tr>
+<td></td>
+<td>Assessment Date</td>
+<td> Wt</td>
+<td> Assessment Category</td>
+</tr>
+<tr>
+<td>&nbsp;<strong>{ItemCode}</strong></td>
+<td>&nbsp;{AssessmentDate}</td>
+<td>&nbsp;{WeightMultiplier}%</td>
+<td>&nbsp;{Category}</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<!-- DivTable.com -->
+
+In this implementation the student should be able to {PerformanceDescription}
+Please do well to update your scoresheet as soon as assessment scores are available. <br/>
+
+<span style= "font-color:steelblue"> Head of Administration</span>, </br>
+<span style= "font-color:steelblue"> Created By {Owner}</span>, </br>]]></rule>
+    <rule id="r106" commandName="Insert|Update" type="Sql" phase="After" name="blogic_buildSessionParameter"><![CDATA[SET @BusinessRules_Whitelist = 'Empty'
+if @Arguments_CommandName = 'Insert'
+
+SET @BusinessRules_Whitelist = 
+            @BusinessRules_Whitelist + 'SendAdminEmail'
+			
+SELECT @Session_Indicator = Indicator
+        FROM LearningObjective 
+		WHERE LearningObjectiveID = @LearningObjectiveID		
+
+-- find the email address of the current user
+SELECT @Session_EmailAddress = m.Email 
+from aspnet_Membership m 
+      inner join aspnet_Users u on m.UserId = u.UserId
+      where
+      u.UserName = @BusinessRules_UserName]]></rule>
+  </businessRules>
+</dataController>

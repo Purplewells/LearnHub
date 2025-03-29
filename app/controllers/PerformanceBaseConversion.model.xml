@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpPerformanceBaseConversion" alias="zlkpPerformanceBaseConversion" created="2024-01-28T01:03:45" modified="2024-01-28T01:14:54" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="GradeScaleType" parentTableSchema="dbo" parentTableName="zlkp_GradeScaleType" x="407" y="20">
+      <foreignKeyColumn columnName="GradeScaleTypeID" parentColumnName="GradeScaleTypeID" />
+    </foreignKey>
+    <foreignKey id="AssessmentElementType" parentTableSchema="dbo" parentTableName="zlkpAssessmentElementType" x="407" y="183">
+      <foreignKeyColumn columnName="AssessmentElementTypeID" parentColumnName="AssessmentElementTypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="PerformanceBaseConversionID" fieldName="PerformanceBaseConversionID" label="Performance Base Conversion ID" />
+    <column name="PerformanceBaseConversion" fieldName="PerformanceBaseConversion" label="Performance Conversion" />
+    <column name="MinScore" fieldName="MinScore" label="Min Score" />
+    <column name="MaxScore" fieldName="MaxScore" label="Max Score" />
+    <column name="Grade" fieldName="Grade" label="LG" />
+    <column name="GradeName" fieldName="GradeName" label="NG" />
+    <column name="Passing" fieldName="Passing" label="Passing" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="GradeRank" fieldName="GradeRank" label="Rank" />
+    <column name="GradeScaleTypeID" fieldName="GradeScaleTypeID" label="Grade Scale Type ID" aliasColumnName="GradeScaleType" aliasForeignKey="GradeScaleType" />
+    <column name="GradeScaleType" fieldName="GradeScaleTypeGradeScaleType" label="Scale Type" foreignKey="GradeScaleType" />
+    <column name="AssessmentElementTypeID" fieldName="AssessmentElementTypeID" label="Assessment Element Type ID" aliasColumnName="AssessmentElementType" aliasForeignKey="AssessmentElementType" />
+    <column name="AssessmentElementType" fieldName="AssessmentElementType" label="Element Type" foreignKey="AssessmentElementType" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="GradeLevelDependent" fieldName="GradeLevelDependent" label="GLD" />
+  </columns>
+</dataModel>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Buses" alias="Buses" created="2024-07-10T11:11:28" modified="2024-07-10T11:31:36" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="BusID" fieldName="BusID" label="Bus ID" />
+    <column name="BusNumber" fieldName="BusNumber" label="Bus Number" />
+    <column name="Make" fieldName="Make" label="Make" />
+    <column name="Model" fieldName="Model" label="Model" />
+    <column name="LicensePlate" fieldName="LicensePlate" label="License Plate" />
+    <column name="Capacity" fieldName="Capacity" label="Capacity" />
+    <column name="RegisterationYear" fieldName="RegisterationYear" label="Reg Year" />
+    <column name="LastMaintenanceDate" fieldName="LastMaintenanceDate" label="Last Maintenance Date" />
+    <column name="NextMaintenanceDate" fieldName="NextMaintenanceDate" label="Next Maintenance Date" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+  </columns>
+</dataModel>

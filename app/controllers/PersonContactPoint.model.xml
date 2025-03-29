@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PersonContactPoint" alias="PersonContactPoint" created="2024-02-07T22:49:40" modified="2024-02-10T10:53:54" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="368" y="20">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="RefContactPointSystem" parentTableSchema="dbo" parentTableName="zlkpContactPointSystem" x="368" y="480">
+      <foreignKeyColumn columnName="RefContactPointSystemID" parentColumnName="RefContactPointSystemID" />
+    </foreignKey>
+    <foreignKey id="Use" parentTableSchema="dbo" parentTableName="zlkp_contact_point_use" x="368" y="641">
+      <foreignKeyColumn columnName="UseCode" parentColumnName="UseCode" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ContactPointID" fieldName="ContactPointID" label="Contact Point ID" />
+    <column name="ContactPoint" fieldName="ContactPoint" label="Contact Point" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="IdentificationCode" aliasForeignKey="Person" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" foreignKey="Person" />
+    <column name="LastName" fieldName="LastName" label="Last Name" foreignKey="Person" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="EffectiveFrom" fieldName="EffectiveFrom" label="Effective From" />
+    <column name="EffectiveTo" fieldName="EffectiveTo" label="Effective To" />
+    <column name="RefContactPointSystemID" fieldName="RefContactPointSystemID" label="Ref Contact Point System ID" aliasColumnName="Description" aliasForeignKey="RefContactPointSystem" />
+    <column name="Description" fieldName="ContactSystem" label="Contact System" foreignKey="RefContactPointSystem" />
+    <column name="Rank" fieldName="Rank" label="Rank" />
+    <column name="UseCode" fieldName="UseCode" label="Use Code" aliasColumnName="UseCodeValue" aliasForeignKey="Use" />
+    <column name="UseCodeValue" fieldName="Usage" label="Usage" foreignKey="Use" />
+    <column name="IsPrimary" fieldName="IsPrimary" label="Is Primary" />
+    <column fieldName="HeaderTitle" type="nvarchar(109)" dataType="String" label="Header Title">
+      <formula><![CDATA[Person.FirstName + ', ' + Person.LastName + ' >> ' + '( ' + 'UPN: ' + Person.IdentificationCode + ' >> ' + Person.CurrentYearGradeLevel + ' )'  
+ ]]></formula>
+    </column>
+  </columns>
+</dataModel>

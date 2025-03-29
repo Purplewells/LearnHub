@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="GetSalaryInformationForBank" conflictDetection="overwriteChanges" label="Get Salary Information For Bank" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"vw_ops_update_get_salary_information_for_bank"."EmployeeID" "EmployeeID"
+	,"vw_ops_update_get_salary_information_for_bank"."FirstName" "FirstName"
+	,"vw_ops_update_get_salary_information_for_bank"."LastName" "LastName"
+	,"vw_ops_update_get_salary_information_for_bank"."UPN" "UPN"
+	,"vw_ops_update_get_salary_information_for_bank"."PaymentDate" "PaymentDate"
+	,"vw_ops_update_get_salary_information_for_bank"."GrossEarnings" "GrossEarnings"
+	,"vw_ops_update_get_salary_information_for_bank"."TotalDeductions" "TotalDeductions"
+	,"vw_ops_update_get_salary_information_for_bank"."TaxAmount" "TaxAmount"
+	,"vw_ops_update_get_salary_information_for_bank"."NetSalary" "NetSalary"
+	,"vw_ops_update_get_salary_information_for_bank"."SalaryID" "SalaryID"
+	,"vw_ops_update_get_salary_information_for_bank"."SalaryName" "SalaryName"
+	,"vw_ops_update_get_salary_information_for_bank"."AmountValue" "AmountValue"
+	,"vw_ops_update_get_salary_information_for_bank"."Code" "Code"
+	,"vw_ops_update_get_salary_information_for_bank"."ElementName" "ElementName"
+	,"vw_ops_update_get_salary_information_for_bank"."ComponentType" "ComponentType"
+	,"vw_ops_update_get_salary_information_for_bank"."IsApproved" "IsApproved"
+	,"vw_ops_update_get_salary_information_for_bank"."IsCurrent" "IsCurrent"
+	,"vw_ops_update_get_salary_information_for_bank"."Name" "SchoolName"
+	,"vw_ops_update_get_salary_information_for_bank"."Address" "Address"
+	,"vw_ops_update_get_salary_information_for_bank"."SortOrder" "SortOrder"
+	,"vw_ops_update_get_salary_information_for_bank"."AccountNo" "AccountNo"
+	,"vw_ops_update_get_salary_information_for_bank"."SocialSecurityNumber" "SSNo"
+	,"vw_ops_update_get_salary_information_for_bank"."BankName" "BankName"
+	,"vw_ops_update_get_salary_information_for_bank"."CurrencyName" "Curr"
+	,"vw_ops_update_get_salary_information_for_bank"."Occupation" "Occupation"
+from "dbo"."vw_ops_update_get_salary_information_for_bank" "vw_ops_update_get_salary_information_for_bank"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="EmployeeID" type="Int32" label="Employee ID" showInSummary="true" />
+    <field name="FirstName" type="String" label="First Name" length="40" showInSummary="true" />
+    <field name="LastName" type="String" label="Last Name" length="40" showInSummary="true" />
+    <field name="UPN" type="String" label="UPN" length="15" showInSummary="true" />
+    <field name="PaymentDate" type="DateTime" label="Payment Date" showInSummary="true" />
+    <field name="GrossEarnings" type="Decimal" dataFormatString="" label="Gross Earning" />
+    <field name="TotalDeductions" type="Decimal" dataFormatString="" label="Total Deductions" />
+    <field name="TaxAmount" type="Decimal" dataFormatString="" label="Tax Amount" />
+    <field name="NetSalary" type="Decimal" dataFormatString="" label="Net Salary" />
+    <field name="SalaryID" type="Int32" dataFormatString="" label="Salary ID" />
+    <field name="SalaryName" type="String" label="Salary Name" length="30" />
+    <field name="AmountValue" type="Decimal" label="Amount Value" />
+    <field name="Code" type="String" label="Code" length="20" />
+    <field name="ElementName" type="String" label="Element Name" length="50" />
+    <field name="ComponentType" type="String" label="Component Type" length="20" />
+    <field name="IsApproved" type="Boolean" label="Is Approved" />
+    <field name="IsCurrent" type="Boolean" label="IsCurrent" />
+    <field name="SchoolName" type="String" label="School" length="60" />
+    <field name="Address" type="String" label="Address" length="150" />
+    <field name="SortOrder" type="Int32" label="Sort Order" />
+    <field name="AccountNo" type="String" label="Account No" length="20" />
+    <field name="SSNo" type="String" label="SSNo" length="20" />
+    <field name="BankName" type="String" label="Bank Name" length="50" />
+    <field name="Curr" type="String" label="Curr" length="20" />
+    <field name="Occupation" type="String" label="Occupation" length="100" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Current Pay Composition" reportLabel="PAYSLIPS FOR BANK" reportTemplate="true" filter="IsCurrent = 1">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="EmployeeID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="UPN" columns="15" />
+        <dataField fieldName="SalaryName" columns="20" />
+        <dataField fieldName="ElementName" columns="20" />
+        <dataField fieldName="ComponentType" columns="20" />
+        <dataField fieldName="GrossEarnings" columns="10">
+          <headerText>Gross</headerText>
+        </dataField>
+        <dataField fieldName="TotalDeductions" columns="10">
+          <headerText>Deductions</headerText>
+        </dataField>
+        <dataField fieldName="TaxAmount" columns="15" />
+        <dataField fieldName="NetSalary" columns="15" />
+        <dataField fieldName="SalaryID" columns="15" hidden="true" />
+        <dataField fieldName="AmountValue" columns="15" />
+        <dataField fieldName="Curr" columns="5" />
+        <dataField fieldName="Code" columns="20" hidden="true" />
+        <dataField fieldName="PaymentDate" columns="20" />
+        <dataField fieldName="IsApproved" hidden="true" />
+        <dataField fieldName="IsCurrent" columns="15">
+          <headerText>ISC</headerText>
+        </dataField>
+        <dataField fieldName="SchoolName" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="SortOrder" columns="15" hidden="true" />
+        <dataField fieldName="AccountNo" columns="20" hidden="true" />
+        <dataField fieldName="SSNo" columns="20" hidden="true" />
+        <dataField fieldName="BankName" columns="50" hidden="true" />
+        <dataField fieldName="Occupation" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_slip_report" type="Grid" commandId="command1" label="Historic Compensations" reportLabel="PAYSLIPS FOR BANK" reportTemplate="true" filter="IsCurrent = 0" groupExpression="EmployeeID, UPN">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="EmployeeID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="UPN" columns="15" />
+        <dataField fieldName="SalaryName" columns="20" />
+        <dataField fieldName="ElementName" columns="20" />
+        <dataField fieldName="ComponentType" columns="20" />
+        <dataField fieldName="GrossEarnings" columns="10">
+          <headerText>Gross</headerText>
+        </dataField>
+        <dataField fieldName="TotalDeductions" columns="10">
+          <headerText>Deductions</headerText>
+        </dataField>
+        <dataField fieldName="TaxAmount" columns="15" />
+        <dataField fieldName="NetSalary" columns="15" />
+        <dataField fieldName="SalaryID" columns="15" hidden="true" />
+        <dataField fieldName="AmountValue" columns="15" />
+        <dataField fieldName="Curr" columns="5" />
+        <dataField fieldName="Code" columns="20" hidden="true" />
+        <dataField fieldName="PaymentDate" columns="20" />
+        <dataField fieldName="IsApproved" hidden="true" />
+        <dataField fieldName="IsCurrent" columns="15">
+          <headerText>ISC</headerText>
+        </dataField>
+        <dataField fieldName="SchoolName" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="SortOrder" columns="15" hidden="true" />
+        <dataField fieldName="AccountNo" columns="20" hidden="true" />
+        <dataField fieldName="SSNo" columns="20" hidden="true" />
+        <dataField fieldName="BankName" columns="50" hidden="true" />
+        <dataField fieldName="Occupation" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Get Salary Information For Bank">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Get Salary Information For Bank" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="EmployeeID" columns="15" />
+            <dataField fieldName="FirstName" columns="40" />
+            <dataField fieldName="LastName" columns="40" />
+            <dataField fieldName="UPN" columns="15" />
+            <dataField fieldName="PaymentDate" columns="10" />
+            <dataField fieldName="GrossEarnings" columns="15" />
+            <dataField fieldName="TotalDeductions" columns="15" />
+            <dataField fieldName="TaxAmount" columns="15" />
+            <dataField fieldName="NetSalary" columns="15" />
+            <dataField fieldName="SalaryID" columns="15" />
+            <dataField fieldName="SalaryName" columns="30" />
+            <dataField fieldName="AmountValue" columns="15" />
+            <dataField fieldName="Code" columns="20" />
+            <dataField fieldName="ElementName" columns="50" />
+            <dataField fieldName="ComponentType" columns="20" />
+            <dataField fieldName="IsApproved" />
+            <dataField fieldName="IsCurrent" />
+            <dataField fieldName="SchoolName" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="SortOrder" columns="15" />
+            <dataField fieldName="AccountNo" columns="20" />
+            <dataField fieldName="SSNo" columns="20" />
+            <dataField fieldName="BankName" columns="50" />
+            <dataField fieldName="Curr" columns="20" />
+            <dataField fieldName="Occupation" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Get Salary Information For Bank">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="EmployeeID" columns="15" />
+            <dataField fieldName="FirstName" columns="40" />
+            <dataField fieldName="LastName" columns="40" />
+            <dataField fieldName="UPN" columns="15" />
+            <dataField fieldName="PaymentDate" columns="10" />
+            <dataField fieldName="GrossEarnings" columns="15" />
+            <dataField fieldName="TotalDeductions" columns="15" />
+            <dataField fieldName="TaxAmount" columns="15" />
+            <dataField fieldName="NetSalary" columns="15" />
+            <dataField fieldName="SalaryID" columns="15" />
+            <dataField fieldName="SalaryName" columns="30" />
+            <dataField fieldName="AmountValue" columns="15" />
+            <dataField fieldName="Code" columns="20" />
+            <dataField fieldName="ElementName" columns="50" />
+            <dataField fieldName="ComponentType" columns="20" />
+            <dataField fieldName="IsApproved" />
+            <dataField fieldName="IsCurrent" />
+            <dataField fieldName="SchoolName" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="SortOrder" columns="15" />
+            <dataField fieldName="AccountNo" columns="20" />
+            <dataField fieldName="SSNo" columns="20" />
+            <dataField fieldName="BankName" columns="50" />
+            <dataField fieldName="Curr" columns="20" />
+            <dataField fieldName="Occupation" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Actionsxxx" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a104" commandName="ReportAsPdf" headerText="Issue Payslips (Top)" />
+      <action id="a103" commandName="ReportAsPdf" headerText="Issue Payslips (Bottom)" />
+      <action id="a2" />
+      <action id="a100" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a3" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a4" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a102" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a101" commandName="ExportRss" headerText="RSS To API" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

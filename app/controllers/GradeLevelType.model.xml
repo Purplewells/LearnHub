@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpGradeLevelType" alias="zlkpGradeLevelType" created="2024-01-28T00:49:26" modified="2024-01-28T00:49:38" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="RefGradeLevelTypeId" fieldName="RefGradeLevelTypeID" label="Ref Grade Level Type Id" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

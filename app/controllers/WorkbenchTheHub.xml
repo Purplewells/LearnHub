@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkbenchTheHub" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="znOrganizationPersonRoleStudent" type="DataView" label="zn Organization Person Role Student">
+      <dataView controller="znOrganizationPersonRoleStudent" view="grid1" />
+    </field>
+    <field name="znContact" type="DataView" label="zn Contact">
+      <dataView controller="znContact" view="grid1" />
+    </field>
+    <field name="znOrganizationPersonRoleParent" type="DataView" label="zn Organization Person Role Parent">
+      <dataView controller="znOrganizationPersonRoleParent" view="grid1" />
+    </field>
+    <field name="znOrganizationPersonRoleStaff" type="DataView" label="zn Organization Person Role Staff">
+      <dataView controller="znOrganizationPersonRoleStaff" view="grid1" />
+    </field>
+    <field name="WorkbenchTheHub" type="DataView" label="Workbench The Hub">
+      <dataView controller="WorkbenchTheHub" />
+    </field>
+  </fields>
+  <views>
+    <view id="ContactHub" type="Form" label="CONTACT HUB" tags="material-icon-contacts">
+      <categories>
+        <category tab="CONTACTS" id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="znContact" columns="15" tag="modal-never&#xD;&#xA;header-image-none&#xD;&#xA;material-icon-contacts">
+              <headerText>CONTACTS</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="STUDENTS" id="c2">
+          <dataFields>
+            <dataField fieldName="znOrganizationPersonRoleStudent" columns="15" tag="material-icon-contacts&#xD;&#xA;modal-never&#xD;&#xA;header-image-none">
+              <headerText>STUDENTS</headerText>
+              <dataView pageSize="12" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="STAFF" id="c3">
+          <dataFields>
+            <dataField fieldName="znOrganizationPersonRoleStaff" columns="15" tag="modal-never&#xD;&#xA;header-image-none&#xD;&#xA;material-icon-contacts">
+              <headerText>Staff</headerText>
+              <dataView pageSize="15" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="PARENT" id="c4">
+          <dataFields>
+            <dataField fieldName="znOrganizationPersonRoleParent" columns="15" tag="modal-never&#xD;&#xA;material-icon-contacts">
+              <headerText>Parent</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+      </categories>
+      <headerText>The Hub provides a centralised repository for accessing contact related information.</headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Contact Actions" flat="false" />
+  </actions>
+</dataController>

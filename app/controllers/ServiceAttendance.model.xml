@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="ServiceAttendance" alias="ServiceAttendance" created="2024-07-10T15:57:06" modified="2024-07-10T15:59:27" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="704" y="46">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="Bus" parentTableSchema="dbo" parentTableName="Buses" x="338" y="480">
+      <foreignKeyColumn columnName="BusID" parentColumnName="BusID" />
+    </foreignKey>
+    <foreignKey id="Route" parentTableSchema="dbo" parentTableName="Routes" x="333" y="819">
+      <foreignKeyColumn columnName="RouteID" parentColumnName="RouteID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ServiceAttendanceID" fieldName="ServiceAttendanceID" label="Service Attendance ID" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="FirstName" aliasForeignKey="Person" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" foreignKey="Person" />
+    <column name="LastName" fieldName="LastName" label="Last Name" foreignKey="Person" />
+    <column fieldName="Fullname" type="nvarchar(71)" dataType="String" label="Fullname">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </column>
+    <column name="BusID" fieldName="BusID" label="Bus ID" aliasColumnName="BusNumber" aliasForeignKey="Bus" />
+    <column name="BusNumber" fieldName="BusNumber" label="Bus Number" foreignKey="Bus" />
+    <column name="RouteID" fieldName="RouteID" label="Route ID" aliasColumnName="RouteName" aliasForeignKey="Route" />
+    <column name="RouteName" fieldName="RouteName" label="Route Name" foreignKey="Route" />
+    <column name="Date" fieldName="Date" label="Date" />
+    <column name="IsPresent" fieldName="IsPresent" label="Is Present" />
+  </columns>
+</dataModel>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Assessment" alias="Assessment" created="2024-08-21T18:25:54" modified="2024-08-22T18:57:27" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Course" parentTableSchema="dbo" parentTableName="Course" x="372" y="20">
+      <foreignKeyColumn columnName="CourseID" parentColumnName="CourseID" />
+    </foreignKey>
+    <foreignKey id="IdentifIcation" parentTableSchema="dbo" parentTableName="zlkpAssessmentIdentification" x="372" y="389">
+      <foreignKeyColumn columnName="IdentifIcationID" parentColumnName="IdentifIcationID" />
+    </foreignKey>
+    <foreignKey id="ContentStandard" parentTableSchema="dbo" parentTableName="zlkpContentStandard" x="372" y="544">
+      <foreignKeyColumn columnName="ContentStandardID" parentColumnName="ContentStandardID" />
+    </foreignKey>
+    <foreignKey id="RefAssessmentPurpose" parentTableSchema="dbo" parentTableName="zlkpAssessmentPurpose" x="384" y="766">
+      <foreignKeyColumn columnName="RefAssessmentPurposeId" parentColumnName="RefAssessmentPurposeId" />
+    </foreignKey>
+    <foreignKey id="RefAssessmentType" parentTableSchema="dbo" parentTableName="zlkpAssessmentType" x="372" y="889">
+      <foreignKeyColumn columnName="RefAssessmentTypeId" parentColumnName="RefAssessmentTypeId" />
+    </foreignKey>
+    <foreignKey id="AssessmentFamily" parentTableSchema="dbo" parentTableName="AssessmentFamily" x="808" y="226">
+      <foreignKeyColumn columnName="AssessmentFamilyID" parentColumnName="AssessmentFamilyID" />
+    </foreignKey>
+    <foreignKey id="AssessmentCategory" parentTableSchema="dbo" parentTableName="zlkp_AssessmentCategory" x="792" y="371">
+      <foreignKeyColumn columnName="AssessmentCategoryID" parentColumnName="AssessmentCategoryID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="AssessmentId" fieldName="AssessmentID" label="Assessment Id" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="AssessmentTitle" fieldName="AssessmentTitle" label="Assessment Title" />
+    <column name="CourseID" fieldName="CourseID" label="Course ID" aliasColumnName="CourseTitle" aliasForeignKey="Course" />
+    <column name="CourseTitle" fieldName="CourseTitle" label="Course Title" foreignKey="Course" />
+    <column name="IdentifIcationID" fieldName="IdentifIcationID" label="Identification ID" aliasColumnName="Code" aliasForeignKey="IdentifIcation" />
+    <column name="Code" fieldName="IdentifIcationCode" label="Identif Ication Code" foreignKey="IdentifIcation" />
+    <column name="SubmittedDate" fieldName="SubmittedDate" label="Submitted Date" />
+    <column name="DueDate" fieldName="DueDate" label="Due Date" />
+    <column name="ContentStandardID" fieldName="ContentStandardID" label="Content Standard ID" aliasColumnName="Title" aliasForeignKey="ContentStandard" />
+    <column name="Title" fieldName="ContentStandardTitle" label="Content Standard Title" foreignKey="ContentStandard" />
+    <column name="MaxRawScore" fieldName="MaxRawScore" label="MPP" />
+    <column name="AssessmentPeriod" fieldName="AssessmentPeriod" label="Assessment Period" />
+    <column name="Objective" fieldName="Objective" label="Objective" />
+    <column name="RefAssessmentPurposeId" fieldName="RefAssessmentPurposeID" label="Ref Assessment Purpose Id" aliasColumnName="Description" aliasForeignKey="RefAssessmentPurpose" />
+    <column name="Description" fieldName="RefAssessmentPurposeDescription" label="Purpose" foreignKey="RefAssessmentPurpose" />
+    <column name="RefAssessmentTypeId" fieldName="RefAssessmentTypeID" label="Ref Assessment Type Id" aliasColumnName="Description" aliasForeignKey="RefAssessmentType" />
+    <column name="Description" fieldName="RefAssessmentTypeDescription" label="Assessment Type" foreignKey="RefAssessmentType" />
+    <column name="AssessmentFamilyID" fieldName="AssessmentFamilyID" label="Assessment Family ID" aliasColumnName="AssessmentFamily" aliasForeignKey="AssessmentFamily" />
+    <column name="AssessmentFamily" fieldName="AssessmentFamily" label="Assessment Family" foreignKey="AssessmentFamily" />
+    <column name="Adaptive" fieldName="Adaptive" label="Adaptive" />
+    <column name="AssessmentCategoryID" fieldName="AssessmentCategoryID" label="Assessment Category ID" aliasColumnName="Category" aliasForeignKey="AssessmentCategory" />
+    <column name="Category" fieldName="AssessmentCategory" label="Category" foreignKey="AssessmentCategory" />
+    <column name="RevisionDate" fieldName="RevisionDate" label="Revision Date" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="Sequence" fieldName="Sequence" label="Sequence" />
+    <column name="PublishItem" fieldName="PublishItem" label="Publish Item" />
+    <column name="PublishResult" fieldName="PublishResult" label="Publish Result" />
+  </columns>
+  <details>
+    <detail fieldName="StudentAssessment" model="StudentAssessment" filterFields="AssessmentID" create="true" edit="true" />
+  </details>
+</dataModel>

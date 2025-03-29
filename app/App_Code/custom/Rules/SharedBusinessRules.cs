@@ -1,0 +1,383 @@
+﻿using System;
+using zLearnHub.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+
+namespace zLearnHub.Rules
+{
+    public partial class SharedBusinessRules : zLearnHub.Data.BusinessRules
+    {
+        public SharedBusinessRules()
+        {
+        }
+       
+        //[AccessControl("UserId", Sql =
+        //    @"SELECT
+        //    aur.UserId
+        //    FROM vw_aspnet_Roles ar
+        //    INNER JOIN aspnet_UsersInRoles aur ON aur.RoleId = ar.RoleId
+        //    INNER JOIN table_of_interest p on p.RoleID = aur.RoleID
+        //    WHERE UserId = @UserId")]
+        //public void RestrictAccessToTableOfInterest()
+        //{
+        //    if (!UserIsInRole("Administrators", "HeadTeacher", "ContentEditors"))
+        //        RestrictAccess("@UserId", UserId);
+        //    else
+        //        RestrictAccess("@UserId", null); // Replace AllowAccess() with appropriate method
+        //}
+
+
+
+        // access restrictions to Gradebook Entry
+        [AccessControl("UserId", Sql =
+            @"SELECT DISTINCT UserId FROM GradeBookEntry WHERE UserId = @Userid")]
+        public void RestrictGradeBookEntry()
+        {
+            if (!UserIsInRole("Administrators", "HeadTeacher", "ContentEditors"))
+                RestrictAccess("@UserId", UserId);
+        }
+
+        // access restrictions to LearningObjective
+        [AccessControl("UserId", Sql =
+            @"SELECT DISTINCT UserId from LearningObjective where UserId = @Userid")]
+        public void RestrictStudentLearningObjectiveforSubjectTeachers()
+        {
+            if (!UserIsInRole("Administrators", "HeadTeacher", "ContentEditors"))
+                RestrictAccess("@UserId", UserId);
+        }
+
+
+        protected override void VirtualizeController(string controllerName)
+        {
+            base.VirtualizeController(controllerName);
+            NodeSet().SelectCategory("c1").SetHeaderText(string.Empty).SetDescription(string.Empty);
+
+            // UI customisation for all controllers
+            // Customize views based on the user's device type (mobile or laptop)
+            string userAgent = System.Web.HttpContext.Current.Request.UserAgent.ToLower();
+            bool isMobile = userAgent.Contains("iphone") || userAgent.Contains("android") || userAgent.Contains("blackberry") || userAgent.Contains("windows ce") || userAgent.Contains("opera mini") || userAgent.Contains("mobile") || userAgent.Contains("palm") || userAgent.Contains("portable");
+            if (isMobile && controllerName != "PhotoAlbum")
+            {
+                NodeSet()
+                    .SelectView("grid1")
+                    .SetTag("view-style-grid-disabled view-style-list view-style-cards view-style-charts")
+                    .SelectDataField("Fullname").Show();
+                
+                NodeSet().SelectView("grid1_mobi")
+                    .SetTag("view-style-grid-disabled view-style-list view-style-cards view-style-charts");
+            }
+       
+            if (controllerName == "StudentSchoolAssociation")
+            {
+                NodeSet()
+                    .SelectView("grid1")
+                    .SelectDataField("FoodServices").Hide()
+                    .SelectDataField("CSY").Hide()
+                    .SelectDataField("MFD").Hide()
+                    .SelectDataField("Fullname").Delete()
+                    .SelectDataField("SEID").Hide()
+                    //.SelectDataField("Lastname").Hide()
+                    .SelectDataField("Lastname").Hide();
+            }
+
+           
+
+            //hide Fullname field in the StudentGradeBookEntry controller nodeset
+            if (!isMobile && controllerName == "StudentGradeEntryBook")
+            {
+                NodeSet().SelectView("grid1").SelectDataField("Fullname").Hide()
+                                             .SelectDataField("Lastname").Show()
+                                             .SelectDataField("Firstname").Show();
+
+                NodeSet().SelectView("grid1_mobi").SelectDataField("Fullname").Show()
+                                                  .SelectDataField("Lastname").Hide()
+                                                  .SelectDataField("Firstname").Hide();
+                NodeSet().SelectView("grid1_expanded_view").SetShowInSelector("true");
+
+            }
+            
+
+            if (controllerName == "OrganizationPersonRoleStudent")
+            {
+                NodeSet()
+                    .SelectView("editForm1")
+                    .SetLabel("Photo").SetHeaderText(string.Empty).SetDescription(string.Empty);
+            }
+
+            if (controllerName == "StudentGradeBookEntry")
+            {
+                NodeSet()
+                    .SelectField("SCID").Hide();
+                    
+            }
+
+            //detail access controll formulation
+            if ((controllerName == "fee_collection_transaction" || controllerName == "fee_collection_transaction_itemised" || controllerName == "znfee_collection_transaction_itemised_detail") && !UserIsInRole("Administrators"))
+            {
+                // make the controller read-only by removing editing actions
+                NodeSet("view[@id='grid1']").SelectActions("Delete").Delete();
+                NodeSet("view[@id='editForm1']").SelectActions("Delete").Delete();
+            }
+
+            if (controllerName == "Contact" && !UserIsInRole("Administrators, ContentEditors"))
+            {
+                NodeSet("view[@id='grid1']").SelectView("grid1").SelectActions("New, Edit, Delete")
+                    .Delete();
+
+            }
+
+        }
+
+        protected override void BeforeSqlAction(ActionArgs args, ActionResult result)
+        {
+            base.BeforeSqlAction(args, result);
+            // Check if the request is trying to delete a payment in FeeCollections
+            if (args.Controller == "fee_collection_transaction" && args.CommandName == "Delete")
+            {
+                if (!UserIsInRole("Administrators"))
+                {
+                    // Add a custom error message
+                    result.Errors.Add("You do not have permission to delete payment records. Please contact an administrator.");
+                    
+                }
+            }
+        }
+
+        [ControllerAction("StockTransactions", "Insert, Update, Calculate", ActionPhase.After)]
+        public void AddOrUpdateStockTransaction()
+        {
+
+            object transactionsIDValue = SelectFieldValue("TransactionsID");
+            
+            if (transactionsIDValue == null)
+                throw new Exception("Transactions ID is required.");
+
+            int transactionsID;
+            try
+            {
+                transactionsID = Convert.ToInt32(transactionsIDValue);
+
+            }
+            catch (InvalidCastException)
+            {
+                throw new Exception("Product ID is not a valid integer.");
+            }
+
+            // Get connection string from configuration
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("zusp_stock_AddStockTransaction", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@TransactionsID", transactionsID);
+                    command.ExecuteNonQuery();
+                }
+
+            }
+
+            Result.ShowAlert("Stock transaction added successfully.");
+
+        }
+
+    
+
+        [ControllerAction("BorrowTransactions", "Insert, Update, Calculate", ActionPhase.After)]
+        public void BeforeInsertBorrowTransaction()
+        {
+
+            object bookIDValue = SelectFieldValue("BookID");
+
+            if (bookIDValue == null)
+                throw new Exception("Book ID is required.");
+            
+            int bookID;
+            try
+            {
+                bookID = Convert.ToInt32(bookIDValue);
+
+            }
+            catch (InvalidCastException)
+            {
+                throw new Exception("Book ID is not a valid integer.");
+            }
+
+
+            // Get connection string from configuration
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("zusp_ops_book_BorrowBook", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@BookID", bookID);
+                    command.ExecuteNonQuery();
+                }
+
+            }
+
+            Result.ShowAlert("Lending transaction added successfully.");
+            
+            
+
+        }
+
+
+        [ControllerAction("UpdateCompensation", "Insert, Update, Calculate", ActionPhase.After)]
+        public void RefreshCompensation()
+        {
+
+            object salaryIDValue = SelectFieldValue("SalaryID");
+
+            if (salaryIDValue == null)
+                throw new Exception("Salary ID is required.");
+
+            int salaryID;
+            try
+            {
+                salaryID = Convert.ToInt32(salaryIDValue);
+
+            }
+            catch (InvalidCastException)
+            {
+                throw new Exception("Salary ID is not a valid integer.");
+            }
+
+
+            // Get connection string from configuration
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("zusp_ops_salary_p2_prepare_information_specific", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@SalaryID", salaryID);
+                    command.ExecuteNonQuery();
+                }
+
+            }
+            
+            Result.Refresh();
+            Result.RefreshChildren();
+            Result.ShowAlert("Salary information updated successfully.");
+ 
+        }
+
+        //[ControllerAction("Person", "Insert", ActionPhase.Before)]
+        //[ControllerAction("Person", "Update", ActionPhase.Before)]
+
+        //public void CheckDuplicateRecord()
+        //{
+        //    string varUPN = Convert.ToString(Arguments["UPN"]);
+        //    int varPersonID = Convert.ToInt32(Arguments["PersonID"]);
+        //    // Query to check for existing records with the same UPN and NationalID
+        //    string sqlQuery = @"
+        //        SELECT COUNT(1) FROM Person WHERE UPN = @UPN AND PersonID <> @PersonID";
+
+        //    // Using SqlText for secure query execution
+        //    using (SqlText sql = new SqlText(sqlQuery))
+        //    {
+        //        sql.AddParameter("@UPN", varUPN);
+        //        sql.AddParameter("@PersonID", varPersonID); // Exclude the current record during updates
+
+        //        int count = Convert.ToInt32(sql.ExecuteScalar());
+
+        //        if (count > 0)
+        //        {
+        //            // Record already exists - stop the action and show an error
+        //            if (Result != null)
+        //            {
+        //                // Record already exists - stop the action and show an error
+        //                Result.ShowAlert("A record with the same UPN already exists.");
+        //                //Result.Cancel();
+
+        //            }
+        //            else
+        //            {
+        //                throw new Exception("Record not found.");
+        //            }
+        //        }
+
+        //    }
+        //}
+
+        [ControllerAction("usp_process_fee_collection_transaction", "Insert, Update, Calculate", ActionPhase.After)]
+        public void process_fee_collection_transaction()
+        {
+
+            object transactionIDValue = SelectFieldValue("TransactionID");
+
+            if (transactionIDValue == null)
+                throw new Exception("Salary ID is required.");
+
+            int transactionID;
+            try
+            {
+                transactionID = Convert.ToInt32(transactionIDValue);
+
+            }
+            catch (InvalidCastException)
+            {
+                throw new Exception("Transaction ID is not a valid integer.");
+            }
+
+
+            // Get connection string from configuration
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("usp_process_fee_collection_transaction", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@TransactionID", transactionID);
+                    command.ExecuteNonQuery();
+                }
+
+            }
+
+            Result.Refresh();
+            Result.RefreshChildren();
+            Result.ShowAlert("Fee collection process updated successfully.");
+
+        }
+
+        [ControllerAction("process_fee_refund", "Refund, Custom, Refund", ActionPhase.After)]
+        public void usp_ops_auto_p4_process_fee_refund (int transactionID)
+        {
+            // Get connection string from configuration
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("usp_ops_auto_p4_process_fee_refund", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@TransactionID", transactionID);
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            // Optional: Add a user notification
+            Result.Refresh();
+            Result.RefreshChildren();
+            Result.ShowMessage("Refund processed successfully.");
+
+            
+
+        }
+
+        private void NavigateUrl(char v)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

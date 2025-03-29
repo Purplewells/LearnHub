@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="OrganizationPersonRole" alias="OrganizationPersonRole" created="2024-02-06T22:13:50" modified="2024-04-14T11:45:38" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Organisation" parentTableSchema="dbo" parentTableName="Organisation" x="367" y="20">
+      <foreignKeyColumn columnName="OrganisationID" parentColumnName="OrganizationID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="367" y="205">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="Role" parentTableSchema="dbo" parentTableName="zlkpRole" x="30" y="229">
+      <foreignKeyColumn columnName="RoleID" parentColumnName="RoleId" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="OrganizationPersonRoleID" fieldName="OrganizationPersonRoleID" label="Organization Person Role ID" />
+    <column fieldName="Fullname" type="nvarchar(71)" dataType="String" label="Fullname">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </column>
+    <column name="OrganisationID" fieldName="OrganisationID" label="Organisation ID" aliasColumnName="Name" aliasForeignKey="Organisation" />
+    <column name="Name" fieldName="Organisation" label="Organisation" foreignKey="Organisation" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="IdentificationCode" aliasForeignKey="Person" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" foreignKey="Person" />
+    <column name="LastName" fieldName="LastName" label="Last Name" foreignKey="Person" />
+    <column name="PhoneNo" fieldName="PhoneNo" label="Phone No" foreignKey="Person" />
+    <column name="Email" fieldName="Email" label="Email" foreignKey="Person" />
+    <column name="CurrentYearStatus" fieldName="CYS" label="CYS" foreignKey="Person" />
+    <column name="CurrentYearGradeLevel" fieldName="CYG" label="CYG" foreignKey="Person" />
+    <column name="EntryDate" fieldName="EntryDate" label="Admission Date" />
+    <column name="ExitDate" fieldName="ExitDate" label="Termination Date" />
+    <column name="RoleID" fieldName="RoleID" label="Role ID" aliasColumnName="RoleName" aliasForeignKey="Role" />
+    <column name="RoleName" fieldName="Role" label="Role" foreignKey="Role" />
+    <column fieldName="HeadTitle" type="nvarchar(71)" dataType="String" label="Head Title">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </column>
+  </columns>
+</dataModel>

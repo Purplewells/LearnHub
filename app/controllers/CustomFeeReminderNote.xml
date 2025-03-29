@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="CustomFeeReminderNote" conflictDetection="overwriteChanges" label="CustomFeeReminderNote" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands />
+  <fields>
+    <field name="PersonID" type="Int32" allowNulls="false" label="Person#" showInSummary="true" />
+    <field name="FeeID" type="Int32" allowNulls="false" label="Fee#" showInSummary="true" />
+    <field name="FirstName" type="String" label="First Name" length="35" showInSummary="true" />
+    <field name="LastName" type="String" label="Last Name" length="35" showInSummary="true" />
+    <field name="UPN" type="String" label="Upn" length="10" showInSummary="true" />
+    <field name="CYG" type="String" label="Cyg" length="10" />
+    <field name="Description" type="String" label="Description" length="50" />
+    <field name="FeeType" type="String" label="Fee Type" length="20" />
+    <field name="Currency" type="String" label="Currency" length="5" />
+    <field name="Debit" type="Decimal" label="Debit" />
+    <field name="Credit" type="Decimal" label="Credit" />
+    <field name="LineBalance" type="Decimal" label="Line Balance" />
+    <field name="SessionCode" type="String" label="Session Code" length="20" />
+    <field name="State" type="Int32" allowNulls="false" label="State" />
+    <field name="SchoolName" type="String" label="School Name" length="50" />
+    <field name="Address" type="String" label="Address" length="500" />
+    <field name="Website" type="String" label="Website" length="50" />
+    <field name="Email" type="String" label="Email" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Custom Fee Reminder Note">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="FeeID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="CYG" columns="5" />
+        <dataField fieldName="Description" columns="20" />
+        <dataField fieldName="FeeType" columns="20" />
+        <dataField fieldName="Currency" columns="5" />
+        <dataField fieldName="Debit" dataFormatString="c" columns="10" />
+        <dataField fieldName="Credit" dataFormatString="c" columns="10" />
+        <dataField fieldName="LineBalance" dataFormatString="c" columns="15" />
+        <dataField fieldName="SessionCode" columns="20" />
+        <dataField fieldName="State" columns="5" hidden="true" />
+        <dataField fieldName="SchoolName" columns="50" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="Website" columns="50" hidden="true" />
+        <dataField fieldName="Email" columns="50" hidden="true" />
+      </dataFields>
+      <styles>
+        <expression type="ClientScript" result="total_fee_summaries" test="$row.State == '2'" />
+      </styles>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Custom Fee Reminder Note">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Custom Fee Reminder Note" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FeeID" columns="15" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="CYG" columns="10" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="FeeType" columns="20" />
+            <dataField fieldName="Currency" columns="5" />
+            <dataField fieldName="Debit" dataFormatString="c" columns="15" />
+            <dataField fieldName="Credit" dataFormatString="c" columns="15" />
+            <dataField fieldName="LineBalance" dataFormatString="c" columns="15" />
+            <dataField fieldName="SessionCode" columns="20" />
+            <dataField fieldName="State" columns="15" />
+            <dataField fieldName="SchoolName" columns="50" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="Website" columns="50" />
+            <dataField fieldName="Email" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Custom Fee Reminder Note">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Custom Fee Reminder Note" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FeeID" columns="15" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="CYG" columns="10" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="FeeType" columns="20" />
+            <dataField fieldName="Currency" columns="5" />
+            <dataField fieldName="Debit" dataFormatString="c" columns="15" />
+            <dataField fieldName="Credit" dataFormatString="c" columns="15" />
+            <dataField fieldName="LineBalance" dataFormatString="c" columns="15" />
+            <dataField fieldName="SessionCode" columns="20" />
+            <dataField fieldName="State" columns="15" />
+            <dataField fieldName="SchoolName" columns="50" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="Website" columns="50" />
+            <dataField fieldName="Email" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" headerText="Print Fee Note" />
+      <action id="a2" commandName="ReportAsImage" headerText="Print To Image" />
+      <action id="a3" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a4" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a100" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a101" commandName="ExportRowset" headerText="Export To IPY" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[EXEC usp_fee_collection_summaries_fee_note_reminder]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement delete here]]></rule>
+  </businessRules>
+</dataController>

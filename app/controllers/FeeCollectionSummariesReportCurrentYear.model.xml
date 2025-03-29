@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dwh" baseTable="pbi_vw_fee_collection_summaries_extra_attributes_report_p1_current_year" alias="pbi_vw_fee_collection_summaries_extra_attributes_report_p1_current_year" created="2024-02-20T16:49:48" modified="2024-02-20T17:09:43" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="Fullname" fieldName="Fullname" label="Fullname" />
+    <column name="UPN" fieldName="UPN" label="UPN" />
+    <column name="CurrentYearGradeLevel" fieldName="GL" label="GL" />
+    <column name="FeeType" fieldName="FeeType" label="Fee Type" />
+    <column name="TotalBilledAmount" fieldName="TotalBilledAmount" label="Billed Amount" format="c" />
+    <column name="Discount" fieldName="Discount" label="Discount" format="c" />
+    <column name="PaidAmount" fieldName="PaidAmount" label="Paid Amount" format="c" />
+    <column name="TotalPaid" fieldName="TotalPaid" label="Total Paid" format="c" />
+    <column name="Balance" fieldName="Balance" label="Balance" format="c" />
+    <column name="Status" fieldName="Status" label="Status" />
+    <column name="LatestPD" fieldName="LatestPd" label="Latest PD" />
+    <column name="DSLP" fieldName="DSLP" label="DSLP" />
+    <column name="RK" fieldName="RK" label="RK" />
+    <column name="FeeRank" fieldName="FeeRank" label="Fee Rank" />
+    <column name="FeeNote" fieldName="FeeNote" label="Description" />
+    <column name="EffectiveFrom" fieldName="EffectiveFrom" label="Effective From" />
+    <column name="SchoolName" fieldName="SchoolName" label="School" />
+    <column name="Address" fieldName="Address" label="Address" />
+    <column name="CalendarCode" fieldName="CalendarCode" label="Aca Year" />
+    <column name="SessionCode" fieldName="SessionCode" label="Session" />
+    <column name="CurrentSchoolYear" fieldName="CSY" label="CSY" />
+    <column name="GuardianName" fieldName="GuardianName" label="Guardian" />
+    <column name="ContactPoint" fieldName="ContactPoint" label="Contact No." />
+  </columns>
+</dataModel>

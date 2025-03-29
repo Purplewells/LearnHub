@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="mlinkGradeLevelPromotion" alias="mlinkGradeLevelPromotion" created="2024-02-03T19:58:03" modified="2025-02-15T18:56:00" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="RefGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="314" y="20">
+      <foreignKeyColumn columnName="RefGradeLevelId" parentColumnName="RefGradeLevelId" />
+    </foreignKey>
+    <foreignKey id="NextRefGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="315" y="324">
+      <foreignKeyColumn columnName="NextRefGradeLevelId" parentColumnName="RefGradeLevelId" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="RefGradeLevelId" fieldName="RefGradeLevelID" label="Ref Grade Level Id" aliasColumnName="Description" aliasForeignKey="RefGradeLevel" />
+    <column name="Description" fieldName="CurrentGradeLevel" label="Current Grade Level" foreignKey="RefGradeLevel" />
+    <column name="SortOrder" fieldName="GLSO" label="GLSO" foreignKey="RefGradeLevel" format="" sortType="Ascending" sortOrder="1" />
+    <column name="NextRefGradeLevelId" fieldName="NextRefGradeLevelID" label="Next Ref Grade Level Id" aliasColumnName="Description" aliasForeignKey="NextRefGradeLevel" />
+    <column name="Description" fieldName="NextGradeLevel" label="Next To Grade Level" foreignKey="NextRefGradeLevel" />
+  </columns>
+</dataModel>

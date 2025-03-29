@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="vw_ops_current_student_and_parents" alias="vw_ops_current_student_and_parents" created="2024-02-21T21:30:00" modified="2024-02-21T21:30:57" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="StudentName" fieldName="StudentName" label="Student Name" />
+    <column name="YearGroup" fieldName="YearGroup" label="Year Group" />
+    <column name="GuardianName" fieldName="GuardianName" label="Guardian Name" />
+    <column name="HowRelated" fieldName="HowRelated" label="How Related" />
+    <column name="LivesWith" fieldName="LivesWith" label="Lives With" />
+    <column name="IsPrimary" fieldName="IsPrimary" label="Is Primary" />
+    <column name="ContactPoint" fieldName="ContactPoint" label="Contact Point" />
+    <column name="Profession" fieldName="Profession" label="Profession" />
+    <column name="System" fieldName="System" label="System" />
+  </columns>
+</dataModel>

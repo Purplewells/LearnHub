@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkbenchFeeStructure" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="FeeType" type="DataView" label="Fee Type">
+      <dataView controller="FeeType" view="grid1" />
+    </field>
+    <field name="FeeStructure" type="DataView" label="Fee Structure">
+      <dataView controller="FeeStructure" view="grid1" />
+    </field>
+    <field name="StudentFees" type="DataView" label="Student Fees">
+      <dataView controller="StudentFees" view="grid1" />
+    </field>
+    <field name="Currency" type="DataView" label="Currency">
+      <dataView controller="Currency" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="FeesWorkbench" type="Form" label="Fees Workbench">
+      <headerText>An interface for managing setting up fees and billing structure.</headerText>
+      <categories>
+        <category id="c2" tab="FEE STRUCTURE" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="FeeStructure" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c1" tab="FEE TYPE">
+          <dataFields>
+            <dataField fieldName="FeeType" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c3" tab="CURRENCY">
+          <dataFields>
+            <dataField fieldName="Currency" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="FeeActions" flat="false" />
+  </actions>
+</dataController>

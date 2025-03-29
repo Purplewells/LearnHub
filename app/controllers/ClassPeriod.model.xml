@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="ClassPeriod" alias="ClassPeriod" created="2024-08-08T16:47:21" modified="2025-02-17T07:59:37" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="ClassPeriodType" parentTableSchema="dbo" parentTableName="zlkpClassPeriodTypeDescriptor" x="330" y="20">
+      <foreignKeyColumn columnName="ClassPeriodTypeID" parentColumnName="ClassPeriodTypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ClassPeriodID" fieldName="ClassPeriodID" label="Class Period ID" />
+    <column name="ClassPeriodName" fieldName="ClassPeriodName" label="Class Period" />
+    <column name="StartTime" fieldName="StartTime" label="Start Time" />
+    <column name="EndTime" fieldName="EndTime" label="End Time" />
+    <column fieldName="PeriodDescriptor" type="nvarchar(47)" dataType="String" label="Period Descriptor">
+      <formula>ClassPeriod.ClassPeriodName + ' (' + LEFT(CONVERT(VARCHAR, ClassPeriod.StartTime, 108), 5)+ ' - ' + LEFT(CONVERT(VARCHAR, ClassPeriod.EndTime, 108), 5) + (' )')</formula>
+    </column>
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="ClassPeriodTypeID" fieldName="ClassPeriodTypeID" label="Class Period Type ID" aliasColumnName="ClassPeriodType" aliasForeignKey="ClassPeriodType" />
+    <column name="ClassPeriodType" fieldName="ClassPeriodType" label="Class Period Type" foreignKey="ClassPeriodType" />
+    <column name="EffectiveFrom" fieldName="EffectiveFrom" label="Effective From" />
+    <column name="TimeBlock" fieldName="TimeBlock" label="Time Block" />
+  </columns>
+</dataModel>

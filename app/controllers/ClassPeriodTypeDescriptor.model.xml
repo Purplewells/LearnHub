@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpClassPeriodTypeDescriptor" alias="zlkpClassPeriodTypeDescriptor" created="2024-08-08T16:48:03" modified="2024-08-08T16:48:13" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="ClassPeriodTypeID" fieldName="ClassPeriodTypeID" label="Class Period Type ID" />
+    <column name="ClassPeriodType" fieldName="ClassPeriodType" label="Class Period Type" />
+  </columns>
+</dataModel>

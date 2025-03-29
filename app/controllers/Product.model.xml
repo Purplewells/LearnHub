@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Product" alias="Product" created="2024-07-09T16:16:58" modified="2024-11-10T10:07:04" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Category" parentTableSchema="dbo" parentTableName="zlkpProductCategory" x="335" y="20">
+      <foreignKeyColumn columnName="CategoryID" parentColumnName="ProductCategoryID" />
+    </foreignKey>
+    <foreignKey id="Supplier" parentTableSchema="dbo" parentTableName="Suppliers" x="344" y="155">
+      <foreignKeyColumn columnName="SupplierID" parentColumnName="SupplierID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ProductID" fieldName="ProductID" label="Product ID" />
+    <column name="SKUCode" fieldName="Skucode" label="SKU" />
+    <column name="ProductName" fieldName="ProductName" label="Product Name" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="IsActive" fieldName="IsActive" label="IsActive" />
+    <column name="CostPrice" fieldName="CostPrice" label="Cost Price" format="c" />
+    <column name="SellingPrice" fieldName="SellingPrice" label="Selling Price" format="c" />
+    <column name="Colour" fieldName="Colour" label="Colour" />
+    <column name="CategoryID" fieldName="CategoryID" label="Category ID" aliasColumnName="CategoryName" aliasForeignKey="Category" />
+    <column name="CategoryName" fieldName="CategoryName" label="Category" foreignKey="Category" />
+    <column name="ReOrderLevel" fieldName="ReOrderLevel" label="ROL Qty" />
+    <column name="ReOrderQty" fieldName="ReOrderQty" label="ROD Qty" />
+    <column name="Barcode" fieldName="Barcode" label="Barcode" />
+    <column name="QtyPerUnit" fieldName="QtyPerUnit" label="Qty Per Unit" />
+    <column name="UnitPrice" fieldName="UnitPrice" label="Unit Price" format="c" />
+    <column name="Quantity" fieldName="Quantity" label="Quantity" />
+    <column name="UnitsOnHold" fieldName="UnitsOnHold" label="Units On Hold" />
+    <column name="UnitsOnOrder" fieldName="UnitsOnOrder" label="Units On Order" />
+    <column name="Sellable" fieldName="Sellable" label="Sellable" />
+    <column fieldName="ExtendedCostValue" type="money" dataType="Decimal" label="Ext. Cost Value" format="c">
+      <formula>Product.Quantity * Product.CostPrice</formula>
+    </column>
+    <column name="SupplierID" fieldName="SupplierID" label="Supplier ID" aliasColumnName="SupplierName" aliasForeignKey="Supplier" />
+    <column name="SupplierName" fieldName="SupplierName" label="Supplier" foreignKey="Supplier" />
+    <column name="ContactName" fieldName="SupplierContactName" label="Supplier Contact" foreignKey="Supplier" />
+    <column name="ContactPhone" fieldName="SupplierContactPhone" label="Contact Phone" foreignKey="Supplier" />
+    <column name="Address" fieldName="SupplierAddress" label="Supplier Address" foreignKey="Supplier" />
+    <column name="City" fieldName="SupplierCity" label="Supplier City" foreignKey="Supplier" />
+    <column name="Country" fieldName="SupplierCountry" label="Supplier Country" foreignKey="Supplier" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ProductImage" fieldName="ProductImage" label="Product Image" />
+    <column name="FileName" fieldName="FileName" label="File Name" />
+    <column name="FileLength" fieldName="FileLength" label="File Length" />
+    <column name="ContentType" fieldName="ContentType" label="Content Type" />
+  </columns>
+  <details>
+    <detail fieldName="PurchaseOrderDetail" model="PurchaseOrderDetailVendor" filterFields="ProductID" create="true" edit="true" />
+  </details>
+</dataModel>

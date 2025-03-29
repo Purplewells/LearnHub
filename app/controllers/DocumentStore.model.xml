@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="DocumentStore" alias="DocumentStore" created="2024-02-05T17:59:20" modified="2024-02-05T17:59:46" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="DocID" fieldName="DocID" label="Doc ID" />
+    <column name="Filename" fieldName="Filename" label="Filename" />
+    <column name="ContentType" fieldName="ContentType" label="Content Type" />
+    <column name="Length" fieldName="Length" label="Length" />
+    <column name="Note" fieldName="Note" label="Note" />
+    <column name="ShortDesc" fieldName="ShortDesc" label="Short Desc" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+  </columns>
+</dataModel>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkbenchMeals" conflictDetection="overwriteChanges" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="MealMenu" type="DataView" label="Meal Menu">
+      <dataView controller="MealMenu" view="grid1" />
+    </field>
+    <field name="MealPlans" type="DataView" label="Meal Plans">
+      <dataView controller="MealPlans" view="grid1" />
+    </field>
+    <field name="MealType" type="DataView" label="Meal Type">
+      <dataView controller="MealType" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="MealsWorkbench" type="Form" label="Meals Workbench">
+      <headerText>&lt;strong&gt;The Meals Workbench allows user to configure the meal services module.&lt;/strong&gt;</headerText>
+      <categories>
+        <category tab="MEAL MENU" id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="MealMenu" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;content-stub-none" />
+          </dataFields>
+        </category>
+        <category tab="MEAL PLANS" id="c2">
+          <dataFields>
+            <dataField fieldName="MealPlans" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;content-stub-none" />
+          </dataFields>
+        </category>
+        <category tab="MEAL TYPE" id="c3">
+          <dataFields>
+            <dataField fieldName="MealType" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;content-stub-none" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Meals Action" flat="false" />
+  </actions>
+</dataController>

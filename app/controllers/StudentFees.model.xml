@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="student_fees" alias="student_fees" created="2024-01-29T08:59:28" modified="2025-02-27T11:15:29" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Fee" parentTableSchema="dbo" parentTableName="Fees" x="397" y="20">
+      <foreignKeyColumn columnName="FeeID" parentColumnName="FeeID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="408" y="359">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="FeeType" parentTableSchema="dbo" parentTableName="zlkpFeeType" x="767" y="20" baseForeignKey="Fee">
+      <foreignKeyColumn columnName="FeeTypeID" parentColumnName="FeeTypeID" />
+    </foreignKey>
+    <foreignKey id="OrganizationCalendar" parentTableSchema="dbo" parentTableName="Calendar" x="768" y="164" baseForeignKey="Fee">
+      <foreignKeyColumn columnName="OrganizationCalendarId" parentColumnName="OrganizationCalendarId" />
+    </foreignKey>
+    <foreignKey id="RefSex" parentTableSchema="dbo" parentTableName="zlkpSex" x="759" y="470" baseForeignKey="Person">
+      <foreignKeyColumn columnName="RefSexID" parentColumnName="GenderID" />
+    </foreignKey>
+    <foreignKey id="School" parentTableSchema="dbo" parentTableName="School" x="1109" y="20" baseForeignKey="OrganizationCalendar">
+      <foreignKeyColumn columnName="SchoolID" parentColumnName="OrganizationID" />
+    </foreignKey>
+    <foreignKey id="Currency" parentTableSchema="dbo" parentTableName="zlkp_currency" x="412" y="235" baseForeignKey="Fee">
+      <foreignKeyColumn columnName="CurrencyID" parentColumnName="CurrencyID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="FeeID" fieldName="FeeID" label="Fee ID" aliasColumnName="Description" aliasForeignKey="Fee" />
+    <column name="Description" fieldName="FeesDescription" label="Fees Description" foreignKey="Fee" />
+    <column name="Amount" fieldName="BillAmount" label="Bill Amount" foreignKey="Fee" format="N" />
+    <column name="FeeAmount" fieldName="FeeAmount" label="Fee Amount" format="N" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="IdentificationCode" aliasForeignKey="Person" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="FirstName" fieldName="FirstName" label="Firstname" foreignKey="Person" />
+    <column name="LastName" fieldName="LastName" label="Lastname" foreignKey="Person" />
+    <column name="CurrentYearGradeLevel" fieldName="CYG" label="CYG" foreignKey="Person" />
+    <column fieldName="Fullname" type="nvarchar(71)" dataType="String" label="Fullname">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </column>
+    <column name="EffectiveFrom" fieldName="EffectiveDate" label="Eff. From" />
+    <column name="DueDate" fieldName="DueDate" label="Due Date" />
+    <column name="Discount" fieldName="Adjustment" label="Adj." format="N" />
+    <column fieldName="LessDiscount" type="money" dataType="Decimal" label="Disc Fee" format="N">
+      <formula>Fee.Amount - COALESCE (student_fees.Discount,0)</formula>
+    </column>
+    <column name="FeeDescription" fieldName="FeeDescription" label="StudentFee Description" />
+    <column name="FeeTypes" fieldName="FeeTypes" label="Fee Types" />
+    <column name="FeeType" fieldName="FeeType" label="Fee Type" foreignKey="FeeType" />
+    <column name="CalendarCode" fieldName="CalendarCode" label="Billed Year" foreignKey="OrganizationCalendar" />
+    <column name="SchoolYearStartDate" fieldName="YearStartDate" label="YSD" foreignKey="OrganizationCalendar" format="d" />
+    <column name="SchoolYearEndDate" fieldName="YearEndDate" label="YED" foreignKey="OrganizationCalendar" format="d" />
+    <column name="CurrentSchoolYear" fieldName="CSY" label="CSY" foreignKey="OrganizationCalendar" />
+    <column name="Code" fieldName="Sex" label="Sex" foreignKey="RefSex" />
+    <column name="SchoolName" fieldName="SchoolName" label="School" foreignKey="School" />
+    <column name="Code" fieldName="CurrencyCode" label="CURR" foreignKey="Currency" />
+    <column name="CurrentBalance" fieldName="CurrentBalance" label="Current Balance" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+  <details>
+    <detail fieldName="fee_collection_transaction" model="fee_collection_transaction_itemised" filterFields="FeeID,PersonID" create="true" edit="true" />
+  </details>
+</dataModel>

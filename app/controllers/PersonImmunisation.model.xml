@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PersonImmunization" alias="PersonImmunization" created="2024-02-09T09:37:39" modified="2024-02-09T09:38:48" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="RefImmunizationType" parentTableSchema="dbo" parentTableName="zlkpImmunizationType" x="354" y="20">
+      <foreignKeyColumn columnName="RefImmunizationTypeId" parentColumnName="RefImmunizationTypeId" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="354" y="181">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="PersonImmunizationId" fieldName="PersonImmunizationID" label="Person Immunization Id" />
+    <column name="ImmunizationDate" fieldName="ImmunizationDate" label="Immunization Date" />
+    <column name="RefImmunizationTypeId" fieldName="RefImmunizationTypeID" label="Ref Immunization Type Id" aliasColumnName="Description" aliasForeignKey="RefImmunizationType" />
+    <column name="Description" fieldName="ImmunisationType" label="Immunisation Type" foreignKey="RefImmunizationType" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="IdentificationCode" aliasForeignKey="Person" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" foreignKey="Person" />
+    <column name="LastName" fieldName="LastName" label="Last Name" foreignKey="Person" />
+    <column fieldName="Fullname" type="nvarchar(71)" dataType="String" label="Fullname">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </column>
+  </columns>
+</dataModel>

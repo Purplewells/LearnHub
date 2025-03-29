@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="znChronicAbsenceMetrics" conflictDetection="overwriteChanges" label="znChronicAbsenceMetrics" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands />
+  <fields>
+    <field name="AcademicYear" type="String" label="Academic Year" length="20" showInSummary="true" />
+    <field name="AcademicTerm" type="String" label="Academic Term" length="20" showInSummary="true" />
+    <field name="TermSequence" type="Int32" label="Term Sequence" showInSummary="true" />
+    <field name="YearSequence" type="Int32" label="Year Sequence" showInSummary="true" />
+    <field name="OrganizationCalendarId" type="Int32" label="Organization Calendar#" showInSummary="true" />
+    <field name="IsCHRAB" type="Int32" label="Is CHRAB" />
+    <field name="prevIsCHRAB_Count" type="Int32" label="prev Is CHRAB Count" readOnly="true" />
+    <field name="Term_IsCHRAB_Change" type="Int32" label="Term Is CHRAB Change" readOnly="true" />
+    <field name="IsAtRisk" type="Int32" label="Is At Risk" />
+    <field name="prevIsAtRisk_Count" type="Int32" label="prev Is At Risk Count" readOnly="true" />
+    <field name="Term_IsAtRisk_Change" type="Int32" label="Term Is At Risk Change" readOnly="true" />
+    <field name="OnTheVerge" type="Int32" label="On The Verge" />
+    <field name="prevOnTheVerge_Count" type="Int32" label="prev On The Verge Count" readOnly="true" />
+    <field name="Term_OnTheVerge_Change" type="Int32" label="Term On The Verge Change" readOnly="true" />
+    <field name="currTotalStudents" type="Int32" label="curr Total Students" />
+    <field name="prevTotalStudents" type="Int32" label="prev Total Students" readOnly="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="zn Chronic Absence Metrics">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="AcademicYear" columns="20" />
+        <dataField fieldName="AcademicTerm" columns="20" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;Count of Students in Attendance Analysis By Term&quot;" />
+        <dataField fieldName="TermSequence" columns="15" />
+        <dataField fieldName="YearSequence" columns="15" />
+        <dataField fieldName="OrganizationCalendarId" columns="15" />
+        <dataField fieldName="IsCHRAB" columns="15" />
+        <dataField fieldName="prevIsCHRAB_Count" columns="15" />
+        <dataField fieldName="Term_IsCHRAB_Change" columns="15" />
+        <dataField fieldName="IsAtRisk" columns="15" />
+        <dataField fieldName="prevIsAtRisk_Count" columns="15" />
+        <dataField fieldName="Term_IsAtRisk_Change" columns="15" />
+        <dataField fieldName="OnTheVerge" columns="15" />
+        <dataField fieldName="prevOnTheVerge_Count" columns="15" />
+        <dataField fieldName="Term_OnTheVerge_Change" columns="15" />
+        <dataField fieldName="currTotalStudents" columns="15" tag="&#xD;&#xA;pivot1-val1-sum" />
+        <dataField fieldName="prevTotalStudents" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review zn Chronic Absence Metrics">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="zn Chronic Absence Metrics" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="AcademicYear" columns="20" />
+            <dataField fieldName="AcademicTerm" columns="20" />
+            <dataField fieldName="TermSequence" columns="15" />
+            <dataField fieldName="YearSequence" columns="15" />
+            <dataField fieldName="OrganizationCalendarId" columns="15" />
+            <dataField fieldName="IsCHRAB" columns="15" />
+            <dataField fieldName="prevIsCHRAB_Count" columns="15" />
+            <dataField fieldName="Term_IsCHRAB_Change" columns="15" />
+            <dataField fieldName="IsAtRisk" columns="15" />
+            <dataField fieldName="prevIsAtRisk_Count" columns="15" />
+            <dataField fieldName="Term_IsAtRisk_Change" columns="15" />
+            <dataField fieldName="OnTheVerge" columns="15" />
+            <dataField fieldName="prevOnTheVerge_Count" columns="15" />
+            <dataField fieldName="Term_OnTheVerge_Change" columns="15" />
+            <dataField fieldName="currTotalStudents" columns="15" />
+            <dataField fieldName="prevTotalStudents" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New zn Chronic Absence Metrics">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New zn Chronic Absence Metrics" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="AcademicYear" columns="20" />
+            <dataField fieldName="AcademicTerm" columns="20" />
+            <dataField fieldName="TermSequence" columns="15" />
+            <dataField fieldName="YearSequence" columns="15" />
+            <dataField fieldName="OrganizationCalendarId" columns="15" />
+            <dataField fieldName="IsCHRAB" columns="15" />
+            <dataField fieldName="IsAtRisk" columns="15" />
+            <dataField fieldName="OnTheVerge" columns="15" />
+            <dataField fieldName="currTotalStudents" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[EXEC [dbo].[usp_term_basis_chrabs_atarisk_ontheverge]]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement delete here]]></rule>
+  </businessRules>
+</dataController>

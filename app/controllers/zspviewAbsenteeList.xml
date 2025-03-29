@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="zspviewAbsenteeList" conflictDetection="overwriteChanges" label="zspviewAbsenteeList" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="StudentSectionAttendanceEvents" custom="true">
+      <text><![CDATA[select distinct
+ csp.StudentName
+,csp.YearGroup
+,csp.GuardianName
+,csp.HowRelated
+,csp.ContactPoint
+,csp.System
+,csp.IsPrimary
+,csp.Employer
+,csp.Profession
+,csp.LivesWith
+,zas.Description
+,ae.EventDate
+,count(*) OVER (PARTITION BY csp.studentName) as 'Absences'
+,zac.Description as AbsenceReason
+from StudentSectionAttendanceEvents ssae with (nowait)
+inner hash join AttendanceEvent ae on ae.AttendanceEventID = ssae.AttendanceEventID
+LEFT join vw_ops_current_student_and_parents csp on csp.OrganizationPersonRoleID = ssae.OrganizationPersonRoleID
+left join zlkpAttendanceStatus zas on zas.RefAttendanceStatusId = ssae.RefAttendanceStatusID
+
+LEFT JOIN [dbo].[zlkpAbsentAttendanceCategory] zac on zac.RefAbsentAttendanceCategoryId = ssae.RefAbsentAttendanceCategoryId
+
+where 
+zas.Description <> ('Present')
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="StudentName" type="String" label="Student Name" length="108" showInSummary="true" />
+    <field name="YearGroup" type="String" label="Year Group" length="100" showInSummary="true" />
+    <field name="GuardianName" type="String" label="Guardian Name" length="88" showInSummary="true" />
+    <field name="HowRelated" type="String" label="How Related" length="20" showInSummary="true" />
+    <field name="ContactPoint" type="String" label="Contact Point" length="30" showInSummary="true" />
+    <field name="System" type="String" label="System" readOnly="true" length="1" />
+    <field name="IsPrimary" type="String" label="Is Primary" length="1" />
+    <field name="Employer" type="String" label="Employer" readOnly="true" length="1" />
+    <field name="Profession" type="String" label="Profession" length="100" />
+    <field name="LivesWith" type="String" label="Lives With" length="1" />
+    <field name="Description" type="String" label="Description" length="100" />
+    <field name="EventDate" type="DateTime" allowNulls="false" label="Event Date" />
+    <field name="Absences" type="Int32" label="Absences" readOnly="true" />
+    <field name="AbsenceReason" type="String" label="Absence Reason" length="100" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Absence Events" sortExpression="EventDate DESC">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="EventDate" columns="20" tag="pivot4-row1-columnstacked-date-all&#xD;&#xA;pivot4-title:&quot;What is the count of absences over time&quot;&#xD;&#xA;pivot4-large&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked-Year-all&#xD;&#xA;pivot5-title:&quot;What is the Count of Absences Reasons and Year&quot;&#xD;&#xA;pivot5-large&#xD;&#xA;" />
+        <dataField fieldName="StudentName" columns="30" />
+        <dataField fieldName="YearGroup" columns="5" tag="pivot2-row1-column&#xD;&#xA;pivot2-title:&quot;What is the count of absences by reason and GradeLevel&quot;&#xD;&#xA;&#xD;&#xA;pivot3-row1-columnstacked&#xD;&#xA;pivot3-title:&quot;What is the count of absences by reason and GradeLevel&quot;">
+          <headerText>CYG</headerText>
+        </dataField>
+        <dataField fieldName="Absences" columns="10" tag="pivot4-val1-sum&#xD;&#xA;" />
+        <dataField fieldName="Description" columns="15">
+          <headerText>Status</headerText>
+        </dataField>
+        <dataField fieldName="AbsenceReason" tag="pivot1-row1-donut&#xD;&#xA;pivot1-title:&quot;What is the count of absences by reason&quot;&#xD;&#xA;pivot1-medium&#xD;&#xA;&#xD;&#xA;pivot2-col&#xD;&#xA;pivot3-col&#xD;&#xA;pivot4-col&#xD;&#xA;pivot5-col&#xD;&#xA;&#xD;&#xA;pivot6-row1-columnstacked-Year-all&#xD;&#xA;pivot6-title:&quot;What is the Prevalence of Absences by Reasons&quot;&#xD;&#xA;pivot6-large&#xD;&#xA;&#xD;&#xA;" columns="25" />
+        <dataField fieldName="GuardianName" columns="20" />
+        <dataField fieldName="HowRelated" columns="20" />
+        <dataField fieldName="ContactPoint" columns="18" tag="action-call" />
+        <dataField fieldName="Profession" hidden="true" />
+        <dataField fieldName="IsPrimary" columns="10" />
+        <dataField fieldName="LivesWith" columns="12" />
+        <dataField fieldName="Employer" columns="1" hidden="true" />
+        <dataField fieldName="System" columns="1" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_absence_last3weeks" type="Grid" commandId="command1" label="Last 3 Weeks Absences" sortExpression="EventDate DESC" filter="DATEDIFF (WW, EVENTDATE, GETDATE()) &lt;= 3">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="EventDate" columns="20" tag="pivot4-row1-columnstacked-date-all&#xD;&#xA;pivot4-title:&quot;What is the count of absences over time&quot;&#xD;&#xA;pivot4-large&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked-Year-all&#xD;&#xA;pivot5-title:&quot;What is the Count of Absences Reasons and Year&quot;&#xD;&#xA;pivot5-large&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" />
+        <dataField fieldName="StudentName" columns="35" />
+        <dataField fieldName="YearGroup" columns="5" tag="pivot2-row1-column&#xD;&#xA;pivot2-title:&quot;What is the count of absences by reason and GradeLevel&quot;&#xD;&#xA;&#xD;&#xA;pivot3-row1-columnstacked&#xD;&#xA;pivot3-title:&quot;What is the count of absences by reason and GradeLevel&quot;">
+          <headerText>CYG</headerText>
+        </dataField>
+        <dataField fieldName="GuardianName" columns="30" />
+        <dataField fieldName="HowRelated" columns="20" />
+        <dataField fieldName="ContactPoint" columns="30" tag="action-call" />
+        <dataField fieldName="Profession" hidden="true" />
+        <dataField fieldName="IsPrimary" columns="10" />
+        <dataField fieldName="LivesWith" columns="8" />
+        <dataField fieldName="Description" columns="15" />
+        <dataField fieldName="Absences" columns="15" tag="pivot4-val1-sum&#xD;&#xA;" />
+        <dataField fieldName="AbsenceReason" tag="pivot1-row1-donut&#xD;&#xA;pivot1-title:&quot;What is the count of absences by reason&quot;&#xD;&#xA;pivot1-medium&#xD;&#xA;&#xD;&#xA;pivot2-col&#xD;&#xA;pivot3-col&#xD;&#xA;pivot4-col&#xD;&#xA;pivot5-col&#xD;&#xA;&#xD;&#xA;pivot6-row1-columnstacked-Year-all&#xD;&#xA;pivot6-title:&quot;What is the Prevalence of Absences by Reasons&quot;&#xD;&#xA;pivot6-large&#xD;&#xA;&#xD;&#xA;pivot7-row1-pie&#xD;&#xA;pivot7-title:&quot;What is the distribution of Absences by Reason&quot;&#xD;&#xA;pivot7-large&#xD;&#xA;" />
+        <dataField fieldName="Employer" columns="1" />
+        <dataField fieldName="System" columns="1" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Student Section Attendance Events">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Student Section Attendance Events" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StudentName" />
+            <dataField fieldName="YearGroup" />
+            <dataField fieldName="GuardianName" />
+            <dataField fieldName="HowRelated" columns="20" />
+            <dataField fieldName="ContactPoint" columns="30" />
+            <dataField fieldName="System" columns="1" />
+            <dataField fieldName="IsPrimary" columns="1" />
+            <dataField fieldName="Employer" columns="1" />
+            <dataField fieldName="Profession" />
+            <dataField fieldName="LivesWith" columns="1" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="EventDate" columns="10" />
+            <dataField fieldName="Absences" columns="15" />
+            <dataField fieldName="AbsenceReason" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Student Section Attendance Events">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Student Section Attendance Events" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StudentName" />
+            <dataField fieldName="YearGroup" />
+            <dataField fieldName="GuardianName" />
+            <dataField fieldName="HowRelated" columns="20" />
+            <dataField fieldName="ContactPoint" columns="30" />
+            <dataField fieldName="IsPrimary" columns="1" />
+            <dataField fieldName="Profession" />
+            <dataField fieldName="LivesWith" columns="1" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="EventDate" columns="10" />
+            <dataField fieldName="AbsenceReason" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

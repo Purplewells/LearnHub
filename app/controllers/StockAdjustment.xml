@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="StockAdjustment" conflictDetection="overwriteChanges" label="Stock Adjustment" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"StockAdjustment"."AdjustmentID" "AdjustmentID"
+	,"StockAdjustment"."ProductID" "ProductID"
+	,"StockAdjustment"."ProductName" "ProductName"
+	,"StockAdjustment"."AdjustmentDate" "AdjustmentDate"
+	,"StockAdjustment"."ScannedQuantity" "ScannedQuantity"
+	,"StockAdjustment"."SystemQuantity" "SystemQuantity"
+	,"StockAdjustment"."AdjustedQuantity" "AdjustedQuantity"
+	,"StockAdjustment"."Reason" "Reason"
+	,"StockAdjustment"."IsAdjustmentComplete" "IsAdjustmentComplete"
+	,"StockAdjustment"."ApprovedBy" "ApprovedBy"
+	,"StockAdjustment"."ApprovalDate" "ApprovalDate"
+	,"StockAdjustment"."CreatedDate" "CreatedDate"
+	,"StockAdjustment"."CreatedBy" "CreatedBy"
+	,"StockAdjustment"."ModifiedDate" "ModifiedDate"
+from "dbo"."StockAdjustment" "StockAdjustment"
+]]></text>
+    </command>
+    <command id="AdjustmentIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="AdjustmentID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="AdjustmentID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Adjustment ID" readOnly="true" />
+    <field name="ProductID" type="Int32" label="Product ID" showInSummary="true" />
+    <field name="ProductName" type="String" label="Product Name" length="50" showInSummary="true" />
+    <field name="AdjustmentDate" type="DateTime" label="Adjustment Date" showInSummary="true" />
+    <field name="ScannedQuantity" type="Int32" label="Scanned Quantity" showInSummary="true" />
+    <field name="SystemQuantity" type="Int32" label="System Quantity" showInSummary="true" />
+    <field name="AdjustedQuantity" type="Int32" label="Adjusted Quantity" />
+    <field name="Reason" type="String" label="Reason" length="255" />
+    <field name="IsAdjustmentComplete" type="Boolean" default="((0))" label="Adj. Completed" />
+    <field name="ApprovedBy" type="String" label="Approved By" length="50" />
+    <field name="ApprovalDate" type="DateTime" dataFormatString="g" label="Approval Date" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Stock Adjustment">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ProductID" columns="15" hidden="true" />
+        <dataField fieldName="ProductName" columns="50" />
+        <dataField fieldName="AdjustmentDate" columns="20" />
+        <dataField fieldName="ScannedQuantity" columns="20" />
+        <dataField fieldName="SystemQuantity" columns="20" />
+        <dataField fieldName="AdjustedQuantity" columns="15">
+          <headerText>Adj. Qty</headerText>
+        </dataField>
+        <dataField fieldName="IsAdjustmentComplete" columns="20" />
+        <dataField fieldName="Reason" columns="30" />
+        <dataField fieldName="ApprovedBy" columns="20" />
+        <dataField fieldName="ApprovalDate" columns="20" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Stock Adjustment">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Stock Adjustment" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ProductID" columns="15" />
+            <dataField fieldName="ProductName" columns="50" />
+            <dataField fieldName="AdjustmentDate" columns="10" />
+            <dataField fieldName="ScannedQuantity" columns="15" />
+            <dataField fieldName="SystemQuantity" columns="15" />
+            <dataField fieldName="AdjustedQuantity" columns="15" />
+            <dataField fieldName="Reason" />
+            <dataField fieldName="IsAdjustmentComplete" />
+            <dataField fieldName="ApprovedBy" columns="50" />
+            <dataField fieldName="ApprovalDate" columns="20" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Stock Adjustment">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ProductID" columns="15" />
+            <dataField fieldName="ProductName" columns="50" />
+            <dataField fieldName="AdjustmentDate" columns="10" />
+            <dataField fieldName="ScannedQuantity" columns="15" />
+            <dataField fieldName="SystemQuantity" columns="15" />
+            <dataField fieldName="AdjustedQuantity" columns="15" />
+            <dataField fieldName="Reason" />
+            <dataField fieldName="IsAdjustmentComplete" />
+            <dataField fieldName="ApprovedBy" columns="50" />
+            <dataField fieldName="ApprovalDate" columns="20" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

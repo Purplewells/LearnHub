@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="master_student_grades_gradebooks_p4" alias="master_student_grades_gradebooks_p4" created="2024-02-05T19:16:51" modified="2024-09-07T13:28:31" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="FirstName" fieldName="FirstName" label="Firstname" />
+    <column name="LastName" fieldName="LastName" label="Lastname" />
+    <column name="UPN" fieldName="UPN" label="UPN" />
+    <column name="GradeLevel" fieldName="GradeLevel" label="GL" />
+    <column name="Stream" fieldName="Stream" label="Stream" />
+    <column name="Subject" fieldName="Subject" label="Subject" />
+    <column name="ClassScore" fieldName="ClassScore" label="Class" />
+    <column name="ExamScore" fieldName="ExamScore" label="Exam" />
+    <column name="TotalScore" fieldName="TotalScore" label="Score" />
+    <column name="GrandTotal" fieldName="GrandTotal" label="Total" />
+    <column name="SubjectRanking" fieldName="SubjectRanking" label="Subject Ranking" />
+    <column name="SubjectRank" fieldName="SubjectRank" label="Sub Rank" />
+    <column name="ClassRanking" fieldName="ClassRanking" label="Rank" />
+    <column name="NoInClass" fieldName="NoInClass" label="No In Class" />
+    <column name="StudentGLScore" fieldName="StudentGlscore" label="SGLS" />
+    <column name="StudentAVGScore" fieldName="StudentAvgscore" label="SAVG" />
+    <column name="ClassAVGScore" fieldName="ClassAvgscore" label="CAVG" />
+    <column name="StudentGLCoursesTaken" fieldName="StudentGlcoursesTaken" label="GL Courses" />
+    <column name="StudentTermCoursesTaken" fieldName="StudentTermCoursesTaken" label="Term Courses" />
+    <column name="LG" fieldName="LG" label="LG" />
+    <column name="NG" fieldName="NG" label="NG" />
+    <column name="Passed" fieldName="PSN" label="PSN" />
+    <column name="Descriptor" fieldName="Descriptor" label="Descriptor" />
+    <column name="Remark" fieldName="Remark" label="Remark" />
+    <column name="IsActive" fieldName="IsActive" label="Active" />
+    <column name="CSY" fieldName="CSY" label="CSY" />
+    <column name="Term" fieldName="Term" label="Term" />
+    <column name="calYear" fieldName="CalYear" label="Year" />
+    <column name="Address" fieldName="Address" label="Address" />
+    <column name="SchoolName" fieldName="SchoolName" label="School" />
+    <column name="Presence" fieldName="Presence" label="PRN" />
+    <column name="Absence" fieldName="Absence" label="ABS" />
+    <column name="PossibleAttendances" fieldName="PossibleAttendances" label="PA" />
+    <column name="TotalBilledAmount" fieldName="TotalBilledAmount" label="Total Billed" format="c" />
+    <column name="TotalPaid" fieldName="TotalPaid" label="Total Paid" format="c" />
+    <column name="Balance" fieldName="Balance" label="Balance" format="c" />
+    <column name="StudentCourseSectionID" fieldName="StudentCourseSectionID" label="Student Course Section ID" />
+    <column name="pctAbsence" fieldName="PctAbsence" label="% Absence" />
+    <column name="pctAttended" fieldName="PctAttended" label="% Attended" />
+    <column name="PerAbsence" fieldName="PerAbsence" label="Per Absence" />
+    <column name="PerPresence" fieldName="PerPresence" label="Per Presence" />
+    <column name="Presences" fieldName="Presences" label="Presences" />
+    <column name="ExcusedAbsences" fieldName="ExcusedAbsences" label="Excused Absences" />
+    <column name="UnExcusedAbsences" fieldName="UnExcusedAbsences" label="UnExcused Absences" />
+    <column name="Tardies" fieldName="Tardies" label="Late" />
+    <column name="NextSessionStartDate" fieldName="NextSessionStartDate" label="NSSD" />
+    <column name="NextSessionEndDate" fieldName="NextSessionEndDate" label="NSED" />
+    <column name="PhotoUrl" fieldName="PhotoUrl" label="Photo Url" />
+    <column name="Logo" fieldName="Logo" label="Logo" />
+    <column name="IsAtRisk" fieldName="IsAtRisk" label="IsAtRisk" />
+    <column name="IsCHRAB" fieldName="IsChrab" label="IsCHRAB" />
+    <column name="OnTheVerge" fieldName="OnTheVerge" label="OnTheVerge" />
+    <column name="prevIsAtRiskCount" fieldName="PrevIsAtRiskCount" label="PrevIsAtRiskCount" />
+    <column name="prevIsCHRABCount" fieldName="PrevIsChrabcount" label="PrevIsCHRABCount" />
+    <column name="prevOnTheVergeCount" fieldName="PrevOnTheVergeCount" label="PrevOnTheVergeCount" />
+    <column name="PerfectAttenance_Count" fieldName="PerfectAttendance" label="IsPA" />
+    <column name="AttendanceRate" fieldName="AttendanceRate" label="ARate" format="p" />
+  </columns>
+</dataModel>

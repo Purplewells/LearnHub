@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connection Error</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #721c24;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        .retry-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #dc3545;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .retry-button:hover {
+                background-color: #c82333;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Oops! A Connection Error Occurred</h3>
+        <p id="error-message">We are unable to connect to the server at the moment. Please check your internet connection or try again later.</p>
+        <p>If the problem persists, please contact support.</p>
+        <button class="retry-button" onclick="location.reload();">Retry</button>
+    </div>
+    <script>
+        function checkTimeout() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('timeout') === 'true') {
+                document.getElementById('error-message').textContent = "Our servers are taking too long to respond. This might be due to high traffic or a temporary issue.";
+            }
+        }
+        checkTimeout();
+    </script>
+</body>
+</html>

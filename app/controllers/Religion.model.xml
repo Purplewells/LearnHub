@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkp_Religion" alias="zlkp_Religion" created="2024-01-28T17:24:36" modified="2025-03-16T11:29:22" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="ReligionID" fieldName="ReligionID" label="Religion ID" />
+    <column name="Religion" fieldName="Religion" label="Religion" />
+    <column name="ReligionCode" fieldName="ReligionCode" label="Code" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedbY" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

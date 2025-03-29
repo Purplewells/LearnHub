@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="CalendarDashboard" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="Calendar" type="DataView" label="Calendar">
+      <dataView controller="Calendar" view="grid1" />
+    </field>
+    <field name="Session" type="DataView" label="Session" causesCalculate="true">
+      <dataView controller="Session" view="grid1" filterSource="Calendar" filterFields="OrganizationCalendarID" />
+    </field>
+    <field name="GradingPeriod" type="DataView" label="Grading Period" causesCalculate="true">
+      <dataView controller="GradingPeriod" view="grid1" filterSource="Session" filterFields="CalendarSessionID" />
+    </field>
+  </fields>
+  <views>
+    <view id="form1" type="Form" label="Academic Calendar">
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Calendar" columns="15" tag="modal-never&#xD;&#xA;page-header-none" />
+            <dataField fieldName="Session" columns="15" tag="modal-never&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-stub-content-none" />
+            <dataField fieldName="GradingPeriod" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-stub-content-none" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Calendar Actions" flat="false" />
+  </actions>
+  <businessRules />
+</dataController>

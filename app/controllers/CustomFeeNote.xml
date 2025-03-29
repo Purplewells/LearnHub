@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="CustomFeeNote" conflictDetection="overwriteChanges" label="CustomFeeNote" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands />
+  <fields>
+    <field name="PersonID" type="Int32" allowNulls="false" label="Person#" readOnly="true" showInSummary="true" />
+    <field name="FeeID" type="Int32" allowNulls="false" label="Fee#" readOnly="true" showInSummary="true" />
+    <field name="FirstName" type="String" label="First Name" length="35" showInSummary="true" />
+    <field name="LastName" type="String" label="Last Name" length="35" showInSummary="true" />
+    <field name="IdentificationCode" type="String" label="Identification Code" length="10" showInSummary="true" />
+    <field name="Description" type="String" label="Description" readOnly="true" length="50" />
+    <field name="FeeType" type="String" label="Fee Type" readOnly="true" length="20" />
+    <field name="EventDate" type="DateTime" label="Event Date" readOnly="true" />
+    <field name="Currency" type="String" label="Currency" readOnly="true" length="5" />
+    <field name="Debit" type="Decimal" label="Debit" readOnly="true" />
+    <field name="Credit" type="Decimal" label="Credit" readOnly="true" />
+    <field name="LineBalance" type="Decimal" label="Line Balance" readOnly="true" />
+    <field name="State" type="Int32" allowNulls="false" label="State" readOnly="true" />
+    <field name="CurrentYearGradeLevel" type="String" label="Current Year Grade Level" length="10" />
+    <field name="SessionCode" type="String" label="Session Code" length="20" />
+    <field name="SchoolName" type="String" label="School Name" length="50" />
+    <field name="Address" type="String" label="Address" length="500" />
+    <field name="Website" type="String" label="Website" length="50" />
+    <field name="Email" type="String" label="Email" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Custom Fee Note" reportTemplate="true">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="FeeID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="IdentificationCode" columns="10">
+          <headerText>UPN</headerText>
+        </dataField>
+        <dataField fieldName="Description" columns="20" />
+        <dataField fieldName="FeeType" columns="20" />
+        <dataField fieldName="EventDate" columns="10" />
+        <dataField fieldName="Currency" columns="5" />
+        <dataField fieldName="Debit" dataFormatString="c" columns="15" />
+        <dataField fieldName="Credit" dataFormatString="c" columns="15" />
+        <dataField fieldName="LineBalance" dataFormatString="c" columns="15" />
+        <dataField fieldName="CurrentYearGradeLevel" columns="5">
+          <headerText>CYG</headerText>
+        </dataField>
+        <dataField fieldName="SessionCode" columns="20" />
+        <dataField fieldName="SchoolName" columns="50" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="Website" columns="50" hidden="true" />
+        <dataField fieldName="Email" columns="50" hidden="true" />
+        <dataField fieldName="State" columns="5" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Custom Fee Note">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Custom Fee Note" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FeeID" columns="15" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="IdentificationCode" columns="10" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="FeeType" columns="20" />
+            <dataField fieldName="EventDate" columns="10" />
+            <dataField fieldName="Currency" columns="5" />
+            <dataField fieldName="Debit" dataFormatString="c" columns="15" />
+            <dataField fieldName="Credit" dataFormatString="c" columns="15" />
+            <dataField fieldName="LineBalance" dataFormatString="c" columns="15" />
+            <dataField fieldName="State" columns="15" />
+            <dataField fieldName="CurrentYearGradeLevel" columns="10" />
+            <dataField fieldName="SessionCode" columns="20" />
+            <dataField fieldName="SchoolName" columns="50" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="Website" columns="50" />
+            <dataField fieldName="Email" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Custom Fee Note">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Custom Fee Note" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="IdentificationCode" columns="10" />
+            <dataField fieldName="CurrentYearGradeLevel" columns="10" />
+            <dataField fieldName="SessionCode" columns="20" />
+            <dataField fieldName="SchoolName" columns="50" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="Website" columns="50" />
+            <dataField fieldName="Email" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" headerText="Print Fee Note" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[WITH cte_student_fees AS (
+    SELECT
+        sf.PersonID,
+        sf.EffectiveFrom AS Date,
+        (sf.FeeAmount - ISNULL(sf.Discount, 0)) AS Debit,
+        0 AS Credit,
+        f.Description,
+        '' AS NameOfPayee,
+        ft.FeeType,
+        '' AS FeeNote,
+        --sf.EffectiveDate AS BillDate,
+        COALESCE(curr.Code, 'GHS') AS Currency,
+        SUM((sf.FeeAmount - ISNULL(sf.Discount, 0))) OVER (PARTITION BY sf.PersonID) AS TotalAmountBilled,
+        0 AS TotalAmountReceived,
+        f.EffectiveDate AS EventDate,
+        'F' AS OPS,
+        sf.FeeID
+    FROM student_fees sf
+    LEFT JOIN Fees f ON sf.FeeID = f.FeeID
+    LEFT JOIN zlkpFeeType ft ON f.FeeTypeID = ft.FeeTypeID
+    LEFT JOIN zlkp_currency curr ON curr.CurrencyID = f.CurrencyID
+    -- WHERE sf.PersonID = 13039
+),
+
+-- Continue with the next CTE(s) as needed...
+
+cte_fee_collection_transaction AS (
+    SELECT
+        fct.PersonID,
+        fct.TransDate AS Date,
+        0 AS Debit,
+        fct.Amount AS Credit,
+        fct.Description,
+        fct.NameOfPayee,
+        fct.FeeType,
+        fct.Description AS FeeNote,
+        fct.TransDate AS BillDate,
+        a.code AS Currency,
+        0 AS TotalAmountBilled,
+        SUM(fct.Amount) OVER (PARTITION BY fct.PersonID) AS TotalAmountReceived,
+        fct.TransDate AS EventDate,
+        'P' AS OPS,
+        fct.FeeID
+    FROM fee_collection_transaction fct
+    OUTER APPLY (
+        SELECT TOP 1 *
+        FROM zlkp_currency curr
+        WHERE curr.IsDefault = 1
+    ) a
+    -- WHERE fct.PersonID = 13039
+),
+
+-- Continue with the final query that joins the two CTEs...
+cte_fee_combined_bill_collection AS(
+
+SELECT
+    sf.PersonID,
+    sf.FeeID,
+    sf.Debit,
+    fct.Credit,
+    sf.Description,
+    sf.FeeType,
+    CAST(sf.EventDate AS DATE) AS EventDate,
+    sf.Currency,
+    (sf.Debit - fct.Credit) AS LineBalance,
+    1 AS State
+FROM cte_student_fees sf
+LEFT JOIN cte_fee_collection_transaction fct ON fct.PersonID = sf.PersonID AND fct.FeeID = sf.FeeID
+--WHERE sf.PersonID = 13039
+
+UNION ALL
+
+SELECT
+    sf.PersonID,
+    '' AS FeeID,
+    SUM(sf.Debit) AS Debit,
+    SUM(fct.Credit) AS Credit,
+    '' AS Description,
+    '' AS FeeType,
+    '' AS EventDate,
+    sf.Currency,
+    (SUM(sf.Debit) - SUM(fct.Credit)) AS LineBalance,
+    2 AS State
+FROM cte_student_fees sf
+LEFT JOIN cte_fee_collection_transaction fct ON fct.PersonID = sf.PersonID AND fct.FeeID = sf.FeeID
+--WHERE sf.PersonID = 13039
+GROUP BY sf.PersonID, sf.Currency
+)
+SELECT 
+aa.PersonID
+,aa.FeeID
+,p.FirstName
+,p.LastName
+,p.IdentificationCode
+,aa.Description
+,aa.FeeType
+,aa.EventDate
+,aa.Currency
+,aa.Debit
+,aa.Credit
+,aa.LineBalance
+,aa.State
+,p.CurrentYearGradeLevel
+,ss.SessionCode
+,s.SchoolName
+,s.Address
+,o.Website
+,o.Email
+,o.Logo
+FROM cte_fee_combined_bill_collection aa
+
+INNER JOIN Person p 						ON p.PersonID = aa.PersonID
+INNER JOIN OrganizationPersonRole opr		ON opr.PersonID = p.PersonID
+INNER JOIN StudentSchoolAssociation ssa		ON ssa.OrganizationPersonRoleID = opr.OrganizationPersonRoleID
+INNER JOIN zlkpGradeLevel zgl				ON zgl.RefGradeLevelId = ssa.RefEntryGradeLevelId
+INNER JOIN Session ss						ON ss.CalendarSessionID = ssa.CalendarSessionID
+INNER JOIN Calendar cal						ON cal.OrganizationCalendarId = ss.OrganizationCalendarId
+INNER JOIN [School] [s]						ON [cal].[SchoolID] = [s].[OrganizationID]
+INNER JOIN [Organisation] [o]				ON [s].[OrganizationID] = [o].[OrganizationID]
+
+--WHERE 
+----(ExitWithdrawDate IS NULL OR ExitWithdrawDate >= GETDATE())	-- (V 0.2)
+----cal.CurrentSchoolYear = 1 --and  
+-- aa.PersonID = 13030		-- (V 0.2)
+]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement delete here]]></rule>
+  </businessRules>
+</dataController>

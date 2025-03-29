@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="EWIndicators" conflictDetection="overwriteChanges" label="EW Indicators" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"master_cte_attendance_analysis"."PersonID" "PersonID"
+	,"master_cte_attendance_analysis"."Name" "Name"
+	,"master_cte_attendance_analysis"."UPN" "UPN"
+	,"master_cte_attendance_analysis"."GradeLevel" "GL"
+	,"master_cte_attendance_analysis"."SortOrder" "GLSO"
+	,"master_cte_attendance_analysis"."Language" "Language"
+	,"master_cte_attendance_analysis"."Religion" "Religion"
+	,"master_cte_attendance_analysis"."Sex" "Sex"
+	,"master_cte_attendance_analysis"."TP" "Attendances"
+	,"master_cte_attendance_analysis"."TA" "Absences"
+	,"master_cte_attendance_analysis"."PA" "PossibleAttendances"
+	,"master_cte_attendance_analysis"."TU" "TU"
+	,"master_cte_attendance_analysis"."TD" "TD"
+	,"master_cte_attendance_analysis"."TED" "TED"
+	,"master_cte_attendance_analysis"."ADA" "ADA"
+	,"master_cte_attendance_analysis"."EPA" "EPA"
+	,"master_cte_attendance_analysis"."ISD" "ISD"
+	,"master_cte_attendance_analysis"."OnTheVerge" "OnTheVerge"
+	,"master_cte_attendance_analysis"."IsCHRAB" "IsChrab"
+	,"master_cte_attendance_analysis"."IsAtRisk" "IsAtRisk"
+	,"master_cte_attendance_analysis"."CHRABRate" "CHRABRate"
+	,"master_cte_attendance_analysis"."ARate" "ARate"
+	,"master_cte_attendance_analysis"."PARate" "PARate"
+	,"master_cte_attendance_analysis"."SessionCode" "Session"
+	,"master_cte_attendance_analysis"."Year" "Year"
+	,"master_cte_attendance_analysis"."Organisation" "Organisation"
+from "dbo"."master_cte_attendance_analysis" "master_cte_attendance_analysis"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonID" type="Int32" label="Person ID" showInSummary="true" />
+    <field name="Name" type="String" label="Name" length="72" showInSummary="true" />
+    <field name="UPN" type="String" label="UPN" length="10" showInSummary="true" />
+    <field name="GL" type="String" label="GL" length="10" showInSummary="true" />
+    <field name="GLSO" type="Decimal" label="GLSO" showInSummary="true" />
+    <field name="Language" type="String" label="Language" length="30" />
+    <field name="Religion" type="String" label="Religion" length="20" />
+    <field name="Sex" type="String" label="Sex" length="30" />
+    <field name="Attendances" type="Int32" label="TA" />
+    <field name="Absences" type="Int32" label="AB" />
+    <field name="PossibleAttendances" type="Int32" label="PA" />
+    <field name="TU" type="Int32" label="TU" />
+    <field name="TD" type="Int32" label="TD" />
+    <field name="TED" type="Int32" label="TED" />
+    <field name="ADA" type="Decimal" dataFormatString="P" label="ADA" />
+    <field name="EPA" type="Decimal" dataFormatString="P" label="EPA" />
+    <field name="ISD" type="String" label="ISD" length="1" />
+    <field name="OnTheVerge" type="String" label="OnVerge" length="3" />
+    <field name="IsChrab" type="String" label="Is CHRAB" length="3" />
+    <field name="IsAtRisk" type="String" label="At Risk" length="3" />
+    <field name="CHRABRate" type="Decimal" dataFormatString="P" label="CHRAB Rate" />
+    <field name="ARate" type="Decimal" dataFormatString="P" label="ABS Rate" />
+    <field name="PARate" type="Decimal" label="PA Rate" />
+    <field name="Session" type="String" label="Session" length="20" />
+    <field name="Year" type="Int16" label="Year" />
+    <field name="Organisation" type="String" label="Organisation" length="60" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Early Warning Indicators" reportLabel="EARLY WARNING INDICATOR" reportTemplate="true">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="Name" columns="25" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="Sex" columns="3" tag="pivot1-row1-donut&#xD;&#xA;pivot1-title:&quot;What is the count of students by Gender&quot;&#xD;&#xA;pivot1-medium&#xD;&#xA;&#xD;&#xA;pivot18-col1" />
+        <dataField fieldName="GL" columns="5" />
+        <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="Language" columns="18" tag="pivot3-row1-donut-sortbyvalue-top5-other&#xD;&#xA;pivot3-title:&quot;Distribution of main languages spoken by students&quot;" />
+        <dataField fieldName="Religion" columns="12" />
+        <dataField fieldName="Attendances" columns="5" />
+        <dataField fieldName="Absences" columns="5" tag="pivot7-val1-sum&#xD;&#xA;pivot8-val1-sum" />
+        <dataField fieldName="PossibleAttendances" columns="3" />
+        <dataField fieldName="TU" columns="15" hidden="true" />
+        <dataField fieldName="TD" columns="15" hidden="true" />
+        <dataField fieldName="TED" columns="15" hidden="true" />
+        <dataField fieldName="ADA" columns="8" tag="pivot9-val1-avg&#xD;&#xA;pivot9-vaxis:&quot;percent&quot;&#xD;&#xA;" />
+        <dataField fieldName="ARate" columns="9" />
+        <dataField fieldName="EPA" columns="10" />
+        <dataField fieldName="CHRABRate" columns="10" />
+        <dataField fieldName="ISD" columns="1" hidden="true" />
+        <dataField fieldName="OnTheVerge" columns="7" tag="pivot10-val1-count&#xD;&#xA;pivot10-col1&#xD;&#xA;pivot15-col1&#xD;&#xA;&#xD;&#xA;pivot12-row1-donut&#xD;&#xA;pivot12-title:&quot;What is proportion of students On the Verge of chronic absence&quot;&#xD;&#xA;pivot12-medium" />
+        <dataField fieldName="IsChrab" columns="10" tag="pivot6-val1-COUNT&#xD;&#xA;&#xD;&#xA;pivot11-val1-count&#xD;&#xA;pivot11-col1&#xD;&#xA;pivot17-col1&#xD;&#xA;&#xD;&#xA;pivot13-row1-donut&#xD;&#xA;pivot13-title:&quot;What is the proportion of students Chronically Absent&quot;&#xD;&#xA;" />
+        <dataField fieldName="IsAtRisk" columns="7" tag="pivot4-col1&#xD;&#xA;pivot5-val1-COUNT&#xD;&#xA;pivot16-col1&#xD;&#xA;&#xD;&#xA;pivot14-row1-donut&#xD;&#xA;pivot14-title:&quot;What is the proportion of students at risk of dropout&quot;&#xD;&#xA;&#xD;&#xA;pivot18-row1-columnstacked&#xD;&#xA;pivot18-title:&quot;Count of students at Risk of Dropout by gender&quot;&#xD;&#xA;pivot18-large" />
+        <dataField fieldName="PARate" columns="15" hidden="true" />
+        <dataField fieldName="Session" columns="12" tag="pivot9-row1-columnstacked&#xD;&#xA;pivot9-title:&quot;What is the average attendance rate by Term&quot;&#xD;&#xA;pivot9-vaxisformat:&quot;percent&quot;" />
+        <dataField fieldName="Year" columns="8" />
+        <dataField fieldName="Organisation" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review EW Indicators">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="EW Indicators" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="Name" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="GL" columns="10" />
+            <dataField fieldName="GLSO" columns="15" />
+            <dataField fieldName="Language" columns="30" />
+            <dataField fieldName="Religion" columns="20" />
+            <dataField fieldName="Sex" columns="30" />
+            <dataField fieldName="Attendances" columns="15" />
+            <dataField fieldName="Absences" columns="15" />
+            <dataField fieldName="PossibleAttendances" columns="15" />
+            <dataField fieldName="TU" columns="15" />
+            <dataField fieldName="TD" columns="15" />
+            <dataField fieldName="TED" columns="15" />
+            <dataField fieldName="ADA" columns="15" />
+            <dataField fieldName="EPA" columns="15" />
+            <dataField fieldName="ISD" columns="1" />
+            <dataField fieldName="OnTheVerge" columns="3" />
+            <dataField fieldName="IsChrab" columns="3" />
+            <dataField fieldName="IsAtRisk" columns="3" />
+            <dataField fieldName="CHRABRate" columns="15" />
+            <dataField fieldName="ARate" columns="15" />
+            <dataField fieldName="PARate" columns="15" />
+            <dataField fieldName="Session" columns="20" />
+            <dataField fieldName="Year" columns="15" />
+            <dataField fieldName="Organisation" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New EW Indicators">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="Name" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="GL" columns="10" />
+            <dataField fieldName="GLSO" columns="15" />
+            <dataField fieldName="Language" columns="30" />
+            <dataField fieldName="Religion" columns="20" />
+            <dataField fieldName="Sex" columns="30" />
+            <dataField fieldName="Attendances" columns="15" />
+            <dataField fieldName="Absences" columns="15" />
+            <dataField fieldName="PossibleAttendances" columns="15" />
+            <dataField fieldName="TU" columns="15" />
+            <dataField fieldName="TD" columns="15" />
+            <dataField fieldName="TED" columns="15" />
+            <dataField fieldName="ADA" columns="15" />
+            <dataField fieldName="EPA" columns="15" />
+            <dataField fieldName="ISD" columns="1" />
+            <dataField fieldName="OnTheVerge" columns="3" />
+            <dataField fieldName="IsChrab" columns="3" />
+            <dataField fieldName="IsAtRisk" columns="3" />
+            <dataField fieldName="CHRABRate" columns="15" />
+            <dataField fieldName="ARate" columns="15" />
+            <dataField fieldName="PARate" columns="15" />
+            <dataField fieldName="Session" columns="20" />
+            <dataField fieldName="Year" columns="15" />
+            <dataField fieldName="Organisation" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

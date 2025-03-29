@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StudentCohortAssociation" alias="StudentCohortAssociation" created="2024-02-03T19:35:03" modified="2024-11-22T14:34:02" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Cohort" parentTableSchema="dbo" parentTableName="Cohort" x="378" y="20">
+      <foreignKeyColumn columnName="CohortID" parentColumnName="CohortID" />
+    </foreignKey>
+    <foreignKey id="Student" parentTableSchema="dbo" parentTableName="Person" x="378" y="275">
+      <foreignKeyColumn columnName="StudentID" parentColumnName="PersonID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="StudentCohortAssociationID" fieldName="StudentCohortAssociationID" label="Student Cohort Association ID" />
+    <column name="CohortID" fieldName="CohortID" label="Cohort ID" aliasColumnName="CohortDescription" aliasForeignKey="Cohort" />
+    <column name="CohortDescription" fieldName="CohortDescription" label="Cohort Description" foreignKey="Cohort" />
+    <column name="StartDate" fieldName="StartDate" label="Start Date" />
+    <column name="EndDate" fieldName="EndDate" label="End Date" />
+    <column name="StudentID" fieldName="StudentID" label="Student ID" aliasColumnName="IdentificationCode" aliasForeignKey="Student" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Student" />
+    <column name="FirstName" fieldName="StudentFirstName" label="Student First Name" foreignKey="Student" />
+    <column name="LastName" fieldName="StudentLastName" label="Student Last Name" foreignKey="Student" />
+    <column fieldName="Fullname" type="nvarchar(71)" dataType="String" label="Fullname">
+      <formula>Student.FirstName + ' ' + Student.LastName</formula>
+    </column>
+    <column fieldName="Name" type="nvarchar(71)" dataType="String" label="Name">
+      <formula><![CDATA[CASE 
+        WHEN COALESCE(FirstName, '') != '' AND COALESCE(LastName, '') != '' THEN FirstName + ' ' + LastName
+        WHEN COALESCE(FirstName, '') != '' THEN FirstName
+        WHEN COALESCE(LastName, '') != '' THEN LastName
+        ELSE 'Unknown' 
+    END ]]></formula>
+    </column>
+  </columns>
+</dataModel>

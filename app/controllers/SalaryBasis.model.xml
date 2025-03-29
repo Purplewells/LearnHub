@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="salary_basis" alias="salary_basis" created="2024-01-28T12:06:59" modified="2024-09-16T07:13:34" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="SalaryBasisType" parentTableSchema="dbo" parentTableName="zlkpSalaryBasisType" x="352" y="20">
+      <foreignKeyColumn columnName="SalaryBasisTypeID" parentColumnName="SalaryBasisTypeID" />
+    </foreignKey>
+    <foreignKey id="InputValue" parentTableSchema="dbo" parentTableName="zlkpInputValues" x="352" y="183">
+      <foreignKeyColumn columnName="InputValueID" parentColumnName="InputValueID" />
+    </foreignKey>
+    <foreignKey id="Status" parentTableSchema="dbo" parentTableName="zlkpSalaryStatus" x="352" y="344">
+      <foreignKeyColumn columnName="StatusID" parentColumnName="StatusID" />
+    </foreignKey>
+    <foreignKey id="Frequency" parentTableSchema="dbo" parentTableName="zlkpSalaryBasisFrequency" x="352" y="484">
+      <foreignKeyColumn columnName="FrequencyID" parentColumnName="FrequencyID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="SalaryBasisID" fieldName="SalaryBasisID" label="Salary Basis ID" format="c" />
+    <column name="BasisName" fieldName="BasisName" label="Basis Name" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="SalaryBasisTypeID" fieldName="SalaryBasisTypeID" label="Salary Basis Type ID" format="c" aliasColumnName="SalaryBasisType" aliasForeignKey="SalaryBasisType" />
+    <column name="SalaryBasisType" fieldName="SalaryBasisType" label="Salary Basis Type" format="c" foreignKey="SalaryBasisType" />
+    <column name="InputValueID" fieldName="InputValueID" label="Input Value ID" aliasColumnName="InputName" aliasForeignKey="InputValue" />
+    <column name="InputName" fieldName="InputName" label="Input Name" foreignKey="InputValue" />
+    <column name="EffectiveFrom" fieldName="EffectiveFrom" label="Effective From" />
+    <column name="EffectiveTo" fieldName="EffectiveTo" label="Effective To" />
+    <column name="GradeStepRateID" fieldName="GradeStepRateID" label="Grade Step Rate ID" />
+    <column name="StatusID" fieldName="StatusID" label="Status ID" aliasColumnName="Status" aliasForeignKey="Status" />
+    <column name="Status" fieldName="Status" label="Status" foreignKey="Status" />
+    <column name="IsAction" fieldName="IsActive" label="Is Active" />
+    <column name="BaseAmount" fieldName="BaseAmount" label="Base Amount" format="c" />
+    <column name="AnnualisationFactor" fieldName="AnnualisationFactor" label="Annualisation Factor" />
+    <column name="FrequencyID" fieldName="FrequencyID" label="Frequency ID" aliasColumnName="Frequency" aliasForeignKey="Frequency" />
+    <column name="Frequency" fieldName="Frequency" label="Frequency" foreignKey="Frequency" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiefBy" fieldName="ModifiefBy" label="Modifief By" />
+    <column name="ComponentsUsage" fieldName="ComponentsUsage" label="Components Usage" />
+  </columns>
+</dataModel>

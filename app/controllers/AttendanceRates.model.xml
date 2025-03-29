@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zvw_metric_attendances_base_reportcard" alias="zvw_metric_attendances_base_reportcard" created="2024-02-18T10:23:43" modified="2024-11-22T06:17:24" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" primaryKey="true" />
+    <column name="Fullname" fieldName="Fullname" label="Fullname" />
+    <column name="GradeLevel" fieldName="GradeLevel" label="GL" />
+    <column name="Term" fieldName="Term" label="Term" />
+    <column name="Absence" fieldName="Absence" label="Absence" />
+    <column name="Presence" fieldName="Presence" label="Presence" />
+    <column name="PossibleAttendances" fieldName="PossibleAttendances" label="PA" />
+    <column name="pctAbsence" fieldName="PctAbsence" label="% Absence" />
+    <column name="pctAttended" fieldName="PctAttended" label="% Attended" />
+    <column name="Presences" fieldName="Presences" label="Presences" />
+    <column name="ExcusedAbsences" fieldName="ExcusedAbsences" label="Absences" />
+    <column name="UnExcusedAbsences" fieldName="UnExcusedAbsences" label="UnExcused" />
+    <column name="Tardies" fieldName="Tardies" label="Tardies" />
+    <column name="Firstname" fieldName="Firstname" label="Firstname" />
+    <column name="LastName" fieldName="Lastname" label="Lastname" />
+  </columns>
+</dataModel>

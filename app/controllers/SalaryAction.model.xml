@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpSalaryAction" alias="zlkpSalaryAction" created="2024-01-28T12:09:08" modified="2024-09-13T19:25:08" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="ActionID" fieldName="ActionID" label="Action ID" />
+    <column name="Action" fieldName="Action" label="Action" />
+    <column name="ActionCode" fieldName="ActionCode" label="Action Code" />
+    <column name="IsAction" fieldName="IsAction" label="Is Action" />
+  </columns>
+</dataModel>

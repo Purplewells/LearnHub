@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StockLevels" alias="StockLevels" created="2024-07-17T09:00:41" modified="2024-08-26T14:41:36" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Product" parentTableSchema="dbo" parentTableName="Product" x="409" y="20">
+      <foreignKeyColumn columnName="ProductID" parentColumnName="ProductID" />
+    </foreignKey>
+    <foreignKey id="ProductCategory" parentTableSchema="dbo" parentTableName="zlkpProductCategory" baseForeignKey="Product" x="712" y="22">
+      <foreignKeyColumn columnName="CategoryID" parentColumnName="ProductCategoryID" />
+    </foreignKey>
+    <foreignKey id="ProductSupplier" parentTableSchema="dbo" parentTableName="Suppliers" baseForeignKey="Product" x="710" y="153">
+      <foreignKeyColumn columnName="SupplierID" parentColumnName="SupplierID" />
+    </foreignKey>
+    <foreignKey id="MovementMode" parentTableSchema="dbo" parentTableName="zlkpMovementMode" x="390" y="482">
+      <foreignKeyColumn columnName="MovementModeID" parentColumnName="MovementModeID" />
+    </foreignKey>
+    <foreignKey id="srcLocation" parentTableSchema="dbo" parentTableName="zlkpInventoryLocations" x="409" y="252">
+      <foreignKeyColumn columnName="srcLocationID" parentColumnName="LocationID" />
+    </foreignKey>
+    <foreignKey id="zlkpInventoryLocations" parentTableSchema="dbo" parentTableName="zlkpInventoryLocations" x="404" y="364">
+      <foreignKeyColumn columnName="recLocationID" parentColumnName="LocationID" />
+    </foreignKey>
+    <foreignKey id="StockTransactions" parentTableSchema="dbo" parentTableName="StockTransactions" x="388" y="599">
+      <foreignKeyColumn columnName="TransactionsID" parentColumnName="TransactionsID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="StockLevelID" fieldName="StockLevelID" label="Stock Level ID" />
+    <column name="ProductID" fieldName="ProductID" label="Product ID" aliasColumnName="ProductName" aliasForeignKey="Product" />
+    <column name="ProductName" fieldName="ProductName" label="Product Name" foreignKey="Product" />
+    <column name="SKUCode" fieldName="SKUCode" label="SKU" foreignKey="Product" />
+    <column name="Barcode" fieldName="Barcode" label="Barcode" foreignKey="Product" />
+    <column name="CategoryName" fieldName="CategoryName" label="Category" foreignKey="ProductCategory" />
+    <column name="TransactionDate" fieldName="TransactionDate" label="Transaction Date" format="g" />
+    <column name="UnitPrice" fieldName="UnitPrice" label="Unit Price" foreignKey="Product" format="c" />
+    <column name="Quantity" fieldName="Quantity" label="Qty" />
+    <column fieldName="ExtendedValue" type="money" dataType="Decimal" label="Stock Value" format="c">
+      <formula>Product.UnitPrice * StockLevels.Quantity</formula>
+    </column>
+    <column name="SupplierName" fieldName="SupplierName" label="Supplier" foreignKey="ProductSupplier" />
+    <column name="MovementModeID" fieldName="MovementModeID" label="Movement Mode ID" aliasColumnName="MovementMode" aliasForeignKey="MovementMode" />
+    <column name="MovementMode" fieldName="MovementMode" label="ActivityMode" foreignKey="MovementMode" />
+    <column name="TransactionsID" fieldName="TransactionsID" label="Transactions ID" aliasColumnName="Quantity" aliasForeignKey="StockTransactions" />
+    <column name="Quantity" fieldName="StockTransactionsQuantity" label="Activity Qty" foreignKey="StockTransactions" />
+    <column name="srcLocationID" fieldName="srcLocationID" label="Src Location ID" aliasColumnName="LocationName" aliasForeignKey="srcLocation" />
+    <column name="LocationName" fieldName="srcLocationName" label="Source Location" foreignKey="srcLocation" />
+    <column name="recLocationID" fieldName="RecLocationID" label="Rec Location ID" aliasColumnName="LocationName" aliasForeignKey="zlkpInventoryLocations" />
+    <column name="LocationName" fieldName="recLocationName" label="Receiving Location" foreignKey="zlkpInventoryLocations" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

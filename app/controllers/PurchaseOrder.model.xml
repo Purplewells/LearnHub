@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PurchaseOrder" alias="PurchaseOrder" created="2024-07-12T08:15:41" modified="2025-02-26T19:30:24" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Supplier" parentTableSchema="dbo" parentTableName="Suppliers" x="362" y="20">
+      <foreignKeyColumn columnName="SupplierID" parentColumnName="SupplierID" />
+    </foreignKey>
+    <foreignKey id="PurchaseOrderStatus" parentTableSchema="dbo" parentTableName="zlkpPurchaseOrderStatus" x="362" y="177">
+      <foreignKeyColumn columnName="PurchaseOrderStatusID" parentColumnName="PurchaseOrderStatusID" />
+    </foreignKey>
+    <foreignKey id="PaymentStatus" parentTableSchema="dbo" parentTableName="zlkpPaymentStatus" x="362" y="342">
+      <foreignKeyColumn columnName="PaymentStatusID" parentColumnName="PaymentStatusID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="PurchaseOrderID" fieldName="PurchaseOrderID" label="Purchase Order ID" />
+    <column fieldName="PONumber" type="nvarchar(6)" dataType="String" label="PO No">
+      <formula>RIGHT('000000' + CAST(PurchaseOrder.PurchaseOrderID AS NVARCHAR(10)), 6)</formula>
+    </column>
+    <column name="SupplierID" fieldName="SupplierID" label="Supplier ID" aliasColumnName="SupplierName" aliasForeignKey="Supplier" />
+    <column name="SupplierName" fieldName="SupplierName" label="Supplier Name" foreignKey="Supplier" />
+    <column name="OrderDate" fieldName="OrderDate" label="Order Date" format="d" />
+    <column name="ExpectedDeliveryDate" fieldName="ExpectedDeliveryDate" label="Expected Date" format="d" />
+    <column name="ActualDeliveryDate" fieldName="ActualDeliveryDate" label="Delivered On" format="d" />
+    <column name="FreightCharge" fieldName="FreightCharge" label="Freight" />
+    <column name="TotalAmount" fieldName="TotalAmount" label="Total Amount" format="c" />
+    <column name="PurchaseOrderStatusID" fieldName="PurchaseOrderStatusID" label="Purchase Order Status ID" aliasColumnName="PurchaseOrderStatus" aliasForeignKey="PurchaseOrderStatus" />
+    <column name="PurchaseOrderStatus" fieldName="Status" label="Order Status" foreignKey="PurchaseOrderStatus" />
+    <column name="PaymentStatusID" fieldName="PaymentStatusID" label="Payment Status ID" aliasColumnName="PaymentStatus" aliasForeignKey="PaymentStatus" />
+    <column name="PaymentStatus" fieldName="PaymentStatus" label="Payment Status" foreignKey="PaymentStatus" />
+    <column name="TrackingNumber" fieldName="TrackingNumber" label="Tracking No." />
+    <column name="Comment" fieldName="Comment" label="Comment" />
+    <column fieldName="POHeader" type="nvarchar(69)" dataType="String" label="PO Header">
+      <formula>'Purchase Order No: ' + CAST(PurchaseOrder.PurchaseOrderID AS NVARCHAR(50))</formula>
+    </column>
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+  <details>
+    <detail fieldName="PurchaseOrderDetail" model="PurchaseOrderDetailVendor" filterFields="PurchaseOrderID" create="true" edit="true" />
+  </details>
+</dataModel>

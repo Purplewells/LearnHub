@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="SessionEnrollmentScheme" conflictDetection="overwriteChanges" label="Session Enrollment Scheme" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"mlinkSessionEnrollment"."CalendarSessionID" "CalendarSessionID"
+	,"CalendarSession"."SessionCode" "CalendarSessionCode"
+	,"mlinkSessionEnrollment"."NextCalendarSessionID" "NextCalendarSessionID"
+	,"NextCalendarSession"."SessionCode" "NextCalendarSessionCode"
+	,"NextCalendarSession"."StartDate" "NextSessionStartDate"
+	,"NextCalendarSession"."EndDate" "NextSessionEndDate"
+	,"NextCalendarSession"."IsActive" "IsActive"
+from "dbo"."mlinkSessionEnrollment" "mlinkSessionEnrollment"
+	left join "dbo"."Session" "CalendarSession" on "mlinkSessionEnrollment"."CalendarSessionID" = "CalendarSession"."CalendarSessionID"
+	left join "dbo"."Session" "NextCalendarSession" on "mlinkSessionEnrollment"."NextCalendarSessionID" = "NextCalendarSession"."CalendarSessionID"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="CalendarSessionID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Calendar Session ID" showInSummary="true">
+      <items style="RadioButtonList" dataController="Session" dataValueField="CalendarSessionID" dataTextField="SessionCode" dataView="grid1_session_advance" />
+    </field>
+    <field name="CalendarSessionCode" type="String" readOnly="true" label="Outgoing Term" length="20" />
+    <field name="NextCalendarSessionID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Next Calendar Session ID" showInSummary="true" allowLEV="true">
+      <items style="RadioButtonList" dataController="Session" dataValueField="CalendarSessionID" dataTextField="SessionCode" copy="NextSessionStartDate=StartDate, NextSessionEndDate=EndDate, IsActive=IsActive" dataView="grid1_session_advance" />
+    </field>
+    <field name="NextCalendarSessionCode" type="String" readOnly="true" label="Incoming term" length="20" />
+    <field name="NextSessionStartDate" type="DateTime" readOnly="true" dataFormatString="d" label="Incoming Session Start" />
+    <field name="NextSessionEndDate" type="DateTime" readOnly="true" dataFormatString="d" label="Incoming Session End" />
+    <field name="IsActive" type="Boolean" readOnly="true" label="Active" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Session Enrollment Scheme">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="CalendarSessionID" aliasFieldName="CalendarSessionCode" />
+        <dataField fieldName="NextCalendarSessionID" aliasFieldName="NextCalendarSessionCode" />
+        <dataField fieldName="NextSessionStartDate" columns="20" />
+        <dataField fieldName="NextSessionEndDate" columns="20" />
+        <dataField fieldName="IsActive" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Session Advance">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="CalendarSessionID" aliasFieldName="CalendarSessionCode" columns="2" />
+            <dataField fieldName="NextCalendarSessionID" aliasFieldName="NextCalendarSessionCode" columns="2" />
+            <dataField fieldName="NextSessionStartDate" columns="10" hidden="true" />
+            <dataField fieldName="NextSessionEndDate" columns="10" hidden="true" />
+            <dataField fieldName="IsActive" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Session Advance">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="CalendarSessionID" aliasFieldName="CalendarSessionCode" columns="2" />
+            <dataField fieldName="NextCalendarSessionID" aliasFieldName="NextCalendarSessionCode" columns="2" />
+            <dataField fieldName="NextSessionStartDate" columns="10" hidden="true" />
+            <dataField fieldName="NextSessionEndDate" columns="10" hidden="true" />
+            <dataField fieldName="IsActive" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action commandName="SQL" cssClass="material-icon-settings" id="a100" headerText="Generate Sessions" notify="Session progress setup completed.">
+        <data><![CDATA[EXEC usp_ops_mlinkSessionEnrollment]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action commandName="SQL" cssClass="material-icon-settings" id="a100" headerText="Generate Sessions">
+        <data><![CDATA[EXEC usp_ops_mlinkSessionEnrollment]]></data>
+      </action>
+      <action id="a2" />
+      <action id="a101" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
+      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Update|calculate" type="JavaScript" phase="After"><![CDATA[// Refresh the current screen after executing the stored procedure
+$app.touch.refresh();
+]]></rule>
+  </businessRules>
+</dataController>

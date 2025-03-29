@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StockAdjustment" alias="StockAdjustment" created="2024-09-24T16:32:25" modified="2024-12-16T16:32:12" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="AdjustmentID" fieldName="AdjustmentID" label="Adjustment ID" />
+    <column name="ProductID" fieldName="ProductID" label="Product ID" />
+    <column name="ProductName" fieldName="ProductName" label="Product Name" />
+    <column name="AdjustmentDate" fieldName="AdjustmentDate" label="Adjustment Date" />
+    <column name="ScannedQuantity" fieldName="ScannedQuantity" label="Scanned Quantity" />
+    <column name="SystemQuantity" fieldName="SystemQuantity" label="System Quantity" />
+    <column name="AdjustedQuantity" fieldName="AdjustedQuantity" label="Adjusted Quantity" />
+    <column name="Reason" fieldName="Reason" label="Reason" />
+    <column name="IsAdjustmentComplete" fieldName="IsAdjustmentComplete" label="Adj. Completed" />
+    <column name="ApprovedBy" fieldName="ApprovedBy" label="Approved By" />
+    <column name="ApprovalDate" fieldName="ApprovalDate" label="Approval Date" format="g" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+  </columns>
+</dataModel>

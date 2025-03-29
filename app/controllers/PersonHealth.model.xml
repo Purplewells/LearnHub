@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PersonHealth" alias="PersonHealth" created="2024-02-07T22:45:45" modified="2024-02-15T08:42:29" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="RefScreeningStatus" parentTableSchema="dbo" parentTableName="zlkpScreeningStatus" x="410" y="20">
+      <foreignKeyColumn columnName="RefScreeningStatusID" parentColumnName="RefVisionScreeningStatusId" />
+    </foreignKey>
+    <foreignKey id="RefHealthInsuranceCoverage" parentTableSchema="dbo" parentTableName="zlkpHealthInsuranceCoverage" x="410" y="181">
+      <foreignKeyColumn columnName="RefHealthInsuranceCoverageID" parentColumnName="RefHealthInsuranceCoverageId" />
+    </foreignKey>
+    <foreignKey id="RefMedicalAlertIndicator" parentTableSchema="dbo" parentTableName="zlkpMedicalAlertIndicator" x="410" y="358">
+      <foreignKeyColumn columnName="RefMedicalAlertIndicatorId" parentColumnName="RefMedicalAlertIndicatorId" />
+    </foreignKey>
+    <foreignKey id="HealthCheckType" parentTableSchema="dbo" parentTableName="zlkpHealthCheckType" x="410" y="979">
+      <foreignKeyColumn columnName="HealthCheckTypeID" parentColumnName="RefDentalInsuranceCoverageTypeId" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="825" y="20">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="PersonHealthID" fieldName="PersonHealthID" label="Person Health ID" />
+    <column name="ScreeningDate" fieldName="ScreeningDate" label="Screening Date" />
+    <column name="RefScreeningStatusID" fieldName="RefScreeningStatusID" label="Ref Screening Status ID" aliasColumnName="Description" aliasForeignKey="RefScreeningStatus" />
+    <column name="Description" fieldName="ScreeningStatus" label="Screening Status" foreignKey="RefScreeningStatus" />
+    <column name="RefHealthInsuranceCoverageID" fieldName="RefHealthInsuranceCoverageID" label="Ref Health Insurance Coverage ID" aliasColumnName="Description" aliasForeignKey="RefHealthInsuranceCoverage" />
+    <column name="Description" fieldName="Insurance" label="Insurance" foreignKey="RefHealthInsuranceCoverage" />
+    <column name="RefMedicalAlertIndicatorId" fieldName="RefMedicalAlertIndicatorID" label="Ref Medical Alert Indicator Id" aliasColumnName="Description" aliasForeignKey="RefMedicalAlertIndicator" />
+    <column name="Description" fieldName="AlertIndicator" label="Alert Indicator" foreignKey="RefMedicalAlertIndicator" />
+    <column name="HealthScreeningEquipmentUsed" fieldName="EquipmentUsed" label="Equipment Used" />
+    <column name="FollowUpRecommendation" fieldName="FollowUp" label="Follow Up" />
+    <column name="HealthCheckTypeID" fieldName="HealthCheckTypeID" label="Health Check Type ID" aliasColumnName="Description" aliasForeignKey="HealthCheckType" />
+    <column name="Description" fieldName="HealthCheckType" label="Health Check Type" foreignKey="HealthCheckType" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="IdentificationCode" aliasForeignKey="Person" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" foreignKey="Person" />
+    <column name="LastName" fieldName="LastName" label="Last Name" foreignKey="Person" />
+  </columns>
+</dataModel>

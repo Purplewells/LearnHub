@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="znStockTransactions" label="znStockTransactions" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"StockTransactions"."TransactionsID" "TransactionsID"
+	,"StockTransactions"."TransDescription" "TransDescription"
+	,"StockTransactions"."ProductID" "ProductID"
+	,"Product"."ProductName" "ProductName"
+	,"Product"."SKUCode" "SKUCode"
+	,"ProductCategory"."CategoryName" "ProductCategoryName"
+	,"ProductSupplier"."SupplierName" "ProductSupplierName"
+	,"StockTransactions"."TransactionDate" "TransactionDate"
+	,"StockTransactions"."TransactionTypeID" "TransactionTypeID"
+	,"TransactionType"."TransactionType" "TransactionType"
+	,"StockTransactions"."TransactionTypeCode" "TransactionTypeCode"
+	,"StockTransactions"."MovementModeID" "MovementModeID"
+	,"MovementMode"."MovementMode" "MovementMode"
+	,"StockTransactions"."SourceLocationID" "SourceLocationID"
+	,"SourceLocation"."LocationName" "SourceLocationName"
+	,"StockTransactions"."ReceivingLocationID" "ReceivingLocationID"
+	,"ReceivingLocation"."LocationName" "ReceivingLocationName"
+	,"StockTransactions"."TransactionStatusID" "TransactionStatusID"
+	,"TransactionStatus"."TransactionStatus" "Status"
+	,"StockTransactions"."Quantity" "Quantity"
+	,"StockTransactions"."CreatedDate" "CreatedDate"
+	,"StockTransactions"."ModifiedDate" "ModifiedDate"
+	,"StockTransactions"."CreatedBy" "CreatedBy"
+	,"StockTransactions"."ModifiedBy" "ModifiedBy"
+from "dbo"."StockTransactions" "StockTransactions"
+	left join "dbo"."Product" "Product" on "StockTransactions"."ProductID" = "Product"."ProductID"
+	left join "dbo"."zlkpProductCategory" "ProductCategory" on "Product"."CategoryID" = "ProductCategory"."ProductCategoryID"
+	left join "dbo"."Suppliers" "ProductSupplier" on "Product"."SupplierID" = "ProductSupplier"."SupplierID"
+	left join "dbo"."zlkpStockTransactionType" "TransactionType" on "StockTransactions"."TransactionTypeID" = "TransactionType"."TransactionTypeID"
+	left join "dbo"."zlkpTransactionStatus" "TransactionStatus" on "StockTransactions"."TransactionStatusID" = "TransactionStatus"."TransactionStatusID"
+	left join "dbo"."zlkpInventoryLocations" "SourceLocation" on "StockTransactions"."SourceLocationID" = "SourceLocation"."LocationID"
+	left join "dbo"."zlkpInventoryLocations" "ReceivingLocation" on "StockTransactions"."ReceivingLocationID" = "ReceivingLocation"."LocationID"
+	left join "dbo"."zlkpMovementMode" "MovementMode" on "StockTransactions"."MovementModeID" = "MovementMode"."MovementModeID"
+]]></text>
+    </command>
+    <command id="TransactionsIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="TransactionsID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="TransactionsID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Transactions ID" readOnly="true" />
+    <field name="TransDescription" type="String" label="Description" length="50" showInSummary="true" />
+    <field name="ProductID" type="Int32" label="Product ID" showInSummary="true">
+      <items style="DropDownList" dataController="Product" newDataView="createForm1" dataValueField="ProductID" dataTextField="ProductName" copy="SKUCode=Skucode, ProductCategoryName=CategoryName, ProductSupplierName=SupplierName" />
+    </field>
+    <field name="ProductName" type="String" readOnly="true" label="Item" length="35" />
+    <field name="SKUCode" type="String" readOnly="true" label="SKU" length="10" />
+    <field name="ProductCategoryName" type="String" readOnly="true" label="Item Category" length="20" />
+    <field name="ProductSupplierName" type="String" readOnly="true" label="Supplier Name" length="50" />
+    <field name="TransactionDate" type="DateTime" dataFormatString="g" label="Trans Date" showInSummary="true" />
+    <field name="TransactionTypeID" type="Int32" label="Transaction Type ID" showInSummary="true" causesCalculate="true">
+      <items style="RadioButtonList" dataController="StockTransactionType" dataValueField="TransactionTypeID" dataTextField="TransactionType" copy="TransactionTypeCode = TransactionType" dataView="grid1" />
+    </field>
+    <field name="TransactionType" type="String" readOnly="true" label="Trans Type" length="10" />
+    <field name="TransactionTypeCode" type="String" label="TTCode" length="5" showInSummary="true" />
+    <field name="MovementModeID" type="Int32" label="Movement Mode ID">
+      <items style="Lookup" dataController="MovementMode" newDataView="createForm1" dataValueField="MovementModeID" dataTextField="MovementMode" />
+    </field>
+    <field name="MovementMode" type="String" readOnly="true" label="Reason Code" length="20" />
+    <field name="SourceLocationID" type="Int32" label="Source Location ID">
+      <items style="Lookup" dataController="InventoryLocations" newDataView="createForm1" dataValueField="LocationID" dataTextField="LocationName" />
+    </field>
+    <field name="SourceLocationName" type="String" readOnly="true" label="Source Loc'n" length="20" />
+    <field name="ReceivingLocationID" type="Int32" label="Receiving Location ID">
+      <items style="Lookup" dataController="InventoryLocations" newDataView="createForm1" dataValueField="LocationID" dataTextField="LocationName" />
+    </field>
+    <field name="ReceivingLocationName" type="String" readOnly="true" label="Receiving Loc'n" length="20" />
+    <field name="TransactionStatusID" type="Int32" label="Transaction Status ID">
+      <items style="Lookup" dataController="TransactionStatus" newDataView="createForm1" dataValueField="TransactionStatusID" dataTextField="TransactionStatus" />
+    </field>
+    <field name="Status" type="String" readOnly="true" label="Status" length="12" />
+    <field name="Quantity" type="Int32" label="Quantity" causesCalculate="true" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Stock Transactions" sortExpression="TransactionDate DESC">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ProductID" aliasFieldName="ProductName" />
+        <dataField fieldName="SKUCode" columns="10" />
+        <dataField fieldName="ProductCategoryName" columns="20" tag="pivot1-col1&#xD;&#xA;&#xD;&#xA;pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;Number of Transactions By Product Category&quot;" />
+        <dataField fieldName="TransactionDate" columns="20" tag="pivot1-row1-columnstacked-year&#xD;&#xA;pivot1-row2-month&#xD;&#xA;pivot1-title:&quot;Count of Transactions By Transaction Date&quot;&#xD;&#xA;&#xD;&#xA;pivot7-row1-line-date&#xD;&#xA;pivot7-title:&quot;Count of Stock Movements Over Time&quot;&#xD;&#xA;pivot7-medium&#xD;&#xA;pivot7-haxistitle:&quot;Transaction Date&quot;&#xD;&#xA;pivot7-vaxistitle:&quot;No. of Transactions&quot;&#xD;&#xA;&#xD;&#xA;" />
+        <dataField fieldName="Quantity" columns="5">
+          <headerText>Qty</headerText>
+        </dataField>
+        <dataField fieldName="SourceLocationID" aliasFieldName="SourceLocationName" tag="pivot4-row1-donut&#xD;&#xA;pivot4-title:&quot;Proportion of Transactions By Source Location&quot;" />
+        <dataField fieldName="ReceivingLocationID" aliasFieldName="ReceivingLocationName" tag="pivot5-row1-pie&#xD;&#xA;pivot5-title:&quot;Proportion of Transactions By Receiving Location&quot;&#xD;&#xA;&#xD;&#xA;pivot6-row1-bar&#xD;&#xA;pivot6-title:&quot;Number of Transactions By Receiving Location&quot;" />
+        <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" tag="pivot3-row1-pie&#xD;&#xA;pivot3-title:&quot;Count of Transactions By Transaction Type&quot;">
+          <headerText>In/Out</headerText>
+        </dataField>
+        <dataField fieldName="MovementModeID" aliasFieldName="MovementMode" tag="pivot8-row1-donut&#xD;&#xA;pivot8-title:&quot;Count of Stock Movements By Reason &quot;&#xD;&#xA;&#xD;&#xA;pivot9-row1-column&#xD;&#xA;pivot9-title:&quot;Count of Transactions By Reason &quot;&#xD;&#xA;pivot9-haxistitle:&quot;Reason Code&quot;&#xD;&#xA;" />
+        <dataField fieldName="TransDescription" columns="35" />
+        <dataField fieldName="TransactionTypeCode" columns="5" hidden="true" />
+        <dataField fieldName="TransactionStatusID" aliasFieldName="Status" hidden="true" />
+        <dataField fieldName="ProductSupplierName" columns="25" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Enter &amp; Maintain Transaction" tags="modal-max-md&#xD;&#xA;modal-content-stub-none">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Stock Transactions" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="TransactionDate" columns="20" />
+            <dataField fieldName="ProductID" aliasFieldName="ProductName" />
+            <dataField fieldName="TransDescription" columns="50" />
+            <dataField fieldName="SKUCode" columns="10" />
+            <dataField fieldName="ProductCategoryName" columns="20" />
+            <dataField fieldName="TransactionStatusID" aliasFieldName="Status" />
+            <dataField fieldName="ProductSupplierName" columns="50" hidden="true" />
+            <dataField fieldName="TransactionTypeCode" columns="5" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c3" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="MovementModeID" aliasFieldName="MovementMode" />
+            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" columns="4" />
+            <dataField fieldName="SourceLocationID" aliasFieldName="SourceLocationName" />
+            <dataField fieldName="ReceivingLocationID" aliasFieldName="ReceivingLocationName" />
+            <dataField fieldName="Quantity" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c2" collapsed="true" headerText="Audit" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Transaction">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Stock Transactions" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="TransactionDate" columns="20" />
+            <dataField fieldName="TransDescription" columns="50" tag="focus-auto" />
+            <dataField fieldName="ProductID" aliasFieldName="ProductName" />
+            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" columns="4" />
+            <dataField fieldName="Quantity" columns="15" />
+            <dataField fieldName="SourceLocationID" aliasFieldName="SourceLocationName" />
+            <dataField fieldName="ReceivingLocationID" aliasFieldName="ReceivingLocationName" />
+            <dataField fieldName="MovementModeID" aliasFieldName="MovementMode" />
+            <dataField fieldName="TransactionStatusID" aliasFieldName="Status" hidden="true" />
+            <dataField fieldName="ProductCategoryName" columns="20" hidden="true" />
+            <dataField fieldName="ProductSupplierName" columns="50" hidden="true" />
+            <dataField fieldName="TransactionTypeCode" columns="5" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" key="CTRL + E" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" key="CTRL + E" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="material-icon-swap_vertical_circle" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action commandName="SQL" headerText="Refresh StockLevels" id="a100" cssClass="material-icon-expand">
+        <data><![CDATA[
+EXEC [dbo].[zusp_stock_AddStockTransaction] @ProductID, @SourceLocationID, @ReceivingLocationID, @Quantity, @TransactionType
+SET @Result_ShowMessage = 'Product No :' + ' ' + CAST(@ProductID AS NVARCHAR(20)) + ' and its associated StockLevel ' + 'has been updated successfully' 
+]]></data>
+      </action>
+      <action id="a2" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a101" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a103" commandName="ReportAsWord" />
+      <action id="a3" commandName="ExportRowset" headerText="Export AS IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send RSS API" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute" name="setTransactionDate"><![CDATA[SET @TransactionDate = GETDATE()]]></rule>
+    <rule id="r101" commandName="New" type="Sql" phase="Execute" name="setQuantity"><![CDATA[SET @Quantity = 1]]></rule>
+    <rule id="r103" commandName="Insert|Update" type="Sql" phase="After" name="AddStockTransaction"><![CDATA[EXEC [dbo].[zusp_stock_AddStockTransaction]  @TransactionsID]]></rule>
+  </businessRules>
+</dataController>

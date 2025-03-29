@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpRole" alias="zlkpRole" created="2024-02-03T22:47:54" modified="2024-02-03T22:48:02" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="RoleId" fieldName="RoleID" label="Role Id" />
+    <column name="RoleName" fieldName="RoleName" label="Role Name" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

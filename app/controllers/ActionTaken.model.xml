@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpActionTaken" alias="zlkpActionTaken" created="2024-02-03T10:45:02" modified="2024-02-03T10:45:08" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="ActionTakenID" fieldName="ActionTakenID" label="Action Taken ID" />
+    <column name="ActionTaken" fieldName="ActionTaken" label="Action Taken" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+  </columns>
+</dataModel>

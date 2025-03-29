@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="StudentSchoolEnrollmentsOvertime" conflictDetection="overwriteChanges" label="Student School Enrollments Overtime" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"pbi_vw_metric_student_school_enrollments_overtime"."StudentEnrollmentID" "StudentEnrollmentID"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."FirstName" "FirstName"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."LastName" "LastName"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."Role" "Role"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."CGL" "CYG"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."EGL" "EGL"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."EnrollStatus" "EnrollStatus"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."EndOfTermStatus" "EndOfTermStatus"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."PromotionReason" "PromotionReason"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."EnrolledDate" "EnrolledDate"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."WDD" "WDD"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."SessionName" "Session"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."WithDrawalStatus" "WithDrawalStatus"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."ExitReason" "ExitReason"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."EntryType" "EntryType"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."EntryDate" "EntryDate"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."ExitDate" "ExitDate"
+	,"pbi_vw_metric_student_school_enrollments_overtime"."Ranked" "Ranked"
+from "dwh"."pbi_vw_metric_student_school_enrollments_overtime" "pbi_vw_metric_student_school_enrollments_overtime"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="StudentEnrollmentID" type="Int32" allowNulls="false" label="Student Enrollment ID" showInSummary="true" />
+    <field name="FirstName" type="String" label="Firstname" length="35" showInSummary="true" />
+    <field name="LastName" type="String" label="Lastname" length="35" showInSummary="true" />
+    <field name="Role" type="String" label="Role" length="50" showInSummary="true" />
+    <field name="CYG" type="String" label="CYG" length="100" showInSummary="true" />
+    <field name="EGL" type="String" label="EGL" length="100" />
+    <field name="EnrollStatus" type="String" label="Enroll Status" length="100" />
+    <field name="EndOfTermStatus" type="String" label="EOT Status" length="100" />
+    <field name="PromotionReason" type="String" label="Promotion Reason" length="100" />
+    <field name="EnrolledDate" type="DateTime" label="Enrolled Date" />
+    <field name="WDD" type="DateTime" label="WDD" />
+    <field name="Session" type="String" label="Session" length="50" />
+    <field name="WithDrawalStatus" type="String" label="Withdrawal Status" length="100" />
+    <field name="ExitReason" type="String" label="Exit Reason" length="100" />
+    <field name="EntryType" type="String" label="Entry Type" length="100" />
+    <field name="EntryDate" type="DateTime" label="Entry Date" />
+    <field name="ExitDate" type="DateTime" label="Exit Date" />
+    <field name="Ranked" type="Int64" label="Ranked" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Enrollments Overtime">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="Role" columns="50" hidden="true" />
+        <dataField fieldName="CYG" columns="5" />
+        <dataField fieldName="EnrollStatus" columns="15" tag="pivot1-row1-pie&#xD;&#xA;pivot1-title:&quot;Enrollment status by academic session&quot; &#xD;&#xA;&#xD;&#xA;" />
+        <dataField fieldName="EnrolledDate" columns="22" tag="pivot5-row1-column-year&#xD;&#xA;pivot5-title:&quot;Count of Enrollment Type over time&quot;" />
+        <dataField fieldName="EntryDate" columns="18" />
+        <dataField fieldName="EntryType" columns="18" tag="pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;Enrollment Type by academic session&quot; &#xD;&#xA;&#xD;&#xA;pivot4-col1&#xD;&#xA;pivot6-col1&#xD;&#xA;pivot5-col1" />
+        <dataField fieldName="WDD" columns="18" />
+        <dataField fieldName="ExitDate" columns="18" tag="pivot6-row1-column-year&#xD;&#xA;pivot6-title:&quot;Count of leavers by Enrollment Type over time&quot;" />
+        <dataField fieldName="EGL" columns="5" />
+        <dataField fieldName="WithDrawalStatus" columns="20" tag="pivot3-row1-pie&#xD;&#xA;pivot3-title:&quot;Withdrawal Reasons by academic session&quot; " />
+        <dataField fieldName="ExitReason" columns="15" />
+        <dataField fieldName="EndOfTermStatus" columns="12" />
+        <dataField fieldName="PromotionReason" columns="30" />
+        <dataField fieldName="Ranked" columns="15" hidden="true" />
+        <dataField fieldName="Session" columns="15" tag="pivot4-row1-column&#xD;&#xA;pivot4-title:&quot;Count of Enrollment Type by academic session&quot;" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Student School Enrollments Overtime">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Student School Enrollments Overtime" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StudentEnrollmentID" columns="15" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="Role" columns="50" />
+            <dataField fieldName="CYG" />
+            <dataField fieldName="EGL" />
+            <dataField fieldName="EnrollStatus" />
+            <dataField fieldName="EndOfTermStatus" />
+            <dataField fieldName="PromotionReason" />
+            <dataField fieldName="EnrolledDate" columns="10" />
+            <dataField fieldName="WDD" columns="10" />
+            <dataField fieldName="Session" columns="50" />
+            <dataField fieldName="WithDrawalStatus" />
+            <dataField fieldName="ExitReason" />
+            <dataField fieldName="EntryType" />
+            <dataField fieldName="EntryDate" columns="10" />
+            <dataField fieldName="ExitDate" columns="10" />
+            <dataField fieldName="Ranked" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Student School Enrollments Overtime">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StudentEnrollmentID" columns="15" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="Role" columns="50" />
+            <dataField fieldName="CYG" />
+            <dataField fieldName="EGL" />
+            <dataField fieldName="EnrollStatus" />
+            <dataField fieldName="EndOfTermStatus" />
+            <dataField fieldName="PromotionReason" />
+            <dataField fieldName="EnrolledDate" columns="10" />
+            <dataField fieldName="WDD" columns="10" />
+            <dataField fieldName="Session" columns="50" />
+            <dataField fieldName="WithDrawalStatus" />
+            <dataField fieldName="ExitReason" />
+            <dataField fieldName="EntryType" />
+            <dataField fieldName="EntryDate" columns="10" />
+            <dataField fieldName="ExitDate" columns="10" />
+            <dataField fieldName="Ranked" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

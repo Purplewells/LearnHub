@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpTermDescriptor" alias="zlkpTermDescriptor" created="2024-01-27T23:41:15" modified="2024-01-27T23:41:28" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="TermDescriptorID" fieldName="TermDescriptorID" label="Term Descriptor ID" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

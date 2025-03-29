@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="DisciplineIncident" alias="DisciplineIncident" created="2024-02-03T10:32:57" modified="2024-02-11T12:16:28" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Alignment" parentTableSchema="dbo" parentTableName="zlkp_discipline_alignment" x="438" y="20">
+      <foreignKeyColumn columnName="AlignmentID" parentColumnName="AlignmentID" />
+    </foreignKey>
+    <foreignKey id="TimeCode" parentTableSchema="dbo" parentTableName="zlkpIncidentTimeDescriptionCode" x="438" y="183">
+      <foreignKeyColumn columnName="TimeCodeID" parentColumnName="RefIncidentTimeDescriptionCodeId" />
+    </foreignKey>
+    <foreignKey id="IncidentStatus" parentTableSchema="dbo" parentTableName="zlkpIncidentStatus" x="438" y="344">
+      <foreignKeyColumn columnName="IncidentStatusID" parentColumnName="IncidentStatusID" />
+    </foreignKey>
+    <foreignKey id="RefIncidentBehavior" parentTableSchema="dbo" parentTableName="zlkpIncidentBehavior" x="438" y="505">
+      <foreignKeyColumn columnName="RefIncidentBehaviorId" parentColumnName="RefIncidentBehaviorId" />
+    </foreignKey>
+    <foreignKey id="RefIncidentInjuryType" parentTableSchema="dbo" parentTableName="zlkpIncidentInjuryType" x="438" y="843">
+      <foreignKeyColumn columnName="RefIncidentInjuryTypeId" parentColumnName="RefIncidentInjuryTypeId" />
+    </foreignKey>
+    <foreignKey id="RefIncidentReporterType" parentTableSchema="dbo" parentTableName="zlkpIncidentReporterType" x="907" y="20">
+      <foreignKeyColumn columnName="RefIncidentReporterTypeId" parentColumnName="RefIncidentReporterTypeId" />
+    </foreignKey>
+    <foreignKey id="RefIncidentLocation" parentTableSchema="dbo" parentTableName="zlkpIncidentLocation" x="907" y="181">
+      <foreignKeyColumn columnName="RefIncidentLocationId" parentColumnName="RefIncidentLocationId" />
+    </foreignKey>
+    <foreignKey id="ActivityType" parentTableSchema="dbo" parentTableName="zlkpBehaviourActivityType" x="907" y="696">
+      <foreignKeyColumn columnName="ActivityTypeID" parentColumnName="ActivityTypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="DisciplineIncidentID" fieldName="DisciplineIncidentID" label="Discipline Incident ID" />
+    <column name="AlignmentID" fieldName="AlignmentID" label="Alignment ID" aliasColumnName="Alignment" aliasForeignKey="Alignment" />
+    <column name="Alignment" fieldName="Alignment" label="Alignment" foreignKey="Alignment" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="Title" fieldName="Title" label="Title" />
+    <column name="IncidentDate" fieldName="IncidentDate" label="Occurrence" format="d" />
+    <column name="IncidentTime" fieldName="IncidentTime" label="Incident Time" />
+    <column name="TimeCodeID" fieldName="TimeCodeID" label="Time Code ID" aliasColumnName="Description" aliasForeignKey="TimeCode" />
+    <column name="Description" fieldName="TimeCodeDescription" label="Time Description" foreignKey="TimeCode" />
+    <column name="IncidentStatusID" fieldName="IncidentStatusID" label="Incident Status ID" aliasColumnName="IncidentStatus" aliasForeignKey="IncidentStatus" />
+    <column name="IncidentStatus" fieldName="Status" label="Status" foreignKey="IncidentStatus" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="RefIncidentBehaviorId" fieldName="RefIncidentBehaviorID" label="Ref Incident Behavior Id" aliasColumnName="Description" aliasForeignKey="RefIncidentBehavior" />
+    <column name="Description" fieldName="IncidentBehavior" label="Incident Behavior" foreignKey="RefIncidentBehavior" />
+    <column name="RefIncidentInjuryTypeId" fieldName="RefIncidentInjuryTypeID" label="Ref Incident Injury Type Id" aliasColumnName="Description" aliasForeignKey="RefIncidentInjuryType" />
+    <column name="Description" fieldName="IncidentInjuryType" label="Incident Injury Type" foreignKey="RefIncidentInjuryType" />
+    <column name="IncidentCost" fieldName="IncidentCost" label="Incident Cost" format="c" />
+    <column name="RefIncidentReporterTypeId" fieldName="RefIncidentReporterTypeID" label="Ref Incident Reporter Type Id" aliasColumnName="Description" aliasForeignKey="RefIncidentReporterType" />
+    <column name="Description" fieldName="ReporterType" label="Reporter Type" foreignKey="RefIncidentReporterType" />
+    <column name="RefIncidentLocationId" fieldName="RefIncidentLocationID" label="Ref Incident Location Id" aliasColumnName="Description" aliasForeignKey="RefIncidentLocation" />
+    <column name="Description" fieldName="Location" label="Location" foreignKey="RefIncidentLocation" />
+    <column name="PublishToParent" fieldName="PublishToParent" label="Publish To Parent" />
+    <column name="PublishToStudent" fieldName="PublishToStudent" label="Publish To Student" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="ActivityTypeID" fieldName="ActivityTypeID" label="Activity Type ID" aliasColumnName="Description" aliasForeignKey="ActivityType" />
+    <column name="Description" fieldName="Activity" label="Activity" foreignKey="ActivityType" />
+    <column name="ResponsiblePersonID" fieldName="ResponsiblePersonID" label="Responsible Person ID" />
+  </columns>
+  <details>
+    <detail fieldName="StudentDisciplineIncidentAssociation" model="StudentDisciplineIncidentAssociation" filterFields="DisciplineIncidentID" create="true" edit="true" />
+  </details>
+</dataModel>

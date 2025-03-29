@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpContactPointSystem" alias="zlkpContactPointSystem" created="2024-02-07T22:51:33" modified="2024-02-07T22:51:41" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="RefContactPointSystemID" fieldName="RefContactPointSystemID" label="Ref Contact Point System ID" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+  </columns>
+</dataModel>

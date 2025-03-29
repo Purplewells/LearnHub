@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="PaymentRecords" conflictDetection="overwriteChanges" label="Payment Records" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"PaymentRecords"."EmployeeID" "EmployeeID"
+	,"PaymentRecords"."PeriodType" "PeriodType"
+	,"PaymentRecords"."FirstName" "FirstName"
+	,"PaymentRecords"."LastName" "LastName"
+	,"PaymentRecords"."IdentificationCode" "UPN"
+	,"PaymentRecords"."SSNo" "Ssno"
+	,"PaymentRecords"."PaymentDate" "PaymentDate"
+	,"PaymentRecords"."BaseSalary" "BaseSalary"
+	,"PaymentRecords"."TotalEarnings" "TotalEarnings"
+	,"PaymentRecords"."GrossEarnings" "GrossEarnings"
+	,"PaymentRecords"."TaxAmount" "TaxAmount"
+	,"PaymentRecords"."TotalDeductions" "TotalDeductions"
+	,"PaymentRecords"."NetSalary" "NetSalary"
+	,"PaymentRecords"."NextRunDate" "NextRunDate"
+	,"PaymentRecords"."CreatedDate" "CreatedDate"
+	,"PaymentRecords"."ModifiedDate" "ModifiedDate"
+	,"PaymentRecords"."CreatedBy" "CreatedBy"
+	,"PaymentRecords"."ModifiedBy" "ModifiedBy"
+	,"PaymentRecords"."IsCurrent" "IsCurrent"
+	,"PaymentRecords"."BatchID" "BatchID"
+from "dbo"."PaymentRecords" "PaymentRecords"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="EmployeeID" type="Int32" label="Employee ID" showInSummary="true" />
+    <field name="PeriodType" type="String" label="Period Type" length="20" showInSummary="true" />
+    <field name="FirstName" type="String" label="Firstname" length="40" showInSummary="true" />
+    <field name="LastName" type="String" label="Lastname" length="40" showInSummary="true" />
+    <field name="UPN" type="String" label="UPN" length="15" showInSummary="true" />
+    <field name="Ssno" type="String" label="SSNo" length="20" />
+    <field name="PaymentDate" type="DateTime" label="Paid Date" />
+    <field name="BaseSalary" type="Decimal" dataFormatString="c" label="Base Salary" />
+    <field name="TotalEarnings" type="Decimal" dataFormatString="c" label="Earnings" />
+    <field name="GrossEarnings" type="Decimal" dataFormatString="c" label="Gross Earnings" />
+    <field name="TaxAmount" type="Decimal" dataFormatString="c" label="Tax Amount" />
+    <field name="TotalDeductions" type="Decimal" dataFormatString="c" label="Deductions" />
+    <field name="NetSalary" type="Decimal" dataFormatString="c" label="Net Salary" />
+    <field name="NextRunDate" type="DateTime" label="Next Run" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="IsCurrent" type="Boolean" label="Is Current" />
+    <field name="BatchID" type="Int32" label="Batch ID" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="PAYROLL RESULTS" filter="IsCurrent = 1" sortExpression="BatchID DESC" reportTemplate="true">
+      <headerText>Please specify the pay period in the General Parameters module before running payroll.</headerText>
+      <dataFields>
+        <dataField fieldName="EmployeeID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="20" />
+        <dataField fieldName="LastName" columns="20" />
+        <dataField fieldName="UPN" columns="15">
+          <headerText>StaffNo.</headerText>
+        </dataField>
+        <dataField fieldName="Ssno" columns="20" hidden="true" />
+        <dataField fieldName="PeriodType" columns="15" />
+        <dataField fieldName="PaymentDate" columns="10" />
+        <dataField fieldName="BaseSalary" columns="10" />
+        <dataField fieldName="TotalEarnings" columns="18" aggregate="Sum">
+          <headerText>Total Earnings</headerText>
+        </dataField>
+        <dataField fieldName="TaxAmount" columns="15" />
+        <dataField fieldName="GrossEarnings" columns="10" aggregate="Sum" hidden="true">
+          <headerText>Gross</headerText>
+        </dataField>
+        <dataField fieldName="TotalDeductions" columns="10" aggregate="Sum">
+          <headerText>Deductions</headerText>
+        </dataField>
+        <dataField fieldName="NetSalary" columns="15" aggregate="Sum" />
+        <dataField fieldName="NextRunDate" columns="10" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="IsCurrent" columns="5">
+          <headerText>ISC</headerText>
+        </dataField>
+        <dataField fieldName="BatchID" columns="12">
+          <headerText />
+        </dataField>
+      </dataFields>
+    </view>
+    <view id="grid1_historical_runs" type="Grid" commandId="command1" label="PREVIOUS BATCHES" sortExpression="BatchID DESC" filter="IsCurrent = 0">
+      <headerText>&lt;strong&gt;To run the payroll please specify the pay period in the General Parameters module. &lt;/strong&gt;</headerText>
+      <dataFields>
+        <dataField fieldName="EmployeeID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="20" />
+        <dataField fieldName="LastName" columns="20" />
+        <dataField fieldName="UPN" columns="15" />
+        <dataField fieldName="Ssno" columns="20" hidden="true" />
+        <dataField fieldName="PeriodType" columns="12" />
+        <dataField fieldName="PaymentDate" columns="10" tag="pivot1-row1-column-date&#xD;&#xA;pivot1-title:&quot;Gross Earnings By Payment  Period&quot;&#xD;&#xA;&#xD;&#xA;pivot2-row1-column-date&#xD;&#xA;pivot2-title:&quot;Gross Earnings By Payment  Period&quot;" />
+        <dataField fieldName="BaseSalary" columns="15" />
+        <dataField fieldName="TotalEarnings" columns="10" aggregate="Sum" />
+        <dataField fieldName="GrossEarnings" columns="15" aggregate="Sum" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum" />
+        <dataField fieldName="TaxAmount" columns="15" tag="pivot2-val2-sum" />
+        <dataField fieldName="TotalDeductions" columns="10" aggregate="Sum" />
+        <dataField fieldName="NetSalary" columns="15" aggregate="Sum" />
+        <dataField fieldName="NextRunDate" columns="10" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="IsCurrent" columns="5">
+          <headerText>ISC</headerText>
+        </dataField>
+        <dataField fieldName="BatchID" columns="8">
+          <headerText>BID</headerText>
+        </dataField>
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Payment Records">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Payment Records" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="EmployeeID" columns="15" />
+            <dataField fieldName="PeriodType" columns="20" />
+            <dataField fieldName="FirstName" columns="40" />
+            <dataField fieldName="LastName" columns="40" />
+            <dataField fieldName="UPN" columns="15" />
+            <dataField fieldName="Ssno" columns="20" />
+            <dataField fieldName="PaymentDate" columns="10" />
+            <dataField fieldName="BaseSalary" columns="15" />
+            <dataField fieldName="TotalEarnings" columns="15" />
+            <dataField fieldName="GrossEarnings" columns="15" />
+            <dataField fieldName="TaxAmount" columns="15" />
+            <dataField fieldName="TotalDeductions" columns="15" />
+            <dataField fieldName="NetSalary" columns="15" />
+            <dataField fieldName="NextRunDate" columns="10" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="IsCurrent" />
+            <dataField fieldName="BatchID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Payment Records">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="EmployeeID" columns="15" />
+            <dataField fieldName="PeriodType" columns="20" />
+            <dataField fieldName="FirstName" columns="40" />
+            <dataField fieldName="LastName" columns="40" />
+            <dataField fieldName="UPN" columns="15" />
+            <dataField fieldName="Ssno" columns="20" />
+            <dataField fieldName="PaymentDate" columns="10" />
+            <dataField fieldName="BaseSalary" columns="15" />
+            <dataField fieldName="TotalEarnings" columns="15" />
+            <dataField fieldName="GrossEarnings" columns="15" />
+            <dataField fieldName="TaxAmount" columns="15" />
+            <dataField fieldName="TotalDeductions" columns="15" />
+            <dataField fieldName="NetSalary" columns="15" />
+            <dataField fieldName="NextRunDate" columns="10" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="IsCurrent" />
+            <dataField fieldName="BatchID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action commandName="SQL" headerText="Run Payroll" description="PAYROLL RUN ALERT" cssClass="material-icon-account_box" confirmation="This action would generate a new payment list for the current specified period. Are you ok to continue ?" id="a100">
+        <data><![CDATA[/*
+Author : Benjamin Ohene-Adu
+Name   : zusp_ops_prepare_payroll
+Description : 
+Version		Date			Note 
+-- 0.1		07/10/2023		Initial Version
+
+EXEC zusp_ops_salary_p3_prepare_payroll
+--SELECT * FROM PaymentRecords WHERE EMPLOYEEID = 51
+--SELECT * FROM GENERALPARAMETERS
+
+*/
+
+EXEC zusp_ops_salary_p3_prepare_payroll]]></data>
+      </action>
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action commandName="SQL" headerText="Run Payroll" description="PAYROLL RUN ALERT" cssClass="material-icon-directions_run" confirmation="This action would generate a new payment list for the current specified period. Are you ok to continue ?" id="a100">
+        <data><![CDATA[/*
+Author : Benjamin Ohene-Adu
+Name   : zusp_ops_prepare_payroll
+Description : 
+Version		Date			Note 
+-- 0.1		07/10/2023		Initial Version
+
+-- EXEC zusp_ops_p2_prepare_payroll
+--SELECT * FROM PaymentRecords WHERE EMPLOYEEID = 51
+--SELECT * FROM GENERALPARAMETERS
+
+*/
+
+EXEC zusp_ops_salary_p3_prepare_payroll]]></data>
+      </action>
+      <action id="a101" commandName="ReportAsPdf" headerText="Print To Bank" />
+      <action id="a2" />
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a103" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send RSS API" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

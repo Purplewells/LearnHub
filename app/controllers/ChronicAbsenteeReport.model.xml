@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="reports" baseTable="zvw_metric_attendances_base_hist" alias="zvw_metric_attendances_base_hist" created="2024-02-17T23:41:46" modified="2024-02-25T22:19:23" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="Name" fieldName="Name" label="Name" />
+    <column name="FirstName" fieldName="FirstName" label="Firstname" />
+    <column name="LastName" fieldName="LastName" label="Lastname" />
+    <column name="UPN" fieldName="UPN" label="UPN" />
+    <column name="GradeLevel" fieldName="GradeLevel" label="GL" />
+    <column name="GLSO" fieldName="GLSO" label="GLSO" />
+    <column name="Stream" fieldName="Stream" label="STM" />
+    <column name="Sex" fieldName="Sex" label="Sex" />
+    <column name="EventDate" fieldName="EventDate" label="Event Date" />
+    <column name="Status" fieldName="Status" label="Status" />
+    <column name="Reason" fieldName="Reason" label="Reason" />
+    <column name="PRN" fieldName="PRN" label="PRN" />
+    <column name="PA" fieldName="PA" label="PA" />
+    <column name="CUA" fieldName="CUA" label="CUA" />
+    <column name="CEA" fieldName="CEA" label="CEA" />
+    <column name="IA" fieldName="IA" label="IA" />
+    <column name="GLDA" fieldName="GLDA" label="GLDA" />
+    <column name="GLDABS" fieldName="GLABS" label="GLABS" />
+    <column name="Year" fieldName="Year" label="Year" />
+    <column name="Organisation" fieldName="Organisation" label="Organisation" />
+    <column name="ADA" fieldName="ADA" label="ADA" format="p" />
+    <column name="GADA" fieldName="GADA" label="GADA" format="p" />
+    <column name="IsCHRAB_OnTheVerge" fieldName="OnVerge" label="On Verge" />
+    <column name="IsCHRAB" fieldName="IsChrab" label="Is CHRAB" />
+    <column name="IsAtRisk" fieldName="IsAtRisk" label="At Risk" />
+    <column name="CHRABRate" fieldName="ChrabRate" label="CHRAB Rate" format="p" />
+    <column name="GLEDAT" fieldName="GLEDAT" label="GLEDAT" />
+    <column name="CHRABRateDerived" fieldName="ChrabrateDerived" label="CHRAB Rate Derived" format="p" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column fieldName="GLS" type="decimal" dataType="Decimal" label="GLS">
+      <formula>zvw_metric_attendances_base_hist.GLSO</formula>
+    </column>
+    <column fieldName="GLSGroup" type="nvarchar(100)" dataType="String" label="GLSGroup">
+      <formula>zvw_metric_attendances_base_hist.GradeLevel</formula>
+    </column>
+    <column fieldName="ChronicAbsence" type="varchar(22)" dataType="String" label="Chronic Absence">
+      <formula><![CDATA[CASE WHEN zvw_metric_attendances_base_hist.IsCHRAB = 1 
+	THEN 'Chronically Absent' 
+	ELSE 'Not Chronically Absent'
+END]]></formula>
+    </column>
+    <column fieldName="AtRiskCheck" type="varchar(11)" dataType="String" label="Risk Check">
+      <formula><![CDATA[CASE WHEN zvw_metric_attendances_base_hist.IsAtRisk = 1 
+	THEN 'Yes At Risk' 
+	ELSE 'Not At Risk'
+END]]></formula>
+    </column>
+    <column fieldName="OnTheVerge" type="varchar(16)" dataType="String" label="On The Verge">
+      <formula><![CDATA[CASE WHEN zvw_metric_attendances_base_hist.IsCHRAB_OnTheVerge = 1 
+	THEN 'Yes On The Verge' 
+	ELSE 'Not On The Verge'
+END]]></formula>
+    </column>
+  </columns>
+</dataModel>

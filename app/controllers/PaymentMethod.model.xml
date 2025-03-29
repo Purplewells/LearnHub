@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpPaymentMethod" alias="zlkpPaymentMethod" created="2024-01-29T09:26:15" modified="2025-02-21T07:09:31" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PaymentMethodID" fieldName="PaymentMethodID" label="Payment Method ID" />
+    <column name="PaymentMethod" fieldName="PaymentMethod" label="Method" />
+    <column name="MethodCode" fieldName="MethodCode" label="Code" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+  </columns>
+</dataModel>

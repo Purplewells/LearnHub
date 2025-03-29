@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="BehaviourActivities" conflictDetection="overwriteChanges" label="Behaviour Activities" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"pbi_vw_metric_discipline_incidents_per_academic_year"."StudentName" "StudentName"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."Code" "Code"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."IncidentDate" "IncidentDate"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."TimeOfDay" "TimeOfDay"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."IncidentMonth" "IncidentMonth"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."MonthNo" "MonthNo"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."Alignment" "Alignment"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."CategoryType" "CategoryType"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."NatureOfBehaviour" "NatureOfBehaviour"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."Points" "Points"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."TimeDesc" "TimeDesc"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."Location" "Location"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."Incident" "Incident"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."ReporterType" "ReporterType"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."RVD" "Rvd"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."Disability" "Disability"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."ActionTaken" "ActionTaken"
+	,"pbi_vw_metric_discipline_incidents_per_academic_year"."ParticipationDescription" "ParticipationDescription"
+from "dwh"."pbi_vw_metric_discipline_incidents_per_academic_year" "pbi_vw_metric_discipline_incidents_per_academic_year"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="StudentName" type="String" label="Student Name" length="72" showInSummary="true" />
+    <field name="Code" type="String" label="Code" length="40" showInSummary="true" />
+    <field name="IncidentDate" type="DateTime" label="Incident Date" showInSummary="true" />
+    <field name="TimeOfDay" type="String" label="Time Of Day" length="5" showInSummary="true" />
+    <field name="IncidentMonth" type="String" label="Incident Month" length="3" showInSummary="true" />
+    <field name="MonthNo" type="Int32" label="Month No" />
+    <field name="Alignment" type="String" label="Alignment" length="18" />
+    <field name="CategoryType" type="String" label="Category Type" length="100" />
+    <field name="NatureOfBehaviour" type="String" label="Nature Of Behaviour" length="20" />
+    <field name="Points" type="Double" label="Points" />
+    <field name="TimeDesc" type="String" label="Time Desc" length="100" />
+    <field name="Location" type="String" label="Location" length="100" />
+    <field name="Incident" type="String" allowQBE="false" allowSorting="false" label="Incident" />
+    <field name="ReporterType" type="String" label="Reporter Type" length="100" />
+    <field name="Rvd" type="String" allowNulls="false" label="Rvd" readOnly="true" length="3" />
+    <field name="Disability" type="String" allowNulls="false" label="Disability" readOnly="true" length="3" />
+    <field name="ActionTaken" type="String" label="Action Taken" length="50" />
+    <field name="ParticipationDescription" type="String" label="Participation" length="20" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Behaviour Activities">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="StudentName" columns="30" />
+        <dataField fieldName="Code" columns="12" />
+        <dataField fieldName="IncidentDate" columns="20" tag="pivot1-row1-column-Year&#xD;&#xA;pivot1-row2-column-month&#xD;&#xA;pivot1-title:&quot;Count of Incidents by Week&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Incident Date&quot;&#xD;&#xA;pivot1-vaxistitle:&quot;No of Incidents&quot;&#xD;&#xA;pivot1-medium&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot6-row1-columnstacked-Year&#xD;&#xA;pivot6-row2-month&#xD;&#xA;pivot6-title:&quot;Count of Incidents by Alignment&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Incident Date&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;No of Incidents&quot;&#xD;&#xA;" />
+        <dataField fieldName="Alignment" columns="18" tag="pivot2-col1&#xD;&#xA;pivot6-col1&#xD;&#xA;&#xD;&#xA;pivot3-row1-pie&#xD;&#xA;pivot3-title:&quot;Count of Incidents by Alignment&quot;&#xD;&#xA;pivot3-haxistitle:&quot;Incident Month&quot;&#xD;&#xA;pivot3-vaxistitle:&quot;Alignments&quot;" />
+        <dataField fieldName="NatureOfBehaviour" columns="15" tag="pivot4-row1-column&#xD;&#xA;pivot4-title:&quot;Count of Incidents by Nature&quot;&#xD;&#xA;pivot4-haxistitle:&quot;Incident Month&quot;&#xD;&#xA;pivot4-vaxistitle:&quot;Alignments&quot;">
+          <headerText>Nature</headerText>
+        </dataField>
+        <dataField fieldName="TimeDesc" tag="pivot5-row1-columnstacked&#xD;&#xA;pivot5-title:&quot;Incidents by Time Code&quot;&#xD;&#xA;pivot5-haxistitle:&quot;Time Code&quot;&#xD;&#xA;pivot5-vaxistitle:&quot;No of Incidents&quot;&#xD;&#xA;pivot5-medium" columns="25" />
+        <dataField fieldName="Location" columns="20" />
+        <dataField fieldName="Points" columns="8" />
+        <dataField fieldName="Incident" hidden="true" />
+        <dataField fieldName="ReporterType" columns="15" />
+        <dataField fieldName="CategoryType" columns="40" />
+        <dataField fieldName="Rvd" columns="3" hidden="true" />
+        <dataField fieldName="Disability" columns="3" />
+        <dataField fieldName="ActionTaken" columns="25" tag="pivot7-row1-donut&#xD;&#xA;pivot7-title:&quot;What are the Actions Taken for Incidents&quot;&#xD;&#xA;pivot7-haxistitle:&quot;Time Code&quot;&#xD;&#xA;pivot7-vaxistitle:&quot;No of Incidents&quot;&#xD;&#xA;" />
+        <dataField fieldName="TimeOfDay" columns="5" hidden="true" />
+        <dataField fieldName="ParticipationDescription" columns="20" />
+        <dataField fieldName="IncidentMonth" columns="3" hidden="true" />
+        <dataField fieldName="MonthNo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Behaviour Activities">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Behaviour Activities" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StudentName" />
+            <dataField fieldName="Code" columns="40" />
+            <dataField fieldName="IncidentDate" columns="10" />
+            <dataField fieldName="TimeOfDay" columns="5" />
+            <dataField fieldName="IncidentMonth" columns="3" />
+            <dataField fieldName="MonthNo" columns="15" />
+            <dataField fieldName="Alignment" columns="18" />
+            <dataField fieldName="CategoryType" />
+            <dataField fieldName="NatureOfBehaviour" columns="20" />
+            <dataField fieldName="Points" columns="15" />
+            <dataField fieldName="TimeDesc" />
+            <dataField fieldName="Location" />
+            <dataField fieldName="Incident" rows="5" />
+            <dataField fieldName="ReporterType" />
+            <dataField fieldName="Rvd" columns="3" />
+            <dataField fieldName="Disability" columns="3" />
+            <dataField fieldName="ActionTaken" columns="50" />
+            <dataField fieldName="ParticipationDescription" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Behaviour Activities">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StudentName" />
+            <dataField fieldName="Code" columns="40" />
+            <dataField fieldName="IncidentDate" columns="10" />
+            <dataField fieldName="TimeOfDay" columns="5" />
+            <dataField fieldName="IncidentMonth" columns="3" />
+            <dataField fieldName="MonthNo" columns="15" />
+            <dataField fieldName="Alignment" columns="18" />
+            <dataField fieldName="CategoryType" />
+            <dataField fieldName="NatureOfBehaviour" columns="20" />
+            <dataField fieldName="Points" columns="15" />
+            <dataField fieldName="TimeDesc" />
+            <dataField fieldName="Location" />
+            <dataField fieldName="Incident" rows="5" />
+            <dataField fieldName="ReporterType" />
+            <dataField fieldName="Rvd" columns="3" />
+            <dataField fieldName="Disability" columns="3" />
+            <dataField fieldName="ActionTaken" columns="50" />
+            <dataField fieldName="ParticipationDescription" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

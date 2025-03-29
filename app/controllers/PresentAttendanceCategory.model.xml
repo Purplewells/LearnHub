@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpPresentAttendanceCategory" alias="zlkpPresentAttendanceCategory" created="2024-01-28T21:42:33" modified="2024-01-28T21:42:49" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="RefPresentAttendanceCategoryId" fieldName="RefPresentAttendanceCategoryID" label="Ref Present Attendance Category Id" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="Definition" fieldName="Definition" label="Definition" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

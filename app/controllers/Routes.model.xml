@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Routes" alias="Routes" created="2024-07-10T11:12:04" modified="2024-07-10T11:31:44" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="RouteID" fieldName="RouteID" label="Route ID" />
+    <column name="RouteName" fieldName="RouteName" label="Route Name" />
+    <column name="StartLocation" fieldName="StartLocation" label="Start Location" />
+    <column name="EndLocation" fieldName="EndLocation" label="End Location" />
+    <column name="RouteDetails" fieldName="RouteDetails" label="Route Details" />
+  </columns>
+</dataModel>

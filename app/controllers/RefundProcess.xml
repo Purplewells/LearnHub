@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="RefundProcess" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="RefundAmount" type="Double" label="Refund Amount" isVirtual="true" />
+  </fields>
+  <views>
+    <view id="RefundForm" type="Form" label="Refund Form">
+      <categories>
+        <category id="c1" headerText="Refund Process" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="RefundAmount" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+</dataController>

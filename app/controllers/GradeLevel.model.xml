@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpGradeLevel" alias="zlkpGradeLevel" created="2024-01-28T00:47:58" modified="2024-01-28T00:49:21" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="GradeLevelType" parentTableSchema="dbo" parentTableName="zlkpGradeLevelType" x="342" y="20">
+      <foreignKeyColumn columnName="GradeLevelTypeID" parentColumnName="RefGradeLevelTypeId" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="RefGradeLevelId" fieldName="RefGradeLevelID" label="Ref Grade Level Id" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="GradeLevelTypeID" fieldName="GradeLevelTypeID" label="Grade Level Type ID" aliasColumnName="Description" aliasForeignKey="GradeLevelType" />
+    <column name="Description" fieldName="GradeLevelType" label="Level Type" foreignKey="GradeLevelType" />
+    <column name="CourseRequired" fieldName="CourseRequired" label="Course Required" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

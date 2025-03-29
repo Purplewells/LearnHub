@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="PersonRelationship" conflictDetection="overwriteChanges" label="Person Relationship" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"PersonRelationship"."ContactRelationID" "ContactRelationID"
+	,"PersonRelationship"."RefPersonRelationshipID" "RefPersonRelationshipID"
+	,"RefPersonRelationship"."PersonRelationship" "Relationship"
+	,"PersonRelationship"."PriorityNo" "PriorityNo"
+	,"PersonRelationship"."Restrictions" "Restrictions"
+	,"PersonRelationship"."LivesWith" "LivesWith"
+	,"PersonRelationship"."PrimaryContactInd" "IsPrimaryContact"
+	,"PersonRelationship"."RelatedPersonID" "RelatedPersonID"
+	,"RelatedPerson"."IdentificationCode" "RUPN"
+	,"RelatedPerson"."FirstName" "GuardianFirstName"
+	,"RelatedPerson"."LastName" "GuardianPersonLastName"
+	,"PersonRelationship"."PersonID" "PersonID"
+	,"Person"."IdentificationCode" "UPN"
+	,"Title"."Description" "Title"
+	,"RefOccupation"."Occupation" "Occupation"
+from "dbo"."PersonRelationship" "PersonRelationship"
+	left join "dbo"."zlkpContactRelationship" "RefPersonRelationship" on "PersonRelationship"."RefPersonRelationshipID" = "RefPersonRelationship"."RefPersonRelationshipID"
+	left join "dbo"."Person" "RelatedPerson" on "PersonRelationship"."RelatedPersonID" = "RelatedPerson"."PersonID"
+	left join "dbo"."zlkpTitle" "Title" on "RelatedPerson"."TitleID" = "Title"."TitleID"
+	left join "dbo"."zlkpOccupation" "RefOccupation" on "RelatedPerson"."RefOccupationId" = "RefOccupation"."RefOccupationId"
+	left join "dbo"."Person" "Person" on "PersonRelationship"."PersonID" = "Person"."PersonID"
+]]></text>
+    </command>
+    <command id="ContactRelationIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ContactRelationID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Person ID">
+      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="UPN" />
+    </field>
+    <field name="RelatedPersonID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Related Person ID">
+      <items style="Lookup" dataController="zlkpParentWithPersonID" dataValueField="PersonID" dataTextField="GuardianName" copy="GuardianFirstName=FirstName, GuardianPersonLastName=LastName, Title=Title, Occupation=Occupation" dataView="grid1" />
+    </field>
+    <field name="GuardianName" type="String" readOnly="true" label="Guardian Name" computed="true">
+      <formula>RelatedPerson.FirstName + ' ' + RelatedPerson.LastName + ' ' + '( ' + Title.Description + ' )' </formula>
+    </field>
+    <field name="GuardianFirstName" type="String" readOnly="true" label="Guardian First Name" length="35" />
+    <field name="GuardianPersonLastName" type="String" readOnly="true" label="Guardian Last Name" length="35" />
+    <field name="ContactRelationID" type="Int32" allowNulls="false" label="Contact Relation ID" readOnly="true" showInSummary="true" />
+    <field name="RefPersonRelationshipID" type="Int32" label="Ref Person Relationship ID" showInSummary="true">
+      <items style="Lookup" dataController="ContactRelationship" newDataView="createForm1" dataValueField="RefPersonRelationshipID" dataTextField="PersonRelationship" />
+    </field>
+    <field name="Relationship" type="String" readOnly="true" label="Relationship" length="20" />
+    <field name="PriorityNo" type="String" label="Priority No" length="15" showInSummary="true">
+      <items style="RadioButtonList">
+        <item value="One" text="First" />
+        <item value="Two" text="Second" />
+        <item value="Three" text="Third" />
+      </items>
+    </field>
+    <field name="Restrictions" type="String" allowQBE="false" allowSorting="false" label="Restrictions" length="2000" showInSummary="true" />
+    <field name="LivesWith" type="Boolean" label="Lives With" showInSummary="true">
+      <items style="RadioButtonList">
+        <item value="0" text="No" />
+        <item value="1" text="Yes" />
+      </items>
+    </field>
+    <field name="IsPrimaryContact" type="Boolean" label="Is Contact" />
+    <field name="RUPN" type="String" readOnly="true" label="RUPN" length="10" />
+    <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
+    <field name="Title" type="String" readOnly="true" label="Title" length="15" />
+    <field name="Occupation" type="String" readOnly="true" label="Occupation" length="100" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Person Relationship">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ContactRelationID" columns="15" hidden="true" />
+        <dataField fieldName="RelatedPersonID" aliasFieldName="GuardianName" />
+        <dataField fieldName="RefPersonRelationshipID" aliasFieldName="Relationship" />
+        <dataField fieldName="PriorityNo" columns="15" />
+        <dataField fieldName="LivesWith" columns="8" />
+        <dataField fieldName="IsPrimaryContact" columns="12" />
+        <dataField fieldName="PersonID" aliasFieldName="GuardianFirstName" />
+        <dataField fieldName="Title" columns="15" hidden="true" />
+        <dataField fieldName="GuardianName" hidden="true" />
+        <dataField fieldName="Occupation" hidden="true" />
+        <dataField fieldName="Restrictions" columns="25" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Guardian">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RelatedPersonID" aliasFieldName="GuardianName" />
+            <dataField fieldName="RefPersonRelationshipID" aliasFieldName="Relationship" />
+            <dataField fieldName="IsPrimaryContact" columns="12" />
+            <dataField fieldName="PriorityNo" tag="lookup-null-value-none" columns="3" />
+            <dataField fieldName="LivesWith" tag="lookup-null-value-none" columns="3" />
+            <dataField fieldName="Restrictions" />
+            <dataField fieldName="PersonID" aliasFieldName="UPN" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Guardian">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RelatedPersonID" aliasFieldName="GuardianName" />
+            <dataField fieldName="RefPersonRelationshipID" aliasFieldName="Relationship" />
+            <dataField fieldName="LivesWith" tag="lookup-null-value-none" />
+            <dataField fieldName="IsPrimaryContact" />
+            <dataField fieldName="PriorityNo" rows="3" tag="lookup-null-value-none" />
+            <dataField fieldName="Restrictions" rows="5" />
+            <dataField fieldName="GuardianName" />
+            <dataField fieldName="ContactRelationID" columns="15" hidden="true" />
+            <dataField fieldName="PersonID" aliasFieldName="UPN" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a102" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a100" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

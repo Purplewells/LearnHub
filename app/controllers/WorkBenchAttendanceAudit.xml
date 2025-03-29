@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkBenchAttendanceAudit" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="AttendanceAudit" type="DataView" label="Attendance Audit">
+      <dataView controller="AttendanceAudit" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="AttendanceAuditReport" type="Form" label="ATTENDANCE AUDIT REPORT">
+      <categories>
+        <category headerText="ATTENDANCE AUDIT" id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="AttendanceAudit" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+      <headerText>The report indicates records of missing attendance takes for various Grade Levels.</headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="AuditReport" flat="false" />
+  </actions>
+</dataController>

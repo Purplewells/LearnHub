@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="TeacherSectionAssociation" alias="TeacherSectionAssociation" created="2024-12-18T10:02:15" modified="2025-01-02T11:37:34" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="OrganizationPersonRole" parentTableSchema="dbo" parentTableName="OrganizationPersonRole" x="342" y="20">
+      <foreignKeyColumn columnName="OrganizationPersonRoleID" parentColumnName="OrganizationPersonRoleID" />
+    </foreignKey>
+    <foreignKey id="OrganizationPersonRoleOrganisation" parentTableSchema="dbo" parentTableName="Organisation" baseForeignKey="OrganizationPersonRole" x="754" y="20">
+      <foreignKeyColumn columnName="OrganisationID" parentColumnName="OrganizationID" />
+    </foreignKey>
+    <foreignKey id="OrganizationPersonRolePerson" parentTableSchema="dbo" parentTableName="Person" baseForeignKey="OrganizationPersonRole" x="754" y="220">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="CourseSection" parentTableSchema="dbo" parentTableName="CourseSection" x="342" y="228">
+      <foreignKeyColumn columnName="CourseSectionID" parentColumnName="CourseSectionID" />
+    </foreignKey>
+    <foreignKey id="CourseSectionCourse" parentTableSchema="dbo" parentTableName="Course" baseForeignKey="CourseSection" x="356" y="567">
+      <foreignKeyColumn columnName="CourseID" parentColumnName="CourseID" />
+    </foreignKey>
+    <foreignKey id="CourseSectionCalendarSession" parentTableSchema="dbo" parentTableName="Session" baseForeignKey="CourseSection" x="767" y="654">
+      <foreignKeyColumn columnName="CalendarSessionID" parentColumnName="CalendarSessionID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="OrganizationPersonRoleID" fieldName="OrganizationPersonRoleID" label="Organization Person Role ID" />
+    <column name="OrganisationID" fieldName="OrganizationPersonRoleOrganisationID" foreignKey="OrganizationPersonRole" />
+    <column name="Name" fieldName="Organisation" label="Organisation" foreignKey="OrganizationPersonRoleOrganisation" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="OrganizationPersonRolePerson" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" foreignKey="OrganizationPersonRolePerson" />
+    <column name="LastName" fieldName="LastName" label="Last Name" foreignKey="OrganizationPersonRolePerson" />
+    <column name="CourseSectionID" fieldName="CourseSectionID" label="Course Section ID" aliasColumnName="SectionNo" aliasForeignKey="CourseSection" />
+    <column name="SectionNo" fieldName="CourseSectionNo" label="Section No" foreignKey="CourseSection" />
+    <column name="CourseTitle" fieldName="CourseTitle" label="Course Title" foreignKey="CourseSectionCourse" />
+    <column name="SessionCode" fieldName="SessionCode" label="Session Code" foreignKey="CourseSectionCalendarSession" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" foreignKey="CourseSectionCalendarSession" />
+    <column fieldName="Fullname" type="nvarchar(71)" dataType="String" label="Fullname">
+      <formula>OrganizationPersonRolePerson.FirstName + ' ' + OrganizationPersonRolePerson.LastName</formula>
+    </column>
+  </columns>
+</dataModel>

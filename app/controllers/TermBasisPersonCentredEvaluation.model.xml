@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="rep_usp_term_basis_person_centred_evaluation" alias="rep_usp_term_basis_person_centred_evaluation" created="2024-07-06T17:27:42" modified="2024-07-09T10:44:10" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="FirstName" fieldName="FirstName" label="Firstname" />
+    <column name="LastName" fieldName="LastName" label="Lastname" />
+    <column name="AcademicYear" fieldName="AcademicYear" label="Aca Year" />
+    <column name="AcademicTerm" fieldName="AcademicTerm" label="Aca Term" />
+    <column name="IsAtRisk" fieldName="IsAtRisk" label="At Risk" />
+    <column name="IsCHRAB" fieldName="IsChrab" label="IsCHRAB" />
+    <column name="OnTheVerge" fieldName="OnTheVerge" label="On The Verge" />
+    <column name="PerfectAttenance_Count" fieldName="PerfectattenanceCount" label="Perfect Attenance Count" />
+    <column name="AttendanceRate" fieldName="AttendanceRate" label="Attendance Rate" format="p" />
+    <column name="prevIsAtRisk_Count" fieldName="PrevisatriskCount" label="prev IsAtRisk" />
+    <column name="prevIsCHRAB_Count" fieldName="PrevischrabCount" label="prev IsCHRAB" />
+    <column name="prevOnTheVerge_Count" fieldName="PrevonthevergeCount" label="prev OnTheVerge" />
+    <column name="Term_IsAtRisk_Change" fieldName="TermIsatriskChange" label="At Risk Change" />
+    <column name="Term_IsCHRAB_Change" fieldName="TermIschrabChange" label="CHRAB Change" />
+    <column name="Term_OnTheVerge_Change" fieldName="TermOnthevergeChange" label="OnTheVerge Change" />
+    <column name="SSIA" fieldName="SSIA" label="SSIA" />
+    <column fieldName="AtRisk" type="varchar(3)" dataType="String" label="At Risk">
+      <formula>CASE WHEN rep_usp_term_basis_person_centred_evaluation.IsAtRisk = '1' THEN 'YES' ELSE 'NO' END</formula>
+    </column>
+    <column fieldName="CHRAB" type="varchar(3)" dataType="String" label="CHRAB">
+      <formula>CASE WHEN rep_usp_term_basis_person_centred_evaluation.IsCHRAB = '1' THEN 'YES' ELSE 'NO' END</formula>
+    </column>
+    <column fieldName="IsOnTheVerge" type="varchar(3)" dataType="String" label="Is OnTheVerge">
+      <formula>CASE WHEN rep_usp_term_basis_person_centred_evaluation.OnTheVerge = '1' THEN 'YES' ELSE 'NO' END</formula>
+    </column>
+    <column fieldName="PA" type="varchar(3)" dataType="String" label="Perfect Attendance">
+      <formula>CASE WHEN rep_usp_term_basis_person_centred_evaluation.PerfectAttenance_Count = '1' THEN 'YES' ELSE 'NO' END</formula>
+    </column>
+  </columns>
+</dataModel>

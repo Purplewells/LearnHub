@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpSectionCharacteristics" alias="zlkpSectionCharacteristics" created="2024-01-28T01:35:09" modified="2024-01-28T01:35:21" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="SectionCharacteristicID" fieldName="SectionCharacteristicID" label="Section Characteristic ID" />
+    <column name="SectionCharacteristicDesc" fieldName="SectionCharacteristicDesc" label="Section Characteristic Desc" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+  </columns>
+</dataModel>

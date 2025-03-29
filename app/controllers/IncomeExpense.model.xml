@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="IncomeExpense" alias="IncomeExpense" created="2024-01-30T11:05:48" modified="2024-12-17T22:28:18" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Budget" parentTableSchema="dbo" parentTableName="Budget" x="329" y="20">
+      <foreignKeyColumn columnName="BudgetID" parentColumnName="BudgetID" />
+    </foreignKey>
+    <foreignKey id="Category" parentTableSchema="dbo" parentTableName="zlkpExpenseCategory" x="333" y="178">
+      <foreignKeyColumn columnName="CategoryID" parentColumnName="CategoryID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="IncomeExpenseID" fieldName="IncomeExpenseID" label="Income Expense ID" />
+    <column name="IncomeName" fieldName="EventName" label="Event Name" />
+    <column name="BudgetID" fieldName="BudgetID" label="Budget" aliasColumnName="BudgetName" aliasForeignKey="Budget" />
+    <column name="BudgetName" fieldName="BudgetName" label="Budget Name" foreignKey="Budget" />
+    <column name="Amount" fieldName="Amount" label="Amount" format="N" />
+    <column name="CategoryID" fieldName="CategoryID" label="Category ID" aliasColumnName="CategoryName" aliasForeignKey="Category" />
+    <column name="CategoryName" fieldName="CategoryName" label="Category" foreignKey="Category" />
+    <column name="EventDate" fieldName="EventDate" label="Event Date" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

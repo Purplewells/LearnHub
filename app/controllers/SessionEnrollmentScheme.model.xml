@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="mlinkSessionEnrollment" alias="mlinkSessionEnrollment" created="2024-02-03T19:51:37" modified="2024-02-03T22:19:49" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="CalendarSession" parentTableSchema="dbo" parentTableName="Session" x="325" y="20">
+      <foreignKeyColumn columnName="CalendarSessionID" parentColumnName="CalendarSessionID" />
+    </foreignKey>
+    <foreignKey id="NextCalendarSession" parentTableSchema="dbo" parentTableName="Session" x="332" y="485">
+      <foreignKeyColumn columnName="NextCalendarSessionID" parentColumnName="CalendarSessionID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="CalendarSessionID" fieldName="CalendarSessionID" label="Calendar Session ID" aliasColumnName="SessionCode" aliasForeignKey="CalendarSession" />
+    <column name="SessionCode" fieldName="CalendarSessionCode" label="Outgoing Term" foreignKey="CalendarSession" />
+    <column name="NextCalendarSessionID" fieldName="NextCalendarSessionID" label="Next Calendar Session ID" aliasColumnName="SessionCode" aliasForeignKey="NextCalendarSession" />
+    <column name="SessionCode" fieldName="NextCalendarSessionCode" label="Incoming term" foreignKey="NextCalendarSession" />
+    <column name="StartDate" fieldName="NextSessionStartDate" label="Incoming Session Start" foreignKey="NextCalendarSession" format="d" />
+    <column name="EndDate" fieldName="NextSessionEndDate" label="Incoming Session End" foreignKey="NextCalendarSession" format="d" />
+    <column name="IsActive" fieldName="IsActive" label="Active" foreignKey="NextCalendarSession" />
+  </columns>
+</dataModel>

@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Salaries" conflictDetection="overwriteChanges" label="Salaries" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.SalariesBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"salary"."SalaryID" "SalaryID"
+	,"salary"."SalaryName" "SalaryName"
+	,"salary"."SalaryBasisID" "SalaryBasisID"
+	,"SalaryBasis"."BasisName" "SalaryBasisName"
+	,"SalaryBasis"."BaseAmount" "TheSalaryBasisBaseAmount"
+	,"salary"."BaseSalaryAmount" "BaseSalaryAmount"
+	,"salary"."GrossAmount" "GrossAmount"
+	,"salary"."NetAmount" "NetAmount"
+	,"salary"."Deductions" "Deductions"
+	,"salary"."ActionID" "ActionID"
+	,"Action"."Action" "Action"
+	,"salary"."IsApproved" "IsApproved"
+	,"salary"."AssignmentID" "AssignmentID"
+	,"Assignment"."StaffClassificationID" "AssignmentStaffClassificationID"
+	,"salary"."ProposedDate" "ProposedDate"
+	,"salary"."NextReviewDate" "NextReviewDate"
+	,"salary"."StartDate" "StartDate"
+	,"salary"."EndDate" "EndDate"
+	,"salary"."CreatedDate" "CreatedDate"
+	,"salary"."ModifiedDate" "ModifiedDate"
+	,"salary"."CreatedBy" "CreatedBy"
+	,"salary"."ModifiedBy" "ModifiedBy"
+	,"salary"."PreTaxDeductions" "PreTaxDeductions"
+	,"salary"."TaxableBenefits" "TaxableBenefits"
+	,"salary"."NonTaxableBenefits" "NonTaxableBenefits"
+	,"salary"."EmployerTaxes" "EmployerTaxes"
+	,"salary"."TaxablePay" "TaxablePay"
+	,"salary"."TaxAmount" "TaxAmount"
+	,"Person"."IdentificationCode" "UPN"
+	,"Person"."FirstName" "FirstName"
+	,"Person"."LastName" "LastName"
+from "dbo"."salary" "salary"
+	left join "dbo"."zlkpSalaryAction" "Action" on "salary"."ActionID" = "Action"."ActionID"
+	left join "dbo"."K12StaffAssignment" "Assignment" on "salary"."AssignmentID" = "Assignment"."StaffAssignmentID"
+	left join "dbo"."OrganizationPersonRole" "OrganizationPersonRole" on "Assignment"."OrganizationPersonRoleID" = "OrganizationPersonRole"."OrganizationPersonRoleID"
+	left join "dbo"."Person" "Person" on "OrganizationPersonRole"."PersonID" = "Person"."PersonID"
+	left join "dbo"."salary_basis" "SalaryBasis" on "salary"."SalaryBasisID" = "SalaryBasis"."SalaryBasisID"
+]]></text>
+    </command>
+    <command id="SalaryIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="SalaryID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="SalaryID" type="Int32" allowNulls="false" isPrimaryKey="true" dataFormatString="c" label="Salary ID" readOnly="true" />
+    <field name="SalaryName" type="String" label="Salary Name" length="30" showInSummary="true" />
+    <field name="SalaryBasisID" type="Int32" dataFormatString="c" label="Salary Basis ID" showInSummary="true" causesCalculate="true">
+      <items style="Lookup" dataController="SalaryBasis" newDataView="createForm1" dataValueField="SalaryBasisID" dataTextField="BasisName" copy="TheSalaryBasisBaseAmount=BaseAmount" />
+    </field>
+    <field name="SalaryBasisName" type="String" readOnly="true" label="Salary Basis Name" length="50" />
+    <field name="TheSalaryBasisBaseAmount" type="Decimal" readOnly="true" dataFormatString="c" label="Basis Amount" causesCalculate="true" />
+    <field name="BaseSalaryAmount" type="Decimal" dataFormatString="c" label="Base Salary Amount" showInSummary="true" />
+    <field name="GrossAmount" type="Decimal" label="Gross Amount" showInSummary="true" />
+    <field name="NetAmount" type="Decimal" label="Net Amount" showInSummary="true" />
+    <field name="Deductions" type="Decimal" label="Deductions" />
+    <field name="ActionID" type="Int32" label="Action ID">
+      <items style="Lookup" dataController="SalaryAction" newDataView="createForm1" dataValueField="ActionID" dataTextField="Action" />
+    </field>
+    <field name="Action" type="String" readOnly="true" label="Action" length="15" />
+    <field name="IsApproved" type="Boolean" label="Is Approved" />
+    <field name="AssignmentID" type="Int32" label="Assignment ID">
+      <items style="Lookup" dataController="K12StaffAssignment" newDataView="createForm1" dataValueField="StaffAssignmentID" dataTextField="StaffClassificationID" copy="UPN=UPN, FirstName=FirstName, LastName=LastName" />
+    </field>
+    <field name="AssignmentStaffClassificationID" type="Int32" readOnly="true" label="Assignment Staff Classification ID" />
+    <field name="ProposedDate" type="DateTime" label="Proposed Date" />
+    <field name="NextReviewDate" type="DateTime" label="Next Review Date" />
+    <field name="StartDate" type="DateTime" label="Start Date" causesCalculate="true" />
+    <field name="EndDate" type="DateTime" label="End Date" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="PreTaxDeductions" type="Decimal" label="Pre Tax Deductions" />
+    <field name="TaxableBenefits" type="Decimal" label="Taxable Benefits" />
+    <field name="NonTaxableBenefits" type="Decimal" label="Non Taxable Benefits" />
+    <field name="EmployerTaxes" type="Decimal" label="Employer Taxes" />
+    <field name="TaxablePay" type="Decimal" label="Taxable Pay" />
+    <field name="TaxAmount" type="Decimal" label="Tax Amount" />
+    <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
+    <field name="FirstName" type="String" readOnly="true" label="Firstname" length="35" />
+    <field name="LastName" type="String" readOnly="true" label="Lastname" length="35" />
+    <field name="SalaryComponentElement" type="DataView" label="Salary Component Element" causesCalculate="true">
+      <dataView controller="SalaryComponentElement" view="grid1" filterFields="SalaryID" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Salaries">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="SalaryName" columns="20" />
+        <dataField fieldName="SalaryBasisID" aliasFieldName="SalaryBasisName" />
+        <dataField fieldName="TheSalaryBasisBaseAmount" columns="15" />
+        <dataField fieldName="BaseSalaryAmount" columns="15" hidden="true" />
+        <dataField fieldName="GrossAmount" columns="15" />
+        <dataField fieldName="NetAmount" columns="15" />
+        <dataField fieldName="TaxablePay" columns="15" />
+        <dataField fieldName="ProposedDate" columns="20" />
+        <dataField fieldName="StartDate" columns="10" />
+        <dataField fieldName="EndDate" columns="10" hidden="true" />
+        <dataField fieldName="Deductions" columns="15" hidden="true" />
+        <dataField fieldName="ActionID" aliasFieldName="Action" />
+        <dataField fieldName="IsApproved" />
+        <dataField fieldName="AssignmentID" aliasFieldName="AssignmentStaffClassificationID" />
+        <dataField fieldName="NextReviewDate" columns="10" hidden="true" />
+        <dataField fieldName="PreTaxDeductions" columns="15" hidden="true" />
+        <dataField fieldName="TaxableBenefits" columns="15" hidden="true" />
+        <dataField fieldName="NonTaxableBenefits" columns="15" hidden="true" />
+        <dataField fieldName="EmployerTaxes" columns="15" hidden="true" />
+        <dataField fieldName="TaxAmount" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="UPN" columns="10" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Salaries">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Salaries" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="TheSalaryBasisBaseAmount" columns="15" hidden="true" />
+            <dataField fieldName="SalaryName" columns="30" />
+            <dataField fieldName="SalaryBasisID" aliasFieldName="SalaryBasisName" />
+            <dataField fieldName="ActionID" aliasFieldName="Action" />
+            <dataField fieldName="AssignmentID" aliasFieldName="AssignmentStaffClassificationID" />
+            <dataField fieldName="StartDate" columns="10" />
+            <dataField fieldName="EndDate" columns="10" />
+            <dataField fieldName="BaseSalaryAmount" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Taxation Element" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="GrossAmount" columns="15" />
+            <dataField fieldName="Deductions" columns="15" />
+            <dataField fieldName="TaxAmount" columns="15">
+              <headerText>Employee Tax Amount</headerText>
+            </dataField>
+            <dataField fieldName="TaxablePay" columns="15" hidden="true" />
+            <dataField fieldName="TaxableBenefits" columns="15" hidden="true" />
+            <dataField fieldName="NonTaxableBenefits" columns="15" hidden="true" />
+            <dataField fieldName="EmployerTaxes" columns="15" />
+            <dataField fieldName="NetAmount" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Date EndPoints" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="ProposedDate" columns="10" />
+            <dataField fieldName="NextReviewDate" columns="10" />
+            <dataField fieldName="PreTaxDeductions" columns="15" />
+            <dataField fieldName="IsApproved" />
+          </dataFields>
+        </category>
+        <category id="c5" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c2" tab="SALARY COMPONENTS" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="SalaryComponentElement" columns="15" tag="modal-fullscreen" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Salary">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Salaries" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="SalaryName" columns="30" />
+            <dataField fieldName="SalaryBasisID" aliasFieldName="SalaryBasisName" />
+            <dataField fieldName="TheSalaryBasisBaseAmount" columns="15" />
+            <dataField fieldName="BaseSalaryAmount" columns="15" />
+            <dataField fieldName="ActionID" aliasFieldName="Action" />
+            <dataField fieldName="IsApproved" />
+            <dataField fieldName="AssignmentID" aliasFieldName="AssignmentStaffClassificationID" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Date EndPoints" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="StartDate" columns="10" />
+            <dataField fieldName="EndDate" columns="10" />
+            <dataField fieldName="ProposedDate" columns="10" />
+            <dataField fieldName="NextReviewDate" columns="10" />
+            <dataField fieldName="PreTaxDeductions" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Taxation Element" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="GrossAmount" columns="15" />
+            <dataField fieldName="Deductions" columns="15" />
+            <dataField fieldName="NetAmount" columns="15" />
+            <dataField fieldName="TaxableBenefits" columns="15" hidden="true" />
+            <dataField fieldName="NonTaxableBenefits" columns="15" hidden="true" />
+            <dataField fieldName="EmployerTaxes" columns="15" />
+            <dataField fieldName="TaxablePay" columns="15" hidden="true" />
+            <dataField fieldName="TaxAmount" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a100" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a102" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send To API" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report" />
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute" name="setDefaultValues"><![CDATA[SET @IsApproved = 1
+SET @GrossAmount = 0.00
+SET @NetAmount = 0.00
+SET @Deductions = 0.00
+SET @TaxablePay = 0.00
+SET @ProposedDate = GETDATE()
+SET @StartDate = GETDATE()
+SET @EndDate = DATEADD(YEAR, 10, @StartDate)]]></rule>
+    <rule id="r102" type="JavaScript" commandName="Insert|Update" phase="Before" name="validate_StartDate"><![CDATA[var fieldValue = [StartDate];
+if (fieldValue == null) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('StartDate', 'StartDate is a required field.');
+}]]></rule>
+    <rule id="r103" type="JavaScript" commandName="Insert|Update" phase="Before" name="validate_SalaryName"><![CDATA[var fieldValue = [SalaryName];
+if (fieldValue == null) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('SalaryName', 'A name for salary is required.');
+}]]></rule>
+    <rule id="r101" commandName="New|Calculate|Update" type="Code" phase="Before" name="setBaseSalaryAmount" />
+    <rule id="r104" commandName="Insert|Update|Calculate" type="Code" phase="After" name="UpdateCompensation" />
+  </businessRules>
+</dataController>

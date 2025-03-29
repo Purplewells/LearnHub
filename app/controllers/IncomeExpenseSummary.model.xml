@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="vw_metric_income_expense_summary" alias="vw_metric_income_expense_summary" created="2024-01-30T11:46:41" modified="2024-04-03T15:50:26" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="BudgetID" fieldName="BudgetID" label="Budget ID" />
+    <column name="BudgetDescriptor" fieldName="BudgetDescriptor" label="Budget Descriptor" />
+    <column name="BudgetName" fieldName="BudgetName" label="Budget" />
+    <column name="CategoryName" fieldName="Category" label="Category" />
+    <column name="Indicator" fieldName="Indicator" label="Indicator" />
+    <column name="EventDate" fieldName="EventDate" label="Event Date" />
+    <column name="BudgetValue" fieldName="BudgetValue" label="Budget Value" format="c" />
+    <column name="TotalIncome" fieldName="TotalIncome" label="Total Income" format="c" />
+    <column name="TotalExpense" fieldName="TotalExpense" label="Total Expense" format="c" />
+    <column name="NetIncome" fieldName="NetIncome" label="Net Income" format="c" />
+    <column name="Week" fieldName="Week" label="Week" />
+    <column name="MonthName" fieldName="MonthName" label="Month Name" />
+    <column name="YearMonth" fieldName="YearMonth" label="Year Month" />
+    <column name="Year" fieldName="Year" label="Year" />
+  </columns>
+</dataModel>

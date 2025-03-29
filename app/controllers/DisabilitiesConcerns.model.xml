@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dwh" baseTable="pbi_vw_metric_student_profile_disabilities_concerns" alias="pbi_vw_metric_student_profile_disabilities_concerns" created="2024-02-22T08:47:24" modified="2024-02-22T08:48:43" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="LastName" fieldName="LastName" label="Lastname" />
+    <column name="FirstName" fieldName="FirstName" label="Firstname" />
+    <column name="Sex" fieldName="Sex" label="Sex" />
+    <column name="DisabilityType" fieldName="DisabilityType" label="Disability Type" />
+    <column name="ConditionType" fieldName="ConditionType" label="Condition Type" />
+    <column name="SourceType" fieldName="SourceType" label="Source Type" />
+    <column name="Status" fieldName="Status" label="Status" />
+    <column name="AccommodationsNeeded" fieldName="AccommodationsNeeded" label="Accommodations Needed" />
+    <column name="ConditionStatus" fieldName="ConditionStatus" label="Condition Status" />
+    <column name="RoleName" fieldName="RoleName" label="Role" />
+  </columns>
+</dataModel>

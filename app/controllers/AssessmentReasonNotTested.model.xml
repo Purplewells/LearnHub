@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpAssessmentReasonNotTested" alias="zlkpAssessmentReasonNotTested" created="2024-08-22T19:00:39" modified="2024-08-22T19:00:47" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="RefAssessmentReasonNotTestedID" fieldName="RefAssessmentReasonNotTestedID" label="Ref Assessment Reason Not Tested ID" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="Definition" fieldName="Definition" label="Definition" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="amt" baseTable="vw_metric_staff_assignment" alias="vw_metric_staff_assignment" created="2024-02-22T13:27:08" modified="2024-03-06T20:13:14" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" />
+    <column name="LastName" fieldName="LastName" label="Last Name" />
+    <column name="BirthDate" fieldName="BirthDate" label="Birth Date" />
+    <column name="UPN" fieldName="UPN" label="UPN" />
+    <column name="Email" fieldName="Email" label="Email" />
+    <column name="PhoneNo" fieldName="PhoneNo" label="Phone No" />
+    <column name="CredentialName" fieldName="Credential" label="Credential" />
+    <column name="Award Entity" fieldName="AwardEntity" label="Award Entity" />
+    <column name="IssuanceDate" fieldName="IssuanceDate" label="Issuance Date" />
+    <column name="ExtendedRole" fieldName="ExtendedRole" label="Role" />
+  </columns>
+</dataModel>

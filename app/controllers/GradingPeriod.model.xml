@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="GradingPeriod" alias="GradingPeriod" created="2024-01-27T23:35:10" modified="2025-03-14T06:09:52" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="GradingPeriodDescriptor" parentTableSchema="dbo" parentTableName="GradingPeriodDescriptor" x="375" y="20">
+      <foreignKeyColumn columnName="GradingPeriodDescriptorID" parentColumnName="GradingPeriodDescriptorID" />
+    </foreignKey>
+    <foreignKey id="CalendarSession" parentTableSchema="dbo" parentTableName="Session" x="375" y="204">
+      <foreignKeyColumn columnName="CalendarSessionID" parentColumnName="CalendarSessionID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="GradingPeriodID" fieldName="GradingPeriodID" label="Grading Period ID" />
+    <column name="GradingPeriod" fieldName="GradingPeriod" label="Grading Period" />
+    <column name="StartDate" fieldName="StartDate" label="Start Date" />
+    <column name="EndDate" fieldName="EndDate" label="End Date" />
+    <column name="GradingPeriodDescriptorID" fieldName="GradingPeriodDescriptorID" label="Grading Period Descriptor ID" aliasColumnName="ShortDescription" aliasForeignKey="GradingPeriodDescriptor" />
+    <column name="ShortDescription" fieldName="GradingPeriodDescriptor" label="Period Descriptor" foreignKey="GradingPeriodDescriptor" />
+    <column name="TotalInstructionalDays" fieldName="TotalInstructionalDays" label="No. of Days" />
+    <column name="CalendarSessionID" fieldName="CalendarSessionID" label="Calendar Session ID" aliasColumnName="SessionName" aliasForeignKey="CalendarSession" />
+    <column name="SessionName" fieldName="SessionName" label="Session Name" foreignKey="CalendarSession" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="Sequence" fieldName="Sequence" label="Sequence No." />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dwh" baseTable="pbi_vw_metric_student_school_enrollments_overtime" alias="pbi_vw_metric_student_school_enrollments_overtime" created="2024-02-21T21:31:41" modified="2024-02-21T21:33:38" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="StudentEnrollmentID" fieldName="StudentEnrollmentID" label="Student Enrollment ID" />
+    <column name="FirstName" fieldName="FirstName" label="Firstname" />
+    <column name="LastName" fieldName="LastName" label="Lastname" />
+    <column name="Role" fieldName="Role" label="Role" />
+    <column name="CGL" fieldName="CYG" label="CYG" />
+    <column name="EGL" fieldName="EGL" label="EGL" />
+    <column name="EnrollStatus" fieldName="EnrollStatus" label="Enroll Status" />
+    <column name="EndOfTermStatus" fieldName="EndOfTermStatus" label="EOT Status" />
+    <column name="PromotionReason" fieldName="PromotionReason" label="Promotion Reason" />
+    <column name="EnrolledDate" fieldName="EnrolledDate" label="Enrolled Date" />
+    <column name="WDD" fieldName="WDD" label="WDD" />
+    <column name="SessionName" fieldName="Session" label="Session" />
+    <column name="WithDrawalStatus" fieldName="WithDrawalStatus" label="Withdrawal Status" />
+    <column name="ExitReason" fieldName="ExitReason" label="Exit Reason" />
+    <column name="EntryType" fieldName="EntryType" label="Entry Type" />
+    <column name="EntryDate" fieldName="EntryDate" label="Entry Date" />
+    <column name="ExitDate" fieldName="ExitDate" label="Exit Date" />
+    <column name="Ranked" fieldName="Ranked" label="Ranked" />
+  </columns>
+</dataModel>

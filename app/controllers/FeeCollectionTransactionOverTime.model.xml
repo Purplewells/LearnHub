@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="fee_collection_transaction" alias="fee_collection_transaction" created="2024-01-29T09:19:49" modified="2024-02-20T15:54:11" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="FeePerson" parentTableSchema="dbo" parentTableName="student_fees" x="354" y="20">
+      <foreignKeyColumn columnName="FeeID" parentColumnName="FeeID" />
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="TransactionType" parentTableSchema="dbo" parentTableName="zlkpTransactionType" x="22" y="515">
+      <foreignKeyColumn columnName="TransactionTypeCode" parentColumnName="TransactionTypeCode" />
+    </foreignKey>
+    <foreignKey id="PaymentMethod" parentTableSchema="dbo" parentTableName="zlkpPaymentMethod" x="358" y="483">
+      <foreignKeyColumn columnName="PaymentMethodID" parentColumnName="PaymentMethodID" />
+    </foreignKey>
+    <foreignKey id="PaymentBy" parentTableSchema="dbo" parentTableName="zlkpPaymentBy" x="354" y="648">
+      <foreignKeyColumn columnName="PaymentByID" parentColumnName="PaymentByID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="714" y="245" baseForeignKey="FeePerson">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="Fee" parentTableSchema="dbo" parentTableName="Fees" x="1082" y="20" baseForeignKey="FeePerson">
+      <foreignKeyColumn columnName="FeeID" parentColumnName="FeeID" />
+    </foreignKey>
+    <foreignKey id="OrganizationCalendar" parentTableSchema="dbo" parentTableName="Calendar" x="1098" y="440" baseForeignKey="Fee">
+      <foreignKeyColumn columnName="OrganizationCalendarId" parentColumnName="OrganizationCalendarId" />
+    </foreignKey>
+    <foreignKey id="School" parentTableSchema="dbo" parentTableName="School" x="1440" y="20" baseForeignKey="OrganizationCalendar">
+      <foreignKeyColumn columnName="SchoolID" parentColumnName="OrganizationID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="TransactionID" fieldName="TransactionID" label="Transaction ID" />
+    <column name="FirstName" fieldName="Firstname" label="Firstname" foreignKey="Person" />
+    <column name="LastName" fieldName="Lastname" label="Lastname" foreignKey="Person" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="CurrentYearGradeLevel" fieldName="GL" label="GL" foreignKey="Person" />
+    <column name="TransDate" fieldName="TransDate" label="Trans Date" />
+    <column name="FeeID" fieldName="FeeID" label="Fee ID" aliasColumnName="FeeStatusCode" aliasForeignKey="FeePerson" />
+    <column name="FeeStatusCode" fieldName="Status" label="Status" foreignKey="FeePerson" />
+    <column name="FeeAmount" fieldName="BillAmount" label="Bill Amount" foreignKey="FeePerson" format="c" />
+    <column name="Discount" fieldName="Discount" label="Discount" foreignKey="FeePerson" format="c" />
+    <column name="Amount" fieldName="AmountPaid" label="Amount Paid" format="c" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="FeeType" fieldName="FeeType" label="Fee Type" />
+    <column name="TransactionTypeCode" fieldName="TransactionTypeCode" label="Transaction Type Code" aliasColumnName="TransactionType" aliasForeignKey="TransactionType" />
+    <column name="TransactionType" fieldName="TransactionType" label="Trans Type" foreignKey="TransactionType" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="PaymentMethodID" fieldName="PaymentMethodID" label="Payment Method ID" aliasColumnName="PaymentMethod" aliasForeignKey="PaymentMethod" />
+    <column name="PaymentMethod" fieldName="PaymentMethod" label="MOPS" foreignKey="PaymentMethod" />
+    <column name="TransactionStatusCode" fieldName="TransactionStatusCode" label="Transaction Status Code" />
+    <column name="PaymentByID" fieldName="PaymentByID" label="Payment By ID" aliasColumnName="PaymentRelation" aliasForeignKey="PaymentBy" />
+    <column name="PaymentRelation" fieldName="PaymentRelation" label="Paid By" foreignKey="PaymentBy" />
+    <column name="NameOfPayee" fieldName="NameOfPayee" label="Payee Name" />
+    <column name="ReceiptNo" fieldName="ReceiptNo" label="Receipt No" />
+    <column name="FeeNote" fieldName="Note" label="Note" />
+    <column name="Description" fieldName="FeeDescription" label="Fee Description" foreignKey="Fee" />
+    <column name="Amount" fieldName="ActualAmount" label="Actual Amount" foreignKey="Fee" format="c" />
+    <column name="EffectiveDate" fieldName="EffectiveDate" label="Effective Date" foreignKey="Fee" format="d" />
+    <column name="EffectiveTo" fieldName="EffectiveTo" label="Effective To" foreignKey="Fee" format="d" />
+    <column name="CalendarCode" fieldName="Calendar" label="Calendar" foreignKey="OrganizationCalendar" />
+    <column name="SchoolName" fieldName="School" label="School" foreignKey="School" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

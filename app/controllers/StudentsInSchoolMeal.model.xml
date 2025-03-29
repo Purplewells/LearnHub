@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="vw_ops_student_in_school_meal" alias="vw_ops_student_in_school_meal" created="2024-01-28T23:12:11" modified="2025-02-17T00:06:47" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="LastName" fieldName="LastName" label="LastName" />
+    <column name="FirstName" fieldName="FirstName" label="FirstName" />
+    <column name="IdentificationCode" fieldName="IdentificationCode" label="UPN" />
+    <column name="EventDate" fieldName="EventDate" label="Event Date" />
+    <column name="GL" fieldName="GL" label="GL" />
+    <column name="IsPresent" fieldName="IsPresent" label="Is Present" />
+  </columns>
+</dataModel>

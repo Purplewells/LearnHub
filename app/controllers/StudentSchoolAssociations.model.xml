@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StudentSchoolAssociation" alias="StudentSchoolAssociation" created="2024-02-04T12:00:02" modified="2024-12-26T11:46:36" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="RefEntryGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="413" y="20">
+      <foreignKeyColumn columnName="RefEntryGradeLevelId" parentColumnName="RefGradeLevelId" />
+    </foreignKey>
+    <foreignKey id="RefPublicSchoolResidence" parentTableSchema="dbo" parentTableName="zlkpPublicSchoolResidence" x="414" y="272">
+      <foreignKeyColumn columnName="RefPublicSchoolResidence" parentColumnName="RefPublicSchoolResidenceId" />
+    </foreignKey>
+    <foreignKey id="RefEnrollmentStatus" parentTableSchema="dbo" parentTableName="zlkpEnrollmentStatus" x="413" y="368">
+      <foreignKeyColumn columnName="RefEnrollmentStatusId" parentColumnName="RefEnrollmentStatusId" />
+    </foreignKey>
+    <foreignKey id="RefEntryType" parentTableSchema="dbo" parentTableName="zlkpEntryType" x="413" y="526">
+      <foreignKeyColumn columnName="RefEntryTypeID" parentColumnName="RefEntryTypeId" />
+    </foreignKey>
+    <foreignKey id="RefExitGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="413" y="687">
+      <foreignKeyColumn columnName="RefExitGradeLevel" parentColumnName="RefGradeLevelId" />
+    </foreignKey>
+    <foreignKey id="RefExitOrWithdrawalStatus" parentTableSchema="dbo" parentTableName="zlkpExitOrWithdrawalStatus" x="413" y="871">
+      <foreignKeyColumn columnName="RefExitOrWithdrawalStatusId" parentColumnName="RefExitOrWithdrawalStatusId" />
+    </foreignKey>
+    <foreignKey id="ExitOrWithdrawType" parentTableSchema="dbo" parentTableName="zlkpExitOrWithdrawalType" x="851" y="20">
+      <foreignKeyColumn columnName="ExitOrWithdrawTypeId" parentColumnName="RefExitOrWithdrawalTypeId" />
+    </foreignKey>
+    <foreignKey id="RefEndOfTermStatus" parentTableSchema="dbo" parentTableName="zlkpEndOfTermStatus" x="851" y="181">
+      <foreignKeyColumn columnName="RefEndOfTermStatusId" parentColumnName="RefEndOfTermStatusId" />
+    </foreignKey>
+    <foreignKey id="EntryGradeLevelReason" parentTableSchema="dbo" parentTableName="zlkpNonPromotionReason" x="851" y="342">
+      <foreignKeyColumn columnName="EntryGradeLevelReasonID" parentColumnName="RefNonPromotionReasonId" />
+    </foreignKey>
+    <foreignKey id="RefSchoolStream" parentTableSchema="dbo" parentTableName="zlkpSchoolStream" x="851" y="503">
+      <foreignKeyColumn columnName="RefSchoolStreamID" parentColumnName="RefSchoolStreamID" />
+    </foreignKey>
+    <foreignKey id="RefFoodServiceEligibilityIds" parentTableSchema="dbo" parentTableName="zlkpFoodServiceEligibility" x="851" y="664">
+      <foreignKeyColumn columnName="RefFoodServiceEligibilityIds" parentColumnName="RefFoodServiceEligibilityId" />
+    </foreignKey>
+    <foreignKey id="RefPromotionReason" parentTableSchema="dbo" parentTableName="zlkpPromotionReason" x="851" y="841">
+      <foreignKeyColumn columnName="RefPromotionReasonId" parentColumnName="RefPromotionReasonId" />
+    </foreignKey>
+    <foreignKey id="CalendarSession" parentTableSchema="dbo" parentTableName="Session" x="1284" y="20">
+      <foreignKeyColumn columnName="CalendarSessionID" parentColumnName="CalendarSessionID" />
+    </foreignKey>
+    <foreignKey id="OrganizationPersonRole" parentTableSchema="dbo" parentTableName="OrganizationPersonRole" x="37" y="782">
+      <foreignKeyColumn columnName="OrganizationPersonRoleID" parentColumnName="OrganizationPersonRoleID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="48" y="953" baseForeignKey="OrganizationPersonRole">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="RefSex" parentTableSchema="dbo" parentTableName="zlkpSex" x="400" y="1175" baseForeignKey="Person">
+      <foreignKeyColumn columnName="RefSexID" parentColumnName="GenderID" />
+    </foreignKey>
+    <foreignKey id="OrganizationCalendar" parentTableSchema="dbo" parentTableName="Calendar" x="1300" y="229" baseForeignKey="CalendarSession">
+      <foreignKeyColumn columnName="OrganizationCalendarID" parentColumnName="OrganizationCalendarId" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="StudentEnrollmentID" fieldName="StudentEnrollmentID" label="Student Enrollment ID" />
+    <column name="RefEntryGradeLevelId" fieldName="RefEntryGradeLevelID" label="Ref Entry Grade Level Id" aliasColumnName="Description" aliasForeignKey="RefEntryGradeLevel" />
+    <column name="Description" fieldName="GL" label="GL" foreignKey="RefEntryGradeLevel" />
+    <column name="SortOrder" fieldName="GLSO" label="GLSO" foreignKey="RefEntryGradeLevel" />
+    <column name="RefPublicSchoolResidence" fieldName="RefPublicSchoolResidence" label="Ref Public School Residence" aliasColumnName="Description" aliasForeignKey="RefPublicSchoolResidence" />
+    <column name="Description" fieldName="HomeGroup" label="Houses" foreignKey="RefPublicSchoolResidence" />
+    <column name="RefEnrollmentStatusId" fieldName="RefEnrollmentStatusID" label="Ref Enrollment Status Id" aliasColumnName="Description" aliasForeignKey="RefEnrollmentStatus" />
+    <column name="Description" fieldName="RefEnrollmentStatusDescription" label="eStatus" foreignKey="RefEnrollmentStatus" />
+    <column name="RefEntryTypeID" fieldName="RefEntryTypeID" label="Ref Entry Type ID" aliasColumnName="Description" aliasForeignKey="RefEntryType" />
+    <column name="Description" fieldName="EntryType" label="EntryType" foreignKey="RefEntryType" />
+    <column name="RefExitGradeLevel" fieldName="RefExitGradeLevel" label="Ref Exit Grade Level" aliasColumnName="Description" aliasForeignKey="RefExitGradeLevel" />
+    <column name="Description" fieldName="WGL" label="WGL" foreignKey="RefExitGradeLevel" />
+    <column name="RefExitOrWithdrawalStatusId" fieldName="RefExitOrWithdrawalStatusID" label="Ref Exit Or Withdrawal Status Id" aliasColumnName="Description" aliasForeignKey="RefExitOrWithdrawalStatus" />
+    <column name="Description" fieldName="ExitOrWithdrawalStatus" label="Withdrawal Status" foreignKey="RefExitOrWithdrawalStatus" />
+    <column name="ExitOrWithdrawTypeId" fieldName="ExitOrWithdrawTypeID" label="Exit Or Withdraw Type Id" aliasColumnName="Description" aliasForeignKey="ExitOrWithdrawType" />
+    <column name="Description" fieldName="ExitOrWithdrawTypeDescription" label="Withdraw Type" foreignKey="ExitOrWithdrawType" />
+    <column name="RefEndOfTermStatusId" fieldName="RefEndOfTermStatusID" label="Ref End Of Term Status Id" aliasColumnName="Description" aliasForeignKey="RefEndOfTermStatus" />
+    <column name="Description" fieldName="EndOfTermStatus" label="End Of Term Status" foreignKey="RefEndOfTermStatus" />
+    <column name="EntryGradeLevelReasonID" fieldName="EntryGradeLevelReasonID" label="Entry Grade Level Reason ID" aliasColumnName="Description" aliasForeignKey="EntryGradeLevelReason" />
+    <column name="Description" fieldName="NonPromoReason" label="Non Promo Reason" foreignKey="EntryGradeLevelReason" />
+    <column name="RefSchoolStreamID" fieldName="RefSchoolStreamID" label="Ref School Stream ID" aliasColumnName="Description" aliasForeignKey="RefSchoolStream" />
+    <column name="Description" fieldName="STM" label="STM" foreignKey="RefSchoolStream" />
+    <column name="RefFoodServiceEligibilityIds" fieldName="RefFoodServiceEligibilityIds" label="Ref Food Service Eligibility Ids" aliasColumnName="Description" aliasForeignKey="RefFoodServiceEligibilityIds" />
+    <column name="Description" fieldName="FoodServices" label="Food Services" foreignKey="RefFoodServiceEligibilityIds" />
+    <column name="RefPromotionReasonId" fieldName="RefPromotionReasonID" label="Ref Promotion Reason Id" aliasColumnName="Description" aliasForeignKey="RefPromotionReason" />
+    <column name="Description" fieldName="PromotionReason" label="Promo Reason" foreignKey="RefPromotionReason" />
+    <column name="EnrolledDate" fieldName="EnrolledDate" label="Enrolled On" />
+    <column name="ExitWithdrawDate" fieldName="ExitWithdrawDate" label="WDD" />
+    <column name="CalendarSessionID" fieldName="CalendarSessionID" label="Calendar Session ID" aliasColumnName="SessionCode" aliasForeignKey="CalendarSession" />
+    <column name="SessionCode" fieldName="Session" label="Session" foreignKey="CalendarSession" />
+    <column name="IsActive" fieldName="CSIA" label="CSIA" foreignKey="CalendarSession" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="OrganizationPersonRoleID" fieldName="OrganizationPersonRoleID" label="Organization Person Role ID" aliasColumnName="OrganisationID" aliasForeignKey="OrganizationPersonRole" />
+    <column name="OrganisationID" fieldName="OrganizationPersonRoleOrganisationID" foreignKey="OrganizationPersonRole" label="OPRID" />
+    <column name="Status" fieldName="Status" label="Recs" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="FirstName" fieldName="Firstname" label="Firstname" foreignKey="Person" />
+    <column name="LastName" fieldName="Lastname" label="Lastname" foreignKey="Person" />
+    <column name="Code" fieldName="Sex" label="Sex" foreignKey="RefSex" />
+    <column name="CurrentSchoolYear" fieldName="CSY" label="CSY" foreignKey="OrganizationCalendar" />
+    <column name="SchoolYearStartDate" fieldName="YSD" label="YSD" foreignKey="OrganizationCalendar" format="d" />
+    <column name="SchoolYearEndDate" fieldName="YED" label="YED" foreignKey="OrganizationCalendar" format="d" />
+    <column fieldName="SEID" type="int" dataType="Int32" label="SEID">
+      <formula>StudentSchoolAssociation.StudentEnrollmentID</formula>
+    </column>
+    <column fieldName="Header" type="nvarchar(199)" dataType="String" label="Header">
+      <formula>Person.FirstName + ', ' + Person.LastName + ' &gt;&gt; ' + '( ' + 'UPN: ' + Person.IdentificationCode + ' )' + ' &gt;&gt; ' + RefEntryGradeLevel.Description</formula>
+    </column>
+    <column fieldName="Fullname" type="nvarchar(71)" dataType="String" label="Fullname">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </column>
+    <column name="MarkedForDeletion" fieldName="MarkedForDeletion" label="MFD" />
+  </columns>
+</dataModel>

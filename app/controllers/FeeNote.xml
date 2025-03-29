@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="FeeNote" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <views>
+    <view id="FeeNoteForm" type="Form" label="Fee Notes">
+      <categories>
+        <category id="c1" headerText="Fee Note" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="CustomFeeReminderNote" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+      <headerText>The Fee Notes allows you to print the status and reminder note for the students.</headerText>
+    </view>
+  </views>
+  <fields>
+    <field name="CustomFeeReminderNote" type="DataView" label="Custom Fee Reminder Note">
+      <dataView controller="CustomFeeReminderNote" view="grid1" />
+    </field>
+  </fields>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Actions" flat="false" />
+  </actions>
+</dataController>

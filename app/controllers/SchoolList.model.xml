@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Person" alias="Person" created="2024-02-07T22:51:58" modified="2024-02-21T21:28:59" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="RefSex" parentTableSchema="dbo" parentTableName="zlkpSex" x="410" y="20">
+      <foreignKeyColumn columnName="RefSexID" parentColumnName="GenderID" />
+    </foreignKey>
+    <foreignKey id="RefCitizenshipStatus" parentTableSchema="dbo" parentTableName="zlkpCitizenshipStatus" x="410" y="183">
+      <foreignKeyColumn columnName="RefCitizenshipStatusID" parentColumnName="RefCitizenshipStatusId" />
+    </foreignKey>
+    <foreignKey id="RefProofOfResidencyType" parentTableSchema="dbo" parentTableName="zlkpProofOfResidencyType" x="410" y="504">
+      <foreignKeyColumn columnName="RefProofOfResidencyTypeID" parentColumnName="RefProofOfResidencyTypeId" />
+    </foreignKey>
+    <foreignKey id="Title" parentTableSchema="dbo" parentTableName="zlkpTitle" x="410" y="826">
+      <foreignKeyColumn columnName="TitleID" parentColumnName="TitleID" />
+    </foreignKey>
+    <foreignKey id="Language" parentTableSchema="dbo" parentTableName="zlkp_language" x="410" y="966">
+      <foreignKeyColumn columnName="LanguageID" parentColumnName="LanguageID" />
+    </foreignKey>
+    <foreignKey id="Religion" parentTableSchema="dbo" parentTableName="zlkp_Religion" x="893" y="20">
+      <foreignKeyColumn columnName="ReligionID" parentColumnName="ReligionID" />
+    </foreignKey>
+    <foreignKey id="Organization" parentTableSchema="dbo" parentTableName="Organisation" x="893" y="161">
+      <foreignKeyColumn columnName="OrganizationID" parentColumnName="OrganizationID" />
+    </foreignKey>
+    <foreignKey id="Town" parentTableSchema="dbo" parentTableName="zlkpTown" x="893" y="345">
+      <foreignKeyColumn columnName="TownID" parentColumnName="TownID" />
+    </foreignKey>
+    <foreignKey id="Country" parentTableSchema="dbo" parentTableName="zlkpCountry" x="893" y="507">
+      <foreignKeyColumn columnName="CountryID" parentColumnName="CountryID" />
+    </foreignKey>
+    <foreignKey id="LocationType" parentTableSchema="dbo" parentTableName="zlkpPersonLocationType" x="893" y="669">
+      <foreignKeyColumn columnName="LocationTypeID" parentColumnName="LocationTypeID" />
+    </foreignKey>
+    <foreignKey id="RefOccupation" parentTableSchema="dbo" parentTableName="zlkpOccupation" x="893" y="853">
+      <foreignKeyColumn columnName="RefOccupationId" parentColumnName="RefOccupationId" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" />
+    <column name="FirstName" fieldName="FirstName" label="Firstname" />
+    <column name="MiddleName" fieldName="MiddleName" label="Middlename" />
+    <column name="LastName" fieldName="LastName" label="Lastname" />
+    <column name="BirthDate" fieldName="BirthDate" label="DOB" />
+    <column name="RefSexID" fieldName="RefSexID" label="Ref Sex ID" aliasColumnName="Description" aliasForeignKey="RefSex" />
+    <column name="Description" fieldName="Sex" label="Sex" foreignKey="RefSex" />
+    <column name="RefCitizenshipStatusID" fieldName="RefCitizenshipStatusID" label="Ref Citizenship Status ID" aliasColumnName="Description" aliasForeignKey="RefCitizenshipStatus" />
+    <column name="Description" fieldName="Ethnicity" label="Ethnicity" foreignKey="RefCitizenshipStatus" />
+    <column name="RefProofOfResidencyTypeID" fieldName="RefProofOfResidencyTypeID" label="Ref Proof Of Residency Type ID" aliasColumnName="Description" aliasForeignKey="RefProofOfResidencyType" />
+    <column name="Description" fieldName="ProofOfResidency" label="Residency Proof" foreignKey="RefProofOfResidencyType" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="Email" fieldName="Email" label="Email" />
+    <column name="PhoneNo" fieldName="PhoneNo" label="Phone No" />
+    <column name="CurrentYearStatus" fieldName="CYS" label="CYS" />
+    <column name="CurrentYearGradeLevel" fieldName="CYG" label="CYG" />
+    <column name="ExtendedRole" fieldName="ExtendedRole" label="PERTY" />
+    <column name="ExtendedLiveStatusStartDate" fieldName="ExtendedLiveStatusStartDate" label="Admission" />
+    <column name="ExtendedLiveStatusEndDate" fieldName="ExtendedLiveStatusEndDate" label="LSED" />
+    <column name="TitleID" fieldName="TitleID" label="Title ID" aliasColumnName="Description" aliasForeignKey="Title" />
+    <column name="Description" fieldName="Title" label="Title" foreignKey="Title" />
+    <column name="LanguageID" fieldName="LanguageID" label="Language ID" aliasColumnName="Language" aliasForeignKey="Language" />
+    <column name="Language" fieldName="Language" label="Language" foreignKey="Language" />
+    <column name="ReligionID" fieldName="ReligionID" label="Religion ID" aliasColumnName="Religion" aliasForeignKey="Religion" />
+    <column name="Religion" fieldName="Religion" label="Belief" foreignKey="Religion" />
+    <column name="PhotoUrl" fieldName="PhotoUrl" label="Photo" />
+    <column name="Name" fieldName="OrganizationName" label="Organisation" foreignKey="Organization" />
+    <column name="Address" fieldName="Address" label="Address" />
+    <column name="TownID" fieldName="TownID" label="Town ID" aliasColumnName="Town" aliasForeignKey="Town" />
+    <column name="Town" fieldName="Town" label="Town" foreignKey="Town" />
+    <column name="PostalCode" fieldName="PostalCode" label="PostCode" />
+    <column name="CountryID" fieldName="CountryID" label="Country ID" aliasColumnName="Description" aliasForeignKey="Country" />
+    <column name="Description" fieldName="Country" label="Country" foreignKey="Country" />
+    <column name="LocationTypeID" fieldName="LocationTypeID" label="Location Type ID" aliasColumnName="Description" aliasForeignKey="LocationType" />
+    <column name="Description" fieldName="LocationType" label="Location Type" foreignKey="LocationType" />
+    <column name="extSetGradeLevel" fieldName="ExtSetGradeLevel" label="Set GL" />
+    <column name="RefOccupationId" fieldName="RefOccupationID" label="Ref Occupation Id" aliasColumnName="Occupation" aliasForeignKey="RefOccupation" />
+    <column fieldName="HeaderFullname" type="nvarchar(109)" dataType="String" label="Header Fullname">
+      <formula><![CDATA[Person.FirstName + ', ' + Person.LastName + ' >> ' + '( ' + 'UPN: ' + Person.IdentificationCode + ' >> ' + Person.CurrentYearGradeLevel + ' )'  
+ ]]></formula>
+    </column>
+    <column name="Occupation" fieldName="Occupation" label="Occupation" foreignKey="RefOccupation" />
+    <column fieldName="AGE" type="nvarchar(14)" dataType="String" label="AGE">
+      <formula><![CDATA[CONVERT(NVARCHAR(10), CONVERT(int,ROUND(DATEDIFF(hour,BirthDate,GETDATE())/8766.0,0))) + ' ' + 'Yrs' 
+]]></formula>
+    </column>
+    <column fieldName="Fullname" type="nvarchar(72)" dataType="String" label="Fullname">
+      <formula>Person.FirstName + '  ' + Person.LastName</formula>
+    </column>
+    <column name="OrganizationID" fieldName="OrganizationID" label="Organization ID" />
+  </columns>
+  <details>
+    <detail fieldName="PersonAllergy" model="PersonAllergy" filterFields="StudentID" create="true" edit="true" />
+    <detail fieldName="PersonContactPoint" model="PersonContactPoint" filterFields="PersonID" create="true" edit="true" />
+    <detail fieldName="PersonCredential" model="PersonCredential" filterFields="PersonID" create="true" edit="true" />
+  </details>
+</dataModel>

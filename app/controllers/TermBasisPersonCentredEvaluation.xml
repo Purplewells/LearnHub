@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="TermBasisPersonCentredEvaluation" conflictDetection="overwriteChanges" label="Term Basis Person Centred Evaluation" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"rep_usp_term_basis_person_centred_evaluation"."PersonID" "PersonID"
+	,"rep_usp_term_basis_person_centred_evaluation"."FirstName" "FirstName"
+	,"rep_usp_term_basis_person_centred_evaluation"."LastName" "LastName"
+	,"rep_usp_term_basis_person_centred_evaluation"."AcademicYear" "AcademicYear"
+	,"rep_usp_term_basis_person_centred_evaluation"."AcademicTerm" "AcademicTerm"
+	,"rep_usp_term_basis_person_centred_evaluation"."IsAtRisk" "IsAtRisk"
+	,"rep_usp_term_basis_person_centred_evaluation"."IsCHRAB" "IsChrab"
+	,"rep_usp_term_basis_person_centred_evaluation"."OnTheVerge" "OnTheVerge"
+	,"rep_usp_term_basis_person_centred_evaluation"."PerfectAttenance_Count" "PerfectattenanceCount"
+	,"rep_usp_term_basis_person_centred_evaluation"."AttendanceRate" "AttendanceRate"
+	,"rep_usp_term_basis_person_centred_evaluation"."prevIsAtRisk_Count" "PrevisatriskCount"
+	,"rep_usp_term_basis_person_centred_evaluation"."prevIsCHRAB_Count" "PrevischrabCount"
+	,"rep_usp_term_basis_person_centred_evaluation"."prevOnTheVerge_Count" "PrevonthevergeCount"
+	,"rep_usp_term_basis_person_centred_evaluation"."Term_IsAtRisk_Change" "TermIsatriskChange"
+	,"rep_usp_term_basis_person_centred_evaluation"."Term_IsCHRAB_Change" "TermIschrabChange"
+	,"rep_usp_term_basis_person_centred_evaluation"."Term_OnTheVerge_Change" "TermOnthevergeChange"
+	,"rep_usp_term_basis_person_centred_evaluation"."SSIA" "SSIA"
+from "dbo"."rep_usp_term_basis_person_centred_evaluation" "rep_usp_term_basis_person_centred_evaluation"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonID" type="Int32" label="Person ID" showInSummary="true" isPrimaryKey="true" isVirtual="true" />
+    <field name="FirstName" type="String" label="Firstname" length="50" showInSummary="true" />
+    <field name="LastName" type="String" label="Lastname" length="50" showInSummary="true" />
+    <field name="AcademicYear" type="String" label="Aca Year" length="20" showInSummary="true" />
+    <field name="AcademicTerm" type="String" label="Aca Term" length="20" showInSummary="true" />
+    <field name="IsAtRisk" type="Int32" label="At Risk" />
+    <field name="IsChrab" type="Int32" label="IsCHRAB" />
+    <field name="OnTheVerge" type="Int32" label="On The Verge" />
+    <field name="PerfectattenanceCount" type="Int32" label="Perfect Attenance Count" />
+    <field name="AttendanceRate" type="Decimal" dataFormatString="p" label="Attendance Rate" />
+    <field name="PrevisatriskCount" type="Int32" label="prev IsAtRisk" />
+    <field name="PrevischrabCount" type="Int32" label="prev IsCHRAB" />
+    <field name="PrevonthevergeCount" type="Int32" label="prev OnTheVerge" />
+    <field name="TermIsatriskChange" type="Int32" label="At Risk Change" />
+    <field name="TermIschrabChange" type="Int32" label="CHRAB Change" />
+    <field name="TermOnthevergeChange" type="Int32" label="OnTheVerge Change" />
+    <field name="SSIA" type="Int32" label="SSIA" />
+    <field name="AtRisk" type="String" readOnly="true" label="At Risk" computed="true">
+      <formula>CASE WHEN rep_usp_term_basis_person_centred_evaluation.IsAtRisk = '1' THEN 'YES' ELSE 'NO' END</formula>
+    </field>
+    <field name="CHRAB" type="String" readOnly="true" label="CHRAB" computed="true">
+      <formula>CASE WHEN rep_usp_term_basis_person_centred_evaluation.IsCHRAB = '1' THEN 'YES' ELSE 'NO' END</formula>
+    </field>
+    <field name="IsOnTheVerge" type="String" readOnly="true" label="Is OnTheVerge" computed="true">
+      <formula>CASE WHEN rep_usp_term_basis_person_centred_evaluation.OnTheVerge = '1' THEN 'YES' ELSE 'NO' END</formula>
+    </field>
+    <field name="PA" type="String" readOnly="true" label="Perfect Attendance" computed="true">
+      <formula>CASE WHEN rep_usp_term_basis_person_centred_evaluation.PerfectAttenance_Count = '1' THEN 'YES' ELSE 'NO' END</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Term Basis Person Centred Evaluation">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="20" />
+        <dataField fieldName="LastName" columns="20" />
+        <dataField fieldName="AcademicYear" columns="12" />
+        <dataField fieldName="AcademicTerm" columns="12" tag="pivot4-row1-columnstacked&#xD;&#xA;pivot4-title:&quot;Students evaluated to be Chronically Absent&quot;" />
+        <dataField fieldName="IsAtRisk" columns="15" hidden="true" />
+        <dataField fieldName="AtRisk" tag="pivot1-row1-donut&#xD;&#xA;pivot1-title:&quot;Count of Students evaluated to be At Risk of Absence Impact&quot;&#xD;&#xA;&#xD;&#xA;pivot4-col1" columns="8" />
+        <dataField fieldName="OnTheVerge" columns="15" hidden="true" />
+        <dataField fieldName="IsOnTheVerge" tag="pivot2-row1-donut&#xD;&#xA;pivot2-title:&quot;Students evaluated to be OnTheVerge of adverse impact of absence&quot;" columns="10">
+          <headerText>OnTheVerge</headerText>
+        </dataField>
+        <dataField fieldName="IsChrab" columns="15" hidden="true" />
+        <dataField fieldName="CHRAB" columns="8" tag="pivot3-row1-donut&#xD;&#xA;pivot3-title:&quot;Students evaluated to be Chronically Absent&quot;" />
+        <dataField fieldName="PerfectattenanceCount" columns="15" hidden="true">
+          <headerText>PaC</headerText>
+        </dataField>
+        <dataField fieldName="PA" tag="pivot5-row1-donut&#xD;&#xA;pivot5-title:&quot;Students evaluated to be minimally absent&quot;" columns="15" />
+        <dataField fieldName="AttendanceRate" columns="15" />
+        <dataField fieldName="PrevisatriskCount" columns="15" hidden="true" />
+        <dataField fieldName="PrevischrabCount" columns="15" hidden="true" />
+        <dataField fieldName="PrevonthevergeCount" columns="15" hidden="true" />
+        <dataField fieldName="TermIsatriskChange" columns="15" hidden="true" />
+        <dataField fieldName="TermIschrabChange" columns="15" hidden="true" />
+        <dataField fieldName="TermOnthevergeChange" columns="15" hidden="true" />
+        <dataField fieldName="SSIA" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Term Basis Person Centred Evaluation">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Term Basis Person Centred Evaluation" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FirstName" columns="50" />
+            <dataField fieldName="LastName" columns="50" />
+            <dataField fieldName="AcademicYear" columns="20" />
+            <dataField fieldName="AcademicTerm" columns="20" />
+            <dataField fieldName="IsAtRisk" columns="15" />
+            <dataField fieldName="IsChrab" columns="15" />
+            <dataField fieldName="OnTheVerge" columns="15" />
+            <dataField fieldName="PerfectattenanceCount" columns="15" />
+            <dataField fieldName="AttendanceRate" columns="15" />
+            <dataField fieldName="PrevisatriskCount" columns="15" />
+            <dataField fieldName="PrevischrabCount" columns="15" />
+            <dataField fieldName="PrevonthevergeCount" columns="15" />
+            <dataField fieldName="TermIsatriskChange" columns="15" />
+            <dataField fieldName="TermIschrabChange" columns="15" />
+            <dataField fieldName="TermOnthevergeChange" columns="15" />
+            <dataField fieldName="SSIA" columns="15" />
+            <dataField fieldName="AtRisk" />
+            <dataField fieldName="CHRAB" />
+            <dataField fieldName="IsOnTheVerge" />
+            <dataField fieldName="PA" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Term Basis Person Centred Evaluation">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FirstName" columns="50" />
+            <dataField fieldName="LastName" columns="50" />
+            <dataField fieldName="AcademicYear" columns="20" />
+            <dataField fieldName="AcademicTerm" columns="20" />
+            <dataField fieldName="IsAtRisk" columns="15" />
+            <dataField fieldName="IsChrab" columns="15" />
+            <dataField fieldName="OnTheVerge" columns="15" />
+            <dataField fieldName="PerfectattenanceCount" columns="15" />
+            <dataField fieldName="AttendanceRate" columns="15" />
+            <dataField fieldName="PrevisatriskCount" columns="15" />
+            <dataField fieldName="PrevischrabCount" columns="15" />
+            <dataField fieldName="PrevonthevergeCount" columns="15" />
+            <dataField fieldName="TermIsatriskChange" columns="15" />
+            <dataField fieldName="TermIschrabChange" columns="15" />
+            <dataField fieldName="TermOnthevergeChange" columns="15" />
+            <dataField fieldName="SSIA" columns="15" />
+            <dataField fieldName="AtRisk" />
+            <dataField fieldName="CHRAB" />
+            <dataField fieldName="IsOnTheVerge" />
+            <dataField fieldName="PA" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

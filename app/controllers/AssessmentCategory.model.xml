@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkp_AssessmentCategory" alias="zlkp_AssessmentCategory" created="2024-01-28T12:04:41" modified="2024-12-26T10:38:17" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="GradeType" parentTableSchema="dbo" parentTableName="zlkp_GradeType" x="356" y="20">
+      <foreignKeyColumn columnName="GradeTypeID" parentColumnName="GradeTypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="AssessmentCategoryID" fieldName="AssessmentCategoryID" label="Assessment Category ID" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="Category" fieldName="Category" label="Category" />
+    <column name="GradeTypeID" fieldName="GradeTypeID" label="Grade Type ID" aliasColumnName="GradeType" aliasForeignKey="GradeType" />
+    <column name="GradeType" fieldName="GradeType" label="Grade Type" foreignKey="GradeType" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" sortOrder="1" sortType="Ascending" />
+  </columns>
+</dataModel>

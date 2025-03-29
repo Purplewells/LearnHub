@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpNatureOfBehaviour" alias="zlkpNatureOfBehaviour" created="2024-02-03T10:46:04" modified="2024-12-21T19:46:38" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="NatureOfBehaviourID" fieldName="NatureOfBehaviourID" label="Nature Of Behaviour ID" />
+    <column name="NatureOfBehaviour" fieldName="NatureOfBehaviour" label="Nature Of Behaviour" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

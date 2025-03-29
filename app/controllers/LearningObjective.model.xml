@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="LearningObjective" alias="LearningObjective" created="2024-02-14T16:06:07" modified="2024-03-01T07:48:02" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="CourseSection" parentTableSchema="dbo" parentTableName="CourseSection" x="409" y="25">
+      <foreignKeyColumn columnName="CourseSectionID" parentColumnName="CourseSectionID" />
+    </foreignKey>
+    <foreignKey id="LearningObjectiveEntryType" parentTableSchema="dbo" parentTableName="zlkp_LearningObjectiveEntryType" x="411" y="393">
+      <foreignKeyColumn columnName="LearningObjectiveEntryTypeID" parentColumnName="LearningObjectiveEntryTypeID" />
+    </foreignKey>
+    <foreignKey id="GradingPeriod" parentTableSchema="dbo" parentTableName="GradingPeriod" x="37" y="663">
+      <foreignKeyColumn columnName="GradingPeriodID" parentColumnName="GradingPeriodID" />
+    </foreignKey>
+    <foreignKey id="PerformanceIndicator" parentTableSchema="dbo" parentTableName="PerformanceIndicator" x="396" y="705">
+      <foreignKeyColumn columnName="PerformanceIndicatorID" parentColumnName="PerformanceIndicatorID" />
+    </foreignKey>
+    <foreignKey id="AssessmentCategory" parentTableSchema="dbo" parentTableName="zlkp_AssessmentCategory" x="33" y="839">
+      <foreignKeyColumn columnName="AssessmentCategoryID" parentColumnName="AssessmentCategoryID" />
+    </foreignKey>
+    <foreignKey id="RefSchoolStream" parentTableSchema="dbo" parentTableName="zlkpSchoolStream" x="35" y="1019">
+      <foreignKeyColumn columnName="RefSchoolStreamID" parentColumnName="RefSchoolStreamID" />
+    </foreignKey>
+    <foreignKey id="Course" parentTableSchema="dbo" parentTableName="Course" x="845" y="24" baseForeignKey="CourseSection">
+      <foreignKeyColumn columnName="CourseID" parentColumnName="CourseID" />
+    </foreignKey>
+    <foreignKey id="RefGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="1225" y="31" baseForeignKey="Course">
+      <foreignKeyColumn columnName="RefGradeLevelId" parentColumnName="RefGradeLevelId" />
+    </foreignKey>
+    <foreignKey id="CalendarSession" parentTableSchema="dbo" parentTableName="Session" x="841" y="306" baseForeignKey="CourseSection">
+      <foreignKeyColumn columnName="CalendarSessionID" parentColumnName="CalendarSessionID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="LearningObjectiveID" fieldName="LearningObjectiveID" label="Learning Objective ID" />
+    <column name="ItemCode" fieldName="ItemCode" label="SBL Title" />
+    <column name="ContentDescription" fieldName="Content" label="Content" />
+    <column name="Indicator" fieldName="Indicator" label="Indicator" />
+    <column name="CourseSectionID" fieldName="CourseSectionID" label="Course Section ID" aliasColumnName="SectionNo" aliasForeignKey="CourseSection" />
+    <column name="SectionNo" fieldName="SectionNo" label="Section No" foreignKey="CourseSection" />
+    <column name="LearningObjectiveEntryTypeID" fieldName="LearningObjectiveEntryTypeID" label="Learning Objective Entry Type ID" aliasColumnName="GradeBookEntryType" aliasForeignKey="LearningObjectiveEntryType" />
+    <column name="GradeBookEntryType" fieldName="AssessmentType" label="Type" foreignKey="LearningObjectiveEntryType" />
+    <column name="IsActive" fieldName="IsActive" label="Active" />
+    <column name="MaxScore" fieldName="MaxScore" label="MPP" />
+    <column name="SubmittedDate" fieldName="SubmittedDate" label="Submitted Date" />
+    <column name="GradingPeriodID" fieldName="GradingPeriodID" label="Grading Period ID" aliasColumnName="GradingPeriod" aliasForeignKey="GradingPeriod" />
+    <column name="GradingPeriod" fieldName="GradingPeriod" label="GP" foreignKey="GradingPeriod" />
+    <column name="PostToStudentAccess" fieldName="PSTA" label="PSTA" />
+    <column name="PublishItem" fieldName="PUIT" label="PUIT" />
+    <column name="PublishResult" fieldName="PURE" label="PURE" />
+    <column name="WeightMultiplier" fieldName="WeightMultiplier" label="% Wt" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="UserID" fieldName="UserID" label="User ID" />
+    <column name="PerformanceIndicatorID" fieldName="PerformanceIndicatorID" label="Performance Indicator ID" aliasColumnName="Code" aliasForeignKey="PerformanceIndicator" />
+    <column name="Code" fieldName="IndicatorCode" label="Learning Standard" foreignKey="PerformanceIndicator" />
+    <column name="PerformanceDescription" fieldName="PerformanceDescription" label="Performance Description" foreignKey="PerformanceIndicator" />
+    <column name="Strand" fieldName="Strand" label="Strand" foreignKey="PerformanceIndicator" />
+    <column name="Substrand" fieldName="Substrand" label="Substrand" foreignKey="PerformanceIndicator" />
+    <column name="extSubject" fieldName="Subject" label="Subject" foreignKey="PerformanceIndicator" />
+    <column name="AssessmentCategoryID" fieldName="AssessmentCategoryID" label="Assessment Category ID" aliasColumnName="Category" aliasForeignKey="AssessmentCategory" />
+    <column name="Category" fieldName="Category" label="Category" foreignKey="AssessmentCategory" />
+    <column name="Owner" fieldName="Owner" label="Owner" />
+    <column name="RefSchoolStreamID" fieldName="RefSchoolStreamID" label="Ref School Stream ID" aliasColumnName="Description" aliasForeignKey="RefSchoolStream" />
+    <column name="Description" fieldName="STM" label="STM" foreignKey="RefSchoolStream" />
+    <column name="Description" fieldName="GL" label="GL" foreignKey="RefGradeLevel" />
+    <column name="SortOrder" fieldName="GLSO" label="GLSO" foreignKey="RefGradeLevel" />
+    <column name="SessionCode" fieldName="Session" label="Session" foreignKey="CalendarSession" />
+    <column name="IsActive" fieldName="SSIA" label="SSIA" foreignKey="CalendarSession" />
+  </columns>
+</dataModel>

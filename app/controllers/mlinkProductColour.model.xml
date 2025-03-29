@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="mlinkProductColour" alias="mlinkProductColour" created="2024-07-09T16:19:34" modified="2024-07-09T16:20:18" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Product" parentTableSchema="dbo" parentTableName="Product" x="275" y="20">
+      <foreignKeyColumn columnName="ProductID" parentColumnName="ProductID" />
+    </foreignKey>
+    <foreignKey id="Colour" parentTableSchema="dbo" parentTableName="Colour" x="275" y="204">
+      <foreignKeyColumn columnName="ColourID" parentColumnName="ColourID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ProductID" fieldName="ProductID" label="Product ID" aliasColumnName="SKUCode" aliasForeignKey="Product" />
+    <column name="SKUCode" fieldName="ProductSkucode" label="Product SKU Code" foreignKey="Product" />
+    <column name="ColourID" fieldName="ColourID" label="Colour ID" aliasColumnName="ColourName" aliasForeignKey="Colour" />
+    <column name="ColourName" fieldName="ColourName" label="Colour Name" foreignKey="Colour" />
+  </columns>
+</dataModel>

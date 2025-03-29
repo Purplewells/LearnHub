@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="CalendarEvent" alias="CalendarEvent" created="2024-01-27T23:39:22" modified="2024-01-27T23:40:52" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="OrganizationCalendar" parentTableSchema="dbo" parentTableName="Calendar" x="362" y="20">
+      <foreignKeyColumn columnName="OrganizationCalendarId" parentColumnName="OrganizationCalendarId" />
+    </foreignKey>
+    <foreignKey id="RefCalendarEventType" parentTableSchema="dbo" parentTableName="CalendarEventDescriptor" x="372" y="337">
+      <foreignKeyColumn columnName="RefCalendarEventType" parentColumnName="RefCalendarEventTypeId" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="CalendarEventID" fieldName="CalendarEventID" label="Calendar Event ID" />
+    <column name="OrganizationCalendarId" fieldName="OrganizationCalendarID" label="Organization Calendar Id" aliasColumnName="CalendarCode" aliasForeignKey="OrganizationCalendar" />
+    <column name="CalendarCode" fieldName="CalendarCode" label="Calendar Code" foreignKey="OrganizationCalendar" />
+    <column name="Name" fieldName="Name" label="Name" />
+    <column name="EventDate" fieldName="EventDate" label="Event Date" />
+    <column name="RefCalendarEventType" fieldName="RefCalendarEventType" label="Ref Calendar Event Type" aliasColumnName="Description" aliasForeignKey="RefCalendarEventType" />
+    <column name="Description" fieldName="EventType" label="Event Type" foreignKey="RefCalendarEventType" />
+  </columns>
+</dataModel>

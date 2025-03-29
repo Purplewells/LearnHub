@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpOrganizationType" alias="zlkpOrganizationType" created="2024-01-31T17:51:28" modified="2024-01-31T17:51:58" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="ElementType" parentTableSchema="dbo" parentTableName="zlkpOrganizationElementType" x="326" y="20">
+      <foreignKeyColumn columnName="ElementTypeID" parentColumnName="ElementTypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="TypeID" fieldName="TypeID" label="Type ID" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="ElementTypeID" fieldName="ElementTypeID" label="Element Type ID" aliasColumnName="Description" aliasForeignKey="ElementType" />
+    <column name="Description" fieldName="ElementType" label="Element Type" foreignKey="ElementType" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

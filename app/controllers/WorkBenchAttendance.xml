@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkBenchAttendance" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="AbsenceReason" type="DataView" label="Absence Reason">
+      <dataView controller="AbsenceReason" view="grid1" />
+    </field>
+    <field name="AttendanceCategory" type="DataView" label="Attendance Category">
+      <dataView controller="AttendanceCategory" view="grid1" />
+    </field>
+    <field name="AttendanceReason" type="DataView" label="Attendance Reason">
+      <dataView controller="AttendanceReason" view="grid1" />
+    </field>
+    <field name="AttendanceStatus" type="DataView" label="Attendance Status">
+      <dataView controller="AttendanceStatus" view="grid1" />
+    </field>
+    <field name="PresentAttendanceCategory" type="DataView" label="Present Attendance Category">
+      <dataView controller="PresentAttendanceCategory" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="AttendanceAttributes" type="Form" label="ATTENDANCE CONFIGURATION WORKBENCH">
+      <categories>
+        <category id="c3" tab="ATTENDANCE EVENT REASON" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="AttendanceReason" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c1" tab="ABSENCE REASON">
+          <dataFields>
+            <dataField fieldName="AbsenceReason" columns="15" tag="material-icon-explore&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c4" tab="ATTENDANCE STATUS">
+          <dataFields>
+            <dataField fieldName="AttendanceStatus" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c5" tab="PRESENCE CATEGORY">
+          <dataFields>
+            <dataField fieldName="PresentAttendanceCategory" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c2" tab="CATEGORY">
+          <dataFields>
+            <dataField fieldName="AttendanceCategory" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+      </categories>
+      <headerText>This interface provides an entry point for configuring attendance module.</headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Attendance Actions" flat="false" />
+  </actions>
+</dataController>

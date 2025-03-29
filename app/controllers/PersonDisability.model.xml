@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PersonDisability" alias="PersonDisability" created="2024-02-10T10:14:02" modified="2024-02-15T08:38:41" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="PrimaryDisabilityType" parentTableSchema="dbo" parentTableName="zlkpDisabilityType" x="439" y="20">
+      <foreignKeyColumn columnName="PrimaryDisabilityTypeId" parentColumnName="RefDisabilityTypeId" />
+    </foreignKey>
+    <foreignKey id="RefAccommodationsNeededType" parentTableSchema="dbo" parentTableName="zlkpAccommodationsNeededType" x="439" y="181">
+      <foreignKeyColumn columnName="RefAccommodationsNeededTypeId" parentColumnName="RefAccommodationsNeededTypeId" />
+    </foreignKey>
+    <foreignKey id="RefDisabilityConditionType" parentTableSchema="dbo" parentTableName="zlkpDisabilityConditionType" x="439" y="358">
+      <foreignKeyColumn columnName="RefDisabilityConditionTypeId" parentColumnName="RefDisabilityConditionTypeId" />
+    </foreignKey>
+    <foreignKey id="RefDisabilityDeterminationSourceType" parentTableSchema="dbo" parentTableName="zlkpDisabilityDeterminationSourceType" x="439" y="519">
+      <foreignKeyColumn columnName="RefDisabilityDeterminationSourceTypeId" parentColumnName="RefDisabilityDeterminationSourceTypeId" />
+    </foreignKey>
+    <foreignKey id="RefDisabilityConditionStatusCode" parentTableSchema="dbo" parentTableName="zlkpDisabilityConditionStatusCode" x="439" y="696">
+      <foreignKeyColumn columnName="RefDisabilityConditionStatusCodeId" parentColumnName="RefDisabilityConditionStatusCodeId" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="881" y="20">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="DisabilitID" fieldName="DisabilitID" label="Disabilit ID" />
+    <column name="PrimaryDisabilityTypeId" fieldName="PrimaryDisabilityTypeID" label="Primary Disability Type Id" aliasColumnName="Description" aliasForeignKey="PrimaryDisabilityType" />
+    <column name="Description" fieldName="PrimaryDisabilityTypeDescription" label="Disability Type" foreignKey="PrimaryDisabilityType" />
+    <column name="DisabilityStatus" fieldName="DisabilityStatus" label="Disability Status" />
+    <column name="RefAccommodationsNeededTypeId" fieldName="RefAccommodationsNeededTypeID" label="Ref Accommodations Needed Type Id" aliasColumnName="Description" aliasForeignKey="RefAccommodationsNeededType" />
+    <column name="Description" fieldName="NeededAccommodations" label="Needed Accommodations" foreignKey="RefAccommodationsNeededType" />
+    <column name="RefDisabilityConditionTypeId" fieldName="RefDisabilityConditionTypeID" label="Ref Disability Condition Type Id" aliasColumnName="Description" aliasForeignKey="RefDisabilityConditionType" />
+    <column name="Description" fieldName="ConditionType" label="Condition Type" foreignKey="RefDisabilityConditionType" />
+    <column name="RefDisabilityDeterminationSourceTypeId" fieldName="RefDisabilityDeterminationSourceTypeID" label="Ref Disability Determination Source Type Id" aliasColumnName="Description" aliasForeignKey="RefDisabilityDeterminationSourceType" />
+    <column name="Description" fieldName="SourceDetermination" label="Source Determination" foreignKey="RefDisabilityDeterminationSourceType" />
+    <column name="RefDisabilityConditionStatusCodeId" fieldName="RefDisabilityConditionStatusCodeID" label="Ref Disability Condition Status Code Id" aliasColumnName="Description" aliasForeignKey="RefDisabilityConditionStatusCode" />
+    <column name="Description" fieldName="ConditionDescription" label="Condition" foreignKey="RefDisabilityConditionStatusCode" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="IdentificationCode" aliasForeignKey="Person" />
+    <column name="IdentificationCode" fieldName="IdentificationCode" label="UPN" foreignKey="Person" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" foreignKey="Person" />
+    <column name="LastName" fieldName="LastName" label="Last Name" foreignKey="Person" />
+    <column name="CurrentYearGradeLevel" fieldName="CurrentYearGradeLevel" label="GL" foreignKey="Person" />
+    <column fieldName="HeaderTitle" type="nvarchar(109)" dataType="String" label="Header Title">
+      <formula><![CDATA[Person.FirstName + ', ' + Person.LastName + ' >> ' + '( ' + 'UPN: ' + Person.IdentificationCode + ' >> ' + Person.CurrentYearGradeLevel + ' )'  
+ ]]></formula>
+    </column>
+  </columns>
+</dataModel>

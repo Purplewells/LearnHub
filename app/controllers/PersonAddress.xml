@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="PersonAddress" conflictDetection="overwriteChanges" label="Person Address" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"PersonAddress"."PersonAddressId" "PersonAddressID"
+	,"PersonAddress"."PersonId" "PersonID"
+	,"Person"."IdentificationCode" "PersonIdentificationCode"
+	,"Person"."FirstName" "PersonFirstName"
+	,"Person"."LastName" "PersonLastName"
+	,"PersonAddress"."RefPersonLocationTypeId" "RefPersonLocationTypeID"
+	,"RefPersonLocationType"."Description" "LocationType"
+	,"PersonAddress"."StreetNumberAndName" "Address"
+	,"PersonAddress"."City" "City"
+	,"PersonAddress"."RefStateId" "RefStateID"
+	,"RefState"."Description" "TownCity"
+	,"PersonAddress"."PostalCode" "PostalCode"
+	,"PersonAddress"."District" "District"
+	,"PersonAddress"."RefCountryId" "RefCountryID"
+	,"RefCountry"."Description" "Country"
+	,"PersonAddress"."Latitude" "Latitude"
+	,"PersonAddress"."Longitude" "Longitude"
+from "dbo"."PersonAddress" "PersonAddress"
+	left join "dbo"."Person" "Person" on "PersonAddress"."PersonId" = "Person"."PersonID"
+	left join "dbo"."zlkpPersonLocationType" "RefPersonLocationType" on "PersonAddress"."RefPersonLocationTypeId" = "RefPersonLocationType"."LocationTypeID"
+	left join "dbo"."zlkpState" "RefState" on "PersonAddress"."RefStateId" = "RefState"."RefStateId"
+	left join "dbo"."zlkpCountry" "RefCountry" on "PersonAddress"."RefCountryId" = "RefCountry"."CountryID"
+]]></text>
+    </command>
+    <command id="PersonAddressIdIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="PersonAddressID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonAddressID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Person Address Id" readOnly="true" />
+    <field name="PersonID" type="Int32" label="Person Id" showInSummary="true">
+      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="UPN" copy="PersonFirstName=FirstName, PersonLastName=LastName" />
+    </field>
+    <field name="PersonIdentificationCode" type="String" readOnly="true" label="Person Identification Code" length="10" />
+    <field name="PersonFirstName" type="String" readOnly="true" label="Person First Name" length="35" />
+    <field name="PersonLastName" type="String" readOnly="true" label="Person Last Name" length="35" />
+    <field name="RefPersonLocationTypeID" type="Int32" label="Ref Person Location Type Id" showInSummary="true">
+      <items style="Lookup" dataController="PersonLocationType" newDataView="createForm1" dataValueField="LocationTypeID" dataTextField="Description" />
+    </field>
+    <field name="LocationType" type="String" readOnly="true" label="Location Type" length="100" />
+    <field name="Address" type="String" label="Address" length="40" showInSummary="true" />
+    <field name="City" type="String" label="City" length="30" showInSummary="true" />
+    <field name="RefStateID" type="Int32" label="Ref State Id" showInSummary="true">
+      <items style="Lookup" dataController="AwardState" newDataView="createForm1" dataValueField="RefStateID" dataTextField="Description" />
+    </field>
+    <field name="TownCity" type="String" readOnly="true" label="Town City" length="100" />
+    <field name="PostalCode" type="String" label="Postal Code" length="17" />
+    <field name="District" type="String" label="District" length="30" />
+    <field name="RefCountryID" type="Int32" label="Ref Country Id">
+      <items style="Lookup" dataController="Country" newDataView="createForm1" dataValueField="CountryID" dataTextField="Description" />
+    </field>
+    <field name="Country" type="String" readOnly="true" label="Country" length="100" />
+    <field name="Latitude" type="String" label="Latitude" length="20" />
+    <field name="Longitude" type="String" label="Longitude" length="20" />
+    <field name="Fullname" type="String" readOnly="true" label="Fullname" computed="true">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Person Address">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" aliasFieldName="PersonIdentificationCode" />
+        <dataField fieldName="PersonFirstName" columns="35" />
+        <dataField fieldName="PersonLastName" columns="35" />
+        <dataField fieldName="RefPersonLocationTypeID" aliasFieldName="LocationType" />
+        <dataField fieldName="Address" columns="40" />
+        <dataField fieldName="City" columns="30" />
+        <dataField fieldName="RefStateID" aliasFieldName="TownCity" />
+        <dataField fieldName="PostalCode" columns="17" />
+        <dataField fieldName="District" columns="30" />
+        <dataField fieldName="RefCountryID" aliasFieldName="Country" />
+        <dataField fieldName="Latitude" columns="20" />
+        <dataField fieldName="Longitude" columns="20" />
+        <dataField fieldName="Fullname" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Person Address">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Person Address" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" aliasFieldName="PersonIdentificationCode" />
+            <dataField fieldName="PersonFirstName" columns="35" />
+            <dataField fieldName="PersonLastName" columns="35" />
+            <dataField fieldName="RefPersonLocationTypeID" aliasFieldName="LocationType" />
+            <dataField fieldName="Address" columns="40" />
+            <dataField fieldName="City" columns="30" />
+            <dataField fieldName="RefStateID" aliasFieldName="TownCity" />
+            <dataField fieldName="PostalCode" columns="17" />
+            <dataField fieldName="District" columns="30" />
+            <dataField fieldName="RefCountryID" aliasFieldName="Country" />
+            <dataField fieldName="Latitude" columns="20" />
+            <dataField fieldName="Longitude" columns="20" />
+            <dataField fieldName="Fullname" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Person Address">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" aliasFieldName="PersonIdentificationCode" />
+            <dataField fieldName="PersonFirstName" columns="35" />
+            <dataField fieldName="PersonLastName" columns="35" />
+            <dataField fieldName="RefPersonLocationTypeID" aliasFieldName="LocationType" />
+            <dataField fieldName="Address" columns="40" />
+            <dataField fieldName="City" columns="30" />
+            <dataField fieldName="RefStateID" aliasFieldName="TownCity" />
+            <dataField fieldName="PostalCode" columns="17" />
+            <dataField fieldName="District" columns="30" />
+            <dataField fieldName="RefCountryID" aliasFieldName="Country" />
+            <dataField fieldName="Latitude" columns="20" />
+            <dataField fieldName="Longitude" columns="20" />
+            <dataField fieldName="Fullname" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

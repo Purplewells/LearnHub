@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="K12StaffAssignment" alias="K12StaffAssignment" created="2024-02-22T14:47:31" modified="2024-02-22T14:56:09" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="StaffClassification" parentTableSchema="dbo" parentTableName="zlkpStaffClassification" x="438" y="20">
+      <foreignKeyColumn columnName="StaffClassificationID" parentColumnName="RefEducationStaffClassificationId" />
+    </foreignKey>
+    <foreignKey id="JobClassification" parentTableSchema="dbo" parentTableName="zlkpProfessionalEducationJobClassification" x="438" y="181">
+      <foreignKeyColumn columnName="JobClassificationID" parentColumnName="RefProfessionalEducationJobClassificationId" />
+    </foreignKey>
+    <foreignKey id="RefTeachingAssignmentRole" parentTableSchema="dbo" parentTableName="zlkpTeachingAssignmentRole" x="438" y="342">
+      <foreignKeyColumn columnName="RefTeachingAssignmentRoleId" parentColumnName="RefTeachingAssignmentRoleId" />
+    </foreignKey>
+    <foreignKey id="PositionType" parentTableSchema="dbo" parentTableName="zlkpClassroomPositionType" x="438" y="519">
+      <foreignKeyColumn columnName="PositionTypeID" parentColumnName="RefClassroomPositionTypeId" />
+    </foreignKey>
+    <foreignKey id="OrganizationPersonRole" parentTableSchema="dbo" parentTableName="OrganizationPersonRole" x="445" y="637">
+      <foreignKeyColumn columnName="OrganizationPersonRoleID" parentColumnName="OrganizationPersonRoleID" />
+    </foreignKey>
+    <foreignKey id="OrganizationPersonRoleOrganisation" parentTableSchema="dbo" parentTableName="Organisation" baseForeignKey="OrganizationPersonRole" x="870" y="500">
+      <foreignKeyColumn columnName="OrganisationID" parentColumnName="OrganizationID" />
+    </foreignKey>
+    <foreignKey id="OrganizationPersonRolePerson" parentTableSchema="dbo" parentTableName="Person" baseForeignKey="OrganizationPersonRole" x="873" y="666">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="Department" parentTableSchema="dbo" parentTableName="Department" x="33" y="586">
+      <foreignKeyColumn columnName="DepartmentID" parentColumnName="DepartmentID" />
+    </foreignKey>
+    <foreignKey id="Title" parentTableSchema="dbo" parentTableName="zlkpTitle" x="1272" y="651" baseForeignKey="OrganizationPersonRolePerson">
+      <foreignKeyColumn columnName="TitleID" parentColumnName="TitleID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="StaffAssignmentID" fieldName="StaffAssignmentID" label="Staff Assignment ID" />
+    <column fieldName="StaffName" type="nvarchar(87)" dataType="String" label="Staff Name">
+      <formula>Title.Description + ' ' + OrganizationPersonRolePerson.FirstName + ' ' + OrganizationPersonRolePerson.LastName</formula>
+    </column>
+    <column name="FirstName" fieldName="FirstName" label="First Name" foreignKey="OrganizationPersonRolePerson" />
+    <column name="LastName" fieldName="LastName" label="Last Name" foreignKey="OrganizationPersonRolePerson" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="OrganizationPersonRolePerson" />
+    <column name="Description" fieldName="Title" label="Title" foreignKey="Title" />
+    <column name="StaffClassificationID" fieldName="StaffClassificationID" label="Staff Classification ID" aliasColumnName="Description" aliasForeignKey="StaffClassification" />
+    <column name="Description" fieldName="Classification" label="Classification" foreignKey="StaffClassification" />
+    <column name="JobClassificationID" fieldName="JobClassificationID" label="Job Classification ID" aliasColumnName="Description" aliasForeignKey="JobClassification" />
+    <column name="Description" fieldName="JobClass" label="Job Class" foreignKey="JobClassification" />
+    <column name="RefTeachingAssignmentRoleId" fieldName="RefTeachingAssignmentRoleID" label="Ref Teaching Assignment Role Id" aliasColumnName="Description" aliasForeignKey="RefTeachingAssignmentRole" />
+    <column name="Description" fieldName="AssignedRole" label="Assigned Role" foreignKey="RefTeachingAssignmentRole" />
+    <column name="PositionTypeID" fieldName="PositionTypeID" label="Position Type ID" aliasColumnName="Description" aliasForeignKey="PositionType" />
+    <column name="Description" fieldName="PositionType" label="Position Type" foreignKey="PositionType" />
+    <column name="HighlyQualifiedTeacherIndicator" fieldName="QTS" label="QTS" />
+    <column name="StartDate" fieldName="StartDate" label="Start Date" />
+    <column name="EndDate" fieldName="EndDate" label="End Date" />
+    <column name="OrganizationPersonRoleID" fieldName="OrganizationPersonRoleID" label="Organization Person Role ID" />
+    <column name="OrganisationID" fieldName="OrganizationPersonRoleOrganisationID" foreignKey="OrganizationPersonRole" />
+    <column name="Name" fieldName="Organisation" label="Organisation" foreignKey="OrganizationPersonRoleOrganisation" />
+    <column name="DepartmentID" fieldName="DepartmentID" label="Department ID" aliasColumnName="DepartmentName" aliasForeignKey="Department" />
+    <column name="DepartmentName" fieldName="Department" label="Department" foreignKey="Department" />
+  </columns>
+</dataModel>

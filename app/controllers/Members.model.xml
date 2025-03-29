@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Members" alias="Members" created="2024-08-01T14:46:25" modified="2024-08-01T14:52:29" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="MemberID" fieldName="MemberID" label="Member ID" />
+    <column name="Name" fieldName="Name" label="Name" />
+    <column name="Address" fieldName="Address" label="Address" />
+    <column name="Email" fieldName="Email" label="Email" />
+    <column name="PhoneNumber" fieldName="PhoneNumber" label="Phone No" />
+    <column name="MembershipDate" fieldName="MembershipDate" label="Membership Date" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+  </columns>
+</dataModel>

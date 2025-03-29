@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="PerformanceIndicator" conflictDetection="overwriteChanges" label="Performance Indicator" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"PerformanceIndicator"."PerformanceIndicatorID" "PerformanceIndicatorID"
+	,"PerformanceIndicator"."Code" "Code"
+	,"PerformanceIndicator"."ICode" "ICode"
+	,"PerformanceIndicator"."PerformanceDescription" "PerformanceDescription"
+	,"PerformanceIndicator"."SuccessStatement" "SuccessStatement"
+	,"PerformanceIndicator"."ContentStandardNo" "StandardNo"
+	,"PerformanceIndicator"."Strand" "Strand"
+	,"PerformanceIndicator"."Substrand" "Substrand"
+	,"PerformanceIndicator"."StrandCode" "StrandCode"
+	,"PerformanceIndicator"."extSubject" "Subject"
+	,"PerformanceIndicator"."extTerm" "ExtTerm"
+	,"PerformanceIndicator"."IsActive" "IsActive"
+	,"PerformanceIndicator"."extIsActive" "ExtIsActive"
+	,"PerformanceIndicator"."GradeLevelID" "GradeLevelID"
+	,"zlkpGradeLevel"."Description" "GL"
+	,"zlkpGradeLevel"."SortOrder" "GLSO"
+	,"PerformanceIndicator"."extContentStandard" "ExtContentStandard"
+	,"PerformanceIndicator"."extLearningStandard" "ExtLearningStandard"
+from "dbo"."PerformanceIndicator" "PerformanceIndicator"
+	left join "dbo"."zlkpGradeLevel" "zlkpGradeLevel" on "PerformanceIndicator"."GradeLevelID" = "zlkpGradeLevel"."RefGradeLevelId"
+]]></text>
+    </command>
+    <command id="PerformanceIndicatorIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="PerformanceIndicatorID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="PerformanceIndicatorID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Performance Indicator ID" readOnly="true" />
+    <field name="Code" type="String" label="Code" length="25" showInSummary="true" />
+    <field name="ICode" type="String" label="ICode" length="30" showInSummary="true" />
+    <field name="PerformanceDescription" type="String" allowQBE="false" allowSorting="false" label="Performance Description" length="2048" showInSummary="true" />
+    <field name="SuccessStatement" type="String" label="Success Statement" length="1024" showInSummary="true" />
+    <field name="StandardNo" type="String" label="Standard No" length="50" showInSummary="true" />
+    <field name="Strand" type="String" label="Strand" length="150" />
+    <field name="Substrand" type="String" label="Substrand" length="150" />
+    <field name="StrandCode" type="String" label="Strand Code" length="20" />
+    <field name="Subject" type="String" label="Subject" length="50" />
+    <field name="ExtTerm" type="String" label="Term" length="15" />
+    <field name="IsActive" type="Boolean" default="((1))" label="Is Active" />
+    <field name="ExtIsActive" type="Boolean" label="Active" />
+    <field name="GradeLevelID" type="Int32" label="Grade Level ID">
+      <items style="Lookup" dataController="GradeLevel" newDataView="createForm1" dataValueField="RefGradeLevelID" dataTextField="Description" copy="GLSO=SortOrder" />
+    </field>
+    <field name="GL" type="String" readOnly="true" label="GL" length="100" />
+    <field name="GLSO" type="Decimal" readOnly="true" label="GLSO" />
+    <field name="PerformanceIndicator" type="String" readOnly="true" label="Performance Indicator" computed="true">
+      <formula>PerformanceIndicator.Code + ' - ' + PerformanceIndicator.PerformanceDescription</formula>
+    </field>
+    <field name="SubjectLearningOutcome" type="String" readOnly="true" label="Subject Learning Outcome" computed="true">
+      <formula>PerformanceIndicator.extSubject + ' - ' + PerformanceIndicator.ICode + ' - ' + PerformanceIndicator.PerformanceDescription</formula>
+    </field>
+    <field name="ExtContentStandard" type="String" allowQBE="false" allowSorting="false" label="Content Standard" length="2048" />
+    <field name="ExtLearningStandard" type="String" allowQBE="false" allowSorting="false" label="ext Learning Standard" length="2048" />
+    <field name="StrandDescriptor" type="String" readOnly="true" label="Strand Descriptor" computed="true">
+      <formula>PerformanceIndicator.StrandCode + ' - ' + PerformanceIndicator.Strand</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Active Standards" sortExpression="GLSO ASC, SUBJECT ASC, ICODE ASC" filter="IsActive = 1">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Code" columns="25" />
+        <dataField fieldName="Strand" tag="header-text" />
+        <dataField fieldName="StrandCode" columns="20" />
+        <dataField fieldName="Substrand" />
+        <dataField fieldName="Subject" columns="20" />
+        <dataField fieldName="PerformanceDescription" rows="5" tag="item-desc" />
+        <dataField fieldName="SuccessStatement" tag="import-duplicate-accept" hidden="true" />
+        <dataField fieldName="StandardNo" columns="20" />
+        <dataField fieldName="ICode" columns="30" tag="import-duplicate-accept" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="ExtIsActive" hidden="true" />
+        <dataField fieldName="SubjectLearningOutcome" hidden="true" />
+        <dataField fieldName="ExtTerm" columns="15" />
+        <dataField fieldName="GradeLevelID" aliasFieldName="GL" />
+        <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="PerformanceIndicator" hidden="true" />
+        <dataField fieldName="ExtContentStandard" rows="5" hidden="true" />
+        <dataField fieldName="ExtLearningStandard" rows="5" hidden="true" />
+        <dataField fieldName="StrandDescriptor" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="all_standards" type="Grid" commandId="command1" label="All Standards" sortExpression="GLSO ASC, SUBJECT ASC, ICODE ASC">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Code" columns="25" />
+        <dataField fieldName="Strand" />
+        <dataField fieldName="StrandCode" columns="20" />
+        <dataField fieldName="Substrand" />
+        <dataField fieldName="Subject" columns="20" />
+        <dataField fieldName="PerformanceDescription" rows="5" tag="item-desc" />
+        <dataField fieldName="SuccessStatement" tag="import-duplicate-accept" hidden="true" />
+        <dataField fieldName="StandardNo" columns="20" />
+        <dataField fieldName="ICode" columns="30" tag="import-duplicate-accept" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="ExtIsActive" hidden="true" />
+        <dataField fieldName="SubjectLearningOutcome" hidden="true" />
+        <dataField fieldName="ExtTerm" columns="15" />
+        <dataField fieldName="GradeLevelID" aliasFieldName="GL" />
+        <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="PerformanceIndicator" hidden="true" />
+        <dataField fieldName="ExtContentStandard" rows="5" hidden="true" />
+        <dataField fieldName="ExtLearningStandard" rows="5" hidden="true" />
+        <dataField fieldName="StrandDescriptor" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Performance Indicator">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="Subject" columns="50" textMode="Static" />
+            <dataField fieldName="ICode" columns="30" textMode="Static" />
+            <dataField fieldName="Code" columns="25" textMode="Static" />
+            <dataField fieldName="Strand" />
+            <dataField fieldName="Substrand" />
+            <dataField fieldName="GLSO" columns="15" hidden="true" />
+            <dataField fieldName="SubjectLearningOutcome" hidden="true" />
+            <dataField fieldName="ExtLearningStandard" rows="5" hidden="true" />
+            <dataField fieldName="GradeLevelID" aliasFieldName="GL" />
+            <dataField fieldName="ExtTerm" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Success Statement" collapsed="true" wrap="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="SuccessStatement" rows="3" textMode="Note" />
+          </dataFields>
+        </category>
+        <category id="c5" headerText="Performance References" collapsed="true" wrap="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="PerformanceDescription" rows="3" />
+            <dataField fieldName="PerformanceIndicator" textMode="Static" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Descriptors" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="StrandDescriptor" />
+            <dataField fieldName="StandardNo" columns="50" />
+            <dataField fieldName="StrandCode" columns="20" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Content Description" collapsed="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="ExtContentStandard" rows="3" textMode="Note" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="ExtIsActive" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Performance Indicator">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="Subject" columns="50" textMode="Static" />
+            <dataField fieldName="ICode" columns="30" textMode="Static" />
+            <dataField fieldName="Code" columns="25" textMode="Static" />
+            <dataField fieldName="Strand" />
+            <dataField fieldName="Substrand" />
+            <dataField fieldName="GLSO" columns="15" hidden="true" />
+            <dataField fieldName="SubjectLearningOutcome" hidden="true" />
+            <dataField fieldName="ExtLearningStandard" rows="5" hidden="true" />
+            <dataField fieldName="GradeLevelID" aliasFieldName="GL" />
+            <dataField fieldName="ExtTerm" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Success Statement" collapsed="true" wrap="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="SuccessStatement" rows="3" textMode="Note" />
+          </dataFields>
+        </category>
+        <category id="c5" headerText="Performance References" collapsed="true" wrap="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="PerformanceDescription" rows="3" />
+            <dataField fieldName="PerformanceIndicator" textMode="Static" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Descriptors" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="StrandDescriptor" />
+            <dataField fieldName="StandardNo" columns="50" />
+            <dataField fieldName="StrandCode" columns="20" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Content Description" collapsed="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="ExtContentStandard" rows="3" textMode="Note" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="ExtIsActive" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

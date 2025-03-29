@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="StudentDisciplineIncidentAssociation" conflictDetection="overwriteChanges" label="Student Discipline Incident Association" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"StudentDisciplineIncidentAssociation"."StudentDisciplineIncidentID" "StudentDisciplineIncidentID"
+	,"StudentDisciplineIncidentAssociation"."DisciplineIncidentID" "DisciplineIncidentID"
+	,"DisciplineIncident"."Code" "DisciplineIncidentCode"
+	,"StudentDisciplineIncidentAssociation"."StudentID" "StudentID"
+	,"Student"."IdentificationCode" "UPN"
+	,"Student"."FirstName" "FirstName"
+	,"Student"."LastName" "LastName"
+	,"StudentDisciplineIncidentAssociation"."IncidentParticipationID" "IncidentParticipationID"
+	,"IncidentParticipation"."ParticipationDescription" "IncidentParticipationDescription"
+	,"StudentDisciplineIncidentAssociation"."BehaviourCategoryTypeID" "BehaviourCategoryTypeID"
+	,"BehaviourCategoryType"."CategoryType" "BehaviourCategoryType"
+	,"BehaviourCategoryType"."Points" "BehaviourCategoryTypePoints"
+	,"StudentDisciplineIncidentAssociation"."ActionTakenID" "ActionTakenID"
+	,"ActionTaken"."ActionTaken" "ActionTaken"
+	,"StudentDisciplineIncidentAssociation"."PersonID" "PersonID"
+	,"Person"."FirstName" "StaffFirstName"
+	,"Person"."LastName" "StaffLastName"
+from "dbo"."StudentDisciplineIncidentAssociation" "StudentDisciplineIncidentAssociation"
+	left join "dbo"."DisciplineIncident" "DisciplineIncident" on "StudentDisciplineIncidentAssociation"."DisciplineIncidentID" = "DisciplineIncident"."DisciplineIncidentID"
+	left join "dbo"."Person" "Student" on "StudentDisciplineIncidentAssociation"."StudentID" = "Student"."PersonID"
+	left join "dbo"."zlkpIncidentParticipation" "IncidentParticipation" on "StudentDisciplineIncidentAssociation"."IncidentParticipationID" = "IncidentParticipation"."IncidentParticipationID"
+	left join "dbo"."zlkpBehaviourCategory" "BehaviourCategoryType" on "StudentDisciplineIncidentAssociation"."BehaviourCategoryTypeID" = "BehaviourCategoryType"."BehaviourCategoryTypeID"
+	left join "dbo"."zlkpActionTaken" "ActionTaken" on "StudentDisciplineIncidentAssociation"."ActionTakenID" = "ActionTaken"."ActionTakenID"
+	left join "dbo"."Person" "Person" on "StudentDisciplineIncidentAssociation"."PersonID" = "Person"."PersonID"
+]]></text>
+    </command>
+    <command id="StudentDisciplineIncidentIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="StudentDisciplineIncidentID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="StudentDisciplineIncidentID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Student Discipline Incident ID" readOnly="true" />
+    <field name="DisciplineIncidentID" type="Int32" allowNulls="false" label="Discipline Incident ID" showInSummary="true">
+      <items style="Lookup" dataController="DisciplineIncident" newDataView="createForm1" dataValueField="DisciplineIncidentID" dataTextField="Code" />
+    </field>
+    <field name="DisciplineIncidentCode" type="String" readOnly="true" label="Discipline Incident Code" length="40" />
+    <field name="StudentID" type="Int32" allowNulls="false" label="Student ID" showInSummary="true">
+      <items style="Lookup" dataController="zlkpStudentList" newDataView="createForm1" dataValueField="PersonID" dataTextField="StudentGradeName" copy="StudentFirstName=FirstName, StudentLastName=LastName" dataView="grid1" />
+    </field>
+    <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
+    <field name="FirstName" type="String" readOnly="true" label="First Name" length="35" />
+    <field name="LastName" type="String" readOnly="true" label="Last Name" length="35" />
+    <field name="IncidentParticipationID" type="Int32" label="Incident Participation ID" showInSummary="true">
+      <items style="Lookup" dataController="IncidentParticipation" newDataView="createForm1" dataValueField="IncidentParticipationID" dataTextField="ParticipationDescription" />
+    </field>
+    <field name="IncidentParticipationDescription" type="String" readOnly="true" label="Incident Involvement" length="20" />
+    <field name="BehaviourCategoryTypeID" type="Int32" label="Behaviour Category Type ID" showInSummary="true">
+      <items style="Lookup" dataController="BehaviourCategory" newDataView="createForm1" dataValueField="BehaviourCategoryTypeID" dataTextField="CategoryType" copy="BehaviourCategoryTypePoints=Points" />
+    </field>
+    <field name="BehaviourCategoryType" type="String" readOnly="true" label="Behaviour Category Type" length="60" />
+    <field name="BehaviourCategoryTypePoints" type="Single" readOnly="true" label="Points" />
+    <field name="ActionTakenID" type="Int32" label="Action Taken ID" showInSummary="true">
+      <items style="Lookup" dataController="ActionTaken" newDataView="createForm1" dataValueField="ActionTakenID" dataTextField="ActionTaken" />
+    </field>
+    <field name="ActionTaken" type="String" readOnly="true" label="Action Taken" length="50" />
+    <field name="PersonID" type="Int32" label="Person ID">
+      <items style="Lookup" dataController="zlkpStaffList" newDataView="createForm1" dataValueField="PersonID" dataTextField="StaffNameTitle" copy="FirstName=FirstName, LastName=LastName" dataView="grid1" />
+    </field>
+    <field name="StaffFirstName" type="String" readOnly="true" label="Staff First Name" length="35" />
+    <field name="StaffLastName" type="String" readOnly="true" label="Staff Last Name" length="35" />
+    <field name="StaffName" type="String" readOnly="true" label="Staff Name" computed="true">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </field>
+    <field name="Fullname" type="String" readOnly="true" label="Fullname" computed="true">
+      <formula>Student.FirstName + ' ' + Student.LastName</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Student Discipline Incident Association">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="DisciplineIncidentID" aliasFieldName="DisciplineIncidentCode" />
+        <dataField fieldName="StudentID" aliasFieldName="Fullname" />
+        <dataField fieldName="FirstName" columns="35" hidden="true" />
+        <dataField fieldName="LastName" columns="35" hidden="true" />
+        <dataField fieldName="IncidentParticipationID" aliasFieldName="IncidentParticipationDescription" />
+        <dataField fieldName="BehaviourCategoryTypeID" aliasFieldName="BehaviourCategoryType" />
+        <dataField fieldName="BehaviourCategoryTypePoints" columns="15" />
+        <dataField fieldName="ActionTakenID" aliasFieldName="ActionTaken" />
+        <dataField fieldName="PersonID" aliasFieldName="StaffName" />
+        <dataField fieldName="StaffLastName" columns="35" hidden="true" />
+        <dataField fieldName="StaffName" />
+        <dataField fieldName="Fullname" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Incident">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="DisciplineIncidentID" aliasFieldName="DisciplineIncidentCode" />
+            <dataField fieldName="StudentID" aliasFieldName="Fullname" />
+            <dataField fieldName="IncidentParticipationID" aliasFieldName="IncidentParticipationDescription" />
+            <dataField fieldName="BehaviourCategoryTypeID" aliasFieldName="BehaviourCategoryType" />
+            <dataField fieldName="BehaviourCategoryTypePoints" columns="15" />
+            <dataField fieldName="ActionTakenID" aliasFieldName="ActionTaken" />
+            <dataField fieldName="PersonID" aliasFieldName="StaffName" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Incident Action">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="DisciplineIncidentID" aliasFieldName="DisciplineIncidentCode" />
+            <dataField fieldName="StudentID" aliasFieldName="Fullname" />
+            <dataField fieldName="IncidentParticipationID" aliasFieldName="IncidentParticipationDescription" />
+            <dataField fieldName="BehaviourCategoryTypeID" aliasFieldName="BehaviourCategoryType" />
+            <dataField fieldName="BehaviourCategoryTypePoints" columns="15" />
+            <dataField fieldName="ActionTakenID" aliasFieldName="ActionTaken" />
+            <dataField fieldName="PersonID" aliasFieldName="StaffName" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" headerText="Review Incident Action" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" headerText="Submit Resolution" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="znStaffCareerProgression" label="znStaffCareerProgression" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"vw_metric_staff_assignment"."PersonID" "PersonID"
+	,"vw_metric_staff_assignment"."FirstName" "FirstName"
+	,"vw_metric_staff_assignment"."LastName" "LastName"
+	,"vw_metric_staff_assignment"."BirthDate" "BirthDate"
+	,"vw_metric_staff_assignment"."UPN" "UPN"
+	,"vw_metric_staff_assignment"."Email" "Email"
+	,"vw_metric_staff_assignment"."PhoneNo" "PhoneNo"
+	,"vw_metric_staff_assignment"."CredentialName" "Credential"
+	,"vw_metric_staff_assignment"."Award Entity" "AwardEntity"
+	,"vw_metric_staff_assignment"."IssuanceDate" "IssuanceDate"
+	,"vw_metric_staff_assignment"."ExtendedRole" "ExtendedRole"
+from "amt"."vw_metric_staff_assignment" "vw_metric_staff_assignment"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonID" type="Int32" allowNulls="false" label="Person ID" showInSummary="true" />
+    <field name="FirstName" type="String" label="First Name" length="35" showInSummary="true" />
+    <field name="LastName" type="String" label="Last Name" readOnly="true" length="51" showInSummary="true" />
+    <field name="BirthDate" type="DateTime" label="Birth Date" showInSummary="true" />
+    <field name="UPN" type="String" label="UPN" length="10" showInSummary="true" />
+    <field name="Email" type="String" label="Email" length="50" />
+    <field name="PhoneNo" type="String" label="Phone No" length="15" />
+    <field name="Credential" type="String" label="Credential" length="60" />
+    <field name="AwardEntity" type="String" label="Award Entity" length="60" />
+    <field name="IssuanceDate" type="DateTime" label="Issuance Date" />
+    <field name="ExtendedRole" type="String" label="Role" length="20" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Staff CPD" filter="ExtendedRole = 'Staff'">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="BirthDate" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="Email" columns="25" />
+        <dataField fieldName="PhoneNo" columns="15" />
+        <dataField fieldName="Credential" columns="25" tag="pivot5-row1-columnstacked&#xD;&#xA;pivot5-title:&quot;What is the count of CPD Credentials&quot;&#xD;&#xA;pivot5-small" />
+        <dataField fieldName="AwardEntity" columns="25" tag="pivot6-row1-column&#xD;&#xA;pivot6-title:&quot;What is the distribution of credentials via award entity&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Instituition&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;No of awards&quot;" />
+        <dataField fieldName="IssuanceDate" columns="20" tag="pivot4-row1-column-date-all&#xD;&#xA;pivot4-title:&quot;What is the CPD of staff over time&quot;&#xD;&#xA;pivot4-medium" />
+        <dataField fieldName="ExtendedRole" columns="20" tag="pivot5-col1" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Staff Career Progression">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Staff Career Progression" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" />
+            <dataField fieldName="BirthDate" columns="10" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="PhoneNo" columns="15" />
+            <dataField fieldName="Credential" />
+            <dataField fieldName="AwardEntity" />
+            <dataField fieldName="IssuanceDate" columns="10" />
+            <dataField fieldName="ExtendedRole" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Staff Career Progression">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" />
+            <dataField fieldName="BirthDate" columns="10" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="PhoneNo" columns="15" />
+            <dataField fieldName="Credential" />
+            <dataField fieldName="AwardEntity" />
+            <dataField fieldName="IssuanceDate" columns="10" />
+            <dataField fieldName="ExtendedRole" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

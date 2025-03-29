@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkbenchMealAndDining" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="StudentsInSchoolMeal" type="DataView" label="Students In School Meal">
+      <dataView controller="StudentsInSchoolMeal" view="grid1" />
+    </field>
+    <field name="FeedingFeeCollections" type="DataView" label="Feeding Fee Collections">
+      <dataView controller="FeedingFeeCollections" view="grid1" />
+    </field>
+    <field name="MealLogs" type="DataView" label="Meal Logs">
+      <dataView controller="MealLogs" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="DiningServices" type="Form" label="MEALS PLANNING WORKBENCH">
+      <categories>
+        <category tab="MEALS MANIFEST" id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="StudentsInSchoolMeal" columns="15" />
+          </dataFields>
+        </category>
+        <category tab="MEAL FEES" id="c2">
+          <dataFields>
+            <dataField fieldName="FeedingFeeCollections" columns="15" tag="inline-editing">
+              <headerText>Meal Fees</headerText>
+              <dataView pageSize="16" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="MEAL LOGS" id="c3">
+          <dataFields>
+            <dataField fieldName="MealLogs" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+      <headerText>&lt;strong&gt;The Meal Planning Workbench (MPW) is ane avenue managing the setup, fee schedule and meal served logs. &lt;/strong&gt;</headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Meal Actions" flat="false" />
+  </actions>
+</dataController>

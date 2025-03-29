@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="OrderDetail" alias="OrderDetail" created="2024-07-10T16:56:15" modified="2024-07-21T01:36:17" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Order" parentTableSchema="dbo" parentTableName="Orders" x="314" y="20">
+      <foreignKeyColumn columnName="OrderID" parentColumnName="OrderID" />
+    </foreignKey>
+    <foreignKey id="Product" parentTableSchema="dbo" parentTableName="Product" x="321" y="274">
+      <foreignKeyColumn columnName="ProductID" parentColumnName="ProductID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="OrderLineID" fieldName="OrderLineID" label="Order Line ID" />
+    <column name="OrderID" fieldName="OrderID" label="Order ID" aliasColumnName="OrderDate" aliasForeignKey="Order" />
+    <column name="OrderDate" fieldName="OrderDate" label="Order Date" foreignKey="Order" format="g" />
+    <column name="IssuedTo" fieldName="OrderIssuedTo" label="Order Issued To" foreignKey="Order" />
+    <column fieldName="OrderLineNo" type="int" dataType="Int32" label="Order Line No">
+      <formula>OrderDetail.OrderLineID</formula>
+    </column>
+    <column name="ProductID" fieldName="ProductID" label="Product ID" aliasColumnName="ProductName" aliasForeignKey="Product" />
+    <column name="ProductName" fieldName="ProductName" label="Product Name" foreignKey="Product" />
+    <column name="SKUCode" fieldName="SKU" label="SKU" foreignKey="Product" />
+    <column name="Barcode" fieldName="Barcode" label="Barcode" foreignKey="Product" />
+    <column name="Sellable" fieldName="Sellable" label="Sellable" foreignKey="Product" />
+    <column name="Quantity" fieldName="Quantity" label="Quantity" />
+    <column name="Discount" fieldName="Discount" label="Discount" format="p" />
+    <column name="UnitPrice" fieldName="UnitPrice" label="Unit Price" foreignKey="Product" format="c" />
+    <column name="UnitPrice" fieldName="extUnitPrice" label="Unit Price" format="c" />
+    <column fieldName="ExtendedPrice" type="decimal" dataType="Decimal" label="Extended Price" format="c">
+      <formula>OrderDetail.Quantity * Product.UnitPrice * ( 1 - OrderDetail.Discount)</formula>
+    </column>
+    <column name="Note" fieldName="Note" label="Note" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

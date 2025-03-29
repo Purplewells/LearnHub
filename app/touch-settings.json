@@ -1,0 +1,191 @@
+﻿{
+  "defaultUI": "TouchUI",
+  "appName": "Telleion  MIS",
+  "map": {
+    "apiKey": "AIzaSyBzY_bPskVZ6PuRQbkzQeuqirZs_D19Se8"
+  },
+  "charts": {
+    "maxPivotRowCount": 100
+  },
+ 
+  "ui": {
+    "menu": {
+      "autoExpand": false,
+      "tabbar": true,
+      "apps": {
+        "location": "toolbar",
+        "input": {
+          "style": "outline"
+        }
+
+      },
+      "location": "toolbar",
+      "multiSelectMaxRowCount": 4000
+
+
+    },
+    "state": {
+      "storage": "local", // Options: "local" (persist across sessions), "session" (current session only)
+      "clear": "never" // Options: "never" (retain state), "always" (clear on login/logout)
+    },
+
+    "theme": {
+      "name": "light",
+      "icons": "outlined",
+      "detect": true,
+      "accent": "Grapello"
+    },
+    "grid": {
+      "lines": {
+        "vertical": true,
+        "horizontal": true
+      }
+
+    },
+
+    "form": {
+      "lines": {
+        "horizontal": true,
+        "input": false
+      }
+    },
+
+
+    "readingPane": {
+      "background": "~/images/reading_pane_01.jpg",
+      "detail": {
+        "actionIcons": true
+      }
+    },
+
+    "ui": {
+      "readingPane": {
+        "minRight": 400,
+        "enabled": true
+      }
+    }
+  },
+  "keyboard": {
+    "touchOnly": false,
+    "number": {
+      "enabled": false,
+      "width": 360,
+      "format": true
+    }
+  },
+
+  "automation": {
+    "enabled": true,
+    "kiosk": {
+      "enabled": true,
+      "gapColor": true,
+      "maxWidth": 2000,
+      "copyright": false,
+      "fullscreen": true
+
+    },
+    "barcode": {
+      "enabled": true,
+      "scanner": {
+        "enabled": true,
+        "autoFocus": true
+
+      }
+    },
+
+    "notify": {
+      "enabled": true,
+      "location": "left",
+      "duration": {
+        "short": 1500,
+        "medium": 5000,
+        "long": 10000
+      }
+    },
+
+    "scrollbars": {
+      "wide": true
+    },
+
+    "date": {
+      "localTime": {
+        "enabled": true
+      }
+    },
+    "import": {
+      "batchSize": 500
+    },
+    "thumbnail": {
+      "width": 20,
+      "height": 20,
+      "crop": true
+    },
+    "membership": {
+      "enabled": true,
+      "profile": "view switch login logout",
+      "help": true,
+      "accountManager": {
+        "enabled": true,
+        "twoFactorAuthentication": {
+          "enabled": false, // Options: true (enable 2FA), false (disable)
+          "delivery": "email" // Method of 2FA code delivery (e.g., "email", "sms")
+        }
+      }
+    },
+    "search": {
+      "quickFind": {
+        "history": {
+          "enabled": true,
+          "depth": 50
+        }
+      },
+
+
+      "history": "search, sort, filter, group"
+
+
+    }
+  },
+  "splash": {
+    "enabled": true,
+    "duration": 2500,
+    //"background": "~/images/master-001.jpg"
+    "background": "~/images/master-001.jpg",
+    "logo": "~/App_Data/images/logo.jpg"
+
+
+  },
+  "server": {
+    "geocoding": {
+      "google": {
+        "key": "AIzaSyBzY_bPskVZ6PuRQbkzQeuqirZs_D19Se8"
+      }
+    },
+
+
+    "client": {
+      "enabled": false,
+      "manifest": {
+        "icons": [
+          {
+            "src": "images/icons/cloud.png",
+            "type": "image/png",
+            "sizes": "144x144"
+          }
+        ]
+      }
+    },
+    "barcodereader": {
+      "size": {
+        "height": 80,
+        "promote": true,
+        "format": "1D",
+        "icon": "material-icon-barcode"
+      }
+    },
+    "sidebar": {
+      "when": "Never" // Options: "always" (always visible), "never" (always hidden), "responsive" (auto-hide)
+    }
+
+  }
+}

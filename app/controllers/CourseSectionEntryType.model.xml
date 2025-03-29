@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpCourseSectionEntryType" alias="zlkpCourseSectionEntryType" created="2024-02-04T18:19:09" modified="2024-02-04T18:19:17" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="RefCourseSectionEntryTypeId" fieldName="RefCourseSectionEntryTypeID" label="Ref Course Section Entry Type Id" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="Definition" fieldName="Definition" label="Definition" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

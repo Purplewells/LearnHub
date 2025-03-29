@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="fee_collection_transaction" alias="fee_collection_transaction" created="2024-01-29T09:19:49" modified="2025-03-20T17:18:33" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="FeePerson" parentTableSchema="dbo" parentTableName="student_fees" x="354" y="20">
+      <foreignKeyColumn columnName="FeeID" parentColumnName="FeeID" />
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="PaymentMethod" parentTableSchema="dbo" parentTableName="zlkpPaymentMethod" x="355" y="427">
+      <foreignKeyColumn columnName="PaymentMethodID" parentColumnName="PaymentMethodID" />
+    </foreignKey>
+    <foreignKey id="PaymentBy" parentTableSchema="dbo" parentTableName="zlkpPaymentBy" x="358" y="540">
+      <foreignKeyColumn columnName="PaymentByID" parentColumnName="PaymentByID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="733" y="20" baseForeignKey="FeePerson">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="Organization" parentTableSchema="dbo" parentTableName="Organisation" x="1101" y="20" baseForeignKey="Person">
+      <foreignKeyColumn columnName="OrganizationID" parentColumnName="OrganizationID" />
+    </foreignKey>
+    <foreignKey id="TransactionType" parentTableSchema="dbo" parentTableName="zlkpTransactionType" x="1244" y="157">
+      <foreignKeyColumn columnName="TransactionTypeID" parentColumnName="TransactionTypeID" />
+    </foreignKey>
+    <foreignKey id="TransactionStatus" parentTableSchema="dbo" parentTableName="zlkpTransactionStatus" x="354" y="319">
+      <foreignKeyColumn columnName="TransactionStatusID" parentColumnName="TransactionStatusID" />
+    </foreignKey>
+    <foreignKey id="DebitAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="362" y="652">
+      <foreignKeyColumn columnName="DebitAccountID" parentColumnName="AccountID" />
+    </foreignKey>
+    <foreignKey id="CreditAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="364" y="791">
+      <foreignKeyColumn columnName="CreditAccountID" parentColumnName="AccountID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="TransactionID" fieldName="TransactionID" label="Transaction ID" />
+    <column name="TransDate" fieldName="TransDate" label="Trans Date" />
+    <column name="FeeID" fieldName="FeeID" label="Fee ID" aliasColumnName="FeeStatusCode" aliasForeignKey="FeePerson" />
+    <column name="FeeStatusCode" fieldName="Status" label="Status" foreignKey="FeePerson" />
+    <column name="FeeAmount" fieldName="BillAmount" label="Bill Amount" foreignKey="FeePerson" format="" />
+    <column name="FeeDescription" fieldName="FeeDescription" label="Fee Description" foreignKey="FeePerson" />
+    <column name="Amount" fieldName="AmountPaid" label="Amount Paid" format="" />
+    <column name="CurrentBalance" fieldName="CurrentBalance" label="Current Balance" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="FeeType" fieldName="FeeType" label="Fee Type" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="PaymentMethodID" fieldName="PaymentMethodID" label="Payment Method ID" aliasColumnName="PaymentMethod" aliasForeignKey="PaymentMethod" />
+    <column name="PaymentMethod" fieldName="PaymentMethod" label="Payment Method" foreignKey="PaymentMethod" />
+    <column name="TransactionStatusCode" fieldName="TransactionStatusCode" label="Transaction Status Code" />
+    <column name="PaymentByID" fieldName="PaymentByID" label="Payment By ID" aliasColumnName="PaymentRelation" aliasForeignKey="PaymentBy" />
+    <column name="PaymentRelation" fieldName="PaymentRelation" label="Paid By" foreignKey="PaymentBy" />
+    <column name="NameOfPayee" fieldName="NameOfPayee" label="Payee Name" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="ReceiptNo" fieldName="ReceiptNo" label="Receipt No" />
+    <column name="FeeNote" fieldName="Note" label="Note" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="CurrentYearGradeLevel" fieldName="GL" label="GL" foreignKey="Person" />
+    <column name="FirstName" fieldName="Firstname" label="Firstname" foreignKey="Person" />
+    <column name="LastName" fieldName="Lastname" label="Lastname" foreignKey="Person" />
+    <column name="Name" fieldName="SchoolName" label="School Name" foreignKey="Organization" />
+    <column name="Address" fieldName="Address" label="Address" foreignKey="Organization" />
+    <column fieldName="Fullname" type="nvarchar(71)" dataType="String" label="Fullname">
+      <formula>Person.FirstName + ' ' + Person.LastName </formula>
+    </column>
+    <column fieldName="HeaderLabel" type="nvarchar(125)" dataType="String" label="Header Label">
+      <formula>COALESCE(Person.FirstName + ' ' + Person.LastName + ' &gt;&gt; ' + fee_collection_transaction.Description, 'UNKNOWN')</formula>
+    </column>
+    <column name="TransactionTypeID" fieldName="TransactionTypeID" label="Transaction Type ID" aliasColumnName="TransactionType" aliasForeignKey="TransactionType" />
+    <column name="TransactionType" fieldName="TransactionType" label="Transaction Type" foreignKey="TransactionType" />
+    <column name="TransactionTypeCode" fieldName="TransactionTypeCode" label="Transaction Type Code" foreignKey="TransactionType" />
+    <column name="TransactionStatusID" fieldName="TransactionStatusID" label="Transaction Status ID" aliasColumnName="TransactionStatus" aliasForeignKey="TransactionStatus" />
+    <column name="TransactionStatus" fieldName="TransactionStatus" label="Transaction Status" foreignKey="TransactionStatus" />
+    <column name="DebitAccountID" fieldName="DebitAccountID" label="Debit Account ID" aliasColumnName="AccountName" aliasForeignKey="DebitAccount" />
+    <column name="AccountName" fieldName="DebitAccountName" label="Debit Account Name" foreignKey="DebitAccount" />
+    <column name="CreditAccountID" fieldName="CreditAccountID" label="Credit Account ID" aliasColumnName="AccountName" aliasForeignKey="CreditAccount" />
+    <column name="AccountName" fieldName="CreditAccountName" label="Credit Account Name" foreignKey="CreditAccount" />
+    <column fieldName="HeaderInfo" type="nvarchar(136)" dataType="String" label="Header Info">
+      <formula>Person.FirstName + ' ' + Person.LastName + ' &gt;&gt; ' + 'ReceiptNo: ' + fee_collection_transaction.ReceiptNo</formula>
+    </column>
+    <column name="RefundedAmount" fieldName="RefundedAmount" label="Refund Amount" />
+    <column name="RefundReason" fieldName="RefundReason" label="Refund Reason" />
+  </columns>
+</dataModel>

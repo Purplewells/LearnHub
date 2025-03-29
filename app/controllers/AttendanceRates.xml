@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="AttendanceRates" conflictDetection="overwriteChanges" label="Attendance Rates" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"zvw_metric_attendances_base_reportcard"."PersonID" "PersonID"
+	,"zvw_metric_attendances_base_reportcard"."Fullname" "Fullname"
+	,"zvw_metric_attendances_base_reportcard"."GradeLevel" "GradeLevel"
+	,"zvw_metric_attendances_base_reportcard"."Term" "Term"
+	,"zvw_metric_attendances_base_reportcard"."Absence" "Absence"
+	,"zvw_metric_attendances_base_reportcard"."Presence" "Presence"
+	,"zvw_metric_attendances_base_reportcard"."PossibleAttendances" "PossibleAttendances"
+	,"zvw_metric_attendances_base_reportcard"."pctAbsence" "PctAbsence"
+	,"zvw_metric_attendances_base_reportcard"."pctAttended" "PctAttended"
+	,"zvw_metric_attendances_base_reportcard"."Presences" "Presences"
+	,"zvw_metric_attendances_base_reportcard"."ExcusedAbsences" "ExcusedAbsences"
+	,"zvw_metric_attendances_base_reportcard"."UnExcusedAbsences" "UnExcusedAbsences"
+	,"zvw_metric_attendances_base_reportcard"."Tardies" "Tardies"
+	,"zvw_metric_attendances_base_reportcard"."Firstname" "Firstname"
+	,"zvw_metric_attendances_base_reportcard"."LastName" "Lastname"
+from "dbo"."zvw_metric_attendances_base_reportcard" "zvw_metric_attendances_base_reportcard"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Person ID" />
+    <field name="Fullname" type="String" label="Fullname" length="72" showInSummary="true" />
+    <field name="GradeLevel" type="String" label="GL" length="100" showInSummary="true" />
+    <field name="Term" type="String" label="Term" length="20" showInSummary="true" />
+    <field name="Absence" type="Int32" label="Absence" showInSummary="true" />
+    <field name="Presence" type="Int32" label="Presence" showInSummary="true" />
+    <field name="PossibleAttendances" type="Int32" label="PA" />
+    <field name="PctAbsence" type="Int32" label="% Absence" readOnly="true" />
+    <field name="PctAttended" type="Int32" label="% Attended" readOnly="true" />
+    <field name="Presences" type="Int32" label="Presences" />
+    <field name="ExcusedAbsences" type="Int32" label="Absences" />
+    <field name="UnExcusedAbsences" type="Int32" label="UnExcused" />
+    <field name="Tardies" type="Int32" label="Tardies" />
+    <field name="Firstname" type="String" label="Firstname" length="35" />
+    <field name="Lastname" type="String" label="Lastname" length="35" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Attendance Rates">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="Fullname" columns="25" />
+        <dataField fieldName="Firstname" columns="18" />
+        <dataField fieldName="Lastname" columns="18" />
+        <dataField fieldName="GradeLevel" columns="5" tag="pivot2-row1-column&#xD;&#xA;pivot2-title:&quot;What is the average attendance by Grade Level&quot;&#xD;&#xA;pivot2-medium" />
+        <dataField fieldName="Absence" columns="10" aggregate="Average" />
+        <dataField fieldName="Presence" columns="10" aggregate="Average" />
+        <dataField fieldName="PossibleAttendances" columns="5" />
+        <dataField fieldName="PctAbsence" columns="10" />
+        <dataField fieldName="PctAttended" columns="10" tag="pivot1-val1-avg&#xD;&#xA;pivot2-val1-avg" />
+        <dataField fieldName="Presences" columns="10" hidden="true" />
+        <dataField fieldName="ExcusedAbsences" columns="10" hidden="true" />
+        <dataField fieldName="UnExcusedAbsences" columns="10" aggregate="Sum" hidden="true" />
+        <dataField fieldName="Tardies" columns="10" aggregate="Sum" hidden="true" />
+        <dataField fieldName="Term" columns="12" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;What is the average attendance by term&quot;" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Attendance Rates">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Attendance Rates" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="Fullname" />
+            <dataField fieldName="GradeLevel" />
+            <dataField fieldName="Term" columns="20" />
+            <dataField fieldName="Absence" columns="15" />
+            <dataField fieldName="Presence" columns="15" />
+            <dataField fieldName="PossibleAttendances" columns="15" />
+            <dataField fieldName="PctAbsence" columns="15" />
+            <dataField fieldName="PctAttended" columns="15" />
+            <dataField fieldName="Presences" columns="15" />
+            <dataField fieldName="ExcusedAbsences" columns="15" />
+            <dataField fieldName="UnExcusedAbsences" columns="15" />
+            <dataField fieldName="Tardies" columns="15" />
+            <dataField fieldName="Firstname" columns="35" />
+            <dataField fieldName="Lastname" columns="35" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Attendance Rates">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="Fullname" />
+            <dataField fieldName="GradeLevel" />
+            <dataField fieldName="Term" columns="20" />
+            <dataField fieldName="Absence" columns="15" />
+            <dataField fieldName="Presence" columns="15" />
+            <dataField fieldName="PossibleAttendances" columns="15" />
+            <dataField fieldName="PctAbsence" columns="15" />
+            <dataField fieldName="PctAttended" columns="15" />
+            <dataField fieldName="Presences" columns="15" />
+            <dataField fieldName="ExcusedAbsences" columns="15" />
+            <dataField fieldName="UnExcusedAbsences" columns="15" />
+            <dataField fieldName="Tardies" columns="15" />
+            <dataField fieldName="Firstname" columns="35" />
+            <dataField fieldName="Lastname" columns="35" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

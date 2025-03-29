@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Cohort" alias="Cohort" created="2024-02-03T19:30:12" modified="2024-02-03T19:36:19" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="CohortType" parentTableSchema="dbo" parentTableName="zlkpCohortTypeDescription" x="382" y="20">
+      <foreignKeyColumn columnName="CohortType" parentColumnName="CohortTypeDescriptionID" />
+    </foreignKey>
+    <foreignKey id="SubjectDescriptorType" parentTableSchema="dbo" parentTableName="zlkpCourseSubjectArea" x="382" y="160">
+      <foreignKeyColumn columnName="SubjectDescriptorTypeID" parentColumnName="CourseSubjectAreaId" />
+    </foreignKey>
+    <foreignKey id="ResponsibleOrganisation" parentTableSchema="dbo" parentTableName="Organisation" x="382" y="321">
+      <foreignKeyColumn columnName="ResponsibleOrganisationID" parentColumnName="OrganizationID" />
+    </foreignKey>
+    <foreignKey id="CohortScope" parentTableSchema="dbo" parentTableName="zlkpCohortScope" x="382" y="505">
+      <foreignKeyColumn columnName="CohortScopeID" parentColumnName="CohortScopeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="CohortID" fieldName="CohortID" label="Cohort ID" />
+    <column name="CohortDescription" fieldName="CohortDescription" label="Description" />
+    <column name="CohortType" fieldName="CohortType" label="Cohort Type" aliasColumnName="CohortTypeDescription" aliasForeignKey="CohortType" />
+    <column name="CohortTypeDescription" fieldName="CohortTypeDescription" label="Cohort Type" foreignKey="CohortType" />
+    <column name="SubjectDescriptorTypeID" fieldName="SubjectDescriptorTypeID" label="Subject Descriptor Type ID" aliasColumnName="SubjectAreaDescription" aliasForeignKey="SubjectDescriptorType" />
+    <column name="SubjectAreaDescription" fieldName="SubjectDescriptorTypeSubjectAreaDescription" label="Subject Area" foreignKey="SubjectDescriptorType" />
+    <column name="ResponsibleOrganisationID" fieldName="ResponsibleOrganisationID" label="Responsible Organisation ID" aliasColumnName="Name" aliasForeignKey="ResponsibleOrganisation" />
+    <column name="Name" fieldName="ResponsibleOrganisationName" label="Responsible Organisation" foreignKey="ResponsibleOrganisation" />
+    <column name="CohortScopeID" fieldName="CohortScopeID" label="Cohort Scope ID" aliasColumnName="CohortScope" aliasForeignKey="CohortScope" />
+    <column name="CohortScope" fieldName="CohortScope" label="Cohort Scope" foreignKey="CohortScope" />
+    <column name="ProgramReference" fieldName="ProgramReference" label="Program Reference" />
+  </columns>
+  <details>
+    <detail fieldName="CohortProgram" model="CohortProgram" filterFields="CohortID" create="true" edit="true" />
+    <detail fieldName="StudentCohortAssociation" model="StudentCohortAssociation" filterFields="CohortID" create="true" edit="true" />
+    <detail fieldName="CohortStaffAssociation" model="CohortStaffAssociation" filterFields="CohortID" create="true" edit="true" />
+  </details>
+</dataModel>

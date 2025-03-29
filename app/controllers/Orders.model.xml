@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Orders" alias="Orders" created="2024-07-10T16:53:48" modified="2024-07-22T20:27:16" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="TransactionType" parentTableSchema="dbo" parentTableName="zlkpMovementTransactionType" x="375" y="476">
+      <foreignKeyColumn columnName="TransactionTypeID" parentColumnName="TransactionTypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="OrderID" fieldName="OrderID" label="Order ID" />
+    <column fieldName="OrderNumber" type="int" dataType="Int32" label="Order Number">
+      <formula>Orders.OrderID</formula>
+    </column>
+    <column name="OrderDate" fieldName="OrderDate" label="Order Date" />
+    <column name="TransactionTypeID" fieldName="TransactionTypeID" label="Transaction Type ID" aliasColumnName="TransactionTypeDesc" aliasForeignKey="TransactionType" />
+    <column name="TransactionTypeDesc" fieldName="TransactionType" label="Transaction Type" foreignKey="TransactionType" />
+    <column name="IssuedTo" fieldName="IssuedTo" label="Issued To" />
+    <column name="Quantity" fieldName="Quantity" label="Quantity" />
+    <column name="Freight" fieldName="Freight" label="Freight" />
+    <column name="OrderTotal" fieldName="OrderTotal" label="Order Total" />
+    <column fieldName="OrderHeader" type="nvarchar(97)" dataType="String" label="Order Header">
+      <formula>Orders.IssuedTo + ' &gt;&gt; ' + 'OrderNo:' + CAST(Orders.OrderID AS NVARCHAR(35))</formula>
+    </column>
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+  <details>
+    <detail fieldName="OrderDetail" model="SalesOrderDetail" filterFields="OrderID" create="true" edit="true" />
+  </details>
+</dataModel>

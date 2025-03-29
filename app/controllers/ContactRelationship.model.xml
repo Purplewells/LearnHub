@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpContactRelationship" alias="zlkpContactRelationship" created="2024-02-10T10:54:01" modified="2024-02-10T10:54:07" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="RefPersonRelationshipID" fieldName="RefPersonRelationshipID" label="Ref Person Relationship ID" />
+    <column name="PersonRelationship" fieldName="PersonRelationship" label="Person Relationship" />
+  </columns>
+</dataModel>

@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="db_a1e68c_demoDataSet" targetNamespace="http://tempuri.org/db_a1e68c_demoDataSet.xsd" xmlns:mstns="http://tempuri.org/db_a1e68c_demoDataSet.xsd" xmlns="http://tempuri.org/db_a1e68c_demoDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="zLearnHub" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="zLearnHub (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.zLearnHub.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="pbi_vw_metric_attendances_baseTableAdapter" Name="pbi_vw_metric_attendances_base">
+            <MainSource>
+              <DbSource ConnectionRef="zLearnHub (Web.config)" DbObjectName="db_a1e68c_demo.dwh.pbi_vw_metric_attendances_base" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT PersonID, OrganizationPersonRoleID, Name, Status, AbsenceReason, EventDate, GradeLevel, SortOrder, Language, Religion, Sex, PossibleAttendances, StatusCount, MultipleSameReason FROM dwh.pbi_vw_metric_attendances_base</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="PersonID" DataSetColumn="PersonID" />
+              <Mapping SourceColumn="OrganizationPersonRoleID" DataSetColumn="OrganizationPersonRoleID" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Status" DataSetColumn="Status" />
+              <Mapping SourceColumn="AbsenceReason" DataSetColumn="AbsenceReason" />
+              <Mapping SourceColumn="EventDate" DataSetColumn="EventDate" />
+              <Mapping SourceColumn="GradeLevel" DataSetColumn="GradeLevel" />
+              <Mapping SourceColumn="SortOrder" DataSetColumn="SortOrder" />
+              <Mapping SourceColumn="Language" DataSetColumn="Language" />
+              <Mapping SourceColumn="Religion" DataSetColumn="Religion" />
+              <Mapping SourceColumn="Sex" DataSetColumn="Sex" />
+              <Mapping SourceColumn="PossibleAttendances" DataSetColumn="PossibleAttendances" />
+              <Mapping SourceColumn="StatusCount" DataSetColumn="StatusCount" />
+              <Mapping SourceColumn="MultipleSameReason" DataSetColumn="MultipleSameReason" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="db_a1e68c_demoDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="False">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="pbi_vw_metric_attendances_base">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PersonID" type="xs:int" />
+              <xs:element name="OrganizationPersonRoleID" type="xs:int" minOccurs="0" />
+              <xs:element name="Name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="72" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Status" type="xs:dateTime" />
+              <xs:element name="AbsenceReason" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EventDate">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GradeLevel" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SortOrder" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Language" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Religion" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Sex" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PossibleAttendances" type="xs:int" minOccurs="0" />
+              <xs:element name="StatusCount" type="xs:int" minOccurs="0" />
+              <xs:element name="MultipleSameReason" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:pbi_vw_metric_attendances_base" />
+      <xs:field xpath="mstns:PersonID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

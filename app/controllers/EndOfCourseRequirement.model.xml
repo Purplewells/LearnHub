@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpEndOfCourseRequirement" alias="zlkpEndOfCourseRequirement" created="2024-01-28T00:55:49" modified="2024-01-28T00:55:58" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="RefK12EndOfCourseRequirementId" fieldName="RefK12EndOfCourseRequirementID" label="Ref K12 End Of Course Requirement Id" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

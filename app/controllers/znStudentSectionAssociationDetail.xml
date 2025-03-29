@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="znStudentSectionAssociationDetail" label="znStudentSectionAssociationDetail" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"StudentSectionAssociation"."StudentCourseSectionID" "StudentCourseSectionID"
+	,"StudentSectionAssociation"."StudentEnrollmentID" "StudentEnrollmentID"
+	,"Person"."FirstName" "Firstname"
+	,"Person"."LastName" "Lastname"
+	,"Person"."IdentificationCode" "UPN"
+	,"RefEntryGradeLevel"."Description" "GL"
+	,"RefEntryGradeLevel"."SortOrder" "GLSO"
+	,"StudentSectionAssociation"."RefSchoolStreamID" "RefSchoolStreamID"
+	,"RefSchoolStream"."Description" "STM"
+	,"StudentEnrollment"."CreatedBy" "StudentEnrollmentCreatedBy"
+	,"StudentSectionAssociation"."RefCourseSectionEnrollmentStatusTypeId" "RefCourseSectionEnrollmentStatusTypeID"
+	,"RefCourseSectionEnrollmentStatusType"."Description" "EnrollmentStatus"
+	,"StudentSectionAssociation"."RefCourseSectionEntryTypeId" "RefCourseSectionEntryTypeID"
+	,"RefCourseSectionEntryType"."Description" "CSE"
+	,"StudentSectionAssociation"."RefCourseSectionExitTypeId" "RefCourseSectionExitTypeID"
+	,"RefCourseSectionExitType"."Description" "CSEExit"
+	,"StudentSectionAssociation"."CreditsEarned" "CreditsEarned"
+	,"StudentSectionAssociation"."CourseSectionID" "CourseSectionID"
+	,"CourseSection"."SectionNo" "SectionNo"
+	,"CourseSection"."SectionName" "SectionName"
+	,"StudentSectionAssociation"."StartDate" "StartDate"
+	,"StudentSectionAssociation"."EndDate" "EndDate"
+	,"StudentSectionAssociation"."CreatedDate" "CreatedDate"
+	,"StudentSectionAssociation"."ModifiedDate" "ModifiedDate"
+	,"StudentSectionAssociation"."CreatedBy" "CreatedBy"
+	,"StudentSectionAssociation"."ModifiedBy" "ModifiedBy"
+	,"StudentSectionAssociation"."TeacherNotes" "TeacherNotes"
+	,"StudentSectionAssociation"."ActiveCourseSection" "ACS"
+	,"StudentSectionAssociation"."extIsActiveSession" "SSIA"
+	,"StudentSectionAssociation"."extActiveCourseSection" "extActiveCourseSection"
+	,"StudentSectionAssociation"."extCalendarSessionID" "extCalendarSessionID"
+	,"StudentSectionAssociation"."extSessionCode" "extSessionCode"
+	,"Course"."CourseTitle" "Course"
+	,"RefSex"."Code" "sex"
+from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
+	left join "dbo"."StudentSchoolAssociation" "StudentEnrollment" on "StudentSectionAssociation"."StudentEnrollmentID" = "StudentEnrollment"."StudentEnrollmentID"
+	left join "dbo"."zlkpGradeLevel" "RefEntryGradeLevel" on "StudentEnrollment"."RefEntryGradeLevelId" = "RefEntryGradeLevel"."RefGradeLevelId"
+	left join "dbo"."OrganizationPersonRole" "OrganizationPersonRole" on "StudentEnrollment"."OrganizationPersonRoleID" = "OrganizationPersonRole"."OrganizationPersonRoleID"
+	left join "dbo"."Person" "Person" on "OrganizationPersonRole"."PersonID" = "Person"."PersonID"
+	left join "dbo"."zlkpSex" "RefSex" on "Person"."RefSexID" = "RefSex"."GenderID"
+	left join "dbo"."zlkpCourseSectionEnrollmentStatusType" "RefCourseSectionEnrollmentStatusType" on "StudentSectionAssociation"."RefCourseSectionEnrollmentStatusTypeId" = "RefCourseSectionEnrollmentStatusType"."RefCourseSectionEnrollmentStatusTypeId"
+	left join "dbo"."zlkpCourseSectionEntryType" "RefCourseSectionEntryType" on "StudentSectionAssociation"."RefCourseSectionEntryTypeId" = "RefCourseSectionEntryType"."RefCourseSectionEntryTypeId"
+	left join "dbo"."zlkpCourseSectionExitType" "RefCourseSectionExitType" on "StudentSectionAssociation"."RefCourseSectionExitTypeId" = "RefCourseSectionExitType"."RefCourseSectionExitTypeId"
+	left join "dbo"."CourseSection" "CourseSection" on "StudentSectionAssociation"."CourseSectionID" = "CourseSection"."CourseSectionID"
+	left join "dbo"."Course" "Course" on "CourseSection"."CourseID" = "Course"."CourseID"
+	left join "dbo"."zlkpSchoolStream" "RefSchoolStream" on "StudentSectionAssociation"."RefSchoolStreamID" = "RefSchoolStream"."RefSchoolStreamID"
+]]></text>
+    </command>
+    <command id="StudentCourseSectionIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="StudentCourseSectionID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="StudentCourseSectionID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Student Course Section ID" readOnly="true" />
+    <field name="StudentEnrollmentID" type="Int32" label="Student Enrollment ID" showInSummary="true">
+      <items style="Lookup" dataController="StudentSchoolAssociation" newDataView="createForm1" dataValueField="StudentEnrollmentID" dataTextField="CreatedBy" copy="Firstname=Firstname, Lastname=Lastname, UPN=UPN, GL=GL, GLSO=GLSO, sex=Sex" />
+    </field>
+    <field name="Firstname" type="String" readOnly="true" label="Firstname" length="35" />
+    <field name="Lastname" type="String" readOnly="true" label="Lastname" length="35" />
+    <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
+    <field name="GL" type="String" readOnly="true" label="GL" length="100" />
+    <field name="GLSO" type="Decimal" readOnly="true" label="GLSO" />
+    <field name="RefSchoolStreamID" type="Int32" label="Ref School Stream ID" showInSummary="true">
+      <items style="Lookup" dataController="SchoolStream" newDataView="createForm1" dataValueField="RefSchoolStreamID" dataTextField="Description" />
+    </field>
+    <field name="STM" type="String" readOnly="true" label="STM" length="8" />
+    <field name="StudentEnrollmentCreatedBy" type="String" readOnly="true" label="Student Enrollment Created By" length="50" />
+    <field name="RefCourseSectionEnrollmentStatusTypeID" type="Int32" label="Ref Course Section Enrollment Status Type Id" showInSummary="true">
+      <items style="Lookup" dataController="CourseSectionEnrollmentStatusType" newDataView="createForm1" dataValueField="RefCourseSectionEnrollmentStatusTypeID" dataTextField="Description" />
+    </field>
+    <field name="EnrollmentStatus" type="String" readOnly="true" label="ENR Status" length="10" />
+    <field name="RefCourseSectionEntryTypeID" type="Int32" label="Ref Course Section Entry Type Id" showInSummary="true">
+      <items style="Lookup" dataController="CourseSectionEntryType" newDataView="createForm1" dataValueField="RefCourseSectionEntryTypeID" dataTextField="Description" />
+    </field>
+    <field name="CSE" type="String" readOnly="true" label="CSE" length="10" />
+    <field name="RefCourseSectionExitTypeID" type="Int32" label="Ref Course Section Exit Type Id" showInSummary="true">
+      <items style="Lookup" dataController="CourseSectionExitType" newDataView="createForm1" dataValueField="RefCourseSectionExitTypeID" dataTextField="Description" />
+    </field>
+    <field name="CSEExit" type="String" readOnly="true" label="CSE Exit" length="100" />
+    <field name="CreditsEarned" type="Decimal" label="Credits" />
+    <field name="CourseSectionID" type="Int32" allowNulls="false" label="Course Section ID">
+      <items style="Lookup" dataController="CourseSection" newDataView="createForm1" dataValueField="CourseSectionID" dataTextField="SectionNo" copy="SectionName=SectionName, Course=CourseTitle" />
+    </field>
+    <field name="SectionNo" type="String" readOnly="true" label="Section No" length="12" />
+    <field name="SectionName" type="String" readOnly="true" label="Section Name" length="15" />
+    <field name="StartDate" type="DateTime" label="Start Date" />
+    <field name="EndDate" type="DateTime" label="End Date" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="TeacherNotes" type="String" label="Teacher Notes" length="1024" />
+    <field name="ACS" type="Boolean" label="ACS" />
+    <field name="SSIA" type="Boolean" label="SSIA" />
+    <field name="extActiveCourseSection" type="Boolean" label="Active Course Section" />
+    <field name="extCalendarSessionID" type="Int32" label="CalendarSessionID" />
+    <field name="extSessionCode" type="String" label="Session Code" length="20" />
+    <field name="Course" type="String" readOnly="true" label="Course" length="60" />
+    <field name="GLS" type="String" readOnly="true" label="GLS" computed="true">
+      <formula>RefEntryGradeLevel.Description</formula>
+    </field>
+    <field name="Header" type="String" readOnly="true" label="Header" computed="true">
+      <formula>Person.FirstName + ', ' + Person.LastName + ' &gt;&gt; ' + '( ' + 'UPN: ' + Person.IdentificationCode + ' )'</formula>
+    </field>
+    <field name="sex" type="String" readOnly="true" label="Sex" length="50" />
+    <field name="SCID" type="Int32" readOnly="true" label="SCID" computed="true">
+      <formula>StudentSectionAssociation.StudentCourseSectionID</formula>
+    </field>
+    <field name="SEID" type="Int32" readOnly="true" label="SEID" computed="true">
+      <formula>StudentSectionAssociation.StudentEnrollmentID</formula>
+    </field>
+    <field name="Name" type="String" readOnly="true" label="Name" computed="true">
+      <formula>Person.FirstName + ' ' + Person.LastName + ' (' + Person.IdentificationCode + ')'</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Active Class Rosters" sortExpression="GLSO ASC" groupExpression="GL, UPN" filter=" ACS=1 ">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="StudentEnrollmentID" aliasFieldName="StudentEnrollmentCreatedBy" hidden="true" />
+        <dataField fieldName="Firstname" columns="18" />
+        <dataField fieldName="Lastname" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="sex" columns="3" />
+        <dataField fieldName="GL" columns="5" />
+        <dataField fieldName="GLS" columns="5" hidden="true" />
+        <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" />
+        <dataField fieldName="Course" columns="20" />
+        <dataField fieldName="CourseSectionID" aliasFieldName="SectionNo" />
+        <dataField fieldName="RefCourseSectionEnrollmentStatusTypeID" aliasFieldName="EnrollmentStatus" />
+        <dataField fieldName="RefCourseSectionEntryTypeID" aliasFieldName="CSE" />
+        <dataField fieldName="RefCourseSectionExitTypeID" aliasFieldName="CSEExit" hidden="true" />
+        <dataField fieldName="CreditsEarned" columns="15" hidden="true" />
+        <dataField fieldName="SectionName" columns="12" hidden="true" />
+        <dataField fieldName="StartDate" columns="18" />
+        <dataField fieldName="EndDate" columns="18" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="TeacherNotes" hidden="true" />
+        <dataField fieldName="ACS" />
+        <dataField fieldName="SSIA" />
+        <dataField fieldName="extActiveCourseSection" hidden="true" />
+        <dataField fieldName="extCalendarSessionID" columns="15" hidden="true" />
+        <dataField fieldName="extSessionCode" columns="12" />
+        <dataField fieldName="Header" hidden="true" tag="header-text" />
+        <dataField fieldName="SCID" columns="5" hidden="true" />
+        <dataField fieldName="SEID" columns="5" hidden="true" />
+        <dataField fieldName="Name" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="all_course_sections" type="Grid" commandId="command1" label="All Class Rosters" sortExpression="GLSO ASC" groupExpression="GL, UPN">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="StudentEnrollmentID" aliasFieldName="StudentEnrollmentCreatedBy" hidden="true" />
+        <dataField fieldName="Firstname" columns="18" />
+        <dataField fieldName="Lastname" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="sex" columns="3" />
+        <dataField fieldName="GL" columns="5" />
+        <dataField fieldName="GLS" columns="5" />
+        <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" />
+        <dataField fieldName="Course" columns="20" />
+        <dataField fieldName="CourseSectionID" aliasFieldName="SectionNo" />
+        <dataField fieldName="RefCourseSectionEnrollmentStatusTypeID" aliasFieldName="EnrollmentStatus" />
+        <dataField fieldName="RefCourseSectionEntryTypeID" aliasFieldName="CSE" />
+        <dataField fieldName="RefCourseSectionExitTypeID" aliasFieldName="CSEExit" hidden="true" />
+        <dataField fieldName="CreditsEarned" columns="15" hidden="true" />
+        <dataField fieldName="SectionName" columns="12" hidden="true" />
+        <dataField fieldName="StartDate" columns="18" />
+        <dataField fieldName="EndDate" columns="18" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="TeacherNotes" hidden="true" />
+        <dataField fieldName="ACS" />
+        <dataField fieldName="SSIA" />
+        <dataField fieldName="extActiveCourseSection" hidden="true" />
+        <dataField fieldName="extCalendarSessionID" columns="15" hidden="true" />
+        <dataField fieldName="extSessionCode" columns="12" />
+        <dataField fieldName="Header" hidden="true" tag="header-text" />
+        <dataField fieldName="SCID" columns="5" />
+        <dataField fieldName="SEID" columns="5" />
+        <dataField fieldName="Name" />
+      </dataFields>
+    </view>
+    <view id="expired_course_sections" type="Grid" commandId="command1" label="All Class Rosters" sortExpression="GLSO ASC" groupExpression="GL, UPN" filter=" ACS=0">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="StudentEnrollmentID" aliasFieldName="StudentEnrollmentCreatedBy" hidden="true" />
+        <dataField fieldName="Firstname" columns="18" />
+        <dataField fieldName="Lastname" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="sex" columns="3" />
+        <dataField fieldName="GL" columns="5" />
+        <dataField fieldName="GLS" columns="5" />
+        <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" />
+        <dataField fieldName="Course" columns="20" />
+        <dataField fieldName="CourseSectionID" aliasFieldName="SectionNo" />
+        <dataField fieldName="RefCourseSectionEnrollmentStatusTypeID" aliasFieldName="EnrollmentStatus" />
+        <dataField fieldName="RefCourseSectionEntryTypeID" aliasFieldName="CSE" />
+        <dataField fieldName="RefCourseSectionExitTypeID" aliasFieldName="CSEExit" hidden="true" />
+        <dataField fieldName="CreditsEarned" columns="15" hidden="true" />
+        <dataField fieldName="SectionName" columns="12" hidden="true" />
+        <dataField fieldName="StartDate" columns="18" />
+        <dataField fieldName="EndDate" columns="18" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="TeacherNotes" hidden="true" />
+        <dataField fieldName="ACS" />
+        <dataField fieldName="SSIA" />
+        <dataField fieldName="extActiveCourseSection" hidden="true" />
+        <dataField fieldName="extCalendarSessionID" columns="15" hidden="true" />
+        <dataField fieldName="extSessionCode" columns="12" />
+        <dataField fieldName="Header" hidden="true" tag="header-text" />
+        <dataField fieldName="SCID" columns="5" />
+        <dataField fieldName="SEID" columns="5" />
+        <dataField fieldName="Name" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Class Roster">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="Firstname" columns="35" hidden="true" />
+            <dataField fieldName="Lastname" columns="35" hidden="true" />
+            <dataField fieldName="UPN" columns="10" hidden="true" />
+            <dataField fieldName="Course" />
+            <dataField fieldName="CourseSectionID" aliasFieldName="SectionNo" />
+            <dataField fieldName="SectionName" columns="50" />
+            <dataField fieldName="StartDate" columns="10" />
+            <dataField fieldName="EndDate" columns="10" />
+            <dataField fieldName="extSessionCode" columns="20" />
+            <dataField fieldName="Header" hidden="true" />
+            <dataField fieldName="Name" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c3" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="GL" />
+            <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" />
+            <dataField fieldName="RefCourseSectionEnrollmentStatusTypeID" aliasFieldName="EnrollmentStatus" />
+            <dataField fieldName="RefCourseSectionEntryTypeID" aliasFieldName="CSE" />
+            <dataField fieldName="ACS" />
+            <dataField fieldName="SSIA" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Teacher's Notes" wrap="true" collapsed="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="TeacherNotes" />
+          </dataFields>
+        </category>
+        <category id="c5" headerText="Audit" collapsed="true" floating="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Class Section">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StudentEnrollmentID" aliasFieldName="StudentEnrollmentCreatedBy" />
+            <dataField fieldName="Firstname" columns="35" />
+            <dataField fieldName="Lastname" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="GL" />
+            <dataField fieldName="GLSO" columns="15" />
+            <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" />
+            <dataField fieldName="RefCourseSectionEnrollmentStatusTypeID" aliasFieldName="EnrollmentStatus" />
+            <dataField fieldName="RefCourseSectionEntryTypeID" aliasFieldName="CSE" />
+            <dataField fieldName="RefCourseSectionExitTypeID" aliasFieldName="CSEExit" />
+            <dataField fieldName="CreditsEarned" columns="15" />
+            <dataField fieldName="CourseSectionID" aliasFieldName="SectionNo" />
+            <dataField fieldName="SectionName" columns="50" />
+            <dataField fieldName="StartDate" columns="10" />
+            <dataField fieldName="EndDate" columns="10" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="TeacherNotes" />
+            <dataField fieldName="ACS" />
+            <dataField fieldName="SSIA" />
+            <dataField fieldName="extActiveCourseSection" />
+            <dataField fieldName="extCalendarSessionID" columns="15" />
+            <dataField fieldName="extSessionCode" columns="20" />
+            <dataField fieldName="Course" />
+            <dataField fieldName="GLS" />
+            <dataField fieldName="Header" />
+            <dataField fieldName="sex" columns="50" />
+            <dataField fieldName="SCID" columns="15" />
+            <dataField fieldName="SEID" columns="15" />
+            <dataField fieldName="Name" />
+          </dataFields>
+        </category>
+        <category id="c2">
+          <description />
+          <dataFields />
+        </category>
+        <category id="c3" flow="NewColumn">
+          <description />
+          <dataFields />
+        </category>
+        <category id="c4" headerText="Teacher's Notes" wrap="true" collapsed="true" flow="NewRow">
+          <description />
+          <dataFields />
+        </category>
+        <category id="c5" headerText="Audit" collapsed="true" floating="true">
+          <description />
+          <dataFields />
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action commandName="SQL" headerText="Schedule Classes" description="Caution Notification" cssClass="material-icon-group_work" confirmation="This action would assign students to their respective classes. Do you want to continue ?" id="a100">
+        <data><![CDATA[/*
+  Date : 28th May 2019
+  Name : [dbo].[usp_merge_automate_class_section_rosters]
+  Description : This  sql script forms part of the process to automate 
+  the assignment of students to course sections (class)
+  A prior process creates the view vw_merge_student_coursesections which is used
+  used to update StudentSectionAssociation table
+  Abnormal Assignment Occurrence : Check to ensure the codes for absence
+  RefCourseSectionEnrollmentStatusTypeId is equal to 8
+  Modified : 02 September 2019    -- added script to refresh child records on update
+  Author : Benjamin Ohene-Adu
+  version		Date			Desc												Author
+  -- 0.2		20/03/2021		tgt.RefSchoolStreamID = src.[RefSchoolStreamID]		Benjamin Ohene-Adu
+  -- 0.3		13/06/2021      Added CourseSectionID to capture changes in setup   Benjamin Ohene-Adu
+
+-- EXEC [dbo].[usp_merge_automate_class_section_rosters]
+--SELECT * FROM StudentSectionAssociation tgt
+*/
+
+EXEC [dbo].[usp_merge_automate_class_section_rosters]
+
+SET @Result_ExecuteOnClient = '$appfactory.find("StudentClassSections", "Controller").sync();'
+SET @Result_ShowMessage = 'The matching process for students ' + CONVERT(NVARCHAR(12), GETDATE()) + ' ' + 'has completed successfully' 
+
+
+]]></data>
+      </action>
+      <action commandName="SQL" headerText="Remove Classes" description="Caution Notification" cssClass="material-icon-group_work" confirmation="This action would remove selected classes and scores. Do you want to continue ?" id="a101" whenKeySelected="true" roles="Administrators, ContentEditors">
+        <data><![CDATA[  /*
+ Author : Benjamin Ohene-Adu
+ Date   : 15th September 2021
+ Version		Desc
+ -- 0.1			This task is to remove mismatched StudentCourseSection where the grade level does not match CourseSection
+ */
+
+delete sgbe
+FROM dbo.StudentGradeBookEntry sgbe
+where  sgbe.StudentCourseSectionID = @StudentCourseSectionID
+
+delete g
+from dbo.Grade g
+where g.StudentCourseSectionID = @StudentCourseSectionID
+
+delete slo
+from dbo.StudentLearningObjective slo
+where  slo.StudentCourseSectionID = @StudentCourseSectionID
+
+delete ssa
+from dbo.StudentSectionAssociation ssa
+where StudentCourseSectionID =  @StudentCourseSectionID]]></data>
+      </action>
+      <action id="a2" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a3" commandName="ExportRowset" headerText="Export TO IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send RSS API" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a3" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a4" commandName="ReportAsWord" headerText="Export To Word" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

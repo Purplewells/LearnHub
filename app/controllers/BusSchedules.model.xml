@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="BusSchedules" alias="BusSchedules" created="2024-07-10T12:10:59" modified="2024-07-10T12:13:16" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Bus" parentTableSchema="dbo" parentTableName="Buses" x="315" y="20">
+      <foreignKeyColumn columnName="BusID" parentColumnName="BusID" />
+    </foreignKey>
+    <foreignKey id="Route" parentTableSchema="dbo" parentTableName="Routes" x="315" y="356">
+      <foreignKeyColumn columnName="RouteID" parentColumnName="RouteID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ScheduleID" fieldName="ScheduleID" label="Schedule ID" />
+    <column name="BusID" fieldName="BusID" label="Bus ID" aliasColumnName="BusNumber" aliasForeignKey="Bus" />
+    <column name="BusNumber" fieldName="BusNumber" label="Bus Number" foreignKey="Bus" />
+    <column name="Capacity" fieldName="BusCapacity" label="Capacity" foreignKey="Bus" />
+    <column name="LicensePlate" fieldName="BusLicensePlate" label="License Plate" foreignKey="Bus" />
+    <column name="RouteID" fieldName="RouteID" label="Route ID" aliasColumnName="RouteName" aliasForeignKey="Route" />
+    <column name="RouteName" fieldName="RouteName" label="Route" foreignKey="Route" />
+    <column name="StartLocation" fieldName="RouteStartLocation" label="Start Location" foreignKey="Route" />
+    <column name="EndLocation" fieldName="RouteEndLocation" label="End Location" foreignKey="Route" />
+    <column name="DriverID" fieldName="DriverID" label="Driver ID" />
+    <column name="DepartureTime" fieldName="DepartureTime" label="Departure Time" />
+    <column name="ArrivalTime" fieldName="ArrivalTime" label="Arrival Time" />
+    <column name="Weekday" fieldName="Weekday" label="Weekday" />
+  </columns>
+</dataModel>

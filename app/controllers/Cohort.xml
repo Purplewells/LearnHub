@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Cohort" conflictDetection="overwriteChanges" label="Cohort" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Cohort"."CohortID" "CohortID"
+	,"Cohort"."CohortDescription" "CohortDescription"
+	,"Cohort"."CohortType" "CohortType"
+	,"CohortType"."CohortTypeDescription" "CohortTypeDescription"
+	,"Cohort"."SubjectDescriptorTypeID" "SubjectDescriptorTypeID"
+	,"SubjectDescriptorType"."SubjectAreaDescription" "SubjectDescriptorTypeSubjectAreaDescription"
+	,"Cohort"."ResponsibleOrganisationID" "ResponsibleOrganisationID"
+	,"ResponsibleOrganisation"."Name" "ResponsibleOrganisationName"
+	,"Cohort"."CohortScopeID" "CohortScopeID"
+	,"CohortScope"."CohortScope" "CohortScope"
+	,"Cohort"."ProgramReference" "ProgramReference"
+from "dbo"."Cohort" "Cohort"
+	left join "dbo"."zlkpCohortTypeDescription" "CohortType" on "Cohort"."CohortType" = "CohortType"."CohortTypeDescriptionID"
+	left join "dbo"."zlkpCourseSubjectArea" "SubjectDescriptorType" on "Cohort"."SubjectDescriptorTypeID" = "SubjectDescriptorType"."CourseSubjectAreaId"
+	left join "dbo"."Organisation" "ResponsibleOrganisation" on "Cohort"."ResponsibleOrganisationID" = "ResponsibleOrganisation"."OrganizationID"
+	left join "dbo"."zlkpCohortScope" "CohortScope" on "Cohort"."CohortScopeID" = "CohortScope"."CohortScopeID"
+]]></text>
+    </command>
+    <command id="CohortIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="CohortID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="CohortID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Cohort ID" readOnly="true" />
+    <field name="CohortDescription" type="String" label="Description" length="50" showInSummary="true" />
+    <field name="CohortType" type="Int32" label="Cohort Type" showInSummary="true">
+      <items style="Lookup" dataController="CohortTypeDescription" newDataView="createForm1" dataValueField="CohortTypeDescriptionID" dataTextField="CohortTypeDescription" />
+    </field>
+    <field name="CohortTypeDescription" type="String" readOnly="true" label="Cohort Type" length="30" />
+    <field name="SubjectDescriptorTypeID" type="Int32" label="Subject Descriptor Type ID" showInSummary="true">
+      <items style="Lookup" dataController="CourseSubjectArea" newDataView="createForm1" dataValueField="CourseSubjectAreaID" dataTextField="SubjectAreaDescription" />
+    </field>
+    <field name="SubjectDescriptorTypeSubjectAreaDescription" type="String" readOnly="true" label="Subject Area" length="25" />
+    <field name="ResponsibleOrganisationID" type="Int32" label="Responsible Organisation ID" showInSummary="true">
+      <items style="Lookup" dataController="Organisation" newDataView="createForm1" dataValueField="OrganizationID" dataTextField="Name" />
+    </field>
+    <field name="ResponsibleOrganisationName" type="String" readOnly="true" label="Responsible Organisation" length="30" />
+    <field name="CohortScopeID" type="Int32" label="Cohort Scope ID" showInSummary="true">
+      <items style="Lookup" dataController="CohortScope" newDataView="createForm1" dataValueField="CohortScopeID" dataTextField="CohortScope" />
+    </field>
+    <field name="CohortScope" type="String" readOnly="true" label="Cohort Scope" length="20" />
+    <field name="ProgramReference" type="String" label="Program Reference" length="100" />
+    <field name="CohortProgram" type="DataView" label="Cohort Program">
+      <dataView controller="CohortProgram" view="grid1" filterFields="CohortID" />
+    </field>
+    <field name="StudentCohortAssociation" type="DataView" label="Student Cohort Association">
+      <dataView controller="StudentCohortAssociation" view="grid1" filterFields="CohortID" />
+    </field>
+    <field name="CohortStaffAssociation" type="DataView" label="Cohort Staff Association">
+      <dataView controller="CohortStaffAssociation" view="grid1" filterFields="CohortID" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Cohort">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="CohortDescription" columns="50" />
+        <dataField fieldName="CohortType" aliasFieldName="CohortTypeDescription" />
+        <dataField fieldName="SubjectDescriptorTypeID" aliasFieldName="SubjectDescriptorTypeSubjectAreaDescription" />
+        <dataField fieldName="CohortScopeID" aliasFieldName="CohortScope" />
+        <dataField fieldName="ResponsibleOrganisationID" aliasFieldName="ResponsibleOrganisationName" />
+        <dataField fieldName="ProgramReference" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Cohort">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="CohortDescription" columns="50" />
+            <dataField fieldName="CohortType" aliasFieldName="CohortTypeDescription" />
+            <dataField fieldName="SubjectDescriptorTypeID" aliasFieldName="SubjectDescriptorTypeSubjectAreaDescription" />
+            <dataField fieldName="ResponsibleOrganisationID" aliasFieldName="ResponsibleOrganisationName" />
+            <dataField fieldName="CohortScopeID" aliasFieldName="CohortScope" />
+            <dataField fieldName="ProgramReference" />
+          </dataFields>
+        </category>
+        <category id="d1" tab="COHORT PROGRAM" flow="NewRow">
+          <dataFields>
+            <dataField fieldName="CohortProgram" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="d2" tab="PARTICIPANTS">
+          <dataFields>
+            <dataField fieldName="StudentCohortAssociation" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none">
+              <headerText>Participants</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="d3" tab="RESPONSIBLE STAFF">
+          <dataFields>
+            <dataField fieldName="CohortStaffAssociation" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none">
+              <headerText>Responsible Staff</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Cohort">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="CohortDescription" columns="50" />
+            <dataField fieldName="CohortType" aliasFieldName="CohortTypeDescription" />
+            <dataField fieldName="SubjectDescriptorTypeID" aliasFieldName="SubjectDescriptorTypeSubjectAreaDescription" />
+            <dataField fieldName="ResponsibleOrganisationID" aliasFieldName="ResponsibleOrganisationName" />
+            <dataField fieldName="CohortScopeID" aliasFieldName="CohortScope" />
+            <dataField fieldName="ProgramReference" />
+          </dataFields>
+        </category>
+        <category id="d1" tab="COHORT PROGRAM" flow="NewRow">
+          <dataFields>
+            <dataField fieldName="CohortProgram" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+          <visibility>
+            <expression test="[1]==2" type="ClientScript" />
+          </visibility>
+        </category>
+        <category id="d2" tab="PARTICIPANTS">
+          <dataFields>
+            <dataField fieldName="StudentCohortAssociation" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none">
+              <headerText>Participants</headerText>
+            </dataField>
+          </dataFields>
+          <visibility>
+            <expression test="[1]==2" type="ClientScript" />
+          </visibility>
+        </category>
+        <category id="d3" tab="RESPONSIBLE STAFF">
+          <dataFields>
+            <dataField fieldName="CohortStaffAssociation" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none">
+              <headerText>Responsible Staff</headerText>
+            </dataField>
+          </dataFields>
+          <visibility>
+            <expression test="[1]==2" type="ClientScript" />
+          </visibility>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="CourseSection" alias="CourseSection" created="2024-01-28T01:30:10" modified="2025-03-20T14:11:17" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="ModeOfInstruction" parentTableSchema="dbo" parentTableName="zlkpCourseSectionDeliveryMode" x="432" y="20">
+      <foreignKeyColumn columnName="ModeOfInstructionID" parentColumnName="RefCourseSectionDeliveryModeId" />
+    </foreignKey>
+    <foreignKey id="RefCreditTypeEarned" parentTableSchema="dbo" parentTableName="zlkpCreditTypeEarned" x="432" y="181">
+      <foreignKeyColumn columnName="RefCreditTypeEarnedId" parentColumnName="RefCreditTypeEarnedId" />
+    </foreignKey>
+    <foreignKey id="GPAApplicability" parentTableSchema="dbo" parentTableName="zlkpCourseGPAApplicability" x="424" y="292">
+      <foreignKeyColumn columnName="GPAApplicabilityID" parentColumnName="RefCourseGPAApplicabilityId" />
+    </foreignKey>
+    <foreignKey id="SectionCharacteristic" parentTableSchema="dbo" parentTableName="zlkpSectionCharacteristics" x="432" y="842">
+      <foreignKeyColumn columnName="SectionCharacteristicID" parentColumnName="SectionCharacteristicID" />
+    </foreignKey>
+    <foreignKey id="CalendarSession" parentTableSchema="dbo" parentTableName="Session" x="916" y="20">
+      <foreignKeyColumn columnName="CalendarSessionID" parentColumnName="CalendarSessionID" />
+    </foreignKey>
+    <foreignKey id="Course" parentTableSchema="dbo" parentTableName="Course" x="427" y="415">
+      <foreignKeyColumn columnName="CourseID" parentColumnName="CourseID" />
+    </foreignKey>
+    <foreignKey id="StaffAssignment" parentTableSchema="dbo" parentTableName="K12StaffAssignment" x="916" y="595">
+      <foreignKeyColumn columnName="StaffAssignmentID" parentColumnName="StaffAssignmentID" />
+    </foreignKey>
+    <foreignKey id="RefGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="1342" y="20" baseForeignKey="Course">
+      <foreignKeyColumn columnName="RefGradeLevelId" parentColumnName="RefGradeLevelId" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="CourseSectionID" fieldName="CourseSectionID" label="Course Section ID" />
+    <column name="SectionNo" fieldName="SectionNo" label="Section No" />
+    <column name="SectionName" fieldName="SectionName" label="Section Name" />
+    <column name="SectionStartDate" fieldName="SectionStartDate" label="Start Date" />
+    <column name="SectionEndDate" fieldName="SectionEndDate" label="End Date" />
+    <column name="ModeOfInstructionID" fieldName="ModeOfInstructionID" label="Mode Of Instruction ID" aliasColumnName="Description" aliasForeignKey="ModeOfInstruction" />
+    <column name="Description" fieldName="ModeOfInstructionDescription" label="Mode" foreignKey="ModeOfInstruction" />
+    <column name="RefCreditTypeEarnedId" fieldName="RefCreditTypeEarnedID" label="Ref Credit Type Earned Id" aliasColumnName="Description" aliasForeignKey="RefCreditTypeEarned" />
+    <column name="Description" fieldName="RefCreditTypeEarnedDescription" label="Credit Type" foreignKey="RefCreditTypeEarned" />
+    <column name="MaximumCapacity" fieldName="Capacity" label="Capacity" />
+    <column name="GPAApplicabilityID" fieldName="GpaapplicabilityID" label="GPA Applicability ID" aliasColumnName="Description" aliasForeignKey="GPAApplicability" />
+    <column name="Description" fieldName="GpaapplicabilityDescription" label="GPA" foreignKey="GPAApplicability" />
+    <column name="SectionCharacteristicID" fieldName="SectionCharacteristicID" label="Section Characteristic ID" aliasColumnName="SectionCharacteristicDesc" aliasForeignKey="SectionCharacteristic" />
+    <column name="SectionCharacteristicDesc" fieldName="SectionCharacteristicDesc" label="Characteristic" foreignKey="SectionCharacteristic" />
+    <column name="CreationDate" fieldName="CreationDate" label="Creation Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CalendarSessionID" fieldName="CalendarSessionID" label="Calendar Session ID" aliasColumnName="SessionCode" aliasForeignKey="CalendarSession" />
+    <column name="SessionCode" fieldName="SessionCode" label="Session Code" foreignKey="CalendarSession" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="CourseID" fieldName="CourseID" label="Course ID" aliasColumnName="Code" aliasForeignKey="Course" />
+    <column name="Code" fieldName="CourseCode" label="Course Code" foreignKey="Course" />
+    <column name="CourseTitle" fieldName="CourseTitle" label="Course Title" foreignKey="Course" />
+    <column name="ActiveCourseSection" fieldName="ACS" label="ACS" />
+    <column name="IsActive" fieldName="IsActive" label="Active" />
+    <column name="StaffAssignmentID" fieldName="StaffAssignmentID" label="Staff Assignment ID" aliasColumnName="StaffClassificationID" aliasForeignKey="StaffAssignment" />
+    <column name="StaffClassificationID" fieldName="StaffAssignmentStaffClassificationID" foreignKey="StaffAssignment" />
+    <column name="SortOrder" fieldName="GLSO" label="GLSO" foreignKey="RefGradeLevel" sortOrder="1" sortType="Ascending" />
+    <column name="Description" fieldName="GL" label="GL" foreignKey="RefGradeLevel" />
+    <column name="AssignedTutor" fieldName="AssignedTutor" label="Tutor" />
+  </columns>
+</dataModel>

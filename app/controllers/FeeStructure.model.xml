@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Fees" alias="Fees" created="2024-01-28T01:27:05" modified="2024-01-28T01:43:49" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="FeeType" parentTableSchema="dbo" parentTableName="zlkpFeeType" x="357" y="20">
+      <foreignKeyColumn columnName="FeeTypeID" parentColumnName="FeeTypeID" />
+    </foreignKey>
+    <foreignKey id="OrganizationCalendar" parentTableSchema="dbo" parentTableName="Calendar" x="357" y="183">
+      <foreignKeyColumn columnName="OrganizationCalendarId" parentColumnName="OrganizationCalendarId" />
+    </foreignKey>
+    <foreignKey id="Currency" parentTableSchema="dbo" parentTableName="zlkp_currency" x="357" y="367">
+      <foreignKeyColumn columnName="CurrencyID" parentColumnName="CurrencyID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="FeeID" fieldName="FeeID" label="Fee ID" />
+    <column name="FeeTypeID" fieldName="FeeTypeID" label="Fee Type ID" aliasColumnName="FeeType" aliasForeignKey="FeeType" />
+    <column name="FeeType" fieldName="FeeType" label="Fee Type" foreignKey="FeeType" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Amount" fieldName="Amount" label="Amount" format="" />
+    <column name="EffectiveDate" fieldName="EffectiveDate" label="Effective Date" format="d" />
+    <column name="EffectiveTo" fieldName="EffectiveTo" label="Effective To" format="d" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="RefGradeLevelID" fieldName="RefGradeLevelID" label="Ref Grade Level ID" />
+    <column name="OrganizationCalendarId" fieldName="OrganizationCalendarID" label="Organization Calendar Id" aliasColumnName="CalendarCode" aliasForeignKey="OrganizationCalendar" />
+    <column name="CalendarCode" fieldName="Year" label="Year" foreignKey="OrganizationCalendar" />
+    <column name="GradeLevelDependent" fieldName="GLD" label="GLD" />
+    <column name="CurrencyID" fieldName="CurrencyID" label="Currency ID" aliasColumnName="Code" aliasForeignKey="Currency" />
+    <column name="Code" fieldName="Curr" label="Curr" foreignKey="Currency" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

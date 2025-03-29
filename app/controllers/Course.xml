@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Course" conflictDetection="overwriteChanges" label="Course" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Course"."CourseID" "CourseID"
+	,"Course"."Code" "Code"
+	,"Course"."CourseTitle" "Course"
+	,"Course"."SubjectAreaID" "SubjectAreaID"
+	,"SubjectArea"."SubjectAreaDescription" "SubjectArea"
+	,"Course"."InstructionalMinutes" "InstructionalMinutes"
+	,"Course"."RefCourseLevelCharacteristicsId" "RefCourseLevelCharacteristicsID"
+	,"RefCourseLevelCharacteristics"."Description" "Characteristics"
+	,"Course"."RefCourseCreditUnitId" "RefCourseCreditUnitID"
+	,"RefCourseCreditUnit"."Description" "CourseCredit"
+	,"Course"."AvailableCreditValue" "AvailableCreditValue"
+	,"Course"."RefGradeLevelId" "RefGradeLevelID"
+	,"RefGradeLevel"."Description" "GradeLevel"
+	,"RefGradeLevel"."SortOrder" "GLSO"
+	,"Course"."CourseRequirement" "CourseRequirement"
+	,"Course"."RefCourseInteractionModeId" "RefCourseInteractionModeID"
+	,"RefCourseInteractionMode"."Description" "Mode"
+	,"Course"."RefK12EndOfCourseRequirementId" "RefK12EndOfCourseRequirementID"
+	,"RefK12EndOfCourseRequirement"."Description" "EOCReq"
+	,"Course"."Active" "Active"
+	,"Course"."EffectiveFrom" "EffectiveFrom"
+	,"Course"."EffectiveTo" "EffectiveTo"
+	,"Course"."CreatedDate" "CreatedDate"
+	,"Course"."ModifiedDate" "ModifiedDate"
+	,"Course"."CreatedBy" "CreatedBy"
+	,"Course"."ModifiedBy" "ModifiedBy"
+	,"Course"."OrganizationID" "OrganizationID"
+	,"Organization"."Name" "School"
+	,"Course"."DepartmentID" "DepartmentID"
+	,"Department"."DepartmentName" "Department"
+from "dbo"."Course" "Course"
+	left join "dbo"."zlkpCourseSubjectArea" "SubjectArea" on "Course"."SubjectAreaID" = "SubjectArea"."CourseSubjectAreaId"
+	left join "dbo"."zlkpCourseLevelCharacteristic" "RefCourseLevelCharacteristics" on "Course"."RefCourseLevelCharacteristicsId" = "RefCourseLevelCharacteristics"."RefCourseLevelCharacteristicId"
+	left join "dbo"."zlkpCourseCreditUnit" "RefCourseCreditUnit" on "Course"."RefCourseCreditUnitId" = "RefCourseCreditUnit"."RefCourseCreditUnitId"
+	left join "dbo"."zlkpGradeLevel" "RefGradeLevel" on "Course"."RefGradeLevelId" = "RefGradeLevel"."RefGradeLevelId"
+	left join "dbo"."zlkpCourseInteractionMode" "RefCourseInteractionMode" on "Course"."RefCourseInteractionModeId" = "RefCourseInteractionMode"."RefCourseInteractionModeId"
+	left join "dbo"."zlkpEndOfCourseRequirement" "RefK12EndOfCourseRequirement" on "Course"."RefK12EndOfCourseRequirementId" = "RefK12EndOfCourseRequirement"."RefK12EndOfCourseRequirementId"
+	left join "dbo"."Organisation" "Organization" on "Course"."OrganizationID" = "Organization"."OrganizationID"
+	left join "dbo"."Department" "Department" on "Course"."DepartmentID" = "Department"."DepartmentID"
+]]></text>
+    </command>
+    <command id="CourseIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="CourseID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="CourseID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Course ID" readOnly="true" />
+    <field name="Code" type="String" label="Code" length="40" showInSummary="true" />
+    <field name="Course" type="String" label="Course" length="60" showInSummary="true" />
+    <field name="SubjectAreaID" type="Int32" label="Subject Area ID" showInSummary="true">
+      <items style="Lookup" dataController="CourseSubjectArea" newDataView="createForm1" dataValueField="CourseSubjectAreaID" dataTextField="SubjectAreaDescription" />
+    </field>
+    <field name="SubjectArea" type="String" readOnly="true" label="Subject Area" length="30" />
+    <field name="InstructionalMinutes" type="Int32" label="Instr Min." showInSummary="true" />
+    <field name="RefCourseLevelCharacteristicsID" type="Int32" label="Ref Course Level Characteristics Id" showInSummary="true">
+      <items style="Lookup" dataController="CourseLevelCharacteristic" newDataView="createForm1" dataValueField="RefCourseLevelCharacteristicID" dataTextField="Description" />
+    </field>
+    <field name="Characteristics" type="String" readOnly="true" label="Characteristics" length="15" />
+    <field name="RefCourseCreditUnitID" type="Int32" label="Ref Course Credit Unit Id">
+      <items style="Lookup" dataController="CourseCreditUnit" newDataView="createForm1" dataValueField="RefCourseCreditUnitID" dataTextField="Description" />
+    </field>
+    <field name="CourseCredit" type="String" readOnly="true" label="Course Credit" length="12" />
+    <field name="AvailableCreditValue" type="Decimal" label="Credit Value" />
+    <field name="RefGradeLevelID" type="Int32" label="Ref Grade Level Id">
+      <items style="Lookup" dataController="GradeLevel" newDataView="createForm1" dataValueField="RefGradeLevelID" dataTextField="Description" copy="GLSO=SortOrder" />
+    </field>
+    <field name="GradeLevel" type="String" readOnly="true" label="GL" length="5" />
+    <field name="GLSO" type="Decimal" readOnly="true" label="GLSO" />
+    <field name="CourseRequirement" type="Boolean" label="REQ" />
+    <field name="RefCourseInteractionModeID" type="Int32" label="Ref Course Interaction Mode Id">
+      <items style="Lookup" dataController="CourseInteractionMode" newDataView="createForm1" dataValueField="RefCourseInteractionModeID" dataTextField="Description" />
+    </field>
+    <field name="Mode" type="String" readOnly="true" label="Mode" length="100" />
+    <field name="RefK12EndOfCourseRequirementID" type="Int32" label="Ref K12 End Of Course Requirement Id">
+      <items style="Lookup" dataController="EndOfCourseRequirement" newDataView="createForm1" dataValueField="RefK12EndOfCourseRequirementID" dataTextField="Description" />
+    </field>
+    <field name="EOCReq" type="String" readOnly="true" label="EOC Req" length="5" />
+    <field name="Active" type="Boolean" label="Active" />
+    <field name="EffectiveFrom" type="DateTime" label="Effective From" />
+    <field name="EffectiveTo" type="DateTime" label="Effective To" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="OrganizationID" type="Int32" label="Organization ID">
+      <items style="Lookup" dataController="Organisation" newDataView="createForm1" dataValueField="OrganizationID" dataTextField="Name" />
+    </field>
+    <field name="School" type="String" readOnly="true" label="School" length="60" />
+    <field name="DepartmentID" type="Int32" label="Department ID">
+      <items style="Lookup" dataController="Department" newDataView="createForm1" dataValueField="DepartmentID" dataTextField="DepartmentName" />
+    </field>
+    <field name="Department" type="String" readOnly="true" label="Department" length="25" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Active Courses" filter="Active = 1" sortExpression="GLSO ASC" groupExpression="GradeLevel">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Course" columns="20" />
+        <dataField fieldName="Code" columns="20" />
+        <dataField fieldName="SubjectAreaID" aliasFieldName="SubjectArea" />
+        <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" />
+        <dataField fieldName="RefCourseLevelCharacteristicsID" aliasFieldName="Characteristics" columns="15" />
+        <dataField fieldName="RefCourseCreditUnitID" aliasFieldName="CourseCredit" columns="12" />
+        <dataField fieldName="AvailableCreditValue" columns="10" />
+        <dataField fieldName="InstructionalMinutes" columns="10" />
+        <dataField fieldName="CourseRequirement" />
+        <dataField fieldName="RefCourseInteractionModeID" aliasFieldName="Mode" hidden="true" />
+        <dataField fieldName="RefK12EndOfCourseRequirementID" aliasFieldName="EOCReq" />
+        <dataField fieldName="Active" />
+        <dataField fieldName="EffectiveFrom" columns="10" />
+        <dataField fieldName="EffectiveTo" columns="10" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="OrganizationID" aliasFieldName="School" hidden="true" />
+        <dataField fieldName="DepartmentID" aliasFieldName="Department" />
+      </dataFields>
+    </view>
+    <view id="grid1_all_courses" type="Grid" commandId="command1" label="All Courses">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Code" columns="20" />
+        <dataField fieldName="Course" columns="20" />
+        <dataField fieldName="SubjectAreaID" aliasFieldName="SubjectArea" />
+        <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" />
+        <dataField fieldName="InstructionalMinutes" columns="8" />
+        <dataField fieldName="RefCourseLevelCharacteristicsID" aliasFieldName="Characteristics" />
+        <dataField fieldName="RefCourseCreditUnitID" aliasFieldName="CourseCredit" />
+        <dataField fieldName="AvailableCreditValue" columns="10" />
+        <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="CourseRequirement" />
+        <dataField fieldName="RefCourseInteractionModeID" aliasFieldName="Mode" hidden="true" />
+        <dataField fieldName="RefK12EndOfCourseRequirementID" aliasFieldName="EOCReq" />
+        <dataField fieldName="Active" />
+        <dataField fieldName="EffectiveFrom" columns="18" />
+        <dataField fieldName="EffectiveTo" columns="10" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="OrganizationID" aliasFieldName="School" hidden="true" />
+        <dataField fieldName="DepartmentID" aliasFieldName="Department" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Course">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="Code" columns="40" />
+            <dataField fieldName="Course" />
+            <dataField fieldName="SubjectAreaID" aliasFieldName="SubjectArea" />
+            <dataField fieldName="InstructionalMinutes" columns="15" />
+            <dataField fieldName="RefCourseLevelCharacteristicsID" aliasFieldName="Characteristics" />
+            <dataField fieldName="RefCourseCreditUnitID" aliasFieldName="CourseCredit" />
+            <dataField fieldName="AvailableCreditValue" columns="15" />
+            <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" />
+            <dataField fieldName="CourseRequirement" />
+            <dataField fieldName="RefCourseInteractionModeID" aliasFieldName="Mode" />
+            <dataField fieldName="RefK12EndOfCourseRequirementID" aliasFieldName="EOCReq" />
+            <dataField fieldName="Active" />
+            <dataField fieldName="EffectiveFrom" columns="10" />
+            <dataField fieldName="EffectiveTo" columns="10" />
+            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+            <dataField fieldName="OrganizationID" aliasFieldName="School" hidden="true" />
+            <dataField fieldName="DepartmentID" aliasFieldName="Department" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Course">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="Code" columns="40" />
+            <dataField fieldName="Course" />
+            <dataField fieldName="SubjectAreaID" aliasFieldName="SubjectArea" />
+            <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" />
+            <dataField fieldName="RefCourseLevelCharacteristicsID" aliasFieldName="Characteristics" />
+            <dataField fieldName="RefCourseCreditUnitID" aliasFieldName="CourseCredit" />
+            <dataField fieldName="InstructionalMinutes" columns="15" />
+            <dataField fieldName="AvailableCreditValue" columns="15" />
+            <dataField fieldName="Active" />
+            <dataField fieldName="CourseRequirement" />
+            <dataField fieldName="RefCourseInteractionModeID" aliasFieldName="Mode" />
+            <dataField fieldName="RefK12EndOfCourseRequirementID" aliasFieldName="EOCReq" />
+            <dataField fieldName="EffectiveFrom" columns="10" />
+            <dataField fieldName="EffectiveTo" columns="10" />
+            <dataField fieldName="OrganizationID" aliasFieldName="School" />
+            <dataField fieldName="DepartmentID" aliasFieldName="Department" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+      <action commandName="BatchEdit" headerText="Batch Edit" id="a100" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New Course" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a5" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a100" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a101" commandName="ReportAsExcel" headerText="Send To Excel" />
+      <action id="a102" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a103" commandName="ExportRss" headerText="Send RSS API" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

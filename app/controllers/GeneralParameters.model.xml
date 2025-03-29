@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="GeneralParameters" alias="GeneralParameters" created="2024-01-28T21:46:56" modified="2024-11-23T05:54:22" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="ParameterType" parentTableSchema="dbo" parentTableName="zlkpParameterType" x="342" y="20">
+      <foreignKeyColumn columnName="ParameterTypeID" parentColumnName="ParameterTypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ParameterID" fieldName="ParameterID" label="Parameter ID" />
+    <column name="ParamenterName" fieldName="ParamenterName" label="Paramenter Name" />
+    <column name="CodeValue" fieldName="CodeValue" label="Value" />
+    <column name="AvailableValues" fieldName="AvailableValues" label="Available Values" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="InUse" fieldName="InUse" label="In Use" />
+    <column name="DisplayOrder" fieldName="DisplayOrder" label="Sort Order" />
+    <column name="ParameterTypeID" fieldName="ParameterTypeID" label="Parameter Type ID" aliasColumnName="ParameterTypeName" aliasForeignKey="ParameterType" />
+    <column name="ParameterTypeName" fieldName="ParameterTypeName" label="Parameter Type" foreignKey="ParameterType" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

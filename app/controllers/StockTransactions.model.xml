@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StockTransactions" alias="StockTransactions" created="2024-07-17T09:06:29" modified="2024-08-16T19:51:27" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Product" parentTableSchema="dbo" parentTableName="Product" x="347" y="20">
+      <foreignKeyColumn columnName="ProductID" parentColumnName="ProductID" />
+    </foreignKey>
+    <foreignKey id="ProductCategory" parentTableSchema="dbo" parentTableName="zlkpProductCategory" baseForeignKey="Product" x="668" y="20">
+      <foreignKeyColumn columnName="CategoryID" parentColumnName="ProductCategoryID" />
+    </foreignKey>
+    <foreignKey id="ProductSupplier" parentTableSchema="dbo" parentTableName="Suppliers" baseForeignKey="Product" x="668" y="183">
+      <foreignKeyColumn columnName="SupplierID" parentColumnName="SupplierID" />
+    </foreignKey>
+    <foreignKey id="TransactionType" parentTableSchema="dbo" parentTableName="zlkpStockTransactionType" x="347" y="228">
+      <foreignKeyColumn columnName="TransactionTypeID" parentColumnName="TransactionTypeID" />
+    </foreignKey>
+    <foreignKey id="TransactionStatus" parentTableSchema="dbo" parentTableName="zlkpTransactionStatus" x="347" y="388">
+      <foreignKeyColumn columnName="TransactionStatusID" parentColumnName="TransactionStatusID" />
+    </foreignKey>
+    <foreignKey id="SourceLocation" parentTableSchema="dbo" parentTableName="zlkpInventoryLocations" x="984" y="20">
+      <foreignKeyColumn columnName="SourceLocationID" parentColumnName="LocationID" />
+    </foreignKey>
+    <foreignKey id="ReceivingLocation" parentTableSchema="dbo" parentTableName="zlkpInventoryLocations" x="980" y="235">
+      <foreignKeyColumn columnName="ReceivingLocationID" parentColumnName="LocationID" />
+    </foreignKey>
+    <foreignKey id="MovementMode" parentTableSchema="dbo" parentTableName="zlkpMovementMode" x="660" y="346">
+      <foreignKeyColumn columnName="MovementModeID" parentColumnName="MovementModeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="TransactionsID" fieldName="TransactionsID" label="Transactions ID" />
+    <column name="TransDescription" fieldName="TransDescription" label="Description" />
+    <column name="ProductID" fieldName="ProductID" label="Product ID" aliasColumnName="ProductName" aliasForeignKey="Product" />
+    <column name="ProductName" fieldName="ProductName" label="Item" foreignKey="Product" />
+    <column name="SKUCode" fieldName="SKUCode" label="SKU" foreignKey="Product" />
+    <column name="CategoryName" fieldName="ProductCategoryName" label="Item Category" foreignKey="ProductCategory" />
+    <column name="SupplierName" fieldName="ProductSupplierName" label="Supplier Name" foreignKey="ProductSupplier" />
+    <column name="TransactionDate" fieldName="TransactionDate" label="Trans Date" format="g" />
+    <column name="TransactionTypeID" fieldName="TransactionTypeID" label="Transaction Type ID" aliasColumnName="TransactionType" aliasForeignKey="TransactionType" />
+    <column name="TransactionType" fieldName="TransactionType" label="Trans Type" foreignKey="TransactionType" />
+    <column name="TransactionTypeCode" fieldName="TransactionTypeCode" label="TTCode" />
+    <column name="MovementModeID" fieldName="MovementModeID" label="Movement Mode ID" aliasColumnName="MovementMode" aliasForeignKey="MovementMode" />
+    <column name="MovementMode" fieldName="MovementMode" label="Reason Code" foreignKey="MovementMode" />
+    <column name="SourceLocationID" fieldName="SourceLocationID" label="Source Location ID" aliasColumnName="LocationName" aliasForeignKey="SourceLocation" />
+    <column name="LocationName" fieldName="SourceLocationName" label="Source Loc'n" foreignKey="SourceLocation" />
+    <column name="ReceivingLocationID" fieldName="ReceivingLocationID" label="Receiving Location ID" aliasColumnName="LocationName" aliasForeignKey="ReceivingLocation" />
+    <column name="LocationName" fieldName="ReceivingLocationName" label="Receiving Loc'n" foreignKey="ReceivingLocation" />
+    <column name="TransactionStatusID" fieldName="TransactionStatusID" label="Transaction Status ID" aliasColumnName="TransactionStatus" aliasForeignKey="TransactionStatus" />
+    <column name="TransactionStatus" fieldName="Status" label="Status" foreignKey="TransactionStatus" />
+    <column name="Quantity" fieldName="Quantity" label="Quantity" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

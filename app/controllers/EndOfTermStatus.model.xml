@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpEndOfTermStatus" alias="zlkpEndOfTermStatus" created="2024-02-04T12:15:21" modified="2024-09-13T19:30:32" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="RefEndOfTermStatusId" fieldName="RefEndOfTermStatusID" label="Ref End Of Term Status Id" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="Definition" fieldName="Definition" label="Definition" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+    <column name="DefaultValue" fieldName="DefaultValue" label="Default Value" />
+  </columns>
+</dataModel>

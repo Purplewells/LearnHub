@@ -1,0 +1,388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="znStudentFeesDetail" label="znStudentFeesDetail" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"student_fees"."FeeID" "FeeID"
+	,"Fee"."Description" "FeesDescription"
+	,"Fee"."Amount" "BillAmount"
+	,"student_fees"."FeeAmount" "FeeAmount"
+	,"student_fees"."PersonID" "PersonID"
+	,"Person"."IdentificationCode" "UPN"
+	,"Person"."FirstName" "FirstName"
+	,"Person"."LastName" "LastName"
+	,"Person"."CurrentYearGradeLevel" "CYG"
+	,"student_fees"."EffectiveFrom" "EffectiveDate"
+	,"student_fees"."DueDate" "DueDate"
+	,"student_fees"."Discount" "Adjustment"
+	,"student_fees"."FeeDescription" "FeeDescription"
+	,"student_fees"."FeeTypes" "FeeTypes"
+	,"FeeType"."FeeType" "FeeType"
+	,"OrganizationCalendar"."CalendarCode" "CalendarCode"
+	,"OrganizationCalendar"."SchoolYearStartDate" "YearStartDate"
+	,"OrganizationCalendar"."SchoolYearEndDate" "YearEndDate"
+	,"OrganizationCalendar"."CurrentSchoolYear" "CSY"
+	,"RefSex"."Code" "Sex"
+	,"School"."SchoolName" "SchoolName"
+	,"Currency"."Code" "CurrencyCode"
+	,"student_fees"."CurrentBalance" "CurrentBalance"
+	,"student_fees"."CreatedDate" "CreatedDate"
+	,"student_fees"."ModifiedDate" "ModifiedDate"
+	,"student_fees"."CreatedBy" "CreatedBy"
+	,"student_fees"."ModifiedBy" "ModifiedBy"
+from "dbo"."student_fees" "student_fees"
+	left join "dbo"."Fees" "Fee" on "student_fees"."FeeID" = "Fee"."FeeID"
+	left join "dbo"."zlkpFeeType" "FeeType" on "Fee"."FeeTypeID" = "FeeType"."FeeTypeID"
+	left join "dbo"."Calendar" "OrganizationCalendar" on "Fee"."OrganizationCalendarId" = "OrganizationCalendar"."OrganizationCalendarId"
+	left join "dbo"."School" "School" on "OrganizationCalendar"."SchoolID" = "School"."OrganizationID"
+	left join "dbo"."zlkp_currency" "Currency" on "Fee"."CurrencyID" = "Currency"."CurrencyID"
+	left join "dbo"."Person" "Person" on "student_fees"."PersonID" = "Person"."PersonID"
+	left join "dbo"."zlkpSex" "RefSex" on "Person"."RefSexID" = "RefSex"."GenderID"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="FeeID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Fee ID" showInSummary="true">
+      <items style="Lookup" dataController="FeeStructure" newDataView="createForm1" dataValueField="FeeID" dataTextField="Description" copy="BillAmount=Amount, FeeType=FeeType, CalendarCode=Year, CurrencyCode=Curr" />
+    </field>
+    <field name="FeesDescription" type="String" readOnly="true" label="Fees Description" length="20" />
+    <field name="BillAmount" type="Decimal" readOnly="true" dataFormatString="N" label="Bill Amount" />
+    <field name="FeeAmount" type="Decimal" dataFormatString="N" label="Fee Amount" showInSummary="true" />
+    <field name="PersonID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Person ID" showInSummary="true">
+      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="UPN" copy="FirstName=FirstName, LastName=LastName, CYG=CYG, " />
+    </field>
+    <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
+    <field name="FirstName" type="String" readOnly="true" label="Firstname" length="35" />
+    <field name="LastName" type="String" readOnly="true" label="Lastname" length="35" />
+    <field name="CYG" type="String" readOnly="true" label="CYG" length="10" />
+    <field name="Fullname" type="String" readOnly="true" label="Fullname" computed="true" showInSummary="true">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </field>
+    <field name="EffectiveDate" type="DateTime" label="Eff. From" showInSummary="true" />
+    <field name="DueDate" type="DateTime" label="Due Date" />
+    <field name="Adjustment" type="Decimal" dataFormatString="N" label="Adj." />
+    <field name="LessDiscount" type="Decimal" readOnly="true" dataFormatString="N" label="Disc Fee" computed="true">
+      <formula>Fee.Amount - COALESCE (student_fees.Discount,0)</formula>
+    </field>
+    <field name="FeeDescription" type="String" label="StudentFee Description" length="30" />
+    <field name="FeeTypes" type="String" label="Fee Types" length="20" />
+    <field name="FeeType" type="String" readOnly="true" label="Fee Type" length="20" />
+    <field name="CalendarCode" type="String" readOnly="true" label="Billed Year" length="30" />
+    <field name="YearStartDate" type="DateTime" readOnly="true" dataFormatString="d" label="YSD" />
+    <field name="YearEndDate" type="DateTime" readOnly="true" dataFormatString="d" label="YED" />
+    <field name="CSY" type="Boolean" readOnly="true" label="CSY" />
+    <field name="Sex" type="String" readOnly="true" label="Sex" length="50" />
+    <field name="SchoolName" type="String" readOnly="true" label="School" length="50" />
+    <field name="CurrencyCode" type="String" readOnly="true" label="CURR" length="5" />
+    <field name="CurrentBalance" type="Decimal" label="Current Balance" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="fee_collection_transaction" type="DataView" label="Payment Transaction">
+      <dataView controller="fee_collection_transaction" view="grid1" filterFields="FeeID,PersonID" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1_current_year_fee" type="Grid" commandId="command1" label="Fee Bill - Current Year" filter="EffectiveDate BETWEEN YearStartDate AND YearEndDate and CSY=1">
+      <headerText>Provides a list of generated bills for students. It incorporates the re-assignment of unpaid fee bills as well.</headerText>
+      <dataFields>
+        <dataField fieldName="FirstName" columns="20" />
+        <dataField fieldName="LastName" columns="20" />
+        <dataField fieldName="PersonID" aliasFieldName="UPN" />
+        <dataField fieldName="CYG" columns="5" />
+        <dataField fieldName="FeeID" aliasFieldName="FeesDescription" columns="20" />
+        <dataField fieldName="FeeType" columns="15" />
+        <dataField fieldName="Sex" columns="4" hidden="true" />
+        <dataField fieldName="BillAmount" columns="10" aggregate="Sum" />
+        <dataField fieldName="Adjustment" columns="7" aggregate="Sum" />
+        <dataField fieldName="LessDiscount" columns="10" aggregate="Sum" />
+        <dataField fieldName="FeeAmount" columns="10" hidden="true" />
+        <dataField fieldName="CurrencyCode" columns="5" />
+        <dataField fieldName="Fullname" hidden="true" tag="header-text" />
+        <dataField fieldName="EffectiveDate" columns="10" />
+        <dataField fieldName="DueDate" columns="10" hidden="true" />
+        <dataField fieldName="FeeDescription" columns="30" hidden="true" />
+        <dataField fieldName="FeeTypes" columns="20" hidden="true" />
+        <dataField fieldName="CalendarCode" columns="10" />
+        <dataField fieldName="YearStartDate" columns="10" hidden="true" />
+        <dataField fieldName="YearEndDate" columns="10" />
+        <dataField fieldName="CSY" />
+        <dataField fieldName="SchoolName" columns="50" hidden="true" />
+        <dataField fieldName="CurrentBalance" columns="15" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_previous_year_fee" type="Grid" commandId="command1" label="Fee Bill - Previous Year " filter="YearEndDate &lt; GETDATE()  AND CSY = 0" tags="material-icon-shopping_basket">
+      <headerText>Provides a list of generated bills for students. It incorporates the re-assignment of unpaid fee bills as well.</headerText>
+      <dataFields>
+        <dataField fieldName="FirstName" columns="20" />
+        <dataField fieldName="LastName" columns="20" />
+        <dataField fieldName="PersonID" aliasFieldName="UPN" />
+        <dataField fieldName="CYG" columns="5" />
+        <dataField fieldName="FeeID" aliasFieldName="FeesDescription" columns="20" />
+        <dataField fieldName="FeeType" columns="15" />
+        <dataField fieldName="Sex" columns="4" hidden="true" />
+        <dataField fieldName="BillAmount" columns="10" aggregate="Sum" />
+        <dataField fieldName="Adjustment" columns="7" aggregate="Sum" />
+        <dataField fieldName="LessDiscount" columns="10" aggregate="Sum" />
+        <dataField fieldName="FeeAmount" columns="10" hidden="true" />
+        <dataField fieldName="CurrencyCode" columns="5" />
+        <dataField fieldName="Fullname" hidden="true" tag="header-text" />
+        <dataField fieldName="EffectiveDate" columns="10" />
+        <dataField fieldName="DueDate" columns="10" hidden="true" />
+        <dataField fieldName="FeeDescription" columns="30" hidden="true" />
+        <dataField fieldName="FeeTypes" columns="20" hidden="true" />
+        <dataField fieldName="CalendarCode" columns="10" />
+        <dataField fieldName="YearStartDate" columns="10" hidden="true" />
+        <dataField fieldName="YearEndDate" columns="10" hidden="true" />
+        <dataField fieldName="CSY" />
+        <dataField fieldName="SchoolName" columns="50" hidden="true" />
+        <dataField fieldName="CurrentBalance" columns="15" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grd1_all_time_fees" type="Grid" commandId="command1" label="Fee Bill - Historical" tags="material-icon-shopping_basket">
+      <headerText>Provides a list of generated bills for students. It incorporates the re-assignment of unpaid fee bills as well.</headerText>
+      <dataFields>
+        <dataField fieldName="FirstName" columns="20" />
+        <dataField fieldName="LastName" columns="20" />
+        <dataField fieldName="PersonID" aliasFieldName="UPN" />
+        <dataField fieldName="CYG" columns="5" />
+        <dataField fieldName="FeeID" aliasFieldName="FeesDescription" columns="20" />
+        <dataField fieldName="FeeType" columns="15" />
+        <dataField fieldName="Sex" columns="4" hidden="true" />
+        <dataField fieldName="BillAmount" columns="10" aggregate="Sum" />
+        <dataField fieldName="Adjustment" columns="7" aggregate="Sum" />
+        <dataField fieldName="LessDiscount" columns="10" aggregate="Sum" />
+        <dataField fieldName="FeeAmount" columns="10" hidden="true" />
+        <dataField fieldName="CurrencyCode" columns="5" />
+        <dataField fieldName="Fullname" hidden="true" tag="header-text" />
+        <dataField fieldName="EffectiveDate" columns="10" />
+        <dataField fieldName="DueDate" columns="10" hidden="true" />
+        <dataField fieldName="FeeDescription" columns="30" hidden="true" />
+        <dataField fieldName="FeeTypes" columns="20" hidden="true" />
+        <dataField fieldName="CalendarCode" columns="10" />
+        <dataField fieldName="YearStartDate" columns="10" />
+        <dataField fieldName="YearEndDate" columns="10" />
+        <dataField fieldName="CSY" />
+        <dataField fieldName="SchoolName" columns="50" hidden="true" />
+        <dataField fieldName="CurrentBalance" columns="15" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Enter &amp; Maintain Student Bill">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="Fullname" hidden="true" />
+            <dataField fieldName="PersonID" aliasFieldName="UPN" hidden="true" />
+            <dataField fieldName="FeeID" aliasFieldName="FeesDescription" />
+            <dataField fieldName="FeeType" columns="20" />
+            <dataField fieldName="FeeAmount" columns="15" hidden="true" />
+            <dataField fieldName="BillAmount" columns="15" />
+            <dataField fieldName="Adjustment" columns="15" />
+            <dataField fieldName="LessDiscount" columns="15" />
+            <dataField fieldName="CurrentBalance" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="EffectiveDate" columns="10" />
+            <dataField fieldName="DueDate" columns="10" />
+            <dataField fieldName="CurrencyCode" columns="5" />
+          </dataFields>
+        </category>
+        <category id="d1" tab="PAYMENT STUB" flow="NewRow">
+          <dataFields>
+            <dataField fieldName="fee_collection_transaction" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;content-stub-none&#xD;&#xA;header-title-none" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Hide" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="YearEndDate" columns="10" />
+            <dataField fieldName="YearStartDate" columns="10" />
+            <dataField fieldName="CalendarCode" columns="30" />
+            <dataField fieldName="FeeTypes" columns="20" hidden="true" />
+            <dataField fieldName="Sex" columns="50" />
+            <dataField fieldName="CSY" />
+            <dataField fieldName="CYG" columns="10" />
+          </dataFields>
+          <visibility>
+            <expression test="[1]==2" type="ClientScript" />
+          </visibility>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Student Bill">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="Fullname" hidden="true" />
+            <dataField fieldName="PersonID" aliasFieldName="UPN" hidden="true" />
+            <dataField fieldName="FeeID" aliasFieldName="FeesDescription" />
+            <dataField fieldName="FeeType" columns="20" />
+            <dataField fieldName="FeeAmount" columns="15" hidden="true" />
+            <dataField fieldName="BillAmount" columns="15" />
+            <dataField fieldName="Adjustment" columns="15" />
+            <dataField fieldName="LessDiscount" columns="15" />
+            <dataField fieldName="CurrentBalance" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="CYG" columns="10" />
+            <dataField fieldName="EffectiveDate" columns="10" />
+            <dataField fieldName="DueDate" columns="10" />
+            <dataField fieldName="CurrencyCode" columns="5" />
+            <dataField fieldName="CSY" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Hide" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="YearEndDate" columns="10" />
+            <dataField fieldName="YearStartDate" columns="10" />
+            <dataField fieldName="CalendarCode" columns="30" />
+            <dataField fieldName="FeeTypes" columns="20" hidden="true" />
+            <dataField fieldName="Sex" columns="50" />
+          </dataFields>
+          <visibility>
+            <expression test="[1]==2" type="ClientScript" />
+          </visibility>
+        </category>
+        <category id="c3" headerText="Audit" collapsed="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1_current_year_fee" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" whenView="grid100" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New Fee" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1_current_year_fee" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1_current_year_fee" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action commandName="SQL" headerText="Prepare Current Bill" id="a100" cssClass="material-icon-group_work" confirmation="This action would generate fees for either a specified group of students or the entire student population if instructed to do so. Would you like to continue ?" notify="This action can be used to prepare and generate adhoc fees that may arise during the academic year period.">
+        <data><![CDATA[/*
+	Date : 04 August 2019
+        Name : [dbo].[usp_vw_merge_students_fee_structure_automation]
+	Description : The enumerated script automates the process of assigning fees to students based on the Grade	 of
+				  setting the student_fees table
+				  Scenario 1 : When there is a matching record and  src.GradeLevelDependent = 1 then the  existing record would be updated
+				  Scenario 2 : When there is no match to the target record then a new record is generated level assigned to the students.
+				  A fee designation must be set to src.GradeLevelDependent = 1 to participate in the process and assigned to each student at that particular grade level
+                  Scenario 3 : If a fee has not been set up, remove it it froom the student_fees table
+*/
+
+
+MERGE student_fees tgt USING vw_merge_students_fee_structure_automation src
+ON src.FeeID = tgt.FeeID
+	AND src.PersonID = tgt.PersonID
+
+WHEN MATCHED
+	AND src.GradeLevelDependent = 1
+	AND src.IsActive = 1 --AND src.FeeTypeID = @FeeTypeID
+	AND src.CurrentSchoolYear = 1
+	THEN UPDATE
+		SET tgt.EffectiveFrom = src.EffectiveDate
+		   ,tgt.FeeAmount = src.Amount
+		   ,tgt.[FeeTypeID] = src.[FeeTypeID] -- added ben 19/03/2021
+		   ,[tgt].[DueDate] = src.[EffectiveTo]
+
+WHEN NOT MATCHED BY TARGET
+	AND src.IsActive = 1 --AND src.FeeTypeID = @FeeTypeID
+	THEN INSERT (FeeID, PersonID, FeeAmount, EffectiveFrom, [DueDate], [FeeTypeID])
+			VALUES (src.FeeID, src.PersonID, src.Amount, src.EffectiveDate, [src].[EffectiveTo], [src].[FeeTypeID]);
+
+SET @Result_ExecuteOnClient = '$appfactory.find("StudentFees", "Controller").sync();'
+SET @Result_ShowMessage = 'Current Year Fees setup and processing ' + ' ' + 'has completed successfully' 
+]]></data>
+      </action>
+      <action id="a2" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a101" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a102" commandName="ReportAsExcel" headerText="Send To Excel" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

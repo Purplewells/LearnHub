@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpSalaryComponentReason" alias="zlkpSalaryComponentReason" created="2024-01-28T12:10:14" modified="2024-09-13T19:36:23" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="ReasonID" fieldName="ReasonID" label="Reason ID" />
+    <column name="Reason" fieldName="Reason" label="Reason" />
+    <column name="IsAction" fieldName="IsActive" label="Is Active" />
+  </columns>
+</dataModel>

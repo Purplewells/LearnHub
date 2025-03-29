@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkbenchEnrollment" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="EnrollmentStatus" type="DataView" label="Enrollment Status">
+      <dataView controller="EnrollmentStatus" view="grid1" />
+    </field>
+    <field name="ExitOrWithdrawalStatus" type="DataView" label="Exit Or Withdrawal Status">
+      <dataView controller="ExitOrWithdrawalStatus" view="grid1" />
+    </field>
+    <field name="ExitOrWithdrawalType" type="DataView" label="Exit Or Withdrawal Type">
+      <dataView controller="ExitOrWithdrawalType" view="grid1" />
+    </field>
+    <field name="NonPromotionReason" type="DataView" label="Non Promotion Reason">
+      <dataView controller="NonPromotionReason" view="grid1" />
+    </field>
+    <field name="PromotionReason" type="DataView" label="Promotion Reason">
+      <dataView controller="PromotionReason" view="grid1" />
+    </field>
+    <field name="PromotionScheme" type="DataView" label="Promotion Scheme">
+      <dataView controller="PromotionScheme" view="grid1" />
+    </field>
+    <field name="EntryType" type="DataView" label="Entry Type">
+      <dataView controller="EntryType" view="grid1" />
+    </field>
+    <field name="EndOfTermStatus" type="DataView" label="End Of Term Status">
+      <dataView controller="EndOfTermStatus" view="grid1" />
+    </field>
+    <field name="SchoolEvents" type="DataView" label="School Events">
+      <dataView controller="SchoolEvents" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="EnrollmentWorkbench" type="Form" label="ENROLLMENT CONFIGURATION WORKBENCH">
+      <headerText>&lt;strong&gt;This interface facilitates the configuration and registration default values for the enrollment experience. &lt;/strong&gt;</headerText>
+      <categories>
+        <category tab="ENROLLMENT STATUS" id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="EnrollmentStatus" columns="15" tag="material-icon-ad_units&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category tab="WITHDRAWAL STATUS" id="c2">
+          <dataFields>
+            <dataField fieldName="ExitOrWithdrawalStatus" columns="15" tag="material-icon-ad_units&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;content-stub-none" />
+          </dataFields>
+        </category>
+        <category tab="END OF TERM STATUS" id="c8">
+          <dataFields>
+            <dataField fieldName="EndOfTermStatus" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content" />
+          </dataFields>
+        </category>
+        <category tab="WITHDRAWAL TYPE" id="c3">
+          <dataFields>
+            <dataField fieldName="ExitOrWithdrawalType" columns="15" tag="material-icon-card_membership&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;content-stub-none" />
+          </dataFields>
+        </category>
+        <category tab="ENROLLMENT TYPE" id="c7">
+          <dataFields>
+            <dataField fieldName="EntryType" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content" />
+          </dataFields>
+        </category>
+        <category tab="PROMOTION REASON" id="c5">
+          <dataFields>
+            <dataField fieldName="PromotionReason" columns="15" tag="material-icon-spa&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;content-stub-none" />
+          </dataFields>
+        </category>
+        <category tab="NON PROMOTION REASON" id="c4">
+          <dataFields>
+            <dataField fieldName="NonPromotionReason" columns="15" tag="material-icon-grid_4x4&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;content-stub-none" />
+          </dataFields>
+        </category>
+        <category tab="PROMOTION SCHEME" id="c6">
+          <dataFields>
+            <dataField fieldName="PromotionScheme" columns="15" tag="material-icon-spa&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;content-stub-none" />
+          </dataFields>
+        </category>
+        <category tab="SCHOOL HOLIDAYS" id="c9">
+          <dataFields>
+            <dataField fieldName="SchoolEvents" columns="15" tag="material-icon-spa&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;content-stub-none" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Enrollment Actions" flat="false" />
+  </actions>
+</dataController>

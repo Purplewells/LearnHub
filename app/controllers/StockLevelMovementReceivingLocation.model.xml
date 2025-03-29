@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="vw_ops_stock_level_movement_receiving_location" alias="vw_ops_stock_level_movement_receiving_location" created="2024-08-25T10:05:00" modified="2024-08-25T10:08:03" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="StockLevelID" fieldName="StockLevelID" label="Stock Level ID" />
+    <column name="ProductID" fieldName="ProductID" label="Product ID" />
+    <column name="SKUCode" fieldName="SKU" label="SKU" />
+    <column name="ProductName" fieldName="ProductName" label="Product" />
+    <column name="CategoryName" fieldName="Category" label="Category" />
+    <column name="TransactionDate" fieldName="TransactionDate" label="Trans Date" />
+    <column name="ReceivingLocation" fieldName="ReceivingLocation" label="Receiving Location" />
+    <column name="TransCode" fieldName="TransCode" label="Trans Code" />
+    <column name="MovementMode" fieldName="MovementMode" label="Movement" />
+    <column name="ExtendedStockValue" fieldName="ExtendedStockValue" label="Stock Value" format="" />
+    <column name="Code" fieldName="CURR" label="CURR" />
+    <column name="ReOrderLevel" fieldName="ReOrderLevel" label="ROL" />
+    <column name="ReOrderQty" fieldName="ReOrderQty" label="ROQ" />
+    <column name="TransactionQty" fieldName="TransactionQty" label="Received Qty" />
+    <column name="RN" fieldName="RN" label="RN" />
+  </columns>
+</dataModel>

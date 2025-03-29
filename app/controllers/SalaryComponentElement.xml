@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="SalaryComponentElement" conflictDetection="overwriteChanges" label="Salary Component Element" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.SalaryComponentElementBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"salary_component_element"."SalaryComponentElementID" "SalaryComponentElementID"
+	,"salary_component_element"."SalaryID" "SalaryID"
+	,"Salary"."SalaryName" "SalaryName"
+	,"salary_component_element"."Amount" "Amount"
+	,"salary_component_element"."IsPercentBased" "IsPercentBased"
+	,"salary_component_element"."AdjustmentFactor" "AdjustmentFactor"
+	,"salary_component_element"."AmountValue" "AmountValue"
+	,"salary_component_element"."IsActive" "IsActive"
+	,"salary_component_element"."IsApproved" "IsApproved"
+	,"salary_component_element"."IsTaxable" "IsTaxable"
+	,"salary_component_element"."IsEarnings" "IsEarnings"
+	,"salary_component_element"."TaxRate" "TaxRate"
+	,"salary_component_element"."StartDate" "StartDate"
+	,"salary_component_element"."EndDate" "EndDate"
+	,"salary_component_element"."IsShowOnPayslip" "IsShowOnPayslip"
+	,"salary_component_element"."CurrencyID" "CurrencyID"
+	,"Currency"."CurrencyName" "CurrencyName"
+	,"salary_component_element"."ElementID" "ElementID"
+	,"Element"."ElementName" "ElementName"
+	,"Element"."SortOrder" "ElementSortOrder"
+	,"ElementComponentType"."ComponentType" "ComponentType"
+	,"salary_component_element"."CreatedDate" "CreatedDate"
+	,"salary_component_element"."ModifiedDate" "ModifiedDate"
+	,"salary_component_element"."CreatedBy" "CreatedBy"
+	,"salary_component_element"."ModifiedBy" "ModifiedBy"
+from "dbo"."salary_component_element" "salary_component_element"
+	left join "dbo"."salary" "Salary" on "salary_component_element"."SalaryID" = "Salary"."SalaryID"
+	left join "dbo"."zlkp_currency" "Currency" on "salary_component_element"."CurrencyID" = "Currency"."CurrencyID"
+	left join "dbo"."zlkpSalaryComponents" "Element" on "salary_component_element"."ElementID" = "Element"."ElementID"
+	left join "dbo"."zlkpSalaryComponentType" "ElementComponentType" on "Element"."ComponentTypeID" = "ElementComponentType"."ComponentTypeID"
+order by "Element"."SortOrder" asc]]></text>
+    </command>
+    <command id="SalaryComponentElementIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="SalaryComponentElementID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="SalaryComponentElementID" type="Int32" allowNulls="false" isPrimaryKey="true" dataFormatString="c" label="Salary Component Element ID" readOnly="true" />
+    <field name="SalaryID" type="Int32" dataFormatString="c" label="Salary ID" showInSummary="true">
+      <items style="Lookup" dataController="ListOfSalaries" newDataView="createForm1" dataValueField="SalaryID" dataTextField="SalaryName" />
+    </field>
+    <field name="SalaryName" type="String" readOnly="true" dataFormatString="c" label="Salary Name" length="30" />
+    <field name="Amount" type="Decimal" dataFormatString="c" label="Amount" showInSummary="true" causesCalculate="true" />
+    <field name="IsPercentBased" type="Boolean" label="Percent Based" showInSummary="true" causesCalculate="true">
+      <items style="DropDownList" />
+    </field>
+    <field name="AdjustmentFactor" type="Decimal" dataFormatString="p" label="Adj. Factor" showInSummary="true" causesCalculate="true" />
+    <field name="AmountValue" type="Decimal" dataFormatString="" label="Amount Value" showInSummary="true" />
+    <field name="IsActive" type="Boolean" label="Active" />
+    <field name="IsApproved" type="Boolean" label="Approved" causesCalculate="true" />
+    <field name="IsTaxable" type="Boolean" label="Taxable" causesCalculate="true" />
+    <field name="IsEarnings" type="Boolean" label="Earnings" causesCalculate="true" />
+    <field name="TaxRate" type="Decimal" dataFormatString="p" label="Tax Rate" causesCalculate="true" />
+    <field name="StartDate" type="DateTime" label="Start Date" />
+    <field name="EndDate" type="DateTime" label="End Date" />
+    <field name="IsShowOnPayslip" type="Boolean" label="Show On Payslip" />
+    <field name="CurrencyID" type="Int32" label="Currency ID">
+      <items style="Lookup" dataController="Currency" newDataView="createForm1" dataValueField="CurrencyID" dataTextField="CurrencyName" />
+    </field>
+    <field name="CurrencyName" type="String" readOnly="true" label="CURR" length="7" />
+    <field name="ElementID" type="Int32" label="Element ID">
+      <items style="Lookup" dataController="SalaryComponent" newDataView="createForm1" dataValueField="ElementID" dataTextField="ElementName" copy="ElementSortOrder=SortOrder, ComponentType=ComponentType" />
+    </field>
+    <field name="ElementName" type="String" readOnly="true" label="Element Name" length="25" />
+    <field name="ElementSortOrder" type="Int32" readOnly="true" label="ESO" />
+    <field name="ComponentType" type="String" readOnly="true" label="Component Type" length="20" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Salary Component Element" sortExpression="ElementSortOrder asc">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ElementID" aliasFieldName="ElementName" />
+        <dataField fieldName="ComponentType" columns="20" />
+        <dataField fieldName="Amount" columns="10" />
+        <dataField fieldName="SalaryID" aliasFieldName="SalaryName" />
+        <dataField fieldName="IsPercentBased">
+          <headerText>% Based</headerText>
+        </dataField>
+        <dataField fieldName="AdjustmentFactor" columns="10" />
+        <dataField fieldName="AmountValue" columns="15" />
+        <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="IsApproved" />
+        <dataField fieldName="IsTaxable" />
+        <dataField fieldName="TaxRate" columns="10" />
+        <dataField fieldName="IsEarnings" />
+        <dataField fieldName="StartDate" columns="10" />
+        <dataField fieldName="EndDate" columns="10" />
+        <dataField fieldName="IsShowOnPayslip" hidden="true" />
+        <dataField fieldName="ElementSortOrder" columns="5" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Salary Component">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="SalaryID" aliasFieldName="SalaryName" />
+            <dataField fieldName="ElementID" aliasFieldName="ElementName" />
+            <dataField fieldName="Amount" columns="15" />
+            <dataField fieldName="IsPercentBased" columns="2" tag="lookup-null-value-none" />
+            <dataField fieldName="AdjustmentFactor" columns="15" />
+            <dataField fieldName="AmountValue" columns="15" />
+            <dataField fieldName="IsTaxable" />
+            <dataField fieldName="TaxRate" columns="15" />
+            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
+            <dataField fieldName="IsEarnings" />
+            <dataField fieldName="StartDate" columns="10" />
+            <dataField fieldName="EndDate" columns="10" />
+            <dataField fieldName="ElementSortOrder" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Flag Attributes" collapsed="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="IsApproved" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Other" collapsed="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="IsShowOnPayslip" />
+            <dataField fieldName="ComponentType" columns="20" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Audit" collapsed="true" floating="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Component">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="SalaryID" aliasFieldName="SalaryName" />
+            <dataField fieldName="ElementID" aliasFieldName="ElementName" />
+            <dataField fieldName="Amount" columns="15" />
+            <dataField fieldName="IsPercentBased" columns="2" tag="lookup-null-value-none" />
+            <dataField fieldName="AdjustmentFactor" columns="15" />
+            <dataField fieldName="AmountValue" columns="15" />
+            <dataField fieldName="IsTaxable" />
+            <dataField fieldName="TaxRate" columns="15" />
+            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
+            <dataField fieldName="IsEarnings" />
+            <dataField fieldName="StartDate" columns="10" />
+            <dataField fieldName="EndDate" columns="10" />
+            <dataField fieldName="ElementSortOrder" columns="15" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Flag Attributes" collapsed="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="IsApproved" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Other" collapsed="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="IsShowOnPayslip" />
+            <dataField fieldName="ComponentType" columns="20" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Audit" collapsed="true" floating="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a102" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a100" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a2" />
+      <action id="a104" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send To API" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a2" commandName="ReportAsImage" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r102" commandName="New" type="Sql" phase="Execute" name="setDefaultComponentValues"><![CDATA[SET @IsActive = 1
+SET @IsApproved = 1
+SET @IsTaxable = 0
+SET @IsEarnings = 0
+SET @IsShowOnPayslip = 1
+SET @IsPercentBased = 0]]></rule>
+    <rule id="r101" commandName="Insert|Update|Calculate" type="Code" phase="Before" name="setAmount" />
+    <rule id="r104" commandName="New|Update|Calculate" type="Sql" phase="Execute" name="setStartDate"><![CDATA[-- perform validation
+--DECLARE @ExitDate DATE
+
+IF @StartDate IS NULL 
+BEGIN
+SET @StartDate = CAST(GETDATE() AS DATE)
+END
+
+]]></rule>
+    <rule id="r105" commandName="Insert|Update|Calculate" type="Sql" phase="Execute" name="setEndDate"><![CDATA[IF @EndDate IS NULL 
+BEGIN
+   SET @EndDate = DATEADD(YEAR, 10, GETDATE())
+  
+END]]></rule>
+    <rule id="r100" commandName="Calculate" type="Code" phase="Execute" name="calculateAmountValue" />
+    <rule id="r103" commandName="Insert|Update|Calculate" type="Sql" phase="After" name="refreshSalaryValues"><![CDATA[EXEC [dbo].[zusp_ops_salary_p2_prepare_information_specific] @SalaryID
+SET @Result_ExecuteOnClient = '$appfactory.find("Salaries", "Controller").sync();'
+SET @Result_ShowMessage = 'Salary computation setup and processing ' + ' ' + 'has completed successfully' ]]></rule>
+  </businessRules>
+</dataController>

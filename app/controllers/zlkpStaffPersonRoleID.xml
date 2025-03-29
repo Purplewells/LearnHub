@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="zlkpStaffPersonRoleID" conflictDetection="overwriteChanges" label="zlkpStaffPersonRoleID" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text" tableName="OrganizationPersonRole" custom="true">
+      <text><![CDATA[SELECT
+ opr.OrganizationPersonRoleID
+   ,opr.RoleID 
+   ,zr.RoleName
+   ,opr.OrganisationID
+   ,o.Name OrganisationName
+   ,opr.PersonID
+   ,p.LastName
+   ,p.FirstName
+   ,StaffName = P.[FirstName] + ' ' + [p].[LastName]
+   ,opr.EntryDate
+   ,opr.ExitDate
+FROM dbo.OrganizationPersonRole opr
+LEFT JOIN dbo.Organisation o
+	ON opr.OrganisationID = o.OrganizationID
+LEFT JOIN dbo.Person p
+	ON opr.PersonID = p.PersonID
+LEFT JOIN dbo.zlkpRole zr
+	ON opr.RoleID = zr.RoleID
+WHERE zr.RoleName IN ('staff')]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="OrganizationPersonRoleID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Organization Person Role#" readOnly="true" />
+    <field name="RoleID" type="Int32" label="Role#" showInSummary="true" />
+    <field name="RoleName" type="String" label="Role Name" length="50" showInSummary="true" />
+    <field name="OrganisationID" type="Int32" label="Organisation#" showInSummary="true" />
+    <field name="OrganisationName" type="String" label="Organisation Name" length="60" showInSummary="true" />
+    <field name="PersonID" type="Int32" label="Person#" showInSummary="true" />
+    <field name="LastName" type="String" label="Last Name" length="35" />
+    <field name="FirstName" type="String" label="First Name" length="35" />
+    <field name="StaffName" type="String" label="Staff Name" readOnly="true" length="71" />
+    <field name="EntryDate" type="DateTime" label="Entry Date" />
+    <field name="ExitDate" type="DateTime" label="Exit Date" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Organization Person Role">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="RoleID" columns="15" />
+        <dataField fieldName="RoleName" columns="50" />
+        <dataField fieldName="OrganisationID" columns="15" />
+        <dataField fieldName="OrganisationName" />
+        <dataField fieldName="PersonID" columns="15" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="StaffName" />
+        <dataField fieldName="EntryDate" columns="10" />
+        <dataField fieldName="ExitDate" columns="10" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Organization Person Role">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Organization Person Role" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RoleID" columns="15" />
+            <dataField fieldName="RoleName" columns="50" />
+            <dataField fieldName="OrganisationID" columns="15" />
+            <dataField fieldName="OrganisationName" />
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="StaffName" />
+            <dataField fieldName="EntryDate" columns="10" />
+            <dataField fieldName="ExitDate" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Organization Person Role">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Organization Person Role" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RoleID" columns="15" />
+            <dataField fieldName="RoleName" columns="50" />
+            <dataField fieldName="OrganisationID" columns="15" />
+            <dataField fieldName="OrganisationName" />
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="EntryDate" columns="10" />
+            <dataField fieldName="ExitDate" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

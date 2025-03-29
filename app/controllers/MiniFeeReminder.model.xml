@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="vw_fee_collection_accounting_ledger_mini_fee_reminder" alias="vw_fee_collection_accounting_ledger_mini_fee_reminder" created="2024-01-31T09:43:26" modified="2024-12-08T13:46:06" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" primaryKey="true" />
+    <column name="Fullname" fieldName="Fullname" label="Fullname" />
+    <column name="UPN" fieldName="UPN" label="UPN" />
+    <column name="NameOfPayee" fieldName="NameOfPayee" label="Payee Name" />
+    <column name="YearGroup" fieldName="YearGroup" label="GL" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="FeeType" fieldName="FeeType" label="Fee Type" />
+    <column name="BillDate" fieldName="BillDate" label="Bill Date" format="d" />
+    <column name="TransactionDate" fieldName="TransactionDate" label="Trans Date" />
+    <column name="Debit" fieldName="Debit" label="Debit" format="N" />
+    <column name="Credit" fieldName="Credit" label="Credit" format="N" />
+    <column name="Balance" fieldName="Balance" label="Balance" format="N" />
+    <column name="SessionCode" fieldName="SessionCode" label="Session" />
+    <column name="NextSessionStartDate" fieldName="NextSessionStartDate" label="Next Session Start Date" />
+    <column name="NextSessionEndDate" fieldName="NextSessionEndDate" label="Next Session End Date" />
+    <column name="HasNextTerm" fieldName="HasNextTerm" label="Has Next Term" />
+    <column name="CalendarCode" fieldName="CalendarCode" label="Calendar Code" />
+    <column name="SchoolName" fieldName="SchoolName" label="School Name" />
+    <column name="Address" fieldName="Address" label="Address" />
+    <column name="Currency" fieldName="Currency" label="CURR" />
+    <column name="TotalAmountBilled" fieldName="TotalAmountBilled" label="Total Amount Billed" format="c" />
+    <column name="TotalAmountReceived" fieldName="TotalAmountReceived" label="Total Amount Received" format="c" />
+    <column name="OPS" fieldName="OPS" label="OPS" />
+    <column name="BilledYear" fieldName="BilledYear" label="Billed Year" />
+    <column name="AmountBilled" fieldName="AmountBilled" label="Amount Billed" format="c" />
+    <column name="AmountPaid" fieldName="AmountPaid" label="Amount Paid" format="c" />
+    <column name="RK" fieldName="RK" label="RK" />
+    <column name="rn" fieldName="RN" label="RN" />
+    <column name="Attribute1" fieldName="Attribute1" label="Attribute 1" />
+    <column name="Attribute2" fieldName="Attribute2" label="Attribute 2" />
+    <column name="ShowOnReport" fieldName="ShowOnReport" label="Show On Report" />
+  </columns>
+</dataModel>

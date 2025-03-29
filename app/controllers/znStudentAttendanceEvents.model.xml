@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StudentSectionAttendanceEvents" alias="StudentSectionAttendanceEvents" created="2024-02-02T21:54:11" modified="2024-02-14T10:42:42" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="RefAbsentAttendanceCategory" parentTableSchema="dbo" parentTableName="zlkpAbsentAttendanceCategory" x="427" y="20">
+      <foreignKeyColumn columnName="RefAbsentAttendanceCategoryID" parentColumnName="RefAbsentAttendanceCategoryId" />
+    </foreignKey>
+    <foreignKey id="RefAttendanceStatus" parentTableSchema="dbo" parentTableName="zlkpAttendanceStatus" x="427" y="197">
+      <foreignKeyColumn columnName="RefAttendanceStatusID" parentColumnName="RefAttendanceStatusId" />
+    </foreignKey>
+    <foreignKey id="RefPresentAttendanceCategory" parentTableSchema="dbo" parentTableName="zlkpPresentAttendanceCategory" x="427" y="358">
+      <foreignKeyColumn columnName="RefPresentAttendanceCategoryId" parentColumnName="RefPresentAttendanceCategoryId" />
+    </foreignKey>
+    <foreignKey id="AttendanceEvent" parentTableSchema="dbo" parentTableName="AttendanceEvent" x="28" y="506">
+      <foreignKeyColumn columnName="AttendanceEventID" parentColumnName="AttendanceEventID" />
+    </foreignKey>
+    <foreignKey id="OrganizationPersonRole" parentTableSchema="dbo" parentTableName="OrganizationPersonRole" x="427" y="834">
+      <foreignKeyColumn columnName="OrganizationPersonRoleID" parentColumnName="OrganizationPersonRoleID" />
+    </foreignKey>
+    <foreignKey id="RefSchoolStream" parentTableSchema="dbo" parentTableName="zlkpSchoolStream" x="31" y="354">
+      <foreignKeyColumn columnName="RefSchoolStreamID" parentColumnName="RefSchoolStreamID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="773" y="815" baseForeignKey="OrganizationPersonRole">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="StudentAttendanceEventID" fieldName="StudentAttendanceEventID" label="Student Attendance Event ID" />
+    <column name="FirstName" fieldName="FirstName" label="FirstName" foreignKey="Person" />
+    <column name="LastName" fieldName="LastName" label="LastName" foreignKey="Person" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="CurrentYearGradeLevel" fieldName="GL" label="GL" foreignKey="Person" />
+    <column name="RefAbsentAttendanceCategoryID" fieldName="RefAbsentAttendanceCategoryID" label="Ref Absent Attendance Category ID" aliasColumnName="Description" aliasForeignKey="RefAbsentAttendanceCategory" />
+    <column name="Description" fieldName="RefAbsentAttendanceCategoryDescription" label="Reason" foreignKey="RefAbsentAttendanceCategory" />
+    <column name="RefAttendanceStatusID" fieldName="RefAttendanceStatusID" label="Ref Attendance Status ID" aliasColumnName="Description" aliasForeignKey="RefAttendanceStatus" />
+    <column name="Description" fieldName="AttendanceStatus" label="Status" foreignKey="RefAttendanceStatus" />
+    <column name="RefPresentAttendanceCategoryId" fieldName="RefPresentAttendanceCategoryID" label="Ref Present Attendance Category Id" aliasColumnName="Description" aliasForeignKey="RefPresentAttendanceCategory" />
+    <column name="Description" fieldName="RefPresentAttendanceCategoryDescription" label="HowTimeSpent" foreignKey="RefPresentAttendanceCategory" />
+    <column name="AttendanceEventID" fieldName="AttendanceEventID" label="Attendance Event ID" aliasColumnName="EventDurationCode" aliasForeignKey="AttendanceEvent" />
+    <column name="EventDurationCode" fieldName="AttendanceEventDurationCode" foreignKey="AttendanceEvent" />
+    <column name="EventDate" fieldName="EventDate" label="Event Date" foreignKey="AttendanceEvent" format="d" />
+    <column name="OrganizationPersonRoleID" fieldName="OrganizationPersonRoleID" label="Organization Person Role ID" aliasColumnName="OrganisationID" aliasForeignKey="OrganizationPersonRole" />
+    <column name="OrganisationID" fieldName="OrganizationPersonRoleOrganisationID" foreignKey="OrganizationPersonRole" />
+    <column name="RefSchoolStreamID" fieldName="RefSchoolStreamID" label="Ref School Stream ID" aliasColumnName="Description" aliasForeignKey="RefSchoolStream" />
+    <column name="Description" fieldName="Stream" label="Stream" foreignKey="RefSchoolStream" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column fieldName="Fullname" type="nvarchar(71)" dataType="String" label="Fullname">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </column>
+  </columns>
+</dataModel>

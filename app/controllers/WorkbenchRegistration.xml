@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkbenchRegistration" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="CredentialBasis" type="DataView" label="Credential Basis">
+      <dataView controller="CredentialBasis" view="grid1" />
+    </field>
+    <field name="Language" type="DataView" label="Language">
+      <dataView controller="Language" view="grid1" />
+    </field>
+    <field name="Occupation" type="DataView" label="Occupation">
+      <dataView controller="Occupation" view="grid1" />
+    </field>
+    <field name="Religion" type="DataView" label="Religion">
+      <dataView controller="Religion" view="grid1" />
+    </field>
+    <field name="FoodServices" type="DataView" label="Food Services">
+      <dataView controller="FoodServices" view="grid1" />
+    </field>
+    <field name="ContactPointSystem" type="DataView" label="Contact Point System">
+      <dataView controller="ContactPointSystem" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="RegistrationWorkbench" type="Form" label="REGISTRATION WORKBENCH">
+      <headerText>This workbench focuses on registration related reference data.</headerText>
+      <categories>
+        <category tab="CONTACT SYSTEM" id="c6" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="ContactPointSystem" columns="15" />
+          </dataFields>
+        </category>
+        <category tab="OCCUPATION" id="c3">
+          <dataFields>
+            <dataField fieldName="Occupation" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
+        </category>
+        <category tab="LANGUAGES" id="c2">
+          <dataFields>
+            <dataField fieldName="Language" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
+        </category>
+        <category tab="RELIGION" id="c4">
+          <dataFields>
+            <dataField fieldName="Religion" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
+        </category>
+        <category tab="FOOD SERVICE ELIGIBILITY" id="c5">
+          <dataFields>
+            <dataField fieldName="FoodServices" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
+        </category>
+        <category tab="CREDENTIAL BASIS" id="c1">
+          <dataFields>
+            <dataField fieldName="CredentialBasis" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+</dataController>

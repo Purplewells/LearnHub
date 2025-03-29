@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="SalesOrderDetail" conflictDetection="overwriteChanges" label="Sales Order Detail" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.SalesOrderDetailBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"OrderDetail"."OrderLineID" "OrderLineID"
+	,"OrderDetail"."OrderID" "OrderID"
+	,"Order"."OrderDate" "OrderDate"
+	,"Order"."IssuedTo" "OrderIssuedTo"
+	,"OrderDetail"."ProductID" "ProductID"
+	,"Product"."ProductName" "ProductName"
+	,"Product"."SKUCode" "SKU"
+	,"Product"."Barcode" "Barcode"
+	,"Product"."Sellable" "Sellable"
+	,"OrderDetail"."Quantity" "Quantity"
+	,"OrderDetail"."Discount" "Discount"
+	,"Product"."UnitPrice" "UnitPrice"
+	,"OrderDetail"."UnitPrice" "extUnitPrice"
+	,"OrderDetail"."Note" "Note"
+	,"OrderDetail"."CreatedDate" "CreatedDate"
+	,"OrderDetail"."CreatedBy" "CreatedBy"
+	,"OrderDetail"."ModifiedDate" "ModifiedDate"
+	,"OrderDetail"."ModifiedBy" "ModifiedBy"
+from "dbo"."OrderDetail" "OrderDetail"
+	left join "dbo"."Orders" "Order" on "OrderDetail"."OrderID" = "Order"."OrderID"
+	left join "dbo"."Product" "Product" on "OrderDetail"."ProductID" = "Product"."ProductID"
+]]></text>
+    </command>
+    <command id="OrderLineIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="OrderLineID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="OrderLineID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Order Line ID" readOnly="true" />
+    <field name="OrderID" type="Int32" label="Order ID" showInSummary="true">
+      <items style="Lookup" dataController="Orders" newDataView="createForm1" dataValueField="OrderID" dataTextField="OrderDate" copy="OrderIssuedTo=IssuedTo" />
+    </field>
+    <field name="OrderDate" type="DateTime" readOnly="true" dataFormatString="g" label="Order Date" />
+    <field name="OrderIssuedTo" type="String" readOnly="true" label="Order Issued To" length="50" />
+    <field name="OrderLineNo" type="Int32" readOnly="true" label="Order Line No" computed="true" showInSummary="true">
+      <formula>OrderDetail.OrderLineID</formula>
+    </field>
+    <field name="ProductID" type="Int32" label="Product ID" showInSummary="true">
+      <items style="Lookup" dataController="Product" newDataView="createForm1" dataValueField="ProductID" dataTextField="ProductName" copy="SKU=Skucode, Barcode=Barcode, Sellable=Sellable, UnitPrice=UnitPrice" />
+    </field>
+    <field name="ProductName" type="String" readOnly="true" label="Product Name" length="35" />
+    <field name="SKU" type="String" readOnly="true" label="SKU" length="10" />
+    <field name="Barcode" type="String" readOnly="true" label="Barcode" length="50" />
+    <field name="Sellable" type="Boolean" readOnly="true" label="Sellable" />
+    <field name="Quantity" type="Int32" label="Quantity" showInSummary="true" />
+    <field name="Discount" type="Decimal" dataFormatString="p" label="Discount" showInSummary="true" />
+    <field name="UnitPrice" type="Decimal" readOnly="true" dataFormatString="c" label="Unit Price" causesCalculate="true" />
+    <field name="extUnitPrice" type="Decimal" dataFormatString="c" label="Unit Price" />
+    <field name="ExtendedPrice" type="Decimal" readOnly="true" dataFormatString="c" label="Extended Price" computed="true">
+      <formula>OrderDetail.Quantity * Product.UnitPrice * ( 1 - OrderDetail.Discount)</formula>
+    </field>
+    <field name="Note" type="String" label="Note" length="50" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Sales Order Detail">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="OrderID" aliasFieldName="OrderDate" />
+        <dataField fieldName="OrderIssuedTo" columns="50" />
+        <dataField fieldName="OrderLineNo" columns="15" />
+        <dataField fieldName="ProductID" aliasFieldName="ProductName" />
+        <dataField fieldName="SKU" columns="10" />
+        <dataField fieldName="Barcode" columns="18" />
+        <dataField fieldName="Sellable" />
+        <dataField fieldName="Quantity" columns="15" />
+        <dataField fieldName="Discount" columns="15" />
+        <dataField fieldName="UnitPrice" columns="15" />
+        <dataField fieldName="extUnitPrice" columns="15" hidden="true" />
+        <dataField fieldName="ExtendedPrice" columns="15" />
+        <dataField fieldName="Note" columns="50" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Sales Order Detail">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Sales Order Detail" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="OrderID" aliasFieldName="OrderDate" />
+            <dataField fieldName="OrderIssuedTo" columns="50" />
+            <dataField fieldName="OrderLineNo" columns="15" />
+            <dataField fieldName="ProductID" aliasFieldName="ProductName" />
+            <dataField fieldName="SKU" columns="10" />
+            <dataField fieldName="Barcode" columns="50" />
+            <dataField fieldName="Sellable" />
+            <dataField fieldName="Quantity" columns="15" />
+            <dataField fieldName="Discount" columns="15" />
+            <dataField fieldName="UnitPrice" columns="15" />
+            <dataField fieldName="extUnitPrice" columns="15" textMode="Static" hidden="true" />
+            <dataField fieldName="ExtendedPrice" columns="15" />
+            <dataField fieldName="Note" columns="50" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Sales Order Detail">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="OrderID" aliasFieldName="OrderDate" />
+            <dataField fieldName="OrderIssuedTo" columns="50" />
+            <dataField fieldName="OrderLineNo" columns="15" hidden="true" />
+            <dataField fieldName="ProductID" aliasFieldName="ProductName" />
+            <dataField fieldName="SKU" columns="10" />
+            <dataField fieldName="Barcode" columns="50" />
+            <dataField fieldName="Sellable" />
+            <dataField fieldName="Quantity" columns="15" />
+            <dataField fieldName="Discount" columns="15" />
+            <dataField fieldName="UnitPrice" columns="15" />
+            <dataField fieldName="extUnitPrice" columns="15" hidden="true" textMode="Static" />
+            <dataField fieldName="ExtendedPrice" columns="15" />
+            <dataField fieldName="Note" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New|Update|Calculate" type="Code" phase="Execute" name="SetExtendedPrice" />
+  </businessRules>
+</dataController>

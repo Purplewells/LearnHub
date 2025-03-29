@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="salary_component_element" alias="salary_component_element" created="2024-02-22T20:10:30" modified="2024-09-15T19:51:26" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Salary" parentTableSchema="dbo" parentTableName="salary" x="387" y="20">
+      <foreignKeyColumn columnName="SalaryID" parentColumnName="SalaryID" />
+    </foreignKey>
+    <foreignKey id="Currency" parentTableSchema="dbo" parentTableName="zlkp_currency" x="387" y="249">
+      <foreignKeyColumn columnName="CurrencyID" parentColumnName="CurrencyID" />
+    </foreignKey>
+    <foreignKey id="Element" parentTableSchema="dbo" parentTableName="zlkpSalaryComponents" x="387" y="411">
+      <foreignKeyColumn columnName="ElementID" parentColumnName="ElementID" />
+    </foreignKey>
+    <foreignKey id="ElementComponentType" parentTableSchema="dbo" parentTableName="zlkpSalaryComponentType" baseForeignKey="Element" x="718" y="489">
+      <foreignKeyColumn columnName="ComponentTypeID" parentColumnName="ComponentTypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="SalaryComponentElementID" fieldName="SalaryComponentElementID" label="Salary Component Element ID" format="c" />
+    <column name="SalaryID" fieldName="SalaryID" label="Salary ID" format="c" aliasColumnName="SalaryName" aliasForeignKey="Salary" />
+    <column name="SalaryName" fieldName="SalaryName" label="Salary Name" format="c" foreignKey="Salary" />
+    <column name="Amount" fieldName="Amount" label="Amount" format="c" />
+    <column name="IsPercentBased" fieldName="IsPercentBased" label="Percent Based" />
+    <column name="AdjustmentFactor" fieldName="AdjustmentFactor" label="Adj. Factor" format="p" />
+    <column name="AmountValue" fieldName="AmountValue" label="Amount Value" format="" />
+    <column name="IsActive" fieldName="IsActive" label="Active" />
+    <column name="IsApproved" fieldName="IsApproved" label="Approved" />
+    <column name="IsTaxable" fieldName="IsTaxable" label="Taxable" />
+    <column name="IsEarnings" fieldName="IsEarnings" label="Earnings" />
+    <column name="TaxRate" fieldName="TaxRate" label="Tax Rate" format="p" />
+    <column name="StartDate" fieldName="StartDate" label="Start Date" />
+    <column name="EndDate" fieldName="EndDate" label="End Date" />
+    <column name="IsShowOnPayslip" fieldName="IsShowOnPayslip" label="Show On Payslip" />
+    <column name="CurrencyID" fieldName="CurrencyID" label="Currency ID" aliasColumnName="CurrencyName" aliasForeignKey="Currency" />
+    <column name="CurrencyName" fieldName="CurrencyName" label="CURR" foreignKey="Currency" />
+    <column name="ElementID" fieldName="ElementID" label="Element ID" aliasColumnName="ElementName" aliasForeignKey="Element" />
+    <column name="ElementName" fieldName="ElementName" label="Element Name" foreignKey="Element" />
+    <column name="SortOrder" fieldName="ElementSortOrder" label="ESO" foreignKey="Element" sortType="Ascending" sortOrder="1" />
+    <column name="ComponentType" fieldName="ComponentType" label="Component Type" foreignKey="ElementComponentType" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

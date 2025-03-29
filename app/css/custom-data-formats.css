@@ -1,0 +1,106 @@
+﻿[data-field="UPN"][data-control="label"] {
+    font-weight: 500;
+    color: coral !important;
+}
+
+[data-field="Lastname"][data-control="field"] {
+    font-weight: bold;
+    color: blue;
+}
+
+[data-field="Age"][data-control="field"] {
+    font-weight: bolder;
+    color: coral !important;
+    background-color: aquamarine !important;
+}
+
+/*Sending email mesages form configuration*/
+/*[data-field="ReceivingEmail"][data-control="label"]
+{
+    font-weight: bolder;
+    color: #4599ea !important;
+    background-color: steelblue !important;
+    text-align: left !important;   
+    width:10px;
+}*/
+
+
+/*[data-field="ReceivingEmail"][data-control="field"] {
+    font-weight:normal;
+    color: steelblue !important;
+    
+    text-align: left !important;
+}*/
+
+
+/*[data-field="DuplicatedReceiver"][data-control="label"] {
+    font-weight: bolder;
+    color: #4599ea !important;
+    background-color: aquamarine !important;
+    text-align: left !important;
+    width: 10px;
+}*/
+
+/*[data-field="Subject"][data-control="label"] {
+    font-weight: bolder;
+    color: #4599ea !important;
+    background-color: aquamarine !important;
+    text-align: left !important;
+    width: 10px;
+}*/
+
+[data-field="EmailBody"][data-control="label"] {
+ 
+    text-align: left !important;
+    width: 10px;
+    visibility:hidden;
+    
+}
+
+[data-field="TotalGradeBookMarks"][data-control="field"],
+[data-field="TotalGradeBookMarks"][data-control="label"] {
+    font-weight: bolder;
+    font-size: small;
+    color: steelblue !important;
+}
+
+[data-field="TotalSLOMark"][data-control="label"],
+[data-field="TotalSLOMark"][data-control="field"] {
+    font-weight: bolder;
+    font-size: small;
+    color: steelblue !important;
+}
+
+[data-field="TotalMarks"][data-control="label"] {
+    font-weight: bolder;
+    font-size: small;
+    color: steelblue !important;
+}
+
+[data-field="TotalMarks"][data-control="field"] {
+    font-weight: bolder;
+    font-size: small;
+    color: steelblue !important;
+}
+
+
+[data-field="Who"][data-control="label"],
+[data-field="Who"][data-control="field"] {
+    font-size: small;
+    color: steelblue !important;
+    align-content: initial;
+    font-style: italic;
+    text-align: left;
+}
+
+
+[data-field="When"][data-control="label"],
+[data-field="When"][data-control="field"] {
+    font-size: small;
+    color: steelblue !important;
+    align-content: initial;
+    font-style: italic;
+    text-align:left;
+}
+
+

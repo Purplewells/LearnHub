@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StockTakeHeader" alias="StockTakeHeader" created="2024-09-24T21:54:46" modified="2024-09-24T22:27:37" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Location" parentTableSchema="dbo" parentTableName="zlkpInventoryLocations" x="346" y="20">
+      <foreignKeyColumn columnName="LocationID" parentColumnName="LocationID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="StockTakeHeaderID" fieldName="StockTakeHeaderID" label="Stock Take Header ID" />
+    <column name="StockTakeNo" fieldName="StockTakeNo" label="Stock Take No" />
+    <column name="LocationID" fieldName="LocationID" label="Location ID" aliasColumnName="LocationName" aliasForeignKey="Location" />
+    <column name="LocationName" fieldName="LocationName" label="Location Name" foreignKey="Location" />
+    <column name="DateFrozen" fieldName="DateFrozen" label="Date Frozen" format="g" />
+    <column name="DateUpdated" fieldName="DateUpdated" label="Date Updated" format="g" />
+    <column name="LinesFrozen" fieldName="LinesFrozen" label="Lines Frozen" />
+    <column name="IsUpdated" fieldName="IsUpdated" label="Is Updated" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="StockTakeDate" fieldName="StockTakeDate" label="Stock Take Date" />
+    <column name="IsPublished" fieldName="IsPublished" label="Is Published" />
+    <column name="Comments" fieldName="Comments" label="Comments" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

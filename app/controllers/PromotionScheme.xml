@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="PromotionScheme" conflictDetection="overwriteChanges" label="Promotion Scheme" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"mlinkGradeLevelPromotion"."RefGradeLevelId" "RefGradeLevelID"
+	,"RefGradeLevel"."Description" "CurrentGradeLevel"
+	,"RefGradeLevel"."SortOrder" "GLSO"
+	,"mlinkGradeLevelPromotion"."NextRefGradeLevelId" "NextRefGradeLevelID"
+	,"NextRefGradeLevel"."Description" "NextGradeLevel"
+from "dbo"."mlinkGradeLevelPromotion" "mlinkGradeLevelPromotion"
+	left join "dbo"."zlkpGradeLevel" "RefGradeLevel" on "mlinkGradeLevelPromotion"."RefGradeLevelId" = "RefGradeLevel"."RefGradeLevelId"
+	left join "dbo"."zlkpGradeLevel" "NextRefGradeLevel" on "mlinkGradeLevelPromotion"."NextRefGradeLevelId" = "NextRefGradeLevel"."RefGradeLevelId"
+order by "RefGradeLevel"."SortOrder" asc]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="RefGradeLevelID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Ref Grade Level Id" showInSummary="true">
+      <items style="RadioButtonList" dataController="GradeLevel" dataValueField="RefGradeLevelID" dataTextField="Description" copy="GLSO=SortOrder" dataView="grid1" />
+    </field>
+    <field name="CurrentGradeLevel" type="String" readOnly="true" label="Current Grade Level" length="20" />
+    <field name="GLSO" type="Decimal" readOnly="true" dataFormatString="" label="GLSO" />
+    <field name="NextRefGradeLevelID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Next Ref Grade Level Id" showInSummary="true">
+      <items style="RadioButtonList" dataController="GradeLevel" dataValueField="RefGradeLevelID" dataTextField="Description" dataView="grid1" />
+    </field>
+    <field name="NextGradeLevel" type="String" readOnly="true" label="Next Grade Level" length="20" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Promotion Scheme" sortExpression="GLSO asc">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="RefGradeLevelID" aliasFieldName="CurrentGradeLevel" />
+        <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="NextRefGradeLevelID" aliasFieldName="NextGradeLevel">
+          <headerText>Next Grade Level</headerText>
+        </dataField>
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Promotion Scheme">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Promotion Scheme" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RefGradeLevelID" aliasFieldName="CurrentGradeLevel" />
+            <dataField fieldName="GLSO" columns="15" textMode="Static" />
+            <dataField fieldName="NextRefGradeLevelID" aliasFieldName="NextGradeLevel" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Promotion Scheme">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RefGradeLevelID" aliasFieldName="CurrentGradeLevel" />
+            <dataField fieldName="NextRefGradeLevelID" aliasFieldName="NextGradeLevel" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action commandName="SQL" headerText="Reset to Base Grade Level" id="a101" confirmation="This action will reset the Current GradeLevels to be the same as the Next GradeLevels. Do you want to continue?" cssClass="material-icon-reset_tv" notify="This action will reset the Current GradeLevels to the same level as the Next GradeLevels is completed.">
+        <data><![CDATA[EXEC [dbo].[usp_ops_reset_promotion_mapping_scheme]]]></data>
+      </action>
+      <action commandName="SQL" headerText="Promote To Next GL" id="a100" cssClass="material-icon-exposure_plus_1" confirmation="This action will promote the Current GradeLevels to the Next GradeLevels for promotion. Do you want to continue?" notify="Current GradeLevels to the Next GradeLevels for promotion have been completed.">
+        <data><![CDATA[EXEC [dbo].[usp_ops_set_promotion_mapping_scheme]]]></data>
+      </action>
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a100" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a102" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" headerText="Send To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send To RSS" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+      <action id="a105" />
+      <action commandName="SQL" headerText="Reset to Base Grade Level" id="a104" confirmation="This action will reset the Current GradeLevels to be the same as the Next GradeLevels. Do you want to continue?" cssClass="material-icon-reset_tv" notify="This action will reset the Current GradeLevels to the same level as the Next GradeLevels is completed.">
+        <data><![CDATA[EXEC [dbo].[usp_ops_reset_promotion_mapping_scheme]]]></data>
+      </action>
+      <action commandName="SQL" headerText="Promote To Next Grade Level" id="a103" cssClass="material-icon-exposure_plus_1" confirmation="This action will promote the current GradeLevels to the next GradeLevels for promotion. Do you want to continue?" notify="Current GradeLevels to the Next GradeLevels for promotion have been completed.">
+        <data><![CDATA[EXEC [dbo].[usp_ops_set_promotion_mapping_scheme]]]></data>
+      </action>
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

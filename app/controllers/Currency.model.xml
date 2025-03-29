@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkp_currency" alias="zlkp_currency" created="2024-01-28T01:29:29" modified="2024-01-28T01:29:47" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="CurrencyID" fieldName="CurrencyID" label="Currency ID" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="CurrencyName" fieldName="CurrencyName" label="Name" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="IsDefault" fieldName="IsDefault" label="Is Default" />
+  </columns>
+</dataModel>

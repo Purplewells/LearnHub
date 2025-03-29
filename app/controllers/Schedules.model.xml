@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="ClassMeetingSchedule" alias="ClassMeetingSchedule" created="2024-08-08T16:47:00" modified="2025-02-16T13:36:01" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="ScheduleID" fieldName="ScheduleID" label="Schedule ID" />
+    <column name="Weeks" fieldName="Weeks" label="Weeks" />
+    <column name="DaysOfWeek" fieldName="DaysOfWeek" label="Days Of Week" />
+  </columns>
+</dataModel>

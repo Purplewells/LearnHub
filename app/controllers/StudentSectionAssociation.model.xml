@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StudentSectionAssociation" alias="StudentSectionAssociation" created="2024-02-04T18:02:09" modified="2024-04-10T18:20:28" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="StudentEnrollment" parentTableSchema="dbo" parentTableName="StudentSchoolAssociation" x="470" y="20">
+      <foreignKeyColumn columnName="StudentEnrollmentID" parentColumnName="StudentEnrollmentID" />
+    </foreignKey>
+    <foreignKey id="RefCourseSectionEnrollmentStatusType" parentTableSchema="dbo" parentTableName="zlkpCourseSectionEnrollmentStatusType" x="470" y="665">
+      <foreignKeyColumn columnName="RefCourseSectionEnrollmentStatusTypeId" parentColumnName="RefCourseSectionEnrollmentStatusTypeId" />
+    </foreignKey>
+    <foreignKey id="RefCourseSectionEntryType" parentTableSchema="dbo" parentTableName="zlkpCourseSectionEntryType" x="470" y="841">
+      <foreignKeyColumn columnName="RefCourseSectionEntryTypeId" parentColumnName="RefCourseSectionEntryTypeId" />
+    </foreignKey>
+    <foreignKey id="RefCourseSectionExitType" parentTableSchema="dbo" parentTableName="zlkpCourseSectionExitType" x="976" y="20">
+      <foreignKeyColumn columnName="RefCourseSectionExitTypeId" parentColumnName="RefCourseSectionExitTypeId" />
+    </foreignKey>
+    <foreignKey id="CourseSection" parentTableSchema="dbo" parentTableName="CourseSection" x="30" y="714">
+      <foreignKeyColumn columnName="CourseSectionID" parentColumnName="CourseSectionID" />
+    </foreignKey>
+    <foreignKey id="RefSchoolStream" parentTableSchema="dbo" parentTableName="zlkpSchoolStream" x="30" y="1075">
+      <foreignKeyColumn columnName="RefSchoolStreamID" parentColumnName="RefSchoolStreamID" />
+    </foreignKey>
+    <foreignKey id="RefEntryGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="983" y="318" baseForeignKey="StudentEnrollment">
+      <foreignKeyColumn columnName="RefEntryGradeLevelId" parentColumnName="RefGradeLevelId" />
+    </foreignKey>
+    <foreignKey id="OrganizationPersonRole" parentTableSchema="dbo" parentTableName="OrganizationPersonRole" x="989" y="570" baseForeignKey="StudentEnrollment">
+      <foreignKeyColumn columnName="OrganizationPersonRoleID" parentColumnName="OrganizationPersonRoleID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="1349" y="20" baseForeignKey="OrganizationPersonRole">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="Course" parentTableSchema="dbo" parentTableName="Course" x="459" y="980" baseForeignKey="CourseSection">
+      <foreignKeyColumn columnName="CourseID" parentColumnName="CourseID" />
+    </foreignKey>
+    <foreignKey id="RefSex" parentTableSchema="dbo" parentTableName="zlkpSex" x="1717" y="20" baseForeignKey="Person">
+      <foreignKeyColumn columnName="RefSexID" parentColumnName="GenderID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="StudentCourseSectionID" fieldName="StudentCourseSectionID" label="Student Course Section ID" />
+    <column name="StudentEnrollmentID" fieldName="StudentEnrollmentID" label="Student Enrollment ID" aliasColumnName="CreatedBy" aliasForeignKey="StudentEnrollment" />
+    <column name="FirstName" fieldName="Firstname" label="Firstname" foreignKey="Person" />
+    <column name="LastName" fieldName="Lastname" label="Lastname" foreignKey="Person" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="Description" fieldName="GL" label="GL" foreignKey="RefEntryGradeLevel" />
+    <column name="SortOrder" fieldName="GLSO" label="GLSO" foreignKey="RefEntryGradeLevel" />
+    <column name="RefSchoolStreamID" fieldName="RefSchoolStreamID" label="Ref School Stream ID" aliasColumnName="Description" aliasForeignKey="RefSchoolStream" />
+    <column name="Description" fieldName="STM" label="STM" foreignKey="RefSchoolStream" />
+    <column name="CreatedBy" fieldName="StudentEnrollmentCreatedBy" label="Student Enrollment Created By" foreignKey="StudentEnrollment" />
+    <column name="RefCourseSectionEnrollmentStatusTypeId" fieldName="RefCourseSectionEnrollmentStatusTypeID" label="Ref Course Section Enrollment Status Type Id" aliasColumnName="Description" aliasForeignKey="RefCourseSectionEnrollmentStatusType" />
+    <column name="Description" fieldName="EnrollmentStatus" label="ENR Status" foreignKey="RefCourseSectionEnrollmentStatusType" />
+    <column name="RefCourseSectionEntryTypeId" fieldName="RefCourseSectionEntryTypeID" label="Ref Course Section Entry Type Id" aliasColumnName="Description" aliasForeignKey="RefCourseSectionEntryType" />
+    <column name="Description" fieldName="CSE" label="CSE" foreignKey="RefCourseSectionEntryType" />
+    <column name="RefCourseSectionExitTypeId" fieldName="RefCourseSectionExitTypeID" label="Ref Course Section Exit Type Id" aliasColumnName="Description" aliasForeignKey="RefCourseSectionExitType" />
+    <column name="Description" fieldName="CSEExit" label="CSE Exit" foreignKey="RefCourseSectionExitType" />
+    <column name="CreditsEarned" fieldName="CreditsEarned" label="Credits" />
+    <column name="CourseSectionID" fieldName="CourseSectionID" label="Course Section ID" aliasColumnName="SectionNo" aliasForeignKey="CourseSection" />
+    <column name="SectionNo" fieldName="SectionNo" label="Section No" foreignKey="CourseSection" />
+    <column name="SectionName" fieldName="SectionName" label="Section Name" foreignKey="CourseSection" />
+    <column name="StartDate" fieldName="StartDate" label="Start Date" />
+    <column name="EndDate" fieldName="EndDate" label="End Date" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="TeacherNotes" fieldName="TeacherNotes" label="Teacher Notes" />
+    <column name="ActiveCourseSection" fieldName="ACS" label="ACS" />
+    <column name="extIsActiveSession" fieldName="SSIA" label="SSIA" />
+    <column name="extActiveCourseSection" fieldName="extActiveCourseSection" label="Active Course Section" />
+    <column name="extCalendarSessionID" fieldName="extCalendarSessionID" label="CalendarSessionID" />
+    <column name="extSessionCode" fieldName="extSessionCode" label="Session Code" />
+    <column name="CourseTitle" fieldName="Course" label="Course" foreignKey="Course" />
+    <column fieldName="GLS" type="nvarchar(100)" dataType="String" label="GLS">
+      <formula>RefEntryGradeLevel.Description</formula>
+    </column>
+    <column fieldName="Header" type="nvarchar(95)" dataType="String" label="Header">
+      <formula>Person.FirstName + ', ' + Person.LastName + ' &gt;&gt; ' + '( ' + 'UPN: ' + Person.IdentificationCode + ' )'</formula>
+    </column>
+    <column name="Code" fieldName="sex" label="Sex" foreignKey="RefSex" />
+    <column fieldName="SCID" type="int" dataType="Int32" label="SCID">
+      <formula>StudentSectionAssociation.StudentCourseSectionID</formula>
+    </column>
+    <column fieldName="SEID" type="int" dataType="Int32" label="SEID">
+      <formula>StudentSectionAssociation.StudentEnrollmentID</formula>
+    </column>
+    <column fieldName="Name" type="nvarchar(84)" dataType="String" label="Name">
+      <formula>Person.FirstName + ' ' + Person.LastName + ' (' + Person.IdentificationCode + ')'</formula>
+    </column>
+  </columns>
+</dataModel>

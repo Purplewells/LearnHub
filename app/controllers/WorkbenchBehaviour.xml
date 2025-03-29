@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkbenchBehaviour" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="BehaviourCategory" type="DataView" label="Behaviour Category">
+      <dataView controller="BehaviourCategory" view="grid1" />
+    </field>
+    <field name="BehaviourActivityType" type="DataView" label="Behaviour Activity Type">
+      <dataView controller="BehaviourActivityType" view="grid1" />
+    </field>
+    <field name="IncidentBehavior" type="DataView" label="Incident Behavior">
+      <dataView controller="IncidentBehavior" view="grid1" />
+    </field>
+    <field name="NatureOfBehaviour" type="DataView" label="Nature Of Behaviour">
+      <dataView controller="NatureOfBehaviour" view="grid1" />
+    </field>
+    <field name="ActionTaken" type="DataView" label="Action Taken">
+      <dataView controller="ActionTaken" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="BehaviourForm" type="Form" label="BEHAVIOUR WORK HUB">
+      <categories>
+        <category headerText="Behaviour Category" tab="BEHAVIOUR CATEGORY" id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="BehaviourCategory" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-dock-bottom" />
+          </dataFields>
+        </category>
+        <category headerText="Behaviour Activity Type" tab="BEHAVIOUR ACTIVITY TYPE" id="c3">
+          <dataFields>
+            <dataField fieldName="BehaviourActivityType" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-dock-bottom" />
+          </dataFields>
+        </category>
+        <category headerText="Incident Behaviour" tab="INCIDENT BEHAVIOUR" id="c4">
+          <dataFields>
+            <dataField fieldName="IncidentBehavior" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-dock-bottom" />
+          </dataFields>
+        </category>
+        <category headerText="NATURE OF BEHAVIOUR" tab="NATURE OF BEHAVIOUR" id="c2">
+          <dataFields>
+            <dataField fieldName="NatureOfBehaviour" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-dock-bottom" />
+          </dataFields>
+        </category>
+        <category headerText="ACTION TAKEN" tab="ACTION TAKEN" id="c5">
+          <dataFields>
+            <dataField fieldName="ActionTaken" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-dock-bottom" />
+          </dataFields>
+        </category>
+      </categories>
+      <headerText>The behaviour hub provides a one-stop place for managing behaviour reference data. </headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Behaviour Action" flat="false" />
+  </actions>
+</dataController>

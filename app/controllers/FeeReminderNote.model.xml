@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="vw_fee_collection_accounting_ledger_fee_note" alias="vw_fee_collection_accounting_ledger_fee_note" created="2024-04-03T23:11:23" modified="2024-04-13T05:53:33" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="LastName" fieldName="LastName" label="Lastname" />
+    <column name="FirstName" fieldName="FirstName" label="Firstname" />
+    <column fieldName="Fullname" type="nvarchar(71)" dataType="String" label="Fullname">
+      <formula>vw_fee_collection_accounting_ledger_fee_note.FirstName + ' ' + vw_fee_collection_accounting_ledger_fee_note.LastName</formula>
+    </column>
+    <column name="GL" fieldName="GL" label="GL" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="FeeType" fieldName="FeeType" label="Fee Type" />
+    <column name="EventDate" fieldName="EventDate" label="Event Date" format="d" />
+    <column name="Debit" fieldName="Debit" label="Debit" format="" />
+    <column name="Credit" fieldName="Credit" label="Credit" format="c" />
+    <column name="TotalAmountBilled" fieldName="TotalAmountBilled" label="Amount Billed" format="" />
+    <column name="TotalAmountReceived" fieldName="TotalAmountReceived" label="Amount Taken" format="" />
+    <column name="Code" fieldName="Code" label="CURR" />
+    <column name="SchoolName" fieldName="SchoolName" label="School Name" />
+    <column name="Address" fieldName="Address" label="Address" />
+    <column name="Email" fieldName="Email" label="Email" />
+    <column name="Attribute1" fieldName="Attribute1" label="Attribute 1" />
+    <column name="Attribute2" fieldName="Attribute2" label="Attribute 2" />
+    <column name="ReportNameCode" fieldName="ReportNameCode" label="Report Name Code" />
+  </columns>
+</dataModel>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkbenchFeesBilling" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="StudentFees" type="DataView" label="Student Fees">
+      <dataView controller="StudentFees" view="grid1_current_year_fee" />
+    </field>
+    <field name="fee_collection_transaction_itemised" type="DataView" label="fee collection transaction itemised">
+      <dataView controller="fee_collection_transaction_itemised" view="grid1" />
+    </field>
+    <field name="FeeCollectionAccountingLedgerMini" type="DataView" label="Fee Collection Accounting Ledger Mini">
+      <dataView controller="FeeCollectionAccountingLedgerMini" view="grid1" />
+    </field>
+    <field name="FeeCollectionSummaries" type="DataView" label="Fee Collection Summaries">
+      <dataView controller="FeeCollectionSummaries" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="WorkbenchFeesBilling" type="Form" label="FEES &amp; BILLS WORKBENCH">
+      <categories>
+        <category tab="STUDENT FEES" id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="StudentFees" columns="15" tag="modal-never">
+              <headerText>Fees &amp; Billing</headerText>
+              <dataView pageSize="15" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="PAYMENTS" id="c2">
+          <dataFields>
+            <dataField fieldName="fee_collection_transaction_itemised" columns="15" tag="modal-fit-content&#xD;&#xA;modal-stub-none&#xD;&#xA;modal-max-sm">
+              <headerText>Itemised Payment Records</headerText>
+              <dataView pageSize="15" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="BILLS &amp; BALANCES" id="c3">
+          <dataFields>
+            <dataField fieldName="FeeCollectionAccountingLedgerMini" columns="15" tag="modal-fullscreen">
+              <headerText>BILLS &amp; BALANCES</headerText>
+              <dataView pageSize="15" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="FEE BALANCES" id="c4">
+          <dataFields>
+            <dataField fieldName="FeeCollectionSummaries" columns="15">
+              <headerText>Fee Collection Overview</headerText>
+              <dataView autoHighlightFirstRow="true" showRowNumber="true" pageSize="15" />
+            </dataField>
+          </dataFields>
+          <description />
+        </category>
+      </categories>
+      <headerText>The FMW screen allows accounts staff, and other authorised personnel to oversee and manage various aspects fee management process.</headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="FeeActions" flat="false" />
+  </actions>
+</dataController>

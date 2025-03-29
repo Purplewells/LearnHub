@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="znContactPoint" label="znContactPoint" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"PersonContactPoint"."ContactPointID" "ContactPointID"
+	,"PersonContactPoint"."ContactPoint" "ContactPoint"
+	,"PersonContactPoint"."PersonID" "PersonID"
+	,"Person"."IdentificationCode" "UPN"
+	,"Person"."FirstName" "FirstName"
+	,"Person"."LastName" "LastName"
+	,"PersonContactPoint"."IsActive" "IsActive"
+	,"PersonContactPoint"."EffectiveFrom" "EffectiveFrom"
+	,"PersonContactPoint"."EffectiveTo" "EffectiveTo"
+	,"PersonContactPoint"."RefContactPointSystemID" "RefContactPointSystemID"
+	,"RefContactPointSystem"."Description" "ContactSystem"
+	,"PersonContactPoint"."Rank" "Rank"
+	,"PersonContactPoint"."UseCode" "UseCode"
+	,"Use"."UseCodeValue" "Usage"
+	,"PersonContactPoint"."IsPrimary" "IsPrimary"
+from "dbo"."PersonContactPoint" "PersonContactPoint"
+	left join "dbo"."Person" "Person" on "PersonContactPoint"."PersonID" = "Person"."PersonID"
+	left join "dbo"."zlkpContactPointSystem" "RefContactPointSystem" on "PersonContactPoint"."RefContactPointSystemID" = "RefContactPointSystem"."RefContactPointSystemID"
+	left join "dbo"."zlkp_contact_point_use" "Use" on "PersonContactPoint"."UseCode" = "Use"."UseCode"
+]]></text>
+    </command>
+    <command id="ContactPointIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ContactPointID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="ContactPointID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Contact Point ID" readOnly="true" />
+    <field name="ContactPoint" type="String" label="Contact Point" length="30" showInSummary="true" />
+    <field name="PersonID" type="Int32" allowNulls="false" label="Person ID" showInSummary="true">
+      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="UPN" copy="FirstName=FirstName, LastName=LastName" />
+    </field>
+    <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
+    <field name="FirstName" type="String" readOnly="true" label="First Name" length="35" />
+    <field name="LastName" type="String" readOnly="true" label="Last Name" length="35" />
+    <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
+    <field name="EffectiveFrom" type="DateTime" label="Effective From" showInSummary="true" />
+    <field name="EffectiveTo" type="DateTime" label="Effective To" showInSummary="true" />
+    <field name="RefContactPointSystemID" type="Int32" label="Ref Contact Point System ID">
+      <items style="Lookup" dataController="ContactPointSystem" newDataView="createForm1" dataValueField="RefContactPointSystemID" dataTextField="Description" />
+    </field>
+    <field name="ContactSystem" type="String" readOnly="true" label="Contact System" length="100" />
+    <field name="Rank" type="Int32" label="Rank" />
+    <field name="UseCode" type="String" label="Use Code" length="10">
+      <items style="Lookup" dataController="ContactPointUse" newDataView="createForm1" dataValueField="UseCode" dataTextField="UseCodeValue" />
+    </field>
+    <field name="Usage" type="String" readOnly="true" label="Usage" length="20" />
+    <field name="IsPrimary" type="Boolean" label="Is Primary" />
+    <field name="HeaderTitle" type="String" readOnly="true" label="Header Title" computed="true">
+      <formula>Person.FirstName + ', ' + Person.LastName + ' &gt;&gt; ' + '( ' + 'UPN: ' + Person.IdentificationCode + ' &gt;&gt; ' + Person.CurrentYearGradeLevel + ' )'  
+ </formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Person Contact Point">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="RefContactPointSystemID" aliasFieldName="ContactSystem" />
+        <dataField fieldName="ContactPoint" columns="20" />
+        <dataField fieldName="UseCode" aliasFieldName="Usage" />
+        <dataField fieldName="PersonID" aliasFieldName="UPN" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="EffectiveFrom" columns="18" />
+        <dataField fieldName="EffectiveTo" columns="18" />
+        <dataField fieldName="Rank" columns="8" />
+        <dataField fieldName="IsPrimary" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="HeaderTitle" hidden="true" tag="header-text" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Contact Point">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ContactPoint" columns="30" />
+            <dataField fieldName="RefContactPointSystemID" aliasFieldName="ContactSystem" />
+            <dataField fieldName="UseCode" aliasFieldName="Usage" />
+            <dataField fieldName="PersonID" aliasFieldName="UPN" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="EffectiveFrom" columns="10" />
+            <dataField fieldName="EffectiveTo" columns="10" />
+            <dataField fieldName="Rank" columns="15" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="IsPrimary" />
+            <dataField fieldName="HeaderTitle" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Contact Point">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ContactPoint" columns="30" />
+            <dataField fieldName="RefContactPointSystemID" aliasFieldName="ContactSystem" />
+            <dataField fieldName="UseCode" aliasFieldName="Usage" />
+            <dataField fieldName="PersonID" aliasFieldName="UPN" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="EffectiveFrom" columns="10" />
+            <dataField fieldName="EffectiveTo" columns="10" />
+            <dataField fieldName="Rank" columns="15" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="IsPrimary" />
+            <dataField fieldName="HeaderTitle" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

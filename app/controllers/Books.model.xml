@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Books" alias="Books" created="2024-07-30T23:12:40" modified="2024-07-30T23:22:28" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="BookID" fieldName="BookID" label="Book ID" />
+    <column name="Title" fieldName="Title" label="Title" />
+    <column name="Author" fieldName="Author" label="Author" />
+    <column name="ISBN" fieldName="ISBN" label="ISBN" />
+    <column name="PublicationYear" fieldName="PublicationYear" label="Pub Year" />
+    <column name="CopiesAvailable" fieldName="CopiesAvailable" label="Available" />
+    <column name="TotalCopies" fieldName="TotalCopies" label="Total Copies" />
+    <column name="Genre" fieldName="Genre" label="Genre" />
+    <column name="Publisher" fieldName="Publisher" label="Publisher" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

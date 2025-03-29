@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PersonIdentifier" alias="PersonIdentifier" created="2024-02-09T09:35:08" modified="2024-02-15T08:22:37" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="RefPersonIdentificationSystem" parentTableSchema="dbo" parentTableName="zlkpPersonIdentificationSystem" x="430" y="20">
+      <foreignKeyColumn columnName="RefPersonIdentificationSystemId" parentColumnName="RefPersonIdentificationSystemId" />
+    </foreignKey>
+    <foreignKey id="RefPersonalInformationVerification" parentTableSchema="dbo" parentTableName="zlkpPersonalInformationVerification" x="430" y="219">
+      <foreignKeyColumn columnName="RefPersonalInformationVerificationId" parentColumnName="RefPersonalInformationVerificationId" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="854" y="20">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="PersonIdentifierId" fieldName="PersonIdentifierID" label="Person Identifier Id" />
+    <column name="Identifier" fieldName="Identifier" label="Identifier" />
+    <column name="RefPersonIdentificationSystemId" fieldName="RefPersonIdentificationSystemID" label="Ref Person Identification System Id" aliasColumnName="Description" aliasForeignKey="RefPersonIdentificationSystem" />
+    <column name="Description" fieldName="IdentificationSystem" label="Identification System" foreignKey="RefPersonIdentificationSystem" />
+    <column name="RefPersonalInformationVerificationId" fieldName="RefPersonalInformationVerificationID" label="Ref Personal Information Verification Id" aliasColumnName="Description" aliasForeignKey="RefPersonalInformationVerification" />
+    <column name="Description" fieldName="PIN" label="PIN" foreignKey="RefPersonalInformationVerification" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="IdentificationCode" aliasForeignKey="Person" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="FirstName" fieldName="Firstname" label="Firstname" foreignKey="Person" />
+    <column name="LastName" fieldName="Lastname" label="Lastname" foreignKey="Person" />
+    <column fieldName="Fullname" type="nvarchar(71)" dataType="String" label="Fullname">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </column>
+  </columns>
+</dataModel>

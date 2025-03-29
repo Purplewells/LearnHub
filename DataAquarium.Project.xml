@@ -1,0 +1,57 @@
+<!-- 
+  This file is provided to store the settings for your Data Aquarium project. 
+  You can safely delete this file if no further code generation is planned.
+-->
+<project compatibility="20111118" dataModel="required" appFolder="app" displayName="LearnHub" group="Education" type="Web Site Factory" sourceControl="git" subscriptionLevel="Unlimited" name="LearnHub" prettyName="Learn Hub" appGenVersion="8.9.23.0" codeDomProvider="CSharp" targetFramework="4.7.2" userInterface="TouchUI" pageImplementation="html" databaseChanged="true" xmlns="urn:schemas-codeontime-com:data-aquarium-project">
+  <connectionString hostDatabaseSharing="false" sessionStateMode="Custom">Data Source=sql6031.site4now.net;Initial Catalog=db_a1e68c_demo;Persist Security Info=True;User ID=db_a1e68c_demo_admin;Password=nanakillo1970;</connectionString>
+  <providerName>System.Data.SqlClient</providerName>
+  <namespace>zLearnHub</namespace>
+  <webServer run="true" port="18728" preview="Browser" client="">
+    <webConfig>AppendChild: /configuration/appSettings
+  &lt;add key="CommandTimeout" value="300" /&gt;
+
+AppendChild: /configuration/system.web
+
+  &lt;customErrors mode="RemoteOnly" defaultRedirect="~/ErrorPages/GenericErrorPage.html"&gt;
+            &lt;error statusCode="403" redirect="~/ErrorPages/NoAccess.html"/&gt;
+            &lt;error statusCode="404" redirect="~/ErrorPages/FileNotFound.html"/&gt;
+        &lt;/customErrors&gt;</webConfig>
+  </webServer>
+  <features useSaveAndNew="true" pageHeader="" copyright="&lt;footer class=&quot;page-footer font-small unique-color-dark&quot;&gt;&#xD;&#xA;    &lt;div class=&quot;footer-copyright text-center py-3&quot;&gt;&#xD;&#xA;        © 2018 Telleion MIS | &#xD;&#xA;         &lt;a href=&quot;http://www.purplewells.com&quot; target=&quot;_blank&quot;&gt;Purplewells Ltd&lt;/a&gt; | Last Updated: 20250320 | V 8.71&#xD;&#xA;    &lt;/div&gt;&#xD;&#xA;&lt;/footer&gt;&#xD;&#xA;" annotations="true" annotationsPath="" newColumn="true" floating="false" maxGridFields="100" multiSelect="false" batchEdit="true" advancedSearch="false" advancedLookup="false" relationshipExplorer="false" enablePermalinks="true" enableHistory="true" enableTransactions="false" showModalForms="true" tabViewSelection="0">
+    <navigation detectUnderscoreSeparatedSchema="" />
+    <blob allowUploadOnInsert="true" />
+    <framework scriptOnly="true" useExtenders="false" />
+    <grid actionColumn="false" />
+    <touch desktopDisplayDensity="Compact" mobileDisplayDensity="Condensed" transitions="" sidebar="Landscape" labelsInList="DisplayedBelow" initialListMode="SeeAll" menu="toolbar" promoteActions="true" smartDates="true" mapApiIdentifier="AIzaSyBzY_bPskVZ6PuRQbkzQeuqirZs_D19Se8" mapApiIdentifierMobile="AIzaSyBzY_bPskVZ6PuRQbkzQeuqirZs_D19Se8" />
+    <cms searchEngine="" analysisEngine="" analysisOnDataPages="true" />
+    <ease urlHashing="true">
+      <auditing>Modified By User Name = ModifiedBy
+Modified On Date          = ModifiedDate
+Created By User Name  = CreatedBy
+Created On Date           = CreatedDate</auditing>
+    </ease>
+    <packageProperties></packageProperties>
+    <smtp deliveryMethod="Network" deliveryFormat="" from="b.adu@dekakis.com" clientDomain="" targetName="" host="mail.ntchosting.com" port="465" defaultCredentials="false" enableSsl="true" username="b.adu@dekakis.com" password="nanakillo,1970" />
+    <addons OfflineSync="" ContentMaker="" />
+  </features>
+  <reports enabled="true" version="15" />
+  <host path="" url="" />
+  <databaseObjectFilter generate="ControllersAndPages"></databaseObjectFilter>
+  <bll normalizeModelNames="true" discoveryDepth="2" labelFormatExpression="" selectMethod="Select" selectSingleMethod="SelectSingle" insertMethod="Insert" updateMethod="Update" deleteMethod="Delete" generateSharedBusinessRules="true" includeViews="true" tabViewSelection="0">
+    <fieldMap></fieldMap>
+    <keys></keys>
+    <fieldsToIgnore></fieldsToIgnore>
+    <fieldsToHide></fieldsToHide>
+    <customLabels></customLabels>
+  </bll>
+  <membership enabled="true" providerName="System.Data.SqlClient" connectionString="" windowsAuthentication="false" activeDirectory="false" customSecurity="false" dedicatedLogin="false" displayRememberMe="true" rememberMeSet="false" displaySignUp="true" displayPasswordRecovery="true" displayMyAccount="true" displayHelp="true" idleUserDetectionTimeout="-1" tabViewSelection="0" validationKey="3B85D8FC2926B4F2E9A990606F89D887B165A3BB536B5DA22A442572CE8A38A80807ADBE6A22B67D02FAFE477E6E21ED5EB127948F400C152104FB7B50A43855">
+    <adConfig></adConfig>
+    <config></config>
+  </membership>
+  <globalization uiCulture="en-GB" culture="en-GB" enableClientBasedCulture="false" supportedCultures="en-GB,en-GB; " googleTranslateApiKey="" />
+  <layout name="Classic" menuStyle="MultiLevel" />
+  <theme name="Aquarium" />
+  <publish mode="FileSystem">
+    <fileSystem external="false">{"path":"C:\\Users\\adub\\Documents\\Code OnTime\\Publish\\LearnHub\\V08720250308","previewUrl":"","webConfigCustomizations":{"DebugMode":"false","SMTPDelivery":"network","SMTPFrom":"b.adu@dekakis.com","SMTPDefaultCredentials":"false","SMTPNetworkUserName":"b.adu@dekakis.com","SMTPNetworkPassword":"nanakillo,1970","SMTPEnableSSL":"true","SMTPNetworkPort":"465","SMTPClientDomain":"mail.ntchosting.com"}}</fileSystem>
+  </publish>
+</project>

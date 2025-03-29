@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="transaction_account_mapping" alias="transaction_account_mapping" created="2025-02-23T13:50:36" modified="2025-03-16T11:31:50" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="TransactionType" parentTableSchema="dbo" parentTableName="zlkpTransactionType" x="323" y="20">
+      <foreignKeyColumn columnName="TransactionTypeID" parentColumnName="TransactionTypeID" />
+    </foreignKey>
+    <foreignKey id="DebitAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="323" y="181">
+      <foreignKeyColumn columnName="DebitAccountID" parentColumnName="AccountID" />
+    </foreignKey>
+    <foreignKey id="CreditAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="323" y="365">
+      <foreignKeyColumn columnName="CreditAccountID" parentColumnName="AccountID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="MappingID" fieldName="MappingID" label="Mapping ID" />
+    <column name="TransactionTypeID" fieldName="TransactionTypeID" label="Transaction Type ID" aliasColumnName="TransactionType" aliasForeignKey="TransactionType" />
+    <column name="TransactionType" fieldName="TransactionType" label="Transaction Type" foreignKey="TransactionType" />
+    <column name="DebitAccountID" fieldName="DebitAccountID" label="Debit Account ID" aliasColumnName="AccountName" aliasForeignKey="DebitAccount" />
+    <column name="AccountName" fieldName="DebitAccountName" label="Debit Account" foreignKey="DebitAccount" />
+    <column name="CreditAccountID" fieldName="CreditAccountID" label="Credit Account ID" aliasColumnName="AccountName" aliasForeignKey="CreditAccount" />
+    <column name="AccountName" fieldName="CreditAccountName" label="Credit Account" foreignKey="CreditAccount" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="EffectiveDate" fieldName="EffectiveDate" label="Effective Date" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedbY" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="LessonPlanTemplates" alias="LessonPlanTemplates" created="2024-02-17T20:27:29" modified="2024-02-17T20:36:03" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="CourseSection" parentTableSchema="dbo" parentTableName="CourseSection" x="366" y="20">
+      <foreignKeyColumn columnName="CourseSectionID" parentColumnName="CourseSectionID" />
+    </foreignKey>
+    <foreignKey id="GradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="366" y="388">
+      <foreignKeyColumn columnName="GradeLevelID" parentColumnName="RefGradeLevelId" />
+    </foreignKey>
+    <foreignKey id="PerformanceIndicator" parentTableSchema="dbo" parentTableName="PerformanceIndicator" x="686" y="552">
+      <foreignKeyColumn columnName="PerformanceIndicatorID" parentColumnName="PerformanceIndicatorID" />
+    </foreignKey>
+    <foreignKey id="LearningStandards" parentTableSchema="dbo" parentTableName="LearningStandards" x="366" y="20">
+      <foreignKeyColumn columnName="LearningStandardsID" parentColumnName="LearningStandardID" />
+    </foreignKey>
+    <foreignKey id="CalendarSession" parentTableSchema="dbo" parentTableName="Session" x="761" y="29" baseForeignKey="CourseSection">
+      <foreignKeyColumn columnName="CalendarSessionID" parentColumnName="CalendarSessionID" />
+    </foreignKey>
+    <foreignKey id="OrganizationCalendar" parentTableSchema="dbo" parentTableName="Calendar" x="1101" y="20" baseForeignKey="CalendarSession">
+      <foreignKeyColumn columnName="OrganizationCalendarID" parentColumnName="OrganizationCalendarId" />
+    </foreignKey>
+    <foreignKey id="School" parentTableSchema="dbo" parentTableName="School" x="1443" y="20" baseForeignKey="OrganizationCalendar">
+      <foreignKeyColumn columnName="SchoolID" parentColumnName="OrganizationID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="LessonPlanTemplateID" fieldName="LessonPlanTemplateID" label="Lesson Plan Template ID" />
+    <column name="CourseSectionID" fieldName="CourseSectionID" label="Course Section ID" aliasColumnName="SectionNo" aliasForeignKey="CourseSection" />
+    <column name="SectionNo" fieldName="SectionNo" label="Section No" foreignKey="CourseSection" />
+    <column name="UnitTopic" fieldName="UnitTopic" label="Unit Topic" />
+    <column name="Duration" fieldName="Duration" label="Duration" />
+    <column name="LessonTopics" fieldName="LessonTopics" label="Lesson Topics" />
+    <column name="LessonAim" fieldName="LessonAim" label="Lesson Aim" />
+    <column name="GradeLevelID" fieldName="GradeLevelID" label="Grade Level ID" aliasColumnName="Description" aliasForeignKey="GradeLevel" />
+    <column name="Description" fieldName="GradeLevel" label="Grade Level" foreignKey="GradeLevel" />
+    <column name="SortOrder" fieldName="GLSO" label="GLSO" foreignKey="GradeLevel" />
+    <column name="Outcomes" fieldName="Outcomes" label="Outcomes" />
+    <column name="LessonOutline" fieldName="LessonOutline" label="Lesson Outline" />
+    <column name="LessonObjectives" fieldName="LessonObjectives" label="Objectives" />
+    <column name="Resources" fieldName="Resources" label="Resources" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="PerformanceIndicatorID" fieldName="PerformanceIndicatorID" label="Performance Indicator ID" aliasColumnName="Code" aliasForeignKey="PerformanceIndicator" />
+    <column name="Code" fieldName="IndicatorCode" label="Indicator Code" foreignKey="PerformanceIndicator" />
+    <column name="ICode" fieldName="ICode" label="ICode" foreignKey="PerformanceIndicator" />
+    <column name="PerformanceDescription" fieldName="Performance" label="Performance" foreignKey="PerformanceIndicator" />
+    <column name="SuccessStatement" fieldName="SuccessCriteria" label="Success Criteria" foreignKey="PerformanceIndicator" />
+    <column name="Strand" fieldName="Strand" label="Strand" foreignKey="PerformanceIndicator" />
+    <column name="Substrand" fieldName="Substrand" label="Substrand" foreignKey="PerformanceIndicator" />
+    <column name="StrandCode" fieldName="StrandCode" label="Strand Code" foreignKey="PerformanceIndicator" />
+    <column name="SubstrandCode" fieldName="SubstrandCode" label="Substrand Code" foreignKey="PerformanceIndicator" />
+    <column name="extSubject" fieldName="CourseTitle" label="Subject" foreignKey="PerformanceIndicator" />
+    <column name="RequestApproval" fieldName="RequestApproval" label="Request Approval" />
+    <column name="ApprovalStatus" fieldName="ApprovalStatus" label="Approval Status" />
+    <column name="Reflection" fieldName="Reflection" label="Reflection" />
+    <column name="LearningStandardsID" fieldName="LearningStandardsID" label="Learning Standards ID" aliasColumnName="Code" aliasForeignKey="LearningStandards" />
+    <column name="Code" fieldName="LearningStandardsCode" label="Learning Standards Code" foreignKey="LearningStandards" />
+    <column name="extCol1" fieldName="ExtCol1" label="Teacher's Name" />
+    <column name="extCol2" fieldName="ExtCol2" label="ext Col2" />
+    <column name="extCol3" fieldName="ExtCol3" label="ext Col3" />
+    <column name="Attachment" fieldName="Attachment" label="Attachment" />
+    <column name="SessionCode" fieldName="Session" label="Session" foreignKey="CalendarSession" />
+    <column name="CurrentSchoolYear" fieldName="CSY" label="CSY" foreignKey="OrganizationCalendar" />
+    <column name="SchoolName" fieldName="School" label="School" foreignKey="School" />
+    <column name="Address" fieldName="Address" label="Address" foreignKey="School" />
+    <column name="Logo" fieldName="SchoolLogo" label="School Logo" foreignKey="School" />
+    <column fieldName="LearningOutcome" type="nvarchar(2129)" dataType="String" label="Learning Outcome">
+      <formula>PerformanceIndicator.Code + ' - ' + PerformanceIndicator.extSubject + ' - ' + PerformanceIndicator.PerformanceDescription</formula>
+    </column>
+    <column fieldName="PerformanceIndicator" type="nvarchar(2076)" dataType="String" label="Performance Indicator">
+      <formula>PerformanceIndicator.Code + ' - ' +PerformanceIndicator.PerformanceDescription</formula>
+    </column>
+  </columns>
+</dataModel>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PersonRelationship" alias="PersonRelationship" created="2024-02-13T21:02:07" modified="2024-02-13T21:07:38" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="RefPersonRelationship" parentTableSchema="dbo" parentTableName="zlkpContactRelationship" x="397" y="20">
+      <foreignKeyColumn columnName="RefPersonRelationshipID" parentColumnName="RefPersonRelationshipID" />
+    </foreignKey>
+    <foreignKey id="RelatedPerson" parentTableSchema="dbo" parentTableName="Person" x="397" y="160">
+      <foreignKeyColumn columnName="RelatedPersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="40" y="609">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="Title" parentTableSchema="dbo" parentTableName="zlkpTitle" x="788" y="20" baseForeignKey="RelatedPerson">
+      <foreignKeyColumn columnName="TitleID" parentColumnName="TitleID" />
+    </foreignKey>
+    <foreignKey id="RefOccupation" parentTableSchema="dbo" parentTableName="zlkpOccupation" x="1062" y="20" baseForeignKey="RelatedPerson">
+      <foreignKeyColumn columnName="RefOccupationId" parentColumnName="RefOccupationId" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ContactRelationID" fieldName="ContactRelationID" label="Contact Relation ID" />
+    <column name="RefPersonRelationshipID" fieldName="RefPersonRelationshipID" label="Ref Person Relationship ID" aliasColumnName="PersonRelationship" aliasForeignKey="RefPersonRelationship" />
+    <column name="PersonRelationship" fieldName="Relationship" label="Relationship" foreignKey="RefPersonRelationship" />
+    <column name="PriorityNo" fieldName="PriorityNo" label="Priority No" />
+    <column name="Restrictions" fieldName="Restrictions" label="Restrictions" />
+    <column name="LivesWith" fieldName="LivesWith" label="Lives With" />
+    <column name="PrimaryContactInd" fieldName="IsPrimaryContact" label="Is Contact" />
+    <column name="RelatedPersonID" fieldName="RelatedPersonID" label="Related Person ID" aliasColumnName="IdentificationCode" aliasForeignKey="RelatedPerson" />
+    <column name="IdentificationCode" fieldName="RUPN" label="RUPN" foreignKey="RelatedPerson" />
+    <column name="FirstName" fieldName="GuardianFirstName" label="Guardian First Name" foreignKey="RelatedPerson" />
+    <column name="LastName" fieldName="GuardianPersonLastName" label="Guardian Last Name" foreignKey="RelatedPerson" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="IdentificationCode" aliasForeignKey="Person" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="Description" fieldName="Title" label="Title" foreignKey="Title" />
+    <column fieldName="GuardianName" type="nvarchar(91)" dataType="String" label="Guardian Name">
+      <formula>RelatedPerson.FirstName + ' ' + RelatedPerson.LastName + ' ' + '( ' + Title.Description + ' )' </formula>
+    </column>
+    <column name="Occupation" fieldName="Occupation" label="Occupation" foreignKey="RefOccupation" />
+  </columns>
+</dataModel>

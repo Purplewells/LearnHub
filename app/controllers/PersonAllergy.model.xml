@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PersonAllergy" alias="PersonAllergy" created="2024-02-07T22:48:36" modified="2024-02-15T08:11:58" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="RefAllergyType" parentTableSchema="dbo" parentTableName="zlkpAllergyType" x="352" y="20">
+      <foreignKeyColumn columnName="RefAllergyTypeId" parentColumnName="RefAllergyTypeId" />
+    </foreignKey>
+    <foreignKey id="RefAllergySeverity" parentTableSchema="dbo" parentTableName="zlkpAllergySeverity" x="352" y="181">
+      <foreignKeyColumn columnName="RefAllergySeverityId" parentColumnName="RefAllergySeverityId" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="353" y="307">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="PersonAllergyID" fieldName="PersonAllergyID" label="Person Allergy ID" />
+    <column name="RefAllergyTypeId" fieldName="RefAllergyTypeID" label="Ref Allergy Type Id" aliasColumnName="Description" aliasForeignKey="RefAllergyType" />
+    <column name="Description" fieldName="AllergyType" label="Allergy Type" foreignKey="RefAllergyType" />
+    <column name="RefAllergySeverityId" fieldName="RefAllergySeverityID" label="Ref Allergy Severity Id" aliasColumnName="Description" aliasForeignKey="RefAllergySeverity" />
+    <column name="Description" fieldName="Severity" label="Severity" foreignKey="RefAllergySeverity" />
+    <column name="ReactionDescription" fieldName="Reaction" label="Reaction" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="FirstName" aliasForeignKey="Person" />
+    <column name="FirstName" fieldName="Firstname" label="Firstname" foreignKey="Person" />
+    <column name="LastName" fieldName="Lastname" label="Lastname" foreignKey="Person" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column fieldName="HeaderTitle" type="nvarchar(109)" dataType="String" label="Header Title">
+      <formula><![CDATA[Person.FirstName + ', ' + Person.LastName + ' >> ' + '( ' + 'UPN: ' + Person.IdentificationCode + ' >> ' + Person.CurrentYearGradeLevel + ' )'  
+ ]]></formula>
+    </column>
+  </columns>
+</dataModel>

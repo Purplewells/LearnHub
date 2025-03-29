@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="MealLogs" alias="MealLogs" created="2024-01-28T23:13:43" modified="2025-02-17T00:06:10" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="meal_menu" parentTableSchema="dbo" parentTableName="zlkpMealMenu" x="355" y="20">
+      <foreignKeyColumn columnName="meal_menu_id" parentColumnName="meal_menu_id" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="meal_log_id" fieldName="MealLogID" label="Meal Log Id" />
+    <column name="personid" fieldName="Personid" label="Personid" />
+    <column name="firstname" fieldName="Firstname" label="Firstname" />
+    <column name="lastname" fieldName="Lastname" label="Lastname" />
+    <column name="identificationcode" fieldName="UPN" label="UPN" />
+    <column name="GradeLevel" fieldName="GradeLevel" label="GL" />
+    <column name="meal_date" fieldName="MealDate" label="Meal Date" />
+    <column name="attended" fieldName="Attended" label="Attended" />
+    <column name="meal_menu_id" fieldName="MealMenuID" label="Meal Menu Id" aliasColumnName="menu_name" aliasForeignKey="meal_menu" />
+    <column name="menu_name" fieldName="MealMenuName" label="Menu Name" foreignKey="meal_menu" />
+    <column name="plan_code" fieldName="PlanCode" label="Plan Code" />
+    <column name="plan_name" fieldName="PlanName" label="Plan Name" />
+    <column name="meal_price" fieldName="MealPrice" label="Meal Price" format="" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

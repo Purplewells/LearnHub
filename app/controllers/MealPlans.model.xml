@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpMealPlans" alias="zlkpMealPlans" created="2024-01-28T19:18:51" modified="2024-01-28T19:20:05" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="meal_plan_id" fieldName="MealPlanID" label="Meal Plan Id" />
+    <column name="school_id" fieldName="SchoolID" label="School Id" />
+    <column name="plan_name" fieldName="PlanName" label="Plan Name" />
+    <column name="plan_code" fieldName="PlanCode" label="Plan Code" />
+    <column name="description" fieldName="Description" label="Description" />
+    <column name="price" fieldName="Price" label="Price" format="c" />
+    <column name="NumberOfDays" fieldName="NumberOfDays" label="Number Of Days" />
+    <column name="EffectiveFrom" fieldName="EffectiveFrom" label="Effective From" format="g" />
+    <column name="EffectiveTo" fieldName="EffectiveTo" label="Effective To" format="g" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+  </columns>
+</dataModel>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="AssessmentScore" alias="AssessmentScore" created="2024-08-21T18:22:52" modified="2024-08-21T18:25:29" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="ReportingMethod" parentTableSchema="dbo" parentTableName="zlkpAssessmentReportingMethod" x="396" y="20">
+      <foreignKeyColumn columnName="ReportingMethodID" parentColumnName="RefAssessmentReportingMethodId" />
+    </foreignKey>
+    <foreignKey id="PerformanceBaseConversion" parentTableSchema="dbo" parentTableName="zlkpPerformanceBaseConversion" x="396" y="181">
+      <foreignKeyColumn columnName="PerformanceBaseConversionID" parentColumnName="PerformanceBaseConversionID" />
+    </foreignKey>
+    <foreignKey id="PerformanceBaseConversionGradeScaleType" parentTableSchema="dbo" parentTableName="zlkp_GradeScaleType" baseForeignKey="PerformanceBaseConversion" x="826" y="162">
+      <foreignKeyColumn columnName="GradeScaleTypeID" parentColumnName="GradeScaleTypeID" />
+    </foreignKey>
+    <foreignKey id="PerformanceBaseConversionAssessmentElementType" parentTableSchema="dbo" parentTableName="zlkpAssessmentElementType" baseForeignKey="PerformanceBaseConversion" x="819" y="320">
+      <foreignKeyColumn columnName="AssessmentElementTypeID" parentColumnName="AssessmentElementTypeID" />
+    </foreignKey>
+    <foreignKey id="StudentAssessment" parentTableSchema="dbo" parentTableName="StudentAssessment" x="396" y="404">
+      <foreignKeyColumn columnName="StudentAssessmentID" parentColumnName="StudentAssessmentID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="AssessmentScoreID" fieldName="AssessmentScoreID" label="Assessment Score ID" />
+    <column name="ReportingMethodID" fieldName="ReportingMethodID" label="Reporting Method ID" aliasColumnName="Description" aliasForeignKey="ReportingMethod" />
+    <column name="Description" fieldName="ReportingMethodDescription" label="Reporting Method Description" foreignKey="ReportingMethod" />
+    <column name="Score" fieldName="Score" label="Earned Score" />
+    <column name="MinimumScore" fieldName="MinimumScore" label="Minimum Score" />
+    <column name="MaximumScore" fieldName="MaximumScore" label="Maximum Score" />
+    <column name="PerformanceBaseConversionID" fieldName="PerformanceBaseConversionID" label="Performance Base Conversion ID" aliasColumnName="PerformanceBaseConversion" aliasForeignKey="PerformanceBaseConversion" />
+    <column name="PerformanceBaseConversion" fieldName="PerformanceBaseConversion" label="Performance Base Conversion" foreignKey="PerformanceBaseConversion" />
+    <column name="GradeScaleType" fieldName="GradeScaleType" label="Grade Scale Type" foreignKey="PerformanceBaseConversionGradeScaleType" />
+    <column name="AssessmentElementType" fieldName="AssessmentElementType" label="Assessment Element Type" foreignKey="PerformanceBaseConversionAssessmentElementType" />
+    <column name="StudentAssessmentID" fieldName="StudentAssessmentID" label="Student Assessment ID" aliasColumnName="EventDecription" aliasForeignKey="StudentAssessment" />
+    <column name="EventDecription" fieldName="EventDecription" label="Event Decription" foreignKey="StudentAssessment" />
+  </columns>
+</dataModel>

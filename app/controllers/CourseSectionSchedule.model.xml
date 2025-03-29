@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="CourseSectionSchedule" alias="CourseSectionSchedule" created="2024-08-08T16:40:48" modified="2025-02-16T15:41:53" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="CourseSection" parentTableSchema="dbo" parentTableName="CourseSection" x="373" y="21">
+      <foreignKeyColumn columnName="CourseSectionID" parentColumnName="CourseSectionID" />
+    </foreignKey>
+    <foreignKey id="ClassPeriod" parentTableSchema="dbo" parentTableName="ClassPeriod" x="398" y="391">
+      <foreignKeyColumn columnName="ClassPeriodID" parentColumnName="ClassPeriodID" />
+    </foreignKey>
+    <foreignKey id="Schedule" parentTableSchema="dbo" parentTableName="ClassMeetingSchedule" x="385" y="590">
+      <foreignKeyColumn columnName="ScheduleID" parentColumnName="ScheduleID" />
+    </foreignKey>
+    <foreignKey id="Room" parentTableSchema="dbo" parentTableName="Room" x="37" y="392">
+      <foreignKeyColumn columnName="RoomID" parentColumnName="RoomID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="MeetingPatternID" fieldName="MeetingPatternID" label="Meeting Pattern ID" />
+    <column name="CourseSectionID" fieldName="CourseSectionID" label="Course Section ID" aliasColumnName="SectionNo" aliasForeignKey="CourseSection" />
+    <column name="SectionNo" fieldName="CourseSectionNo" label="Section No" foreignKey="CourseSection" />
+    <column name="SectionName" fieldName="CourseSectionName" label="Course Section Name" foreignKey="CourseSection" />
+    <column name="Title" fieldName="Title" label="Title" />
+    <column name="StartDate" fieldName="StartDate" label="Start Date" format="g" />
+    <column name="EndDate" fieldName="EndDate" label="End Date" format="g" />
+    <column name="ClassPeriodID" fieldName="ClassPeriodID" label="Class Period ID" aliasColumnName="ClassPeriodName" aliasForeignKey="ClassPeriod" />
+    <column name="ClassPeriodName" fieldName="ClassPeriodName" label="Period Name" foreignKey="ClassPeriod" />
+    <column name="StartTime" fieldName="ClassPeriodStartTime" label="Start Time" foreignKey="ClassPeriod" />
+    <column name="ScheduleID" fieldName="ScheduleID" label="Schedule ID" />
+    <column name="DaysOfWeek" fieldName="ScheduleDaysOfWeek" label="DaysOfWeek" foreignKey="Schedule" />
+    <column name="Weeks" fieldName="ScheduleWeeks" label="Schedule Weeks" foreignKey="Schedule" />
+    <column name="EndTime" fieldName="ClassPeriodEndTime" label="End Time" foreignKey="ClassPeriod" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="RoomID" fieldName="RoomID" label="Room ID" aliasColumnName="RoomName" aliasForeignKey="Room" />
+    <column name="RoomName" fieldName="RoomName" label="Room Name" foreignKey="Room" />
+    <column name="Description" fieldName="Description" label="Description" />
+  </columns>
+</dataModel>

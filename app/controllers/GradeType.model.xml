@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkp_GradeType" alias="zlkp_GradeType" created="2024-01-28T21:42:58" modified="2024-01-28T21:43:13" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="GradeTypeID" fieldName="GradeTypeID" label="Grade Type ID" />
+    <column name="GradeType" fieldName="GradeType" label="Grade Type" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+  </columns>
+</dataModel>

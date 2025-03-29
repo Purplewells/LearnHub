@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="FeeCollectionSummaries" conflictDetection="overwriteChanges" label="Fee Collection Summaries" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"vw_fee_collection_summaries"."PersonID" "PersonID"
+	,"vw_fee_collection_summaries"."Fullname" "Fullname"
+	,"vw_fee_collection_summaries"."LastName" "LastName"
+	,"vw_fee_collection_summaries"."FirstName" "FirstName"
+	,"vw_fee_collection_summaries"."UPN" "UPN"
+	,"vw_fee_collection_summaries"."Discount" "Discount"
+	,"vw_fee_collection_summaries"."PaidAmount" "AmountPaid"
+	,"vw_fee_collection_summaries"."TotalBilledAmount" "TotalBilledAmount"
+	,"vw_fee_collection_summaries"."TotalPaid" "TotalPaid"
+	,"vw_fee_collection_summaries"."Balance" "Balance"
+	,"vw_fee_collection_summaries"."Status" "Status"
+	,"vw_fee_collection_summaries"."GL" "GL"
+	,"vw_fee_collection_summaries"."CSY" "CSY"
+	,"vw_fee_collection_summaries"."Currency" "Currency"
+from "dbo"."vw_fee_collection_summaries" "vw_fee_collection_summaries"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonID" type="Int32" allowNulls="false" label="Person ID" showInSummary="true" />
+    <field name="Fullname" type="String" label="Fullname" readOnly="true" length="71" showInSummary="true" />
+    <field name="LastName" type="String" label="Last Name" length="35" showInSummary="true" />
+    <field name="FirstName" type="String" label="First Name" length="35" showInSummary="true" />
+    <field name="UPN" type="String" label="UPN" length="10" showInSummary="true" />
+    <field name="Discount" type="Decimal" dataFormatString="c" label="Discount" readOnly="true" />
+    <field name="AmountPaid" type="Decimal" dataFormatString="c" label="Amount Paid" />
+    <field name="TotalBilledAmount" type="Decimal" dataFormatString="c" label="Total Billed Amount" />
+    <field name="TotalPaid" type="Decimal" dataFormatString="c" label="Total Paid" />
+    <field name="Balance" type="Decimal" dataFormatString="c" label="Balance" readOnly="true" />
+    <field name="Status" type="String" allowNulls="false" label="Status" readOnly="true" length="11" />
+    <field name="GL" type="String" label="GL" length="10" />
+    <field name="CSY" type="String" label="CSY" length="10" />
+    <field name="Currency" type="String" label="CURR" length="5" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Fee Collection Summaries">
+      <headerText>This screen shows balances for students who have made at least one payment. It shows Billed Amount , Discount, Amount Paid and Total Balance.</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="Fullname" columns="30" hidden="true" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="GL" columns="5" />
+        <dataField fieldName="TotalBilledAmount" columns="15" aggregate="Sum" />
+        <dataField fieldName="Discount" columns="15" aggregate="Sum" />
+        <dataField fieldName="AmountPaid" columns="15" aggregate="Sum" />
+        <dataField fieldName="TotalPaid" columns="15" aggregate="Sum" />
+        <dataField fieldName="Balance" columns="15" aggregate="Sum" />
+        <dataField fieldName="Currency" columns="5" />
+        <dataField fieldName="Status" columns="11" />
+        <dataField fieldName="CSY" columns="5" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Fee Collection Summaries">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Fee Collection Summaries" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="Fullname" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="Discount" columns="15" />
+            <dataField fieldName="AmountPaid" columns="15" />
+            <dataField fieldName="TotalBilledAmount" columns="15" />
+            <dataField fieldName="TotalPaid" columns="15" />
+            <dataField fieldName="Balance" columns="15" />
+            <dataField fieldName="Status" columns="11" />
+            <dataField fieldName="GL" columns="10" />
+            <dataField fieldName="CSY" columns="10" />
+            <dataField fieldName="Currency" columns="5" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Fee Collection Summaries">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="Fullname" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="Discount" columns="15" />
+            <dataField fieldName="AmountPaid" columns="15" />
+            <dataField fieldName="TotalBilledAmount" columns="15" />
+            <dataField fieldName="TotalPaid" columns="15" />
+            <dataField fieldName="Balance" columns="15" />
+            <dataField fieldName="Status" columns="11" />
+            <dataField fieldName="GL" columns="10" />
+            <dataField fieldName="CSY" columns="10" />
+            <dataField fieldName="Currency" columns="5" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a100" commandName="ReportAsPdf" headerText="Print Fee Balances" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a2" />
+      <action id="a102" commandName="ReportAsWord" />
+      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="vw_fee_col_ac_ledger_mini_combined_extended" alias="vw_fee_col_ac_ledger_mini_combined_extended" created="2024-01-31T11:38:20" modified="2024-01-31T13:25:42" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="Fullname" fieldName="Fullname" label="Fullname" />
+    <column name="UPN" fieldName="UPN" label="UPN" />
+    <column name="YearGroup" fieldName="YearGroup" label="GL" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="FeeType" fieldName="FeeType" label="Fee Type" />
+    <column name="EventDate" fieldName="EventDate" label="Event Date" />
+    <column name="Debit" fieldName="Debit" label="Debit" format="c" />
+    <column name="Credit" fieldName="Credit" label="Credit" format="c" />
+    <column name="AmountPaidPerFeeType" fieldName="AmountPaidPerFeeType" label="Each Credit" format="c" />
+    <column name="txBalances" fieldName="EachBalances" label="Each Balance" format="c" />
+    <column name="totAmountBilled" fieldName="TotAmountBilled" label="Total Amount Billed" format="c" />
+    <column name="TotalAmountPaid" fieldName="TotalAmountPaid" label="Total Amount Paid" format="c" />
+    <column name="LocalBalance" fieldName="LocalBalance" label="Local Balance" format="c" />
+    <column name="SessionCode" fieldName="SessionCode" label="Session" />
+    <column name="CalendarYear" fieldName="CalendarYear" label="Calendar Year" />
+    <column name="BillYear" fieldName="BillYear" label="Bill Year" />
+    <column name="SchoolName" fieldName="SchoolName" label="School" />
+    <column name="Address" fieldName="Address" label="Address" />
+    <column name="CSY" fieldName="CSY" label="CSY" />
+    <column name="OPS" fieldName="OPS" label="OPS" />
+    <column name="Currency" fieldName="Currency" label="CURR" />
+    <column name="BilledYear" fieldName="BilledYear" label="Billed Year" />
+    <column name="DebtBalance" fieldName="DebtBalance" label="Debt Balance" format="c" />
+    <column name="ThisYearArrears" fieldName="ThisYearArrears" label="This Year Arrears" format="c" />
+    <column name="LastYearArrears" fieldName="LastYearArrears" label="Last Year Arrears" format="c" />
+    <column name="HasArrears" fieldName="HasArrears" label="Has Arrears" />
+    <column name="Attribute1" fieldName="Attribute1" label="Attribute1" />
+    <column name="Attribute2" fieldName="Attribute2" label="Attribute2" />
+    <column name="ShowOnreport" fieldName="ShowOnReport" label="Show On Report" />
+    <column fieldName="GroupingID" type="nvarchar(10)" dataType="String" label="Grouping ID">
+      <formula>vw_fee_col_ac_ledger_mini_combined_extended.UPN</formula>
+    </column>
+  </columns>
+</dataModel>

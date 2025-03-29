@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="DisabilitiesConcerns" conflictDetection="overwriteChanges" label="Disabilities Concerns" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"pbi_vw_metric_student_profile_disabilities_concerns"."PersonID" "PersonID"
+	,"pbi_vw_metric_student_profile_disabilities_concerns"."LastName" "LastName"
+	,"pbi_vw_metric_student_profile_disabilities_concerns"."FirstName" "FirstName"
+	,"pbi_vw_metric_student_profile_disabilities_concerns"."Sex" "Sex"
+	,"pbi_vw_metric_student_profile_disabilities_concerns"."DisabilityType" "DisabilityType"
+	,"pbi_vw_metric_student_profile_disabilities_concerns"."ConditionType" "ConditionType"
+	,"pbi_vw_metric_student_profile_disabilities_concerns"."SourceType" "SourceType"
+	,"pbi_vw_metric_student_profile_disabilities_concerns"."Status" "Status"
+	,"pbi_vw_metric_student_profile_disabilities_concerns"."AccommodationsNeeded" "AccommodationsNeeded"
+	,"pbi_vw_metric_student_profile_disabilities_concerns"."ConditionStatus" "ConditionStatus"
+	,"pbi_vw_metric_student_profile_disabilities_concerns"."RoleName" "RoleName"
+from "dwh"."pbi_vw_metric_student_profile_disabilities_concerns" "pbi_vw_metric_student_profile_disabilities_concerns"
+]]></text>
+    </command>
+    <command id="PersonIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="PersonID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonID" type="Int32" allowNulls="false" label="Person ID" readOnly="true" showInSummary="true" />
+    <field name="LastName" type="String" label="Lastname" length="35" showInSummary="true" />
+    <field name="FirstName" type="String" label="Firstname" length="35" showInSummary="true" />
+    <field name="Sex" type="String" label="Sex" length="100" showInSummary="true" />
+    <field name="DisabilityType" type="String" label="Disability Type" length="100" showInSummary="true" />
+    <field name="ConditionType" type="String" label="Condition Type" length="100" />
+    <field name="SourceType" type="String" label="Source Type" length="100" />
+    <field name="Status" type="String" allowNulls="false" label="Status" readOnly="true" length="8" />
+    <field name="AccommodationsNeeded" type="String" label="Accommodations Needed" length="100" />
+    <field name="ConditionStatus" type="String" label="Condition Status" length="100" />
+    <field name="RoleName" type="String" label="Role" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Disabilities Concerns">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="Sex" columns="10" tag="pivot1-row1-pie&#xD;&#xA;pivot1-title:&quot;What is total number of disabilities concerns by gender&quot;" />
+        <dataField fieldName="DisabilityType" tag="pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;What is total number of disabilities concerns by disability type&quot;" />
+        <dataField fieldName="ConditionType" tag="pivot3-col1" />
+        <dataField fieldName="SourceType" tag="pivot3-row1-column&#xD;&#xA;pivot3-title:&quot;What is total number of disabilities concerns by source&quot;" />
+        <dataField fieldName="Status" columns="8" />
+        <dataField fieldName="AccommodationsNeeded" />
+        <dataField fieldName="ConditionStatus" />
+        <dataField fieldName="RoleName" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Disabilities Concerns">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Disabilities Concerns" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="Sex" />
+            <dataField fieldName="DisabilityType" />
+            <dataField fieldName="ConditionType" />
+            <dataField fieldName="SourceType" />
+            <dataField fieldName="Status" columns="8" />
+            <dataField fieldName="AccommodationsNeeded" />
+            <dataField fieldName="ConditionStatus" />
+            <dataField fieldName="RoleName" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Disabilities Concerns">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="Sex" />
+            <dataField fieldName="DisabilityType" />
+            <dataField fieldName="ConditionType" />
+            <dataField fieldName="SourceType" />
+            <dataField fieldName="Status" columns="8" />
+            <dataField fieldName="AccommodationsNeeded" />
+            <dataField fieldName="ConditionStatus" />
+            <dataField fieldName="RoleName" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

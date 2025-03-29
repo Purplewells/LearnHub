@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpAssessmentElementType" alias="zlkpAssessmentElementType" created="2024-01-28T01:07:41" modified="2024-01-28T01:07:49" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="AssessmentElementTypeID" fieldName="AssessmentElementTypeID" label="Assessment Element Type ID" />
+    <column name="AssessmentElementType" fieldName="AssessmentElementType" label="Assessment Element Type" />
+  </columns>
+</dataModel>

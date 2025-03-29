@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dwh" baseTable="pbi_vw_metric_discipline_incidents_per_academic_year" alias="pbi_vw_metric_discipline_incidents_per_academic_year" created="2024-02-29T21:39:24" modified="2024-02-29T21:41:16" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="StudentName" fieldName="StudentName" label="Student Name" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="IncidentDate" fieldName="IncidentDate" label="Incident Date" />
+    <column name="TimeOfDay" fieldName="TimeOfDay" label="Time Of Day" />
+    <column name="IncidentMonth" fieldName="IncidentMonth" label="Incident Month" />
+    <column name="MonthNo" fieldName="MonthNo" label="Month No" />
+    <column name="Alignment" fieldName="Alignment" label="Alignment" />
+    <column name="CategoryType" fieldName="CategoryType" label="Category Type" />
+    <column name="NatureOfBehaviour" fieldName="NatureOfBehaviour" label="Nature Of Behaviour" />
+    <column name="Points" fieldName="Points" label="Points" />
+    <column name="TimeDesc" fieldName="TimeDesc" label="Time Desc" />
+    <column name="Location" fieldName="Location" label="Location" />
+    <column name="Incident" fieldName="Incident" label="Incident" />
+    <column name="ReporterType" fieldName="ReporterType" label="Reporter Type" />
+    <column name="RVD" fieldName="Rvd" label="Rvd" />
+    <column name="Disability" fieldName="Disability" label="Disability" />
+    <column name="ActionTaken" fieldName="ActionTaken" label="Action Taken" />
+    <column name="ParticipationDescription" fieldName="ParticipationDescription" label="Participation" />
+  </columns>
+</dataModel>

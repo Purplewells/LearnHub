@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpTeachingAssignmentRole" alias="zlkpTeachingAssignmentRole" created="2024-02-22T14:56:46" modified="2024-02-22T14:56:53" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="RefTeachingAssignmentRoleId" fieldName="RefTeachingAssignmentRoleID" label="Ref Teaching Assignment Role Id" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

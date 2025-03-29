@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="vw_ops_update_get_salary_information_for_bank" alias="vw_ops_update_get_salary_information_for_bank" created="2024-03-25T19:03:24" modified="2024-12-30T11:21:28" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="EmployeeID" fieldName="EmployeeID" label="Employee ID" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" />
+    <column name="LastName" fieldName="LastName" label="Last Name" />
+    <column name="UPN" fieldName="UPN" label="UPN" />
+    <column name="PaymentDate" fieldName="PaymentDate" label="Payment Date" />
+    <column name="GrossEarnings" fieldName="GrossEarnings" label="Gross Earning" format="" />
+    <column name="TotalDeductions" fieldName="TotalDeductions" label="Total Deductions" format="" />
+    <column name="TaxAmount" fieldName="TaxAmount" label="Tax Amount" format="" />
+    <column name="NetSalary" fieldName="NetSalary" label="Net Salary" format="" />
+    <column name="SalaryID" fieldName="SalaryID" label="Salary ID" format="" />
+    <column name="SalaryName" fieldName="SalaryName" label="Salary Name" />
+    <column name="AmountValue" fieldName="AmountValue" label="Amount Value" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="ElementName" fieldName="ElementName" label="Element Name" />
+    <column name="ComponentType" fieldName="ComponentType" label="Component Type" />
+    <column name="IsApproved" fieldName="IsApproved" label="Is Approved" />
+    <column name="IsCurrent" fieldName="IsCurrent" label="IsCurrent" />
+    <column name="Name" fieldName="SchoolName" label="School" />
+    <column name="Address" fieldName="Address" label="Address" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+    <column name="AccountNo" fieldName="AccountNo" label="Account No" />
+    <column name="SocialSecurityNumber" fieldName="SSNo" label="SSNo" />
+    <column name="BankName" fieldName="BankName" label="Bank Name" />
+    <column name="CurrencyName" fieldName="Curr" label="Curr" />
+    <column name="Occupation" fieldName="Occupation" label="Occupation" />
+  </columns>
+</dataModel>

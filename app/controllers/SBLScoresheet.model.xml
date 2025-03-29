@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StudentLearningObjective" alias="StudentLearningObjective" created="2024-03-04T11:20:24" modified="2024-03-04T12:16:48" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="PerformanceBaseConversion" parentTableSchema="dbo" parentTableName="zlkpPerformanceBaseConversion" x="413" y="20">
+      <foreignKeyColumn columnName="PerformanceBaseConversionID" parentColumnName="PerformanceBaseConversionID" />
+    </foreignKey>
+    <foreignKey id="GradingPeriod" parentTableSchema="dbo" parentTableName="GradingPeriod" x="418" y="194">
+      <foreignKeyColumn columnName="GradingPeriodID" parentColumnName="GradingPeriodID" />
+    </foreignKey>
+    <foreignKey id="StudentCourseSection" parentTableSchema="dbo" parentTableName="StudentSectionAssociation" x="826" y="111">
+      <foreignKeyColumn columnName="StudentCourseSectionID" parentColumnName="StudentCourseSectionID" />
+    </foreignKey>
+    <foreignKey id="GradeType" parentTableSchema="dbo" parentTableName="zlkp_GradeType" x="421" y="361">
+      <foreignKeyColumn columnName="GradeTypeID" parentColumnName="GradeTypeID" />
+    </foreignKey>
+    <foreignKey id="LearningObjective" parentTableSchema="dbo" parentTableName="LearningObjective" x="422" y="485">
+      <foreignKeyColumn columnName="LearningObjectiveID" parentColumnName="LearningObjectiveID" />
+    </foreignKey>
+    <foreignKey id="StudentEnrollment" parentTableSchema="dbo" parentTableName="StudentSchoolAssociation" x="1234" y="119" baseForeignKey="StudentCourseSection">
+      <foreignKeyColumn columnName="StudentEnrollmentID" parentColumnName="StudentEnrollmentID" />
+    </foreignKey>
+    <foreignKey id="OrganizationPersonRole" parentTableSchema="dbo" parentTableName="OrganizationPersonRole" x="1250" y="544" baseForeignKey="StudentEnrollment">
+      <foreignKeyColumn columnName="OrganizationPersonRoleID" parentColumnName="OrganizationPersonRoleID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="1264" y="720" baseForeignKey="OrganizationPersonRole">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="RefSchoolStream" parentTableSchema="dbo" parentTableName="zlkpSchoolStream" x="1593" y="113" baseForeignKey="StudentEnrollment">
+      <foreignKeyColumn columnName="RefSchoolStreamID" parentColumnName="RefSchoolStreamID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="StudentLearningObjectiveID" fieldName="StudentLearningObjectiveID" label="Student Learning Objective ID" />
+    <column name="PerformanceBaseConversionID" fieldName="PerformanceBaseConversionID" label="Performance Base Conversion ID" aliasColumnName="GradeName" aliasForeignKey="PerformanceBaseConversion" />
+    <column name="GradeName" fieldName="PerformanceBaseConversionGradeName" label="Performance Base Conversion Grade Name" foreignKey="PerformanceBaseConversion" />
+    <column name="Description" fieldName="PerformanceBaseConversionDescription" label="GRM" foreignKey="PerformanceBaseConversion" />
+    <column name="GradingPeriodID" fieldName="GradingPeriodID" label="Grading Period ID" aliasColumnName="GradingPeriod" aliasForeignKey="GradingPeriod" />
+    <column name="GradingPeriod" fieldName="GradingPeriod" label="GP" foreignKey="GradingPeriod" />
+    <column name="StudentCourseSectionID" fieldName="StudentCourseSectionID" label="Student Course Section ID" aliasColumnName="CreatedBy" aliasForeignKey="StudentCourseSection" />
+    <column name="CreatedBy" fieldName="StudentCourseSectionCreatedBy" label="Student Course Section Created By" foreignKey="StudentCourseSection" />
+    <column name="GradeTypeID" fieldName="GradeTypeID" label="Grade Type ID" aliasColumnName="GradeType" aliasForeignKey="GradeType" />
+    <column name="GradeType" fieldName="GradeType" label="ASTY" foreignKey="GradeType" />
+    <column name="EarnedScore" fieldName="EarnedScore" label="Score" />
+    <column name="LetterGrade" fieldName="LetterGrade" label="LG" />
+    <column name="DateFulfilled" fieldName="AssessedDate" label="Assessed Date" />
+    <column name="Weight" fieldName="Weight" label="% Wt" />
+    <column name="LearningObjectiveID" fieldName="LearningObjectiveID" label="Learning Objective ID" aliasColumnName="ItemCode" aliasForeignKey="LearningObjective" />
+    <column name="ItemCode" fieldName="LearningObjectiveItemCode" label="Learning Objective Item Code" foreignKey="LearningObjective" />
+    <column name="MaxScore" fieldName="MaxScore" label="Max Score" foreignKey="LearningObjective" />
+    <column name="ExtMaxScore" fieldName="ExtMaxScore" label="MPP" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="UserID" fieldName="UserID" label="User ID" />
+    <column name="IsActive" fieldName="IsActive" label="IsActive" />
+    <column name="extStatement" fieldName="ExtStatement" label="ext Statement" />
+    <column name="IdentificationCode" fieldName="IdentificationCode" label="Identification Code" />
+    <column name="extIsACtiveSession" fieldName="ExtIsActiveSession" label="Active Session" />
+    <column name="extIsCSY" fieldName="ExtIsCsy" label="ext Is CSY" />
+    <column name="extIsPassing" fieldName="ExtIsPassing" label="PSN" />
+    <column name="extPWS" fieldName="ExtPWS" label="PWS" />
+    <column name="extPBSG" fieldName="ExtPBSG" label="PBSG" />
+    <column name="extOWS" fieldName="ExtOWS" label="OWS" />
+    <column name="extContentStandardNo" fieldName="ExtContentStandardNo" label="ext Content Standard No" />
+    <column name="SuccessCriteria" fieldName="SuccessCriteria" label="Success Criteria" />
+    <column name="IsActiveGradingPeriod" fieldName="IsActiveGradingPeriod" label="Is Active Grading Period" />
+    <column name="extItemCode" fieldName="ExtItemCode" label="Item Code" />
+    <column name="extStrandCode" fieldName="ExtStrandCode" label="ext Strand Code" />
+    <column name="extStrandDesc" fieldName="ExtStrandDesc" label="ext Strand Desc" />
+    <column name="extStandard" fieldName="ExtStandard" label="ext Standard" />
+    <column name="extCourseTitle" fieldName="ExtCourseTitle" label="Course" />
+    <column name="extSectionName" fieldName="ExtSectionName" label="Section" />
+    <column name="extPerformanceDescription" fieldName="ExtPerformanceDescription" label="ext Performance Description" />
+    <column name="extContentDescription" fieldName="ExtContentDescription" label="ext Content Description" />
+    <column name="FirstName" fieldName="FirstName" label="Firstname" foreignKey="Person" />
+    <column name="LastName" fieldName="LastName" label="Lastname" foreignKey="Person" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="Description" fieldName="STM" label="STM" foreignKey="RefSchoolStream" />
+  </columns>
+</dataModel>

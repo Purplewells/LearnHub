@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Calendar" conflictDetection="overwriteChanges" label="Calendar" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Calendar"."OrganizationCalendarId" "OrganizationCalendarID"
+	,"Calendar"."CalendarCode" "CalendarCode"
+	,"Calendar"."CalendarDescription" "Description"
+	,"Calendar"."CalendarYear" "Year"
+	,"Calendar"."SchoolYearStartDate" "YearStartDate"
+	,"Calendar"."SchoolYearEndDate" "YearEndDate"
+	,"Calendar"."CurrentSchoolYear" "CSY"
+	,"Calendar"."SchoolID" "SchoolID"
+	,"School"."SchoolName" "School"
+	,"Calendar"."AcademicYearLength" "AcademicYearLength"
+	,"Calendar"."Sequence" "Sequence"
+	,"Calendar"."CreatedDate" "CreatedDate"
+	,"Calendar"."ModifiedDate" "ModifiedDate"
+	,"Calendar"."CreatedBy" "CreatedBy"
+	,"Calendar"."ModifiedBy" "ModifiedBy"
+from "dbo"."Calendar" "Calendar"
+	left join "dbo"."School" "School" on "Calendar"."SchoolID" = "School"."OrganizationID"
+]]></text>
+    </command>
+    <command id="OrganizationCalendarIdIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="OrganizationCalendarID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="OrganizationCalendarID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Organization Calendar Id" readOnly="true" />
+    <field name="CalendarCode" type="String" label="Code" length="30" showInSummary="true" />
+    <field name="Description" type="String" label="Description" length="60" showInSummary="true" />
+    <field name="Year" type="Int32" label="Year" showInSummary="true" />
+    <field name="YearStartDate" type="DateTime" label="Year Start Date" showInSummary="true" />
+    <field name="YearEndDate" type="DateTime" label="Year End Date" showInSummary="true" />
+    <field name="CSY" type="Boolean" label="CSY" />
+    <field name="SchoolID" type="Int32" label="School ID">
+      <items style="Lookup" dataController="School" newDataView="createForm1" dataValueField="OrganizationID" dataTextField="SchoolName" />
+    </field>
+    <field name="School" type="String" readOnly="true" label="School" length="50" />
+    <field name="AcademicYearLength" type="Int32" label="No. of Days" />
+    <field name="Sequence" type="Int32" label="SEQ" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="Session" type="DataView" label="Session">
+      <dataView controller="Session" view="grid1" filterFields="Column not found in the model: OrganizationCalendarID" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Active Calendar" filter="CSY = 1">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="CalendarCode" columns="20" />
+        <dataField fieldName="Description" columns="20" />
+        <dataField fieldName="Year" columns="10" />
+        <dataField fieldName="YearStartDate" columns="20" />
+        <dataField fieldName="YearEndDate" columns="20" />
+        <dataField fieldName="CSY" />
+        <dataField fieldName="SchoolID" aliasFieldName="School" hidden="true" />
+        <dataField fieldName="AcademicYearLength" columns="15" />
+        <dataField fieldName="Sequence" columns="15" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_all_calendars" type="Grid" commandId="command1" label="All Calendars">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="CalendarCode" columns="20" />
+        <dataField fieldName="Description" columns="20" />
+        <dataField fieldName="Year" columns="10" />
+        <dataField fieldName="YearStartDate" columns="20" />
+        <dataField fieldName="YearEndDate" columns="20" />
+        <dataField fieldName="CSY" />
+        <dataField fieldName="SchoolID" aliasFieldName="School" hidden="true" />
+        <dataField fieldName="AcademicYearLength" columns="15" />
+        <dataField fieldName="Sequence" columns="15" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Calendar">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="Description" />
+            <dataField fieldName="CalendarCode" columns="30" />
+            <dataField fieldName="Year" columns="15" />
+            <dataField fieldName="YearStartDate" columns="10" />
+            <dataField fieldName="YearEndDate" columns="10" />
+            <dataField fieldName="CSY" />
+            <dataField fieldName="SchoolID" aliasFieldName="School" />
+            <dataField fieldName="AcademicYearLength" columns="15" />
+            <dataField fieldName="Sequence" columns="15" />
+          </dataFields>
+        </category>
+        <category id="d1" tab="SESSION" flow="NewRow">
+          <dataFields>
+            <dataField fieldName="Session" tag="modal-fullscreen&#xD;&#xA;modal-fit-content" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Audit Trail" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Calendar">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="CalendarCode" columns="30" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="Year" columns="15" />
+            <dataField fieldName="YearStartDate" columns="10" />
+            <dataField fieldName="YearEndDate" columns="10" />
+            <dataField fieldName="CSY" />
+            <dataField fieldName="SchoolID" aliasFieldName="School" />
+            <dataField fieldName="AcademicYearLength" columns="15" hidden="true" />
+            <dataField fieldName="Sequence" columns="15" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+          </dataFields>
+        </category>
+        <category id="d1">
+          <dataFields>
+            <dataField fieldName="Session" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New Calendar" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert|Update|New" type="Sql" phase="After" name="calculateAcademicYearLength"><![CDATA[EXEC [dbo].[usp_academic_year_calculate_total_instruction_days]]]></rule>
+  </businessRules>
+</dataController>

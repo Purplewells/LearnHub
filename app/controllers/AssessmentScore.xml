@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="AssessmentScore" conflictDetection="overwriteChanges" label="Assessment Score" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"AssessmentScore"."AssessmentScoreID" "AssessmentScoreID"
+	,"AssessmentScore"."ReportingMethodID" "ReportingMethodID"
+	,"ReportingMethod"."Description" "ReportingMethodDescription"
+	,"AssessmentScore"."Score" "Score"
+	,"AssessmentScore"."MinimumScore" "MinimumScore"
+	,"AssessmentScore"."MaximumScore" "MaximumScore"
+	,"AssessmentScore"."PerformanceBaseConversionID" "PerformanceBaseConversionID"
+	,"PerformanceBaseConversion"."PerformanceBaseConversion" "PerformanceBaseConversion"
+	,"PerformanceBaseConversionGradeScaleType"."GradeScaleType" "GradeScaleType"
+	,"PerformanceBaseConversionAssessmentElementType"."AssessmentElementType" "AssessmentElementType"
+	,"AssessmentScore"."StudentAssessmentID" "StudentAssessmentID"
+	,"StudentAssessment"."EventDecription" "EventDecription"
+from "dbo"."AssessmentScore" "AssessmentScore"
+	left join "dbo"."zlkpAssessmentReportingMethod" "ReportingMethod" on "AssessmentScore"."ReportingMethodID" = "ReportingMethod"."RefAssessmentReportingMethodId"
+	left join "dbo"."zlkpPerformanceBaseConversion" "PerformanceBaseConversion" on "AssessmentScore"."PerformanceBaseConversionID" = "PerformanceBaseConversion"."PerformanceBaseConversionID"
+	left join "dbo"."zlkp_GradeScaleType" "PerformanceBaseConversionGradeScaleType" on "PerformanceBaseConversion"."GradeScaleTypeID" = "PerformanceBaseConversionGradeScaleType"."GradeScaleTypeID"
+	left join "dbo"."zlkpAssessmentElementType" "PerformanceBaseConversionAssessmentElementType" on "PerformanceBaseConversion"."AssessmentElementTypeID" = "PerformanceBaseConversionAssessmentElementType"."AssessmentElementTypeID"
+	left join "dbo"."StudentAssessment" "StudentAssessment" on "AssessmentScore"."StudentAssessmentID" = "StudentAssessment"."StudentAssessmentID"
+]]></text>
+    </command>
+    <command id="AssessmentScoreIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="AssessmentScoreID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="AssessmentScoreID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Assessment Score ID" readOnly="true" />
+    <field name="ReportingMethodID" type="Int32" label="Reporting Method ID" showInSummary="true" />
+    <field name="ReportingMethodDescription" type="String" readOnly="true" label="Reporting Method Description" length="100" />
+    <field name="Score" type="String" label="Earned Score" length="15" showInSummary="true" />
+    <field name="MinimumScore" type="Decimal" label="Minimum Score" showInSummary="true" />
+    <field name="MaximumScore" type="Decimal" label="Maximum Score" showInSummary="true" />
+    <field name="PerformanceBaseConversionID" type="Int32" label="Performance Base Conversion ID" showInSummary="true">
+      <items style="Lookup" dataController="PerformanceBaseConversion" newDataView="createForm1" dataValueField="PerformanceBaseConversionID" dataTextField="PerformanceBaseConversion" copy="GradeScaleType=GradeScaleTypeGradeScaleType, AssessmentElementType=AssessmentElementType" />
+    </field>
+    <field name="PerformanceBaseConversion" type="String" readOnly="true" label="Performance Base Conversion" length="30" />
+    <field name="GradeScaleType" type="String" readOnly="true" label="Grade Scale Type" length="25" />
+    <field name="AssessmentElementType" type="String" readOnly="true" label="Assessment Element Type" length="20" />
+    <field name="StudentAssessmentID" type="Int32" label="Student Assessment ID">
+      <items style="Lookup" dataController="StudentAssessment" newDataView="createForm1" dataValueField="StudentAssessmentID" dataTextField="EventDecription" />
+    </field>
+    <field name="EventDecription" type="String" readOnly="true" label="Event Decription" length="40" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Assessment Score">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ReportingMethodID" aliasFieldName="ReportingMethodDescription" />
+        <dataField fieldName="Score" columns="15" />
+        <dataField fieldName="MinimumScore" columns="15" />
+        <dataField fieldName="MaximumScore" columns="15" />
+        <dataField fieldName="PerformanceBaseConversionID" aliasFieldName="PerformanceBaseConversion" />
+        <dataField fieldName="GradeScaleType" columns="25" />
+        <dataField fieldName="AssessmentElementType" columns="20" />
+        <dataField fieldName="StudentAssessmentID" aliasFieldName="EventDecription" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Assessment Score">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Assessment Score" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ReportingMethodID" aliasFieldName="ReportingMethodDescription" />
+            <dataField fieldName="Score" columns="15" />
+            <dataField fieldName="MinimumScore" columns="15" />
+            <dataField fieldName="MaximumScore" columns="15" />
+            <dataField fieldName="PerformanceBaseConversionID" aliasFieldName="PerformanceBaseConversion" />
+            <dataField fieldName="GradeScaleType" columns="25" />
+            <dataField fieldName="AssessmentElementType" columns="20" />
+            <dataField fieldName="StudentAssessmentID" aliasFieldName="EventDecription" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Assessment Score">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ReportingMethodID" aliasFieldName="ReportingMethodDescription" />
+            <dataField fieldName="Score" columns="15" />
+            <dataField fieldName="MinimumScore" columns="15" />
+            <dataField fieldName="MaximumScore" columns="15" />
+            <dataField fieldName="PerformanceBaseConversionID" aliasFieldName="PerformanceBaseConversion" />
+            <dataField fieldName="GradeScaleType" columns="25" />
+            <dataField fieldName="AssessmentElementType" columns="20" />
+            <dataField fieldName="StudentAssessmentID" aliasFieldName="EventDecription" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

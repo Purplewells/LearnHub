@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dwh" baseTable="pbi_vw_metric_discipline_behaviour_management" alias="pbi_vw_metric_discipline_behaviour_management" created="2024-02-29T21:41:27" modified="2024-02-29T21:42:57" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="StudentID" fieldName="StudentID" label="Student ID" />
+    <column name="Participant" fieldName="Participant" label="Participant" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" />
+    <column name="GradeLevel" fieldName="GradeLevel" label="GL" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+    <column name="IncidentType" fieldName="IncidentType" label="Incident Type" />
+    <column name="Alignment" fieldName="Alignment" label="Alignment" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="Title" fieldName="Title" label="Title" />
+    <column name="IncidentDate" fieldName="IncidentDate" label="Incident Date" />
+    <column name="TimeCode" fieldName="TimeCode" label="Time Code" />
+    <column name="IncidentStatus" fieldName="IncidentStatus" label="Incident Status" />
+    <column name="CategoryType" fieldName="CategoryType" label="Category Type" />
+    <column name="Location" fieldName="Location" label="Location" />
+    <column name="ActionTaken" fieldName="ActionTaken" label="Action Taken" />
+    <column name="ActivityType" fieldName="ActivityType" label="Activity Type" />
+    <column name="Instructor" fieldName="Instructor" label="Instructor" />
+    <column name="Points" fieldName="Points" label="Points" />
+    <column name="NatureOfBehaviour" fieldName="NatureOfBehaviour" label="Nature Of Behaviour" />
+    <column name="Gender" fieldName="Gender" label="Gender" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="RVD" fieldName="Rvd" label="Rvd" />
+    <column name="Disability" fieldName="Disability" label="Disability" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+  </columns>
+</dataModel>

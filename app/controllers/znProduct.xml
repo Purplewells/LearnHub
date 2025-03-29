@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="znProduct" label="znProduct" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Product"."ProductID" "ProductID"
+	,"Product"."SKUCode" "Skucode"
+	,"Product"."ProductName" "ProductName"
+	,"Product"."Description" "Description"
+	,"Product"."IsActive" "IsActive"
+	,"Product"."CostPrice" "CostPrice"
+	,"Product"."SellingPrice" "SellingPrice"
+	,"Product"."Colour" "Colour"
+	,"Product"."CategoryID" "CategoryID"
+	,"Category"."CategoryName" "CategoryName"
+	,"Product"."ReOrderLevel" "ReOrderLevel"
+	,"Product"."ReOrderQty" "ReOrderQty"
+	,"Product"."Barcode" "Barcode"
+	,"Product"."QtyPerUnit" "QtyPerUnit"
+	,"Product"."UnitPrice" "UnitPrice"
+	,"Product"."Quantity" "Quantity"
+	,"Product"."UnitsOnHold" "UnitsOnHold"
+	,"Product"."UnitsOnOrder" "UnitsOnOrder"
+	,"Product"."Sellable" "Sellable"
+	,"Product"."SupplierID" "SupplierID"
+	,"Supplier"."SupplierName" "SupplierName"
+	,"Supplier"."ContactName" "SupplierContactName"
+	,"Supplier"."ContactPhone" "SupplierContactPhone"
+	,"Supplier"."Address" "SupplierAddress"
+	,"Supplier"."City" "SupplierCity"
+	,"Supplier"."Country" "SupplierCountry"
+	,"Product"."CreatedDate" "CreatedDate"
+	,"Product"."ModifiedDate" "ModifiedDate"
+	,"Product"."ProductImage" "ProductImage"
+	,"Product"."FileName" "FileName"
+	,"Product"."FileLength" "FileLength"
+	,"Product"."ContentType" "ContentType"
+from "dbo"."Product" "Product"
+	left join "dbo"."zlkpProductCategory" "Category" on "Product"."CategoryID" = "Category"."ProductCategoryID"
+	left join "dbo"."Suppliers" "Supplier" on "Product"."SupplierID" = "Supplier"."SupplierID"
+]]></text>
+    </command>
+    <command id="ProductIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ProductID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="ProductID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Product ID" readOnly="true" />
+    <field name="Skucode" type="String" label="SKU" length="10" showInSummary="true" />
+    <field name="ProductName" type="String" label="Product Name" length="100" showInSummary="true" />
+    <field name="Description" type="String" label="Description" length="50" showInSummary="true" />
+    <field name="IsActive" type="Boolean" label="IsActive" showInSummary="true" />
+    <field name="CostPrice" type="Decimal" dataFormatString="c" default="((0))" label="Cost Price" showInSummary="true" />
+    <field name="SellingPrice" type="Decimal" dataFormatString="c" default="((0))" label="Selling Price" />
+    <field name="Colour" type="String" label="Colour" length="15" />
+    <field name="CategoryID" type="Int32" label="Category ID">
+      <items style="Lookup" dataController="ProductCategory" newDataView="createForm1" dataValueField="ProductCategoryID" dataTextField="CategoryName" />
+    </field>
+    <field name="CategoryName" type="String" readOnly="true" label="Category" length="20" />
+    <field name="ReOrderLevel" type="Int32" label="ROL Qty" />
+    <field name="ReOrderQty" type="Int32" label="ROD Qty" />
+    <field name="Barcode" type="String" label="Barcode" length="50" />
+    <field name="QtyPerUnit" type="String" label="Qty Per Unit" length="50" />
+    <field name="UnitPrice" type="Decimal" dataFormatString="c" label="Unit Price" />
+    <field name="Quantity" type="Int32" label="Quantity" />
+    <field name="UnitsOnHold" type="String" label="Units On Hold" length="50" />
+    <field name="UnitsOnOrder" type="Int32" label="Units On Order" />
+    <field name="Sellable" type="Boolean" label="Sellable" />
+    <field name="ExtendedCostValue" type="Decimal" readOnly="true" dataFormatString="c" label="Ext. Cost Value" computed="true">
+      <formula>Product.Quantity * Product.CostPrice</formula>
+    </field>
+    <field name="SupplierID" type="Int32" label="Supplier ID">
+      <items style="Lookup" dataController="Suppliers" newDataView="createForm1" dataValueField="SupplierID" dataTextField="SupplierName" copy="SupplierContactName=ContactName, SupplierContactPhone=ContactPhone, SupplierAddress=Address, SupplierCity=City, SupplierCountry=Country" />
+    </field>
+    <field name="SupplierName" type="String" readOnly="true" label="Supplier" length="30" />
+    <field name="SupplierContactName" type="String" readOnly="true" label="Supplier Contact" length="50" />
+    <field name="SupplierContactPhone" type="String" readOnly="true" label="Contact Phone" length="20" />
+    <field name="SupplierAddress" type="String" readOnly="true" label="Supplier Address" length="100" />
+    <field name="SupplierCity" type="String" readOnly="true" label="Supplier City" length="30" />
+    <field name="SupplierCountry" type="String" readOnly="true" label="Supplier Country" length="50" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="ProductImage" type="Byte[]" onDemand="true" sourceFields="ProductID" onDemandHandler="ProductProductImage" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Product Image" />
+    <field name="FileName" type="String" label="File Name" length="50" />
+    <field name="FileLength" type="Int32" label="File Length" />
+    <field name="ContentType" type="String" label="Content Type" length="50" />
+    <field name="PurchaseOrderDetail" type="DataView" label="Purchase Order Detail">
+      <dataView controller="PurchaseOrderDetail" view="grid1" filterFields="ProductID" />
+    </field>
+    <field name="ProductColour" type="String" label="Product Colour" length="128">
+      <items style="AutoComplete" targetController="mlinkProductColour" dataController="Colour" newDataView="createForm1" />
+    </field>
+    <field name="Photo" type="Byte[]" label="Photo" sourceFields="ProductID" onDemand="true" onDemandHandler="ProductPhotoHandler" onDemandStyle="Thumbnail" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="List of Items" tags="header-image-none" sortExpression="ProductName ASC">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ProductName" tag="item-heading" columns="30" />
+        <dataField fieldName="Skucode" columns="15" hidden="true" />
+        <dataField fieldName="Barcode" columns="18" tag="barcode" />
+        <dataField fieldName="CategoryID" aliasFieldName="CategoryName" tag="pivot1-row1-column" />
+        <dataField fieldName="IsActive" columns="15" />
+        <dataField fieldName="Sellable" />
+        <dataField fieldName="Description" columns="50" hidden="true" />
+        <dataField fieldName="Colour" columns="15" hidden="true" />
+        <dataField fieldName="QtyPerUnit" columns="20" />
+        <dataField fieldName="CostPrice" columns="10" hidden="true" />
+        <dataField fieldName="SellingPrice" columns="15" hidden="true" />
+        <dataField fieldName="UnitPrice" columns="10" />
+        <dataField fieldName="Quantity" columns="5">
+          <headerText>Qty</headerText>
+        </dataField>
+        <dataField fieldName="ExtendedCostValue" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum" />
+        <dataField fieldName="ReOrderLevel" columns="5">
+          <headerText>ROL</headerText>
+        </dataField>
+        <dataField fieldName="ReOrderQty" columns="5">
+          <headerText>ROQ</headerText>
+        </dataField>
+        <dataField fieldName="UnitsOnHold" columns="50" hidden="true" />
+        <dataField fieldName="UnitsOnOrder" columns="15" hidden="true">
+          <headerText>InTransit</headerText>
+        </dataField>
+        <dataField fieldName="SupplierID" aliasFieldName="SupplierName" tag="pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;Proportion Supply Value By Supplier&quot;" />
+        <dataField fieldName="SupplierContactName" columns="50" hidden="true" />
+        <dataField fieldName="SupplierContactPhone" columns="20" hidden="true" />
+        <dataField fieldName="SupplierAddress" hidden="true" />
+        <dataField fieldName="SupplierCity" columns="30" hidden="true" />
+        <dataField fieldName="SupplierCountry" columns="20" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="ProductImage" columns="15" hidden="true" />
+        <dataField fieldName="FileName" columns="50" hidden="true" />
+        <dataField fieldName="FileLength" columns="15" hidden="true" />
+        <dataField fieldName="ContentType" columns="50" hidden="true" />
+        <dataField fieldName="Photo" columns="15" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_discontinued_items" type="Grid" commandId="command1" label="Discontinued Items" tags="header-image-none">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ProductName" tag="item-heading" columns="30" />
+        <dataField fieldName="Skucode" columns="15" />
+        <dataField fieldName="Barcode" columns="18" tag="barcode" />
+        <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="Description" columns="50" hidden="true" />
+        <dataField fieldName="Colour" columns="15" hidden="true" />
+        <dataField fieldName="QtyPerUnit" columns="20" />
+        <dataField fieldName="CostPrice" columns="10" />
+        <dataField fieldName="SellingPrice" columns="15" hidden="true" />
+        <dataField fieldName="UnitPrice" columns="10" />
+        <dataField fieldName="Quantity" columns="5" hidden="true">
+          <headerText>Qty</headerText>
+        </dataField>
+        <dataField fieldName="ReOrderLevel" columns="15" hidden="true" />
+        <dataField fieldName="ReOrderQty" columns="10" hidden="true" />
+        <dataField fieldName="UnitsOnHold" columns="50" hidden="true" />
+        <dataField fieldName="UnitsOnOrder" columns="15" hidden="true" />
+        <dataField fieldName="Sellable" />
+        <dataField fieldName="ExtendedCostValue" columns="15" />
+        <dataField fieldName="SupplierID" aliasFieldName="SupplierName" />
+        <dataField fieldName="SupplierContactName" columns="50" />
+        <dataField fieldName="SupplierContactPhone" columns="20" />
+        <dataField fieldName="SupplierAddress" />
+        <dataField fieldName="SupplierCity" columns="30" />
+        <dataField fieldName="SupplierCountry" columns="50" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="ProductImage" columns="15" hidden="true" />
+        <dataField fieldName="FileName" columns="50" hidden="true" />
+        <dataField fieldName="FileLength" columns="15" hidden="true" />
+        <dataField fieldName="ContentType" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Product">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c2" headerText="Product Detail" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="ProductName" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="Skucode" columns="10" />
+            <dataField fieldName="Barcode" columns="50" />
+            <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
+            <dataField fieldName="QtyPerUnit" columns="50" />
+            <dataField fieldName="Sellable" />
+            <dataField fieldName="IsActive" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Cost &amp; Price" floating="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="CostPrice" columns="15" />
+            <dataField fieldName="UnitPrice" columns="15" />
+            <dataField fieldName="SellingPrice" columns="15" />
+            <dataField fieldName="ProductColour" rows="5" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Quantities &amp; Thresholds" floating="true" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="Quantity" columns="15" />
+            <dataField fieldName="UnitsOnHold" columns="50" />
+            <dataField fieldName="UnitsOnOrder" columns="15" />
+            <dataField fieldName="ReOrderLevel" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c5" headerText="Supplier Details">
+          <description />
+          <dataFields>
+            <dataField fieldName="SupplierID" aliasFieldName="SupplierName" />
+            <dataField fieldName="SupplierContactName" columns="50" />
+            <dataField fieldName="SupplierContactPhone" columns="20" />
+            <dataField fieldName="SupplierAddress" />
+            <dataField fieldName="SupplierCity" columns="30" />
+            <dataField fieldName="SupplierCountry" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c6" headerText="Others" collapsed="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="ReOrderQty" columns="15" />
+            <dataField fieldName="Photo" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Product">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c2" headerText="Product Detail" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="ProductName" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="Skucode" columns="10" />
+            <dataField fieldName="Barcode" columns="50" />
+            <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
+            <dataField fieldName="QtyPerUnit" columns="50" />
+            <dataField fieldName="Sellable" />
+            <dataField fieldName="IsActive" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Cost &amp; Price" floating="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="CostPrice" columns="15" />
+            <dataField fieldName="UnitPrice" columns="15" />
+            <dataField fieldName="SellingPrice" columns="15" />
+            <dataField fieldName="ProductColour" rows="5" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Quantities &amp; Thresholds" floating="true" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="Quantity" columns="15" />
+            <dataField fieldName="UnitsOnHold" columns="50" />
+            <dataField fieldName="UnitsOnOrder" columns="15" />
+            <dataField fieldName="ReOrderLevel" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c5" headerText="Supplier Details">
+          <description />
+          <dataFields>
+            <dataField fieldName="SupplierID" aliasFieldName="SupplierName" />
+            <dataField fieldName="SupplierContactName" columns="50" />
+            <dataField fieldName="SupplierContactPhone" columns="20" />
+            <dataField fieldName="SupplierAddress" />
+            <dataField fieldName="SupplierCity" columns="30" />
+            <dataField fieldName="SupplierCountry" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c6" headerText="Others" collapsed="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="ReOrderQty" columns="15" />
+            <dataField fieldName="Photo" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action commandName="SQL" headerText="Refresh Products" id="a100" cssClass="material-icon-restart_alt">
+        <data><![CDATA[EXECUTE zusp_ops_process_purchase_order_all
+SET @Result_ExecuteOnClient = '$appfactory.find("Product", "Controller").sync();'
+SET @Result_ShowMessage = 'The process updates for inventory items ' + CONVERT(NVARCHAR(12), GETDATE()) + ' ' + 'has completed successfully' 
+
+]]></data>
+      </action>
+      <action id="a2" />
+      <action id="a101" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a102" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a103" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send To RSS  API" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New|Insert" type="Sql" phase="Execute" name="setSellableValue"><![CDATA[SET @Sellable = 0
+SET @UnitsOnHold = 0
+SET @UnitsOnOrder = 0
+--SET @UnitsInStock = 1]]></rule>
+  </businessRules>
+  <blobAdapterConfig>Field: Photo
+Storage-System: File
+Path-Template: ~/app_data/ProductPhotos/{ProductID}-{PhotoFileName}</blobAdapterConfig>
+</dataController>

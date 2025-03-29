@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpSalaryBasisType" alias="zlkpSalaryBasisType" created="2024-01-28T12:08:34" modified="2024-09-14T15:37:44" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="SalaryBasisTypeID" fieldName="SalaryBasisTypeID" label="Salary Basis Type ID" format="c" />
+    <column name="SalaryBasisType" fieldName="SalaryBasisType" label="Salary Basis Type" />
+    <column name="Definition" fieldName="Definition" label="Definition" />
+  </columns>
+</dataModel>

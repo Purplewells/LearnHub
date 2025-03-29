@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StudentAssessment" alias="StudentAssessment" created="2024-08-21T18:18:59" modified="2024-08-21T18:22:31" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="ReasonNotTested" parentTableSchema="dbo" parentTableName="zlkpAssessmentReasonNotTested" x="380" y="20">
+      <foreignKeyColumn columnName="ReasonNotTestedID" parentColumnName="RefAssessmentReasonNotTestedID" />
+    </foreignKey>
+    <foreignKey id="AdministrationEnvironment" parentTableSchema="dbo" parentTableName="zlkpEnvironmentSetting" x="380" y="181">
+      <foreignKeyColumn columnName="AdministrationEnvironment" parentColumnName="RefEnvironmentSettingId" />
+    </foreignKey>
+    <foreignKey id="Assessment" parentTableSchema="dbo" parentTableName="Assessment" x="380" y="358">
+      <foreignKeyColumn columnName="AssessmentID" parentColumnName="AssessmentId" />
+    </foreignKey>
+    <foreignKey id="StudentCourseSection" parentTableSchema="dbo" parentTableName="StudentSectionAssociation" x="380" y="680">
+      <foreignKeyColumn columnName="StudentCourseSectionID" parentColumnName="StudentCourseSectionID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="StudentAssessmentID" fieldName="StudentAssessmentID" label="Student Assessment ID" />
+    <column name="AdministrationDate" fieldName="AdministrationDate" label="Administration Date" />
+    <column name="AssessmentID" fieldName="AssessmentID" label="Assessment ID" aliasColumnName="AssessmentTitle" aliasForeignKey="Assessment" />
+    <column name="AssessmentTitle" fieldName="AssessmentTitle" label="Assessment Title" foreignKey="Assessment" />
+    <column name="Code" fieldName="AssessmentCode" label="Assessment Code" foreignKey="Assessment" />
+    <column name="ReTestIndicator" fieldName="ReTestIndicator" label="Re Test Indicator" />
+    <column name="ReasonNotTestedID" fieldName="ReasonNotTestedID" label="Reason Not Tested ID" aliasColumnName="Description" aliasForeignKey="ReasonNotTested" />
+    <column name="Description" fieldName="ReasonNotTestedDescription" label="Reason Not Tested Description" foreignKey="ReasonNotTested" />
+    <column name="AdministrationEnvironment" fieldName="AdministrationEnvironment" label="Administration Environment" aliasColumnName="Description" aliasForeignKey="AdministrationEnvironment" />
+    <column name="EventDecription" fieldName="EventDecription" label="Event Decription" />
+    <column name="Description" fieldName="AdministrationEnvironmentDescription" label="Environment" foreignKey="AdministrationEnvironment" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="StudentCourseSectionID" fieldName="StudentCourseSectionID" label="Student Course Section ID" aliasColumnName="CreatedBy" aliasForeignKey="StudentCourseSection" />
+    <column name="CreatedBy" fieldName="StudentCourseSectionCreatedBy" label="Student Course Section Created By" foreignKey="StudentCourseSection" />
+  </columns>
+</dataModel>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpParameterType" alias="zlkpParameterType" created="2024-01-28T21:48:35" modified="2024-01-28T21:48:42" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="ParameterTypeID" fieldName="ParameterTypeID" label="Parameter Type ID" />
+    <column name="ParameterTypeName" fieldName="ParameterTypeName" label="Parameter Type Name" />
+  </columns>
+</dataModel>

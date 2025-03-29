@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpMealType" alias="zlkpMealType" created="2024-01-28T19:20:09" modified="2024-01-28T19:20:19" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="meal_type_id" fieldName="MealTypeID" label="Meal Type Id" />
+    <column name="meal_type" fieldName="MealType" label="Meal Type" />
+    <column name="description" fieldName="Description" label="Description" />
+    <column name="is_active" fieldName="IsActive" label="Is Active" />
+  </columns>
+</dataModel>

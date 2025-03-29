@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkbenchSalaries" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="SalaryAction" type="DataView" label="Salary Action">
+      <dataView controller="SalaryAction" view="grid1" />
+    </field>
+    <field name="SalaryBasis" type="DataView" label="Salary Basis">
+      <dataView controller="SalaryBasis" view="grid1" />
+    </field>
+    <field name="SalaryBasisFrequency" type="DataView" label="Salary Basis Frequency">
+      <dataView controller="SalaryBasisFrequency" view="grid1" />
+    </field>
+    <field name="SalaryBasisType" type="DataView" label="Salary Basis Type">
+      <dataView controller="SalaryBasisType" view="grid1" />
+    </field>
+    <field name="SalaryComponent" type="DataView" label="Salary Component">
+      <dataView controller="SalaryComponent" view="grid1" />
+    </field>
+    <field name="SalaryComponentReason" type="DataView" label="Salary Component Reason">
+      <dataView controller="SalaryComponentReason" view="grid1" />
+    </field>
+    <field name="SalaryComponentType" type="DataView" label="Salary Component Type">
+      <dataView controller="SalaryComponentType" view="grid1" />
+    </field>
+    <field name="SalaryStatus" type="DataView" label="Salary Status">
+      <dataView controller="SalaryStatus" view="grid1" />
+    </field>
+    <field name="SalaryComponentElement" type="DataView" label="Salary Component Element">
+      <dataView controller="SalaryComponentElement" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="SalariesWorkBench" type="Form" label="SALARY CONFIGURATION WORKBENCH">
+      <categories>
+        <category id="c2" tab="SALARY BASIS" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="SalaryBasis" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none">
+              <dataView pageSize="15" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="c4" tab="SALARY COMPONENTS">
+          <dataFields>
+            <dataField fieldName="SalaryComponent" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none">
+              <dataView pageSize="15" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="c7" tab="COMPONENT TYPE">
+          <dataFields>
+            <dataField fieldName="SalaryComponentType" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c1" tab="ACTION">
+          <dataFields>
+            <dataField fieldName="SalaryAction" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none">
+              <dataView pageSize="15" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="c6" tab="SALARY STATUS">
+          <dataFields>
+            <dataField fieldName="SalaryStatus" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c3" tab="PAYMENT FREQUENCY">
+          <dataFields>
+            <dataField fieldName="SalaryBasisFrequency" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none">
+              <headerText>PAYMENT FREQUENCY</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="c5" tab="COMPONENT REASON">
+          <dataFields>
+            <dataField fieldName="SalaryComponentReason" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c8" tab="COMPONENT ELEMENTS">
+          <dataFields>
+            <dataField fieldName="SalaryComponentElement" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+      </categories>
+      <headerText>This interface allows users to provide configuration or default values for slary determination.</headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Salaries Action" flat="true" />
+  </actions>
+</dataController>

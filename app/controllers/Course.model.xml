@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Course" alias="Course" created="2024-01-28T00:51:33" modified="2024-01-28T15:21:03" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="SubjectArea" parentTableSchema="dbo" parentTableName="zlkpCourseSubjectArea" x="419" y="20">
+      <foreignKeyColumn columnName="SubjectAreaID" parentColumnName="CourseSubjectAreaId" />
+    </foreignKey>
+    <foreignKey id="RefCourseLevelCharacteristics" parentTableSchema="dbo" parentTableName="zlkpCourseLevelCharacteristic" x="419" y="181">
+      <foreignKeyColumn columnName="RefCourseLevelCharacteristicsId" parentColumnName="RefCourseLevelCharacteristicId" />
+    </foreignKey>
+    <foreignKey id="RefCourseCreditUnit" parentTableSchema="dbo" parentTableName="zlkpCourseCreditUnit" x="419" y="358">
+      <foreignKeyColumn columnName="RefCourseCreditUnitId" parentColumnName="RefCourseCreditUnitId" />
+    </foreignKey>
+    <foreignKey id="RefGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="419" y="519">
+      <foreignKeyColumn columnName="RefGradeLevelId" parentColumnName="RefGradeLevelId" />
+    </foreignKey>
+    <foreignKey id="RefCourseInteractionMode" parentTableSchema="dbo" parentTableName="zlkpCourseInteractionMode" x="419" y="798">
+      <foreignKeyColumn columnName="RefCourseInteractionModeId" parentColumnName="RefCourseInteractionModeId" />
+    </foreignKey>
+    <foreignKey id="RefK12EndOfCourseRequirement" parentTableSchema="dbo" parentTableName="zlkpEndOfCourseRequirement" x="419" y="864">
+      <foreignKeyColumn columnName="RefK12EndOfCourseRequirementId" parentColumnName="RefK12EndOfCourseRequirementId" />
+    </foreignKey>
+    <foreignKey id="Organization" parentTableSchema="dbo" parentTableName="Organisation" x="889" y="20">
+      <foreignKeyColumn columnName="OrganizationID" parentColumnName="OrganizationID" />
+    </foreignKey>
+    <foreignKey id="Department" parentTableSchema="dbo" parentTableName="Department" x="889" y="204">
+      <foreignKeyColumn columnName="DepartmentID" parentColumnName="DepartmentID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="CourseID" fieldName="CourseID" label="Course ID" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="CourseTitle" fieldName="Course" label="Course" />
+    <column name="SubjectAreaID" fieldName="SubjectAreaID" label="Subject Area ID" aliasColumnName="SubjectAreaDescription" aliasForeignKey="SubjectArea" />
+    <column name="SubjectAreaDescription" fieldName="SubjectArea" label="Subject Area" foreignKey="SubjectArea" />
+    <column name="InstructionalMinutes" fieldName="InstructionalMinutes" label="Instr Min." />
+    <column name="RefCourseLevelCharacteristicsId" fieldName="RefCourseLevelCharacteristicsID" label="Ref Course Level Characteristics Id" aliasColumnName="Description" aliasForeignKey="RefCourseLevelCharacteristics" />
+    <column name="Description" fieldName="Characteristics" label="Characteristics" foreignKey="RefCourseLevelCharacteristics" />
+    <column name="RefCourseCreditUnitId" fieldName="RefCourseCreditUnitID" label="Ref Course Credit Unit Id" aliasColumnName="Description" aliasForeignKey="RefCourseCreditUnit" />
+    <column name="Description" fieldName="CourseCredit" label="Course Credit" foreignKey="RefCourseCreditUnit" />
+    <column name="AvailableCreditValue" fieldName="AvailableCreditValue" label="Credit Value" />
+    <column name="RefGradeLevelId" fieldName="RefGradeLevelID" label="Ref Grade Level Id" aliasColumnName="Description" aliasForeignKey="RefGradeLevel" />
+    <column name="Description" fieldName="GradeLevel" label="GL" foreignKey="RefGradeLevel" />
+    <column name="SortOrder" fieldName="GLSO" label="GLSO" foreignKey="RefGradeLevel" />
+    <column name="CourseRequirement" fieldName="CourseRequirement" label="REQ" />
+    <column name="RefCourseInteractionModeId" fieldName="RefCourseInteractionModeID" label="Ref Course Interaction Mode Id" aliasColumnName="Description" aliasForeignKey="RefCourseInteractionMode" />
+    <column name="Description" fieldName="Mode" label="Mode" foreignKey="RefCourseInteractionMode" />
+    <column name="RefK12EndOfCourseRequirementId" fieldName="RefK12EndOfCourseRequirementID" label="Ref K12 End Of Course Requirement Id" aliasColumnName="Description" aliasForeignKey="RefK12EndOfCourseRequirement" />
+    <column name="Description" fieldName="EOCReq" label="EOC Req" foreignKey="RefK12EndOfCourseRequirement" />
+    <column name="Active" fieldName="Active" label="Active" />
+    <column name="EffectiveFrom" fieldName="EffectiveFrom" label="Effective From" />
+    <column name="EffectiveTo" fieldName="EffectiveTo" label="Effective To" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="OrganizationID" fieldName="OrganizationID" label="Organization ID" aliasColumnName="Name" aliasForeignKey="Organization" />
+    <column name="Name" fieldName="School" label="School" foreignKey="Organization" />
+    <column name="DepartmentID" fieldName="DepartmentID" label="Department ID" aliasColumnName="DepartmentName" aliasForeignKey="Department" />
+    <column name="DepartmentName" fieldName="Department" label="Department" foreignKey="Department" />
+  </columns>
+</dataModel>

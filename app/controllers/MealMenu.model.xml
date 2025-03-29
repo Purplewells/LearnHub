@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpMealMenu" alias="zlkpMealMenu" created="2024-01-28T19:18:28" modified="2024-01-28T19:18:45" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="meal_menu_id" fieldName="MealMenuID" label="Meal Menu Id" />
+    <column name="menu_name" fieldName="MenuName" label="Menu Name" />
+    <column name="description" fieldName="Description" label="Description" />
+    <column name="nutrition_information" fieldName="NutritionInformation" label="Nutrition" />
+    <column name="is_active" fieldName="IsActive" label="Is Active" />
+  </columns>
+</dataModel>

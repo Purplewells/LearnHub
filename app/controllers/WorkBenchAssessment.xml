@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkBenchAssessment" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="znGradeBookEntry" type="DataView" label="Assessment Plans">
+      <dataView controller="znGradeBookEntry" view="grid1" />
+    </field>
+    <field name="znStudentGradeBookEntry" type="DataView" label="Assessment Outcomes">
+      <dataView controller="znStudentGradeBookEntry" view="grid1" />
+    </field>
+    <field name="GradeBookEntry" type="DataView" label="Grade Book Entry">
+      <dataView controller="GradeBookEntry" view="grid1" />
+    </field>
+    <field name="StudentGradeBookEntry" type="DataView" label="Student Grade Book Entry">
+      <dataView controller="StudentGradeBookEntry" view="grid1" />
+    </field>
+    <field name="AssessmentType" type="DataView" label="Assessment Type">
+      <dataView controller="AssessmentType" view="grid1" />
+    </field>
+    <field name="AssessmentCategory" type="DataView" label="Assessment Category">
+      <dataView controller="AssessmentCategory" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="Assessment" type="Form" label="Assessment Workbench">
+      <categories>
+        <category id="c3" tab="GBA PLANS" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="GradeBookEntry" columns="15" tag="modal-never">
+              <headerText>Assessment Schedule</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="c4" tab="GBA SCORES">
+          <dataFields>
+            <dataField fieldName="StudentGradeBookEntry" columns="15" tag="modal-never">
+              <headerText>GBA Scores</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="c6" tab="ASSESSMENT CATEGORY">
+          <dataFields>
+            <dataField fieldName="AssessmentCategory" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content" />
+          </dataFields>
+        </category>
+      </categories>
+      <headerText>The Assessment Workbench facillitates quick access to planning and outcomes data.</headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Assessment Actions" flat="false" />
+  </actions>
+</dataController>

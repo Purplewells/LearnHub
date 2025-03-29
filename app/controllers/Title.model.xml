@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpTitle" alias="zlkpTitle" created="2024-02-07T23:01:58" modified="2024-02-07T23:02:02" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="TitleID" fieldName="TitleID" label="Title ID" />
+    <column name="Description" fieldName="Description" label="Description" />
+  </columns>
+</dataModel>

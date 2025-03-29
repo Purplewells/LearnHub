@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="CustomFeeReminderFeeChit" conflictDetection="overwriteChanges" label="Custom Fee Reminder Fee Chit" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"vw_fee_col_ac_ledger_mini_combined_extended"."PersonID" "PersonID"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."Fullname" "Fullname"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."UPN" "UPN"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."YearGroup" "YearGroup"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."Description" "Description"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."FeeType" "FeeType"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."EventDate" "EventDate"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."Debit" "Debit"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."Credit" "Credit"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."AmountPaidPerFeeType" "AmountPaidPerFeeType"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."txBalances" "EachBalances"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."totAmountBilled" "TotAmountBilled"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."TotalAmountPaid" "TotalAmountPaid"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."LocalBalance" "LocalBalance"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."SessionCode" "SessionCode"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."CalendarYear" "CalendarYear"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."BillYear" "BillYear"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."SchoolName" "SchoolName"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."Address" "Address"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."CSY" "CSY"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."OPS" "OPS"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."Currency" "Currency"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."BilledYear" "BilledYear"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."DebtBalance" "DebtBalance"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."ThisYearArrears" "ThisYearArrears"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."LastYearArrears" "LastYearArrears"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."HasArrears" "HasArrears"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."Attribute1" "Attribute1"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."Attribute2" "Attribute2"
+	,"vw_fee_col_ac_ledger_mini_combined_extended"."ShowOnreport" "ShowOnReport"
+from "dbo"."vw_fee_col_ac_ledger_mini_combined_extended" "vw_fee_col_ac_ledger_mini_combined_extended"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonID" type="Int32" allowNulls="false" label="Person ID" showInSummary="true" />
+    <field name="Fullname" type="String" label="Fullname" length="71" showInSummary="true" />
+    <field name="UPN" type="String" label="UPN" length="10" showInSummary="true" />
+    <field name="YearGroup" type="String" label="GL" length="10" showInSummary="true" />
+    <field name="Description" type="String" label="Description" length="50" showInSummary="true" />
+    <field name="FeeType" type="String" label="Fee Type" length="20" />
+    <field name="EventDate" type="DateTime" label="Event Date" />
+    <field name="Debit" type="Decimal" dataFormatString="c" label="Debit" />
+    <field name="Credit" type="Decimal" dataFormatString="c" label="Credit" />
+    <field name="AmountPaidPerFeeType" type="Decimal" allowNulls="false" dataFormatString="c" label="Each Credit" />
+    <field name="EachBalances" type="Decimal" dataFormatString="c" label="Each Balance" />
+    <field name="TotAmountBilled" type="Decimal" dataFormatString="c" label="Total Amount Billed" />
+    <field name="TotalAmountPaid" type="Decimal" dataFormatString="c" label="Total Amount Paid" />
+    <field name="LocalBalance" type="Decimal" dataFormatString="c" label="Local Balance" />
+    <field name="SessionCode" type="String" label="Session" length="20" />
+    <field name="CalendarYear" type="String" label="Calendar Year" length="60" />
+    <field name="BillYear" type="Int32" label="Bill Year" />
+    <field name="SchoolName" type="String" label="School" length="50" />
+    <field name="Address" type="String" label="Address" length="500" />
+    <field name="CSY" type="Boolean" label="CSY" />
+    <field name="OPS" type="String" allowNulls="false" label="OPS" length="2" />
+    <field name="Currency" type="String" label="CURR" length="5" />
+    <field name="BilledYear" type="Int32" label="Billed Year" readOnly="true" />
+    <field name="DebtBalance" type="Decimal" dataFormatString="c" label="Debt Balance" />
+    <field name="ThisYearArrears" type="Decimal" dataFormatString="c" label="This Year Arrears" readOnly="true" />
+    <field name="LastYearArrears" type="Decimal" dataFormatString="c" label="Last Year Arrears" readOnly="true" />
+    <field name="HasArrears" type="String" allowNulls="false" label="Has Arrears" readOnly="true" length="1" />
+    <field name="Attribute1" type="String" allowQBE="false" allowSorting="false" label="Attribute1" />
+    <field name="Attribute2" type="String" label="Attribute2" length="1024" />
+    <field name="ShowOnReport" type="Boolean" label="Show On Report" />
+    <field name="GroupingID" type="String" readOnly="true" label="Grouping ID" computed="true">
+      <formula>vw_fee_col_ac_ledger_mini_combined_extended.UPN</formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Financial Statement Report" groupExpression="BillYear, GroupingID" reportTemplate="true">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="Fullname" columns="35" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="YearGroup" columns="5" />
+        <dataField fieldName="Description" columns="25" />
+        <dataField fieldName="FeeType" columns="20" />
+        <dataField fieldName="EventDate" columns="10" />
+        <dataField fieldName="Debit" columns="15" />
+        <dataField fieldName="Credit" columns="15" />
+        <dataField fieldName="AmountPaidPerFeeType" columns="15" />
+        <dataField fieldName="EachBalances" columns="15" />
+        <dataField fieldName="TotAmountBilled" columns="15" />
+        <dataField fieldName="TotalAmountPaid" columns="15" />
+        <dataField fieldName="LocalBalance" columns="15" hidden="true" />
+        <dataField fieldName="DebtBalance" columns="15" />
+        <dataField fieldName="Currency" columns="5" />
+        <dataField fieldName="SessionCode" columns="20" />
+        <dataField fieldName="CalendarYear" columns="12" hidden="true" />
+        <dataField fieldName="BillYear" columns="15" hidden="true" />
+        <dataField fieldName="SchoolName" columns="50" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="BilledYear" columns="10" />
+        <dataField fieldName="CSY" />
+        <dataField fieldName="OPS" columns="2" hidden="true" />
+        <dataField fieldName="ThisYearArrears" columns="15" hidden="true" />
+        <dataField fieldName="LastYearArrears" columns="15" hidden="true" />
+        <dataField fieldName="HasArrears" columns="1" hidden="true" />
+        <dataField fieldName="Attribute1" hidden="true" />
+        <dataField fieldName="Attribute2" hidden="true" />
+        <dataField fieldName="ShowOnReport" />
+        <dataField fieldName="GroupingID" />
+      </dataFields>
+      <styles>
+        <expression type="ClientScript" result="student-credit-payment" test="$row.Credit&gt;0" />
+      </styles>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Custom Fee Reminder Fee Chit">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Custom Fee Reminder Fee Chit" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="Fullname" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="YearGroup" columns="10" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="FeeType" columns="20" />
+            <dataField fieldName="EventDate" columns="10" />
+            <dataField fieldName="Debit" columns="15" />
+            <dataField fieldName="Credit" columns="15" />
+            <dataField fieldName="AmountPaidPerFeeType" columns="15" />
+            <dataField fieldName="EachBalances" columns="15" />
+            <dataField fieldName="TotAmountBilled" columns="15" />
+            <dataField fieldName="TotalAmountPaid" columns="15" />
+            <dataField fieldName="LocalBalance" columns="15" />
+            <dataField fieldName="SessionCode" columns="20" />
+            <dataField fieldName="CalendarYear" />
+            <dataField fieldName="BillYear" columns="15" />
+            <dataField fieldName="SchoolName" columns="50" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="CSY" />
+            <dataField fieldName="OPS" columns="2" />
+            <dataField fieldName="Currency" columns="5" />
+            <dataField fieldName="BilledYear" columns="15" />
+            <dataField fieldName="DebtBalance" columns="15" />
+            <dataField fieldName="ThisYearArrears" columns="15" />
+            <dataField fieldName="LastYearArrears" columns="15" />
+            <dataField fieldName="HasArrears" columns="1" />
+            <dataField fieldName="Attribute1" rows="5" />
+            <dataField fieldName="Attribute2" />
+            <dataField fieldName="ShowOnReport" />
+            <dataField fieldName="GroupingID" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Custom Fee Reminder Fee Chit">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="Fullname" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="YearGroup" columns="10" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="FeeType" columns="20" />
+            <dataField fieldName="EventDate" columns="10" />
+            <dataField fieldName="Debit" columns="15" />
+            <dataField fieldName="Credit" columns="15" />
+            <dataField fieldName="AmountPaidPerFeeType" columns="15" />
+            <dataField fieldName="EachBalances" columns="15" />
+            <dataField fieldName="TotAmountBilled" columns="15" />
+            <dataField fieldName="TotalAmountPaid" columns="15" />
+            <dataField fieldName="LocalBalance" columns="15" />
+            <dataField fieldName="SessionCode" columns="20" />
+            <dataField fieldName="CalendarYear" />
+            <dataField fieldName="BillYear" columns="15" />
+            <dataField fieldName="SchoolName" columns="50" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="CSY" />
+            <dataField fieldName="OPS" columns="2" />
+            <dataField fieldName="Currency" columns="5" />
+            <dataField fieldName="BilledYear" columns="15" />
+            <dataField fieldName="DebtBalance" columns="15" />
+            <dataField fieldName="ThisYearArrears" columns="15" />
+            <dataField fieldName="LastYearArrears" columns="15" />
+            <dataField fieldName="HasArrears" columns="1" />
+            <dataField fieldName="Attribute1" rows="5" />
+            <dataField fieldName="Attribute2" />
+            <dataField fieldName="ShowOnReport" />
+            <dataField fieldName="GroupingID" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" headerText="Print Bill Statement" />
+      <action id="a3" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a101" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a100" />
+      <action id="a4" commandName="ReportAsWord" headerText="Export To Word" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

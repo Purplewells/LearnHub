@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpSalaryComponentType" alias="zlkpSalaryComponentType" created="2024-01-28T12:09:23" modified="2024-03-30T20:49:38" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="ComponentTypeID" fieldName="ComponentTypeID" label="Component Type ID" />
+    <column name="ComponentType" fieldName="ComponentType" label="Component Type" />
+    <column name="ComponentCode" fieldName="ComponentCode" label="Component Code" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="Taxable" fieldName="Taxable" label="Taxable" />
+    <column name="TaxRate" fieldName="TaxRate" label="Tax Rate" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

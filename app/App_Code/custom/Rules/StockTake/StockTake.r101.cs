@@ -1,0 +1,34 @@
+﻿using System;
+using System.Data;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Web;
+using System.Web.Security;
+using zLearnHub.Data;
+using zLearnHub.Models;
+
+namespace zLearnHub.Rules
+{
+    public partial class StockTakeBusinessRules : zLearnHub.Rules.SharedBusinessRules
+    {
+
+        /// <summary>Rule "calculateDifference" implementation:
+        /// This method will execute in any view after an action
+        /// with a command name that matches "Insert|update|calculate".
+        /// </summary>
+        [Rule("r101")]
+        public void r101Implementation(StockTakeModel instance)
+        {
+            // This is the placeholder for method implementation.
+
+            
+            //instance.SystemQuantity = instance.refProductQuantity;
+
+            instance.StockDifference = instance.ScannedQuantity - instance.refProductQuantity;
+           
+
+            
+        }
+    }
+}

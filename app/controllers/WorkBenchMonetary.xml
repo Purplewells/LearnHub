@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkBenchMonetary" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <views>
+    <view id="MonetaryWorkBench" type="Form" label="MONETARY REFERENCE WORKBENCH">
+      <headerText>This workbench focuses on grouping the finance and payment related references.</headerText>
+      <categories>
+        <category id="c1" tab="PAYMENT METHOD" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="PaymentMethod" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
+        </category>
+        <category tab="TRANSACTION STATUS" id="c2">
+          <dataFields>
+            <dataField fieldName="TransactionStatus" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
+        </category>
+        <category tab="TRANSACTION TYPE" id="c5">
+          <dataFields>
+            <dataField fieldName="TransactionType" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
+        </category>
+        <category tab="BUDGET NAMES" id="c3">
+          <dataFields>
+            <dataField fieldName="BudgetName" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs">
+              <dataView pageSize="15" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="BUDGET TYPE" id="c4">
+          <dataFields>
+            <dataField fieldName="BudgetType" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
+        </category>
+        <category tab="ACCOUNT TYPE SOURCE" id="c6">
+          <dataFields>
+            <dataField fieldName="AccountSource" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs">
+              <headerText>Account Type Source</headerText>
+              <dataView pageSize="15" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="ACCOUNT TYPE" id="c7">
+          <dataFields>
+            <dataField fieldName="AccountType" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs">
+              <dataView pageSize="15" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="ACCOUNT MAPPINGS" id="c8">
+          <dataFields>
+            <dataField fieldName="TransactionAccountMapping" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs">
+              <dataView pageSize="20" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="CHART OF ACCOUNTS" id="c9">
+          <dataFields>
+            <dataField fieldName="ChartOfAccounts" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <fields>
+    <field name="TransactionStatus" type="DataView" label="Transaction Status">
+      <dataView controller="TransactionStatus" view="grid1" />
+    </field>
+    <field name="TransactionType" type="DataView" label="Transaction Type">
+      <dataView controller="TransactionType" view="grid1" />
+    </field>
+    <field name="BudgetName" type="DataView" label="Budget Name">
+      <dataView controller="BudgetName" view="grid1" />
+    </field>
+    <field name="BudgetType" type="DataView" label="Budget Type">
+      <dataView controller="BudgetType" view="grid1" />
+    </field>
+    <field name="PaymentMethod" type="DataView" label="Payment Method">
+      <dataView controller="PaymentMethod" view="grid1" />
+    </field>
+    <field name="AccountType" type="DataView" label="Account Type">
+      <dataView controller="AccountType" view="grid1" />
+    </field>
+    <field name="TransactionAccountMapping" type="DataView" label="Transaction Account Mapping">
+      <dataView controller="TransactionAccountMapping" view="grid1" />
+    </field>
+    <field name="AccountSource" type="DataView" label="Account Source">
+      <dataView controller="AccountSource" view="grid1" />
+    </field>
+    <field name="ChartOfAccounts" type="DataView" label="Chart Of Accounts">
+      <dataView controller="ChartOfAccounts" view="grid1" />
+    </field>
+  </fields>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Required Actions " flat="false" />
+  </actions>
+</dataController>

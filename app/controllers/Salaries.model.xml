@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="salary" alias="salary" created="2024-01-30T21:44:11" modified="2024-09-16T07:19:37" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Action" parentTableSchema="dbo" parentTableName="zlkpSalaryAction" x="353" y="296">
+      <foreignKeyColumn columnName="ActionID" parentColumnName="ActionID" />
+    </foreignKey>
+    <foreignKey id="Assignment" parentTableSchema="dbo" parentTableName="K12StaffAssignment" x="353" y="459">
+      <foreignKeyColumn columnName="AssignmentID" parentColumnName="StaffAssignmentID" />
+    </foreignKey>
+    <foreignKey id="OrganizationPersonRole" parentTableSchema="dbo" parentTableName="OrganizationPersonRole" x="742" y="97" baseForeignKey="Assignment">
+      <foreignKeyColumn columnName="OrganizationPersonRoleID" parentColumnName="OrganizationPersonRoleID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="755" y="269" baseForeignKey="OrganizationPersonRole">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="SalaryBasis" parentTableSchema="dbo" parentTableName="salary_basis" x="351" y="28">
+      <foreignKeyColumn columnName="SalaryBasisID" parentColumnName="SalaryBasisID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="SalaryID" fieldName="SalaryID" label="Salary ID" format="c" />
+    <column name="SalaryName" fieldName="SalaryName" label="Salary Name" />
+    <column name="SalaryBasisID" fieldName="SalaryBasisID" label="Salary Basis ID" format="c" aliasColumnName="BasisName" aliasForeignKey="SalaryBasis" />
+    <column name="BasisName" fieldName="SalaryBasisName" label="Salary Basis Name" foreignKey="SalaryBasis" />
+    <column name="BaseAmount" fieldName="TheSalaryBasisBaseAmount" label="Basis Amount" foreignKey="SalaryBasis" format="c" />
+    <column name="BaseSalaryAmount" fieldName="BaseSalaryAmount" label="Base Salary Amount" format="c" />
+    <column name="GrossAmount" fieldName="GrossAmount" label="Gross Amount" />
+    <column name="NetAmount" fieldName="NetAmount" label="Net Amount" />
+    <column name="Deductions" fieldName="Deductions" label="Deductions" />
+    <column name="ActionID" fieldName="ActionID" label="Action ID" aliasColumnName="Action" aliasForeignKey="Action" />
+    <column name="Action" fieldName="Action" label="Action" foreignKey="Action" />
+    <column name="IsApproved" fieldName="IsApproved" label="Is Approved" />
+    <column name="AssignmentID" fieldName="AssignmentID" label="Assignment ID" aliasColumnName="StaffClassificationID" aliasForeignKey="Assignment" />
+    <column name="StaffClassificationID" fieldName="AssignmentStaffClassificationID" foreignKey="Assignment" />
+    <column name="ProposedDate" fieldName="ProposedDate" label="Proposed Date" />
+    <column name="NextReviewDate" fieldName="NextReviewDate" label="Next Review Date" />
+    <column name="StartDate" fieldName="StartDate" label="Start Date" />
+    <column name="EndDate" fieldName="EndDate" label="End Date" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="PreTaxDeductions" fieldName="PreTaxDeductions" label="Pre Tax Deductions" />
+    <column name="TaxableBenefits" fieldName="TaxableBenefits" label="Taxable Benefits" />
+    <column name="NonTaxableBenefits" fieldName="NonTaxableBenefits" label="Non Taxable Benefits" />
+    <column name="EmployerTaxes" fieldName="EmployerTaxes" label="Employer Taxes" />
+    <column name="TaxablePay" fieldName="TaxablePay" label="Taxable Pay" />
+    <column name="TaxAmount" fieldName="TaxAmount" label="Tax Amount" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="FirstName" fieldName="FirstName" label="Firstname" foreignKey="Person" />
+    <column name="LastName" fieldName="LastName" label="Lastname" foreignKey="Person" />
+  </columns>
+</dataModel>

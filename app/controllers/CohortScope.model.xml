@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpCohortScope" alias="zlkpCohortScope" created="2024-02-03T19:32:20" modified="2024-02-03T19:32:26" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="CohortScopeID" fieldName="CohortScopeID" label="Cohort Scope ID" />
+    <column name="CohortScope" fieldName="CohortScope" label="Cohort Scope" />
+  </columns>
+</dataModel>

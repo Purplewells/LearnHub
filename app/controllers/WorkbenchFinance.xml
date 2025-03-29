@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkbenchFinance" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="Budget" type="DataView" label="Budget">
+      <dataView controller="Budget" view="grid1" />
+    </field>
+    <field name="IncomeExpense" type="DataView" label="Income Expense">
+      <dataView controller="IncomeExpense" view="grid1" />
+    </field>
+    <field name="IncomeAndExpenseTracker" type="DataView" label="Income And Expense Tracker">
+      <dataView controller="IncomeAndExpenseTracker" view="grid1" />
+    </field>
+    <field name="IncomeExpenseSummary" type="DataView" label="Income Expense Summary">
+      <dataView controller="IncomeExpenseSummary" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="FinanceWorkbench" type="Form" label="FINANCE WORKBENCH">
+      <categories>
+        <category tab="BUDGET ALLOCATION" id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Budget" columns="15" tag="header-title-none&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;content-stub-none&#xD;&#xA;modal-dock-center" />
+          </dataFields>
+        </category>
+        <category tab="INCOME &amp; EXPENSE" id="c2">
+          <dataFields>
+            <dataField fieldName="IncomeExpense" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs">
+              <dataView pageSize="15" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="A/C STATEMENT" id="c3">
+          <dataFields>
+            <dataField fieldName="IncomeAndExpenseTracker" columns="15" tag="modal-max-sm&#xD;&#xA;modal-fit-content">
+              <dataView pageSize="15" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="CASH FLOW" id="c4">
+          <dataFields>
+            <dataField fieldName="IncomeExpenseSummary" columns="15">
+              <dataView pageSize="15" />
+            </dataField>
+          </dataFields>
+        </category>
+      </categories>
+      <headerText>&lt;strong&gt;The Finance Planning Workbench provides an overview of the financial status showing data including income, expenses, investments and cashflow information. &lt;/strong&gt;</headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Finance Actions" flat="false" />
+  </actions>
+</dataController>

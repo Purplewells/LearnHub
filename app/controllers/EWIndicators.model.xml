@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="master_cte_attendance_analysis" alias="master_cte_attendance_analysis" created="2024-02-18T14:13:45" modified="2024-02-18T14:57:00" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="Name" fieldName="Name" label="Name" />
+    <column name="UPN" fieldName="UPN" label="UPN" />
+    <column name="GradeLevel" fieldName="GL" label="GL" />
+    <column name="SortOrder" fieldName="GLSO" label="GLSO" />
+    <column name="Language" fieldName="Language" label="Language" />
+    <column name="Religion" fieldName="Religion" label="Religion" />
+    <column name="Sex" fieldName="Sex" label="Sex" />
+    <column name="TP" fieldName="Attendances" label="TA" />
+    <column name="TA" fieldName="Absences" label="AB" />
+    <column name="PA" fieldName="PossibleAttendances" label="PA" />
+    <column name="TU" fieldName="TU" label="TU" />
+    <column name="TD" fieldName="TD" label="TD" />
+    <column name="TED" fieldName="TED" label="TED" />
+    <column name="ADA" fieldName="ADA" label="ADA" format="P" />
+    <column name="EPA" fieldName="EPA" label="EPA" format="P" />
+    <column name="ISD" fieldName="ISD" label="ISD" />
+    <column name="OnTheVerge" fieldName="OnTheVerge" label="OnVerge" />
+    <column name="IsCHRAB" fieldName="IsChrab" label="Is CHRAB" />
+    <column name="IsAtRisk" fieldName="IsAtRisk" label="At Risk" />
+    <column name="CHRABRate" fieldName="CHRABRate" label="CHRAB Rate" format="P" />
+    <column name="ARate" fieldName="ARate" label="ABS Rate" format="P" />
+    <column name="PARate" fieldName="PARate" label="PA Rate" />
+    <column name="SessionCode" fieldName="Session" label="Session" />
+    <column name="Year" fieldName="Year" label="Year" />
+    <column name="Organisation" fieldName="Organisation" label="Organisation" />
+  </columns>
+</dataModel>

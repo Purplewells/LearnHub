@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="PersonDisability" conflictDetection="overwriteChanges" label="Person Disability" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"PersonDisability"."DisabilitID" "DisabilitID"
+	,"PersonDisability"."PrimaryDisabilityTypeId" "PrimaryDisabilityTypeID"
+	,"PrimaryDisabilityType"."Description" "PrimaryDisabilityTypeDescription"
+	,"PersonDisability"."DisabilityStatus" "DisabilityStatus"
+	,"PersonDisability"."RefAccommodationsNeededTypeId" "RefAccommodationsNeededTypeID"
+	,"RefAccommodationsNeededType"."Description" "NeededAccommodations"
+	,"PersonDisability"."RefDisabilityConditionTypeId" "RefDisabilityConditionTypeID"
+	,"RefDisabilityConditionType"."Description" "ConditionType"
+	,"PersonDisability"."RefDisabilityDeterminationSourceTypeId" "RefDisabilityDeterminationSourceTypeID"
+	,"RefDisabilityDeterminationSourceType"."Description" "SourceDetermination"
+	,"PersonDisability"."RefDisabilityConditionStatusCodeId" "RefDisabilityConditionStatusCodeID"
+	,"RefDisabilityConditionStatusCode"."Description" "ConditionDescription"
+	,"PersonDisability"."PersonID" "PersonID"
+	,"Person"."IdentificationCode" "IdentificationCode"
+	,"Person"."FirstName" "FirstName"
+	,"Person"."LastName" "LastName"
+	,"Person"."CurrentYearGradeLevel" "CurrentYearGradeLevel"
+from "dbo"."PersonDisability" "PersonDisability"
+	left join "dbo"."zlkpDisabilityType" "PrimaryDisabilityType" on "PersonDisability"."PrimaryDisabilityTypeId" = "PrimaryDisabilityType"."RefDisabilityTypeId"
+	left join "dbo"."zlkpAccommodationsNeededType" "RefAccommodationsNeededType" on "PersonDisability"."RefAccommodationsNeededTypeId" = "RefAccommodationsNeededType"."RefAccommodationsNeededTypeId"
+	left join "dbo"."zlkpDisabilityConditionType" "RefDisabilityConditionType" on "PersonDisability"."RefDisabilityConditionTypeId" = "RefDisabilityConditionType"."RefDisabilityConditionTypeId"
+	left join "dbo"."zlkpDisabilityDeterminationSourceType" "RefDisabilityDeterminationSourceType" on "PersonDisability"."RefDisabilityDeterminationSourceTypeId" = "RefDisabilityDeterminationSourceType"."RefDisabilityDeterminationSourceTypeId"
+	left join "dbo"."zlkpDisabilityConditionStatusCode" "RefDisabilityConditionStatusCode" on "PersonDisability"."RefDisabilityConditionStatusCodeId" = "RefDisabilityConditionStatusCode"."RefDisabilityConditionStatusCodeId"
+	left join "dbo"."Person" "Person" on "PersonDisability"."PersonID" = "Person"."PersonID"
+]]></text>
+    </command>
+    <command id="DisabilitIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="DisabilitID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="DisabilitID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Disabilit ID" readOnly="true" />
+    <field name="PrimaryDisabilityTypeID" type="Int32" label="Primary Disability Type Id" showInSummary="true">
+      <items style="Lookup" dataController="DisabilityType" newDataView="createForm1" dataValueField="RefDisabilityTypeID" dataTextField="Description" />
+    </field>
+    <field name="PrimaryDisabilityTypeDescription" type="String" readOnly="true" label="Disability Type" length="30" />
+    <field name="DisabilityStatus" type="Boolean" label="Disability Status" showInSummary="true" />
+    <field name="RefAccommodationsNeededTypeID" type="Int32" label="Ref Accommodations Needed Type Id" showInSummary="true">
+      <items style="Lookup" dataController="AccommodationsNeededType" newDataView="createForm1" dataValueField="RefAccommodationsNeededTypeID" dataTextField="Description" />
+    </field>
+    <field name="NeededAccommodations" type="String" readOnly="true" label="Needed Accommodations" length="30" />
+    <field name="RefDisabilityConditionTypeID" type="Int32" label="Ref Disability Condition Type Id" showInSummary="true">
+      <items style="Lookup" dataController="DisabilityConditionType" newDataView="createForm1" dataValueField="RefDisabilityConditionTypeID" dataTextField="Description" />
+    </field>
+    <field name="ConditionType" type="String" readOnly="true" label="Condition Type" length="30" />
+    <field name="RefDisabilityDeterminationSourceTypeID" type="Int32" label="Ref Disability Determination Source Type Id" showInSummary="true">
+      <items style="Lookup" dataController="DisabilityDeterminationSourceType" newDataView="createForm1" dataValueField="RefDisabilityDeterminationSourceTypeID" dataTextField="Description" />
+    </field>
+    <field name="SourceDetermination" type="String" readOnly="true" label="Source Determination" length="30" />
+    <field name="RefDisabilityConditionStatusCodeID" type="Int32" label="Ref Disability Condition Status Code Id">
+      <items style="Lookup" dataController="DisabilityConditionStatusCode" newDataView="createForm1" dataValueField="RefDisabilityConditionStatusCodeID" dataTextField="Description" />
+    </field>
+    <field name="ConditionDescription" type="String" readOnly="true" label="Condition" length="30" />
+    <field name="PersonID" type="Int32" label="Person ID">
+      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="UPN" copy="FirstName=FirstName, LastName=LastName, CurrentYearGradeLevel=CYG" />
+    </field>
+    <field name="IdentificationCode" type="String" readOnly="true" label="UPN" length="10" />
+    <field name="FirstName" type="String" readOnly="true" label="First Name" length="35" />
+    <field name="LastName" type="String" readOnly="true" label="Last Name" length="35" />
+    <field name="CurrentYearGradeLevel" type="String" readOnly="true" label="GL" length="10" />
+    <field name="HeaderTitle" type="String" readOnly="true" label="Header Title" computed="true">
+      <formula>Person.FirstName + ', ' + Person.LastName + ' &gt;&gt; ' + '( ' + 'UPN: ' + Person.IdentificationCode + ' &gt;&gt; ' + Person.CurrentYearGradeLevel + ' )'  
+ </formula>
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Person Disability">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PrimaryDisabilityTypeID" aliasFieldName="PrimaryDisabilityTypeDescription" />
+        <dataField fieldName="RefDisabilityConditionTypeID" aliasFieldName="ConditionType" />
+        <dataField fieldName="RefDisabilityDeterminationSourceTypeID" aliasFieldName="SourceDetermination" />
+        <dataField fieldName="RefDisabilityConditionStatusCodeID" aliasFieldName="ConditionDescription" />
+        <dataField fieldName="RefAccommodationsNeededTypeID" aliasFieldName="NeededAccommodations" />
+        <dataField fieldName="DisabilityStatus" />
+        <dataField fieldName="PersonID" aliasFieldName="IdentificationCode" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="CurrentYearGradeLevel" columns="10" />
+        <dataField fieldName="HeaderTitle" hidden="true" tag="header-text" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Special Need">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Person Disability" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RefDisabilityConditionTypeID" aliasFieldName="ConditionType" />
+            <dataField fieldName="PrimaryDisabilityTypeID" aliasFieldName="PrimaryDisabilityTypeDescription" />
+            <dataField fieldName="RefDisabilityDeterminationSourceTypeID" aliasFieldName="SourceDetermination" />
+            <dataField fieldName="RefAccommodationsNeededTypeID" aliasFieldName="NeededAccommodations" />
+            <dataField fieldName="RefDisabilityConditionStatusCodeID" aliasFieldName="ConditionDescription" />
+            <dataField fieldName="DisabilityStatus" />
+            <dataField fieldName="PersonID" aliasFieldName="IdentificationCode" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="CurrentYearGradeLevel" columns="10" />
+            <dataField fieldName="HeaderTitle" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Special Need">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RefDisabilityConditionTypeID" aliasFieldName="ConditionType" />
+            <dataField fieldName="PrimaryDisabilityTypeID" aliasFieldName="PrimaryDisabilityTypeDescription" />
+            <dataField fieldName="RefDisabilityDeterminationSourceTypeID" aliasFieldName="SourceDetermination" />
+            <dataField fieldName="RefDisabilityConditionStatusCodeID" aliasFieldName="ConditionDescription" />
+            <dataField fieldName="RefAccommodationsNeededTypeID" aliasFieldName="NeededAccommodations" />
+            <dataField fieldName="DisabilityStatus" />
+            <dataField fieldName="PersonID" aliasFieldName="IdentificationCode" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="CurrentYearGradeLevel" columns="10" />
+            <dataField fieldName="HeaderTitle" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

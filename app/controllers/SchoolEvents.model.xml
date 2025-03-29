@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="CalendarEventDescriptor" alias="CalendarEventDescriptor" created="2024-01-28T11:57:40" modified="2024-01-28T11:59:20" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="RefCalendarEventTypeId" fieldName="RefCalendarEventTypeID" label="Ref Calendar Event Type Id" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="EffectiveStartDate" fieldName="EffectiveStartDate" label="Start Date" />
+    <column name="EffectiveEndDate" fieldName="EffectiveEndDate" label="End Date" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

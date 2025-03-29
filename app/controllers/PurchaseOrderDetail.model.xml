@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PurchaseOrderDetail" alias="PurchaseOrderDetail" created="2024-07-10T22:17:04" modified="2024-07-12T12:56:22" x="20" y="27" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Product" parentTableSchema="dbo" parentTableName="Product" x="367" y="20">
+      <foreignKeyColumn columnName="ProductID" parentColumnName="ProductID" />
+    </foreignKey>
+    <foreignKey id="ProductCategory" parentTableSchema="dbo" parentTableName="zlkpProductCategory" baseForeignKey="Product" x="710" y="24">
+      <foreignKeyColumn columnName="CategoryID" parentColumnName="ProductCategoryID" />
+    </foreignKey>
+    <foreignKey id="PurchaseOrder" parentTableSchema="dbo" parentTableName="PurchaseOrder" x="371" y="177">
+      <foreignKeyColumn columnName="PurchaseOrderID" parentColumnName="PurchaseOrderID" />
+    </foreignKey>
+    <foreignKey id="PurchaseOrderSupplier" parentTableSchema="dbo" parentTableName="Suppliers" x="746" y="182" baseForeignKey="PurchaseOrder">
+      <foreignKeyColumn columnName="SupplierID" parentColumnName="SupplierID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ProductID" fieldName="ProductID" label="Product ID" aliasColumnName="ProductName" aliasForeignKey="Product" />
+    <column name="ProductName" fieldName="ProductName" label="Product Name" foreignKey="Product" />
+    <column name="CategoryName" fieldName="ProductCategory" label="Product Category" foreignKey="ProductCategory" />
+    <column name="Quantity" fieldName="Quantity" label="Quantity" />
+    <column name="UnitPrice" fieldName="UnitPrice" label="Unit Price" format="c" />
+    <column fieldName="ExtendedCost" type="money" dataType="Decimal" label="Extended Cost" format="c">
+      <formula>PurchaseOrderDetail.UnitPrice * PurchaseOrderDetail.Quantity</formula>
+    </column>
+    <column name="IsArrived" fieldName="IsArrived" label="Is Arrived" />
+    <column name="ArrivalDate" fieldName="ArrivalDate" label="Arrival Date" />
+    <column name="Note" fieldName="Note" label="Note" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="PurchaseOrderID" fieldName="PurchaseOrderID" label="Purchase Order ID" aliasColumnName="TrackingNumber" aliasForeignKey="PurchaseOrder" />
+    <column name="TrackingNumber" fieldName="TrackingNumber" label="Tracking Number" foreignKey="PurchaseOrder" />
+    <column name="SupplierName" fieldName="SupplierName" label="Supplier Name" foreignKey="PurchaseOrderSupplier" />
+  </columns>
+</dataModel>

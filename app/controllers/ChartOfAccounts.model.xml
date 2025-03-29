@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="chart_of_accounts" alias="chart_of_accounts" created="2025-02-23T13:40:32" modified="2025-02-23T21:01:49" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="AccountType" parentTableSchema="dbo" parentTableName="account_type" x="329" y="20">
+      <foreignKeyColumn columnName="AccountTypeID" parentColumnName="AccountTypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="AccountID" fieldName="AccountID" label="Account ID" />
+    <column name="AccountName" fieldName="AccountName" label="Account Name" />
+    <column name="AccountTypeID" fieldName="AccountTypeID" label="Account Type ID" aliasColumnName="AccountType" aliasForeignKey="AccountType" />
+    <column name="AccountType" fieldName="AccountType" label="Account Type" foreignKey="AccountType" />
+    <column name="IsActive" fieldName="IsActive" label="IsActive" />
+    <column name="ParentAccountID" fieldName="ParentAccountID" label="Parent Account ID" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+  </columns>
+</dataModel>

@@ -1,0 +1,725 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="znContactPhotos" label="znContactPhotos" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Person"."PersonID" "PersonID"
+	,"Person"."IdentificationCode" "UPN"
+	,"Person"."FirstName" "FirstName"
+	,"Person"."MiddleName" "MiddleName"
+	,"Person"."LastName" "LastName"
+	,"Person"."BirthDate" "BirthDate"
+	,"Person"."RefSexID" "RefSexID"
+	,"RefSex"."Description" "Sex"
+	,"Person"."RefCitizenshipStatusID" "RefCitizenshipStatusID"
+	,"RefCitizenshipStatus"."Description" "Ethnicity"
+	,"Person"."RefProofOfResidencyTypeID" "RefProofOfResidencyTypeID"
+	,"RefProofOfResidencyType"."Description" "ProofOfResidency"
+	,"Person"."CreatedBy" "CreatedBy"
+	,"Person"."CreatedDate" "CreatedDate"
+	,"Person"."ModifiedDate" "ModifiedDate"
+	,"Person"."ModifiedBy" "ModifiedBy"
+	,"Person"."Email" "Email"
+	,"Person"."PhoneNo" "PhoneNo"
+	,"Person"."CurrentYearStatus" "CYS"
+	,"Person"."CurrentYearGradeLevel" "CYG"
+	,"Person"."ExtendedRole" "ExtendedRole"
+	,"Person"."ExtendedLiveStatusStartDate" "ExtendedLiveStatusStartDate"
+	,"Person"."ExtendedLiveStatusEndDate" "ExtendedLiveStatusEndDate"
+	,"Person"."TitleID" "TitleID"
+	,"Title"."Description" "Title"
+	,"Person"."LanguageID" "LanguageID"
+	,"Language"."Language" "Language"
+	,"Person"."ReligionID" "ReligionID"
+	,"Religion"."Religion" "Religion"
+	,"Person"."PhotoUrl" "PhotoUrl"
+	,"Person"."OrganizationID" "OrganizationID"
+	,"Organization"."Name" "OrganizationName"
+	,"Person"."Address" "Address"
+	,"Person"."TownID" "TownID"
+	,"Town"."Town" "Town"
+	,"Person"."PostalCode" "PostalCode"
+	,"Person"."CountryID" "CountryID"
+	,"Country"."Description" "Country"
+	,"Person"."LocationTypeID" "LocationTypeID"
+	,"LocationType"."Description" "LocationType"
+	,"Person"."CreatedByID" "CreatedByID"
+	,"Person"."extSetGradeLevel" "ExtSetGradeLevel"
+	,"Person"."extImportGradeLevel" "ImportGL"
+	,"Person"."RefOccupationId" "RefOccupationID"
+	,"RefOccupation"."Occupation" "Occupation"
+	,"Person"."SocialSecurityNumber" "SSNo"
+	,"Person"."AccountNo" "AccountNo"
+	,"Person"."BankName" "Bank"
+from "dbo"."Person" "Person"
+	left join "dbo"."zlkpSex" "RefSex" on "Person"."RefSexID" = "RefSex"."GenderID"
+	left join "dbo"."zlkpCitizenshipStatus" "RefCitizenshipStatus" on "Person"."RefCitizenshipStatusID" = "RefCitizenshipStatus"."RefCitizenshipStatusId"
+	left join "dbo"."zlkpProofOfResidencyType" "RefProofOfResidencyType" on "Person"."RefProofOfResidencyTypeID" = "RefProofOfResidencyType"."RefProofOfResidencyTypeId"
+	left join "dbo"."zlkpTitle" "Title" on "Person"."TitleID" = "Title"."TitleID"
+	left join "dbo"."zlkp_language" "Language" on "Person"."LanguageID" = "Language"."LanguageID"
+	left join "dbo"."zlkp_Religion" "Religion" on "Person"."ReligionID" = "Religion"."ReligionID"
+	left join "dbo"."Organisation" "Organization" on "Person"."OrganizationID" = "Organization"."OrganizationID"
+	left join "dbo"."zlkpTown" "Town" on "Person"."TownID" = "Town"."TownID"
+	left join "dbo"."zlkpCountry" "Country" on "Person"."CountryID" = "Country"."CountryID"
+	left join "dbo"."zlkpPersonLocationType" "LocationType" on "Person"."LocationTypeID" = "LocationType"."LocationTypeID"
+	left join "dbo"."zlkpOccupation" "RefOccupation" on "Person"."RefOccupationId" = "RefOccupation"."RefOccupationId"
+]]></text>
+    </command>
+    <command id="PersonIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="PersonID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Person ID" readOnly="true" />
+    <field name="UPN" type="String" label="UPN" length="10" showInSummary="true" />
+    <field name="FirstName" type="String" label="Firstname" length="35" showInSummary="true" />
+    <field name="MiddleName" type="String" label="Middlename" length="35" showInSummary="true" />
+    <field name="LastName" type="String" label="Lastname" length="35" showInSummary="true" />
+    <field name="BirthDate" type="DateTime" label="DOB" showInSummary="true" />
+    <field name="RefSexID" type="Int32" label="Ref Sex ID">
+      <items style="Lookup" dataController="Sex" newDataView="createForm1" dataValueField="GenderID" dataTextField="Description" />
+    </field>
+    <field name="Sex" type="String" readOnly="true" label="Sex" length="8" />
+    <field name="RefCitizenshipStatusID" type="Int32" label="Ref Citizenship Status ID">
+      <items style="Lookup" dataController="CitizenshipStatus" newDataView="createForm1" dataValueField="RefCitizenshipStatusID" dataTextField="Description" />
+    </field>
+    <field name="Ethnicity" type="String" readOnly="true" label="Ethnicity" length="15" />
+    <field name="RefProofOfResidencyTypeID" type="Int32" label="Ref Proof Of Residency Type ID">
+      <items style="Lookup" dataController="IdentificationProof" newDataView="createForm1" dataValueField="RefProofOfResidencyTypeID" dataTextField="Description" />
+    </field>
+    <field name="ProofOfResidency" type="String" readOnly="true" label="Residency Proof" length="100" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="Email" type="String" label="Email" length="50" />
+    <field name="PhoneNo" type="String" label="Phone No" length="15" />
+    <field name="CYS" type="String" label="CYS" length="10" />
+    <field name="CYG" type="String" label="CYG" length="10" />
+    <field name="ExtendedRole" type="String" label="PERTY" length="20" />
+    <field name="ExtendedLiveStatusStartDate" type="DateTime" label="Admission" />
+    <field name="ExtendedLiveStatusEndDate" type="DateTime" label="LSED" />
+    <field name="TitleID" type="Int32" label="Title ID">
+      <items style="Lookup" dataController="Title" newDataView="createForm1" dataValueField="TitleID" dataTextField="Description" />
+    </field>
+    <field name="Title" type="String" readOnly="true" label="Title" length="15" />
+    <field name="LanguageID" type="Int32" label="Language ID">
+      <items style="Lookup" dataController="Language" newDataView="createForm1" dataValueField="LanguageID" dataTextField="Language" />
+    </field>
+    <field name="Language" type="String" readOnly="true" label="Language" length="12" />
+    <field name="ReligionID" type="Int32" label="Religion ID">
+      <items style="Lookup" dataController="Religion" newDataView="createForm1" dataValueField="ReligionID" dataTextField="Religion" />
+    </field>
+    <field name="Religion" type="String" readOnly="true" label="Belief" length="20" />
+    <field name="PhotoUrl" type="Byte[]" onDemand="true" sourceFields="PersonID" onDemandHandler="ContactPhotoUrl" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Photo" />
+    <field name="OrganizationID" type="Int32" label="Organization ID">
+      <items style="Lookup" dataController="Organisation" newDataView="createForm1" dataValueField="OrganizationID" dataTextField="Name" />
+    </field>
+    <field name="OrganizationName" type="String" readOnly="true" label="Organisation" length="60" />
+    <field name="Address" type="String" label="Address" length="50" />
+    <field name="TownID" type="Int32" label="Town ID">
+      <items style="Lookup" dataController="Town" newDataView="createForm1" dataValueField="TownID" dataTextField="Town" />
+    </field>
+    <field name="Town" type="String" readOnly="true" label="Town" length="30" />
+    <field name="PostalCode" type="String" label="PostCode" length="12" />
+    <field name="CountryID" type="Int32" label="Country ID">
+      <items style="Lookup" dataController="Country" newDataView="createForm1" dataValueField="CountryID" dataTextField="Description" />
+    </field>
+    <field name="Country" type="String" readOnly="true" label="Country" length="100" />
+    <field name="LocationTypeID" type="Int32" label="Location Type ID">
+      <items style="Lookup" dataController="PersonLocationType" newDataView="createForm1" dataValueField="LocationTypeID" dataTextField="Description" />
+    </field>
+    <field name="LocationType" type="String" readOnly="true" label="Location Type" length="100" />
+    <field name="CreatedByID" type="String" label="Created By ID" length="50" />
+    <field name="ExtSetGradeLevel" type="String" label="Set GL" length="20" />
+    <field name="ImportGL" type="String" label="Import GL" length="10" />
+    <field name="RefOccupationID" type="Int32" label="Ref Occupation Id">
+      <items style="Lookup" dataController="Occupation" newDataView="createForm1" dataValueField="RefOccupationID" dataTextField="Occupation" />
+    </field>
+    <field name="HeaderFullname" type="String" readOnly="true" label="Header Fullname" computed="true">
+      <formula>Person.FirstName + ', ' + Person.LastName + ' &gt;&gt; ' + '( ' + 'UPN: ' + Person.IdentificationCode + ' &gt;&gt; ' + Person.CurrentYearGradeLevel + ' )'  
+ </formula>
+    </field>
+    <field name="Occupation" type="String" readOnly="true" label="Occupation" length="25" />
+    <field name="AGE" type="String" readOnly="true" label="AGE" computed="true">
+      <formula>CONVERT(NVARCHAR(10), CONVERT(int,ROUND(DATEDIFF(hour,BirthDate,GETDATE())/8766.0,0))) + ' ' + 'Yrs' 
+</formula>
+    </field>
+    <field name="Fullname" type="String" readOnly="true" label="Fullname" computed="true">
+      <formula>Person.FirstName + '  ' + Person.LastName</formula>
+    </field>
+    <field name="SSNo" type="String" label="SSNo" length="20" />
+    <field name="AccountNo" type="String" label="Account No" length="20" />
+    <field name="Bank" type="String" label="Bank" length="50" />
+    <field name="PersonAllergy" type="DataView" label="Allergy">
+      <dataView controller="PersonAllergy" view="grid1" filterFields="PersonID" />
+    </field>
+    <field name="PersonContactPoint" type="DataView" label="Contact Point">
+      <dataView controller="PersonContactPoint" view="grid1" filterFields="PersonID" />
+    </field>
+    <field name="PersonCredential" type="DataView" label="Credential">
+      <dataView controller="PersonCredential" view="grid1" filterFields="PersonID" />
+    </field>
+    <field name="PersonHealth" type="DataView" label="HealthCheck">
+      <dataView controller="PersonHealth" view="grid1" filterFields="PersonID" />
+    </field>
+    <field name="PersonIdentifier" type="DataView" label="Identification">
+      <dataView controller="PersonIdentifier" view="grid1" filterFields="PersonID" />
+    </field>
+    <field name="PersonImmunisation" type="DataView" label="Immunisation">
+      <dataView controller="PersonImmunisation" view="grid1" filterFields="PersonID" />
+    </field>
+    <field name="PersonDisability" type="DataView" label="Disability">
+      <dataView controller="PersonDisability" view="grid1" filterFields="PersonID" />
+    </field>
+    <field name="OrganizationPersonRole" type="DataView" label="Admission">
+      <dataView controller="OrganizationPersonRole" view="grid1" filterFields="PersonID" />
+    </field>
+    <field name="PersonRelationship" type="DataView" label="Guardian">
+      <dataView controller="PersonRelationship" view="grid1" filterFields="PersonID" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Contact" sortExpression="ModifiedDate DESC" filter="(ExtendedLiveStatusEndDate &gt;= GETDATE() OR ExtendedLiveStatusEndDate IS NULL  AND CurrentYearStatus &lt;&gt; 'No' )">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="MiddleName" columns="35" hidden="true" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="BirthDate" columns="10" tag="pivot4-row1-columnstacked-month&#xD;&#xA;pivot4-title:&quot;What is the count of birthday celebrants by month&quot;&#xD;&#xA;pivot4-vaxistitle:&quot;Number of students&quot;&#xD;&#xA;pivot4-haxistitle:&quot;Month of Year&quot;&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked-year&#xD;&#xA;pivot5-title:&quot;What is the count of birthday celebrants by year and gender&quot;&#xD;&#xA;pivot5-vaxistitle:&quot;Number of students&quot;&#xD;&#xA;pivot5-haxistitle:&quot;Month of Year&quot;" />
+        <dataField fieldName="AGE" columns="8" />
+        <dataField fieldName="RefSexID" aliasFieldName="Sex" tag="pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;Count of students by gender&quot;&#xD;&#xA;&#xD;&#xA;pivot4-col1&#xD;&#xA;pivot5-col1" />
+        <dataField fieldName="ExtendedLiveStatusStartDate" columns="18" />
+        <dataField fieldName="RefCitizenshipStatusID" aliasFieldName="Ethnicity" />
+        <dataField fieldName="LanguageID" aliasFieldName="Language" tag="pivot6-row1-columnstacked-month&#xD;&#xA;pivot6-title:&quot;What is the count of home languages spoken&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;Number of Occurrences&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Language&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot7-row1-pie-top5&#xD;&#xA;pivot7-title:&quot;What is the top 5 most home spoken languages&quot;" />
+        <dataField fieldName="RefProofOfResidencyTypeID" aliasFieldName="ProofOfResidency" hidden="true" />
+        <dataField fieldName="Email" columns="50" hidden="true" />
+        <dataField fieldName="PhoneNo" columns="15" hidden="true" />
+        <dataField fieldName="CYS" columns="4" />
+        <dataField fieldName="CYG" columns="4" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;What is the student population by grade level&quot;&#xD;&#xA;pivot1-vaxistitle:&quot;Number of students&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Grade Level&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot3-row1-pie-sort&#xD;&#xA;pivot3-title:&quot;What is the spread of students by grade level&quot;" />
+        <dataField fieldName="ExtendedRole" columns="10" />
+        <dataField fieldName="ExtendedLiveStatusEndDate" columns="10" hidden="true">
+          <headerText />
+        </dataField>
+        <dataField fieldName="TitleID" aliasFieldName="Title" hidden="true" />
+        <dataField fieldName="ReligionID" aliasFieldName="Religion" hidden="true" />
+        <dataField fieldName="PhotoUrl" columns="15" hidden="true" />
+        <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" hidden="true" />
+        <dataField fieldName="Address" columns="50" hidden="true" />
+        <dataField fieldName="TownID" aliasFieldName="Town" hidden="true" />
+        <dataField fieldName="PostalCode" columns="12" hidden="true" />
+        <dataField fieldName="CountryID" aliasFieldName="Country" hidden="true" />
+        <dataField fieldName="LocationTypeID" aliasFieldName="LocationType" hidden="true" />
+        <dataField fieldName="CreatedByID" columns="50" hidden="true" />
+        <dataField fieldName="ExtSetGradeLevel" columns="20" hidden="true" />
+        <dataField fieldName="ImportGL" columns="10" hidden="true" />
+        <dataField fieldName="RefOccupationID" aliasFieldName="Occupation" tag="pivot8-row1-pie-sort&#xD;&#xA;pivot8-title:&quot;Count of contacts by occupational activity&quot;" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="HeaderFullname" hidden="true" tag="header-text" />
+        <dataField fieldName="Fullname" hidden="true" />
+        <dataField fieldName="SSNo" columns="20" hidden="true" />
+        <dataField fieldName="AccountNo" columns="20" hidden="true" />
+        <dataField fieldName="Bank" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="contacts_in_transit" type="Grid" commandId="command1" label="InTransit Contacts" sortExpression="ModifiedDate DESC" filter="CurrentYearStatus IS NULL OR CurrentYearGradeLevel IS NULL">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="MiddleName" columns="35" hidden="true" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="BirthDate" columns="10" />
+        <dataField fieldName="AGE" columns="8" />
+        <dataField fieldName="RefSexID" aliasFieldName="Sex" />
+        <dataField fieldName="ExtendedLiveStatusStartDate" columns="18" />
+        <dataField fieldName="RefCitizenshipStatusID" aliasFieldName="Ethnicity" />
+        <dataField fieldName="LanguageID" aliasFieldName="Language" />
+        <dataField fieldName="RefProofOfResidencyTypeID" aliasFieldName="ProofOfResidency" hidden="true" />
+        <dataField fieldName="Email" columns="50" hidden="true" />
+        <dataField fieldName="PhoneNo" columns="15" hidden="true" />
+        <dataField fieldName="CYS" columns="4" />
+        <dataField fieldName="CYG" columns="4" />
+        <dataField fieldName="ExtendedRole" columns="10" />
+        <dataField fieldName="ExtendedLiveStatusEndDate" columns="10" hidden="true">
+          <headerText />
+        </dataField>
+        <dataField fieldName="TitleID" aliasFieldName="Title" hidden="true" />
+        <dataField fieldName="ReligionID" aliasFieldName="Religion" hidden="true" />
+        <dataField fieldName="PhotoUrl" columns="15" hidden="true" />
+        <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" hidden="true" />
+        <dataField fieldName="Address" columns="50" hidden="true" />
+        <dataField fieldName="TownID" aliasFieldName="Town" hidden="true" />
+        <dataField fieldName="PostalCode" columns="12" hidden="true" />
+        <dataField fieldName="CountryID" aliasFieldName="Country" hidden="true" />
+        <dataField fieldName="LocationTypeID" aliasFieldName="LocationType" hidden="true" />
+        <dataField fieldName="CreatedByID" columns="50" hidden="true" />
+        <dataField fieldName="RefOccupationID" aliasFieldName="Occupation" />
+        <dataField fieldName="ExtSetGradeLevel" columns="20" hidden="true" />
+        <dataField fieldName="ImportGL" columns="5">
+          <headerText>IMP</headerText>
+        </dataField>
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="HeaderFullname" hidden="true" tag="header-text" />
+        <dataField fieldName="Fullname" hidden="true" />
+        <dataField fieldName="SSNo" columns="20" hidden="true" />
+        <dataField fieldName="AccountNo" columns="20" hidden="true" />
+        <dataField fieldName="Bank" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="archived_contacts" type="Grid" commandId="command1" label="Archived Contacts" sortExpression="ModifiedDate DESC" filter="ExtendedLiveStatusEndDate &lt; GETDATE()&#xD;&#xA;OR&#xD;&#xA;CurrentYearGradeLevel = '999' ">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="MiddleName" columns="35" hidden="true" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="BirthDate" columns="10" />
+        <dataField fieldName="AGE" columns="8" />
+        <dataField fieldName="RefSexID" aliasFieldName="Sex" />
+        <dataField fieldName="ExtendedLiveStatusStartDate" columns="18" />
+        <dataField fieldName="ExtendedLiveStatusEndDate" columns="10">
+          <headerText>Exit Date</headerText>
+        </dataField>
+        <dataField fieldName="RefCitizenshipStatusID" aliasFieldName="Ethnicity" />
+        <dataField fieldName="LanguageID" aliasFieldName="Language" />
+        <dataField fieldName="RefProofOfResidencyTypeID" aliasFieldName="ProofOfResidency" hidden="true" />
+        <dataField fieldName="Email" columns="50" hidden="true" />
+        <dataField fieldName="PhoneNo" columns="15" hidden="true" />
+        <dataField fieldName="CYS" columns="4" />
+        <dataField fieldName="CYG" columns="4" />
+        <dataField fieldName="ExtendedRole" columns="10" />
+        <dataField fieldName="TitleID" aliasFieldName="Title" hidden="true" />
+        <dataField fieldName="ReligionID" aliasFieldName="Religion" hidden="true" />
+        <dataField fieldName="PhotoUrl" columns="15" hidden="true" />
+        <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" hidden="true" />
+        <dataField fieldName="Address" columns="50" hidden="true" />
+        <dataField fieldName="TownID" aliasFieldName="Town" hidden="true" />
+        <dataField fieldName="PostalCode" columns="12" hidden="true" />
+        <dataField fieldName="CountryID" aliasFieldName="Country" hidden="true" />
+        <dataField fieldName="LocationTypeID" aliasFieldName="LocationType" hidden="true" />
+        <dataField fieldName="CreatedByID" columns="50" hidden="true" />
+        <dataField fieldName="ExtSetGradeLevel" columns="20" hidden="true" />
+        <dataField fieldName="ImportGL" columns="10" hidden="true" />
+        <dataField fieldName="RefOccupationID" aliasFieldName="Occupation" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="HeaderFullname" hidden="true" tag="header-text" />
+        <dataField fieldName="Fullname" hidden="true" />
+        <dataField fieldName="SSNo" columns="20" hidden="true" />
+        <dataField fieldName="AccountNo" columns="20" hidden="true" />
+        <dataField fieldName="Bank" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_export_contacts" type="Grid" commandId="command1" label="Contact Export" sortExpression="ModifiedDate DESC" filter="(ExtendedLiveStatusEndDate &gt;= GETDATE() OR ExtendedLiveStatusEndDate IS NULL  AND CurrentYearStatus &lt;&gt; 'No' )" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="MiddleName" columns="35" hidden="true" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="BirthDate" columns="10" tag="pivot4-row1-columnstacked-month&#xD;&#xA;pivot4-title:&quot;What is the count of birthday celebrants by month&quot;&#xD;&#xA;pivot4-vaxistitle:&quot;Number of students&quot;&#xD;&#xA;pivot4-haxistitle:&quot;Month of Year&quot;&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked-year&#xD;&#xA;pivot5-title:&quot;What is the count of birthday celebrants by year and gender&quot;&#xD;&#xA;pivot5-vaxistitle:&quot;Number of students&quot;&#xD;&#xA;pivot5-haxistitle:&quot;Month of Year&quot;" />
+        <dataField fieldName="AGE" columns="8" />
+        <dataField fieldName="RefSexID" aliasFieldName="Sex" tag="pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;Count of students by gender&quot;&#xD;&#xA;&#xD;&#xA;pivot4-col1&#xD;&#xA;pivot5-col1" />
+        <dataField fieldName="ExtendedLiveStatusStartDate" columns="18" />
+        <dataField fieldName="RefCitizenshipStatusID" aliasFieldName="Ethnicity" />
+        <dataField fieldName="LanguageID" aliasFieldName="Language" tag="pivot6-row1-columnstacked-month&#xD;&#xA;pivot6-title:&quot;What is the count of home languages spoken&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;Number of Occurrences&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Language&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot7-row1-pie-top5&#xD;&#xA;pivot7-title:&quot;What is the top 5 most home spoken languages&quot;" />
+        <dataField fieldName="RefProofOfResidencyTypeID" aliasFieldName="ProofOfResidency" hidden="true" />
+        <dataField fieldName="Email" columns="50" hidden="true" />
+        <dataField fieldName="PhoneNo" columns="15" hidden="true" />
+        <dataField fieldName="CYS" columns="4" />
+        <dataField fieldName="CYG" columns="4" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;What is the student population by grade level&quot;&#xD;&#xA;pivot1-vaxistitle:&quot;Number of students&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Grade Level&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot3-row1-pie-sort&#xD;&#xA;pivot3-title:&quot;What is the spread of students by grade level&quot;" />
+        <dataField fieldName="ExtendedRole" columns="10" />
+        <dataField fieldName="ExtendedLiveStatusEndDate" columns="10" hidden="true">
+          <headerText />
+        </dataField>
+        <dataField fieldName="TitleID" aliasFieldName="Title" hidden="true" />
+        <dataField fieldName="ReligionID" aliasFieldName="Religion" hidden="true" />
+        <dataField fieldName="PhotoUrl" columns="15" hidden="true" />
+        <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" hidden="true" />
+        <dataField fieldName="Address" columns="50" hidden="true" />
+        <dataField fieldName="TownID" aliasFieldName="Town" hidden="true" />
+        <dataField fieldName="PostalCode" columns="12" hidden="true" />
+        <dataField fieldName="CountryID" aliasFieldName="Country" hidden="true" />
+        <dataField fieldName="LocationTypeID" aliasFieldName="LocationType" hidden="true" />
+        <dataField fieldName="CreatedByID" columns="50" hidden="true" />
+        <dataField fieldName="ExtSetGradeLevel" columns="20" hidden="true" />
+        <dataField fieldName="ImportGL" columns="10" hidden="true" />
+        <dataField fieldName="RefOccupationID" aliasFieldName="Occupation" tag="pivot8-row1-pie-sort&#xD;&#xA;pivot8-title:&quot;Count of contacts by occupational activity&quot;" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="HeaderFullname" hidden="true" tag="header-text" />
+        <dataField fieldName="Fullname" hidden="true" />
+        <dataField fieldName="SSNo" columns="20" />
+        <dataField fieldName="AccountNo" columns="20" />
+        <dataField fieldName="Bank" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Contact">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="MiddleName" columns="35" />
+            <dataField fieldName="BirthDate" columns="10" />
+            <dataField fieldName="RefSexID" aliasFieldName="Sex" />
+            <dataField fieldName="TitleID" aliasFieldName="Title" />
+            <dataField fieldName="UPN" columns="10" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="LanguageID" aliasFieldName="Language" />
+            <dataField fieldName="ReligionID" aliasFieldName="Religion" />
+            <dataField fieldName="RefCitizenshipStatusID" aliasFieldName="Ethnicity" />
+            <dataField fieldName="RefProofOfResidencyTypeID" aliasFieldName="ProofOfResidency" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="PhoneNo" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c3" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="PhotoUrl" columns="15" tag="thumb-person&#xD;&#xA;image-size-75x90&#xD;&#xA;image-quality-10&#xD;&#xA;image-large-cover&#xD;&#xA;image-large-clip&#xD;&#xA;image-large-reject" />
+            <dataField fieldName="AGE" hidden="true" />
+            <dataField fieldName="RefOccupationID" aliasFieldName="Occupation" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Address &amp; Location" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="Address" columns="50" />
+            <dataField fieldName="TownID" aliasFieldName="Town" />
+            <dataField fieldName="PostalCode" columns="12" />
+            <dataField fieldName="CountryID" aliasFieldName="Country" />
+            <dataField fieldName="LocationTypeID" aliasFieldName="LocationType" />
+          </dataFields>
+        </category>
+        <category id="c12" headerText="Banking Details" collapsed="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="SSNo" columns="20" />
+            <dataField fieldName="AccountNo" columns="20" />
+            <dataField fieldName="Bank" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c5" headerText="Audit" collapsed="true" floating="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="HeaderFullname" hidden="true" />
+            <dataField fieldName="Fullname" hidden="true" />
+            <dataField fieldName="ImportGL" columns="10" hidden="true" />
+            <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c10" tab="ADMISSION" flow="NewRow">
+          <dataFields>
+            <dataField fieldName="OrganizationPersonRole" columns="15" tag="modal-never&#xD;&#xA;material-icon-school">
+              <headerText>Admission</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="c11" tab="GUARDIAN">
+          <dataFields>
+            <dataField fieldName="PersonRelationship" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;" />
+          </dataFields>
+        </category>
+        <category id="d1" tab="ALLERGY">
+          <dataFields>
+            <dataField fieldName="PersonAllergy" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;modal-dock-bottom">
+              <headerText>ALLERGY</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="d2" tab="CONTACT POINT">
+          <dataFields>
+            <dataField fieldName="PersonContactPoint" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;modal-dock-bottom">
+              <headerText>CONTACT POINT</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="d3" tab="CREDENTIALS">
+          <dataFields>
+            <dataField fieldName="PersonCredential" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;modal-dock-bottom">
+              <headerText>CREDENTIALS</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="c6" tab="HEALTH CHECK">
+          <dataFields>
+            <dataField fieldName="PersonHealth" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;modal-dock-bottom" />
+          </dataFields>
+        </category>
+        <category id="c7" tab="IDENTIFIERS">
+          <dataFields>
+            <dataField fieldName="PersonIdentifier" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;" />
+          </dataFields>
+        </category>
+        <category id="c8" tab="IMMUNISATION">
+          <dataFields>
+            <dataField fieldName="PersonImmunisation" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;" />
+          </dataFields>
+        </category>
+        <category id="c9" tab="SPECIAL NEED">
+          <dataFields>
+            <dataField fieldName="PersonDisability" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;content-stub-none" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Contact">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="MiddleName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="BirthDate" columns="10" />
+            <dataField fieldName="RefSexID" aliasFieldName="Sex" />
+            <dataField fieldName="TitleID" aliasFieldName="Title" />
+            <dataField fieldName="UPN" columns="10" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="LanguageID" aliasFieldName="Language" />
+            <dataField fieldName="ReligionID" aliasFieldName="Religion" />
+            <dataField fieldName="RefCitizenshipStatusID" aliasFieldName="Ethnicity" />
+            <dataField fieldName="RefProofOfResidencyTypeID" aliasFieldName="ProofOfResidency" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="PhoneNo" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c3" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="PhotoUrl" columns="15" tag="thumb-person&#xD;&#xA;image-size-75x90&#xD;&#xA;image-quality-10&#xD;&#xA;image-large-cover&#xD;&#xA;image-large-clip&#xD;&#xA;image-large-reject" />
+            <dataField fieldName="AGE" />
+            <dataField fieldName="RefOccupationID" aliasFieldName="Occupation" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Address &amp; Location" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="Address" columns="50" />
+            <dataField fieldName="TownID" aliasFieldName="Town" />
+            <dataField fieldName="PostalCode" columns="12" />
+            <dataField fieldName="CountryID" aliasFieldName="Country" />
+            <dataField fieldName="LocationTypeID" aliasFieldName="LocationType" />
+          </dataFields>
+        </category>
+        <category id="c6" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="SSNo" columns="20" />
+            <dataField fieldName="AccountNo" columns="20" />
+            <dataField fieldName="Bank" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c5" headerText="Audit" collapsed="true">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="HeaderFullname" hidden="true" />
+            <dataField fieldName="Fullname" hidden="true" />
+            <dataField fieldName="ImportGL" columns="10" hidden="true" />
+            <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createFormImport" type="Form" commandId="command1" label="New Contact">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="MiddleName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="BirthDate" columns="10" />
+            <dataField fieldName="TitleID" aliasFieldName="Title" />
+            <dataField fieldName="RefSexID" aliasFieldName="Sex" />
+            <dataField fieldName="SSNo" columns="20" />
+            <dataField fieldName="AccountNo" columns="20" />
+            <dataField fieldName="Bank" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="xxxxxx" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="LanguageID" aliasFieldName="Language" />
+            <dataField fieldName="ReligionID" aliasFieldName="Religion" />
+            <dataField fieldName="RefCitizenshipStatusID" aliasFieldName="Ethnicity" />
+            <dataField fieldName="RefProofOfResidencyTypeID" aliasFieldName="ProofOfResidency" hidden="true" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="PhoneNo" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="ggggg" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="RefOccupationID" aliasFieldName="Occupation" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Address &amp; Location" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="Address" columns="50" />
+            <dataField fieldName="TownID" aliasFieldName="Town" />
+            <dataField fieldName="PostalCode" columns="12" />
+            <dataField fieldName="CountryID" aliasFieldName="Country" />
+            <dataField fieldName="LocationTypeID" aliasFieldName="LocationType" hidden="true" />
+            <dataField fieldName="ImportGL" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action commandName="SQL" headerText="PO-01 - Refresh MDS" cssClass="material-icon-sync" id="a100">
+        <data><![CDATA[/*
+	Version		Date :			Description	sync year group																				Author
+	-- 0.1		18/09/2019		This process updates the current selected record and										Benjamin Ohene-Adu
+								updates the gradelevel, CurrentYearStatus and the ExtendedRole								Benjamin Ohene-Adu
+	-- 0.2		19/09/2019      This stage of the process updates the status of students with a current enrollment record
+								CurrentYearGradeLevel, CurrentYearStatus and ExtendedRole
+*/
+
+
+EXEC [zusp_harmonise_grade_level_groups]
+	SET @Result_ShowMessage = 'Update process for CYGs ' + ' ' + 'has completed successfully' ;
+	SET @Result_Refresh = 1]]></data>
+      </action>
+      <action commandName="SQL" headerText="PO-02 - Sweep Attributes" cssClass="material-icon-cleaning_services" id="a101">
+        <data><![CDATA[/*
+	Version		Date :			Description	sync year group																				Author
+	-- 0.1		18/09/2019		This process updates the current selected record and										Benjamin Ohene-Adu
+								updates the gradelevel, CurrentYearStatus and the ExtendedRole								Benjamin Ohene-Adu
+	-- 0.2		19/09/2019      This stage of the process updates the status of students with a current enrollment record
+								CurrentYearGradeLevel, CurrentYearStatus and ExtendedRole
+*/
+
+
+EXEC [zusp_harmonise_grade_level_groups]
+	SET @Result_ShowMessage = 'Update process for CYGs ' + ' ' + 'has completed successfully' ;
+	SET @Result_Refresh = 1]]></data>
+      </action>
+      <action id="a2" />
+      <action id="a6" commandName="Import" commandArgument="createFormImport" headerText="Step 01: Upload Transfer File" />
+      <action commandName="SQL" headerText="Step 02: Run Enrolment Routine" cssClass="material-icon-run_circle" id="a102" confirmation="This action would enroll multiple records into the system. Ensure you have set the RecordType you want to work with in the App Configuration (Student, Staff or Parent). Do you want to continue ?">
+        <data><![CDATA[-- Fast onboarding from upload
+EXEC [dbo].[usp_ops_mass_create_onboarding_from_transferfile_p1]
+
+EXEC [dbo].[usp_ops_mass_create_enrolment_from_onboarding_p2]
+SET @Result_ShowMessage = 'Express enrolment process completed successfully' ;
+	SET @Result_Refresh = 1]]></data>
+      </action>
+      <action commandName="SQL" headerText="Revert &amp; Cleanup Upload Error" cssClass="material-icon-local_laundry_service" id="a103" confirmation="This action would unenroll multiple records from the system if you have made a mistake in the import file. Do you want to continue ?">
+        <data><![CDATA[EXEC usp_ops_mass_revert_onboarding_from_transferfile_p3]]></data>
+      </action>
+      <action id="a5" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a3" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a4" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a100" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a101" commandName="ExportRss" headerText="Send RSS API" />
+      <action id="a102" commandName="ExportRowset" headerText="Export TO IPY" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r101" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateLastName"><![CDATA[var fieldValue = [LastName];
+if (fieldValue == null) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('LastName', 'Required field.');
+}]]></rule>
+    <rule id="r100" commandName="New|Update" type="Sql" phase="After" name="setAdmissionNumber"><![CDATA[IF @UPN IS NULL
+BEGIN
+ EXEC [dbo].[usp_ops_generate_identification_codes] @PersonID
+END ]]></rule>
+    <rule id="r102" commandName="Insert" type="Sql" phase="After" name="setGlobalID"><![CDATA[EXEC [dbo].[zusp_update_globalid]
+--SET @Result_ShowMessage = 'Global identifications have been successfully updated' 
+
+]]></rule>
+  </businessRules>
+</dataController>

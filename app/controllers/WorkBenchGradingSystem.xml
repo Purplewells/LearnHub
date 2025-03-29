@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkBenchGradingSystem" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="GradeLevel" type="DataView" label="Grade Level">
+      <dataView controller="GradeLevel" view="grid1" />
+    </field>
+    <field name="SchoolStream" type="DataView" label="School Stream">
+      <dataView controller="SchoolStream" view="grid1" />
+    </field>
+    <field name="PerformanceBaseConversion" type="DataView" label="Performance Base Conversion">
+      <dataView controller="PerformanceBaseConversion" view="grid1" />
+    </field>
+    <field name="PromotionScheme" type="DataView" label="Promotion Scheme">
+      <dataView controller="PromotionScheme" view="grid1" />
+    </field>
+    <field name="SessionEnrollmentScheme" type="DataView" label="Session Enrollment Scheme">
+      <dataView controller="SessionEnrollmentScheme" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="GradingParameters" type="Form" label="GRADING &amp; PROGRESSION HUB">
+      <categories>
+        <category id="c1" headerText="GRADE LEVELS" tab="GRADE LEVELS" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="GradeLevel" columns="15" tag="material-icon-signal_cellular_alt&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-fit-content" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="SCHOOL STREAMS" tab="STREAMS">
+          <dataFields>
+            <dataField fieldName="SchoolStream" columns="15" tag="modal-dock-bottom&#xD;&#xA;modal-fit-content&#xD;&#xA;material-icon-water" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="GRADE SCALES" tab="GRADE SCALES" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="PerformanceBaseConversion" columns="15" tag="modal-dock-bottom&#xD;&#xA;modal-fit-content&#xD;&#xA;material-icon-exposure_plus_1">
+              <headerText>Grade Scales</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="c4" headerText="PROMOTION SCHEME" tab="PROMOTION SCHEME" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="PromotionScheme" columns="15" tag="modal-max-sm&#xD;&#xA;modal-fit-content" />
+          </dataFields>
+        </category>
+        <category id="c5" headerText="SESSION PROGRESSION" tab="SESSION PROGRESSION" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="SessionEnrollmentScheme" columns="15" tag="modal-max-sm&#xD;&#xA;modal-fit-content&#xD;&#xA;material-icon-settings" />
+          </dataFields>
+        </category>
+      </categories>
+      <headerText>This Grading Hub provides users with a common place to set up GradeLevels, Streams, and Grade Scales.</headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Grade Scale Actions" flat="false" />
+  </actions>
+</dataController>

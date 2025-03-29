@@ -1,0 +1,643 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="HistoricalGradesReport" label="HistoricalGradesReport" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"master_student_grades_gradebooks_p4"."PersonID" "PersonID"
+	,"master_student_grades_gradebooks_p4"."FirstName" "FirstName"
+	,"master_student_grades_gradebooks_p4"."LastName" "LastName"
+	,"master_student_grades_gradebooks_p4"."UPN" "UPN"
+	,"master_student_grades_gradebooks_p4"."GradeLevel" "GradeLevel"
+	,"master_student_grades_gradebooks_p4"."Stream" "Stream"
+	,"master_student_grades_gradebooks_p4"."Subject" "Subject"
+	,"master_student_grades_gradebooks_p4"."ClassScore" "ClassScore"
+	,"master_student_grades_gradebooks_p4"."ExamScore" "ExamScore"
+	,"master_student_grades_gradebooks_p4"."TotalScore" "TotalScore"
+	,"master_student_grades_gradebooks_p4"."GrandTotal" "GrandTotal"
+	,"master_student_grades_gradebooks_p4"."SubjectRanking" "SubjectRanking"
+	,"master_student_grades_gradebooks_p4"."SubjectRank" "SubjectRank"
+	,"master_student_grades_gradebooks_p4"."ClassRanking" "ClassRanking"
+	,"master_student_grades_gradebooks_p4"."NoInClass" "NoInClass"
+	,"master_student_grades_gradebooks_p4"."StudentGLScore" "StudentGlscore"
+	,"master_student_grades_gradebooks_p4"."StudentAVGScore" "StudentAvgscore"
+	,"master_student_grades_gradebooks_p4"."ClassAVGScore" "ClassAvgscore"
+	,"master_student_grades_gradebooks_p4"."StudentGLCoursesTaken" "StudentGlcoursesTaken"
+	,"master_student_grades_gradebooks_p4"."StudentTermCoursesTaken" "StudentTermCoursesTaken"
+	,"master_student_grades_gradebooks_p4"."LG" "LG"
+	,"master_student_grades_gradebooks_p4"."NG" "NG"
+	,"master_student_grades_gradebooks_p4"."Passed" "PSN"
+	,"master_student_grades_gradebooks_p4"."Descriptor" "Descriptor"
+	,"master_student_grades_gradebooks_p4"."Remark" "Remark"
+	,"master_student_grades_gradebooks_p4"."IsActive" "IsActive"
+	,"master_student_grades_gradebooks_p4"."CSY" "CSY"
+	,"master_student_grades_gradebooks_p4"."Term" "Term"
+	,"master_student_grades_gradebooks_p4"."calYear" "CalYear"
+	,"master_student_grades_gradebooks_p4"."Address" "Address"
+	,"master_student_grades_gradebooks_p4"."SchoolName" "SchoolName"
+	,"master_student_grades_gradebooks_p4"."Presence" "Presence"
+	,"master_student_grades_gradebooks_p4"."Absence" "Absence"
+	,"master_student_grades_gradebooks_p4"."PossibleAttendances" "PossibleAttendances"
+	,"master_student_grades_gradebooks_p4"."TotalBilledAmount" "TotalBilledAmount"
+	,"master_student_grades_gradebooks_p4"."TotalPaid" "TotalPaid"
+	,"master_student_grades_gradebooks_p4"."Balance" "Balance"
+	,"master_student_grades_gradebooks_p4"."StudentCourseSectionID" "StudentCourseSectionID"
+	,"master_student_grades_gradebooks_p4"."pctAbsence" "PctAbsence"
+	,"master_student_grades_gradebooks_p4"."pctAttended" "PctAttended"
+	,"master_student_grades_gradebooks_p4"."PerAbsence" "PerAbsence"
+	,"master_student_grades_gradebooks_p4"."PerPresence" "PerPresence"
+	,"master_student_grades_gradebooks_p4"."Presences" "Presences"
+	,"master_student_grades_gradebooks_p4"."ExcusedAbsences" "ExcusedAbsences"
+	,"master_student_grades_gradebooks_p4"."UnExcusedAbsences" "UnExcusedAbsences"
+	,"master_student_grades_gradebooks_p4"."Tardies" "Tardies"
+	,"master_student_grades_gradebooks_p4"."NextSessionStartDate" "NextSessionStartDate"
+	,"master_student_grades_gradebooks_p4"."NextSessionEndDate" "NextSessionEndDate"
+	,"master_student_grades_gradebooks_p4"."PhotoUrl" "PhotoUrl"
+	,"master_student_grades_gradebooks_p4"."Logo" "Logo"
+	,"master_student_grades_gradebooks_p4"."IsAtRisk" "IsAtRisk"
+	,"master_student_grades_gradebooks_p4"."IsCHRAB" "IsChrab"
+	,"master_student_grades_gradebooks_p4"."OnTheVerge" "OnTheVerge"
+	,"master_student_grades_gradebooks_p4"."prevIsAtRiskCount" "PrevIsAtRiskCount"
+	,"master_student_grades_gradebooks_p4"."prevIsCHRABCount" "PrevIsChrabcount"
+	,"master_student_grades_gradebooks_p4"."prevOnTheVergeCount" "PrevOnTheVergeCount"
+	,"master_student_grades_gradebooks_p4"."PerfectAttenance_Count" "PerfectAttendance"
+	,"master_student_grades_gradebooks_p4"."AttendanceRate" "AttendanceRate"
+from "dbo"."master_student_grades_gradebooks_p4" "master_student_grades_gradebooks_p4"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonID" type="Int32" label="Person ID" showInSummary="true" isPrimaryKey="true" isVirtual="true" />
+    <field name="FirstName" type="String" label="Firstname" length="35" showInSummary="true" />
+    <field name="LastName" type="String" label="Lastname" length="35" showInSummary="true" />
+    <field name="UPN" type="String" label="UPN" length="10" showInSummary="true" />
+    <field name="GradeLevel" type="String" label="GL" length="10" showInSummary="true" />
+    <field name="Stream" type="String" label="Stream" length="12" />
+    <field name="Subject" type="String" label="Subject" length="30" />
+    <field name="ClassScore" type="Decimal" label="Class" />
+    <field name="ExamScore" type="Decimal" label="Exam" />
+    <field name="TotalScore" type="Decimal" label="Score" />
+    <field name="GrandTotal" type="Decimal" label="Total" />
+    <field name="SubjectRanking" type="Int32" label="Subject Ranking" />
+    <field name="SubjectRank" type="String" label="Sub Rank" length="8" />
+    <field name="ClassRanking" type="Int32" label="Rank" />
+    <field name="NoInClass" type="Int32" label="No In Class" />
+    <field name="StudentGlscore" type="Decimal" label="SGLS" />
+    <field name="StudentAvgscore" type="Decimal" label="SAVG" />
+    <field name="ClassAvgscore" type="Decimal" label="CAVG" />
+    <field name="StudentGlcoursesTaken" type="Int32" label="GL Courses" />
+    <field name="StudentTermCoursesTaken" type="Int32" label="Term Courses" />
+    <field name="LG" type="String" label="LG" length="5" />
+    <field name="NG" type="String" label="NG" length="10" />
+    <field name="PSN" type="String" label="PSN" length="3" />
+    <field name="Descriptor" type="String" label="Descriptor" length="30" />
+    <field name="Remark" type="String" label="Remark" length="1024" />
+    <field name="IsActive" type="Boolean" label="Active" />
+    <field name="CSY" type="Boolean" label="CSY" />
+    <field name="Term" type="String" label="Term" length="20" />
+    <field name="CalYear" type="String" label="Year" length="30" />
+    <field name="Address" type="String" label="Address" length="150" />
+    <field name="SchoolName" type="String" label="School" length="50" />
+    <field name="Presence" type="Int32" label="PRN" />
+    <field name="Absence" type="Int32" label="ABS" />
+    <field name="PossibleAttendances" type="Int32" label="PA" />
+    <field name="TotalBilledAmount" type="Decimal" dataFormatString="c" label="Total Billed" />
+    <field name="TotalPaid" type="Decimal" dataFormatString="c" label="Total Paid" />
+    <field name="Balance" type="Decimal" dataFormatString="c" label="Balance" />
+    <field name="StudentCourseSectionID" type="Int32" label="Student Course Section ID" />
+    <field name="PctAbsence" type="Int32" label="% Absence" />
+    <field name="PctAttended" type="Int32" label="% Attended" />
+    <field name="PerAbsence" type="Int32" label="Per Absence" />
+    <field name="PerPresence" type="Int32" label="Per Presence" />
+    <field name="Presences" type="Int32" label="Presences" />
+    <field name="ExcusedAbsences" type="Int32" label="Excused Absences" />
+    <field name="UnExcusedAbsences" type="Int32" label="UnExcused Absences" />
+    <field name="Tardies" type="Int32" label="Late" />
+    <field name="NextSessionStartDate" type="DateTime" label="NSSD" />
+    <field name="NextSessionEndDate" type="DateTime" label="NSED" />
+    <field name="PhotoUrl" type="Byte[]" onDemand="true" sourceFields="" onDemandHandler="master_student_grades_gradebooks_p4PhotoUrl" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Photo Url" />
+    <field name="Logo" type="Byte[]" onDemand="true" sourceFields="" onDemandHandler="master_student_grades_gradebooks_p4Logo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Logo" />
+    <field name="IsAtRisk" type="Int32" label="IsAtRisk" />
+    <field name="IsChrab" type="Int32" label="IsCHRAB" />
+    <field name="OnTheVerge" type="Int32" label="OnTheVerge" />
+    <field name="PrevIsAtRiskCount" type="Int32" label="PrevIsAtRiskCount" />
+    <field name="PrevIsChrabcount" type="Int32" label="PrevIsCHRABCount" />
+    <field name="PrevOnTheVergeCount" type="Int32" label="PrevOnTheVergeCount" />
+    <field name="PerfectAttendance" type="Int32" label="IsPA" />
+    <field name="AttendanceRate" type="Decimal" dataFormatString="p" label="ARate" />
+  </fields>
+  <views>
+    <view id="grid1_attainment" type="Grid" commandId="command1" label="Assessment Matrix" groupExpression="Term, GradeLevel, Stream, UPN" reportTemplate="true" filter="IsActive = 1" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="GradeLevel" columns="10" />
+        <dataField fieldName="Stream" columns="12" />
+        <dataField fieldName="Subject" columns="30" />
+        <dataField fieldName="ClassScore" columns="8" />
+        <dataField fieldName="ExamScore" columns="8" />
+        <dataField fieldName="TotalScore" columns="8" />
+        <dataField fieldName="GrandTotal" columns="15" />
+        <dataField fieldName="SubjectRanking" columns="15" hidden="true" />
+        <dataField fieldName="SubjectRank" columns="8" />
+        <dataField fieldName="ClassRanking" columns="5" />
+        <dataField fieldName="NoInClass" columns="15" hidden="true" />
+        <dataField fieldName="StudentGlscore" columns="8" />
+        <dataField fieldName="StudentAvgscore" columns="8" />
+        <dataField fieldName="ClassAvgscore" columns="5" />
+        <dataField fieldName="StudentGlcoursesTaken" columns="15" hidden="true" />
+        <dataField fieldName="StudentTermCoursesTaken" columns="15" hidden="true" />
+        <dataField fieldName="LG" columns="5" />
+        <dataField fieldName="NG" columns="10" hidden="true" />
+        <dataField fieldName="PSN" columns="3" />
+        <dataField fieldName="Descriptor" columns="30" />
+        <dataField fieldName="Remark" hidden="true" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="CSY" columns="3" />
+        <dataField fieldName="Term" columns="20" />
+        <dataField fieldName="CalYear" columns="30" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="SchoolName" columns="50" hidden="true" />
+        <dataField fieldName="Presence" columns="5" />
+        <dataField fieldName="Absence" columns="5" />
+        <dataField fieldName="PossibleAttendances" columns="5" />
+        <dataField fieldName="TotalBilledAmount" columns="15" hidden="true" />
+        <dataField fieldName="TotalPaid" columns="15" hidden="true" />
+        <dataField fieldName="Balance" columns="15" hidden="true" />
+        <dataField fieldName="StudentCourseSectionID" columns="15" hidden="true" />
+        <dataField fieldName="PctAbsence" columns="15" hidden="true" />
+        <dataField fieldName="PctAttended" columns="15" hidden="true" />
+        <dataField fieldName="PerAbsence" columns="15" hidden="true" />
+        <dataField fieldName="PerPresence" columns="15" hidden="true" />
+        <dataField fieldName="Presences" columns="15" hidden="true" />
+        <dataField fieldName="ExcusedAbsences" columns="15" hidden="true" />
+        <dataField fieldName="UnExcusedAbsences" columns="15" hidden="true" />
+        <dataField fieldName="Tardies" columns="15" hidden="true" />
+        <dataField fieldName="NextSessionStartDate" columns="10" hidden="true" />
+        <dataField fieldName="NextSessionEndDate" columns="10" hidden="true" />
+        <dataField fieldName="PhotoUrl" columns="15" hidden="true" />
+        <dataField fieldName="Logo" columns="15" hidden="true" />
+        <dataField fieldName="IsAtRisk" columns="15" />
+        <dataField fieldName="IsChrab" columns="15" />
+        <dataField fieldName="OnTheVerge" columns="15" />
+        <dataField fieldName="PrevIsAtRiskCount" columns="15" />
+        <dataField fieldName="PrevIsChrabcount" columns="15" />
+        <dataField fieldName="PrevOnTheVergeCount" columns="15" />
+        <dataField fieldName="PerfectAttendance" columns="15" />
+        <dataField fieldName="AttendanceRate" columns="15" />
+      </dataFields>
+    </view>
+    <view id="grid1_current_year_report" type="Grid" commandId="command1" label="Current Year - ReportCards" groupExpression="Term, GradeLevel, Stream, UPN" reportTemplate="true" filter="CSY = 1">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="GradeLevel" columns="10" />
+        <dataField fieldName="Stream" columns="12" />
+        <dataField fieldName="Subject" columns="30" />
+        <dataField fieldName="ClassScore" columns="8" />
+        <dataField fieldName="ExamScore" columns="8" />
+        <dataField fieldName="TotalScore" columns="8" />
+        <dataField fieldName="GrandTotal" columns="15" />
+        <dataField fieldName="SubjectRanking" columns="15" hidden="true" />
+        <dataField fieldName="SubjectRank" columns="8" />
+        <dataField fieldName="ClassRanking" columns="5" />
+        <dataField fieldName="NoInClass" columns="15" hidden="true" />
+        <dataField fieldName="StudentGlscore" columns="5" />
+        <dataField fieldName="StudentAvgscore" columns="5" />
+        <dataField fieldName="ClassAvgscore" columns="5" />
+        <dataField fieldName="StudentGlcoursesTaken" columns="15" hidden="true" />
+        <dataField fieldName="StudentTermCoursesTaken" columns="15" hidden="true" />
+        <dataField fieldName="LG" columns="5" />
+        <dataField fieldName="NG" columns="10" hidden="true" />
+        <dataField fieldName="PSN" columns="3" />
+        <dataField fieldName="Descriptor" columns="30" />
+        <dataField fieldName="Remark" hidden="true" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="CSY" columns="3" />
+        <dataField fieldName="Term" columns="20" />
+        <dataField fieldName="CalYear" columns="30" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="SchoolName" columns="50" hidden="true" />
+        <dataField fieldName="Presence" columns="5" />
+        <dataField fieldName="Absence" columns="5" />
+        <dataField fieldName="PossibleAttendances" columns="5" />
+        <dataField fieldName="TotalBilledAmount" columns="15" hidden="true" />
+        <dataField fieldName="TotalPaid" columns="15" hidden="true" />
+        <dataField fieldName="Balance" columns="15" hidden="true" />
+        <dataField fieldName="StudentCourseSectionID" columns="15" hidden="true" />
+        <dataField fieldName="PctAbsence" columns="15" hidden="true" />
+        <dataField fieldName="PctAttended" columns="15" hidden="true" />
+        <dataField fieldName="PerAbsence" columns="15" hidden="true" />
+        <dataField fieldName="PerPresence" columns="15" hidden="true" />
+        <dataField fieldName="Presences" columns="15" hidden="true" />
+        <dataField fieldName="ExcusedAbsences" columns="15" hidden="true" />
+        <dataField fieldName="UnExcusedAbsences" columns="15" hidden="true" />
+        <dataField fieldName="Tardies" columns="15" hidden="true" />
+        <dataField fieldName="NextSessionStartDate" columns="10" hidden="true" />
+        <dataField fieldName="NextSessionEndDate" columns="10" hidden="true" />
+        <dataField fieldName="PhotoUrl" columns="15" hidden="true" />
+        <dataField fieldName="Logo" columns="15" hidden="true" />
+        <dataField fieldName="IsAtRisk" columns="15" />
+        <dataField fieldName="IsChrab" columns="15" />
+        <dataField fieldName="OnTheVerge" columns="15" />
+        <dataField fieldName="PrevIsAtRiskCount" columns="15" />
+        <dataField fieldName="PrevIsChrabcount" columns="15" />
+        <dataField fieldName="PrevOnTheVergeCount" columns="15" />
+        <dataField fieldName="PerfectAttendance" columns="15" />
+        <dataField fieldName="AttendanceRate" columns="15" />
+      </dataFields>
+    </view>
+    <view id="grid1_attainment_with_photos" type="Grid" commandId="command1" label="Current Term - Photo ReportCards" groupExpression="Term, GradeLevel, Stream, UPN" reportTemplate="true" filter="IsActive = 1" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="GradeLevel" columns="10" />
+        <dataField fieldName="Stream" columns="12" />
+        <dataField fieldName="Subject" columns="30" />
+        <dataField fieldName="ClassScore" columns="8" />
+        <dataField fieldName="ExamScore" columns="8" />
+        <dataField fieldName="TotalScore" columns="8" />
+        <dataField fieldName="GrandTotal" columns="15" />
+        <dataField fieldName="SubjectRanking" columns="15" hidden="true" />
+        <dataField fieldName="SubjectRank" columns="8" />
+        <dataField fieldName="ClassRanking" columns="5" />
+        <dataField fieldName="NoInClass" columns="15" hidden="true" />
+        <dataField fieldName="StudentGlscore" columns="5" />
+        <dataField fieldName="StudentAvgscore" columns="5" />
+        <dataField fieldName="ClassAvgscore" columns="5" />
+        <dataField fieldName="StudentGlcoursesTaken" columns="15" hidden="true" />
+        <dataField fieldName="StudentTermCoursesTaken" columns="15" hidden="true" />
+        <dataField fieldName="LG" columns="5" />
+        <dataField fieldName="NG" columns="10" hidden="true" />
+        <dataField fieldName="PSN" columns="3" />
+        <dataField fieldName="Descriptor" columns="30" />
+        <dataField fieldName="Remark" hidden="true" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="CSY" columns="3" />
+        <dataField fieldName="Term" columns="20" />
+        <dataField fieldName="CalYear" columns="30" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="SchoolName" columns="50" hidden="true" />
+        <dataField fieldName="Presence" columns="5" />
+        <dataField fieldName="Absence" columns="5" />
+        <dataField fieldName="PossibleAttendances" columns="5" />
+        <dataField fieldName="TotalBilledAmount" columns="15" hidden="true" />
+        <dataField fieldName="TotalPaid" columns="15" hidden="true" />
+        <dataField fieldName="Balance" columns="15" hidden="true" />
+        <dataField fieldName="StudentCourseSectionID" columns="15" hidden="true" />
+        <dataField fieldName="PctAbsence" columns="15" hidden="true" />
+        <dataField fieldName="PctAttended" columns="15" hidden="true" />
+        <dataField fieldName="PerAbsence" columns="15" hidden="true" />
+        <dataField fieldName="PerPresence" columns="15" hidden="true" />
+        <dataField fieldName="Presences" columns="15" hidden="true" />
+        <dataField fieldName="ExcusedAbsences" columns="15" hidden="true" />
+        <dataField fieldName="UnExcusedAbsences" columns="15" hidden="true" />
+        <dataField fieldName="Tardies" columns="15" hidden="true" />
+        <dataField fieldName="NextSessionStartDate" columns="10" hidden="true" />
+        <dataField fieldName="NextSessionEndDate" columns="10" hidden="true" />
+        <dataField fieldName="PhotoUrl" columns="15" hidden="true" />
+        <dataField fieldName="Logo" columns="15" hidden="true" />
+        <dataField fieldName="IsAtRisk" columns="15" />
+        <dataField fieldName="IsChrab" columns="15" />
+        <dataField fieldName="OnTheVerge" columns="15" />
+        <dataField fieldName="PrevIsAtRiskCount" columns="15" />
+        <dataField fieldName="PrevIsChrabcount" columns="15" />
+        <dataField fieldName="PrevOnTheVergeCount" columns="15" />
+        <dataField fieldName="PerfectAttendance" columns="15" />
+        <dataField fieldName="AttendanceRate" columns="15" />
+      </dataFields>
+    </view>
+    <view id="grid1_attainment_long" type="Grid" commandId="command1" label="Current Term - ReportCards (LR)" groupExpression="Term, GradeLevel, Stream, UPN" reportTemplate="true" filter="IsActive = 1" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="GradeLevel" columns="10" />
+        <dataField fieldName="Stream" columns="12" />
+        <dataField fieldName="Subject" columns="30" />
+        <dataField fieldName="ClassScore" columns="8" />
+        <dataField fieldName="ExamScore" columns="8" />
+        <dataField fieldName="TotalScore" columns="8" />
+        <dataField fieldName="GrandTotal" columns="15" />
+        <dataField fieldName="SubjectRanking" columns="15" hidden="true" />
+        <dataField fieldName="SubjectRank" columns="8" />
+        <dataField fieldName="ClassRanking" columns="5" />
+        <dataField fieldName="NoInClass" columns="15" hidden="true" />
+        <dataField fieldName="StudentGlscore" columns="8" />
+        <dataField fieldName="StudentAvgscore" columns="8" />
+        <dataField fieldName="ClassAvgscore" columns="5" />
+        <dataField fieldName="StudentGlcoursesTaken" columns="15" hidden="true" />
+        <dataField fieldName="StudentTermCoursesTaken" columns="15" hidden="true" />
+        <dataField fieldName="LG" columns="5" />
+        <dataField fieldName="NG" columns="10" hidden="true" />
+        <dataField fieldName="PSN" columns="3" />
+        <dataField fieldName="Descriptor" columns="30" />
+        <dataField fieldName="Remark" hidden="true" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="CSY" columns="3" />
+        <dataField fieldName="Term" columns="20" />
+        <dataField fieldName="CalYear" columns="30" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="SchoolName" columns="50" hidden="true" />
+        <dataField fieldName="Presence" columns="5" />
+        <dataField fieldName="Absence" columns="5" />
+        <dataField fieldName="PossibleAttendances" columns="5" />
+        <dataField fieldName="TotalBilledAmount" columns="15" hidden="true" />
+        <dataField fieldName="TotalPaid" columns="15" hidden="true" />
+        <dataField fieldName="Balance" columns="15" hidden="true" />
+        <dataField fieldName="StudentCourseSectionID" columns="15" hidden="true" />
+        <dataField fieldName="PctAbsence" columns="15" hidden="true" />
+        <dataField fieldName="PctAttended" columns="15" hidden="true" />
+        <dataField fieldName="PerAbsence" columns="15" hidden="true" />
+        <dataField fieldName="PerPresence" columns="15" hidden="true" />
+        <dataField fieldName="Presences" columns="15" hidden="true" />
+        <dataField fieldName="ExcusedAbsences" columns="15" hidden="true" />
+        <dataField fieldName="UnExcusedAbsences" columns="15" hidden="true" />
+        <dataField fieldName="Tardies" columns="15" hidden="true" />
+        <dataField fieldName="NextSessionStartDate" columns="10" hidden="true" />
+        <dataField fieldName="NextSessionEndDate" columns="10" hidden="true" />
+        <dataField fieldName="PhotoUrl" columns="15" hidden="true" />
+        <dataField fieldName="Logo" columns="15" hidden="true" />
+        <dataField fieldName="IsAtRisk" columns="15" />
+        <dataField fieldName="IsChrab" columns="15" />
+        <dataField fieldName="OnTheVerge" columns="15" />
+        <dataField fieldName="PrevIsAtRiskCount" columns="15" />
+        <dataField fieldName="PrevIsChrabcount" columns="15" />
+        <dataField fieldName="PrevOnTheVergeCount" columns="15" />
+        <dataField fieldName="PerfectAttendance" columns="15" />
+        <dataField fieldName="AttendanceRate" columns="15" />
+      </dataFields>
+    </view>
+    <view id="grid1_attainment_with_no_images" type="Grid" commandId="command1" label="Current Term - ReportCards (NP)" groupExpression="Term, GradeLevel, Stream, UPN" reportTemplate="true" filter="IsActive = 1" showInSelector="false">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="GradeLevel" columns="10" />
+        <dataField fieldName="Stream" columns="12" />
+        <dataField fieldName="Subject" columns="30" />
+        <dataField fieldName="ClassScore" columns="8" />
+        <dataField fieldName="ExamScore" columns="8" />
+        <dataField fieldName="TotalScore" columns="8" />
+        <dataField fieldName="GrandTotal" columns="15" />
+        <dataField fieldName="SubjectRanking" columns="15" hidden="true" />
+        <dataField fieldName="SubjectRank" columns="8" />
+        <dataField fieldName="ClassRanking" columns="5" />
+        <dataField fieldName="NoInClass" columns="15" hidden="true" />
+        <dataField fieldName="StudentGlscore" columns="5" />
+        <dataField fieldName="StudentAvgscore" columns="5" />
+        <dataField fieldName="ClassAvgscore" columns="5" />
+        <dataField fieldName="StudentGlcoursesTaken" columns="15" hidden="true" />
+        <dataField fieldName="StudentTermCoursesTaken" columns="15" hidden="true" />
+        <dataField fieldName="LG" columns="5" />
+        <dataField fieldName="NG" columns="10" hidden="true" />
+        <dataField fieldName="PSN" columns="3" />
+        <dataField fieldName="Descriptor" columns="30" />
+        <dataField fieldName="Remark" hidden="true" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="CSY" columns="3" />
+        <dataField fieldName="Term" columns="20" />
+        <dataField fieldName="CalYear" columns="30" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="SchoolName" columns="50" hidden="true" />
+        <dataField fieldName="Presence" columns="5" />
+        <dataField fieldName="Absence" columns="5" />
+        <dataField fieldName="PossibleAttendances" columns="5" />
+        <dataField fieldName="TotalBilledAmount" columns="15" hidden="true" />
+        <dataField fieldName="TotalPaid" columns="15" hidden="true" />
+        <dataField fieldName="Balance" columns="15" hidden="true" />
+        <dataField fieldName="StudentCourseSectionID" columns="15" hidden="true" />
+        <dataField fieldName="PctAbsence" columns="15" hidden="true" />
+        <dataField fieldName="PctAttended" columns="15" hidden="true" />
+        <dataField fieldName="PerAbsence" columns="15" hidden="true" />
+        <dataField fieldName="PerPresence" columns="15" hidden="true" />
+        <dataField fieldName="Presences" columns="15" hidden="true" />
+        <dataField fieldName="ExcusedAbsences" columns="15" hidden="true" />
+        <dataField fieldName="UnExcusedAbsences" columns="15" hidden="true" />
+        <dataField fieldName="Tardies" columns="15" hidden="true" />
+        <dataField fieldName="NextSessionStartDate" columns="10" hidden="true" />
+        <dataField fieldName="NextSessionEndDate" columns="10" hidden="true" />
+        <dataField fieldName="PhotoUrl" columns="15" hidden="true" />
+        <dataField fieldName="Logo" columns="15" hidden="true" />
+        <dataField fieldName="IsAtRisk" columns="15" />
+        <dataField fieldName="IsChrab" columns="15" />
+        <dataField fieldName="OnTheVerge" columns="15" />
+        <dataField fieldName="PrevIsAtRiskCount" columns="15" />
+        <dataField fieldName="PrevIsChrabcount" columns="15" />
+        <dataField fieldName="PrevOnTheVergeCount" columns="15" />
+        <dataField fieldName="PerfectAttendance" columns="15" />
+        <dataField fieldName="AttendanceRate" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Historical Grades">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Historical Grades" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="GradeLevel" columns="10" />
+            <dataField fieldName="Stream" columns="12" />
+            <dataField fieldName="Subject" columns="30" />
+            <dataField fieldName="ClassScore" columns="15" />
+            <dataField fieldName="ExamScore" columns="15" />
+            <dataField fieldName="TotalScore" columns="15" />
+            <dataField fieldName="GrandTotal" columns="15" />
+            <dataField fieldName="SubjectRanking" columns="15" />
+            <dataField fieldName="SubjectRank" columns="8" />
+            <dataField fieldName="ClassRanking" columns="15" />
+            <dataField fieldName="NoInClass" columns="15" />
+            <dataField fieldName="StudentGlscore" columns="15" />
+            <dataField fieldName="StudentAvgscore" columns="15" />
+            <dataField fieldName="ClassAvgscore" columns="15" />
+            <dataField fieldName="StudentGlcoursesTaken" columns="15" />
+            <dataField fieldName="StudentTermCoursesTaken" columns="15" />
+            <dataField fieldName="LG" columns="5" />
+            <dataField fieldName="NG" columns="10" />
+            <dataField fieldName="PSN" columns="3" />
+            <dataField fieldName="Descriptor" columns="30" />
+            <dataField fieldName="Remark" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="CSY" />
+            <dataField fieldName="Term" columns="20" />
+            <dataField fieldName="CalYear" columns="30" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="SchoolName" columns="50" />
+            <dataField fieldName="Presence" columns="15" />
+            <dataField fieldName="Absence" columns="15" />
+            <dataField fieldName="PossibleAttendances" columns="15" />
+            <dataField fieldName="TotalBilledAmount" columns="15" />
+            <dataField fieldName="TotalPaid" columns="15" />
+            <dataField fieldName="Balance" columns="15" />
+            <dataField fieldName="StudentCourseSectionID" columns="15" />
+            <dataField fieldName="PctAbsence" columns="15" />
+            <dataField fieldName="PctAttended" columns="15" />
+            <dataField fieldName="PerAbsence" columns="15" />
+            <dataField fieldName="PerPresence" columns="15" />
+            <dataField fieldName="Presences" columns="15" />
+            <dataField fieldName="ExcusedAbsences" columns="15" />
+            <dataField fieldName="UnExcusedAbsences" columns="15" />
+            <dataField fieldName="Tardies" columns="15" />
+            <dataField fieldName="NextSessionStartDate" columns="10" />
+            <dataField fieldName="NextSessionEndDate" columns="10" />
+            <dataField fieldName="PhotoUrl" columns="15" />
+            <dataField fieldName="Logo" columns="15" />
+            <dataField fieldName="IsAtRisk" columns="15" />
+            <dataField fieldName="IsChrab" columns="15" />
+            <dataField fieldName="OnTheVerge" columns="15" />
+            <dataField fieldName="PrevIsAtRiskCount" columns="15" />
+            <dataField fieldName="PrevIsChrabcount" columns="15" />
+            <dataField fieldName="PrevOnTheVergeCount" columns="15" />
+            <dataField fieldName="PerfectAttendance" columns="15" />
+            <dataField fieldName="AttendanceRate" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Historical Grades">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="GradeLevel" columns="10" />
+            <dataField fieldName="Stream" columns="12" />
+            <dataField fieldName="Subject" columns="30" />
+            <dataField fieldName="ClassScore" columns="15" />
+            <dataField fieldName="ExamScore" columns="15" />
+            <dataField fieldName="TotalScore" columns="15" />
+            <dataField fieldName="GrandTotal" columns="15" />
+            <dataField fieldName="SubjectRanking" columns="15" />
+            <dataField fieldName="SubjectRank" columns="8" />
+            <dataField fieldName="ClassRanking" columns="15" />
+            <dataField fieldName="NoInClass" columns="15" />
+            <dataField fieldName="StudentGlscore" columns="15" />
+            <dataField fieldName="StudentAvgscore" columns="15" />
+            <dataField fieldName="ClassAvgscore" columns="15" />
+            <dataField fieldName="StudentGlcoursesTaken" columns="15" />
+            <dataField fieldName="StudentTermCoursesTaken" columns="15" />
+            <dataField fieldName="LG" columns="5" />
+            <dataField fieldName="NG" columns="10" />
+            <dataField fieldName="PSN" columns="3" />
+            <dataField fieldName="Descriptor" columns="30" />
+            <dataField fieldName="Remark" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="CSY" />
+            <dataField fieldName="Term" columns="20" />
+            <dataField fieldName="CalYear" columns="30" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="SchoolName" columns="50" />
+            <dataField fieldName="Presence" columns="15" />
+            <dataField fieldName="Absence" columns="15" />
+            <dataField fieldName="PossibleAttendances" columns="15" />
+            <dataField fieldName="TotalBilledAmount" columns="15" />
+            <dataField fieldName="TotalPaid" columns="15" />
+            <dataField fieldName="Balance" columns="15" />
+            <dataField fieldName="StudentCourseSectionID" columns="15" />
+            <dataField fieldName="PctAbsence" columns="15" />
+            <dataField fieldName="PctAttended" columns="15" />
+            <dataField fieldName="PerAbsence" columns="15" />
+            <dataField fieldName="PerPresence" columns="15" />
+            <dataField fieldName="Presences" columns="15" />
+            <dataField fieldName="ExcusedAbsences" columns="15" />
+            <dataField fieldName="UnExcusedAbsences" columns="15" />
+            <dataField fieldName="Tardies" columns="15" />
+            <dataField fieldName="NextSessionStartDate" columns="10" />
+            <dataField fieldName="NextSessionEndDate" columns="10" />
+            <dataField fieldName="PhotoUrl" columns="15" />
+            <dataField fieldName="Logo" columns="15" />
+            <dataField fieldName="IsAtRisk" columns="15" />
+            <dataField fieldName="IsChrab" columns="15" />
+            <dataField fieldName="OnTheVerge" columns="15" />
+            <dataField fieldName="PrevIsAtRiskCount" columns="15" />
+            <dataField fieldName="PrevIsChrabcount" columns="15" />
+            <dataField fieldName="PrevOnTheVergeCount" columns="15" />
+            <dataField fieldName="PerfectAttendance" columns="15" />
+            <dataField fieldName="AttendanceRate" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1_attainment" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" whenView="gri100" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1_attainment" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1_attainment" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a101" commandName="ReportAsPdf" headerText="Print Term Matrix Report" cssClass="material-icon-exit_to_app" whenLastCommandName="Any">
+        <data><![CDATA[_controller=HistoricalGradesReport
+_view=grid1_current_year_report
+_template=HistoricalGradesReport_grid1.rdlc
+]]></data>
+      </action>
+      <action id="a100" commandName="ReportAsPdf" headerText="Print Attainment Reports" whenView="xxxx" />
+      <action id="a2" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a103" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a4" commandName="ReportAsWord" />
+      <action id="a105" />
+      <action id="a3" commandName="ExportRowset" headerText="Send To IPY" />
+      <action id="a104" commandName="ExportRss" headerText="Send To API" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

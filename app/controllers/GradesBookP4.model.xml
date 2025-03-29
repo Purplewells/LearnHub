@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="vw_metric_master_student_grades_gradebooks_p4" alias="vw_metric_master_student_grades_gradebooks_p4" created="2024-09-14T09:05:34" modified="2024-09-14T09:08:52" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" />
+    <column name="LastName" fieldName="LastName" label="Last Name" />
+    <column name="UPN" fieldName="Upn" label="Upn" />
+    <column name="GradeLevel" fieldName="GradeLevel" label="Grade Level" />
+    <column name="Subject" fieldName="Subject" label="Subject" />
+    <column name="ClassScore" fieldName="ClassScore" label="Class Score" />
+    <column name="ExamScore" fieldName="ExamScore" label="Exam Score" />
+    <column name="TotalScore" fieldName="TotalScore" label="Total Score" />
+    <column name="GrandTotal" fieldName="GrandTotal" label="Grand Total" />
+    <column name="SubjectRanking" fieldName="SubjectRanking" label="Subject Ranking" />
+    <column name="SubjectRank" fieldName="SubjectRank" label="Subject Rank" />
+    <column name="ClassRanking" fieldName="ClassRanking" label="Class Ranking" />
+    <column name="ClassRank" fieldName="ClassRank" label="Class Rank" />
+    <column name="NoInClass" fieldName="NoInClass" label="No In Class" />
+    <column name="StudentGLScore" fieldName="StudentGlscore" label="Student GL Score" />
+    <column name="StudentAVGScore" fieldName="StudentAvgscore" label="Student AVG Score" />
+    <column name="StudentGLCoursesTaken" fieldName="StudentGlcoursesTaken" label="Student GL Courses Taken" />
+    <column name="StudentTermCoursesTaken" fieldName="StudentTermCoursesTaken" label="Student Term Courses Taken" />
+    <column name="ClassAVGScore" fieldName="ClassAvgscore" label="Class AVG Score" />
+    <column name="LG" fieldName="Lg" label="Lg" />
+    <column name="NG" fieldName="Ng" label="Ng" />
+    <column name="Passed" fieldName="Passed" label="Passed" />
+    <column name="Descriptor" fieldName="Descriptor" label="Descriptor" />
+    <column name="Remark" fieldName="Remark" label="Remark" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="CSY" fieldName="Csy" label="Csy" />
+    <column name="Term" fieldName="Term" label="Term" />
+    <column name="calYear" fieldName="CalYear" label="cal Year" />
+    <column name="Address" fieldName="Address" label="Address" />
+    <column name="SchoolName" fieldName="SchoolName" label="School Name" />
+    <column name="Presence" fieldName="Presence" label="Presence" />
+    <column name="Absence" fieldName="Absence" label="Absence" />
+    <column name="PossibleAttendances" fieldName="PossibleAttendances" label="Possible Attendances" />
+    <column name="TotalBilledAmount" fieldName="TotalBilledAmount" label="Total Billed Amount" format="c" />
+    <column name="TotalPaid" fieldName="TotalPaid" label="Total Paid" format="c" />
+    <column name="Balance" fieldName="Balance" label="Balance" format="c" />
+    <column name="pctAbsence" fieldName="PctAbsence" label="pct Absence" />
+    <column name="pctAttended" fieldName="PctAttended" label="pct Attended" />
+    <column name="PerAbsence" fieldName="PerAbsence" label="Per Absence" />
+    <column name="PerPresence" fieldName="PerPresence" label="Per Presence" />
+    <column name="Presences" fieldName="Presences" label="Presences" />
+    <column name="ExcusedAbsences" fieldName="ExcusedAbsences" label="Excused Absences" />
+    <column name="UnExcusedAbsences" fieldName="UnExcusedAbsences" label="Un Excused Absences" />
+    <column name="Tardies" fieldName="Tardies" label="Tardies" />
+    <column name="NextSessionStartDate" fieldName="NextSessionStartDate" label="Next Session Start Date" />
+    <column name="NextSessionEndDate" fieldName="NextSessionEndDate" label="Next Session End Date" />
+    <column name="extCalendarSessionID" fieldName="ExtCalendarSessionID" label="ext Calendar Session ID" />
+    <column name="Stream" fieldName="Stream" label="Stream" />
+    <column name="PhotoUrl" fieldName="PhotoUrl" label="Photo Url" />
+    <column name="Logo" fieldName="Logo" label="Logo" />
+    <column name="OrganizationID" fieldName="OrganizationID" label="Organization ID" />
+  </columns>
+</dataModel>

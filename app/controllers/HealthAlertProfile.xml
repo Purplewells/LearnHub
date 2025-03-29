@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="HealthAlertProfile" conflictDetection="overwriteChanges" label="Health Alert Profile" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"pbi_vw_metric_student_profile_healthalert"."PersonID" "PersonID"
+	,"pbi_vw_metric_student_profile_healthalert"."StudentName" "StudentName"
+	,"pbi_vw_metric_student_profile_healthalert"."GradeLevel" "GL"
+	,"pbi_vw_metric_student_profile_healthalert"."Gender" "Gender"
+	,"pbi_vw_metric_student_profile_healthalert"."Ethnic" "Ethnic"
+	,"pbi_vw_metric_student_profile_healthalert"."AllergyType" "AllergyType"
+	,"pbi_vw_metric_student_profile_healthalert"."ReactionDescription" "ReactionDescription"
+	,"pbi_vw_metric_student_profile_healthalert"."NoOfAllergies" "NoOfAllergies"
+	,"pbi_vw_metric_student_profile_healthalert"."CalendarYear" "CalendarYear"
+	,"pbi_vw_metric_student_profile_healthalert"."CSY" "CSY"
+from "dwh"."pbi_vw_metric_student_profile_healthalert" "pbi_vw_metric_student_profile_healthalert"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonID" type="Int32" allowNulls="false" label="Person ID" showInSummary="true" />
+    <field name="StudentName" type="String" label="Student Name" readOnly="true" length="71" showInSummary="true" />
+    <field name="GL" type="String" label="GL" length="100" showInSummary="true" />
+    <field name="Gender" type="String" label="Sex" length="100" showInSummary="true" />
+    <field name="Ethnic" type="String" label="Ethnic" length="100" showInSummary="true" />
+    <field name="AllergyType" type="String" label="Allergy Type" readOnly="true" length="100" />
+    <field name="ReactionDescription" type="String" allowQBE="false" allowSorting="false" label="Reaction" readOnly="true" length="2000" />
+    <field name="NoOfAllergies" type="Int32" label="Allergies" />
+    <field name="CalendarYear" type="Int32" label="Year" />
+    <field name="CSY" type="String" allowNulls="false" label="CSY" readOnly="true" length="3" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Health Alert Profile">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="StudentName" columns="35" />
+        <dataField fieldName="GL" columns="5" tag="pivot1-row1-pie&#xD;&#xA;pivot1-title:&quot;What is the Health Profile Distribution of my school&quot;" />
+        <dataField fieldName="Gender" columns="8" tag="pivot4-col1&#xD;&#xA;&#xD;&#xA;pivot6-row1-columnstacked&#xD;&#xA;pivot6-title:&quot;What is the Health Profile of my school by Gender and Allergy Type&quot;" />
+        <dataField fieldName="Ethnic" columns="18" tag="pivot5-row1-donut-sortbyvalue&#xD;&#xA;pivot5-title:&quot;What is the Alergy Profile by Ethnicity&quot;&#xD;&#xA;hideblank" />
+        <dataField fieldName="AllergyType" columns="20" tag="pivot2-row1-pie-top10-sortbyvalue&#xD;&#xA;pivot2-title:&quot;What is the Students Health Profile by Alergy Type&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot3-row1-column-top10-sortbyvalue&#xD;&#xA;pivot3-title:&quot;What is the total allergies by Allergy Type&quot;&#xD;&#xA;&#xD;&#xA;pivot4-row1-barstacked-sortbyvalue&#xD;&#xA;pivot4-title:&quot;What is the Alergy Type by Gender&quot;&#xD;&#xA;&#xD;&#xA;pivot6-col1" />
+        <dataField fieldName="ReactionDescription" columns="25" />
+        <dataField fieldName="NoOfAllergies" columns="10" />
+        <dataField fieldName="CalendarYear" columns="8" />
+        <dataField fieldName="CSY" columns="3" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Health Alert Profile">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Health Alert Profile" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="StudentName" />
+            <dataField fieldName="GL" />
+            <dataField fieldName="Gender" />
+            <dataField fieldName="Ethnic" />
+            <dataField fieldName="AllergyType" />
+            <dataField fieldName="ReactionDescription" rows="5" />
+            <dataField fieldName="NoOfAllergies" columns="15" />
+            <dataField fieldName="CalendarYear" columns="15" />
+            <dataField fieldName="CSY" columns="3" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Health Alert Profile">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="StudentName" />
+            <dataField fieldName="GL" />
+            <dataField fieldName="Gender" />
+            <dataField fieldName="Ethnic" />
+            <dataField fieldName="AllergyType" />
+            <dataField fieldName="ReactionDescription" rows="5" />
+            <dataField fieldName="NoOfAllergies" columns="15" />
+            <dataField fieldName="CalendarYear" columns="15" />
+            <dataField fieldName="CSY" columns="3" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

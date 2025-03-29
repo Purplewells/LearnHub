@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="Organisation" alias="Organisation" created="2024-02-08T22:32:38" modified="2024-02-08T22:33:32" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Type" parentTableSchema="dbo" parentTableName="zlkpOrganizationType" x="320" y="20">
+      <foreignKeyColumn columnName="TypeID" parentColumnName="TypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="OrganizationID" fieldName="OrganizationID" label="Organization ID" />
+    <column name="Name" fieldName="Name" label="Name" />
+    <column name="TypeID" fieldName="TypeID" label="Type ID" aliasColumnName="Description" aliasForeignKey="Type" />
+    <column name="Description" fieldName="OrganisationType" label="Organisation Type" foreignKey="Type" />
+    <column name="ShortName" fieldName="ShortName" label="Short Name" />
+    <column name="Website" fieldName="Website" label="Website" />
+    <column name="Email" fieldName="Email" label="Email" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="Logo" fieldName="Logo" label="Logo" />
+    <column name="Emblem" fieldName="Emblem" label="Emblem" />
+    <column name="Address" fieldName="Address" label="Address" />
+  </columns>
+</dataModel>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="AttendanceEvent" alias="AttendanceEvent" created="2024-02-02T21:50:19" modified="2025-02-17T10:57:41" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="AttendanceEventCategory" parentTableSchema="dbo" parentTableName="zlkp_AttendanceEventCategory" x="386" y="20">
+      <foreignKeyColumn columnName="AttendanceEventCategoryID" parentColumnName="AttendanceEventCategoryID" />
+    </foreignKey>
+    <foreignKey id="RefGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="390" y="150">
+      <foreignKeyColumn columnName="RefGradeLevelId" parentColumnName="RefGradeLevelId" />
+    </foreignKey>
+    <foreignKey id="CourseSection" parentTableSchema="dbo" parentTableName="CourseSection" x="386" y="383">
+      <foreignKeyColumn columnName="CourseSectionID" parentColumnName="CourseSectionID" />
+    </foreignKey>
+    <foreignKey id="AttendanceEventReason" parentTableSchema="dbo" parentTableName="zlkp_AttendanceEventReason" x="386" y="751">
+      <foreignKeyColumn columnName="AttendanceEventReasonID" parentColumnName="AttendanceEventReasonID" />
+    </foreignKey>
+    <foreignKey id="RefSchoolStream" parentTableSchema="dbo" parentTableName="zlkpSchoolStream" x="34" y="394">
+      <foreignKeyColumn columnName="RefSchoolStreamID" parentColumnName="RefSchoolStreamID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="AttendanceEventID" fieldName="AttendanceEventID" label="Attendance Event ID" />
+    <column name="AttendanceEventCategoryID" fieldName="AttendanceEventCategoryID" label="Attendance Event Category ID" aliasColumnName="AttendanceEventCategory" aliasForeignKey="AttendanceEventCategory" />
+    <column name="AttendanceEventCategory" fieldName="EventCategory" label="Event Category" foreignKey="AttendanceEventCategory" />
+    <column name="RefGradeLevelId" fieldName="RefGradeLevelID" label="Ref Grade Level Id" aliasColumnName="Description" aliasForeignKey="RefGradeLevel" />
+    <column name="Description" fieldName="GradeLevel" label="GL" foreignKey="RefGradeLevel" />
+    <column name="EventDate" fieldName="EventDate" label="Event Date" />
+    <column name="AttendanceEventReasonID" fieldName="AttendanceEventReasonID" label="Attendance Event Reason ID" aliasColumnName="AttendanceEventReason" aliasForeignKey="AttendanceEventReason" />
+    <column name="AttendanceEventReason" fieldName="EventReason" label="Event Reason" foreignKey="AttendanceEventReason" />
+    <column name="RefSchoolStreamID" fieldName="RefSchoolStreamID" label="Ref School Stream ID" aliasColumnName="Description" aliasForeignKey="RefSchoolStream" />
+    <column name="Description" fieldName="Stream" label="Stream" foreignKey="RefSchoolStream" />
+    <column name="CourseSectionID" fieldName="CourseSectionID" label="Course Section ID" aliasColumnName="SectionName" aliasForeignKey="CourseSection" />
+    <column name="SectionName" fieldName="SectionName" label="Section Name" foreignKey="CourseSection" />
+    <column name="SectionNo" fieldName="SectionNo" label="Section No" foreignKey="CourseSection" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+  <details>
+    <detail fieldName="StudentSectionAttendanceEvents" model="znStudentAttendanceEvents" filterFields="AttendanceEventID" create="true" edit="true" />
+  </details>
+</dataModel>

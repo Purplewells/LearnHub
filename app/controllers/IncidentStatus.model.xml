@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpIncidentStatus" alias="zlkpIncidentStatus" created="2024-02-03T10:45:46" modified="2024-02-03T10:45:53" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="IncidentStatusID" fieldName="IncidentStatusID" label="Incident Status ID" />
+    <column name="IncidentStatus" fieldName="IncidentStatus" label="Incident Status" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="Definition" fieldName="Definition" label="Definition" />
+  </columns>
+</dataModel>

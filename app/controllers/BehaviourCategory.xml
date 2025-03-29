@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="BehaviourCategory" conflictDetection="overwriteChanges" label="Behaviour Category" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"zlkpBehaviourCategory"."BehaviourCategoryTypeID" "BehaviourCategoryTypeID"
+	,"zlkpBehaviourCategory"."CategoryType" "CategoryType"
+	,"zlkpBehaviourCategory"."Points" "Points"
+	,"zlkpBehaviourCategory"."SortOrder" "SortOrder"
+	,"zlkpBehaviourCategory"."NatureOfBehaviourID" "NatureOfBehaviourID"
+	,"NatureOfBehaviour"."NatureOfBehaviour" "NatureOfBehaviour"
+	,"zlkpBehaviourCategory"."IsActive" "IsActive"
+from "dbo"."zlkpBehaviourCategory" "zlkpBehaviourCategory"
+	left join "dbo"."zlkpNatureOfBehaviour" "NatureOfBehaviour" on "zlkpBehaviourCategory"."NatureOfBehaviourID" = "NatureOfBehaviour"."NatureOfBehaviourID"
+]]></text>
+    </command>
+    <command id="BehaviourCategoryTypeIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="BehaviourCategoryTypeID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="BehaviourCategoryTypeID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Behaviour Category Type ID" readOnly="true" />
+    <field name="CategoryType" type="String" label="Category Type" length="100" showInSummary="true" />
+    <field name="Points" type="Single" allowNulls="false" label="Points" showInSummary="true" />
+    <field name="SortOrder" type="Int32" label="Sort Order" showInSummary="true" />
+    <field name="NatureOfBehaviourID" type="Int32" label="Nature Of Behaviour ID" showInSummary="true">
+      <items style="Lookup" dataController="NatureOfBehaviour" newDataView="createForm1" dataValueField="NatureOfBehaviourID" dataTextField="NatureOfBehaviour" />
+    </field>
+    <field name="NatureOfBehaviour" type="String" readOnly="true" label="Nature Of Behaviour" length="20" />
+    <field name="IsActive" type="Boolean" default="((1))" label="Is Active" showInSummary="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Behaviour Category">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="CategoryType" />
+        <dataField fieldName="Points" columns="8" />
+        <dataField fieldName="SortOrder" columns="10" />
+        <dataField fieldName="NatureOfBehaviourID" aliasFieldName="NatureOfBehaviour" />
+        <dataField fieldName="IsActive" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Behaviour Category">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Behaviour Category" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="CategoryType" />
+            <dataField fieldName="NatureOfBehaviourID" aliasFieldName="NatureOfBehaviour" />
+            <dataField fieldName="Points" columns="15" />
+            <dataField fieldName="SortOrder" columns="15" />
+            <dataField fieldName="IsActive" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Behaviour Category">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="CategoryType" />
+            <dataField fieldName="Points" columns="15" />
+            <dataField fieldName="SortOrder" columns="15" />
+            <dataField fieldName="NatureOfBehaviourID" aliasFieldName="NatureOfBehaviour" />
+            <dataField fieldName="IsActive" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

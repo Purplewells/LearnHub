@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="vw_fee_collection_summaries" alias="vw_fee_collection_summaries" created="2024-01-29T22:31:03" modified="2024-01-29T22:32:59" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="Fullname" fieldName="Fullname" label="Fullname" />
+    <column name="LastName" fieldName="LastName" label="Last Name" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" />
+    <column name="UPN" fieldName="UPN" label="UPN" />
+    <column name="Discount" fieldName="Discount" label="Discount" format="c" />
+    <column name="PaidAmount" fieldName="AmountPaid" label="Amount Paid" format="c" />
+    <column name="TotalBilledAmount" fieldName="TotalBilledAmount" label="Total Billed Amount" format="c" />
+    <column name="TotalPaid" fieldName="TotalPaid" label="Total Paid" format="c" />
+    <column name="Balance" fieldName="Balance" label="Balance" format="c" />
+    <column name="Status" fieldName="Status" label="Status" />
+    <column name="GL" fieldName="GL" label="GL" />
+    <column name="CSY" fieldName="CSY" label="CSY" />
+    <column name="Currency" fieldName="Currency" label="CURR" />
+  </columns>
+</dataModel>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StudentRemarks" alias="StudentRemarks" created="2024-02-02T23:10:42" modified="2024-11-22T14:22:53" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="StudentEnrollment" parentTableSchema="dbo" parentTableName="StudentSchoolAssociation" x="357" y="20">
+      <foreignKeyColumn columnName="StudentEnrollmentID" parentColumnName="StudentEnrollmentID" />
+    </foreignKey>
+    <foreignKey id="CalendarSession" parentTableSchema="dbo" parentTableName="Session" x="357" y="503">
+      <foreignKeyColumn columnName="CalendarSessionID" parentColumnName="CalendarSessionID" />
+    </foreignKey>
+    <foreignKey id="OrganizationPersonRole" parentTableSchema="dbo" parentTableName="OrganizationPersonRole" x="732" y="20" baseForeignKey="StudentEnrollment">
+      <foreignKeyColumn columnName="OrganizationPersonRoleID" parentColumnName="OrganizationPersonRoleID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="1080" y="20" baseForeignKey="OrganizationPersonRole">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="RemarkID" fieldName="RemarkID" label="Remark ID" />
+    <column name="StudentEnrollmentID" fieldName="StudentEnrollmentID" label="Student Enrollment ID" aliasColumnName="CreatedBy" aliasForeignKey="StudentEnrollment" />
+    <column name="CreatedBy" fieldName="StudentEnrollmentCreatedBy" label="Student Enrollment Created By" foreignKey="StudentEnrollment" />
+    <column name="Note" fieldName="Note" label="Note" />
+    <column name="CalendarSessionID" fieldName="CalendarSessionID" label="Calendar Session ID" aliasColumnName="SessionCode" aliasForeignKey="CalendarSession" />
+    <column name="SessionCode" fieldName="Session" label="Session" foreignKey="CalendarSession" />
+    <column name="IsActive" fieldName="SSIA" label="SSIA" foreignKey="CalendarSession" />
+    <column name="GradeLevelID" fieldName="GradeLevelID" label="Grade Level ID" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" />
+    <column name="SessionCode" fieldName="SessionCode" label="Session Code" />
+    <column name="IsSessionActive" fieldName="CSIA" label="CSIA" />
+    <column name="GLSO" fieldName="GLSO" label="GLSO" />
+    <column name="GL" fieldName="GL" label="GL" />
+    <column name="extFirstName" fieldName="ExtFirstName" label="ext First Name" />
+    <column name="extLastName" fieldName="ExtLastName" label="ext Last Name" />
+    <column name="Stream" fieldName="Stream" label="Stream" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="FirstName" fieldName="Firstname" label="Firstname" foreignKey="Person" />
+    <column name="LastName" fieldName="Lastname" label="Lastname" foreignKey="Person" />
+    <column fieldName="Fullname" type="nvarchar(71)" dataType="String" label="Fullname">
+      <formula>Person.FirstName + ' ' + Person.LastName</formula>
+    </column>
+  </columns>
+</dataModel>

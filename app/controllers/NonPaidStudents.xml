@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="NonPaidStudents" conflictDetection="overwriteChanges" label="Non Paid Students" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"vw_fee_collection_summaries_no_payment_latest"."PersonID" "PersonID"
+	,"vw_fee_collection_summaries_no_payment_latest"."FullName" "FullName"
+	,"vw_fee_collection_summaries_no_payment_latest"."YearGroup" "YearGroup"
+	,"vw_fee_collection_summaries_no_payment_latest"."Description" "Description"
+	,"vw_fee_collection_summaries_no_payment_latest"."FeeType" "FeeType"
+	,"vw_fee_collection_summaries_no_payment_latest"."EffectiveFrom" "EffectiveFrom"
+	,"vw_fee_collection_summaries_no_payment_latest"."Debit" "Debit"
+	,"vw_fee_collection_summaries_no_payment_latest"."Credit" "Credit"
+	,"vw_fee_collection_summaries_no_payment_latest"."Balance" "Balance"
+	,"vw_fee_collection_summaries_no_payment_latest"."GuardianName" "GuardianName"
+	,"vw_fee_collection_summaries_no_payment_latest"."ContactPoint" "ContactPoint"
+	,"vw_fee_collection_summaries_no_payment_latest"."HowRelated" "HowRelated"
+	,"vw_fee_collection_summaries_no_payment_latest"."IsPrimary" "IsPrimary"
+from "dbo"."vw_fee_collection_summaries_no_payment_latest" "vw_fee_collection_summaries_no_payment_latest"
+]]></text>
+    </command>
+    <command id="PersonIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="PersonID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonID" type="Int32" label="Person ID" readOnly="true" showInSummary="true" />
+    <field name="FullName" type="String" label="Fullname" length="71" showInSummary="true" />
+    <field name="YearGroup" type="String" allowNulls="false" label="CYG" length="100" showInSummary="true" />
+    <field name="Description" type="String" label="Description" length="50" showInSummary="true" />
+    <field name="FeeType" type="String" label="Fee Type" length="20" showInSummary="true" />
+    <field name="EffectiveFrom" type="DateTime" label="Effective From" />
+    <field name="Debit" type="Decimal" dataFormatString="c" label="Debit" />
+    <field name="Credit" type="Decimal" dataFormatString="c" label="Credit" />
+    <field name="Balance" type="Decimal" dataFormatString="c" label="Balance" />
+    <field name="GuardianName" type="String" label="Guardian" length="88" />
+    <field name="ContactPoint" type="String" label="Contact No." length="30" />
+    <field name="HowRelated" type="String" label="How Related" length="20" />
+    <field name="IsPrimary" type="String" label="Default" length="1" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Non Paid Students">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="FullName" columns="25" />
+        <dataField fieldName="YearGroup" columns="5" />
+        <dataField fieldName="Description" columns="20" />
+        <dataField fieldName="FeeType" columns="20" />
+        <dataField fieldName="EffectiveFrom" columns="20" />
+        <dataField fieldName="Debit" columns="10" />
+        <dataField fieldName="Credit" columns="10" />
+        <dataField fieldName="Balance" columns="10" />
+        <dataField fieldName="GuardianName" columns="25" />
+        <dataField fieldName="ContactPoint" columns="20" />
+        <dataField fieldName="HowRelated" columns="20" />
+        <dataField fieldName="IsPrimary" columns="10" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Non Paid Students">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Non Paid Students" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FullName" />
+            <dataField fieldName="YearGroup" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="FeeType" columns="20" />
+            <dataField fieldName="EffectiveFrom" columns="10" />
+            <dataField fieldName="Debit" columns="15" />
+            <dataField fieldName="Credit" columns="15" />
+            <dataField fieldName="Balance" columns="15" />
+            <dataField fieldName="GuardianName" />
+            <dataField fieldName="ContactPoint" columns="30" />
+            <dataField fieldName="HowRelated" columns="20" />
+            <dataField fieldName="IsPrimary" columns="1" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Non Paid Students">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FullName" />
+            <dataField fieldName="YearGroup" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="FeeType" columns="20" />
+            <dataField fieldName="EffectiveFrom" columns="10" />
+            <dataField fieldName="Debit" columns="15" />
+            <dataField fieldName="Credit" columns="15" />
+            <dataField fieldName="Balance" columns="15" />
+            <dataField fieldName="GuardianName" />
+            <dataField fieldName="ContactPoint" columns="30" />
+            <dataField fieldName="HowRelated" columns="20" />
+            <dataField fieldName="IsPrimary" columns="1" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

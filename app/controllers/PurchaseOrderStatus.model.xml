@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpPurchaseOrderStatus" alias="zlkpPurchaseOrderStatus" created="2024-07-12T08:16:54" modified="2024-07-12T08:18:19" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="PurchaseOrderStatusID" fieldName="PurchaseOrderStatusID" label="Purchase Order Status ID" />
+    <column name="PurchaseOrderStatus" fieldName="PurchaseOrderStatus" label="Purchase Order Status" />
+    <column name="CodeValue" fieldName="CodeValue" label="Code Value" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StudentGradeBookEntry" alias="StudentGradeBookEntry" created="2024-02-02T16:05:25" modified="2024-06-04T11:25:07" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="StudentCourseSection" parentTableSchema="dbo" parentTableName="StudentSectionAssociation" x="414" y="20">
+      <foreignKeyColumn columnName="StudentCourseSectionID" parentColumnName="StudentCourseSectionID" />
+    </foreignKey>
+    <foreignKey id="GradeBookEntry" parentTableSchema="dbo" parentTableName="GradeBookEntry" x="426" y="500">
+      <foreignKeyColumn columnName="GradeBookEntryID" parentColumnName="GradeBookEntryID" />
+    </foreignKey>
+    <foreignKey id="GradeBookEntryType" parentTableSchema="dbo" parentTableName="zlkp_GradeBookEntryType" x="424" y="746">
+      <foreignKeyColumn columnName="GradeBookEntryTypeID" parentColumnName="GradeBookEntryTypeID" />
+    </foreignKey>
+    <foreignKey id="GradingPeriod" parentTableSchema="dbo" parentTableName="GradingPeriod" x="423" y="856">
+      <foreignKeyColumn columnName="GradingPeriodID" parentColumnName="GradingPeriodID" />
+    </foreignKey>
+    <foreignKey id="PerformanceBaseConversion" parentTableSchema="dbo" parentTableName="zlkpPerformanceBaseConversion" x="411" y="319">
+      <foreignKeyColumn columnName="PerformanceBaseConversionID" parentColumnName="PerformanceBaseConversionID" />
+    </foreignKey>
+    <foreignKey id="RefSchoolStream" parentTableSchema="dbo" parentTableName="zlkpSchoolStream" x="426" y="1010">
+      <foreignKeyColumn columnName="RefSchoolStreamID" parentColumnName="RefSchoolStreamID" />
+    </foreignKey>
+    <foreignKey id="StudentEnrollment" parentTableSchema="dbo" parentTableName="StudentSchoolAssociation" x="848" y="20" baseForeignKey="StudentCourseSection">
+      <foreignKeyColumn columnName="StudentEnrollmentID" parentColumnName="StudentEnrollmentID" />
+    </foreignKey>
+    <foreignKey id="RefEntryGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="1241" y="20" baseForeignKey="StudentEnrollment">
+      <foreignKeyColumn columnName="RefEntryGradeLevelId" parentColumnName="RefGradeLevelId" />
+    </foreignKey>
+    <foreignKey id="CalendarSession" parentTableSchema="dbo" parentTableName="Session" x="1241" y="195" baseForeignKey="StudentEnrollment">
+      <foreignKeyColumn columnName="CalendarSessionID" parentColumnName="CalendarSessionID" />
+    </foreignKey>
+    <foreignKey id="OrganizationCalendar" parentTableSchema="dbo" parentTableName="Calendar" x="1582" y="20" baseForeignKey="CalendarSession">
+      <foreignKeyColumn columnName="OrganizationCalendarID" parentColumnName="OrganizationCalendarId" />
+    </foreignKey>
+    <foreignKey id="OrganizationPersonRole" parentTableSchema="dbo" parentTableName="OrganizationPersonRole" x="1237" y="459" baseForeignKey="StudentEnrollment">
+      <foreignKeyColumn columnName="OrganizationPersonRoleID" parentColumnName="OrganizationPersonRoleID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="1582" y="187" baseForeignKey="OrganizationPersonRole">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+    <foreignKey id="CourseSection" parentTableSchema="dbo" parentTableName="CourseSection" x="823" y="756" baseForeignKey="StudentCourseSection">
+      <foreignKeyColumn columnName="CourseSectionID" parentColumnName="CourseSectionID" />
+    </foreignKey>
+    <foreignKey id="Course" parentTableSchema="dbo" parentTableName="Course" x="841" y="1084" baseForeignKey="CourseSection">
+      <foreignKeyColumn columnName="CourseID" parentColumnName="CourseID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="StudentGradeBookEntryID" fieldName="StudentGradeBookEntryID" label="Student Grade Book Entry ID" />
+    <column name="LetterGrade" fieldName="LetterGrade" label="Letter Grade" />
+    <column name="NumericGradeEarned" fieldName="NumericGradeEarned" label="Score" />
+    <column name="Weight" fieldName="Weight" label="% Wt" />
+    <column name="StudentCourseSectionID" fieldName="StudentCourseSectionID" label="Student Course Section ID" aliasColumnName="CreatedBy" aliasForeignKey="StudentCourseSection" />
+    <column name="CreatedBy" fieldName="StudentCourseSectionCreatedBy" label="Student Course Section Created By" foreignKey="StudentCourseSection" />
+    <column name="GradeBookEntryID" fieldName="GradeBookEntryID" label="Grade Book Entry ID" aliasColumnName="GradeBookTitle" aliasForeignKey="GradeBookEntry" />
+    <column name="GradeBookTitle" fieldName="GradeBookTitle" label="GB Title" foreignKey="GradeBookEntry" />
+    <column name="GradeBookEntryTypeID" fieldName="GradeBookEntryTypeID" label="Grade Book Entry Type ID" aliasColumnName="GradeBookEntryType" aliasForeignKey="GradeBookEntryType" />
+    <column name="GradeBookEntryType" fieldName="GBEntryType" label="CASTY" foreignKey="GradeBookEntryType" />
+    <column name="Code" fieldName="ASTY" label="ASTY" foreignKey="GradeBookEntryType" />
+    <column name="GradingPeriodID" fieldName="GradingPeriodID" label="Grading Period ID" aliasColumnName="GradingPeriod" aliasForeignKey="GradingPeriod" />
+    <column name="GradingPeriod" fieldName="GradingPeriod" label="GP" foreignKey="GradingPeriod" />
+    <column name="CompetencyLevelDescriptorID" fieldName="CompetencyLevelDescriptorID" label="Competency Level Descriptor ID" />
+    <column name="SubmittedDate" fieldName="SubmittedDate" label="Assesment Date" />
+    <column name="PerformanceBaseConversionID" fieldName="PerformanceBaseConversionID" label="Performance Base Conversion ID" aliasColumnName="PerformanceBaseConversion" aliasForeignKey="PerformanceBaseConversion" />
+    <column name="PerformanceBaseConversion" fieldName="PerformanceBaseConversion" label="Performance Base Conversion" foreignKey="PerformanceBaseConversion" />
+    <column name="MinScore" fieldName="MinScore" label="Min Score" foreignKey="PerformanceBaseConversion" />
+    <column name="MaxScore" fieldName="MaxScore" label="Max Score" foreignKey="PerformanceBaseConversion" />
+    <column name="GradeName" fieldName="NG" label="NG" foreignKey="PerformanceBaseConversion" />
+    <column name="Grade" fieldName="LG" label="LG" foreignKey="PerformanceBaseConversion" />
+    <column name="Passing" fieldName="Passing" label="PSN" foreignKey="PerformanceBaseConversion" />
+    <column name="Description" fieldName="PerformanceBaseConversionDescription" label="Performance Base Conversion Description" foreignKey="PerformanceBaseConversion" />
+    <column name="GradeRank" fieldName="GradeRank" label="Grade Rank" foreignKey="PerformanceBaseConversion" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="UserID" fieldName="UserID" label="UserID" />
+    <column name="extMaxScore" fieldName="extMaxScore" label="MPP" />
+    <column name="extIsActiveSession" fieldName="extIsActiveSession" label="extIsActiveSession" />
+    <column name="extIsCSY" fieldName="ExtIsCsy" label="CSY" />
+    <column name="extActiveCourseSection" fieldName="ExtActiveCourseSection" label="ACS" />
+    <column name="extPBSG" fieldName="ExtPBSG" label="extPBSG" />
+    <column name="extCalendarSessionID" fieldName="ExtCalendarSessionID" label="ext Calendar Session ID" />
+    <column name="RefSchoolStreamID" fieldName="RefSchoolStreamID" label="Ref School Stream ID" aliasColumnName="Description" aliasForeignKey="RefSchoolStream" />
+    <column name="Description" fieldName="Stream" label="STM" foreignKey="RefSchoolStream" />
+    <column name="extIsPassing" fieldName="ExtIsPassing" label="extIsPassing" />
+    <column name="extPWS" fieldName="ExtPWS" label="extPWS" />
+    <column name="extOWS" fieldName="ExtOWS" label="extOWS" />
+    <column fieldName="CWS" type="decimal" dataType="Decimal" label="CWS">
+      <formula><![CDATA[SELECT SUM((StudentGradeBookEntry.NumericGradeEarned / StudentGradeBookEntry.extMaxScore) * StudentGradeBookEntry.Weight)
+FROM StudentGradeBookEntry
+WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.StudentCourseSectionID]]></formula>
+    </column>
+    <column name="Description" fieldName="GradeLevel" label="GL" foreignKey="RefEntryGradeLevel" />
+    <column name="SortOrder" fieldName="GLSO" label="GLSO" foreignKey="RefEntryGradeLevel" />
+    <column name="SessionName" fieldName="Session" label="Session" foreignKey="CalendarSession" />
+    <column name="IsActive" fieldName="SessionIsActive" label="SSIA" foreignKey="CalendarSession" />
+    <column name="CalendarYear" fieldName="calYear" label="Cal Year" foreignKey="OrganizationCalendar" />
+    <column name="CurrentSchoolYear" fieldName="CSY" label="CSY" foreignKey="OrganizationCalendar" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="FirstName" fieldName="Firstname" label="Firstname" foreignKey="Person" />
+    <column name="LastName" fieldName="Lastname" label="Lastname" foreignKey="Person" />
+    <column name="CourseTitle" fieldName="Course" label="Course" foreignKey="Course" />
+    <column fieldName="SGID" type="int" dataType="Int32" label="SGID">
+      <formula>StudentGradeBookEntry.StudentGradeBookEntryID</formula>
+    </column>
+    <column fieldName="SCID" type="int" dataType="Int32" label="SCID">
+      <formula>StudentCourseSection.StudentCourseSectionID</formula>
+    </column>
+    <column name="extSGID" fieldName="extSGID" label="extSGID" />
+    <column name="extSCID" fieldName="extSCID" label="extSCID" />
+    <column fieldName="Fullname" type="nvarchar(72)" dataType="String" label="Fullname">
+      <formula>UPPER(Person.FirstName + ', ' + Person.LastName)</formula>
+    </column>
+  </columns>
+</dataModel>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="fee_collection_transaction_refund" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="FeeDescription" type="String" readOnly="true" label="Fee Description" />
+    <field name="RefundAmount" type="String" label="Refund Amount" length="50" />
+  </fields>
+</dataController>

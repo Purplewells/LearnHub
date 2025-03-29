@@ -1,0 +1,511 @@
+﻿
+
+.app-bar-toolbar {
+    position: absolute;
+}
+
+.my-image {
+    filter: brightness(0.5); /* Adjust the value between 0 and 1 to control the level of dimness */
+}
+
+.search-container {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 800px;
+    height: 2.5em;
+    align-self:center;
+}
+
+
+
+/*conditional format for current_parents*/
+.dv-item.current_parents {
+    /*background-color: #edf676 !important;*/
+}
+
+ui-listview > li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.current_parents .ui-btn::before,
+.current_parents .ui-btn .app-frozen-spacer::before {
+    display: inline-block;
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    /*width: 100px;*/
+    /*background-color: #edf676 !important;*/
+}
+
+
+
+
+/*conditional format for ExpiredRelationship*/
+
+.dv-item.ExpiredRelationship {
+    background-color: #f07218 !important;
+}
+
+ui-listview > li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: #f07218 !important;
+}
+
+.ExpiredRelationship .ui-btn::after,
+.ExpiredRelationship .ui-btn .app-frozen-spacer::after {
+    display: inline-block;
+    content: ' ';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 7px;
+    background-color: #f07218 !important;
+}
+
+/*--====================================--*/
+
+
+/*conditional format for students*/
+.dv-item.current_students {
+    background-color: aliceblue !important;
+}
+
+ui-listview > li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: chartreuse !important;
+}
+
+.current_students .ui-btn::after,
+.current_students .ui-btn .app-frozen-spacer::after {
+    display: inline-block;
+    content: ' ';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 7px;
+    color: white !important;
+    background-color: #ffd800 !important;
+}
+
+
+/*conditional format for student-credit-payment */
+/*.app-grid .student-credit-payment .app-field-credit::after,
+.student-credit-payment .app-field-credit .app-field-data::after*/
+.app-listview .app-grid .student-credit-payment {
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    /*padding-left: 0.5em;*/
+    color: #f3f878;
+    content: '\e044';
+    background-color: #f3f878 !important;
+    border-color: #f07218 !important;
+}
+
+.app-grid .student-in-credit .app-field-data::after {
+    display: inline-block;
+    font-size:20px;
+    background-color: steelblue !important;
+}
+
+/*Added 11th - 18th Dec 2023*/
+.app-grid .student-credit-payment{
+    background-color: khaki !important;
+    border-block-color: burlywood aquamarine;
+}
+
+/*Added 11th - 21st Apr 2024*/
+.app-grid .total_fee_summaries {
+    background-color: khaki !important;
+    border-block-color: burlywood aquamarine;
+}
+
+.app-listview .student-credit-payment {
+    background-color: khaki !important;
+    border-block-color: burlywood aquamarine;
+}
+
+.app-grid .student-extended-role {
+    display: inline-grid;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    padding-left: 0.5em;
+    color: #f3f878;
+    content: '\e044';
+    background-color: orange !important;
+    border-color: orange !important;
+}
+
+
+.app-grid .staff-extended-role .app-field-ExtendedRole::after {
+    display: inline-block;
+    font-family: 'Glyphicon Halflings';
+    font-style: normal;
+    font-weight: bold;
+    line-height: 1;
+    padding-left: .5em;
+    /*change these settings*/
+    color: coral !important;
+    content: "\e035";
+}
+
+
+
+
+.dv-item.class-with-no-teacher {
+    background-color: aliceblue !important;
+}
+
+.class-with-no-teacher .ui-btn::after,
+.class-with-no-teacher .ui-btn .app-frozen-spacer::after {
+    display: inline-block;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 7px;
+    background-color: #ffd800 !important;
+}
+
+
+.app-grid .class-with-no-teacher .app-field-SectionName::after,
+.class-with-no-teacher .app-field-SectionName .app-field-data::after {
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: .5em;
+    color: orange;
+    content: "\e034";
+}
+
+
+/* too expensive*/
+
+tr.TooExpensive td.Cell {
+    background-color: #ffe79c !important;
+    border-color: #ffe79c !important;
+}
+
+tr.HighDiscount td.Discount {
+    background-image: none !important;
+    background-color: #9C0B12 !important;
+    color: white;
+}
+
+tr.TooExpensive.Highlight td.Cell {
+    background-color: #C5C5C5 !important;
+    border-color: #9E9E9E !important;
+}
+
+/**/
+.app-listview .positive-behaviour .ui-btn::after,
+.app-listview .positive-behaviour .ui-btn .app-frozen-spacer::after {
+    display: inline-block;
+    content: ' ';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    transform: rotate(45deg);
+    /* change these properties */
+    top: 0;
+    margin-top: -12px;
+    left: 0;
+    margin-left: -12px;
+    background-color: forestgreen;
+}
+
+
+.dv-item.positive-behaviour {
+    background-color: beige !important;
+}
+
+ui-listview > li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: burlywood !important;
+}
+
+.positive-behaviour .ui-btn::after,
+.positive-behaviour .ui-btn .app-frozen-spacer::after {
+    display: inline-block;
+    content: ' ';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 7px;
+    background-color: #ffd800 !important;
+}
+
+/*Two Level Menu - Trial and Test Idea*/
+div.two-level div.production-menu {
+    background-image: url(../_Shared/Page_Categories.png);
+    background-repeat: no-repeat;
+    background-position: 110% top;
+}
+
+div.two-level div.human-resources-menu {
+    background-image: url(../_Shared/Page_Announce.png);
+    background-repeat: no-repeat;
+    background-position: 130% top;
+    padding-right: 70px !important;
+}
+
+/* Fee collections command payments*/
+
+.dv-item.latest_cum_payment {
+    background-color: aquamarine !important;
+    font-weight: 300;
+    color: white;
+    font-size: 1.9em;
+    font-style: italic;
+}
+
+/* Email responses */
+
+.dv-item.mark_mail_as_read {
+    background-color: aquamarine !important;
+    font-weight: 300;
+    color: white;
+    font-size: 1.9em;
+    font-style: italic;
+}
+
+/* Unread Email messages */
+.dv-item.mark_mail_as_read {
+    background-color: #f07218 !important;
+    font-weight: normal;
+    color: white;
+    font-size: 1.9em;
+    font-style: italic;
+}
+
+.mark_mail_as_read > .ui-btn:not(:hover):not(.app-selected):not(.ui-btn-active),
+.mark_mail_as_read > .ui-btn:not(:hover):not(.app-selected):not(.ui-btn-active) .app-frozen-spacer {
+    /* change this property */
+    background-color: #ffd800 !important;
+}
+
+.app-grid .course-failed .app-field-ExtPWS::after,
+.course-failed .app-field-ExtPWS .app-field-data::after {
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: .5em;
+    /* change these properties  */
+    color: red;
+    content: "\e034";
+}
+
+.dv-item.course-failed {
+    background-color: aliceblue !important;
+}
+
+ui-btn app-is-link {
+    background: red !important;
+    font-size: 100px !important;
+}
+
+
+.jumbotron {
+    background-image: url(/images/header-02.jpg);
+    background-size: cover;
+    height: 100%;
+}
+
+.LessonApprovalStatus-Approved .ui-btn::after,
+.LessonApprovalStatus-Approved .ui-btn .app-frozen-spacer::after {
+    display: inline-block;
+    content: ' ';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 7px;
+    background-color: #74d016 !important;
+}
+
+.LessonApprovalStatus-Review .ui-btn::after,
+.LessonApprovalStatus-Review .ui-btn .app-frozen-spacer::after {
+    display: inline-block;
+    content: ' ';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 7px;
+    background-color: #f3f313 !important;
+}
+
+.LessonApprovalStatus-Rejected .ui-btn::after,
+.LessonApprovalStatus-Rejected .ui-btn .app-frozen-spacer::after {
+    display: inline-block;
+    content: ' ';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 7px;
+    background-color: #e60e0e !important;
+}
+
+.app-grid .IsAtRisk{
+    background-color:yellow !important;
+}
+
+    .app-grid .IsAtRisk .ui-btn::after,
+    .app-grid .IsAtRisk .ui-btn .app-frozen-spacer::after {
+        display: inline-block;
+        content: ' ';
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        transform: rotate(45deg);
+        /* change these properties */
+        top: 0;
+        margin-top: -12px;
+        left: 0;
+        margin-left: -12px;
+        background-color: yellow !important;
+    }
+
+
+.app-grid .OnTheVerge {
+    background-color: orange !important;
+}
+
+.app-grid .IsAtRisk {
+    background-color: yellow !important;
+}
+
+.app-grid .IsCHRAB {
+    background-color: red !important;
+}
+
+/*.app-grid .extRoleParent {
+    background-color: darkkhaki !important;
+}*/
+
+
+.app-listview .extRoleParent .ui-btn::after,
+.app-listview .extRoleParent .ui-btn .app-frozen-spacer::after {
+    display: inline-block;
+    content: ' ';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    transform: rotate(45deg);
+    /* change these properties */
+    top: 0;
+    margin-top: -12px;
+    left: 0;
+    margin-left: -12px;
+    background-color: forestgreen;
+}
+
+
+.grida {
+
+    background: linear-gradient(90deg, rgba(224,232,57,1) 0%, rgba(224,232,57,1) 35%, rgba(224,232,57,1) 100%);
+}
+
+.app-grid .app-listview .PaidInfull > .ui-btn:not(:hover):not(.app-selected):not(.ui-btn-active),
+.app-grid .app-listview .PaidInfull > .ui-btn:not(:hover):not(.app-selected):not(.ui-btn-active) .app-frozen-spacer {
+    /* change this property */
+    background-color: #0c871d !important;
+}
+
+.app-grid .app-listview .PartialPaid > .ui-btn:not(:hover):not(.app-selected):not(.ui-btn-active),
+.app-grid .app-listview .PartialPaid > .ui-btn:not(:hover):not(.app-selected):not(.ui-btn-active) .app-frozen-spacer {
+    /* change this property */
+    background-color: rgba(224,232,57,1) !important;
+}
+
+
+.app-grid .PassOrFail {
+    background-color: orange !important;
+}
+
+.app-grid .GBAScore td.NumericGradeEarned {
+    color: white !important;
+    font-weight: bold !important;
+    background-color: orange !important;
+}
+
+.app-grid .ReOrderChecks {
+    color: orangered !important;
+    font-weight: bold !important;
+    background-color: beige !important;
+}
+
+/*experimentation with custom grid headers*/
+/*.app-grid-header{
+    background-color: steelblue !important;
+    background-size:contain !important;
+    color: white !important;
+    font-weight:bold;
+    
+}
+
+.app-grid-header:hover {
+    background-color: yellowgreen !important;
+    background-size: contain !important;
+    color: black !important;
+    font-weight: bold;
+}*/
+
+/* Target only the FeeCollection grid */
+.fee-collection-grid .app-grid-header {
+    background-color: steelblue !important;
+    background-size: contain !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.fee-collection-grid .app-grid-header:hover {
+    background-color: yellowgreen !important;
+    background-size: contain !important;
+    color: black !important;
+    font-weight: bold;
+}
+
+/* End experimentation for FeeCollection grid */
+
+.app-bar-aggregates .app-field{
+    font-weight: bold !important;
+    font-size : 12px !important;
+    color: red !important;
+}
+
+.app-bar-aggregates .app-static-text{
+    font-size: 12px !important;
+}
+
+
+
+
+
+
+
+
+
+

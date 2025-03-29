@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="ReportParameters" alias="ReportParameters" created="2024-01-28T21:48:48" modified="2024-01-28T21:49:03" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="ReportID" fieldName="ReportID" label="Report ID" />
+    <column name="ReportName" fieldName="ReportName" label="Report Name" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="Attribute1" fieldName="Attribute1" label="Attribute1" />
+    <column name="Attribute2" fieldName="Attribute2" label="Attribute2" />
+    <column name="Attribute3" fieldName="Attribute3" label="Attribute3" />
+    <column name="Attribute4" fieldName="Attribute4" label="Attribute4" />
+    <column name="Attribute5" fieldName="Attribute5" label="Attribute5" />
+    <column name="Attribute6" fieldName="Attribute6" label="Attribute6" />
+    <column name="ShowOnReport" fieldName="ShowOnReport" label="Show On Report" />
+  </columns>
+</dataModel>

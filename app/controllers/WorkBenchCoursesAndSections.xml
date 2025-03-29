@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkBenchCoursesAndSections" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="Course" type="DataView" label="Course">
+      <dataView controller="Course" view="grid1" />
+    </field>
+    <field name="CourseSection" type="DataView" label="Course Section">
+      <dataView controller="CourseSection" view="grid1" />
+    </field>
+    <field name="CourseSubjectArea" type="DataView" label="Course Subject Area">
+      <dataView controller="CourseSubjectArea" view="grid1" />
+    </field>
+    <field name="CourseInteractionMode" type="DataView" label="Course Interaction Mode">
+      <dataView controller="CourseInteractionMode" view="grid1" />
+    </field>
+    <field name="ClassPeriodTypeDescriptor" type="DataView" label="Class Period Type Descriptor">
+      <dataView controller="ClassPeriodTypeDescriptor" view="grid1" />
+    </field>
+    <field name="ClassPeriod" type="DataView" label="Class Period">
+      <dataView controller="ClassPeriod" view="grid1" />
+    </field>
+    <field name="CourseSectionDeliveryMode" type="DataView" label="Course Section Delivery Mode">
+      <dataView controller="CourseSectionDeliveryMode" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="CoursesAndsections" type="Form" label="COURSES &amp; SECTIONS HUB">
+      <categories>
+        <category tab="COURSE SECTIONS" id="c2" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="CourseSection" columns="15" tag="modal-max-xs&#xD;&#xA;modal-when-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;modal-dock-bottom&#xD;&#xA;">
+              <dataView pageSize="16" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="COURSES" id="c1">
+          <dataFields>
+            <dataField fieldName="Course" columns="15" tag="modal-max-sx&#xD;&#xA;modal-fit-content&#xD;&#xA;content-stub-none&#xD;&#xA;modal-auto-grow&#xD;&#xA;">
+              <dataView pageSize="16" autoHighlightFirstRow="true" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category tab="SUBJECTS" id="c3">
+          <dataFields>
+            <dataField fieldName="CourseSubjectArea" columns="15" tag="modal-max-xs&#xD;&#xA;modal-when-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;modal-dock-bottom&#xD;&#xA;" />
+          </dataFields>
+        </category>
+        <category tab="CLASS PERIOD" id="c6">
+          <dataFields>
+            <dataField fieldName="ClassPeriod" columns="15" tag="modal-max-xs&#xD;&#xA;modal-when-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;&#xD;&#xA;" />
+          </dataFields>
+        </category>
+        <category tab="CLASS PERIOD TYPE" id="c5">
+          <dataFields>
+            <dataField fieldName="ClassPeriodTypeDescriptor" columns="15" tag="modal-max-xs&#xD;&#xA;modal-when-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;modal-dock-bottom&#xD;&#xA;" />
+          </dataFields>
+        </category>
+        <category tab="DELIVERY MODE" id="c4">
+          <dataFields>
+            <dataField fieldName="CourseSectionDeliveryMode" columns="15" tag="modal-max-xs&#xD;&#xA;modal-when-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;modal-dock-bottom&#xD;&#xA;" />
+          </dataFields>
+        </category>
+      </categories>
+      <headerText>This hub helps organise subject experiences provided for the instruction of students on a regular or systematic basis.</headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Course Actions" flat="false" />
+  </actions>
+</dataController>

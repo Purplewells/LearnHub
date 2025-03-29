@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Orders" conflictDetection="overwriteChanges" label="Orders" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Orders"."OrderID" "OrderID"
+	,"Orders"."OrderDate" "OrderDate"
+	,"Orders"."TransactionTypeID" "TransactionTypeID"
+	,"TransactionType"."TransactionTypeDesc" "TransactionType"
+	,"Orders"."IssuedTo" "IssuedTo"
+	,"Orders"."Quantity" "Quantity"
+	,"Orders"."Freight" "Freight"
+	,"Orders"."OrderTotal" "OrderTotal"
+	,"Orders"."CreatedDate" "CreatedDate"
+	,"Orders"."CreatedBy" "CreatedBy"
+	,"Orders"."ModifiedDate" "ModifiedDate"
+	,"Orders"."ModifiedBy" "ModifiedBy"
+from "dbo"."Orders" "Orders"
+	left join "dbo"."zlkpMovementTransactionType" "TransactionType" on "Orders"."TransactionTypeID" = "TransactionType"."TransactionTypeID"
+]]></text>
+    </command>
+    <command id="OrderIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="OrderID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="OrderID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Order ID" readOnly="true" />
+    <field name="OrderNumber" type="Int32" readOnly="true" label="Order Number" computed="true" showInSummary="true">
+      <formula>Orders.OrderID</formula>
+    </field>
+    <field name="OrderDate" type="DateTime" label="Order Date" showInSummary="true" />
+    <field name="TransactionTypeID" type="Int32" label="Transaction Type ID" showInSummary="true">
+      <items style="Lookup" dataController="MovementTransactionType" newDataView="createForm1" dataValueField="TransactionTypeID" dataTextField="TransactionTypeDesc" copy="extTransactionType = TransactionTypeCode" />
+    </field>
+    <field name="TransactionType" type="String" readOnly="true" label="Transaction Type" length="15" />
+    <field name="IssuedTo" type="String" label="Issued To" length="50" showInSummary="true" />
+    <field name="Quantity" type="Int32" label="Quantity" showInSummary="true" />
+    <field name="Freight" type="Decimal" label="Freight" />
+    <field name="OrderTotal" type="Decimal" label="Order Total" />
+    <field name="OrderHeader" type="String" readOnly="true" label="Order Header" computed="true">
+      <formula>Orders.IssuedTo + ' &gt;&gt; ' + 'OrderNo:' + CAST(Orders.OrderID AS NVARCHAR(35))</formula>
+    </field>
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="OrderDetail" type="DataView" label="Order Detail">
+      <dataView controller="SalesOrderDetail" view="grid1" filterFields="OrderID" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Orders">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="OrderNumber" columns="15" />
+        <dataField fieldName="OrderDate" columns="10" />
+        <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" />
+        <dataField fieldName="IssuedTo" columns="35" />
+        <dataField fieldName="Quantity" columns="15" hidden="true" />
+        <dataField fieldName="Freight" columns="15">
+          <headerText>Delivery Charge</headerText>
+        </dataField>
+        <dataField fieldName="OrderTotal" columns="15" />
+        <dataField fieldName="OrderHeader" hidden="true" tag="header-text" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Orders">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Orders" flow="NewColumn">
+          <description><![CDATA[General Info]]></description>
+          <dataFields>
+            <dataField fieldName="OrderNumber" columns="15" hidden="true" />
+            <dataField fieldName="OrderDate" columns="10" />
+            <dataField fieldName="OrderHeader" hidden="true" />
+            <dataField fieldName="IssuedTo" columns="50" />
+            <dataField fieldName="OrderTotal" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c3" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" />
+            <dataField fieldName="Quantity" columns="15" hidden="true" />
+            <dataField fieldName="Freight" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Orders" flow="NewRow">
+          <description />
+          <dataFields />
+        </category>
+        <category id="c2" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Orders">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Orders" flow="NewColumn">
+          <description><![CDATA[General Info]]></description>
+          <dataFields>
+            <dataField fieldName="OrderNumber" columns="15" hidden="true" />
+            <dataField fieldName="OrderDate" columns="10" />
+            <dataField fieldName="OrderHeader" hidden="true" />
+            <dataField fieldName="IssuedTo" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c3" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" />
+            <dataField fieldName="Quantity" columns="15" hidden="true" />
+            <dataField fieldName="Freight" columns="15" />
+            <dataField fieldName="OrderTotal" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Orders" flow="NewRow">
+          <description />
+          <dataFields />
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Edit" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New|Update" type="JavaScript" phase="After" name="setOrderDate"><![CDATA[[OrderDate] = new Date();
+[Freight] = 0;
+[IssuedTo] = 'Enter receipient name';
+]]></rule>
+    <rule id="r101" type="JavaScript" commandName="Insert|Update" phase="Before" name="validate_IssuedTo"><![CDATA[var fieldValue = [IssuedTo];
+if (fieldValue == null) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('IssuedTo', 'A reciepient name is required.');
+}]]></rule>
+  </businessRules>
+</dataController>

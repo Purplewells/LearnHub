@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PerformanceIndicator" alias="PerformanceIndicator" created="2024-02-03T15:08:14" modified="2024-02-03T18:48:30" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="zlkpGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="451" y="415">
+      <foreignKeyColumn columnName="GradeLevelID" parentColumnName="RefGradeLevelId" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="PerformanceIndicatorID" fieldName="PerformanceIndicatorID" label="Performance Indicator ID" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="ICode" fieldName="ICode" label="ICode" />
+    <column name="PerformanceDescription" fieldName="PerformanceDescription" label="Performance Description" />
+    <column name="SuccessStatement" fieldName="SuccessStatement" label="Success Statement" />
+    <column name="ContentStandardNo" fieldName="StandardNo" label="Standard No" />
+    <column name="Strand" fieldName="Strand" label="Strand" />
+    <column name="Substrand" fieldName="Substrand" label="Substrand" />
+    <column name="StrandCode" fieldName="StrandCode" label="Strand Code" />
+    <column name="extSubject" fieldName="Subject" label="Subject" />
+    <column name="extTerm" fieldName="ExtTerm" label="Term" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="extIsActive" fieldName="ExtIsActive" label="Active" />
+    <column name="GradeLevelID" fieldName="GradeLevelID" label="Grade Level ID" aliasColumnName="Description" aliasForeignKey="zlkpGradeLevel" />
+    <column name="Description" fieldName="GL" label="GL" foreignKey="zlkpGradeLevel" />
+    <column name="SortOrder" fieldName="GLSO" label="GLSO" foreignKey="zlkpGradeLevel" />
+    <column fieldName="PerformanceIndicator" type="nvarchar(2076)" dataType="String" label="Performance Indicator">
+      <formula>PerformanceIndicator.Code + ' - ' + PerformanceIndicator.PerformanceDescription</formula>
+    </column>
+    <column fieldName="SubjectLearningOutcome" type="nvarchar(2134)" dataType="String" label="Subject Learning Outcome">
+      <formula>PerformanceIndicator.extSubject + ' - ' + PerformanceIndicator.ICode + ' - ' + PerformanceIndicator.PerformanceDescription</formula>
+    </column>
+    <column name="extContentStandard" fieldName="ExtContentStandard" label="Content Standard" />
+    <column name="extLearningStandard" fieldName="ExtLearningStandard" label="ext Learning Standard" />
+    <column fieldName="StrandDescriptor" type="nvarchar(173)" dataType="String" label="Strand Descriptor">
+      <formula>PerformanceIndicator.StrandCode + ' - ' + PerformanceIndicator.Strand</formula>
+    </column>
+  </columns>
+</dataModel>

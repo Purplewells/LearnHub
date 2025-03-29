@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="FeedingFeePayments" alias="FeedingFeePayments" created="2024-01-28T23:17:20" modified="2025-03-16T19:46:00" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="meal_plan" parentTableSchema="dbo" parentTableName="zlkpMealPlans" x="331" y="20">
+      <foreignKeyColumn columnName="meal_plan_id" parentColumnName="meal_plan_id" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="payment_id" fieldName="PaymentID" label="Payment Id" />
+    <column name="personid" fieldName="Personid" label="Personid" />
+    <column name="firstname" fieldName="Firstname" label="Firstname" />
+    <column name="lastname" fieldName="Lastname" label="Lastname" />
+    <column name="identificationcode" fieldName="UPN" label="UPN" />
+    <column name="GradeLevel" fieldName="GL" label="GL" />
+    <column name="meal_plan_id" fieldName="MealPlanID" label="Meal Plan Id" aliasColumnName="plan_name" aliasForeignKey="meal_plan" />
+    <column name="plan_name" fieldName="MealPlanName" label="Meal Plan" foreignKey="meal_plan" />
+    <column name="plan_code" fieldName="MealPlanCode" label="Plan Code" foreignKey="meal_plan" />
+    <column name="price" fieldName="MealPrice" label="Meal Price" foreignKey="meal_plan" format="c" />
+    <column name="NumberOfDays" fieldName="NumberOfDays" label="No. of Days" foreignKey="meal_plan" />
+    <column name="payment_amount" fieldName="AmountPaid" label="Amount Paid" />
+    <column name="Curr" fieldName="Curr" label="Curr" />
+    <column name="payment_date" fieldName="PaidDate" label="Paid Date" />
+    <column name="service_start_date" fieldName="ServiceStartDate" label="Start Date" />
+    <column name="service_end_date" fieldName="ServiceEndDate" label="End Date" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="Status" fieldName="Status" label="Status" />
+    <column name="ServiceStatus" fieldName="ServiceStatus" label="Service Status" />
+  </columns>
+</dataModel>
