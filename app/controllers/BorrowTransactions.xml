@@ -67,39 +67,39 @@ END</formula>
     <view id="grid1" type="Grid" commandId="command1" label="Lending Activities" sortExpression="BorrowDate DESC" filter="(DueDate &lt; GETDATE() AND ReturnDate IS NULL) OR (ReturnDate IS NOT NULL AND ReturnDate &gt; DueDate)">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="BookID" aliasFieldName="BookTitle" />
+        <dataField fieldName="BookID" aliasFieldName="BookTitle" tag="pivot4-row1-donut-top10-sortdescbyvalue&#xD;&#xA;pivot4-title:&quot;Top 10 Most popular books borrowed&quot; &#xD;&#xA;pivot4-haxistitle:&quot;Transaction Date&quot;        &#xD;&#xA;pivot4-vaxistitle:&quot;Returned Books&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot5-row1-donut-top10-sortascbyvalue&#xD;&#xA;pivot5-title:&quot;Top 10 Least popular books borrowed&quot; &#xD;&#xA;pivot5-haxistitle:&quot;Transaction Date&quot;        &#xD;&#xA;pivot5-vaxistitle:&quot;Returned Books&quot;&#xD;&#xA;&#xD;&#xA;" />
         <dataField fieldName="BookAuthor" columns="40" />
         <dataField fieldName="MemberID" aliasFieldName="MemberName" />
-        <dataField fieldName="BorrowDate" columns="20" />
+        <dataField fieldName="BorrowDate" columns="20" tag="pivot1-row1-column-date&#xD;&#xA;pivot1-title:&quot;Count of Books Borrowed via Transaction Date&quot; &#xD;&#xA;pivot1-haxistitle:&quot;Transaction Date&quot;        &#xD;&#xA;pivot1-vaxistitle:&quot;Books&quot;&#xD;&#xA;" />
         <dataField fieldName="DueDate" columns="20" />
-        <dataField fieldName="ReturnDate" columns="10" />
+        <dataField fieldName="ReturnDate" columns="10" tag="pivot2-row1-column-date&#xD;&#xA;pivot2-title:&quot;Count of Books Returned via Transaction Date&quot; &#xD;&#xA;pivot2-haxistitle:&quot;Transaction Date&quot;        &#xD;&#xA;pivot2-vaxistitle:&quot;Returned Books&quot;&#xD;&#xA;" />
+        <dataField fieldName="Status" columns="10" tag="pivot3-row1-donut&#xD;&#xA;pivot3-title:&quot;Count of Books Returned by Status &quot; &#xD;&#xA;pivot3-haxistitle:&quot;Transaction Date&quot;        &#xD;&#xA;pivot3-vaxistitle:&quot;Returned Books&quot;&#xD;&#xA;" />
+        <dataField fieldName="OverduePeriod" columns="15" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="20" hidden="true">
           <headerText>Issued By</headerText>
         </dataField>
         <dataField fieldName="ModifiedBy" columns="20" hidden="true" />
-        <dataField fieldName="Status" columns="10" />
-        <dataField fieldName="OverduePeriod" columns="15" />
       </dataFields>
     </view>
     <view id="grid1_all_lendings" type="Grid" commandId="command1" label="All Lending Activities" sortExpression="BorrowDate DESC">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="BookID" aliasFieldName="BookTitle" />
+        <dataField fieldName="BookID" aliasFieldName="BookTitle" tag="pivot4-row1-donut-top10-sortdescbyvalue&#xD;&#xA;pivot4-title:&quot;Top 10 Most popular books borrowed&quot; &#xD;&#xA;pivot4-haxistitle:&quot;Transaction Date&quot;        &#xD;&#xA;pivot4-vaxistitle:&quot;Returned Books&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot5-row1-donut-top10-sortascbyvalue&#xD;&#xA;pivot5-title:&quot;Top 10 Least popular books borrowed&quot; &#xD;&#xA;pivot5-haxistitle:&quot;Transaction Date&quot;        &#xD;&#xA;pivot5-vaxistitle:&quot;Returned Books&quot;&#xD;&#xA;&#xD;&#xA;" />
         <dataField fieldName="BookAuthor" columns="50" />
         <dataField fieldName="MemberID" aliasFieldName="MemberName" />
-        <dataField fieldName="BorrowDate" columns="20" />
+        <dataField fieldName="BorrowDate" columns="20" tag="pivot1-row1-column-date&#xD;&#xA;pivot1-title:&quot;Count of Books Borrowed via Transaction Date&quot; &#xD;&#xA;pivot1-haxistitle:&quot;Transaction Date&quot;        &#xD;&#xA;pivot1-vaxistitle:&quot;Books&quot;&#xD;&#xA;" />
         <dataField fieldName="DueDate" columns="20" />
-        <dataField fieldName="ReturnDate" columns="10" />
+        <dataField fieldName="ReturnDate" columns="10" tag="pivot2-row1-column-date&#xD;&#xA;pivot2-title:&quot;Count of Books Returned via Transaction Date&quot; &#xD;&#xA;pivot2-haxistitle:&quot;Transaction Date&quot;        &#xD;&#xA;pivot2-vaxistitle:&quot;Returned Books&quot;&#xD;&#xA;" />
+        <dataField fieldName="Status" tag="pivot3-row1-donut&#xD;&#xA;pivot3-title:&quot;Count of Books Returned by Status &quot; &#xD;&#xA;pivot3-haxistitle:&quot;Transaction Date&quot;        &#xD;&#xA;pivot3-vaxistitle:&quot;Returned Books&quot;&#xD;&#xA;" />
+        <dataField fieldName="OverduePeriod" columns="15" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="20" hidden="true">
           <headerText>Issued By</headerText>
         </dataField>
         <dataField fieldName="ModifiedBy" columns="20" hidden="true" />
-        <dataField fieldName="Status" />
-        <dataField fieldName="OverduePeriod" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Lending Transaction">
