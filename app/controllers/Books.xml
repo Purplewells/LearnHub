@@ -43,7 +43,7 @@ from "dbo"."Books" "Books"
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Books">
+    <view id="grid1" type="Grid" commandId="command1" label="Book Catalogue">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Title" tag="header-text" columns="40" />
@@ -70,8 +70,8 @@ from "dbo"."Books" "Books"
             <dataField fieldName="Author" columns="50" />
             <dataField fieldName="ISBN" columns="20" />
             <dataField fieldName="PublicationYear" columns="15" />
-            <dataField fieldName="CopiesAvailable" columns="15" />
             <dataField fieldName="TotalCopies" columns="15" />
+            <dataField fieldName="CopiesAvailable" columns="15" textMode="Static" />
             <dataField fieldName="Genre" columns="50" />
             <dataField fieldName="Publisher" />
           </dataFields>
@@ -97,8 +97,8 @@ from "dbo"."Books" "Books"
             <dataField fieldName="Author" columns="50" />
             <dataField fieldName="ISBN" columns="20" />
             <dataField fieldName="PublicationYear" columns="15" />
-            <dataField fieldName="CopiesAvailable" columns="15" />
             <dataField fieldName="TotalCopies" columns="15" />
+            <dataField fieldName="CopiesAvailable" columns="15" textMode="Static" />
             <dataField fieldName="Genre" columns="50" />
             <dataField fieldName="Publisher" />
           </dataFields>
@@ -139,10 +139,13 @@ from "dbo"."Books" "Books"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a101" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a103" commandName="ReportAsWord" headerText="Export To Word" />
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" />
-      <action id="a4" commandName="ExportRss" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -154,12 +157,6 @@ from "dbo"."Books" "Books"
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
-    </actionGroup>
-    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" />
-      <action id="a2" commandName="ReportAsImage" />
-      <action id="a3" commandName="ReportAsExcel" />
-      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

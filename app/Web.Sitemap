@@ -75,9 +75,9 @@
     <siteMapNode title="UTILITIES" description="" roles="Administrators, StoreOfficers, ContentEditor">
       <siteMapNode title="LIBRARY" description="" roles="Administrators, Librarian">
         <siteMapNode title="Catalogue" description="View Books" url="~/pages/books" cssClass="material-icon-menu_book" />
-        <siteMapNode title="Bus Schedules" description="View Bus Schedules" url="~/pages/bus-schedules" cssClass="material-icon-event_available" />
-        <siteMapNode title="Members" description="View Members" url="~/pages/members" cssClass="material-icon-groups" />
         <siteMapNode title="Lend Activities" description="View Borrow Transactions" url="~/pages/borrow-transactions" cssClass="material-icon-check_box" />
+        <siteMapNode title="Members" description="View Members" url="~/pages/members" cssClass="material-icon-groups" />
+        <siteMapNode title="Bus Schedules" description="View Bus Schedules" url="~/pages/bus-schedules" cssClass="material-icon-event_available" />
         <siteMapNode title="Documents" description="View Document Store" url="~/pages/document-store" cssClass="material-icon-folder" />
         <siteMapNode title="Staff CPD" description="View Career Progression Development" url="~/pages/staff-career-progression" roles="XXXX" cssClass="material-icon-campaign" />
       </siteMapNode>

@@ -78,6 +78,11 @@ from "dbo"."BorrowTransactions" "BorrowTransactions"
             <dataField fieldName="BorrowDate" columns="10" />
             <dataField fieldName="DueDate" columns="10" />
             <dataField fieldName="ReturnDate" columns="10" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
@@ -98,10 +103,10 @@ from "dbo"."BorrowTransactions" "BorrowTransactions"
             <dataField fieldName="BorrowDate" columns="10" />
             <dataField fieldName="DueDate" columns="10" />
             <dataField fieldName="ReturnDate" columns="10" />
-            <dataField fieldName="CreatedDate" columns="20" />
-            <dataField fieldName="ModifiedDate" columns="20" />
-            <dataField fieldName="CreatedBy" columns="50" />
-            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -136,7 +141,7 @@ from "dbo"."BorrowTransactions" "BorrowTransactions"
       <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="Lend New Book" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" headerText="Review Lending Transaction" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="material-icon-library_books" whenView="grid1" headerText="Review Transaction" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
