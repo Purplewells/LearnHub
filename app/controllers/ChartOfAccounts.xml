@@ -6,14 +6,20 @@
 select
 	"chart_of_accounts"."AccountID" "AccountID"
 	,"chart_of_accounts"."AccountName" "AccountName"
+	,"chart_of_accounts"."AccountNumber" "AccountNumber"
+	,"chart_of_accounts"."Label" "Label"
 	,"chart_of_accounts"."AccountTypeID" "AccountTypeID"
 	,"AccountType"."AccountType" "AccountType"
 	,"chart_of_accounts"."IsActive" "IsActive"
+	,"chart_of_accounts"."LFT" "LFT"
+	,"chart_of_accounts"."RGT" "RGT"
 	,"chart_of_accounts"."ParentAccountID" "ParentAccountID"
+	,"ParentAccount"."AccountName" "ParentAccountName"
 	,"chart_of_accounts"."CreatedDate" "CreatedDate"
 	,"chart_of_accounts"."ModifiedDate" "ModifiedDate"
 from "dbo"."chart_of_accounts" "chart_of_accounts"
 	left join "dbo"."account_type" "AccountType" on "chart_of_accounts"."AccountTypeID" = "AccountType"."AccountTypeID"
+	left join "dbo"."chart_of_accounts" "ParentAccount" on "chart_of_accounts"."ParentAccountID" = "ParentAccount"."AccountID"
 ]]></text>
     </command>
     <command id="AccountIDIdentityCommand" type="Text" event="Inserted">
@@ -26,25 +32,36 @@ from "dbo"."chart_of_accounts" "chart_of_accounts"
   <fields>
     <field name="AccountID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Account ID" readOnly="true" />
     <field name="AccountName" type="String" label="Account Name" length="100" showInSummary="true" />
+    <field name="AccountNumber" type="String" label="Account Number" length="20" showInSummary="true" />
+    <field name="Label" type="String" label="Label" length="50" showInSummary="true" />
     <field name="AccountTypeID" type="Int32" label="Account Type ID" showInSummary="true">
       <items style="Lookup" dataController="AccountType" newDataView="createForm1" dataValueField="AccountTypeID" dataTextField="AccountType" />
     </field>
     <field name="AccountType" type="String" readOnly="true" label="Account Type" length="20" />
     <field name="IsActive" type="Boolean" default="((1))" label="IsActive" showInSummary="true" />
-    <field name="ParentAccountID" type="Int32" label="Parent Account ID" showInSummary="true" />
-    <field name="CreatedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Created Date" showInSummary="true" />
+    <field name="LFT" type="Int32" label="LFT" />
+    <field name="RGT" type="Int32" label="RGT" />
+    <field name="ParentAccountID" type="Int32" label="Parent Account ID">
+      <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" />
+    </field>
+    <field name="ParentAccountName" type="String" readOnly="true" label="Parent Account" length="30" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Modified Date" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Chart Of Accounts">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="AccountName" />
+        <dataField fieldName="AccountName" columns="25" />
+        <dataField fieldName="AccountNumber" columns="20" />
+        <dataField fieldName="Label" columns="20" />
         <dataField fieldName="AccountTypeID" aliasFieldName="AccountType" />
         <dataField fieldName="IsActive" />
-        <dataField fieldName="ParentAccountID" columns="15" />
-        <dataField fieldName="CreatedDate" columns="20" />
-        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="LFT" columns="5" />
+        <dataField fieldName="RGT" columns="5" />
+        <dataField fieldName="ParentAccountID" aliasFieldName="ParentAccountName" columns="25" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Chart Of Accounts">
@@ -54,9 +71,13 @@ from "dbo"."chart_of_accounts" "chart_of_accounts"
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="AccountName" />
+            <dataField fieldName="AccountNumber" columns="20" />
+            <dataField fieldName="Label" columns="50" />
             <dataField fieldName="AccountTypeID" aliasFieldName="AccountType" />
             <dataField fieldName="IsActive" />
-            <dataField fieldName="ParentAccountID" columns="15" />
+            <dataField fieldName="LFT" columns="15" />
+            <dataField fieldName="RGT" columns="15" />
+            <dataField fieldName="ParentAccountID" aliasFieldName="ParentAccountName" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
           </dataFields>
@@ -70,9 +91,13 @@ from "dbo"."chart_of_accounts" "chart_of_accounts"
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="AccountName" />
+            <dataField fieldName="AccountNumber" columns="20" />
+            <dataField fieldName="Label" columns="50" />
             <dataField fieldName="AccountTypeID" aliasFieldName="AccountType" />
             <dataField fieldName="IsActive" />
-            <dataField fieldName="ParentAccountID" columns="15" />
+            <dataField fieldName="LFT" columns="15" />
+            <dataField fieldName="RGT" columns="15" />
+            <dataField fieldName="ParentAccountID" aliasFieldName="ParentAccountName" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
           </dataFields>

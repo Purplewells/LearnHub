@@ -1,17 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="chart_of_accounts" alias="chart_of_accounts" created="2025-02-23T13:40:32" modified="2025-02-23T21:01:49" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="chart_of_accounts" alias="chart_of_accounts" created="2025-02-23T13:40:32" modified="2025-03-30T12:59:21" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
-    <foreignKey id="AccountType" parentTableSchema="dbo" parentTableName="account_type" x="329" y="20">
+    <foreignKey id="AccountType" parentTableSchema="dbo" parentTableName="account_type" x="392" y="52">
       <foreignKeyColumn columnName="AccountTypeID" parentColumnName="AccountTypeID" />
+    </foreignKey>
+    <foreignKey id="ParentAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="410" y="182">
+      <foreignKeyColumn columnName="ParentAccountID" parentColumnName="AccountID" />
     </foreignKey>
   </foreignKeys>
   <columns>
     <column name="AccountID" fieldName="AccountID" label="Account ID" />
     <column name="AccountName" fieldName="AccountName" label="Account Name" />
+    <column name="AccountNumber" fieldName="AccountNumber" label="Account Number" />
+    <column name="Label" fieldName="Label" label="Label" />
     <column name="AccountTypeID" fieldName="AccountTypeID" label="Account Type ID" aliasColumnName="AccountType" aliasForeignKey="AccountType" />
     <column name="AccountType" fieldName="AccountType" label="Account Type" foreignKey="AccountType" />
     <column name="IsActive" fieldName="IsActive" label="IsActive" />
-    <column name="ParentAccountID" fieldName="ParentAccountID" label="Parent Account ID" />
+    <column name="LFT" fieldName="LFT" label="LFT" />
+    <column name="RGT" fieldName="RGT" label="RGT" />
+    <column name="ParentAccountID" fieldName="ParentAccountID" label="Parent Account ID" aliasColumnName="AccountName" aliasForeignKey="ParentAccount" />
+    <column name="AccountName" fieldName="ParentAccountName" label="Parent Account" foreignKey="ParentAccount" />
     <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
     <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
   </columns>

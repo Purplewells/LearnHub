@@ -38,7 +38,7 @@ from "dbo"."account_general_ledger" "account_general_ledger"
     <field name="LedgerID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Ledger ID" readOnly="true" />
     <field name="TransactionID" type="Int32" label="Transaction ID" showInSummary="true" />
     <field name="AccountID" type="Int32" label="Account ID" showInSummary="true">
-      <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" copy="AccountType=AccountType" />
+      <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" copy="AccountNumber=AccountNumber, LFT=LFT, RGT=RGT, AccountType=AccountType" />
     </field>
     <field name="AccountName" type="String" readOnly="true" label="Account Name" length="45" />
     <field name="AccountNumber" type="String" readOnly="true" label="Account Number" length="20" />
