@@ -137,6 +137,7 @@
         <siteMapNode title="CHRABS TermBased" description="View Term Basis Person Centred Evaluation" url="~/pages/term-basis-person-centred-evaluation" cssClass="material-icon-cached" />
         <siteMapNode title="CHRABS SchoolBased" description="" url="~/pages/absence-metrics" roles="*" cssClass="material-icon-check-box_outline_blank" />
         <siteMapNode title="CHRABS Indicators" description="View Attendance Anomaly Detection Indicators" url="~/pages/ewindicators" cssClass="material-icon-sports" />
+        <siteMapNode title="CHRABS YoY" description="" url="~/pages/chrabyo-y" roles="*" cssClass="material-icon-monitoring" />
       </siteMapNode>
       <siteMapNode title="Stock Movements" description="" roles="Administrators, ContentEditors, StoreOfficers">
         <siteMapNode title="Stock Levels" description="View Stock Levels" url="~/pages/stock-levels" cssClass="material-icon-expand" />
