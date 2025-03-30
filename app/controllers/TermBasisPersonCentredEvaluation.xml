@@ -29,8 +29,8 @@ from "dbo"."rep_usp_term_basis_person_centred_evaluation" "rep_usp_term_basis_pe
     <field name="PersonID" type="Int32" label="Person ID" showInSummary="true" isPrimaryKey="true" isVirtual="true" />
     <field name="FirstName" type="String" label="Firstname" length="50" showInSummary="true" />
     <field name="LastName" type="String" label="Lastname" length="50" showInSummary="true" />
-    <field name="AcademicYear" type="String" label="Aca Year" length="20" showInSummary="true" />
-    <field name="AcademicTerm" type="String" label="Aca Term" length="20" showInSummary="true" />
+    <field name="AcademicYear" type="String" label="Year" length="20" showInSummary="true" />
+    <field name="AcademicTerm" type="String" label="Term" length="20" showInSummary="true" />
     <field name="IsAtRisk" type="Int32" label="At Risk" />
     <field name="IsChrab" type="Int32" label="IsCHRAB" />
     <field name="OnTheVerge" type="Int32" label="On The Verge" />
@@ -52,12 +52,12 @@ from "dbo"."rep_usp_term_basis_person_centred_evaluation" "rep_usp_term_basis_pe
     <field name="IsOnTheVerge" type="String" readOnly="true" label="Is OnTheVerge" computed="true">
       <formula>CASE WHEN rep_usp_term_basis_person_centred_evaluation.OnTheVerge = '1' THEN 'YES' ELSE 'NO' END</formula>
     </field>
-    <field name="PA" type="String" readOnly="true" label="Perfect Attendance" computed="true">
+    <field name="IsPerfect" type="String" readOnly="true" label="Is Perfect" computed="true">
       <formula>CASE WHEN rep_usp_term_basis_person_centred_evaluation.PerfectAttenance_Count = '1' THEN 'YES' ELSE 'NO' END</formula>
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Term Basis Person Centred Evaluation">
+    <view id="grid1" type="Grid" commandId="command1" label="Term Based Attendance Evaluation">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="PersonID" columns="15" hidden="true" />
@@ -73,10 +73,10 @@ from "dbo"."rep_usp_term_basis_person_centred_evaluation" "rep_usp_term_basis_pe
         </dataField>
         <dataField fieldName="IsChrab" columns="15" hidden="true" />
         <dataField fieldName="CHRAB" columns="8" tag="pivot3-row1-donut&#xD;&#xA;pivot3-title:&quot;Students evaluated to be Chronically Absent&quot;" />
-        <dataField fieldName="PerfectattenanceCount" columns="15" hidden="true">
-          <headerText>PaC</headerText>
+        <dataField fieldName="IsPerfect" columns="12" />
+        <dataField fieldName="PerfectattenanceCount" columns="12" hidden="true">
+          <headerText />
         </dataField>
-        <dataField fieldName="PA" tag="pivot5-row1-donut&#xD;&#xA;pivot5-title:&quot;Students evaluated to be minimally absent&quot;" columns="15" />
         <dataField fieldName="AttendanceRate" columns="15" />
         <dataField fieldName="PrevisatriskCount" columns="15" hidden="true" />
         <dataField fieldName="PrevischrabCount" columns="15" hidden="true" />
@@ -113,7 +113,7 @@ from "dbo"."rep_usp_term_basis_person_centred_evaluation" "rep_usp_term_basis_pe
             <dataField fieldName="AtRisk" />
             <dataField fieldName="CHRAB" />
             <dataField fieldName="IsOnTheVerge" />
-            <dataField fieldName="PA" />
+            <dataField fieldName="IsPerfect" />
           </dataFields>
         </category>
       </categories>
@@ -144,7 +144,7 @@ from "dbo"."rep_usp_term_basis_person_centred_evaluation" "rep_usp_term_basis_pe
             <dataField fieldName="AtRisk" />
             <dataField fieldName="CHRAB" />
             <dataField fieldName="IsOnTheVerge" />
-            <dataField fieldName="PA" />
+            <dataField fieldName="IsPerfect" />
           </dataFields>
         </category>
       </categories>
@@ -183,10 +183,17 @@ from "dbo"."rep_usp_term_basis_person_centred_evaluation" "rep_usp_term_basis_pe
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
+      <action commandName="SQL" headerText="Refresh Dataset" id="a103">
+        <data><![CDATA[ EXEC [dbo].[usp_term_basis_person_centred_evaluation]]]></data>
+      </action>
       <action id="a2" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a100" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a102" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a104" />
       <action id="a3" commandName="ExportRowset" />
-      <action id="a4" commandName="ExportRss" />
+      <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
       <action id="a7" commandName="DataSheet" />
       <action id="a8" commandName="Grid" />
     </actionGroup>
@@ -197,10 +204,7 @@ from "dbo"."rep_usp_term_basis_person_centred_evaluation" "rep_usp_term_basis_pe
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" />
       <action id="a2" commandName="ReportAsImage" />
-      <action id="a3" commandName="ReportAsExcel" />
-      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
