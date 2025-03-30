@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="vw_process__missing_attendance_registers" alias="vw_process__missing_attendance_registers" created="2024-02-18T11:00:49" modified="2025-01-02T14:18:42" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="vw_process__missing_attendance_registers" alias="vw_process__missing_attendance_registers" created="2024-02-18T11:00:49" modified="2025-03-30T21:25:44" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys />
   <columns>
     <column name="Date" fieldName="Date" label="Date" />
@@ -8,7 +8,8 @@
     <column name="Stream" fieldName="Stream" label="STM" />
     <column name="RG" fieldName="RG" label="RG" />
     <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
-    <column name="IsActive" fieldName="IsActive" label="ISC" />
     <column name="SessionCode" fieldName="SessionCode" label="Session" />
+    <column name="IsCurrentTerm" fieldName="IsCurrentTerm" label="ISC" />
+    <column name="CSY" fieldName="CSY" label="CSY" />
   </columns>
 </dataModel>

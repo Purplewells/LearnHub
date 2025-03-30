@@ -10,8 +10,9 @@ select
 	,"vw_process__missing_attendance_registers"."Stream" "Stream"
 	,"vw_process__missing_attendance_registers"."RG" "RG"
 	,"vw_process__missing_attendance_registers"."SortOrder" "SortOrder"
-	,"vw_process__missing_attendance_registers"."IsActive" "IsActive"
 	,"vw_process__missing_attendance_registers"."SessionCode" "SessionCode"
+	,"vw_process__missing_attendance_registers"."IsCurrentTerm" "IsCurrentTerm"
+	,"vw_process__missing_attendance_registers"."CSY" "CSY"
 from "dbo"."vw_process__missing_attendance_registers" "vw_process__missing_attendance_registers"
 ]]></text>
     </command>
@@ -23,11 +24,12 @@ from "dbo"."vw_process__missing_attendance_registers" "vw_process__missing_atten
     <field name="Stream" type="String" allowNulls="false" label="STM" length="100" showInSummary="true" />
     <field name="RG" type="String" allowNulls="false" label="RG" readOnly="true" length="2" showInSummary="true" />
     <field name="SortOrder" type="Int32" label="Sort Order" />
-    <field name="IsActive" type="Boolean" label="ISC" />
     <field name="SessionCode" type="String" label="Session" readOnly="true" length="20" />
+    <field name="IsCurrentTerm" type="String" allowNulls="false" label="ISC" readOnly="true" length="3" />
+    <field name="CSY" type="String" allowNulls="false" label="CSY" readOnly="true" length="3" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Attendance Audit" sortExpression="Date DESC, SortOrder ASC, Stream ASC">
+    <view id="grid1" type="Grid" commandId="command1" label="Active Term Attendance Audit" sortExpression="Date DESC, SortOrder ASC, Stream ASC" filter="IsCurrentTerm = 'Yes'">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="SessionCode" columns="12" />
@@ -37,7 +39,22 @@ from "dbo"."vw_process__missing_attendance_registers" "vw_process__missing_atten
         <dataField fieldName="Stream" columns="8" />
         <dataField fieldName="RG" columns="5" />
         <dataField fieldName="SortOrder" columns="15" hidden="true" />
-        <dataField fieldName="IsActive" columns="5" />
+        <dataField fieldName="IsCurrentTerm" columns="3" />
+        <dataField fieldName="CSY" columns="3" />
+      </dataFields>
+    </view>
+    <view id="grid1_all_attendance_audits" type="Grid" commandId="command1" label="Historical Attendance Audits" sortExpression="Date DESC, SortOrder ASC, Stream ASC" filter="IsCurrentTerm = 'No'">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="SessionCode" columns="12" />
+        <dataField fieldName="Date" columns="18" />
+        <dataField fieldName="EventDate" columns="18" />
+        <dataField fieldName="GL" columns="8" />
+        <dataField fieldName="Stream" columns="8" />
+        <dataField fieldName="RG" columns="5" />
+        <dataField fieldName="SortOrder" columns="15" hidden="true" />
+        <dataField fieldName="IsCurrentTerm" columns="3" />
+        <dataField fieldName="CSY" columns="3" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Attendance Audit">
@@ -52,8 +69,9 @@ from "dbo"."vw_process__missing_attendance_registers" "vw_process__missing_atten
             <dataField fieldName="Stream" />
             <dataField fieldName="RG" columns="2" />
             <dataField fieldName="SortOrder" columns="15" />
-            <dataField fieldName="IsActive" />
             <dataField fieldName="SessionCode" columns="20" />
+            <dataField fieldName="IsCurrentTerm" columns="3" />
+            <dataField fieldName="CSY" columns="3" />
           </dataFields>
         </category>
       </categories>
@@ -70,8 +88,9 @@ from "dbo"."vw_process__missing_attendance_registers" "vw_process__missing_atten
             <dataField fieldName="Stream" />
             <dataField fieldName="RG" columns="2" />
             <dataField fieldName="SortOrder" columns="15" />
-            <dataField fieldName="IsActive" />
             <dataField fieldName="SessionCode" columns="20" />
+            <dataField fieldName="IsCurrentTerm" columns="3" />
+            <dataField fieldName="CSY" columns="3" />
           </dataFields>
         </category>
       </categories>
