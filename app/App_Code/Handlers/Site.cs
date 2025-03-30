@@ -56,7 +56,7 @@ namespace zLearnHub.Handlers
             get
             {
                 return @"<footer class=""page-footer font-small unique-color-dark""><div class=""footer-copyright text-center py-3"">
-        © 2018 Telleion MIS | <a href=""http://www.purplewells.com"" target=""_blank"">Purplewells Ltd</a> | Last Updated: 20250320 | V 8.71</div>
+        © 2018 Telleion MIS | <a href=""http://www.purplewells.com"" target=""_blank"">Purplewells Ltd</a> | Last Updated: 20250330 | V 8.72</div>
 </footer>
 ";
             }
