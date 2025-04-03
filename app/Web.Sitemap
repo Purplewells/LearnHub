@@ -40,18 +40,21 @@
     <siteMapNode title="ACCOUNTING" description="" roles="Administrators, AccountManagers, FeeManagers, StoreOfficers, MealCoordinators">
       <siteMapNode title="FINANCE" description="" roles="Administrators, AccountManagers, FeeManagers, FeeClerks, ContentEditors">
         <siteMapNode title="Fees &amp; Bills" description="View Fees &amp; Bills" url="~/pages/feemanagement" roles="*" cssClass="material-icon-money" />
-        <siteMapNode title="Finances" description="View Finance Overview" url="~/pages/finance-plan" roles="Administrators, AccountManagers" cssClass="material-icon-attach_money" />
-        <siteMapNode title="Manual Entries" description="View Manual Account Journal Entries" url="~/pages/manual-account-journal-entries" cssClass="material-icon-sync_alt" />
-        <siteMapNode title="General Ledger" description="Keep records all financial transactions" url="~/pages/account-general-ledger" cssClass="material-icon-point_of_sale" />
         <siteMapNode title="Bill Note" description="A reminder note to parents/guardians to request for outstanding balance." url="~/pages/mini-fee-reminder" cssClass="material-icon-receipt" />
         <siteMapNode title="Fee Notes" description="" url="~/pages/custom-fee-note-report" roles="Administrators, AccountManagers, FeeManagers, DONOTDISPLAY" cssClass="material-icon-receipt" />
         <siteMapNode title="Debtors Bill" description="" url="~/pages/debtors-bill" roles="*" cssClass="material-icon-account_balance_wallet" />
+      </siteMapNode>
+      <siteMapNode title="ACCOUNTS" description="" roles="Administrators, Accountants, ContentEditors">
+        <siteMapNode title="Finances" description="View Finance Overview" url="~/pages/finance-plan" roles="Administrators, AccountManagers" cssClass="material-icon-attach_money" />
+        <siteMapNode title="Manual Entries" description="View Manual Account Journal Entries" url="~/pages/manual-account-journal-entries" roles="Administrators, AccountManagers" cssClass="material-icon-sync_alt" />
+        <siteMapNode title="Journal" description="Keep records all financial transactions" url="~/pages/account-general-ledger" roles="Administrators, AccountManagers" cssClass="material-icon-point_of_sale" />
+        <siteMapNode title="Trial Balance" description="" url="~/pages/trial-balance" roles="Administrators, AccountManagers" cssClass="material-icon-account_balance_wallet" />
       </siteMapNode>
       <siteMapNode title="INVENTORY" description="" roles="Administrators, AccountManagers, StoreOfficers">
         <siteMapNode title="Requisition Orders" description="View Orders" url="~/pages/orders" roles="xxxx" cssClass="material-icon-alarm" />
         <siteMapNode title="Purchase Order" description="View Purchase Order" url="~/pages/purchase-order" roles="*" cssClass="material-icon-casino" />
         <siteMapNode title="Stock Hub" description="" url="~/pages/stock-hub" roles="*" cssClass="material-icon-home_plan" />
-        <siteMapNode title="Stock Items" description="View Product" url="~/pages/product" cssClass="material-icon-spa" />
+        <siteMapNode title="Stock Items" description="View Stock Items" url="~/pages/product" cssClass="material-icon-spa" />
         <siteMapNode title="Stock Trans" description="View Stock Transactions" url="~/pages/stock-transactions" roles="xxxxx" cssClass="material-icon-ad_units" />
         <siteMapNode title="Stock Movement" description="View Stock Level Movement" url="~/pages/stock-level-movement" roles="xxxx" />
         <siteMapNode title="Stock Rec'd Locations" description="View Stock Level Movement Receiving Location" url="~/pages/stock-level-movement-receiving-location" roles="xxxx" cssClass="material-icon-shield_with_heart" />
@@ -107,6 +110,7 @@
       <siteMapNode title="Room" description="View Room" url="~/pages/room" cssClass="material-icon-chair" />
       <siteMapNode title="School Holidays" description="View School Events" url="~/pages/school-events" cssClass="material-icon-local_bar" />
       <siteMapNode title="Teacher Sections" description="View Teacher Section Association" url="~/pages/teacher-section-association" cssClass="material-icon-cast_for_education" />
+      <siteMapNode title="Progress Level" description="View Progress Level" url="~/pages/progress-level" cssClass="material-icon-pending" />
       <siteMapNode title="Reports Parameters" description="View Report Parameters" url="~/pages/report-parameters" cssClass="material-icon-arrow_drop_down_circle" />
       <siteMapNode title="General Parameters" description="View General Parameters" url="~/pages/general-parameters" cssClass="material-icon-approval" />
     </siteMapNode>
@@ -159,6 +163,7 @@
     <siteMapNode title="SUPPORT HELP" description="" roles="*">
       <siteMapNode title="Tutorials" description="" url="~/pages/tutorials" roles="*" cssClass="material-icon-star" />
       <siteMapNode title="Maps" description="" url="~/pages/maps" roles="*" cssClass="material-icon-location_on" />
+      <siteMapNode title="Locations" description="" url="~/pages/locations" roles="*" />
     </siteMapNode>
     <siteMapNode title="CODES" description="" roles="DONOTVIEW">
       <siteMapNode title="Allergy Type" description="View Allergy Type" url="~/pages/allergy-type" cssClass="material-icon-science" />

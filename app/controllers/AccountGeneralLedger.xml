@@ -41,13 +41,13 @@ from "dbo"."account_general_ledger" "account_general_ledger"
       <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" copy="AccountNumber=AccountNumber, LFT=LFT, RGT=RGT, AccountType=AccountType" />
     </field>
     <field name="AccountName" type="String" readOnly="true" label="Account Name" length="45" />
-    <field name="AccountNumber" type="String" readOnly="true" label="Account Number" length="20" />
+    <field name="AccountNumber" type="String" readOnly="true" label="Account No." length="20" />
     <field name="LFT" type="Int32" readOnly="true" label="LFT" />
     <field name="RGT" type="Int32" readOnly="true" label="RGT" />
     <field name="AccountType" type="String" readOnly="true" label="Account Type" length="20" />
     <field name="DebitAmount" type="Decimal" default="((0.00))" label="Debit Amount" showInSummary="true" />
     <field name="CreditAmount" type="Decimal" default="((0.00))" label="Credit Amount" showInSummary="true" />
-    <field name="TransactionDate" type="DateTime" dataFormatString="" default="(getdate())" label="Transaction Date" showInSummary="true" />
+    <field name="TransactionDate" type="DateTime" dataFormatString="d" default="(getdate())" label="Transaction Date" showInSummary="true" />
     <field name="Memo" type="String" label="Memo" length="255" />
     <field name="ReferenceNumber" type="String" label="Reference No." length="20" />
     <field name="PostingDate" type="DateTime" dataFormatString="g" label="Posting Date" />
@@ -62,7 +62,7 @@ from "dbo"."account_general_ledger" "account_general_ledger"
       <dataFields>
         <dataField fieldName="TransactionID" columns="15" hidden="true" />
         <dataField fieldName="AccountID" aliasFieldName="AccountName" />
-        <dataField fieldName="AccountNumber" columns="20" />
+        <dataField fieldName="AccountNumber" columns="15" />
         <dataField fieldName="AccountType" columns="20" />
         <dataField fieldName="DebitAmount" columns="15" />
         <dataField fieldName="CreditAmount" columns="15" />
@@ -92,7 +92,7 @@ from "dbo"."account_general_ledger" "account_general_ledger"
             <dataField fieldName="AccountType" columns="20" />
             <dataField fieldName="DebitAmount" columns="15" />
             <dataField fieldName="CreditAmount" columns="15" />
-            <dataField fieldName="TransactionDate" columns="20" />
+            <dataField fieldName="TransactionDate" columns="10" />
             <dataField fieldName="Memo" />
             <dataField fieldName="ReferenceNumber" columns="20" />
             <dataField fieldName="PostingDate" columns="20" />
@@ -118,7 +118,7 @@ from "dbo"."account_general_ledger" "account_general_ledger"
             <dataField fieldName="AccountType" columns="20" />
             <dataField fieldName="DebitAmount" columns="15" />
             <dataField fieldName="CreditAmount" columns="15" />
-            <dataField fieldName="TransactionDate" columns="20" />
+            <dataField fieldName="TransactionDate" columns="10" />
             <dataField fieldName="Memo" />
             <dataField fieldName="ReferenceNumber" columns="20" />
             <dataField fieldName="PostingDate" columns="20" />

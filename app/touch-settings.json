@@ -7,7 +7,6 @@
   "charts": {
     "maxPivotRowCount": 100
   },
- 
   "ui": {
     "menu": {
       "autoExpand": false,
@@ -17,18 +16,14 @@
         "input": {
           "style": "outline"
         }
-
       },
       "location": "toolbar",
       "multiSelectMaxRowCount": 4000
-
-
     },
     "state": {
       "storage": "local", // Options: "local" (persist across sessions), "session" (current session only)
       "clear": "never" // Options: "never" (retain state), "always" (clear on login/logout)
     },
-
     "theme": {
       "name": "light",
       "icons": "outlined",
@@ -40,24 +35,19 @@
         "vertical": true,
         "horizontal": true
       }
-
     },
-
     "form": {
       "lines": {
         "horizontal": true,
         "input": false
       }
     },
-
-
     "readingPane": {
       "background": "~/images/reading_pane_01.jpg",
       "detail": {
         "actionIcons": true
       }
     },
-
     "ui": {
       "readingPane": {
         "minRight": 400,
@@ -73,7 +63,6 @@
       "format": true
     }
   },
-
   "automation": {
     "enabled": true,
     "kiosk": {
@@ -82,17 +71,14 @@
       "maxWidth": 2000,
       "copyright": false,
       "fullscreen": true
-
     },
     "barcode": {
       "enabled": true,
       "scanner": {
         "enabled": true,
         "autoFocus": true
-
       }
     },
-
     "notify": {
       "enabled": true,
       "location": "left",
@@ -102,11 +88,9 @@
         "long": 10000
       }
     },
-
     "scrollbars": {
       "wide": true
     },
-
     "date": {
       "localTime": {
         "enabled": true
@@ -139,21 +123,14 @@
           "depth": 50
         }
       },
-
-
       "history": "search, sort, filter, group"
-
-
     }
   },
   "splash": {
     "enabled": true,
     "duration": 2500,
-    //"background": "~/images/master-001.jpg"
     "background": "~/images/master-001.jpg",
-    "logo": "~/App_Data/images/logo.jpg"
-
-
+    "logo": "~/app_data/images/logo.jpg"
   },
   "server": {
     "geocoding": {
@@ -161,8 +138,6 @@
         "key": "AIzaSyBzY_bPskVZ6PuRQbkzQeuqirZs_D19Se8"
       }
     },
-
-
     "client": {
       "enabled": false,
       "manifest": {
@@ -186,6 +161,5 @@
     "sidebar": {
       "when": "Never" // Options: "always" (always visible), "never" (always hidden), "responsive" (auto-hide)
     }
-
   }
 }

@@ -1,0 +1,122 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Locations</title>
+  </head>
+</html>
+  <body data-authorize-roles="*">
+    <!--The contents of this page will be overwritten by app generator. Set page property "Generate" to "First Time Only" to preserve changes.-->
+      <div data-app-role="page" data-content-framework="bootstrap">
+          <!-- Carousel ================================================== -->
+          <div id="myCarousel" class="carousel carousel-md slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#myCarousel" data-slide-to="1"></li>
+                  <li data-target="#myCarousel" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner">
+                  <div class="item active">
+                      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                           alt="First slide" style="height: 100%" />
+                      <div class="container">
+                          <div class="carousel-caption">
+                              <h1 data-editable="true">
+                                  <i class="material-icon">campaign</i>Example headline.
+                              </h1>
+                              <p data-editable="true">
+                                  Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
+                                  porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                              </p>
+                              <p>
+                                  <a class="btn btn-lg btn-primary" href="#" role="button" data-editable="true">Sign up today &raquo;</a>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="item">
+                      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                           alt="Second slide" style="height: 100%" />
+                      <div class="container">
+                          <div class="carousel-caption">
+                              <h1 data-editable="true">
+                                  <i class="material-icon">whatshot</i>Another example headline.
+                              </h1>
+                              <p data-editable="true">
+                                  Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
+                                  porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                              </p>
+                              <p>
+                                  <a class="btn btn-lg btn-primary" href="#" role="button" data-editable="true">Learn more &raquo;</a>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="item">
+                      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                           alt="Third slide" style="height: 100%" />
+                      <div class="container">
+                          <div class="carousel-caption">
+                              <h1 data-editable="true">
+                                  <i class="material-icon">work_outline</i>One more for good measure.
+                              </h1>
+                              <p data-editable="true">
+                                  Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
+                                  porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                              </p>
+                              <p>
+                                  <a class="btn btn-lg btn-primary" href="#" role="button" data-editable="true">Browse gallery &raquo;</a>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                  <i class="material-icon">chevron_left</i>
+              </a><a class="right carousel-control"
+                     href="#myCarousel" role="button" data-slide="next">
+                  <i class="material-icon">chevron_right</i>
+              </a>
+          </div>
+         <p>This is a mapping page</p>
+              <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzY_bPskVZ6PuRQbkzQeuqirZs_D19Se8&callback=loadMap"></script>
+              <script>
+                  function loadMap() {
+                      const mapElement = document.getElementById('map');
+                      if (!mapElement) {
+                          console.error("Map element not found");
+                          return;
+                      }
+
+                      const map = new google.maps.Map(mapElement, {
+                          zoom: 12,
+                          center: { lat: 6.5244, lng: 3.3792 } // Default to Lagos
+                      });
+
+                      fetch('/appservices/Contact') // Replace with actual API/View URL
+                          .then(response => response.json())
+                          .then(data => {
+                              data.forEach(asset => {
+                                  const marker = new google.maps.Marker({
+                                      position: { lat: parseFloat(asset.Latitude), lng: parseFloat(asset.Longitude) },
+                                      map: map,
+                                      title: asset.Name
+                                  });
+
+                                  const infoWindow = new google.maps.InfoWindow({
+                                      content: `<strong>${asset.Name}</strong><br>Latitude: ${asset.Latitude}<br>Longitude: ${asset.Longitude}`
+                                  });
+
+                                  marker.addListener("click", function () {
+                                      infoWindow.open(map, marker);
+                                  });
+                              });
+                          })
+                          .catch(error => {
+                              console.error("Error fetching asset data:", error);
+                              // Optionally, display an error message to the user
+                          });
+                  }
+              </script>
+    </body>

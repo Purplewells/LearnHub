@@ -92,11 +92,11 @@ order by "RefGradeLevel"."SortOrder" asc]]></text>
       <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action commandName="SQL" headerText="Reset to Base Grade Level" id="a101" confirmation="This action will reset the Current GradeLevels to be the same as the Next GradeLevels. Do you want to continue?" cssClass="material-icon-reset_tv" notify="This action will reset the Current GradeLevels to the same level as the Next GradeLevels is completed.">
-        <data><![CDATA[EXEC [dbo].[usp_ops_reset_promotion_mapping_scheme]]]></data>
-      </action>
       <action commandName="SQL" headerText="Promote To Next GL" id="a100" cssClass="material-icon-exposure_plus_1" confirmation="This action will promote the Current GradeLevels to the Next GradeLevels for promotion. Do you want to continue?" notify="Current GradeLevels to the Next GradeLevels for promotion have been completed.">
         <data><![CDATA[EXEC [dbo].[usp_ops_set_promotion_mapping_scheme]]]></data>
+      </action>
+      <action commandName="SQL" headerText="Reset to Base Grade Level" id="a101" confirmation="This action will reset the Current GradeLevels to be the same as the Next GradeLevels. Do you want to continue?" cssClass="material-icon-reset_tv" notify="This action will reset the Current GradeLevels to the same level as the Next GradeLevels is completed.">
+        <data><![CDATA[EXEC [dbo].[usp_ops_reset_promotion_mapping_scheme]]]></data>
       </action>
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
@@ -114,11 +114,11 @@ order by "RefGradeLevel"."SortOrder" asc]]></text>
       <action id="a7" commandName="DataSheet" />
       <action id="a8" commandName="Grid" />
       <action id="a105" />
-      <action commandName="SQL" headerText="Reset to Base Grade Level" id="a104" confirmation="This action will reset the Current GradeLevels to be the same as the Next GradeLevels. Do you want to continue?" cssClass="material-icon-reset_tv" notify="This action will reset the Current GradeLevels to the same level as the Next GradeLevels is completed.">
-        <data><![CDATA[EXEC [dbo].[usp_ops_reset_promotion_mapping_scheme]]]></data>
-      </action>
       <action commandName="SQL" headerText="Promote To Next Grade Level" id="a103" cssClass="material-icon-exposure_plus_1" confirmation="This action will promote the current GradeLevels to the next GradeLevels for promotion. Do you want to continue?" notify="Current GradeLevels to the Next GradeLevels for promotion have been completed.">
         <data><![CDATA[EXEC [dbo].[usp_ops_set_promotion_mapping_scheme]]]></data>
+      </action>
+      <action commandName="SQL" headerText="Reset to Base Grade Level" id="a104" confirmation="This action will reset the Current GradeLevels to be the same as the Next GradeLevels. Do you want to continue?" cssClass="material-icon-reset_tv" notify="This action will reset the Current GradeLevels to the same level as the Next GradeLevels is completed.">
+        <data><![CDATA[EXEC [dbo].[usp_ops_reset_promotion_mapping_scheme]]]></data>
       </action>
     </actionGroup>
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
