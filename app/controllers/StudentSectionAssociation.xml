@@ -26,6 +26,8 @@ select
 	,"CourseSection"."SectionName" "SectionName"
 	,"StudentSectionAssociation"."StartDate" "StartDate"
 	,"StudentSectionAssociation"."EndDate" "EndDate"
+	,"StudentSectionAssociation"."RefProgressLevelId" "RefProgressLevelId"
+	,"RefProgressLevel"."Description" "RefProgressLevelDescription"
 	,"StudentSectionAssociation"."CreatedDate" "CreatedDate"
 	,"StudentSectionAssociation"."ModifiedDate" "ModifiedDate"
 	,"StudentSectionAssociation"."CreatedBy" "CreatedBy"
@@ -50,6 +52,7 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
 	left join "dbo"."CourseSection" "CourseSection" on "StudentSectionAssociation"."CourseSectionID" = "CourseSection"."CourseSectionID"
 	left join "dbo"."Course" "Course" on "CourseSection"."CourseID" = "Course"."CourseID"
 	left join "dbo"."zlkpSchoolStream" "RefSchoolStream" on "StudentSectionAssociation"."RefSchoolStreamID" = "RefSchoolStream"."RefSchoolStreamID"
+	left join "dbo"."zlkpProgressLevel" "RefProgressLevel" on "StudentSectionAssociation"."RefProgressLevelId" = "RefProgressLevel"."RefProgressLevelId"
 ]]></text>
     </command>
     <command id="StudentCourseSectionIDIdentityCommand" type="Text" event="Inserted">
@@ -94,6 +97,10 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
     <field name="SectionName" type="String" readOnly="true" label="Section Name" length="15" />
     <field name="StartDate" type="DateTime" label="Start Date" />
     <field name="EndDate" type="DateTime" label="End Date" />
+    <field name="RefProgressLevelId" type="Int32" label="Ref Progress Level Id">
+      <items style="Lookup" dataController="ProgressLevel" newDataView="createForm1" dataValueField="RefProgressLevelID" dataTextField="Description" />
+    </field>
+    <field name="RefProgressLevelDescription" type="String" readOnly="true" label="Progress Level" length="20" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />
@@ -145,6 +152,7 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
         <dataField fieldName="SectionName" columns="12" hidden="true" />
         <dataField fieldName="StartDate" columns="18" />
         <dataField fieldName="EndDate" columns="18" />
+        <dataField fieldName="RefProgressLevelId" aliasFieldName="RefProgressLevelDescription" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
@@ -182,6 +190,7 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
         <dataField fieldName="SectionName" columns="12" hidden="true" />
         <dataField fieldName="StartDate" columns="18" />
         <dataField fieldName="EndDate" columns="18" />
+        <dataField fieldName="RefProgressLevelId" aliasFieldName="RefProgressLevelDescription" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
@@ -194,7 +203,7 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
         <dataField fieldName="Header" hidden="true" tag="header-text" />
         <dataField fieldName="SCID" columns="8" />
         <dataField fieldName="SEID" columns="8" />
-        <dataField fieldName="Name" />
+        <dataField fieldName="Name" hidden="true" />
       </dataFields>
     </view>
     <view id="all_course_sections" type="Grid" commandId="command1" label="All Class Rosters" sortExpression="GLSO ASC" groupExpression="GL, UPN">
@@ -219,6 +228,7 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
         <dataField fieldName="SectionName" columns="12" hidden="true" />
         <dataField fieldName="StartDate" columns="18" />
         <dataField fieldName="EndDate" columns="18" />
+        <dataField fieldName="RefProgressLevelId" aliasFieldName="RefProgressLevelDescription" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
@@ -231,7 +241,45 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
         <dataField fieldName="Header" hidden="true" tag="header-text" />
         <dataField fieldName="SCID" columns="8" />
         <dataField fieldName="SEID" columns="8" />
-        <dataField fieldName="Name" />
+        <dataField fieldName="Name" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="all_higher_education" type="Grid" commandId="command1" label="Higher Education Rosters" sortExpression="GLSO ASC" groupExpression="GL, Name" filter=" ACS=1 ">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="StudentEnrollmentID" aliasFieldName="StudentEnrollmentCreatedBy" hidden="true" />
+        <dataField fieldName="Firstname" columns="18" />
+        <dataField fieldName="Lastname" columns="18" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="sex" columns="3" hidden="true" />
+        <dataField fieldName="GL" columns="5" />
+        <dataField fieldName="GLS" columns="5" />
+        <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" />
+        <dataField fieldName="Course" columns="20" />
+        <dataField fieldName="CourseSectionID" aliasFieldName="SectionNo" />
+        <dataField fieldName="extSessionCode" columns="15" />
+        <dataField fieldName="RefCourseSectionEnrollmentStatusTypeID" aliasFieldName="EnrollmentStatus" />
+        <dataField fieldName="RefCourseSectionEntryTypeID" aliasFieldName="CSE" />
+        <dataField fieldName="RefCourseSectionExitTypeID" aliasFieldName="CSEExit" hidden="true" />
+        <dataField fieldName="CreditsEarned" columns="15" hidden="true" />
+        <dataField fieldName="SectionName" columns="12" hidden="true" />
+        <dataField fieldName="StartDate" columns="18" />
+        <dataField fieldName="EndDate" columns="18" />
+        <dataField fieldName="RefProgressLevelId" aliasFieldName="RefProgressLevelDescription" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="TeacherNotes" hidden="true" />
+        <dataField fieldName="ACS" />
+        <dataField fieldName="SSIA" />
+        <dataField fieldName="extActiveCourseSection" hidden="true" />
+        <dataField fieldName="extCalendarSessionID" columns="15" hidden="true" />
+        <dataField fieldName="Header" hidden="true" tag="header-text" />
+        <dataField fieldName="SCID" columns="8" />
+        <dataField fieldName="SEID" columns="8" />
+        <dataField fieldName="Name" hidden="true" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Student Section Association">
@@ -248,6 +296,7 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
             <dataField fieldName="SectionName" columns="50" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
+            <dataField fieldName="RefProgressLevelId" aliasFieldName="RefProgressLevelDescription" />
             <dataField fieldName="extSessionCode" columns="20" />
             <dataField fieldName="Header" hidden="true" />
             <dataField fieldName="Name" hidden="true" />
@@ -295,6 +344,7 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
             <dataField fieldName="SectionName" columns="50" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
+            <dataField fieldName="RefProgressLevelId" aliasFieldName="RefProgressLevelDescription" />
             <dataField fieldName="extSessionCode" columns="20" />
             <dataField fieldName="Header" hidden="true" />
             <dataField fieldName="Name" hidden="true" />

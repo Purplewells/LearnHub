@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="StudentSectionAssociation" alias="StudentSectionAssociation" created="2024-02-04T18:02:09" modified="2024-04-10T18:20:28" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="StudentSectionAssociation" alias="StudentSectionAssociation" created="2024-02-04T18:02:09" modified="2025-04-01T11:58:09" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="StudentEnrollment" parentTableSchema="dbo" parentTableName="StudentSchoolAssociation" x="470" y="20">
       <foreignKeyColumn columnName="StudentEnrollmentID" parentColumnName="StudentEnrollmentID" />
@@ -10,7 +10,7 @@
     <foreignKey id="RefCourseSectionEntryType" parentTableSchema="dbo" parentTableName="zlkpCourseSectionEntryType" x="470" y="841">
       <foreignKeyColumn columnName="RefCourseSectionEntryTypeId" parentColumnName="RefCourseSectionEntryTypeId" />
     </foreignKey>
-    <foreignKey id="RefCourseSectionExitType" parentTableSchema="dbo" parentTableName="zlkpCourseSectionExitType" x="976" y="20">
+    <foreignKey id="RefCourseSectionExitType" parentTableSchema="dbo" parentTableName="zlkpCourseSectionExitType" x="852" y="164">
       <foreignKeyColumn columnName="RefCourseSectionExitTypeId" parentColumnName="RefCourseSectionExitTypeId" />
     </foreignKey>
     <foreignKey id="CourseSection" parentTableSchema="dbo" parentTableName="CourseSection" x="30" y="714">
@@ -33,6 +33,9 @@
     </foreignKey>
     <foreignKey id="RefSex" parentTableSchema="dbo" parentTableName="zlkpSex" x="1717" y="20" baseForeignKey="Person">
       <foreignKeyColumn columnName="RefSexID" parentColumnName="GenderID" />
+    </foreignKey>
+    <foreignKey id="RefProgressLevel" parentTableSchema="dbo" parentTableName="zlkpProgressLevel" x="500" y="490">
+      <foreignKeyColumn columnName="RefProgressLevelId" parentColumnName="RefProgressLevelId" />
     </foreignKey>
   </foreignKeys>
   <columns>
@@ -58,6 +61,8 @@
     <column name="SectionName" fieldName="SectionName" label="Section Name" foreignKey="CourseSection" />
     <column name="StartDate" fieldName="StartDate" label="Start Date" />
     <column name="EndDate" fieldName="EndDate" label="End Date" />
+    <column name="RefProgressLevelId" fieldName="RefProgressLevelId" label="Ref Progress Level Id" aliasColumnName="Description" aliasForeignKey="RefProgressLevel" />
+    <column name="Description" fieldName="RefProgressLevelDescription" label="Progress Level" foreignKey="RefProgressLevel" />
     <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
     <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
     <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />

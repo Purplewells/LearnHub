@@ -103,12 +103,12 @@ from "dbo"."mlinkSessionEnrollment" "mlinkSessionEnrollment"
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
-      <action commandName="SQL" cssClass="material-icon-settings" id="a100" headerText="Generate Sessions" notify="Session progress setup completed.">
+      <action commandName="SQL" cssClass="material-icon-wifi_protected_setup" id="a100" headerText="Set Session" notify="Session progress setup completed.">
         <data><![CDATA[EXEC usp_ops_mlinkSessionEnrollment]]></data>
       </action>
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="SQL" cssClass="material-icon-settings" id="a100" headerText="Generate Sessions">
+      <action commandName="SQL" cssClass="material-icon-wifi_protected_setup" id="a100" headerText="Set Sessions">
         <data><![CDATA[EXEC usp_ops_mlinkSessionEnrollment]]></data>
       </action>
       <action id="a2" />

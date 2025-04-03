@@ -16,6 +16,9 @@
     <field name="SessionEnrollmentScheme" type="DataView" label="Session Enrollment Scheme">
       <dataView controller="SessionEnrollmentScheme" view="grid1" />
     </field>
+    <field name="ProgressLevel" type="DataView" label="Progress Level">
+      <dataView controller="ProgressLevel" view="grid1" />
+    </field>
   </fields>
   <views>
     <view id="GradingParameters" type="Form" label="GRADING &amp; PROGRESSION HUB">
@@ -45,6 +48,11 @@
         <category id="c5" headerText="SESSION PROGRESSION" tab="SESSION PROGRESSION" flow="NewColumn">
           <dataFields>
             <dataField fieldName="SessionEnrollmentScheme" columns="15" tag="modal-max-sm&#xD;&#xA;modal-fit-content&#xD;&#xA;material-icon-settings" />
+          </dataFields>
+        </category>
+        <category id="c6" headerText="PROGRESS LEVEL" tab="PROGRESS LEVEL" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="ProgressLevel" columns="15" tag="material-icon-pending&#xD;&#xA;modal-max-sm&#xD;&#xA;modal-fit-content&#xD;&#xA;material-icon-settings" />
           </dataFields>
         </category>
       </categories>
