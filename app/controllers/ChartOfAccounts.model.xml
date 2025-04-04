@@ -1,11 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="chart_of_accounts" alias="chart_of_accounts" created="2025-02-23T13:40:32" modified="2025-03-30T12:59:21" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="chart_of_accounts" alias="chart_of_accounts" created="2025-02-23T13:40:32" modified="2025-04-04T14:23:34" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="AccountType" parentTableSchema="dbo" parentTableName="account_type" x="392" y="52">
       <foreignKeyColumn columnName="AccountTypeID" parentColumnName="AccountTypeID" />
     </foreignKey>
     <foreignKey id="ParentAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="410" y="182">
       <foreignKeyColumn columnName="ParentAccountID" parentColumnName="AccountID" />
+    </foreignKey>
+    <foreignKey id="AccountCategory" parentTableSchema="dbo" parentTableName="zlkpChartAccountCategory" x="400" y="391">
+      <foreignKeyColumn columnName="AccountCategoryID" parentColumnName="AccountCategoryID" />
+    </foreignKey>
+    <foreignKey id="AccountUsage" parentTableSchema="dbo" parentTableName="zlkpChartAccountUsage" x="34" y="474">
+      <foreignKeyColumn columnName="AccountUsageID" parentColumnName="AccountUsageID" />
     </foreignKey>
   </foreignKeys>
   <columns>
@@ -15,6 +21,10 @@
     <column name="Label" fieldName="Label" label="Label" />
     <column name="AccountTypeID" fieldName="AccountTypeID" label="Account Type ID" aliasColumnName="AccountType" aliasForeignKey="AccountType" />
     <column name="AccountType" fieldName="AccountType" label="Account Type" foreignKey="AccountType" />
+    <column name="AccountCategoryID" fieldName="AccountCategoryID" label="Account Category ID" aliasColumnName="AccountCategory" aliasForeignKey="AccountCategory" />
+    <column name="AccountCategory" fieldName="AccountCategory" label="Category" foreignKey="AccountCategory" />
+    <column name="AccountUsageID" fieldName="AccountUsageID" label="Account Usage ID" aliasColumnName="AccountUsage" aliasForeignKey="AccountUsage" />
+    <column name="AccountUsage" fieldName="AccountUsage" label="Usage" foreignKey="AccountUsage" />
     <column name="IsActive" fieldName="IsActive" label="IsActive" />
     <column name="LFT" fieldName="LFT" label="LFT" />
     <column name="RGT" fieldName="RGT" label="RGT" />

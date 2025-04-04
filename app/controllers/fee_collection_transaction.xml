@@ -73,7 +73,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
     <field name="Status" type="String" readOnly="true" label="Status" length="10" />
     <field name="BillAmount" type="Decimal" readOnly="true" dataFormatString="" label="Bill Amount" />
     <field name="FeeDescription" type="String" readOnly="true" label="Fee Description" length="30" />
-    <field name="AmountPaid" type="Decimal" dataFormatString="" label="Amount Paid" showInSummary="true" causesCalculate="true" />
+    <field name="AmountPaid" type="Decimal" dataFormatString="N" label="Amount Paid" showInSummary="true" causesCalculate="true" formatOnClient="false" />
     <field name="CurrentBalance" type="Decimal" label="Current Balance" showInSummary="true" />
     <field name="Description" type="String" label="Description" length="50" showInSummary="true" />
     <field name="FeeType" type="String" label="Fee Type" length="20" />
@@ -220,9 +220,9 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
             <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" hidden="true" />
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" hidden="true" />
             <dataField fieldName="HeaderInfo" hidden="true" />
-            <dataField fieldName="RefundedAmount" columns="15" />
-            <dataField fieldName="RefundReason" columns="50" />
-            <dataField fieldName="RefundAmount" columns="15">
+            <dataField fieldName="RefundedAmount" columns="15" hidden="true" />
+            <dataField fieldName="RefundReason" columns="50" hidden="true" />
+            <dataField fieldName="RefundAmount" columns="15" hidden="true">
               <visibility>
                 <expression test="[TransactionTypeCode] == 'Refund'" type="ClientScript" />
               </visibility>
@@ -266,8 +266,8 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
             <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
             <dataField fieldName="HeaderInfo" hidden="true" />
-            <dataField fieldName="RefundedAmount" columns="15" />
-            <dataField fieldName="RefundReason" columns="50" />
+            <dataField fieldName="RefundedAmount" columns="15" hidden="true" />
+            <dataField fieldName="RefundReason" columns="50" hidden="true" />
           </dataFields>
         </category>
         <category id="c2" headerText="Originator" collapsed="true" floating="true" flow="NewRow">
@@ -333,7 +333,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
             <dataField fieldName="FeeID" aliasFieldName="Status" />
             <dataField fieldName="BillAmount" columns="15" />
             <dataField fieldName="FeeDescription" columns="30" hidden="true" />
-            <dataField fieldName="AmountPaid" columns="15" tag="focus-auto" />
+            <dataField fieldName="AmountPaid" columns="15" tag="focus-auto" dataFormatString="N" />
             <dataField fieldName="Description" columns="50" hidden="true" />
             <dataField fieldName="FeeType" columns="20" hidden="true" />
             <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" rows="3" columns="4" />
@@ -356,8 +356,8 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
             <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" hidden="true" />
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" hidden="true" />
             <dataField fieldName="HeaderInfo" hidden="true" />
-            <dataField fieldName="RefundedAmount" columns="15" />
-            <dataField fieldName="RefundReason" columns="50" />
+            <dataField fieldName="RefundedAmount" columns="15" hidden="true" />
+            <dataField fieldName="RefundReason" columns="50" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -500,10 +500,12 @@ LEFT JOIN zlkpFeeType zft ON zft.FeeTypeID = f.FeeTypeID
 where p.PersonID = @PersonID
 --where f.FeeID = @FeeID and p.PersonID = @PersonID
 ]]></rule>
-    <rule id="r106" commandName="Insert|Update|Calculate" type="Sql" phase="After" name="post_assign_chartofaccount"><![CDATA[EXEC usp_ops_auto_p2_post_to_update_debit_credit_fee_collection_transaction @TransactionID;
+    <rule id="r106" commandName="Insert|Update|Calculate" type="Sql" phase="After" name="post_assign_DebitID_and_CreditID"><![CDATA[--EXEC usp_ops_auto_p2_post_to_update_debit_credit_fee_collection_transaction @TransactionID;
+
+EXEC [dbo].[usp_ops_auto_p1_post_account_using_mapping_table] @TransactionID;
 
 ]]></rule>
-    <rule id="r109" commandName="Insert|update" type="Sql" phase="After" name="post_to_account_ledger"><![CDATA[EXEC [dbo].[usp_ops_auto_p3_post_to_account_ledger_on_fee_collection] @TransactionID]]></rule>
+    <rule id="r109" commandName="Insert|update" type="Sql" phase="After" name="post_fee_to_account_ledger"><![CDATA[EXEC [dbo].[usp_ops_auto_p2_post_fee_to_account_ledger] @TransactionID]]></rule>
     <rule id="r108" commandName="Insert|Update" type="Sql" phase="After" name="updateCurrentFeeBalance"><![CDATA[EXEC update_fee_collection_current_balance @FeeID, @PersonID]]></rule>
     <rule id="r110" commandName="Update|Insert|Calculate" type="Sql" phase="After" name="setAccountLedgerModifiedBy"><![CDATA[--DECLARE @BusinessRules_UserName NVARCHAR(50)
 UPDATE account_general_ledger

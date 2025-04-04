@@ -17,9 +17,15 @@ select
 	,"IncomeExpense"."ModifiedDate" "ModifiedDate"
 	,"IncomeExpense"."CreatedBy" "CreatedBy"
 	,"IncomeExpense"."ModifiedBy" "ModifiedBy"
+	,"IncomeExpense"."DebitAccountID" "DebitAccountID"
+	,"DebitAccount"."AccountName" "DebitAccountName"
+	,"IncomeExpense"."CreditAccountID" "CreditAccountID"
+	,"CreditAccount"."AccountName" "CreditAccountName"
 from "dbo"."IncomeExpense" "IncomeExpense"
 	left join "dbo"."Budget" "Budget" on "IncomeExpense"."BudgetID" = "Budget"."BudgetID"
 	left join "dbo"."zlkpExpenseCategory" "Category" on "IncomeExpense"."CategoryID" = "Category"."CategoryID"
+	left join "dbo"."chart_of_accounts" "DebitAccount" on "IncomeExpense"."DebitAccountID" = "DebitAccount"."AccountID"
+	left join "dbo"."chart_of_accounts" "CreditAccount" on "IncomeExpense"."CreditAccountID" = "CreditAccount"."AccountID"
 ]]></text>
     </command>
     <command id="IncomeExpenseIDIdentityCommand" type="Text" event="Inserted">
@@ -47,6 +53,14 @@ from "dbo"."IncomeExpense" "IncomeExpense"
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="DebitAccountID" type="Int32" label="Debit Account ID">
+      <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" />
+    </field>
+    <field name="DebitAccountName" type="String" readOnly="true" label="Debit Account" length="30" />
+    <field name="CreditAccountID" type="Int32" label="Credit Account ID">
+      <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" />
+    </field>
+    <field name="CreditAccountName" type="String" readOnly="true" label="Credit Account" length="30" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Income Expense" sortExpression="EventDate DESC">
@@ -57,11 +71,13 @@ from "dbo"."IncomeExpense" "IncomeExpense"
         <dataField fieldName="Amount" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum&#xD;&#xA;pivot3-val1-sum&#xD;&#xA;pivot4-val1-sum&#xD;&#xA;pivot5-val1-sum&#xD;&#xA;pivot6-val1-sum" />
         <dataField fieldName="CategoryID" aliasFieldName="CategoryName" columns="30" tag="pivot1-row1-barstacked&#xD;&#xA;pivot1-title:&quot;Total Budget Value by Category&quot;" />
         <dataField fieldName="Description" columns="40" />
-        <dataField fieldName="BudgetID" aliasFieldName="BudgetName" tag="pivot4-col1-top10-other&#xD;&#xA;pivot5-col1-top10-other&#xD;&#xA;&#xD;&#xA;pivot2-row1-barstacked&#xD;&#xA;pivot2-title:&quot;Total Budget Value by Budget Descriptor&quot;&#xD;&#xA;&#xD;&#xA;pivot3-row1-donut&#xD;&#xA;pivot3-title:&quot;Total Income Expense Budget Value by Budget Descriptor&quot;" />
+        <dataField fieldName="BudgetID" aliasFieldName="BudgetName" tag="pivot4-col1-top10-other&#xD;&#xA;pivot5-col1-top10-other&#xD;&#xA;&#xD;&#xA;pivot2-row1-barstacked&#xD;&#xA;pivot2-title:&quot;Total Budget Value by Budget Descriptor&quot;&#xD;&#xA;&#xD;&#xA;pivot3-row1-donut&#xD;&#xA;pivot3-title:&quot;Total Income Expense Budget Value by Budget Descriptor&quot;" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
         <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
+        <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Activity">
@@ -80,6 +96,8 @@ from "dbo"."IncomeExpense" "IncomeExpense"
             <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
             <dataField fieldName="CreatedBy" columns="50" hidden="true" />
             <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+            <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
+            <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
           </dataFields>
         </category>
       </categories>
@@ -100,6 +118,8 @@ from "dbo"."IncomeExpense" "IncomeExpense"
             <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
             <dataField fieldName="CreatedBy" columns="50" hidden="true" />
             <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+            <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
+            <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
           </dataFields>
         </category>
       </categories>
@@ -166,4 +186,7 @@ from "dbo"."IncomeExpense" "IncomeExpense"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert|update" type="Sql" phase="After" name="post_inc_exp_to_account_general"><![CDATA[EXECUTE usp_ops_auto_p3_post_inc_exp_to_account_ledger @IncomeExpenseID]]></rule>
+  </businessRules>
 </dataController>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpChartAccountUsage" alias="zlkpChartAccountUsage" created="2025-04-04T14:03:20" modified="2025-04-04T14:22:25" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="AccountUsageID" fieldName="AccountUsageID" label="Account Usage ID" />
+    <column name="AccountUsage" fieldName="AccountUsage" label="Account Usage" />
+    <column name="AccountUsageCode" fieldName="AccountUsageCode" label="Usage Code" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

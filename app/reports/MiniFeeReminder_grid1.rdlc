@@ -710,7 +710,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>We have noticed our accounts show the fees for </Value>
+                                      <Value>We hope this message finds you well. This an advisory note in view of </Value>
                                       <Style>
                                         <FontStyle>Normal</FontStyle>
                                         <FontFamily>arial</FontFamily>
@@ -767,7 +767,7 @@
                                       </Style>
                                     </TextRun>
                                     <TextRun>
-                                      <Value>is still outstanding. Please be reminded to clear the outstanding balance as soon as possible. We have no doubt you will give this matter your usual kind attention.</Value>
+                                      <Value>payment of tuition and associated fees. Please find the breakdown of the fees below. We appreciate your usual kind attention.</Value>
                                       <Style>
                                         <FontStyle>Normal</FontStyle>
                                         <FontFamily>arial</FontFamily>
@@ -1216,11 +1216,11 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>FEE ARREARS PAYMENT REMINDER</Value>
+                      <Value>FEE PAYMENT ADVISORY NOTE</Value>
                       <Style>
                         <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
-                        <Color>DarkViolet</Color>
+                        <Color>SteelBlue</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpChartAccountCategory" alias="zlkpChartAccountCategory" created="2025-04-04T14:02:48" modified="2025-04-04T14:22:44" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="AccountCategoryID" fieldName="AccountCategoryID" label="Account Category ID" />
+    <column name="AccountCategory" fieldName="AccountCategory" label="Account Category" />
+    <column name="AccountCategoryCode" fieldName="AccountCategoryCode" label="Code" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

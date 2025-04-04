@@ -37,18 +37,18 @@
         <siteMapNode title="Environment Setting" description="View Environment Setting" url="~/pages/environment-setting" />
       </siteMapNode>
     </siteMapNode>
-    <siteMapNode title="ACCOUNTING" description="" roles="Administrators, AccountManagers, FeeManagers, StoreOfficers, MealCoordinators">
-      <siteMapNode title="FINANCE" description="" roles="Administrators, AccountManagers, FeeManagers, FeeClerks, ContentEditors">
+    <siteMapNode title="ACCOUNTING" description="" roles="Administrators, AccountManagers, , Accountants, FeeManagers, StoreOfficers, MealCoordinators">
+      <siteMapNode title="FINANCE" description="" roles="Administrators, AccountManagers, FeeManagers, FeeClerks, ContentEditors, Accountants">
         <siteMapNode title="Fees &amp; Bills" description="View Fees &amp; Bills" url="~/pages/feemanagement" roles="*" cssClass="material-icon-money" />
         <siteMapNode title="Bill Note" description="A reminder note to parents/guardians to request for outstanding balance." url="~/pages/mini-fee-reminder" cssClass="material-icon-receipt" />
         <siteMapNode title="Fee Notes" description="" url="~/pages/custom-fee-note-report" roles="Administrators, AccountManagers, FeeManagers, DONOTDISPLAY" cssClass="material-icon-receipt" />
         <siteMapNode title="Debtors Bill" description="" url="~/pages/debtors-bill" roles="*" cssClass="material-icon-account_balance_wallet" />
       </siteMapNode>
       <siteMapNode title="ACCOUNTS" description="" roles="Administrators, Accountants, ContentEditors">
-        <siteMapNode title="Finances" description="View Finance Overview" url="~/pages/finance-plan" roles="Administrators, AccountManagers" cssClass="material-icon-attach_money" />
-        <siteMapNode title="Manual Entries" description="View Manual Account Journal Entries" url="~/pages/manual-account-journal-entries" roles="Administrators, AccountManagers" cssClass="material-icon-sync_alt" />
-        <siteMapNode title="Journal" description="Keep records all financial transactions" url="~/pages/account-general-ledger" roles="Administrators, AccountManagers" cssClass="material-icon-point_of_sale" />
-        <siteMapNode title="Trial Balance" description="" url="~/pages/trial-balance" roles="Administrators, AccountManagers" cssClass="material-icon-account_balance_wallet" />
+        <siteMapNode title="Finances" description="View Finance Overview" url="~/pages/finance-plan" roles="Administrators, Accountants" cssClass="material-icon-attach_money" />
+        <siteMapNode title="Manual Entries" description="View Manual Account Journal Entries" url="~/pages/manual-account-journal-entries" roles="Administrators, Accountants" cssClass="material-icon-sync_alt" />
+        <siteMapNode title="GL Journal" description="Keep records all financial transactions" url="~/pages/account-general-ledger" roles="Administrators, Accountants" cssClass="material-icon-point_of_sale" />
+        <siteMapNode title="Trial Balance" description="" url="~/pages/trial-balance" roles="Administrators, Accountants" cssClass="material-icon-account_balance_wallet" />
       </siteMapNode>
       <siteMapNode title="INVENTORY" description="" roles="Administrators, AccountManagers, StoreOfficers">
         <siteMapNode title="Requisition Orders" description="View Orders" url="~/pages/orders" roles="xxxx" cssClass="material-icon-alarm" />

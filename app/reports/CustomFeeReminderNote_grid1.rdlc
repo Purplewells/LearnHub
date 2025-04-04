@@ -1011,23 +1011,10 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Ghana Education Service</Value>
-                      <Style>
-                        <FontSize>11pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
                       <Label>SchoolName</Label>
                       <Value>=First(Fields!SchoolName.Value, "CustomFeeReminderNote")</Value>
                       <Style>
-                        <FontSize>9pt</FontSize>
+                        <FontSize>11pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1052,11 +1039,11 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>FEE ARREARS PAYMENT REMINDER</Value>
+                      <Value>FEE PAYMENT ADVISORY NOTE</Value>
                       <Style>
                         <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
-                        <Color>DarkViolet</Color>
+                        <Color>SteelBlue</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>

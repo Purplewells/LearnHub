@@ -79,7 +79,7 @@ from "dbo"."vw_fee_collection_accounting_ledger_mini_fee_reminder" "vw_fee_colle
     <field name="ShowOnReport" type="Boolean" label="Show On Report" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Debtors Reminder" reportLabel="Bill Reminder" reportTemplate="true">
+    <view id="grid1" type="Grid" commandId="command1" label="Payment Advice Note" reportLabel="Bill Reminder" reportTemplate="true">
       <headerText>This report provides a list of debtors a reminder to make their payment. </headerText>
       <dataFields>
         <dataField fieldName="Fullname" columns="30" />
@@ -304,7 +304,7 @@ from "dbo"."vw_fee_collection_accounting_ledger_mini_fee_reminder" "vw_fee_colle
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid100" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ReportAsPdf" headerText="Print Debtors (With Note)">
+      <action id="a1" commandName="ReportAsPdf" headerText="Print Bill With Note">
         <data />
       </action>
       <action id="a102" commandName="ReportAsPdf" headerText="Print Detailed Mini Statement" cssClass="material-icon-credit_card">

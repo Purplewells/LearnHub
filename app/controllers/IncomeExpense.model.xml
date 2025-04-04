@@ -1,11 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="IncomeExpense" alias="IncomeExpense" created="2024-01-30T11:05:48" modified="2024-12-17T22:28:18" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="IncomeExpense" alias="IncomeExpense" created="2024-01-30T11:05:48" modified="2025-04-04T14:48:34" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Budget" parentTableSchema="dbo" parentTableName="Budget" x="329" y="20">
       <foreignKeyColumn columnName="BudgetID" parentColumnName="BudgetID" />
     </foreignKey>
     <foreignKey id="Category" parentTableSchema="dbo" parentTableName="zlkpExpenseCategory" x="333" y="178">
       <foreignKeyColumn columnName="CategoryID" parentColumnName="CategoryID" />
+    </foreignKey>
+    <foreignKey id="DebitAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="333" y="300">
+      <foreignKeyColumn columnName="DebitAccountID" parentColumnName="AccountID" />
+    </foreignKey>
+    <foreignKey id="CreditAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="331" y="514">
+      <foreignKeyColumn columnName="CreditAccountID" parentColumnName="AccountID" />
     </foreignKey>
   </foreignKeys>
   <columns>
@@ -22,5 +28,9 @@
     <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
     <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
     <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="DebitAccountID" fieldName="DebitAccountID" label="Debit Account ID" aliasColumnName="AccountName" aliasForeignKey="DebitAccount" />
+    <column name="AccountName" fieldName="DebitAccountName" label="Debit Account" foreignKey="DebitAccount" />
+    <column name="CreditAccountID" fieldName="CreditAccountID" label="Credit Account ID" aliasColumnName="AccountName" aliasForeignKey="CreditAccount" />
+    <column name="AccountName" fieldName="CreditAccountName" label="Credit Account" foreignKey="CreditAccount" />
   </columns>
 </dataModel>

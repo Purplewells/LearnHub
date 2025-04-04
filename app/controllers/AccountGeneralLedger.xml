@@ -67,9 +67,11 @@ from "dbo"."account_general_ledger" "account_general_ledger"
         <dataField fieldName="DebitAmount" columns="15" />
         <dataField fieldName="CreditAmount" columns="15" />
         <dataField fieldName="TransactionDate" columns="20" />
-        <dataField fieldName="LFT" columns="5" />
-        <dataField fieldName="RGT" columns="5" />
-        <dataField fieldName="ReferenceNumber" columns="12" />
+        <dataField fieldName="LFT" columns="5" hidden="true" />
+        <dataField fieldName="RGT" columns="5" hidden="true" />
+        <dataField fieldName="ReferenceNumber" columns="12">
+          <headerText>Reference No.</headerText>
+        </dataField>
         <dataField fieldName="PostingDate" columns="20" />
         <dataField fieldName="Memo" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
