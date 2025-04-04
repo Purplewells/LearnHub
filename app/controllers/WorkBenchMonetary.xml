@@ -32,18 +32,23 @@
           </dataFields>
         </category>
         <category tab="ACCOUNT TYPE SOURCE" id="c6">
-          <dataFields>
-            <dataField fieldName="AccountSource" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs">
-              <headerText>Account Type Source</headerText>
-              <dataView pageSize="15" />
-            </dataField>
-          </dataFields>
+          <dataFields />
         </category>
         <category tab="ACCOUNT TYPE" id="c7">
           <dataFields>
             <dataField fieldName="AccountType" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs">
               <dataView pageSize="15" />
             </dataField>
+          </dataFields>
+        </category>
+        <category tab="ACCOUNT CATEGORY" id="c10">
+          <dataFields>
+            <dataField fieldName="ChartAccountCategory" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
+        </category>
+        <category tab="ACCOUNT USAGE" id="c11">
+          <dataFields>
+            <dataField fieldName="ChartAccountUsage" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
           </dataFields>
         </category>
         <category tab="ACCOUNT MAPPINGS" id="c8">
@@ -83,11 +88,14 @@
     <field name="TransactionAccountMapping" type="DataView" label="Transaction Account Mapping">
       <dataView controller="TransactionAccountMapping" view="grid1" />
     </field>
-    <field name="AccountSource" type="DataView" label="Account Source">
-      <dataView controller="AccountSource" view="grid1" />
-    </field>
     <field name="ChartOfAccounts" type="DataView" label="Chart Of Accounts">
       <dataView controller="ChartOfAccounts" view="grid1" />
+    </field>
+    <field name="ChartAccountUsage" type="DataView" label="Chart Account Usage">
+      <dataView controller="ChartAccountUsage" view="grid1" />
+    </field>
+    <field name="ChartAccountCategory" type="DataView" label="Chart Account Category">
+      <dataView controller="ChartAccountCategory" view="grid1" />
     </field>
   </fields>
   <actions>

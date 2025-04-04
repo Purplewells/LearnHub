@@ -179,12 +179,12 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
             <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" />
             <dataField fieldName="TransactionStatusCode" columns="20" hidden="true" />
             <dataField fieldName="FeeID" aliasFieldName="Status" hidden="true" />
+            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" />
             <dataField fieldName="FeeDescription" columns="30" hidden="true" />
             <dataField fieldName="Description" columns="50" />
             <dataField fieldName="FeeType" columns="20" hidden="true" />
             <dataField fieldName="PersonID" textMode="Static" columns="15" hidden="true" />
-            <dataField fieldName="HeaderInfo" />
-            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" />
+            <dataField fieldName="HeaderInfo" hidden="true" />
           </dataFields>
         </category>
         <category id="c2" flow="NewColumn">
@@ -196,7 +196,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
             <dataField fieldName="CurrencyCode" columns="5" />
             <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" />
             <dataField fieldName="NameOfPayee" columns="25" />
-            <dataField fieldName="EffectiveDate" columns="10" />
+            <dataField fieldName="EffectiveDate" columns="10" hidden="true" />
             <dataField fieldName="EffectiveTo" columns="10" />
           </dataFields>
         </category>
@@ -249,7 +249,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
             <dataField fieldName="Description" columns="50" />
             <dataField fieldName="FeeType" columns="20" />
             <dataField fieldName="PersonID" textMode="Static" columns="15" hidden="true" />
-            <dataField fieldName="HeaderInfo" />
+            <dataField fieldName="HeaderInfo" hidden="true" />
             <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" />
           </dataFields>
         </category>
