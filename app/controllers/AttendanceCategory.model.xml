@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="zlkp_AttendanceEventCategory" alias="zlkp_AttendanceEventCategory" created="2024-01-28T12:02:27" modified="2024-01-28T12:03:04" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="zlkp_AttendanceEventCategory" alias="zlkp_AttendanceEventCategory" created="2024-01-28T12:02:27" modified="2025-04-05T13:47:29" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys />
   <columns>
     <column name="AttendanceEventCategoryID" fieldName="AttendanceEventCategoryID" label="Attendance Event Category ID" />
-    <column name="AttendanceEventCategory" fieldName="AttendanceEventCategory" label="Attendance Event Category" />
+    <column name="AttendanceEventCategory" fieldName="AttendanceEventCategory" label="Event Category" />
     <column name="IsActive" fieldName="IsActive" label="Is Active" />
   </columns>
 </dataModel>

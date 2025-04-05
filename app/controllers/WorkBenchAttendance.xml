@@ -25,14 +25,14 @@
             <dataField fieldName="AttendanceReason" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
           </dataFields>
         </category>
-        <category id="c1" tab="ABSENCE REASON">
-          <dataFields>
-            <dataField fieldName="AbsenceReason" columns="15" tag="material-icon-explore&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
-          </dataFields>
-        </category>
         <category id="c4" tab="ATTENDANCE STATUS">
           <dataFields>
             <dataField fieldName="AttendanceStatus" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c1" tab="ABSENCE REASON">
+          <dataFields>
+            <dataField fieldName="AbsenceReason" columns="15" tag="material-icon-explore&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
           </dataFields>
         </category>
         <category id="c5" tab="PRESENCE CATEGORY">

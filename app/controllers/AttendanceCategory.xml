@@ -19,7 +19,7 @@ from "dbo"."zlkp_AttendanceEventCategory" "zlkp_AttendanceEventCategory"
   </commands>
   <fields>
     <field name="AttendanceEventCategoryID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Attendance Event Category ID" readOnly="true" />
-    <field name="AttendanceEventCategory" type="String" label="Attendance Event Category" length="15" showInSummary="true" />
+    <field name="AttendanceEventCategory" type="String" label="Event Category" length="15" showInSummary="true" />
     <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
   </fields>
   <views>

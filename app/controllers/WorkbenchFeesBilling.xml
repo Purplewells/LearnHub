@@ -44,7 +44,7 @@
         <category tab="FEE BALANCES" id="c4">
           <dataFields>
             <dataField fieldName="FeeCollectionSummaries" columns="15">
-              <headerText>Fee Collection Overview</headerText>
+              <headerText>Fee Balances</headerText>
               <dataView autoHighlightFirstRow="true" showRowNumber="true" pageSize="15" />
             </dataField>
           </dataFields>

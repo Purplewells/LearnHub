@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="zlkp_AttendanceEventReason" alias="zlkp_AttendanceEventReason" created="2024-01-28T12:01:11" modified="2024-01-28T12:01:28" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="zlkp_AttendanceEventReason" alias="zlkp_AttendanceEventReason" created="2024-01-28T12:01:11" modified="2025-04-05T13:44:11" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys />
   <columns>
     <column name="AttendanceEventReasonID" fieldName="AttendanceEventReasonID" label="Attendance Event Reason ID" />
-    <column name="AttendanceEventReason" fieldName="AttendanceEventReason" label="Attendance Event Reason" />
-    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="AttendanceEventReason" fieldName="AttendanceEventReason" label="Event Reason" />
+    <column name="IsActive" fieldName="IsActive" label="Active" />
     <column name="Code" fieldName="Code" label="Code" />
   </columns>
 </dataModel>
