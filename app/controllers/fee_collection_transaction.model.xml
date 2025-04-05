@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="fee_collection_transaction" alias="fee_collection_transaction" created="2024-01-29T09:19:49" modified="2025-03-20T17:18:33" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="fee_collection_transaction" alias="fee_collection_transaction" created="2024-01-29T09:19:49" modified="2025-04-05T13:34:34" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="FeePerson" parentTableSchema="dbo" parentTableName="student_fees" x="354" y="20">
       <foreignKeyColumn columnName="FeeID" parentColumnName="FeeID" />
@@ -46,7 +46,7 @@
     <column name="PaymentMethod" fieldName="PaymentMethod" label="Payment Method" foreignKey="PaymentMethod" />
     <column name="TransactionStatusCode" fieldName="TransactionStatusCode" label="Transaction Status Code" />
     <column name="PaymentByID" fieldName="PaymentByID" label="Payment By ID" aliasColumnName="PaymentRelation" aliasForeignKey="PaymentBy" />
-    <column name="PaymentRelation" fieldName="PaymentRelation" label="Paid By" foreignKey="PaymentBy" />
+    <column name="PaymentRelation" fieldName="PaymentRelation" label="Relationship" foreignKey="PaymentBy" />
     <column name="NameOfPayee" fieldName="NameOfPayee" label="Payee Name" />
     <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
     <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />

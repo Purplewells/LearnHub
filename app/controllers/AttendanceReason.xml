@@ -20,15 +20,17 @@ from "dbo"."zlkp_AttendanceEventReason" "zlkp_AttendanceEventReason"
   </commands>
   <fields>
     <field name="AttendanceEventReasonID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Attendance Event Reason ID" readOnly="true" />
-    <field name="AttendanceEventReason" type="String" label="Attendance Event Reason" length="20" showInSummary="true" />
-    <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
+    <field name="AttendanceEventReason" type="String" label="Event Reason" length="20" showInSummary="true" />
+    <field name="IsActive" type="Boolean" label="Active" showInSummary="true" />
     <field name="Code" type="String" label="Code" length="5" showInSummary="true" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Active Attendance Reason" filter="IsActive = 1">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="AttendanceEventReason" columns="20" />
+        <dataField fieldName="AttendanceEventReason" columns="35">
+          <headerText>Event Reason</headerText>
+        </dataField>
         <dataField fieldName="IsActive" />
         <dataField fieldName="Code" columns="5" />
       </dataFields>

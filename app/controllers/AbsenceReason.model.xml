@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="zlkpAbsentAttendanceCategory" alias="zlkpAbsentAttendanceCategory" created="2024-01-28T12:00:27" modified="2024-01-28T12:00:51" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="zlkpAbsentAttendanceCategory" alias="zlkpAbsentAttendanceCategory" created="2024-01-28T12:00:27" modified="2025-04-05T13:48:04" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys />
   <columns>
     <column name="RefAbsentAttendanceCategoryId" fieldName="RefAbsentAttendanceCategoryID" label="Ref Absent Attendance Category Id" />
