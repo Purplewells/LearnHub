@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="ManualAccountJournalEntries" conflictDetection="overwriteChanges" label="Manual Account Journal Entries" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="ManualAccountJournalEntries" conflictDetection="overwriteChanges" label="Manual Account Journal Entries" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.ManualAccountJournalEntriesBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -14,6 +14,7 @@ select
 	,"CreditAccountType"."AccountType" "CreditAccountType"
 	,"manual_account_journal_entries"."Amount" "Amount"
 	,"manual_account_journal_entries"."Description" "Description"
+	,"manual_account_journal_entries"."Note" "Note"
 	,"manual_account_journal_entries"."EnteredBy" "EnteredBy"
 	,"manual_account_journal_entries"."CreatedAt" "CreatedDate"
 	,"manual_account_journal_entries"."ModifiedDate" "ModifiedDate"
@@ -48,6 +49,7 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
     <field name="CreditAccountType" type="String" readOnly="true" label="Credit Account Type" length="20" />
     <field name="Amount" type="Decimal" label="Amount" showInSummary="true" dataFormatString="D" />
     <field name="Description" type="String" label="Description" length="255" showInSummary="true" />
+    <field name="Note" type="String" label="Note" length="100" />
     <field name="EnteredBy" type="String" label="Entered By" length="50" />
     <field name="CreatedDate" type="DateTime" dataFormatString="d" default="(getdate())" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" default="(getutcdate())" label="Modified Date" />
@@ -63,6 +65,7 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
         <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
         <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
         <dataField fieldName="Amount" columns="15" dataFormatString="D" />
+        <dataField fieldName="Note" />
         <dataField fieldName="EnteredBy" columns="30" hidden="true" />
         <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
         <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
@@ -85,6 +88,7 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
             <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
             <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
+            <dataField fieldName="Note" />
             <dataField fieldName="CreatedDate" columns="10" hidden="true" />
             <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
             <dataField fieldName="EnteredBy" columns="50" />
@@ -94,7 +98,7 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="Create Journal Entry">
+    <view id="createForm1" type="Form" commandId="command1" label="New Journal Entry">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
@@ -107,6 +111,7 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
             <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
             <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
+            <dataField fieldName="Note" />
             <dataField fieldName="EnteredBy" columns="50" hidden="true" />
             <dataField fieldName="CreatedDate" columns="10" hidden="true" />
             <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
@@ -179,4 +184,7 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Code" phase="Execute" name="setDefaultNote" />
+  </businessRules>
 </dataController>

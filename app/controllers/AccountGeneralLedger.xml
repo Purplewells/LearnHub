@@ -136,11 +136,11 @@ from "dbo"."account_general_ledger" "account_general_ledger"
   <actions>
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
+      <action id="a2" commandName="Edit" whenView="grid10" />
       <action id="a3" commandName="Delete" />
       <action id="a6" />
-      <action id="a7" commandName="New" commandArgument="grid1" />
-      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a7" commandName="New" commandArgument="grid1" whenView="grid100" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" whenView="grid100" />
       <action id="a9" />
       <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
     </actionGroup>
@@ -162,7 +162,7 @@ from "dbo"."account_general_ledger" "account_general_ledger"
       <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid10" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">

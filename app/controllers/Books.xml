@@ -69,11 +69,11 @@ from "dbo"."Books" "Books"
             <dataField fieldName="Title" />
             <dataField fieldName="Author" columns="50" />
             <dataField fieldName="ISBN" columns="20" />
+            <dataField fieldName="Publisher" />
+            <dataField fieldName="Genre" columns="50" />
             <dataField fieldName="PublicationYear" columns="15" />
             <dataField fieldName="TotalCopies" columns="15" />
             <dataField fieldName="CopiesAvailable" columns="15" textMode="Static" />
-            <dataField fieldName="Genre" columns="50" />
-            <dataField fieldName="Publisher" />
           </dataFields>
         </category>
         <category id="c2" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
