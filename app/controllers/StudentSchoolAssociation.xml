@@ -227,7 +227,9 @@ from "dbo"."StudentSchoolAssociation" "StudentSchoolAssociation"
         <dataField fieldName="ExitWithdrawDate" columns="10" tag="pivot11-col1-year" />
         <dataField fieldName="RefEndOfTermStatusID" aliasFieldName="EndOfTermStatus" hidden="true" />
         <dataField fieldName="RefPublicSchoolResidence" aliasFieldName="HomeGroup" columns="15" tag="pivot8-row1-pie&#xD;&#xA;pivot8-title:&quot;What is the outlook school's activity groups&quot;&#xD;&#xA;&#xD;&#xA;pivot9-row1-barstacked&#xD;&#xA;pivot9-title:&quot;What is the outlook school's activity groups by gender&quot;&#xD;&#xA;&#xD;&#xA;pivot10-row1-columnstacked&#xD;&#xA;pivot10-title:&quot;What is the outlook school's activity groups by gender&quot;" />
-        <dataField fieldName="RefFoodServiceEligibilityIds" aliasFieldName="FoodServices" tag="pivot6-row1-pie&#xD;&#xA;pivot6-title:&quot;What is the outlook of the Food Service Affordability&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Grade Level&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;No. of students&quot;" />
+        <dataField fieldName="RefFoodServiceEligibilityIds" aliasFieldName="FoodServices" tag="pivot6-row1-pie&#xD;&#xA;pivot6-title:&quot;What is the outlook of the Food Service Affordability&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Grade Level&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;No. of students&quot;">
+          <headerText>FDS</headerText>
+        </dataField>
         <dataField fieldName="CalendarSessionID" aliasFieldName="Session" />
         <dataField fieldName="CSIA" />
         <dataField fieldName="Status" columns="8" />

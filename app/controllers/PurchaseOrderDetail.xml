@@ -111,21 +111,17 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
     <view id="createForm1" type="Form" commandId="command1" label="New Purchase Order Detail">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="Purchase Order Detail" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="ProductID" aliasFieldName="ProductName" />
             <dataField fieldName="ProductCategory" columns="20" />
-            <dataField fieldName="UnitPrice" columns="15" />
             <dataField fieldName="Quantity" columns="15" />
+            <dataField fieldName="UnitPrice" columns="15" />
             <dataField fieldName="ExtendedCost" columns="15" />
-            <dataField fieldName="IsArrived" hidden="true" />
-            <dataField fieldName="ArrivalDate" columns="10" hidden="true" />
+            <dataField fieldName="IsArrived" />
+            <dataField fieldName="ArrivalDate" columns="10" />
             <dataField fieldName="Note" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
             <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
             <dataField fieldName="SupplierName" columns="50" />
           </dataFields>

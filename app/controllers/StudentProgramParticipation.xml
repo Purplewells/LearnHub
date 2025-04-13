@@ -1,86 +1,73 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="EnrollmentStatus" conflictDetection="overwriteChanges" label="Enrollment Status" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="StudentProgramParticipation" conflictDetection="overwriteChanges" label="Student Program Participation" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
 select
-	"zlkpEnrollmentStatus"."RefEnrollmentStatusId" "RefEnrollmentStatusID"
-	,"zlkpEnrollmentStatus"."Description" "Description"
-	,"zlkpEnrollmentStatus"."Code" "Code"
-	,"zlkpEnrollmentStatus"."Definition" "Definition"
-	,"zlkpEnrollmentStatus"."SortOrder" "SortOrder"
-	,"zlkpEnrollmentStatus"."IsActive" "IsActive"
-	,"zlkpEnrollmentStatus"."DefaultValue" "DefaultValue"
-from "dbo"."zlkpEnrollmentStatus" "zlkpEnrollmentStatus"
+	"StudentProgramParticipation"."StudentProgramParticipationID" "StudentProgramParticipationID"
+	,"StudentProgramParticipation"."ProgramID" "ProgramID"
+	,"Program"."ProgramName" "ProgramName"
+	,"StudentProgramParticipation"."PersonID" "PersonID"
+	,"Person"."FirstName" "FirstName"
+	,"Person"."LastName" "LastName"
+from "dbo"."StudentProgramParticipation" "StudentProgramParticipation"
+	left join "dbo"."Program" "Program" on "StudentProgramParticipation"."ProgramID" = "Program"."ProgramID"
+	left join "dbo"."Person" "Person" on "StudentProgramParticipation"."PersonID" = "Person"."PersonID"
 ]]></text>
     </command>
-    <command id="RefEnrollmentStatusIdIdentityCommand" type="Text" event="Inserted">
+    <command id="StudentProgramParticipationIDIdentityCommand" type="Text" event="Inserted">
       <text><![CDATA[select @@identity]]></text>
       <output>
-        <fieldOutput fieldName="RefEnrollmentStatusID" />
+        <fieldOutput fieldName="StudentProgramParticipationID" />
       </output>
     </command>
   </commands>
   <fields>
-    <field name="RefEnrollmentStatusID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Ref Enrollment Status Id" readOnly="true" />
-    <field name="Description" type="String" allowNulls="false" label="Description" length="100" showInSummary="true" />
-    <field name="Code" type="String" label="Code" length="50" showInSummary="true" />
-    <field name="Definition" type="String" allowQBE="false" allowSorting="false" label="Definition" length="4000" showInSummary="true" />
-    <field name="SortOrder" type="Decimal" label="Sort Order" showInSummary="true" />
-    <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
-    <field name="DefaultValue" type="Boolean" default="((1))" label="Default Value" />
+    <field name="StudentProgramParticipationID" type="Int32" allowNulls="false" label="Student Program Participation ID" readOnly="true" showInSummary="true" />
+    <field name="ProgramID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Program ID" showInSummary="true">
+      <items style="Lookup" dataController="Program" newDataView="createForm1" dataValueField="ProgramID" dataTextField="ProgramName" />
+    </field>
+    <field name="ProgramName" type="String" readOnly="true" label="Program Name" length="50" />
+    <field name="PersonID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Person ID" showInSummary="true">
+      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="FirstName" copy="LastName=LastName" />
+    </field>
+    <field name="FirstName" type="String" readOnly="true" label="First Name" length="35" />
+    <field name="LastName" type="String" readOnly="true" label="Last Name" length="35" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Enrollment Status" filter="IsActive =1">
+    <view id="grid1" type="Grid" commandId="command1" label="Student Program Participation">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Description" columns="20" />
-        <dataField fieldName="Code" columns="10" />
-        <dataField fieldName="Definition" hidden="true" />
-        <dataField fieldName="SortOrder" columns="10" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="DefaultValue" columns="12" />
+        <dataField fieldName="StudentProgramParticipationID" columns="15" hidden="true" />
+        <dataField fieldName="ProgramID" aliasFieldName="ProgramName" />
+        <dataField fieldName="PersonID" aliasFieldName="FirstName" />
+        <dataField fieldName="LastName" columns="35" />
       </dataFields>
     </view>
-    <view id="grid1_all_enrollment_statuses" type="Grid" commandId="command1" label="All Enrollment Statuses">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Description" columns="20" />
-        <dataField fieldName="Code" columns="10" />
-        <dataField fieldName="Definition" hidden="true" />
-        <dataField fieldName="SortOrder" columns="10" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="DefaultValue" columns="12" />
-      </dataFields>
-    </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Enrollment Status">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Student Program Participation">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Student Program Participation" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="Description" />
-            <dataField fieldName="Code" columns="50" />
-            <dataField fieldName="SortOrder" columns="15" />
-            <dataField fieldName="IsActive" />
-            <dataField fieldName="DefaultValue" />
-            <dataField fieldName="Definition" rows="5" />
+            <dataField fieldName="StudentProgramParticipationID" columns="15" />
+            <dataField fieldName="ProgramID" aliasFieldName="ProgramName" />
+            <dataField fieldName="PersonID" aliasFieldName="FirstName" />
+            <dataField fieldName="LastName" columns="35" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Enrollment Status">
+    <view id="createForm1" type="Form" commandId="command1" label="New Student Program Participation">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="Description" />
-            <dataField fieldName="Code" columns="50" />
-            <dataField fieldName="SortOrder" columns="15" />
-            <dataField fieldName="IsActive" />
-            <dataField fieldName="DefaultValue" />
-            <dataField fieldName="Definition" rows="5" />
+            <dataField fieldName="StudentProgramParticipationID" columns="15" />
+            <dataField fieldName="ProgramID" aliasFieldName="ProgramName" />
+            <dataField fieldName="PersonID" aliasFieldName="FirstName" />
+            <dataField fieldName="LastName" columns="35" />
           </dataFields>
         </category>
       </categories>

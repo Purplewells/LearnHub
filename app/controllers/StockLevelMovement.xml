@@ -64,7 +64,7 @@ from "dbo"."vw_ops_stock_level_movement" "vw_ops_stock_level_movement"
         <dataField fieldName="MovementMode" columns="20" />
         <dataField fieldName="SourceLocation" columns="20" tag="pivot1-col1" />
         <dataField fieldName="Quantity" columns="10" tag="pivot1-val1-sum&#xD;&#xA;" />
-        <dataField fieldName="ExtendedStockValue" columns="10" />
+        <dataField fieldName="ExtendedStockValue" columns="10" aggregate="Sum" />
         <dataField fieldName="CURR" columns="5" />
         <dataField fieldName="ReceivingLocation" columns="20" tag="pivot2-col1&#xD;&#xA;&#xD;&#xA;pivot3-row1-columnstacked&#xD;&#xA;pivot3-title:&quot;Resource Levels By Receiving Location&quot;&#xD;&#xA;pivot3-haxistitle:&quot;Item&quot;&#xD;&#xA;pivot3-vaxistitle:&quot;Number of Items&quot;&#xD;&#xA;&#xD;&#xA;pivot4-row1-barstacked&#xD;&#xA;pivot4-title:&quot;Resource Levels By Receiving Location and Category&quot;&#xD;&#xA;pivot4-vaxistitle:&quot;Location&quot;&#xD;&#xA;pivot4-haxistitle:&quot;Number of Items&quot;&#xD;&#xA;pivot4-large&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" />
         <dataField fieldName="TransactionQty" columns="12" tag="pivot2-val1-sum&#xD;&#xA;pivot3-val1-sum&#xD;&#xA;pivot4-val1-sum" />

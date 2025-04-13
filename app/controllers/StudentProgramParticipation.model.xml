@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StudentProgramParticipation" alias="StudentProgramParticipation" created="2025-04-09T16:13:27" modified="2025-04-09T16:13:58" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Program" parentTableSchema="dbo" parentTableName="Program" x="415" y="20">
+      <foreignKeyColumn columnName="ProgramID" parentColumnName="ProgramID" />
+    </foreignKey>
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="415" y="204">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="StudentProgramParticipationID" fieldName="StudentProgramParticipationID" label="Student Program Participation ID" />
+    <column name="ProgramID" fieldName="ProgramID" label="Program ID" aliasColumnName="ProgramName" aliasForeignKey="Program" />
+    <column name="ProgramName" fieldName="ProgramName" label="Program Name" foreignKey="Program" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="FirstName" aliasForeignKey="Person" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" foreignKey="Person" />
+    <column name="LastName" fieldName="LastName" label="Last Name" foreignKey="Person" />
+  </columns>
+</dataModel>

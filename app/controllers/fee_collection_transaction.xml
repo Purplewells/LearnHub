@@ -220,7 +220,11 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
             <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" hidden="true" />
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" hidden="true" />
             <dataField fieldName="HeaderInfo" hidden="true" />
-            <dataField fieldName="RefundedAmount" columns="15" hidden="true" />
+            <dataField fieldName="RefundedAmount" columns="15" hidden="true">
+              <visibility>
+                <expression test="[TransactionTypeCode] == 'Refund'" type="ClientScript" />
+              </visibility>
+            </dataField>
             <dataField fieldName="RefundReason" columns="50" hidden="true" />
             <dataField fieldName="RefundAmount" columns="15" hidden="true">
               <visibility>
