@@ -44,6 +44,9 @@
           <dataFields>
             <dataField fieldName="AttendanceCategory" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
           </dataFields>
+          <visibility>
+            <expression test="[1]==[10]" type="ClientScript" />
+          </visibility>
         </category>
       </categories>
       <headerText>This interface provides an entry point for configuring attendance module.</headerText>

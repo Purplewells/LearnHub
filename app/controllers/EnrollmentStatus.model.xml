@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="zlkpEnrollmentStatus" alias="zlkpEnrollmentStatus" created="2024-01-28T17:28:14" modified="2024-01-28T17:28:21" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="zlkpEnrollmentStatus" alias="zlkpEnrollmentStatus" created="2024-01-28T17:28:14" modified="2025-04-09T12:12:41" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys />
   <columns>
     <column name="RefEnrollmentStatusId" fieldName="RefEnrollmentStatusID" label="Ref Enrollment Status Id" />
@@ -7,6 +7,7 @@
     <column name="Code" fieldName="Code" label="Code" />
     <column name="Definition" fieldName="Definition" label="Definition" />
     <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
     <column name="DefaultValue" fieldName="DefaultValue" label="Default Value" />
   </columns>
 </dataModel>

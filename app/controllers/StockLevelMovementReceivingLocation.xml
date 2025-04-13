@@ -58,7 +58,7 @@ from "dbo"."vw_ops_stock_level_movement_receiving_location" "vw_ops_stock_level_
         <dataField fieldName="TransactionDate" columns="10" />
         <dataField fieldName="ReceivingLocation" columns="20" tag="pivot2-col1&#xD;&#xA;&#xD;&#xA;pivot3-row1-donut&#xD;&#xA;pivot3-title:&quot;Distribution of Items by Received Location&quot;&#xD;&#xA;pivot3-haxistitle:&quot;Item&quot;&#xD;&#xA;pivot3-vaxistitle:&quot;Number of Items&quot;&#xD;&#xA;" />
         <dataField fieldName="TransactionQty" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot3-val1-sum" />
-        <dataField fieldName="ExtendedStockValue" columns="15" tag="pivot4-val1-sum" />
+        <dataField fieldName="ExtendedStockValue" columns="15" tag="pivot4-val1-sum" aggregate="Sum" />
         <dataField fieldName="CURR" columns="5" />
         <dataField fieldName="MovementMode" columns="20" tag="pivot4-row1-pie&#xD;&#xA;pivot4-title:&quot;Value of Items by Received Location&quot;&#xD;&#xA;pivot4-haxistitle:&quot;Item&quot;&#xD;&#xA;pivot4-vaxistitle:&quot;Number of Items&quot;&#xD;&#xA;" />
         <dataField fieldName="TransCode" columns="10" />

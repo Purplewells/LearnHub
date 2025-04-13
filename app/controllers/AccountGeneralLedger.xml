@@ -12,6 +12,7 @@ select
 	,"Account"."LFT" "LFT"
 	,"Account"."RGT" "RGT"
 	,"AccountType"."AccountType" "AccountType"
+	,"account_general_ledger"."extSourceName" "ExtSourceName"
 	,"account_general_ledger"."DebitAmount" "DebitAmount"
 	,"account_general_ledger"."CreditAmount" "CreditAmount"
 	,"account_general_ledger"."TransactionDate" "TransactionDate"
@@ -45,9 +46,10 @@ from "dbo"."account_general_ledger" "account_general_ledger"
     <field name="LFT" type="Int32" readOnly="true" label="LFT" />
     <field name="RGT" type="Int32" readOnly="true" label="RGT" />
     <field name="AccountType" type="String" readOnly="true" label="Account Type" length="20" />
+    <field name="ExtSourceName" type="String" label="Source Name" length="40" showInSummary="true" />
     <field name="DebitAmount" type="Decimal" default="((0.00))" label="Debit Amount" showInSummary="true" />
     <field name="CreditAmount" type="Decimal" default="((0.00))" label="Credit Amount" showInSummary="true" />
-    <field name="TransactionDate" type="DateTime" dataFormatString="d" default="(getdate())" label="Transaction Date" showInSummary="true" />
+    <field name="TransactionDate" type="DateTime" dataFormatString="d" default="(getdate())" label="Transaction Date" />
     <field name="Memo" type="String" label="Memo" length="255" />
     <field name="ReferenceNumber" type="String" label="Reference No." length="20" />
     <field name="PostingDate" type="DateTime" dataFormatString="g" label="Posting Date" />
@@ -66,14 +68,15 @@ from "dbo"."account_general_ledger" "account_general_ledger"
         <dataField fieldName="AccountType" columns="20" />
         <dataField fieldName="DebitAmount" columns="15" />
         <dataField fieldName="CreditAmount" columns="15" />
-        <dataField fieldName="TransactionDate" columns="20" />
         <dataField fieldName="LFT" columns="5" hidden="true" />
         <dataField fieldName="RGT" columns="5" hidden="true" />
         <dataField fieldName="ReferenceNumber" columns="12">
-          <headerText>Reference No.</headerText>
+          <headerText>Ref No.</headerText>
         </dataField>
+        <dataField fieldName="TransactionDate" columns="20" />
         <dataField fieldName="PostingDate" columns="20" />
-        <dataField fieldName="Memo" hidden="true" />
+        <dataField fieldName="ExtSourceName" columns="25" />
+        <dataField fieldName="Memo" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
@@ -92,6 +95,7 @@ from "dbo"."account_general_ledger" "account_general_ledger"
             <dataField fieldName="LFT" columns="15" />
             <dataField fieldName="RGT" columns="15" />
             <dataField fieldName="AccountType" columns="20" />
+            <dataField fieldName="ExtSourceName" columns="40" />
             <dataField fieldName="DebitAmount" columns="15" />
             <dataField fieldName="CreditAmount" columns="15" />
             <dataField fieldName="TransactionDate" columns="10" />
@@ -118,6 +122,7 @@ from "dbo"."account_general_ledger" "account_general_ledger"
             <dataField fieldName="LFT" columns="15" />
             <dataField fieldName="RGT" columns="15" />
             <dataField fieldName="AccountType" columns="20" />
+            <dataField fieldName="ExtSourceName" columns="40" />
             <dataField fieldName="DebitAmount" columns="15" />
             <dataField fieldName="CreditAmount" columns="15" />
             <dataField fieldName="TransactionDate" columns="10" />

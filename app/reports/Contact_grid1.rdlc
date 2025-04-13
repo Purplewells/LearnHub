@@ -221,7 +221,11 @@
           <DataField>MarkedForDeletion</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
         </Field>
-      </Fields>
+      <Field Name="Programs">
+  <DataField>Programs</DataField>
+  <rd:TypeName>System.String</rd:TypeName>
+</Field>
+</Fields>
     </DataSet>
   </DataSets>
   <ReportSections>

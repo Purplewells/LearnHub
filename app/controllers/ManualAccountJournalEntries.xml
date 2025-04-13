@@ -55,7 +55,24 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Manual Journal Entries" sortExpression="TransactionDate DESC">
+    <view id="grid1" type="Grid" commandId="command1" label="Active Manual Journal Entries" sortExpression="TransactionDate DESC" filter="CAST(TransactionDate AS DATE) = CAST(GETDATE() AS DATE)">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Description" tag="header-text" columns="40" />
+        <dataField fieldName="TransactionDate" columns="20" />
+        <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
+        <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
+        <dataField fieldName="Amount" columns="15" dataFormatString="D" />
+        <dataField fieldName="EnteredBy" columns="30" hidden="true" />
+        <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
+        <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_historical_entries" type="Grid" commandId="command1" label="All Historical Entries" sortExpression="TransactionDate DESC">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Description" tag="header-text" columns="40" />

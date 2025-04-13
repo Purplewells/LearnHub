@@ -203,7 +203,9 @@ from "dbo"."GradingPeriod" "GradingPeriod"
     </actionGroup>
   </actions>
   <businessRules>
-    <rule id="r100" commandName="New|Insert|Update" type="Sql" phase="After" name="calculateGradingPeriodDays"><![CDATA[EXEC [dbo].[usp_session_gradingperiod_calculate_total_instruction_days]
+    <rule id="r100" commandName="New|Insert|Update" type="Sql" phase="After" name="calculateGradingPeriodDuration"><![CDATA[-- EXEC [dbo].[usp_session_gradingperiod_calculate_total_instruction_days]
+
+EXEC [dbo].[usp_session_gradingperiod_calculate_total_instruction_days] @GradingPeriodID, @CalendarSessionID
 ]]></rule>
   </businessRules>
 </dataController>

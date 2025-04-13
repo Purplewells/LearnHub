@@ -78,23 +78,23 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="SupplierName" columns="35" />
-        <dataField fieldName="ContactName" columns="25" />
+        <dataField fieldName="ContactName" columns="25" hidden="true" />
         <dataField fieldName="ProductID" aliasFieldName="ProductName" />
         <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
         <dataField fieldName="ProductCategory" columns="20" />
-        <dataField fieldName="PurchaseDate" columns="10" />
-        <dataField fieldName="ArrivalDate" columns="10" />
+        <dataField fieldName="PurchaseDate" columns="20" />
+        <dataField fieldName="ArrivalDate" columns="20" />
         <dataField fieldName="Quantity" columns="15" hidden="true" />
         <dataField fieldName="UnitPrice" columns="15" hidden="true" />
         <dataField fieldName="ExtendedCost" columns="15" hidden="true" />
         <dataField fieldName="IsArrived" hidden="true" />
         <dataField fieldName="Note" hidden="true" />
-        <dataField fieldName="ContactEmail" columns="50" />
+        <dataField fieldName="ContactEmail" columns="35" />
         <dataField fieldName="ContactPhone" columns="20" />
         <dataField fieldName="SupplierAddress" columns="25" />
         <dataField fieldName="City" columns="20" />
         <dataField fieldName="State" columns="15" hidden="true" />
-        <dataField fieldName="Country" columns="25" />
+        <dataField fieldName="Country" columns="25" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
@@ -115,12 +115,12 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
             <dataField fieldName="UnitPrice" columns="15" />
             <dataField fieldName="ExtendedCost" columns="15" />
             <dataField fieldName="IsArrived" />
-            <dataField fieldName="Note" />
-            <dataField fieldName="CreatedDate" columns="20" />
-            <dataField fieldName="CreatedBy" columns="50" />
-            <dataField fieldName="ModifiedDate" columns="20" />
-            <dataField fieldName="ModifiedBy" columns="50" />
             <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <description />
+          <dataFields>
             <dataField fieldName="SupplierName" columns="50" />
             <dataField fieldName="ContactName" columns="50" />
             <dataField fieldName="ContactEmail" columns="50" />
@@ -129,6 +129,16 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
             <dataField fieldName="City" columns="30" />
             <dataField fieldName="State" columns="15" />
             <dataField fieldName="Country" columns="50" />
+            <dataField fieldName="Note" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Audit" collapsed="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="ModifiedBy" columns="50" />
           </dataFields>
         </category>
       </categories>
@@ -137,22 +147,22 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+          <description />
           <dataFields>
             <dataField fieldName="ProductID" aliasFieldName="ProductName" />
             <dataField fieldName="ProductCategory" columns="20" />
             <dataField fieldName="PurchaseDate" columns="10" />
             <dataField fieldName="ArrivalDate" columns="10" />
-            <dataField fieldName="Quantity" columns="15" />
             <dataField fieldName="UnitPrice" columns="15" />
+            <dataField fieldName="Quantity" columns="15" />
             <dataField fieldName="ExtendedCost" columns="15" />
-            <dataField fieldName="IsArrived" />
             <dataField fieldName="Note" />
-            <dataField fieldName="CreatedDate" columns="20" />
-            <dataField fieldName="CreatedBy" columns="50" />
-            <dataField fieldName="ModifiedDate" columns="20" />
-            <dataField fieldName="ModifiedBy" columns="50" />
             <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <description />
+          <dataFields>
             <dataField fieldName="SupplierName" columns="50" />
             <dataField fieldName="ContactName" columns="50" />
             <dataField fieldName="ContactEmail" columns="50" />
@@ -161,6 +171,7 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
             <dataField fieldName="City" columns="30" />
             <dataField fieldName="State" columns="15" />
             <dataField fieldName="Country" columns="50" />
+            <dataField fieldName="IsArrived" />
           </dataFields>
         </category>
       </categories>

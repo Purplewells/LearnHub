@@ -7,6 +7,7 @@ select
 	"zlkpPresentAttendanceCategory"."RefPresentAttendanceCategoryId" "RefPresentAttendanceCategoryID"
 	,"zlkpPresentAttendanceCategory"."Description" "Description"
 	,"zlkpPresentAttendanceCategory"."Code" "Code"
+	,"zlkpPresentAttendanceCategory"."IsActive" "IsActive"
 	,"zlkpPresentAttendanceCategory"."Definition" "Definition"
 	,"zlkpPresentAttendanceCategory"."SortOrder" "SortOrder"
 from "dbo"."zlkpPresentAttendanceCategory" "zlkpPresentAttendanceCategory"
@@ -23,15 +24,26 @@ from "dbo"."zlkpPresentAttendanceCategory" "zlkpPresentAttendanceCategory"
     <field name="RefPresentAttendanceCategoryID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Ref Present Attendance Category Id" readOnly="true" />
     <field name="Description" type="String" allowNulls="false" label="Description" length="100" showInSummary="true" />
     <field name="Code" type="String" label="Code" length="50" showInSummary="true" />
+    <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
     <field name="Definition" type="String" allowQBE="false" allowSorting="false" label="Definition" length="4000" showInSummary="true" />
     <field name="SortOrder" type="Decimal" label="Sort Order" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Present Attendance Category">
+    <view id="grid1" type="Grid" commandId="command1" label="Active Attendance Category" filter="IsActive = 1">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Description" />
         <dataField fieldName="Code" columns="10" />
+        <dataField fieldName="IsActive" columns="8" />
+        <dataField fieldName="SortOrder" columns="10" />
+      </dataFields>
+    </view>
+    <view id="grid1_all_attendance_categories" type="Grid" commandId="command1" label="All Attendance Category">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Description" />
+        <dataField fieldName="Code" columns="10" />
+        <dataField fieldName="IsActive" columns="8" />
         <dataField fieldName="SortOrder" columns="10" />
       </dataFields>
     </view>
@@ -43,6 +55,7 @@ from "dbo"."zlkpPresentAttendanceCategory" "zlkpPresentAttendanceCategory"
           <dataFields>
             <dataField fieldName="Description" />
             <dataField fieldName="Code" columns="50" />
+            <dataField fieldName="IsActive" />
             <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>
@@ -56,6 +69,7 @@ from "dbo"."zlkpPresentAttendanceCategory" "zlkpPresentAttendanceCategory"
           <dataFields>
             <dataField fieldName="Description" />
             <dataField fieldName="Code" columns="50" />
+            <dataField fieldName="IsActive" />
             <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>
