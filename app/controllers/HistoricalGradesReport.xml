@@ -62,6 +62,10 @@ select
 	,"master_student_grades_gradebooks_p4"."prevOnTheVergeCount" "PrevOnTheVergeCount"
 	,"master_student_grades_gradebooks_p4"."PerfectAttenance_Count" "PerfectAttendance"
 	,"master_student_grades_gradebooks_p4"."AttendanceRate" "AttendanceRate"
+	,"master_student_grades_gradebooks_p4"."TotalIncidents" "TotalIncidents"
+	,"master_student_grades_gradebooks_p4"."FinalBehaviorScore" "FinalBehaviorScore"
+	,"master_student_grades_gradebooks_p4"."BehaviourTypes" "BehaviourTypes"
+	,"master_student_grades_gradebooks_p4"."BehaviourComment" "BehaviourComment"
 from "dbo"."master_student_grades_gradebooks_p4" "master_student_grades_gradebooks_p4"
 ]]></text>
     </command>
@@ -125,6 +129,10 @@ from "dbo"."master_student_grades_gradebooks_p4" "master_student_grades_gradeboo
     <field name="PrevOnTheVergeCount" type="Int32" label="PrevOnTheVergeCount" />
     <field name="PerfectAttendance" type="Int32" label="IsPA" />
     <field name="AttendanceRate" type="Decimal" dataFormatString="p" label="ARate" />
+    <field name="TotalIncidents" type="Int32" label="Total Incidents" />
+    <field name="FinalBehaviorScore" type="Int32" label="Final Behavior Score" />
+    <field name="BehaviourTypes" type="String" label="Behaviour Types" length="1028" />
+    <field name="BehaviourComment" type="String" label="Behaviour Comment" length="1024" />
   </fields>
   <views>
     <view id="grid1_attainment" type="Grid" commandId="command1" label="Assessment Matrix" groupExpression="Term, GradeLevel, Stream, UPN" reportTemplate="true" filter="IsActive = 1" showInSelector="false">
@@ -188,6 +196,10 @@ from "dbo"."master_student_grades_gradebooks_p4" "master_student_grades_gradeboo
         <dataField fieldName="PrevOnTheVergeCount" columns="15" />
         <dataField fieldName="PerfectAttendance" columns="15" />
         <dataField fieldName="AttendanceRate" columns="15" />
+        <dataField fieldName="TotalIncidents" columns="15" />
+        <dataField fieldName="FinalBehaviorScore" columns="15" />
+        <dataField fieldName="BehaviourTypes" />
+        <dataField fieldName="BehaviourComment" />
       </dataFields>
     </view>
     <view id="grid1_current_year_report" type="Grid" commandId="command1" label="Current Year - ReportCards" groupExpression="Term, GradeLevel, Stream, UPN" reportTemplate="true" filter="CSY = 1">
@@ -251,6 +263,10 @@ from "dbo"."master_student_grades_gradebooks_p4" "master_student_grades_gradeboo
         <dataField fieldName="PrevOnTheVergeCount" columns="15" />
         <dataField fieldName="PerfectAttendance" columns="15" />
         <dataField fieldName="AttendanceRate" columns="15" />
+        <dataField fieldName="TotalIncidents" columns="15" />
+        <dataField fieldName="FinalBehaviorScore" columns="15" />
+        <dataField fieldName="BehaviourTypes" />
+        <dataField fieldName="BehaviourComment" />
       </dataFields>
     </view>
     <view id="grid1_attainment_with_photos" type="Grid" commandId="command1" label="Current Term - Photo ReportCards" groupExpression="Term, GradeLevel, Stream, UPN" reportTemplate="true" filter="IsActive = 1" showInSelector="false">
@@ -314,6 +330,10 @@ from "dbo"."master_student_grades_gradebooks_p4" "master_student_grades_gradeboo
         <dataField fieldName="PrevOnTheVergeCount" columns="15" />
         <dataField fieldName="PerfectAttendance" columns="15" />
         <dataField fieldName="AttendanceRate" columns="15" />
+        <dataField fieldName="TotalIncidents" columns="15" />
+        <dataField fieldName="FinalBehaviorScore" columns="15" />
+        <dataField fieldName="BehaviourTypes" />
+        <dataField fieldName="BehaviourComment" />
       </dataFields>
     </view>
     <view id="grid1_attainment_long" type="Grid" commandId="command1" label="Current Term - ReportCards (LR)" groupExpression="Term, GradeLevel, Stream, UPN" reportTemplate="true" filter="IsActive = 1" showInSelector="false">
@@ -377,6 +397,10 @@ from "dbo"."master_student_grades_gradebooks_p4" "master_student_grades_gradeboo
         <dataField fieldName="PrevOnTheVergeCount" columns="15" />
         <dataField fieldName="PerfectAttendance" columns="15" />
         <dataField fieldName="AttendanceRate" columns="15" />
+        <dataField fieldName="TotalIncidents" columns="15" />
+        <dataField fieldName="FinalBehaviorScore" columns="15" />
+        <dataField fieldName="BehaviourTypes" />
+        <dataField fieldName="BehaviourComment" />
       </dataFields>
     </view>
     <view id="grid1_attainment_with_no_images" type="Grid" commandId="command1" label="Current Term - ReportCards (NP)" groupExpression="Term, GradeLevel, Stream, UPN" reportTemplate="true" filter="IsActive = 1" showInSelector="false">
@@ -440,6 +464,10 @@ from "dbo"."master_student_grades_gradebooks_p4" "master_student_grades_gradeboo
         <dataField fieldName="PrevOnTheVergeCount" columns="15" />
         <dataField fieldName="PerfectAttendance" columns="15" />
         <dataField fieldName="AttendanceRate" columns="15" />
+        <dataField fieldName="TotalIncidents" columns="15" />
+        <dataField fieldName="FinalBehaviorScore" columns="15" />
+        <dataField fieldName="BehaviourTypes" />
+        <dataField fieldName="BehaviourComment" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Historical Grades">
@@ -506,6 +534,10 @@ from "dbo"."master_student_grades_gradebooks_p4" "master_student_grades_gradeboo
             <dataField fieldName="PrevOnTheVergeCount" columns="15" />
             <dataField fieldName="PerfectAttendance" columns="15" />
             <dataField fieldName="AttendanceRate" columns="15" />
+            <dataField fieldName="TotalIncidents" columns="15" />
+            <dataField fieldName="FinalBehaviorScore" columns="15" />
+            <dataField fieldName="BehaviourTypes" />
+            <dataField fieldName="BehaviourComment" />
           </dataFields>
         </category>
       </categories>
@@ -574,6 +606,10 @@ from "dbo"."master_student_grades_gradebooks_p4" "master_student_grades_gradeboo
             <dataField fieldName="PrevOnTheVergeCount" columns="15" />
             <dataField fieldName="PerfectAttendance" columns="15" />
             <dataField fieldName="AttendanceRate" columns="15" />
+            <dataField fieldName="TotalIncidents" columns="15" />
+            <dataField fieldName="FinalBehaviorScore" columns="15" />
+            <dataField fieldName="BehaviourTypes" />
+            <dataField fieldName="BehaviourComment" />
           </dataFields>
         </category>
       </categories>

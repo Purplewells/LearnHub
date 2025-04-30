@@ -8,8 +8,8 @@ select
 	,"StockAdjustment"."ProductID" "ProductID"
 	,"StockAdjustment"."ProductName" "ProductName"
 	,"StockAdjustment"."AdjustmentDate" "AdjustmentDate"
-	,"StockAdjustment"."ScannedQuantity" "ScannedQuantity"
 	,"StockAdjustment"."SystemQuantity" "SystemQuantity"
+	,"StockAdjustment"."ScannedQuantity" "ScannedQuantity"
 	,"StockAdjustment"."AdjustedQuantity" "AdjustedQuantity"
 	,"StockAdjustment"."Reason" "Reason"
 	,"StockAdjustment"."IsAdjustmentComplete" "IsAdjustmentComplete"
@@ -31,10 +31,10 @@ from "dbo"."StockAdjustment" "StockAdjustment"
   <fields>
     <field name="AdjustmentID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Adjustment ID" readOnly="true" />
     <field name="ProductID" type="Int32" label="Product ID" showInSummary="true" />
-    <field name="ProductName" type="String" label="Product Name" length="50" showInSummary="true" />
+    <field name="ProductName" type="String" label="Item Name" length="50" showInSummary="true" />
     <field name="AdjustmentDate" type="DateTime" label="Adjustment Date" showInSummary="true" />
-    <field name="ScannedQuantity" type="Int32" label="Scanned Quantity" showInSummary="true" />
     <field name="SystemQuantity" type="Int32" label="System Quantity" showInSummary="true" />
+    <field name="ScannedQuantity" type="Int32" label="Counted Quantity" showInSummary="true" />
     <field name="AdjustedQuantity" type="Int32" label="Adjusted Quantity" />
     <field name="Reason" type="String" label="Reason" length="255" />
     <field name="IsAdjustmentComplete" type="Boolean" default="((0))" label="Adj. Completed" />
@@ -45,14 +45,18 @@ from "dbo"."StockAdjustment" "StockAdjustment"
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Stock Adjustment">
+    <view id="grid1" type="Grid" commandId="command1" label="Active Stock Adjustments" filter="IsAdjustmentComplete = 0">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="ProductID" columns="15" hidden="true" />
         <dataField fieldName="ProductName" columns="50" />
         <dataField fieldName="AdjustmentDate" columns="20" />
-        <dataField fieldName="ScannedQuantity" columns="20" />
-        <dataField fieldName="SystemQuantity" columns="20" />
+        <dataField fieldName="SystemQuantity" columns="20">
+          <headerText>System Quantity</headerText>
+        </dataField>
+        <dataField fieldName="ScannedQuantity" columns="20">
+          <headerText>Counted Quantity</headerText>
+        </dataField>
         <dataField fieldName="AdjustedQuantity" columns="15">
           <headerText>Adj. Qty</headerText>
         </dataField>
@@ -60,6 +64,30 @@ from "dbo"."StockAdjustment" "StockAdjustment"
         <dataField fieldName="Reason" columns="30" />
         <dataField fieldName="ApprovedBy" columns="20" />
         <dataField fieldName="ApprovalDate" columns="20" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_all_adjustments" type="Grid" commandId="command1" label="Approved Adjustments" filter="IsAdjustmentComplete = 1">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ProductID" columns="15" hidden="true" />
+        <dataField fieldName="ProductName" columns="50" />
+        <dataField fieldName="AdjustmentDate" columns="20" />
+        <dataField fieldName="SystemQuantity" columns="20">
+          <headerText>System Quantity</headerText>
+        </dataField>
+        <dataField fieldName="ScannedQuantity" columns="20">
+          <headerText>Counted Quantity</headerText>
+        </dataField>
+        <dataField fieldName="AdjustedQuantity" columns="15">
+          <headerText>Adj. Qty</headerText>
+        </dataField>
+        <dataField fieldName="IsAdjustmentComplete" columns="20" />
+        <dataField fieldName="ApprovalDate" columns="20" />
+        <dataField fieldName="Reason" columns="45" />
+        <dataField fieldName="ApprovedBy" columns="20" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
@@ -74,8 +102,8 @@ from "dbo"."StockAdjustment" "StockAdjustment"
             <dataField fieldName="ProductID" columns="15" />
             <dataField fieldName="ProductName" columns="50" />
             <dataField fieldName="AdjustmentDate" columns="10" />
-            <dataField fieldName="ScannedQuantity" columns="15" />
             <dataField fieldName="SystemQuantity" columns="15" />
+            <dataField fieldName="ScannedQuantity" columns="15" />
             <dataField fieldName="AdjustedQuantity" columns="15" />
             <dataField fieldName="Reason" />
             <dataField fieldName="IsAdjustmentComplete" />
@@ -97,8 +125,8 @@ from "dbo"."StockAdjustment" "StockAdjustment"
             <dataField fieldName="ProductID" columns="15" />
             <dataField fieldName="ProductName" columns="50" />
             <dataField fieldName="AdjustmentDate" columns="10" />
-            <dataField fieldName="ScannedQuantity" columns="15" />
             <dataField fieldName="SystemQuantity" columns="15" />
+            <dataField fieldName="ScannedQuantity" columns="15" />
             <dataField fieldName="AdjustedQuantity" columns="15" />
             <dataField fieldName="Reason" />
             <dataField fieldName="IsAdjustmentComplete" />
@@ -145,10 +173,16 @@ from "dbo"."StockAdjustment" "StockAdjustment"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
+      <action commandName="SQL" headerText="Post Update Product Qty" id="a100" cssClass="material-icon-swap_horizontal_circle">
+        <data><![CDATA[EXEC zusp_stock_p7_post_adjustment_approval]]></data>
+      </action>
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" />
-      <action id="a4" commandName="ExportRss" />
+      <action id="a101" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
+      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a103" commandName="ReportAsWord" headerText="Export To Word" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -161,10 +195,7 @@ from "dbo"."StockAdjustment" "StockAdjustment"
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" />
       <action id="a2" commandName="ReportAsImage" />
-      <action id="a3" commandName="ReportAsExcel" />
-      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

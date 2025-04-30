@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="master_student_grades_gradebooks_p4" alias="master_student_grades_gradebooks_p4" created="2024-02-05T19:16:51" modified="2024-09-07T13:28:31" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="master_student_grades_gradebooks_p4" alias="master_student_grades_gradebooks_p4" created="2024-02-05T19:16:51" modified="2025-04-14T21:18:35" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys />
   <columns>
     <column name="PersonID" fieldName="PersonID" label="Person ID" />
@@ -60,5 +60,9 @@
     <column name="prevOnTheVergeCount" fieldName="PrevOnTheVergeCount" label="PrevOnTheVergeCount" />
     <column name="PerfectAttenance_Count" fieldName="PerfectAttendance" label="IsPA" />
     <column name="AttendanceRate" fieldName="AttendanceRate" label="ARate" format="p" />
+    <column name="TotalIncidents" fieldName="TotalIncidents" label="Total Incidents" />
+    <column name="FinalBehaviorScore" fieldName="FinalBehaviorScore" label="Final Behavior Score" />
+    <column name="BehaviourTypes" fieldName="BehaviourTypes" label="Behaviour Types" />
+    <column name="BehaviourComment" fieldName="BehaviourComment" label="Behaviour Comment" />
   </columns>
 </dataModel>

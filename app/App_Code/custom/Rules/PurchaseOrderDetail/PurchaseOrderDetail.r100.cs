@@ -22,7 +22,13 @@ namespace zLearnHub.Rules
         {
             // This is the placeholder for method implementation.
 
-            instance.ExtendedCost = instance.UnitPrice * instance.Quantity;
+            // factor the nullability
+            if (instance.UnitPrice != null && instance.Quantity != null)
+            {
+                // calculate the extended cost
+                instance.ExtendedCost = instance.UnitPrice * instance.Quantity;
+            }
+            
         }
     }
 }

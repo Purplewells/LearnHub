@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="PurchaseOrderDetail" alias="PurchaseOrderDetail" created="2024-07-10T22:17:04" modified="2024-07-12T12:56:22" x="20" y="27" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="PurchaseOrderDetail" alias="PurchaseOrderDetail" created="2024-07-10T22:17:04" modified="2025-04-20T08:57:29" x="20" y="27" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Product" parentTableSchema="dbo" parentTableName="Product" x="367" y="20">
       <foreignKeyColumn columnName="ProductID" parentColumnName="ProductID" />
@@ -10,8 +10,11 @@
     <foreignKey id="PurchaseOrder" parentTableSchema="dbo" parentTableName="PurchaseOrder" x="371" y="177">
       <foreignKeyColumn columnName="PurchaseOrderID" parentColumnName="PurchaseOrderID" />
     </foreignKey>
-    <foreignKey id="PurchaseOrderSupplier" parentTableSchema="dbo" parentTableName="Suppliers" x="746" y="182" baseForeignKey="PurchaseOrder">
+    <foreignKey id="PurchaseOrderSupplier" parentTableSchema="dbo" parentTableName="Suppliers" x="706" y="279" baseForeignKey="PurchaseOrder">
       <foreignKeyColumn columnName="SupplierID" parentColumnName="SupplierID" />
+    </foreignKey>
+    <foreignKey id="UnitOfMeasure" parentTableSchema="dbo" parentTableName="UnitOfMeasure" x="365" y="377">
+      <foreignKeyColumn columnName="UnitOfMeasureID" parentColumnName="UnitOfMeasureID" />
     </foreignKey>
   </foreignKeys>
   <columns>
@@ -33,5 +36,8 @@
     <column name="PurchaseOrderID" fieldName="PurchaseOrderID" label="Purchase Order ID" aliasColumnName="TrackingNumber" aliasForeignKey="PurchaseOrder" />
     <column name="TrackingNumber" fieldName="TrackingNumber" label="Tracking Number" foreignKey="PurchaseOrder" />
     <column name="SupplierName" fieldName="SupplierName" label="Supplier Name" foreignKey="PurchaseOrderSupplier" />
+    <column name="UnitOfMeasureID" fieldName="UnitOfMeasureID" label="Unit Of Measure ID" aliasColumnName="UOMName" aliasForeignKey="UnitOfMeasure" />
+    <column name="UOMName" fieldName="UnitOfMeasure" label="Unit Of Measure" foreignKey="UnitOfMeasure" />
+    <column name="QuantityReceived" fieldName="QuantityReceived" label="Qty Rec'd" />
   </columns>
 </dataModel>

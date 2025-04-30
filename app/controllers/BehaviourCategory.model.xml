@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="zlkpBehaviourCategory" alias="zlkpBehaviourCategory" created="2024-02-03T10:45:18" modified="2024-12-21T19:46:51" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="zlkpBehaviourCategory" alias="zlkpBehaviourCategory" created="2024-02-03T10:45:18" modified="2025-04-14T22:49:00" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="NatureOfBehaviour" parentTableSchema="dbo" parentTableName="zlkpNatureOfBehaviour" x="380" y="20">
       <foreignKeyColumn columnName="NatureOfBehaviourID" parentColumnName="NatureOfBehaviourID" />
@@ -13,5 +13,6 @@
     <column name="NatureOfBehaviourID" fieldName="NatureOfBehaviourID" label="Nature Of Behaviour ID" aliasColumnName="NatureOfBehaviour" aliasForeignKey="NatureOfBehaviour" />
     <column name="NatureOfBehaviour" fieldName="NatureOfBehaviour" label="Nature Of Behaviour" foreignKey="NatureOfBehaviour" />
     <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="Description" fieldName="Description" label="Description" />
   </columns>
 </dataModel>

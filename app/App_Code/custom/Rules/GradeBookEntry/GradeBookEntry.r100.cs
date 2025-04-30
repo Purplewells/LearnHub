@@ -26,6 +26,16 @@ namespace zLearnHub.Rules
             instance.SubmittedDate = DateTime.Today;
             instance.UserID = (Guid)UserId;
             instance.DueDate = DateTime.Today.AddDays(14);
+
+            // check if the total of the weights for CourseSection does not exceed 100 %. If it 
+            // does prevent the default action
+            // and display an error message
+            // if the total of the weights for CourseSection does not exceed 100 %, then set the
+            //save the record
+
+            // i need to implement the above brief
+
+
         }
     }
 }

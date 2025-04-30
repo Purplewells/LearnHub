@@ -558,6 +558,15 @@
                                     <TablixMembers>
                                       <TablixMember />
                                     </TablixMembers>
+                                    <Visibility>
+                                      <Hidden>=IIF(
+   (ReportItems!AmountBilled.Value - ReportItems!AmountPaid.Value = 0) 
+   OR 
+   (ReportItems!AmountBilled.Value - ReportItems!AmountPaid.Value Is Nothing),
+   TRUE,
+   FALSE
+)</Hidden>
+                                    </Visibility>
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
@@ -729,7 +738,7 @@
                                                   <Paragraph>
                                                     <TextRuns>
                                                       <TextRun>
-                                                        <Value>= Sum(Fields!Debit.Value)</Value>
+                                                        <Value>=SUM(IIF(Fields!IsPaidInFull.Value = 0, Fields!Debit.Value, nothing), "znCustomFeeDebtorsReminderNote")</Value>
                                                         <Style>
                                                           <FontSize>8pt</FontSize>
                                                           <Format>'GH₵' #,0;('GH₵' #,0);'-'</Format>
@@ -804,7 +813,7 @@
                                                   <Paragraph>
                                                     <TextRuns>
                                                       <TextRun>
-                                                        <Value>=Sum(Fields!Credit.Value)</Value>
+                                                        <Value>=SUM(IIF(Fields!IsPaidInFull.Value = 0, Fields!Credit.Value, nothing), "znCustomFeeDebtorsReminderNote")</Value>
                                                         <Style>
                                                           <FontSize>8pt</FontSize>
                                                           <Format>'GH₵' #,0;('GH₵' #,0);'-'</Format>
@@ -1115,7 +1124,7 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="FilterDetailsTextbox">
+            <Textbox Name="FilterDetailsTextbox2">
               <CanGrow>true</CanGrow>
               <CanShrink>true</CanShrink>
               <KeepTogether>true</KeepTogether>
@@ -1127,7 +1136,7 @@
                       <Style>
                         <FontStyle>Italic</FontStyle>
                         <FontSize>8pt</FontSize>
-                        <Color>Navy</Color>
+                        <Color>White</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1137,16 +1146,19 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.91017cm</Top>
-              <Left>1.03188cm</Left>
+              <Left>1.34912cm</Left>
               <Height>0.25in</Height>
-              <Width>1.58333in</Width>
+              <Width>0.90625in</Width>
               <ZIndex>1</ZIndex>
               <Visibility>
-                <Hidden>=String.IsNullOrEmpty(Parameters!FilterDetails.Value)</Hidden>
+                <Hidden>=System.String.IsNullOrEmpty(Parameters!FilterDetails.Value)</Hidden>
               </Visibility>
               <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
                 <BottomBorder>
-                  <Style>=IIf(String.IsNullOrEmpty(Parameters!FilterDetails.Value), "", "Solid")</Style>
+                  <Style>=IIf(String.IsNullOrEmpty(Parameters!FilterDetails.Value), "", "None")</Style>
                 </BottomBorder>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>

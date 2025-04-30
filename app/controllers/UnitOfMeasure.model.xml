@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="UnitOfMeasure" alias="UnitOfMeasure" created="2025-04-19T05:20:41" modified="2025-04-19T11:31:05" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="UnitOfMeasureID" fieldName="UnitOfMeasureID" label="Unit Of Measure ID" />
+    <column name="UOMName" fieldName="Uomname" label="Unit Of Measure" />
+    <column name="UOMCode" fieldName="Uomcode" label="Code" />
+    <column name="UOMType" fieldName="Uomtype" label="UOM Type" />
+    <column name="IsDefault" fieldName="IsDefault" label="Default" />
+    <column name="IsActive" fieldName="IsActive" label="Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

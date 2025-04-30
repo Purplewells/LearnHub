@@ -40,6 +40,12 @@ namespace zLearnHub.Models
         TrackingNumber,
 
         SupplierName,
+
+        UnitOfMeasureID,
+
+        UnitOfMeasure,
+
+        QuantityReceived,
     }
 
     public partial class PurchaseOrderDetailModel : BusinessRulesObjectModel
@@ -92,6 +98,15 @@ namespace zLearnHub.Models
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private string _supplierName;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private int? _unitOfMeasureID;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private string _unitOfMeasure;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private decimal? _quantityReceived;
 
         public PurchaseOrderDetailModel()
         {
@@ -307,6 +322,45 @@ namespace zLearnHub.Models
             {
                 _supplierName = value;
                 UpdateFieldValue("SupplierName", value);
+            }
+        }
+
+        public int? UnitOfMeasureID
+        {
+            get
+            {
+                return _unitOfMeasureID;
+            }
+            set
+            {
+                _unitOfMeasureID = value;
+                UpdateFieldValue("UnitOfMeasureID", value);
+            }
+        }
+
+        public string UnitOfMeasure
+        {
+            get
+            {
+                return _unitOfMeasure;
+            }
+            set
+            {
+                _unitOfMeasure = value;
+                UpdateFieldValue("UnitOfMeasure", value);
+            }
+        }
+
+        public decimal? QuantityReceived
+        {
+            get
+            {
+                return _quantityReceived;
+            }
+            set
+            {
+                _quantityReceived = value;
+                UpdateFieldValue("QuantityReceived", value);
             }
         }
 

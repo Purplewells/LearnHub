@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="ProductUOM" alias="ProductUOM" created="2025-04-19T05:26:44" modified="2025-04-19T11:32:40" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Product" parentTableSchema="dbo" parentTableName="Product" x="320" y="20">
+      <foreignKeyColumn columnName="ProductID" parentColumnName="ProductID" />
+    </foreignKey>
+    <foreignKey id="UnitOfMeasure" parentTableSchema="dbo" parentTableName="UnitOfMeasure" x="315" y="202">
+      <foreignKeyColumn columnName="UnitOfMeasureID" parentColumnName="UnitOfMeasureID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ProductUOMID" fieldName="ProductUomid" label="Product UOMID" />
+    <column name="ProductID" fieldName="ProductID" label="Product ID" aliasColumnName="ProductName" aliasForeignKey="Product" />
+    <column name="ProductName" fieldName="ProductName" label="Product Name" foreignKey="Product" />
+    <column name="UnitOfMeasureID" fieldName="UnitOfMeasureID" label="Unit Of Measure ID" aliasColumnName="UOMName" aliasForeignKey="UnitOfMeasure" />
+    <column name="UOMName" fieldName="UnitOfMeasureUomname" label="Unit Of Measure" foreignKey="UnitOfMeasure" />
+    <column name="ConversionFactor" fieldName="ConversionFactor" label="Conversion Factor" />
+    <column name="IsDefault" fieldName="IsDefault" label="Default" />
+  </columns>
+</dataModel>

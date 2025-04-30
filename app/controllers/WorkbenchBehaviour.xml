@@ -16,21 +16,24 @@
     <field name="ActionTaken" type="DataView" label="Action Taken">
       <dataView controller="ActionTaken" view="grid1" />
     </field>
+    <field name="DisciplineAlignment" type="DataView" label="Discipline Alignment">
+      <dataView controller="DisciplineAlignment" view="grid1" />
+    </field>
   </fields>
   <views>
     <view id="BehaviourForm" type="Form" label="BEHAVIOUR WORK HUB">
       <categories>
-        <category headerText="Behaviour Category" tab="BEHAVIOUR CATEGORY" id="c1" flow="NewColumn">
+        <category headerText="DISCIPLINE ALIGNMENT" tab="DISCIPLINE ALIGNMENT" id="c6" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="DisciplineAlignment" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-dock-bottom" />
+          </dataFields>
+        </category>
+        <category headerText="BEHAVIOUR CATEGORY" tab="BEHAVIOUR CATEGORY" id="c1">
           <dataFields>
             <dataField fieldName="BehaviourCategory" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-dock-bottom" />
           </dataFields>
         </category>
-        <category headerText="Behaviour Activity Type" tab="BEHAVIOUR ACTIVITY TYPE" id="c3">
-          <dataFields>
-            <dataField fieldName="BehaviourActivityType" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-dock-bottom" />
-          </dataFields>
-        </category>
-        <category headerText="Incident Behaviour" tab="INCIDENT BEHAVIOUR" id="c4">
+        <category headerText="INCIDENT BEHAVIOUR" tab="INCIDENT BEHAVIOUR" id="c4">
           <dataFields>
             <dataField fieldName="IncidentBehavior" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-dock-bottom" />
           </dataFields>
@@ -43,6 +46,11 @@
         <category headerText="ACTION TAKEN" tab="ACTION TAKEN" id="c5">
           <dataFields>
             <dataField fieldName="ActionTaken" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-dock-bottom" />
+          </dataFields>
+        </category>
+        <category headerText="BEHAVIOUR ACTIVITY TYPE" tab="BEHAVIOUR ACTIVITY TYPE" id="c3">
+          <dataFields>
+            <dataField fieldName="BehaviourActivityType" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-dock-bottom" />
           </dataFields>
         </category>
       </categories>

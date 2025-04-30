@@ -36,9 +36,14 @@ select
 	,"Product"."FileName" "FileName"
 	,"Product"."FileLength" "FileLength"
 	,"Product"."ContentType" "ContentType"
+	,"Product"."UnitOfMeasureID" "UnitOfMeasureID"
+	,"UnitOfMeasure"."UOMName" "UnitOfMeasure"
+	,"UnitOfMeasure"."UOMType" "UoMType"
+	,"Product"."ConversionFactor" "ConversionFactor"
 from "dbo"."Product" "Product"
 	left join "dbo"."zlkpProductCategory" "Category" on "Product"."CategoryID" = "Category"."ProductCategoryID"
 	left join "dbo"."Suppliers" "Supplier" on "Product"."SupplierID" = "Supplier"."SupplierID"
+	left join "dbo"."UnitOfMeasure" "UnitOfMeasure" on "Product"."UnitOfMeasureID" = "UnitOfMeasure"."UnitOfMeasureID"
 ]]></text>
     </command>
     <command id="ProductIDIdentityCommand" type="Text" event="Inserted">
@@ -51,7 +56,7 @@ from "dbo"."Product" "Product"
   <fields>
     <field name="ProductID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Product ID" readOnly="true" />
     <field name="Skucode" type="String" label="SKU" length="10" showInSummary="true" />
-    <field name="ProductName" type="String" label="Product Name" length="100" showInSummary="true" />
+    <field name="ProductName" type="String" label="Item Name" length="100" showInSummary="true" />
     <field name="Description" type="String" label="Description" length="50" showInSummary="true" />
     <field name="IsActive" type="Boolean" label="IsActive" showInSummary="true" />
     <field name="CostPrice" type="Decimal" dataFormatString="c" default="((0))" label="Cost Price" showInSummary="true" />
@@ -70,7 +75,7 @@ from "dbo"."Product" "Product"
     <field name="UnitsOnHold" type="String" label="Units On Hold" length="50" />
     <field name="UnitsOnOrder" type="Int32" label="Units On Order" />
     <field name="Sellable" type="Boolean" label="Sellable" />
-    <field name="ExtendedCostValue" type="Decimal" readOnly="true" dataFormatString="c" label="Ext. Cost Value" computed="true">
+    <field name="ExtendedCostValue" type="Decimal" readOnly="true" dataFormatString="c" label="Extended Value" computed="true">
       <formula>Product.Quantity * Product.CostPrice</formula>
     </field>
     <field name="SupplierID" type="Int32" label="Supplier ID">
@@ -88,6 +93,12 @@ from "dbo"."Product" "Product"
     <field name="FileName" type="String" label="File Name" length="50" />
     <field name="FileLength" type="Int32" label="File Length" />
     <field name="ContentType" type="String" label="Content Type" length="50" />
+    <field name="UnitOfMeasureID" type="Int32" label="Unit Of Measure ID">
+      <items style="Lookup" dataController="UnitOfMeasure" newDataView="createForm1" dataValueField="UnitOfMeasureID" dataTextField="Uomname" copy="UoMType=Uomtype" />
+    </field>
+    <field name="UnitOfMeasure" type="String" readOnly="true" label="Unit Of Measure" length="20" />
+    <field name="UoMType" type="String" readOnly="true" label="Measure Type" length="20" />
+    <field name="ConversionFactor" type="Decimal" label="Conversion Factor" />
     <field name="PurchaseOrderDetail" type="DataView" label="Purchase Order Detail">
       <dataView controller="PurchaseOrderDetailVendor" view="grid1" filterFields="ProductID" />
     </field>
@@ -105,23 +116,32 @@ from "dbo"."Product" "Product"
         <dataField fieldName="Barcode" columns="18" tag="barcode" />
         <dataField fieldName="CategoryID" aliasFieldName="CategoryName" tag="pivot1-row1-column" />
         <dataField fieldName="SupplierID" aliasFieldName="SupplierName" tag="pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;Proportion Supply Value By Supplier&quot;" />
-        <dataField fieldName="Sellable" />
         <dataField fieldName="Description" columns="50" hidden="true" />
         <dataField fieldName="Colour" columns="15" hidden="true" />
-        <dataField fieldName="QtyPerUnit" columns="20" />
+        <dataField fieldName="Quantity" columns="10">
+          <headerText>OnHand</headerText>
+        </dataField>
+        <dataField fieldName="UnitOfMeasure" columns="10">
+          <headerText>UoM</headerText>
+        </dataField>
         <dataField fieldName="CostPrice" columns="10" hidden="true" />
         <dataField fieldName="SellingPrice" columns="15" hidden="true" />
         <dataField fieldName="UnitPrice" columns="10" />
-        <dataField fieldName="Quantity" columns="5">
-          <headerText>Qty</headerText>
+        <dataField fieldName="ExtendedCostValue" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum" aggregate="Sum">
+          <headerText>Extended Value</headerText>
         </dataField>
-        <dataField fieldName="ExtendedCostValue" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum" aggregate="Sum" />
+        <dataField fieldName="QtyPerUnit" columns="20" hidden="true" />
+        <dataField fieldName="ConversionFactor" columns="10">
+          <headerText>Qty Per Unit</headerText>
+        </dataField>
+        <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
         <dataField fieldName="ReOrderLevel" columns="5">
           <headerText>ROL</headerText>
         </dataField>
         <dataField fieldName="ReOrderQty" columns="5">
           <headerText>ROQ</headerText>
         </dataField>
+        <dataField fieldName="Sellable" />
         <dataField fieldName="IsActive" columns="15" />
         <dataField fieldName="UnitsOnHold" columns="50" hidden="true" />
         <dataField fieldName="UnitsOnOrder" columns="15" hidden="true">
@@ -138,13 +158,14 @@ from "dbo"."Product" "Product"
         <dataField fieldName="FileName" columns="50" hidden="true" />
         <dataField fieldName="FileLength" columns="15" hidden="true" />
         <dataField fieldName="ContentType" columns="50" hidden="true" />
+        <dataField fieldName="UoMType" columns="20" hidden="true" />
         <dataField fieldName="Photo" columns="15" hidden="true" />
       </dataFields>
       <styles>
         <expression type="ClientScript" result="ReOrderChecks" test="$row.Quantity &lt;= $row.ReOrderQty" />
       </styles>
     </view>
-    <view id="discontinued_products" type="Grid" commandId="command1" label="List of Discontinued Items" tags="header-image-none" sortExpression="ModifiedDate DESC" filter="IsActive = 0">
+    <view id="grid1_discontinued" type="Grid" commandId="command1" label="Inactive Items" tags="header-image-none" sortExpression="ModifiedDate DESC" filter="IsActive = 0">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="ProductName" tag="item-heading" columns="30" />
@@ -152,23 +173,32 @@ from "dbo"."Product" "Product"
         <dataField fieldName="Barcode" columns="18" tag="barcode" />
         <dataField fieldName="CategoryID" aliasFieldName="CategoryName" tag="pivot1-row1-column" />
         <dataField fieldName="SupplierID" aliasFieldName="SupplierName" tag="pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;Proportion Supply Value By Supplier&quot;" />
-        <dataField fieldName="Sellable" />
         <dataField fieldName="Description" columns="50" hidden="true" />
         <dataField fieldName="Colour" columns="15" hidden="true" />
-        <dataField fieldName="QtyPerUnit" columns="20" />
-        <dataField fieldName="CostPrice" columns="10" hidden="true" />
-        <dataField fieldName="SellingPrice" columns="15" hidden="true" />
-        <dataField fieldName="UnitPrice" columns="10" />
+        <dataField fieldName="QtyPerUnit" columns="20" hidden="true" />
+        <dataField fieldName="ConversionFactor" columns="10">
+          <headerText>Qty Per Unit</headerText>
+        </dataField>
+        <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
         <dataField fieldName="Quantity" columns="5">
           <headerText>Qty</headerText>
         </dataField>
-        <dataField fieldName="ExtendedCostValue" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum" />
+        <dataField fieldName="UnitOfMeasure" columns="10">
+          <headerText>UoM</headerText>
+        </dataField>
+        <dataField fieldName="CostPrice" columns="10" hidden="true" />
+        <dataField fieldName="SellingPrice" columns="15" hidden="true" />
+        <dataField fieldName="UnitPrice" columns="10" />
+        <dataField fieldName="ExtendedCostValue" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum" aggregate="Sum">
+          <headerText>Extended Value</headerText>
+        </dataField>
         <dataField fieldName="ReOrderLevel" columns="5">
           <headerText>ROL</headerText>
         </dataField>
         <dataField fieldName="ReOrderQty" columns="5">
           <headerText>ROQ</headerText>
         </dataField>
+        <dataField fieldName="Sellable" />
         <dataField fieldName="IsActive" columns="15" />
         <dataField fieldName="UnitsOnHold" columns="50" hidden="true" />
         <dataField fieldName="UnitsOnOrder" columns="15" hidden="true">
@@ -185,6 +215,7 @@ from "dbo"."Product" "Product"
         <dataField fieldName="FileName" columns="50" hidden="true" />
         <dataField fieldName="FileLength" columns="15" hidden="true" />
         <dataField fieldName="ContentType" columns="50" hidden="true" />
+        <dataField fieldName="UoMType" columns="20" hidden="true" />
         <dataField fieldName="Photo" columns="15" hidden="true" />
       </dataFields>
       <styles>
@@ -202,7 +233,11 @@ from "dbo"."Product" "Product"
             <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
             <dataField fieldName="Skucode" columns="10" />
             <dataField fieldName="Barcode" columns="50" />
-            <dataField fieldName="QtyPerUnit" columns="50" />
+            <dataField fieldName="QtyPerUnit" columns="50" hidden="true" />
+            <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
+            <dataField fieldName="ConversionFactor" columns="5">
+              <headerText>Quantity Per Unit</headerText>
+            </dataField>
             <dataField fieldName="Sellable" />
             <dataField fieldName="IsActive" />
           </dataFields>
@@ -223,6 +258,7 @@ from "dbo"."Product" "Product"
             <dataField fieldName="UnitsOnOrder" columns="15" />
             <dataField fieldName="ReOrderLevel" columns="15" />
             <dataField fieldName="ProductColour" rows="5" />
+            <dataField fieldName="UnitOfMeasure" columns="20" hidden="true" />
           </dataFields>
         </category>
         <category id="c5" headerText="Supplier Details">
@@ -233,7 +269,7 @@ from "dbo"."Product" "Product"
             <dataField fieldName="SupplierContactPhone" columns="20" />
             <dataField fieldName="SupplierAddress" />
             <dataField fieldName="SupplierCity" columns="30" />
-            <dataField fieldName="SupplierCountry" columns="50" />
+            <dataField fieldName="SupplierCountry" columns="50" hidden="true" />
           </dataFields>
         </category>
         <category id="c6" headerText="Others" collapsed="true" flow="NewRow">
@@ -253,9 +289,10 @@ from "dbo"."Product" "Product"
           <dataFields>
             <dataField fieldName="ProductName" toolTip="Please enter the name of the item ..." watermark="Please enter the name of the item ..." />
             <dataField fieldName="Description" columns="50" watermark="Enter description of item ....." toolTip="Enter description of item ....." />
-            <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
             <dataField fieldName="Skucode" columns="10" />
             <dataField fieldName="Barcode" columns="50" tag="barcode" />
+            <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
+            <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
             <dataField fieldName="QtyPerUnit" columns="50" />
             <dataField fieldName="Sellable" />
             <dataField fieldName="IsActive" />

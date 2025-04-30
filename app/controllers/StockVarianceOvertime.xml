@@ -35,11 +35,11 @@ from "dbo"."StockVarianceOvertime" "StockVarianceOvertime"
     <field name="ProductID" type="Int32" label="Product ID" showInSummary="true">
       <items style="Lookup" dataController="Product" newDataView="createForm1" dataValueField="ProductID" dataTextField="ProductName" copy="SKU=Skucode, ProductQuantity=Quantity" />
     </field>
-    <field name="ProductName" type="String" readOnly="true" label="Product Name" length="40" />
-    <field name="SKU" type="String" readOnly="true" label="SKU" length="10" />
-    <field name="ProductQuantity" type="Int32" readOnly="true" label="Product Quantity" />
+    <field name="ProductName" type="String" readOnly="true" label="Item Name" length="40" />
+    <field name="SKU" type="String" readOnly="true" label="Item No." length="10" />
+    <field name="ProductQuantity" type="Int32" readOnly="true" label="Item Quantity" />
     <field name="SystemQuantity" type="Int32" label="System Quantity" showInSummary="true" />
-    <field name="QuantityCounted" type="Int32" label="Scanned Count" showInSummary="true" />
+    <field name="QuantityCounted" type="Int32" label="Counted  Quantity" showInSummary="true" />
     <field name="StockTakeDate" type="DateTime" label="Stock Take Date" showInSummary="true" />
     <field name="Variance" type="Int32" label="Variance" showInSummary="true" />
     <field name="VariancePercentage" type="Decimal" dataFormatString="" label="% Variance" />
@@ -93,6 +93,9 @@ from "dbo"."StockVarianceOvertime" "StockVarianceOvertime"
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedBy" columns="50" />
           </dataFields>
+          <visibility>
+            <expression test="[1]==[1]" type="ClientScript" />
+          </visibility>
         </category>
       </categories>
     </view>

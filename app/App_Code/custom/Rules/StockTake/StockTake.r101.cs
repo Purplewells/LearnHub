@@ -25,10 +25,16 @@ namespace zLearnHub.Rules
             
             //instance.SystemQuantity = instance.refProductQuantity;
 
-            instance.StockDifference = instance.ScannedQuantity - instance.refProductQuantity;
-           
+           // instance.StockDifference = instance.ScannedQuantity - instance.refProductQuantity;
+            if(instance.ScannedQuantity != null)
+            {
+                instance.StockDifference = instance.ScannedQuantity - instance.SystemQuantity;
+                //instance.PercentVariance = ((instance.ScannedQuantity - instance.SystemQuantity) / instance.SystemQuantity) * 100;
 
-            
+            }
+
+
+
         }
     }
 }

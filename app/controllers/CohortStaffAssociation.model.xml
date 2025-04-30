@@ -1,30 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="CohortStaffAssociation" alias="CohortStaffAssociation" created="2024-02-03T19:36:20" modified="2024-02-03T19:49:06" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="CohortStaffAssociation" alias="CohortStaffAssociation" created="2024-02-03T19:36:20" modified="2025-04-17T14:25:14" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Cohort" parentTableSchema="dbo" parentTableName="Cohort" x="381" y="20">
       <foreignKeyColumn columnName="CohortID" parentColumnName="CohortID" />
     </foreignKey>
-    <foreignKey id="StaffAssignment" parentTableSchema="dbo" parentTableName="K12StaffAssignment" x="381" y="275">
-      <foreignKeyColumn columnName="StaffAssignmentID" parentColumnName="StaffAssignmentID" />
-    </foreignKey>
-    <foreignKey id="OrganizationPersonRole" parentTableSchema="dbo" parentTableName="OrganizationPersonRole" x="807" y="20" baseForeignKey="StaffAssignment">
-      <foreignKeyColumn columnName="OrganizationPersonRoleID" parentColumnName="OrganizationPersonRoleID" />
-    </foreignKey>
-    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="1155" y="20" baseForeignKey="OrganizationPersonRole">
-      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    <foreignKey id="Staff" parentTableSchema="dbo" parentTableName="Person" x="396" y="244">
+      <foreignKeyColumn columnName="StaffID" parentColumnName="PersonID" />
     </foreignKey>
   </foreignKeys>
   <columns>
+    <column name="StaffCohortAssociationID" fieldName="StaffCohortAssociationID" label="Staff Cohort Association ID" />
     <column name="CohortID" fieldName="CohortID" label="Cohort ID" aliasColumnName="CohortDescription" aliasForeignKey="Cohort" />
     <column name="CohortDescription" fieldName="CohortDescription" label="Cohort Description" foreignKey="Cohort" />
     <column name="StartDate" fieldName="StartDate" label="Start Date" />
     <column name="EndDate" fieldName="EndDate" label="End Date" />
-    <column name="StaffAssignmentID" fieldName="StaffAssignmentID" label="Staff Assignment ID" aliasColumnName="StaffClassificationID" aliasForeignKey="StaffAssignment" />
-    <column name="StaffClassificationID" fieldName="StaffAssignmentStaffClassificationID" foreignKey="StaffAssignment" label="StaffAssignmentStaffClassificationID" />
-    <column name="FirstName" fieldName="FirstName" label="Firstname" foreignKey="Person" />
-    <column name="LastName" fieldName="LastName" label="Lastname" foreignKey="Person" />
+    <column name="StaffID" fieldName="StaffID" label="Staff ID" aliasColumnName="FirstName" aliasForeignKey="Staff" />
+    <column name="FirstName" fieldName="StaffFirstName" label="Staff First Name" foreignKey="Staff" />
+    <column name="LastName" fieldName="StaffLastName" label="Staff Last Name" foreignKey="Staff" />
     <column fieldName="StaffName" type="nvarchar(71)" dataType="String" label="Staff Name">
-      <formula>Person.FirstName + ' ' +Person.LastName</formula>
+      <formula>Staff.FirstName + ' ' + Staff.LastName</formula>
     </column>
   </columns>
 </dataModel>
