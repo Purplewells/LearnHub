@@ -269,43 +269,7 @@ namespace zLearnHub.Rules
  
         }
 
-        //[ControllerAction("Person", "Insert", ActionPhase.Before)]
-        //[ControllerAction("Person", "Update", ActionPhase.Before)]
-
-        //public void CheckDuplicateRecord()
-        //{
-        //    string varUPN = Convert.ToString(Arguments["UPN"]);
-        //    int varPersonID = Convert.ToInt32(Arguments["PersonID"]);
-        //    // Query to check for existing records with the same UPN and NationalID
-        //    string sqlQuery = @"
-        //        SELECT COUNT(1) FROM Person WHERE UPN = @UPN AND PersonID <> @PersonID";
-
-        //    // Using SqlText for secure query execution
-        //    using (SqlText sql = new SqlText(sqlQuery))
-        //    {
-        //        sql.AddParameter("@UPN", varUPN);
-        //        sql.AddParameter("@PersonID", varPersonID); // Exclude the current record during updates
-
-        //        int count = Convert.ToInt32(sql.ExecuteScalar());
-
-        //        if (count > 0)
-        //        {
-        //            // Record already exists - stop the action and show an error
-        //            if (Result != null)
-        //            {
-        //                // Record already exists - stop the action and show an error
-        //                Result.ShowAlert("A record with the same UPN already exists.");
-        //                //Result.Cancel();
-
-        //            }
-        //            else
-        //            {
-        //                throw new Exception("Record not found.");
-        //            }
-        //        }
-
-        //    }
-        //}
+       
 
         [ControllerAction("usp_process_fee_collection_transaction", "Insert, Update, Calculate", ActionPhase.After)]
         public void process_fee_collection_transaction()
@@ -349,7 +313,7 @@ namespace zLearnHub.Rules
 
         }
 
-        [ControllerAction("process_fee_refund", "Refund, Custom, Refund", ActionPhase.After)]
+        [ControllerAction("process_fee_refund", "Refund, Custom, Adjustment", ActionPhase.After)]
         public void usp_ops_auto_p4_process_fee_refund (int transactionID)
         {
             // Get connection string from configuration
@@ -375,9 +339,36 @@ namespace zLearnHub.Rules
 
         }
 
-        private void NavigateUrl(char v)
+        [ControllerAction("ProcessPurchaseOrder", "Insert, Update, Calculate", ActionPhase.After)]
+        public void process_purchase_order_from_order_details(int purchaseOrderID)
         {
-            throw new NotImplementedException();
+
+            // Get connection string from configuration
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("zusp_ops_process_purchase_order", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@PurchaseOrderID", purchaseOrderID);
+                    command.ExecuteNonQuery();
+                }
+            }
+            Result.Refresh();
+            Result.RefreshChildren();
+            Result.ShowAlert("Stock Levels updated from purchase order detail successfully.");
+
+        }
+
+        // navigate to another page 
+        [ControllerAction("navigate_to_page", "Insert, Update, Calculate", ActionPhase.After)]
+       // navigate to another CodeOnTime page or controlller
+        public void navigate_to_page()
+        {
+            //string url = "https://www.google.com";
+            //Result.NavigateUrl(url);
         }
     }
 }

@@ -19,11 +19,15 @@ select
 	,"PurchaseOrderDetail"."PurchaseOrderID" "PurchaseOrderID"
 	,"PurchaseOrder"."TrackingNumber" "TrackingNumber"
 	,"PurchaseOrderSupplier"."SupplierName" "SupplierName"
+	,"PurchaseOrderDetail"."UnitOfMeasureID" "UnitOfMeasureID"
+	,"UnitOfMeasure"."UOMName" "UnitOfMeasure"
+	,"PurchaseOrderDetail"."QuantityReceived" "QuantityReceived"
 from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
 	left join "dbo"."Product" "Product" on "PurchaseOrderDetail"."ProductID" = "Product"."ProductID"
 	left join "dbo"."zlkpProductCategory" "ProductCategory" on "Product"."CategoryID" = "ProductCategory"."ProductCategoryID"
 	left join "dbo"."PurchaseOrder" "PurchaseOrder" on "PurchaseOrderDetail"."PurchaseOrderID" = "PurchaseOrder"."PurchaseOrderID"
 	left join "dbo"."Suppliers" "PurchaseOrderSupplier" on "PurchaseOrder"."SupplierID" = "PurchaseOrderSupplier"."SupplierID"
+	left join "dbo"."UnitOfMeasure" "UnitOfMeasure" on "PurchaseOrderDetail"."UnitOfMeasureID" = "UnitOfMeasure"."UnitOfMeasureID"
 ]]></text>
     </command>
     <command id="PurchaseOrderDetailIDIdentityCommand" type="Text" event="Inserted">
@@ -56,6 +60,11 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
     </field>
     <field name="TrackingNumber" type="String" readOnly="true" label="Tracking Number" length="15" />
     <field name="SupplierName" type="String" readOnly="true" label="Supplier Name" length="50" />
+    <field name="UnitOfMeasureID" type="Int32" label="Unit Of Measure ID">
+      <items style="Lookup" dataController="UnitOfMeasure" newDataView="createForm1" dataValueField="UnitOfMeasureID" dataTextField="Uomname" />
+    </field>
+    <field name="UnitOfMeasure" type="String" readOnly="true" label="Unit Of Measure" length="20" />
+    <field name="QuantityReceived" type="Decimal" label="Qty Rec'd" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Purchase Order Detail">
@@ -68,8 +77,9 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
         <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
         <dataField fieldName="ProductCategory" columns="20" />
         <dataField fieldName="Quantity" columns="15" />
+        <dataField fieldName="QuantityReceived" columns="15" />
         <dataField fieldName="UnitPrice" columns="15" />
-        <dataField fieldName="ExtendedCost" columns="15" />
+        <dataField fieldName="ExtendedCost" columns="15" aggregate="Sum" />
         <dataField fieldName="IsArrived" hidden="true" />
         <dataField fieldName="ArrivalDate" columns="10" hidden="true" />
         <dataField fieldName="Note" hidden="true" />
@@ -77,24 +87,31 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
         <dataField fieldName="SupplierName" columns="50" />
+        <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Purchase Order Detail">
+    <view id="editForm1" type="Form" commandId="command1" label="Enter &amp; Maintain PO Line Item">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Purchase Order Detail" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="ProductID" aliasFieldName="ProductName" />
-            <dataField fieldName="ProductCategory" columns="20" />
+            <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
             <dataField fieldName="Quantity" columns="15" />
             <dataField fieldName="UnitPrice" columns="15" />
-            <dataField fieldName="ExtendedCost" columns="15" />
+            <dataField fieldName="ExtendedCost" columns="15">
+              <headerText>Extended Cost Value</headerText>
+            </dataField>
             <dataField fieldName="IsArrived" />
             <dataField fieldName="ArrivalDate" columns="10" />
-            <dataField fieldName="Note" />
+            <dataField fieldName="QuantityReceived" columns="15">
+              <headerText>Quantity Received </headerText>
+            </dataField>
+            <dataField fieldName="Note" hidden="true" />
             <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
-            <dataField fieldName="SupplierName" columns="50" />
+            <dataField fieldName="SupplierName" columns="50" hidden="true" />
+            <dataField fieldName="ProductCategory" columns="20" hidden="true" />
           </dataFields>
         </category>
         <category id="c2" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
@@ -108,22 +125,26 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Purchase Order Detail">
+    <view id="createForm1" type="Form" commandId="command1" label="New PO Line Items">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Purchase Order Detail" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="ProductID" aliasFieldName="ProductName" />
-            <dataField fieldName="ProductCategory" columns="20" />
+            <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
             <dataField fieldName="Quantity" columns="15" />
             <dataField fieldName="UnitPrice" columns="15" />
             <dataField fieldName="ExtendedCost" columns="15" />
             <dataField fieldName="IsArrived" />
             <dataField fieldName="ArrivalDate" columns="10" />
+            <dataField fieldName="QuantityReceived" columns="15">
+              <headerText>Quantity Received </headerText>
+            </dataField>
             <dataField fieldName="Note" />
             <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
-            <dataField fieldName="SupplierName" columns="50" />
+            <dataField fieldName="SupplierName" columns="50" hidden="true" />
+            <dataField fieldName="ProductCategory" columns="20" hidden="true" />
           </dataFields>
         </category>
       </categories>

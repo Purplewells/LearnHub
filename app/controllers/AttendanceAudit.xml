@@ -20,11 +20,11 @@ from "dbo"."vw_process__missing_attendance_registers" "vw_process__missing_atten
   <fields>
     <field name="Date" type="DateTime" allowNulls="false" label="Date" showInSummary="true" />
     <field name="EventDate" type="DateTime" label="Event Date" showInSummary="true" />
-    <field name="GL" type="String" allowNulls="false" label="GL" length="100" showInSummary="true" />
-    <field name="Stream" type="String" allowNulls="false" label="STM" length="100" showInSummary="true" />
+    <field name="GL" type="String" label="GL" length="100" showInSummary="true" />
+    <field name="Stream" type="String" label="STM" length="100" showInSummary="true" />
     <field name="RG" type="String" allowNulls="false" label="RG" readOnly="true" length="2" showInSummary="true" />
     <field name="SortOrder" type="Int32" label="Sort Order" />
-    <field name="SessionCode" type="String" label="Session" readOnly="true" length="20" />
+    <field name="SessionCode" type="String" label="Session" length="20" />
     <field name="IsCurrentTerm" type="String" allowNulls="false" label="ISC" readOnly="true" length="3" />
     <field name="CSY" type="String" allowNulls="false" label="CSY" readOnly="true" length="3" />
   </fields>

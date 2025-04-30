@@ -25,8 +25,6 @@ namespace zLearnHub.Rules
             // improve the code by adding comments and proper indentation
 
 
-
-
             if (instance.IsPercentBased == true && instance.AdjustmentFactor != null)
             {
                 instance.AmountValue = instance.AdjustmentFactor * instance.Amount;
@@ -36,12 +34,6 @@ namespace zLearnHub.Rules
                 instance.AmountValue = instance.Amount;
             }
 
-
-            // This is the placeholder for method implementation.
-            // improve the code by adding comments and proper indentation
-            
-
-         
            
         }
     }

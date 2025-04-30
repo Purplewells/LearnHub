@@ -4,43 +4,41 @@
     <command id="command1" type="Text">
       <text><![CDATA[
 select
-	"CohortStaffAssociation"."CohortID" "CohortID"
+	"CohortStaffAssociation"."StaffCohortAssociationID" "StaffCohortAssociationID"
+	,"CohortStaffAssociation"."CohortID" "CohortID"
 	,"Cohort"."CohortDescription" "CohortDescription"
 	,"CohortStaffAssociation"."StartDate" "StartDate"
 	,"CohortStaffAssociation"."EndDate" "EndDate"
-	,"CohortStaffAssociation"."StaffAssignmentID" "StaffAssignmentID"
-	,"StaffAssignment"."StaffClassificationID" "StaffAssignmentStaffClassificationID"
-	,"Person"."FirstName" "FirstName"
-	,"Person"."LastName" "LastName"
+	,"CohortStaffAssociation"."StaffID" "StaffID"
+	,"Staff"."FirstName" "StaffFirstName"
+	,"Staff"."LastName" "StaffLastName"
 from "dbo"."CohortStaffAssociation" "CohortStaffAssociation"
 	left join "dbo"."Cohort" "Cohort" on "CohortStaffAssociation"."CohortID" = "Cohort"."CohortID"
-	left join "dbo"."K12StaffAssignment" "StaffAssignment" on "CohortStaffAssociation"."StaffAssignmentID" = "StaffAssignment"."StaffAssignmentID"
-	left join "dbo"."OrganizationPersonRole" "OrganizationPersonRole" on "StaffAssignment"."OrganizationPersonRoleID" = "OrganizationPersonRole"."OrganizationPersonRoleID"
-	left join "dbo"."Person" "Person" on "OrganizationPersonRole"."PersonID" = "Person"."PersonID"
+	left join "dbo"."Person" "Staff" on "CohortStaffAssociation"."StaffID" = "Staff"."PersonID"
 ]]></text>
     </command>
     <command id="StaffCohortAssociationIDIdentityCommand" type="Text" event="Inserted">
       <text><![CDATA[select @@identity]]></text>
       <output>
-        <fieldOutput fieldName="" />
+        <fieldOutput fieldName="StaffCohortAssociationID" />
       </output>
     </command>
   </commands>
   <fields>
-    <field name="CohortID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Cohort ID" showInSummary="true">
+    <field name="StaffCohortAssociationID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Staff Cohort Association ID" readOnly="true" />
+    <field name="CohortID" type="Int32" label="Cohort ID" showInSummary="true">
       <items style="Lookup" dataController="Cohort" newDataView="createForm1" dataValueField="CohortID" dataTextField="CohortDescription" />
     </field>
     <field name="CohortDescription" type="String" readOnly="true" label="Cohort Description" length="50" />
     <field name="StartDate" type="DateTime" label="Start Date" showInSummary="true" />
     <field name="EndDate" type="DateTime" label="End Date" showInSummary="true" />
-    <field name="StaffAssignmentID" type="Int32" allowNulls="false" label="Staff Assignment ID" showInSummary="true">
-      <items style="Lookup" dataController="zlkpStaffList" dataValueField="PersonID" dataTextField="StaffNameTitle" copy="FirstName=FirstName, LastName=LastName" dataView="grid1" />
+    <field name="StaffID" type="Int32" label="Staff ID" showInSummary="true">
+      <items style="Lookup" dataController="zlkpStaffList" dataValueField="PersonID" dataTextField="StaffNameTitle" copy="StaffLastName=LastName" dataView="grid1" autoSelect="true" />
     </field>
-    <field name="StaffAssignmentStaffClassificationID" type="Int32" readOnly="true" label="StaffAssignmentStaffClassificationID" />
-    <field name="FirstName" type="String" readOnly="true" label="Firstname" length="35" />
-    <field name="LastName" type="String" readOnly="true" label="Lastname" length="35" />
+    <field name="StaffFirstName" type="String" readOnly="true" label="Staff First Name" length="35" />
+    <field name="StaffLastName" type="String" readOnly="true" label="Staff Last Name" length="35" />
     <field name="StaffName" type="String" readOnly="true" label="Staff Name" computed="true" showInSummary="true">
-      <formula>Person.FirstName + ' ' +Person.LastName</formula>
+      <formula>Staff.FirstName + ' ' + Staff.LastName</formula>
     </field>
   </fields>
   <views>
@@ -50,9 +48,8 @@ from "dbo"."CohortStaffAssociation" "CohortStaffAssociation"
         <dataField fieldName="CohortID" aliasFieldName="CohortDescription" />
         <dataField fieldName="StartDate" columns="10" />
         <dataField fieldName="EndDate" columns="10" />
-        <dataField fieldName="StaffAssignmentID" aliasFieldName="StaffAssignmentStaffClassificationID" />
-        <dataField fieldName="FirstName" columns="35" />
-        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="StaffID" aliasFieldName="StaffName" />
+        <dataField fieldName="StaffLastName" columns="35" hidden="true" />
         <dataField fieldName="StaffName" />
       </dataFields>
     </view>
@@ -65,7 +62,8 @@ from "dbo"."CohortStaffAssociation" "CohortStaffAssociation"
             <dataField fieldName="CohortID" aliasFieldName="CohortDescription" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
-            <dataField fieldName="StaffAssignmentID" aliasFieldName="StaffName" />
+            <dataField fieldName="StaffID" aliasFieldName="StaffFirstName" />
+            <dataField fieldName="StaffLastName" columns="35" />
             <dataField fieldName="StaffName" />
           </dataFields>
         </category>
@@ -80,7 +78,8 @@ from "dbo"."CohortStaffAssociation" "CohortStaffAssociation"
             <dataField fieldName="CohortID" aliasFieldName="CohortDescription" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
-            <dataField fieldName="StaffAssignmentID" aliasFieldName="StaffName" />
+            <dataField fieldName="StaffID" aliasFieldName="StaffFirstName" />
+            <dataField fieldName="StaffLastName" columns="35" />
             <dataField fieldName="StaffName" />
           </dataFields>
         </category>

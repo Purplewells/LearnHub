@@ -141,7 +141,7 @@ from "dbo"."DisciplineIncident" "DisciplineIncident"
             <dataField fieldName="AlignmentID" aliasFieldName="Alignment" />
             <dataField fieldName="IncidentDate" columns="10" />
             <dataField fieldName="RefIncidentBehaviorID" aliasFieldName="IncidentBehavior" />
-            <dataField fieldName="ActivityTypeID" aliasFieldName="Activity" />
+            <dataField fieldName="ActivityTypeID" aliasFieldName="Activity" hidden="true" />
             <dataField fieldName="IncidentTime" columns="15" hidden="true" />
             <dataField fieldName="Code" columns="40" hidden="true" />
           </dataFields>
@@ -199,7 +199,7 @@ from "dbo"."DisciplineIncident" "DisciplineIncident"
             <dataField fieldName="AlignmentID" aliasFieldName="Alignment" />
             <dataField fieldName="IncidentDate" columns="10" />
             <dataField fieldName="RefIncidentBehaviorID" aliasFieldName="IncidentBehavior" />
-            <dataField fieldName="ActivityTypeID" aliasFieldName="Activity" />
+            <dataField fieldName="ActivityTypeID" aliasFieldName="Activity" hidden="true" />
             <dataField fieldName="IncidentTime" columns="15" hidden="true" />
             <dataField fieldName="Code" columns="40" hidden="true" />
           </dataFields>

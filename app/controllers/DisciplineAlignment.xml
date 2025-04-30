@@ -7,6 +7,8 @@ select
 	"zlkp_discipline_alignment"."AlignmentID" "AlignmentID"
 	,"zlkp_discipline_alignment"."Alignment" "Alignment"
 	,"zlkp_discipline_alignment"."IsActive" "IsActive"
+	,"zlkp_discipline_alignment"."Description" "Description"
+	,"zlkp_discipline_alignment"."SortOrder" "SortOrder"
 from "dbo"."zlkp_discipline_alignment" "zlkp_discipline_alignment"
 ]]></text>
     </command>
@@ -21,6 +23,8 @@ from "dbo"."zlkp_discipline_alignment" "zlkp_discipline_alignment"
     <field name="AlignmentID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Alignment ID" readOnly="true" />
     <field name="Alignment" type="String" label="Alignment" length="18" showInSummary="true" />
     <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
+    <field name="Description" type="String" label="Description" length="150" showInSummary="true" />
+    <field name="SortOrder" type="Int32" label="Sort Order" showInSummary="true" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Discipline Alignment">
@@ -28,6 +32,8 @@ from "dbo"."zlkp_discipline_alignment" "zlkp_discipline_alignment"
       <dataFields>
         <dataField fieldName="Alignment" columns="18" />
         <dataField fieldName="IsActive" />
+        <dataField fieldName="Description" />
+        <dataField fieldName="SortOrder" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Discipline Alignment">
@@ -38,6 +44,8 @@ from "dbo"."zlkp_discipline_alignment" "zlkp_discipline_alignment"
           <dataFields>
             <dataField fieldName="Alignment" columns="18" />
             <dataField fieldName="IsActive" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -50,6 +58,8 @@ from "dbo"."zlkp_discipline_alignment" "zlkp_discipline_alignment"
           <dataFields>
             <dataField fieldName="Alignment" columns="18" />
             <dataField fieldName="IsActive" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>
       </categories>

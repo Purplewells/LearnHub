@@ -117,7 +117,23 @@
           <DataField>ContactPhone</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-      </Fields>
+      <Field Name="QuantityReceived">
+  <DataField>QuantityReceived</DataField>
+  <rd:TypeName>System.Decimal</rd:TypeName>
+</Field>
+<Field Name="UnitOfMeasure">
+  <DataField>UnitOfMeasure</DataField>
+  <rd:TypeName>System.String</rd:TypeName>
+</Field>
+<Field Name="UnitOfMeasureID">
+  <DataField>UnitOfMeasureID</DataField>
+  <rd:TypeName>System.Int32</rd:TypeName>
+</Field>
+<Field Name="IsFullyReceived">
+  <DataField>IsFullyReceived</DataField>
+  <rd:TypeName>System.Boolean</rd:TypeName>
+</Field>
+</Fields>
     </DataSet>
   </DataSets>
   <ReportSections>

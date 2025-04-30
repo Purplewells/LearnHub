@@ -31,14 +31,21 @@
     <field name="StockTransactionType" type="DataView" label="Stock Transaction Type">
       <dataView controller="StockTransactionType" view="grid1" />
     </field>
+    <field name="UnitOfMeasure" type="DataView" label="Unit Of Measure">
+      <dataView controller="UnitOfMeasure" view="grid1" />
+    </field>
+    <field name="ProductUoM" type="DataView" label="Product Uo M">
+      <dataView controller="ProductUoM" view="grid1" />
+    </field>
   </fields>
   <views>
     <view id="StockHubs" type="Form" label="INVENTORY MANAGEMENT HUB">
       <categories>
         <category id="c1" tab="ITEMS" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="Product" columns="15" tag="modal-fullscreen&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none">
+            <dataField fieldName="Product" columns="15" tag="modal-never&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none">
               <headerText>Stock Items</headerText>
+              <dataView pageSize="15" />
             </dataField>
           </dataFields>
         </category>
@@ -102,6 +109,16 @@
         <category id="c10" tab="TRANSACTION TYPES">
           <dataFields>
             <dataField fieldName="StockTransactionType" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;material-icon-arrow_circle_up" />
+          </dataFields>
+        </category>
+        <category id="c11" tab="UNIT OF MEASURE">
+          <dataFields>
+            <dataField fieldName="UnitOfMeasure" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;material-icon-arrow_circle_up" />
+          </dataFields>
+        </category>
+        <category id="c12" tab="PRODUCT UoM">
+          <dataFields>
+            <dataField fieldName="ProductUoM" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;material-icon-arrow_circle_up" />
           </dataFields>
         </category>
       </categories>

@@ -39,11 +39,13 @@ namespace zLearnHub.Models
 
         StockDifference,
 
-        PercentVariance,
+        Variance,
 
         IsVarianceAccepted,
 
         Barcode,
+
+        StockTakeReason,
 
         LocationID,
 
@@ -107,13 +109,16 @@ namespace zLearnHub.Models
         private decimal? _stockDifference;
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        private decimal? _percentVariance;
+        private decimal? _variance;
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private bool? _isVarianceAccepted;
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private string _barcode;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private string _stockTakeReason;
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private int? _locationID;
@@ -337,16 +342,16 @@ namespace zLearnHub.Models
             }
         }
 
-        public decimal? PercentVariance
+        public decimal? Variance
         {
             get
             {
-                return _percentVariance;
+                return _variance;
             }
             set
             {
-                _percentVariance = value;
-                UpdateFieldValue("PercentVariance", value);
+                _variance = value;
+                UpdateFieldValue("Variance", value);
             }
         }
 
@@ -373,6 +378,19 @@ namespace zLearnHub.Models
             {
                 _barcode = value;
                 UpdateFieldValue("Barcode", value);
+            }
+        }
+
+        public string StockTakeReason
+        {
+            get
+            {
+                return _stockTakeReason;
+            }
+            set
+            {
+                _stockTakeReason = value;
+                UpdateFieldValue("StockTakeReason", value);
             }
         }
 

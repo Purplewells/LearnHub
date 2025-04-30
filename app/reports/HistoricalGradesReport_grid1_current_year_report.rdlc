@@ -242,7 +242,23 @@
           <DataField>AttendanceRate</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-      </Fields>
+      <Field Name="BehaviourTypes">
+  <DataField>BehaviourTypes</DataField>
+  <rd:TypeName>System.String</rd:TypeName>
+</Field>
+<Field Name="FinalBehaviorScore">
+  <DataField>FinalBehaviorScore</DataField>
+  <rd:TypeName>System.Int32</rd:TypeName>
+</Field>
+<Field Name="TotalIncidents">
+  <DataField>TotalIncidents</DataField>
+  <rd:TypeName>System.Int32</rd:TypeName>
+</Field>
+<Field Name="BehaviourComment">
+  <DataField>BehaviourComment</DataField>
+  <rd:TypeName>System.String</rd:TypeName>
+</Field>
+</Fields>
       <Query>
         <DataSourceName>HistoricalGradesReportDataSource</DataSourceName>
         <CommandText />

@@ -241,7 +241,23 @@
           <DataField>PerfectAttendance</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-      </Fields>
+        <Field Name="BehaviourTypes">
+          <DataField>BehaviourTypes</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FinalBehaviorScore">
+          <DataField>FinalBehaviorScore</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="TotalIncidents">
+          <DataField>TotalIncidents</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      <Field Name="BehaviourComment">
+  <DataField>BehaviourComment</DataField>
+  <rd:TypeName>System.String</rd:TypeName>
+</Field>
+</Fields>
     </DataSet>
   </DataSets>
   <ReportSections>
@@ -2219,7 +2235,7 @@
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>Textbox37</rd:DefaultName>
-                              <Top>5.90139in</Top>
+                              <Top>5.91389in</Top>
                               <Left>0.10351in</Left>
                               <Height>0.74446in</Height>
                               <Width>6.40256in</Width>
@@ -2585,7 +2601,7 @@
                                 </Style>
                               </ChartNoDataMessage>
                               <DataSetName>HistoricalGrades</DataSetName>
-                              <Top>2.9375in</Top>
+                              <Top>2.95in</Top>
                               <Left>0.12264in</Left>
                               <Height>1.46667in</Height>
                               <Width>4.24822in</Width>
@@ -2993,7 +3009,7 @@
                                 </Style>
                               </ChartNoDataMessage>
                               <DataSetName>HistoricalGrades</DataSetName>
-                              <Top>2.9375in</Top>
+                              <Top>2.95in</Top>
                               <Left>4.44031in</Left>
                               <Height>1.46667in</Height>
                               <Width>2.08905in</Width>
@@ -3394,7 +3410,7 @@
                                 </Chart>
                               </ReportItems>
                               <KeepTogether>true</KeepTogether>
-                              <Top>4.45973in</Top>
+                              <Top>4.47223in</Top>
                               <Left>0.10351in</Left>
                               <Height>1.35139in</Height>
                               <Width>3.25248in</Width>
@@ -3684,7 +3700,7 @@
                                 </Textbox>
                               </ReportItems>
                               <KeepTogether>true</KeepTogether>
-                              <Top>4.46944in</Top>
+                              <Top>4.48194in</Top>
                               <Left>3.4765in</Left>
                               <Height>1.35139in</Height>
                               <Width>3.04036in</Width>

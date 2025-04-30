@@ -21,7 +21,16 @@ namespace zLearnHub.Rules
         public void r100Implementation(SalesOrderDetailModel instance)
         {
             // This is the placeholder for method implementation.
-            instance.ExtendedPrice = instance.UnitPrice * instance.Quantity;
+            // The actual method code is in the Rule file (r100.cs).
+            // factor in nullability
+            if (instance.UnitPrice != null && instance.Quantity != null)
+            {
+                if (instance.Quantity > 0)
+                {
+                    instance.ExtendedPrice = instance.UnitPrice * instance.Quantity;
+                }
+            }
+            
         }
     }
 }

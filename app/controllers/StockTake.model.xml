@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="StockTake" alias="StockTake" created="2024-09-24T16:30:44" modified="2024-12-16T13:04:55" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="StockTake" alias="StockTake" created="2024-09-24T16:30:44" modified="2025-04-24T22:50:29" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Product" parentTableSchema="dbo" parentTableName="Product" x="464" y="196">
       <foreignKeyColumn columnName="ProductID" parentColumnName="ProductID" />
@@ -17,23 +17,24 @@
       <formula>RIGHT(REPLICATE('0', 5) + CAST(StockTake.StockTakeHeaderID AS VARCHAR(5)), 5)</formula>
     </column>
     <column name="ProductID" fieldName="ProductID" label="Product ID" aliasColumnName="ProductName" aliasForeignKey="Product" />
-    <column name="ProductName" fieldName="sProductName" label="Product Name" foreignKey="Product" />
+    <column name="ProductName" fieldName="sProductName" label="Item Name" foreignKey="Product" />
     <column name="StockTakeNo" fieldName="StockTakeNo" label="StockHeaderNo" foreignKey="StockTakeHeader" />
     <column name="StockTakeNo" fieldName="StockTakeNumber" label="Stock Take No" />
     <column name="LocationName" fieldName="LocationName" label="Location" foreignKey="Location" />
-    <column name="SKUCode" fieldName="SKU" label="SKU" foreignKey="Product" />
+    <column name="SKUCode" fieldName="SKU" label="Item No." foreignKey="Product" />
     <column name="StockTakeHeaderID" fieldName="StockTakeHeaderID" label="Stock Take Header ID" aliasColumnName="StockTakeNo" aliasForeignKey="StockTakeHeader" />
     <column name="Quantity" fieldName="refProductQuantity" label="refProductQuantity" foreignKey="Product" />
     <column name="ProductName" fieldName="ProductName" label="Product" />
     <column name="SystemQuantity" fieldName="SystemQuantity" label="System Qty" />
     <column name="ScannedQuantity" fieldName="ScannedQuantity" label="Counted Qty" />
-    <column name="StockTakeDate" fieldName="StockTakeDate" label="Stock Date" />
+    <column name="StockTakeDate" fieldName="StockTakeDate" label="Event Date" />
     <column name="StockDifference" fieldName="StockDifference" label="Variance" />
-    <column fieldName="PercentVariance" type="decimal" dataType="Decimal" label="% Variance" format="p">
-      <formula>StockTake.StockDifference / 100</formula>
+    <column fieldName="Variance" type="decimal" dataType="Decimal" label="Variance" format="P">
+      <formula>(StockTake.ScannedQuantity - StockTake.SystemQuantity) / StockTake.ScannedQuantity</formula>
     </column>
     <column name="IsVarianceAccepted" fieldName="IsVarianceAccepted" label="Var Accepted" format="" />
     <column name="Barcode" fieldName="Barcode" label="Barcode" />
+    <column name="StockTakeReason" fieldName="StockTakeReason" label="Reason" />
     <column name="LocationID" fieldName="LocationID" label="Location ID" />
     <column name="Notes" fieldName="Notes" label="Notes" />
     <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
