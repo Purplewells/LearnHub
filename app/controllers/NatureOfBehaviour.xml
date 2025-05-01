@@ -27,16 +27,7 @@ from "dbo"."zlkpNatureOfBehaviour" "zlkpNatureOfBehaviour"
     <field name="SortOrder" type="Int32" label="Sort Order" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Nature Of Behaviour" filter="IsActive = 1">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="NatureOfBehaviour" columns="20" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="Code" columns="20" />
-        <dataField fieldName="SortOrder" columns="15" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_nature_of_behaviours" type="Grid" commandId="command1" label="All Nature Of Behaviours">
+    <view id="grid1" type="Grid" commandId="command1" label="Nature Of Behaviour">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="NatureOfBehaviour" columns="20" />

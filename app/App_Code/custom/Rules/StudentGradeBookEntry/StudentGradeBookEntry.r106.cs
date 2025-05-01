@@ -23,20 +23,20 @@ namespace zLearnHub.Rules
             // This is the placeholder for method implementation.
             // check if NumericGradeEarned is greater than MaxScore then prevent the insert/update otherwise allow the insert/update
             // to happen
-            if (instance.NumericGradeEarned > instance.MaxScore)
-            {
-                //throw new InValidGradeException("NumericGradeEarned cannot be greater than MaxScore");
-                PreventDefault();
-                Result.ShowMessage("NumericGradeEarned cannot be greater than MaxScore ");
-                Result.Focus("NumericGradeEarned");
-            }
-            else
-            {
-                // allow the natural event flow
+            //if (instance.NumericGradeEarned > instance.MaxScore)
+            //{
+            //    //throw new InValidGradeException("NumericGradeEarned cannot be greater than MaxScore");
+            //    PreventDefault();
+            //    Result.ShowMessage("NumericGradeEarned cannot be greater than MaxScore ");
+            //    Result.Focus("NumericGradeEarned");
+            //}
+            //else
+            //{
+            //    // allow the natural event flow
 
                 
 
-            }
+            //}
             
         }
     }

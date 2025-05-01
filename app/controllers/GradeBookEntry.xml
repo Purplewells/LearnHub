@@ -320,7 +320,7 @@ where CalendarSession.IsActive=1
         <category id="c5">
           <description />
           <dataFields>
-            <dataField fieldName="Session" columns="50" hidden="true" />
+            <dataField fieldName="Session" columns="50" />
             <dataField fieldName="Course" />
             <dataField fieldName="CSY" hidden="true" />
             <dataField fieldName="CSIA" hidden="true" />
@@ -605,7 +605,7 @@ where (sgbe.extSGID  IS NULL or sgbe.extSCID is NULL) and extIsActiveSession = 1
       </action>
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="SQL" headerText="SYNC To Scoresheet_revived" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a100" whenKeySelected="true">
+      <action commandName="SQL" headerText="SYNC To Scoresheet" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a100" whenKeySelected="true">
         <data><![CDATA[/*
 	Date: 13th Dec 2019
 	Modification : Amended the update process to ensure only one record  per student person s affected
@@ -681,31 +681,6 @@ SET extSGID = sgbe.StudentGradeBookEntryID, extSCID = sgbe.StudentCourseSectionI
 from StudentGradeBookEntry sgbe
 where (sgbe.extSGID  IS NULL or sgbe.extSCID is NULL) and extIsActiveSession = 1]]></data>
       </action>
-      <action commandName="SQL" headerText="SYNC ALTERNATIVE EXPERIMENTAL" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a106" whenKeySelected="true">
-        <data><![CDATA[EXEC dbo.usp_ops_sync_gradebooks_to_student_gradebook_entries_experimental  @GradeBookEntryID, @RefSchoolStreamID]]></data>
-      </action>
-      <action commandName="SQL" headerText="SYNC To Scoresheet" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a105" whenKeySelected="true">
-        <data><![CDATA[/*
-	Date: 13th Dec 2019
-	Modification : Amended the update process to ensure only one record  per student person s affected
-	Version		Date				Description								Author
-	-- 0.2		14th July 2021
-    -- 0.3      1st August 2021		Removed extCalendarSessionI as  comparison predicate to reduce duplicate	Benjamin Ohene-Adu
-	-- 0.4		20 April 2025		Amended the match logic to remove duplicate issues
-*/
-
---select * from vw_merge_app_current_enrollment_for_gradebookentries src
---select * from StudentGradeBookEntry sgbe
-
-EXEC usp_ops_sync_gradebooks_to_student_gradebook_entries
-    @RefSchoolStreamID ,
-    @GradingPeriodID,
-    @GradeBookEntryTypeID,
-    @CourseSectionID,
-    @GradeBookEntryID;
-
-]]></data>
-      </action>
       <action commandName="SQL" headerText="Remove Plan" cssClass="material-icon-sync" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a101" whenKeySelected="true">
         <data><![CDATA[/*
 	Date : 20th Sept 2019
@@ -762,20 +737,6 @@ if (fieldValue == null) {
     this.preventDefault();
     // set the focus on the field and display an error
     this.result.focus('RefSchoolStreamID', 'Stream is required, Please select a stream!');
-}]]></rule>
-    <rule id="r112" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateMPP"><![CDATA[var fieldValue = [MPP];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('MPP', 'Maximum score value is required.');
-}]]></rule>
-    <rule id="r111" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateWeight"><![CDATA[var fieldValue = [Weight];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('Weight', 'Assessment Weight is required.');
 }]]></rule>
     <rule id="r104" commandName="New" type="Sql" phase="Execute" name="setPublishingControlDefaultValue"><![CDATA[Set @PTFA = 1
 Set @PTSA = 1

@@ -84,8 +84,8 @@ from "dbo"."StudentRemarks" "StudentRemarks"
         <dataField fieldName="Stream" columns="8" />
         <dataField fieldName="Note" hidden="true" />
         <dataField fieldName="CalendarSessionID" aliasFieldName="Session" columns="15" />
-        <dataField fieldName="SSIA" hidden="true" />
-        <dataField fieldName="CSIA" hidden="true" />
+        <dataField fieldName="SSIA" />
+        <dataField fieldName="CSIA" />
         <dataField fieldName="GradeLevelID" columns="15" hidden="true" />
         <dataField fieldName="PersonID" columns="15" hidden="true" />
         <dataField fieldName="SessionCode" columns="20" hidden="true" />

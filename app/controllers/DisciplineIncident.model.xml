@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="DisciplineIncident" alias="DisciplineIncident" created="2024-02-03T10:32:57" modified="2024-02-11T12:16:28" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="DisciplineIncident" alias="DisciplineIncident" created="2024-02-03T10:32:57" modified="2025-04-30T20:27:07" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Alignment" parentTableSchema="dbo" parentTableName="zlkp_discipline_alignment" x="438" y="20">
       <foreignKeyColumn columnName="AlignmentID" parentColumnName="AlignmentID" />
@@ -32,7 +32,7 @@
     <column name="Alignment" fieldName="Alignment" label="Alignment" foreignKey="Alignment" />
     <column name="Code" fieldName="Code" label="Code" />
     <column name="Title" fieldName="Title" label="Title" />
-    <column name="IncidentDate" fieldName="IncidentDate" label="Occurrence" format="d" />
+    <column name="IncidentDate" fieldName="IncidentDate" label="Occurrence" format="d" sortOrder="1" sortType="Descending" />
     <column name="IncidentTime" fieldName="IncidentTime" label="Incident Time" />
     <column name="TimeCodeID" fieldName="TimeCodeID" label="Time Code ID" aliasColumnName="Description" aliasForeignKey="TimeCode" />
     <column name="Description" fieldName="TimeCodeDescription" label="Time Description" foreignKey="TimeCode" />

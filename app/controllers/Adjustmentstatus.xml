@@ -1,80 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="BehaviourCategory" conflictDetection="overwriteChanges" label="Behaviour Category" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Adjustmentstatus" conflictDetection="overwriteChanges" label="Adjustmentstatus" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
 select
-	"zlkpBehaviourCategory"."BehaviourCategoryTypeID" "BehaviourCategoryTypeID"
-	,"zlkpBehaviourCategory"."CategoryType" "CategoryType"
-	,"zlkpBehaviourCategory"."Points" "Points"
-	,"zlkpBehaviourCategory"."SortOrder" "SortOrder"
-	,"zlkpBehaviourCategory"."NatureOfBehaviourID" "NatureOfBehaviourID"
-	,"NatureOfBehaviour"."NatureOfBehaviour" "NatureOfBehaviour"
-	,"zlkpBehaviourCategory"."IsActive" "IsActive"
-	,"zlkpBehaviourCategory"."Description" "Description"
-from "dbo"."zlkpBehaviourCategory" "zlkpBehaviourCategory"
-	left join "dbo"."zlkpNatureOfBehaviour" "NatureOfBehaviour" on "zlkpBehaviourCategory"."NatureOfBehaviourID" = "NatureOfBehaviour"."NatureOfBehaviourID"
+	"zlkp_AdjustmentStatus"."AdjustmentStatusID" "AdjustmentStatusID"
+	,"zlkp_AdjustmentStatus"."AdjustmentStatus" "AdjustmentStatus"
+	,"zlkp_AdjustmentStatus"."IsActive" "IsActive"
+	,"zlkp_AdjustmentStatus"."SortOrder" "SortOrder"
+	,"zlkp_AdjustmentStatus"."CreatedDate" "CreatedDate"
+from "dbo"."zlkp_AdjustmentStatus" "zlkp_AdjustmentStatus"
 ]]></text>
     </command>
-    <command id="BehaviourCategoryTypeIDIdentityCommand" type="Text" event="Inserted">
+    <command id="AdjustmentStatusIDIdentityCommand" type="Text" event="Inserted">
       <text><![CDATA[select @@identity]]></text>
       <output>
-        <fieldOutput fieldName="BehaviourCategoryTypeID" />
+        <fieldOutput fieldName="AdjustmentStatusID" />
       </output>
     </command>
   </commands>
   <fields>
-    <field name="BehaviourCategoryTypeID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Behaviour Category Type ID" readOnly="true" />
-    <field name="CategoryType" type="String" label="Category Type" length="100" showInSummary="true" />
-    <field name="Points" type="Single" allowNulls="false" label="Points" showInSummary="true" />
+    <field name="AdjustmentStatusID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Adjustment Status ID" readOnly="true" />
+    <field name="AdjustmentStatus" type="String" label="Adjustment Status" length="50" showInSummary="true" />
+    <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
     <field name="SortOrder" type="Int32" label="Sort Order" showInSummary="true" />
-    <field name="NatureOfBehaviourID" type="Int32" label="Nature Of Behaviour ID" showInSummary="true">
-      <items style="Lookup" dataController="NatureOfBehaviour" newDataView="createForm1" dataValueField="NatureOfBehaviourID" dataTextField="NatureOfBehaviour" />
-    </field>
-    <field name="NatureOfBehaviour" type="String" readOnly="true" label="Nature Of Behaviour" length="20" />
-    <field name="IsActive" type="Boolean" default="((1))" label="Is Active" showInSummary="true" />
-    <field name="Description" type="String" label="Description" length="250" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Behaviour Category">
+    <view id="grid1" type="Grid" commandId="command1" label="Adjustmentstatus">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="CategoryType" />
-        <dataField fieldName="Points" columns="8" />
-        <dataField fieldName="SortOrder" columns="10" />
-        <dataField fieldName="NatureOfBehaviourID" aliasFieldName="NatureOfBehaviour" />
+        <dataField fieldName="AdjustmentStatus" columns="50" />
         <dataField fieldName="IsActive" />
-        <dataField fieldName="Description" />
+        <dataField fieldName="SortOrder" columns="15" />
+        <dataField fieldName="CreatedDate" columns="20" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Behaviour Category">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Adjustmentstatus">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Behaviour Category" flow="NewColumn">
+        <category id="c1" headerText="Adjustmentstatus" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="CategoryType" />
-            <dataField fieldName="NatureOfBehaviourID" aliasFieldName="NatureOfBehaviour" />
-            <dataField fieldName="Points" columns="15" />
-            <dataField fieldName="SortOrder" columns="15" />
+            <dataField fieldName="AdjustmentStatus" columns="50" />
             <dataField fieldName="IsActive" />
-            <dataField fieldName="Description" />
+            <dataField fieldName="SortOrder" columns="15" />
+            <dataField fieldName="CreatedDate" columns="20" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Behaviour Category">
+    <view id="createForm1" type="Form" commandId="command1" label="New Adjustmentstatus">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="CategoryType" />
-            <dataField fieldName="Points" columns="15" />
-            <dataField fieldName="SortOrder" columns="15" />
-            <dataField fieldName="NatureOfBehaviourID" aliasFieldName="NatureOfBehaviour" />
+            <dataField fieldName="AdjustmentStatus" columns="50" />
             <dataField fieldName="IsActive" />
-            <dataField fieldName="Description" />
+            <dataField fieldName="SortOrder" columns="15" />
+            <dataField fieldName="CreatedDate" columns="20" />
           </dataFields>
         </category>
       </categories>
