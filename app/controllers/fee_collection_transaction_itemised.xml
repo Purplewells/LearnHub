@@ -128,22 +128,22 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
           <headerText>Description</headerText>
         </dataField>
         <dataField fieldName="UPN" columns="10" aggregate="Count" />
-        <dataField fieldName="GL" columns="5" tag="pivot5-row1-bar&#xD;&#xA;pivot5-title:&quot;Total Amount Received By Grade Level&quot;" />
+        <dataField fieldName="GL" columns="5" />
         <dataField fieldName="Sex" columns="5" />
         <dataField fieldName="Description" columns="50" hidden="true" />
         <dataField fieldName="FeeDescription" columns="30" hidden="true" />
-        <dataField fieldName="TransDate" columns="18" tag="pivot3-row1-line-date&#xD;&#xA;pivot3-title:&quot;Count of Transaction over time&quot;" />
+        <dataField fieldName="TransDate" columns="18" />
         <dataField fieldName="FeeAmount" columns="10" />
         <dataField fieldName="BillAmount" columns="15" hidden="true" />
-        <dataField fieldName="AmountPaid" columns="10" aggregate="Sum" tag="pivot1-val1-sum&#xD;&#xA;pivot4-val1-sum&#xD;&#xA;pivot5-val1-sum" />
+        <dataField fieldName="AmountPaid" columns="10" aggregate="Sum" />
         <dataField fieldName="CurrencyCode" columns="5" />
         <dataField fieldName="TransactionStatusCode" columns="12" hidden="true" />
         <dataField fieldName="ReceiptNo" columns="10" />
-        <dataField fieldName="CalendarCode" columns="12" tag="pivot4-row1-column&#xD;&#xA;pivot4-title:&quot;Sum of Amount Paid By Transaction Type&quot;" />
+        <dataField fieldName="CalendarCode" columns="12" />
         <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" hidden="true">
           <headerText>P. Method</headerText>
         </dataField>
-        <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" tag="pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;Total Amount Paid By Relation Type&quot;&#xD;&#xA;&#xD;&#xA;pivot6-row1-donut&#xD;&#xA;pivot6-title:&quot;Count of Transactions via Realtion Type&quot;" />
+        <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" />
         <dataField fieldName="FeeID" aliasFieldName="Status" hidden="true" />
         <dataField fieldName="NameOfPayee" columns="25" hidden="true" />
         <dataField fieldName="Note" columns="50" hidden="true" />
@@ -151,7 +151,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
         <dataField fieldName="CurrentBalance" columns="8" hidden="true">
           <headerText>CBL</headerText>
         </dataField>
-        <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" columns="8" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;Sum of Amount Paid By Transaction Type&quot;" hidden="true">
+        <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" columns="8">
           <headerText>TransType</headerText>
         </dataField>
         <dataField fieldName="FeeType" columns="15" hidden="true" />

@@ -808,11 +808,18 @@ SET @Result_ShowMessage = 'Attendance metrics has been refreshed successfully fo
   </actions>
   <businessRules>
     <rule id="r100" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateNumericGradeEarned"><![CDATA[var fieldValue = [NumericGradeEarned];
-if (fieldValue != null && fieldValue > [extMaxScore]) {
+if (fieldValue == null) {
     // prevent the default action processing
     this.preventDefault();
     // set the focus on the field and display an error
-    this.result.focus('NumericGradeEarned', 'Score earned cannot be greater than Threshold.');
+    this.result.focus('NumericGradeEarned', 'Required field.');
+}]]></rule>
+    <rule id="r102" type="JavaScript" commandName="Insert|Update" phase="Before" name="checkNumericGradeEarnedLimit"><![CDATA[var fieldValue = [NumericGradeEarned];
+if (fieldValue != null && fieldValue > [MaxScore]) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('NumericGradeEarned', 'Score is greater than the threshold.');
 }]]></rule>
     <rule id="r101" commandName="Insert|Update|Calculate" type="Code" phase="Execute" name="setPBSGValue" />
     <rule id="r103" commandName="Insert|Update|Calculate" type="Code" phase="Execute" name="setOWSValue" />

@@ -100,7 +100,7 @@ from "dbo"."StockLevels" "StockLevels"
         <dataField fieldName="ExtendedValue" columns="15" />
         <dataField fieldName="SupplierName" columns="30" hidden="true" />
         <dataField fieldName="RecLocationID" aliasFieldName="recLocationName" tag="pivot4-col1" />
-        <dataField fieldName="TransactionsID" aliasFieldName="StockTransactionsQuantity" tag="pivot4-val1-sum" />
+        <dataField fieldName="TransactionsID" aliasFieldName="StockTransactionsQuantity" tag="pivot4-val1-sum" columns="12" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />

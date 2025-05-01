@@ -76,7 +76,6 @@ from "dbo"."vw_ops_stock_level_movement_receiving_location" "vw_ops_stock_level_
             <dataField fieldName="StockLevelID" columns="15" hidden="true" />
             <dataField fieldName="ProductID" columns="15" hidden="true" />
             <dataField fieldName="ProductName" textMode="Static" />
-            <dataField fieldName="SKU" columns="10" textMode="Static" />
             <dataField fieldName="Category" columns="20" />
             <dataField fieldName="TransactionDate" columns="10" />
             <dataField fieldName="ReceivingLocation" columns="40" />
@@ -87,6 +86,7 @@ from "dbo"."vw_ops_stock_level_movement_receiving_location" "vw_ops_stock_level_
         <category id="c2" flow="NewColumn">
           <description />
           <dataFields>
+            <dataField fieldName="SKU" columns="10" textMode="Static" />
             <dataField fieldName="TransactionQty" columns="15" />
             <dataField fieldName="ReOrderQty" columns="15" />
             <dataField fieldName="ReOrderLevel" columns="15" />

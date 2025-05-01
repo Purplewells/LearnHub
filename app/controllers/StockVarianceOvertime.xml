@@ -93,9 +93,6 @@ from "dbo"."StockVarianceOvertime" "StockVarianceOvertime"
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedBy" columns="50" />
           </dataFields>
-          <visibility>
-            <expression test="[1]==[1]" type="ClientScript" />
-          </visibility>
         </category>
       </categories>
     </view>

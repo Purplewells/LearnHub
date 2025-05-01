@@ -87,16 +87,14 @@ from "dbo"."StockTake" "StockTake"
         <dataField fieldName="ProductName" hidden="true" />
         <dataField fieldName="StockTakeDate" columns="20" />
         <dataField fieldName="LocationName" columns="20" />
-        <dataField fieldName="StockTakeReason" columns="15" />
         <dataField fieldName="refProductQuantity" columns="15" hidden="true" />
         <dataField fieldName="SystemQuantity" columns="15" readOnly="true" />
         <dataField fieldName="ScannedQuantity" columns="15" />
-        <dataField fieldName="StockDifference" columns="5">
-          <headerText>Diff</headerText>
-        </dataField>
+        <dataField fieldName="StockDifference" columns="12" hidden="true" />
         <dataField fieldName="Variance" columns="15" />
         <dataField fieldName="IsVarianceAccepted" columns="20" />
-        <dataField fieldName="Barcode" columns="18" hidden="true" />
+        <dataField fieldName="Barcode" columns="18" />
+        <dataField fieldName="StockTakeReason" columns="50" />
         <dataField fieldName="LocationID" columns="15" hidden="true" />
         <dataField fieldName="Notes" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
@@ -213,19 +211,10 @@ from "dbo"."StockTake" "StockTake"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="SQL" headerText="Generate Stock Overtime " id="a104" cssClass="material-icon-position_bottom_right">
-        <data><![CDATA[EXEC [zusp_stock_p3_calculate_stockvarianceovertime] @StockTakeHeaderID]]></data>
-      </action>
-      <action commandName="SQL" headerText="Post Adjustment Approval" cssClass="material-icon-change_circle" confirmation="This action would post variances within tolerance to the items to update the item quantity. Do you want to continue ?" id="a100">
-        <data><![CDATA[EXECUTE zusp_stock_p7_post_adjustment_approval]]></data>
-      </action>
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
-      <action id="a4" commandName="ExportRss" headerText="Export To RSS APi" />
-      <action id="a101" commandName="ReportAsPdf" headerText="Export To PDF" />
-      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a103" commandName="ReportAsWord" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -237,6 +226,12 @@ from "dbo"."StockTake" "StockTake"
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
@@ -245,22 +240,17 @@ from "dbo"."StockTake" "StockTake"
     </actionGroup>
   </actions>
   <businessRules>
-    <rule id="r100" commandName="New|Update" type="Sql" phase="Execute" name="setStockTakeDate"><![CDATA[IF @ScannedQuantity IS NOT NULL AND @StockTakeDate IS NULL
-	SET @StockTakeDate = GETDATE()
-ELSE 
-   SET @StockTakeDate = NULL]]></rule>
-    <rule id="r103" commandName="Insert|Calculate|Update" type="Sql" phase="After" name="setSystemQuantity"><![CDATA[/*
-UPDATE st
+    <rule id="r102" commandName="New|Update" type="Sql" phase="Execute" name="setIsVarianceAccepted"><![CDATA[if @IsVarianceAccepted IS NULL 
+    SET @IsVarianceAccepted = 0]]></rule>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute" name="setStockTakeDate"><![CDATA[SET @StockTakeDate = GETDATE()]]></rule>
+    <rule id="r103" commandName="Insert|Calculate|Update" type="Sql" phase="After" name="setSystemQuantity"><![CDATA[UPDATE st
 SET st.ProductName = p.ProductName
 	, st.SystemQuantity = ISNULL( st.SystemQuantity, p.Quantity)
 	, st.StockDifference = st.ScannedQuantity - p.Quantity
 
 FROM StockTake st
 INNER JOIN Product p on p.ProductID = st.ProductID
-WHERE p.ProductID = @ProductID
-*/]]></rule>
-    <rule id="r101" commandName="Insert|update|Calculate" type="Code" phase="Execute" name="calculateDifference" />
-    <rule id="r102" commandName="New|Update" type="Sql" phase="Execute" name="setIsVarianceAccepted"><![CDATA[if @IsVarianceAccepted IS NULL 
-    SET @IsVarianceAccepted = 0]]></rule>
+WHERE p.ProductID = @ProductID]]></rule>
+    <rule id="r101" commandName="Insert|update|calculate" type="Code" phase="Before" name="calculateDifference" />
   </businessRules>
 </dataController>

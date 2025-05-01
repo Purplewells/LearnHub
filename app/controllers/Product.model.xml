@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="Product" alias="Product" created="2024-07-09T16:16:58" modified="2025-04-24T22:52:31" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="Product" alias="Product" created="2024-07-09T16:16:58" modified="2025-04-30T13:09:46" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Category" parentTableSchema="dbo" parentTableName="zlkpProductCategory" x="335" y="20">
       <foreignKeyColumn columnName="CategoryID" parentColumnName="ProductCategoryID" />
@@ -25,9 +25,9 @@
     <column name="ReOrderLevel" fieldName="ReOrderLevel" label="ROL Qty" />
     <column name="ReOrderQty" fieldName="ReOrderQty" label="ROD Qty" />
     <column name="Barcode" fieldName="Barcode" label="Barcode" />
-    <column name="QtyPerUnit" fieldName="QtyPerUnit" label="Qty Per Unit" />
+    <column name="QtyPerUnit" fieldName="QtyPerUnit" label="xxxQty Per Unit" />
     <column name="UnitPrice" fieldName="UnitPrice" label="Unit Price" format="c" />
-    <column name="Quantity" fieldName="Quantity" label="Quantity" />
+    <column name="Quantity" fieldName="Quantity" label="Onhand" />
     <column name="UnitsOnHold" fieldName="UnitsOnHold" label="Units On Hold" />
     <column name="UnitsOnOrder" fieldName="UnitsOnOrder" label="Units On Order" />
     <column name="Sellable" fieldName="Sellable" label="Sellable" />
@@ -48,9 +48,9 @@
     <column name="FileLength" fieldName="FileLength" label="File Length" />
     <column name="ContentType" fieldName="ContentType" label="Content Type" />
     <column name="UnitOfMeasureID" fieldName="UnitOfMeasureID" label="Unit Of Measure ID" aliasColumnName="UOMName" aliasForeignKey="UnitOfMeasure" />
-    <column name="UOMName" fieldName="UnitOfMeasure" label="Unit Of Measure" foreignKey="UnitOfMeasure" />
+    <column name="UOMName" fieldName="UnitOfMeasure" label="UoM" foreignKey="UnitOfMeasure" />
     <column name="UOMType" fieldName="UoMType" label="Measure Type" foreignKey="UnitOfMeasure" />
-    <column name="ConversionFactor" fieldName="ConversionFactor" label="Conversion Factor" />
+    <column name="ConversionFactor" fieldName="ConversionFactor" label="Qty Per Unit" />
   </columns>
   <details>
     <detail fieldName="PurchaseOrderDetail" model="PurchaseOrderDetailVendor" filterFields="ProductID" create="true" edit="true" />

@@ -60,8 +60,8 @@
         <siteMapNode title="Stock Rec'd Locations" description="View Stock Level Movement Receiving Location" url="~/pages/stock-level-movement-receiving-location" roles="xxxx" cssClass="material-icon-shield_with_heart" />
         <siteMapNode title="StockHeader" description="View Stock Take Header" url="~/pages/stock-take-header" cssClass="material-icon-lightbulb" />
         <siteMapNode title="StockTake" description="View Stock Take" url="~/pages/stock-take" cssClass="material-icon-code" />
-        <siteMapNode title="StockVariances" description="View Stock Variance Overtime" url="~/pages/stock-variance-overtime" cssClass="material-icon-pending" />
-        <siteMapNode title="StockAdjustment" description="View Stock Adjustment" url="~/pages/stock-adjustment" cssClass="material-icon-upload_file" />
+        <siteMapNode title="StockVariances" description="Stock variances refer to discrepancies between the recorded inventory levels and the actual physical count of items on hand. " url="~/pages/stock-variance-overtime" cssClass="material-icon-pending" />
+        <siteMapNode title="StockAdjustment" description="Stock adjustment is the process of updating inventory records to reflect changes in stock levels." url="~/pages/stock-adjustment" cssClass="material-icon-upload_file" />
       </siteMapNode>
       <siteMapNode title="MEALS HUB" description="" roles="Administrators, AccountManagers, Management, FeeManagers, MealCoordinators">
         <siteMapNode title="Meals Plan" description="" url="~/pages/meals-planning" roles="Administrators, AccountManagers, Management, FeeManagers, MealCoordinators" cssClass="material-icon-set_meal" />
@@ -93,13 +93,13 @@
       <siteMapNode title="Course Section" description="Courses represent the organisation of subject matter and related learning experiences provided for the instruction of students on a regular or systematic basis." url="~/pages/courses-hub" roles="*" cssClass="material-icon-dvr" />
       <siteMapNode title="Fee Structure" description="The Fees Structure enables defining and setting the structure of fees and it's billing components." url="~/pages/billing-structure" roles="*" cssClass="material-icon-grid_goldenratio" />
       <siteMapNode title="Workbench Hub" description="" roles="*" />
-      <siteMapNode title="Hub - Attendances" description="An interface for managing attendance reference attributes." url="~/pages/attendance-attribute" roles="*" cssClass="material-icon-arrow_drop_down_circle" />
+      <siteMapNode title="Hub - Attendance" description="An interface for managing attendance reference attributes." url="~/pages/attendance-attribute" roles="*" cssClass="material-icon-arrow_drop_down_circle" />
       <siteMapNode title="Hub - Behaviour" description="" url="~/pages/behaviour-work-hub" roles="*" cssClass="material-icon-self_improvement" />
       <siteMapNode title="Hub - Enrollment" description="" url="~/pages/enrollment-benchmark" roles="*" cssClass="material-icon-ad_units" />
       <siteMapNode title="Hub - Compensation" description="This interface allows users to provide configuration or default values for slary determination." url="~/pages/salaries-benchmark" roles="*" cssClass="material-icon-arrow_circle_up" />
-      <siteMapNode title="Hub - Meal Services" description="Meal services configuration" url="~/pages/meal-services" roles="*" cssClass="material-icon-inventory" />
-      <siteMapNode title="Hub - Financials" description="" url="~/pages/monetary-work-bench" roles="*" cssClass="material-icon-savings" />
-      <siteMapNode title="Hub - Registrations" description="View Registration Workbench" url="~/pages/registration-workbench" roles="*" cssClass="material-icon-send" />
+      <siteMapNode title="Hub - Meal Service" description="Meal services configuration" url="~/pages/meal-services" roles="*" cssClass="material-icon-inventory" />
+      <siteMapNode title="Hub - Financial" description="" url="~/pages/monetary-work-bench" roles="*" cssClass="material-icon-savings" />
+      <siteMapNode title="Hub - Registration" description="View Registration Workbench" url="~/pages/registration-workbench" roles="*" cssClass="material-icon-send" />
       <siteMapNode title="Other Setup" description="" roles="*" />
       <siteMapNode title="Assessment Type" description="View Assessment Type" url="~/pages/assessment-type" cssClass="material-icon-settings_applications" />
       <siteMapNode title="Buses" description="View Buses" url="~/pages/buses" cssClass="material-icon-arrow_drop_down_circle" />
