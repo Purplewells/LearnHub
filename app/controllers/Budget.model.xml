@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="Budget" alias="Budget" created="2024-01-30T00:07:41" modified="2024-04-03T11:14:51" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="Budget" alias="Budget" created="2024-01-30T00:07:41" modified="2025-05-02T04:53:54" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="BudgetName" parentTableSchema="dbo" parentTableName="zlkpBudgetName" x="320" y="20">
       <foreignKeyColumn columnName="BudgetNameID" parentColumnName="BudgetNameID" />
@@ -17,10 +17,12 @@
     <column name="StartDate" fieldName="StartDate" label="Start Date" />
     <column name="EndDate" fieldName="EndDate" label="End Date" />
     <column name="BudgetValue" fieldName="BudgetValue" label="Budget Value" format="c" />
+    <column name="Code" fieldName="Code" label="Code" />
     <column name="Description" fieldName="Notes" label="Notes" />
     <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
     <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
     <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
     <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="CurrencyID" fieldName="CurrencyID" label="Currency ID" />
   </columns>
 </dataModel>

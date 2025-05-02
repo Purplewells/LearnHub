@@ -14,6 +14,8 @@ select
 	,"vw_metric_income_expense_summary"."TotalIncome" "TotalIncome"
 	,"vw_metric_income_expense_summary"."TotalExpense" "TotalExpense"
 	,"vw_metric_income_expense_summary"."NetIncome" "NetIncome"
+	,"vw_metric_income_expense_summary"."CurrencyName" "CurrencyName"
+	,"vw_metric_income_expense_summary"."Code" "Code"
 	,"vw_metric_income_expense_summary"."Week" "Week"
 	,"vw_metric_income_expense_summary"."MonthName" "MonthName"
 	,"vw_metric_income_expense_summary"."YearMonth" "YearMonth"
@@ -29,10 +31,12 @@ from "dbo"."vw_metric_income_expense_summary" "vw_metric_income_expense_summary"
     <field name="Category" type="String" label="Category" length="100" showInSummary="true" />
     <field name="Indicator" type="String" label="Indicator" length="10" showInSummary="true" />
     <field name="EventDate" type="DateTime" allowNulls="false" label="Event Date" />
-    <field name="BudgetValue" type="Decimal" dataFormatString="c" label="Budget Value" />
-    <field name="TotalIncome" type="Decimal" dataFormatString="c" label="Total Income" readOnly="true" />
-    <field name="TotalExpense" type="Decimal" dataFormatString="c" label="Total Expense" readOnly="true" />
-    <field name="NetIncome" type="Decimal" dataFormatString="c" label="Net Income" readOnly="true" />
+    <field name="BudgetValue" type="Decimal" label="Budget Value" />
+    <field name="TotalIncome" type="Decimal" label="Total Income" readOnly="true" />
+    <field name="TotalExpense" type="Decimal" label="Total Expense" readOnly="true" />
+    <field name="NetIncome" type="Decimal" label="Net Income" readOnly="true" />
+    <field name="CurrencyName" type="String" label="Currency Name" length="20" />
+    <field name="Code" type="String" label="Code" length="5" />
     <field name="Week" type="Byte" label="Week" />
     <field name="MonthName" type="String" label="Month Name" length="9" />
     <field name="YearMonth" type="Int32" label="Year Month" />
@@ -52,6 +56,10 @@ from "dbo"."vw_metric_income_expense_summary" "vw_metric_income_expense_summary"
         <dataField fieldName="TotalIncome" columns="15" aggregate="Sum" />
         <dataField fieldName="TotalExpense" columns="15" aggregate="Sum" />
         <dataField fieldName="NetIncome" columns="15" aggregate="Sum" tag="pivot2-val2-sum&#xD;&#xA;pivot3-val1-sum&#xD;&#xA;pivot4-val1-sum&#xD;&#xA;pivot5-val1-sum" />
+        <dataField fieldName="CurrencyName" columns="7">
+          <headerText>Curr</headerText>
+        </dataField>
+        <dataField fieldName="Code" columns="5" hidden="true" />
         <dataField fieldName="Week" columns="8" />
         <dataField fieldName="MonthName" columns="9" hidden="true">
           <headerText>Month</headerText>
@@ -76,6 +84,8 @@ from "dbo"."vw_metric_income_expense_summary" "vw_metric_income_expense_summary"
             <dataField fieldName="TotalIncome" columns="15" />
             <dataField fieldName="TotalExpense" columns="15" />
             <dataField fieldName="NetIncome" columns="15" />
+            <dataField fieldName="CurrencyName" columns="20" />
+            <dataField fieldName="Code" columns="5" />
             <dataField fieldName="Week" columns="15" />
             <dataField fieldName="MonthName" columns="9" />
             <dataField fieldName="YearMonth" columns="15" />
@@ -100,6 +110,8 @@ from "dbo"."vw_metric_income_expense_summary" "vw_metric_income_expense_summary"
             <dataField fieldName="TotalIncome" columns="15" />
             <dataField fieldName="TotalExpense" columns="15" />
             <dataField fieldName="NetIncome" columns="15" />
+            <dataField fieldName="CurrencyName" columns="20" />
+            <dataField fieldName="Code" columns="5" />
             <dataField fieldName="Week" columns="15" />
             <dataField fieldName="MonthName" columns="9" />
             <dataField fieldName="YearMonth" columns="15" />

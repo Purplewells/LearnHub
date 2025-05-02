@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="IncomeExpense" alias="IncomeExpense" created="2024-01-30T11:05:48" modified="2025-04-04T14:48:34" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="IncomeExpense" alias="IncomeExpense" created="2024-01-30T11:05:48" modified="2025-05-02T04:02:47" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Budget" parentTableSchema="dbo" parentTableName="Budget" x="329" y="20">
       <foreignKeyColumn columnName="BudgetID" parentColumnName="BudgetID" />
@@ -12,6 +12,9 @@
     </foreignKey>
     <foreignKey id="CreditAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="331" y="514">
       <foreignKeyColumn columnName="CreditAccountID" parentColumnName="AccountID" />
+    </foreignKey>
+    <foreignKey id="Currency" parentTableSchema="dbo" parentTableName="zlkp_currency" x="29" y="400">
+      <foreignKeyColumn columnName="CurrencyID" parentColumnName="CurrencyID" />
     </foreignKey>
   </foreignKeys>
   <columns>
@@ -32,5 +35,7 @@
     <column name="AccountName" fieldName="DebitAccountName" label="Debit Account" foreignKey="DebitAccount" />
     <column name="CreditAccountID" fieldName="CreditAccountID" label="Credit Account ID" aliasColumnName="AccountName" aliasForeignKey="CreditAccount" />
     <column name="AccountName" fieldName="CreditAccountName" label="Credit Account" foreignKey="CreditAccount" />
+    <column name="CurrencyID" fieldName="CurrencyID" label="Currency ID" aliasColumnName="CurrencyName" aliasForeignKey="Currency" />
+    <column name="CurrencyName" fieldName="CurrencyName" label="Curr" foreignKey="Currency" />
   </columns>
 </dataModel>

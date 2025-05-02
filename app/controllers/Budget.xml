@@ -12,11 +12,13 @@ select
 	,"Budget"."StartDate" "StartDate"
 	,"Budget"."EndDate" "EndDate"
 	,"Budget"."BudgetValue" "BudgetValue"
+	,"Budget"."Code" "Code"
 	,"Budget"."Description" "Notes"
 	,"Budget"."CreatedDate" "CreatedDate"
 	,"Budget"."ModifiedDate" "ModifiedDate"
 	,"Budget"."CreatedBy" "CreatedBy"
 	,"Budget"."ModifiedBy" "ModifiedBy"
+	,"Budget"."CurrencyID" "CurrencyID"
 from "dbo"."Budget" "Budget"
 	left join "dbo"."zlkpBudgetName" "BudgetName" on "Budget"."BudgetNameID" = "BudgetName"."BudgetNameID"
 	left join "dbo"."zlkpBudgetType" "BudgetNameBudgetType" on "BudgetName"."BudgetTypeID" = "BudgetNameBudgetType"."BudgetTypeID"
@@ -39,12 +41,14 @@ from "dbo"."Budget" "Budget"
     <field name="BudgetType" type="String" readOnly="true" label="Budget Type" length="15" />
     <field name="StartDate" type="DateTime" label="Start Date" showInSummary="true" />
     <field name="EndDate" type="DateTime" label="End Date" showInSummary="true" />
-    <field name="BudgetValue" type="Decimal" dataFormatString="c" label="Budget Value" showInSummary="true" />
+    <field name="BudgetValue" type="Decimal" label="Budget Value" showInSummary="true" />
+    <field name="Code" type="String" label="Code" length="10" />
     <field name="Notes" type="String" label="Notes" length="500" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="CurrencyID" type="Int32" label="Currency ID" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Active Budgets" filter="EndDate &gt;= GETDATE()">
@@ -56,11 +60,13 @@ from "dbo"."Budget" "Budget"
         <dataField fieldName="StartDate" columns="10" />
         <dataField fieldName="EndDate" columns="10" />
         <dataField fieldName="BudgetValue" columns="15" />
+        <dataField fieldName="Code" columns="7" />
         <dataField fieldName="Notes" hidden="true" columns="200" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
         <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="CurrencyID" columns="15" hidden="true" />
       </dataFields>
     </view>
     <view id="grid1_all_budgets" type="Grid" commandId="command1" label="All Budget Allocations">
@@ -72,6 +78,7 @@ from "dbo"."Budget" "Budget"
         <dataField fieldName="StartDate" columns="10" />
         <dataField fieldName="EndDate" columns="10" />
         <dataField fieldName="BudgetValue" columns="15" />
+        <dataField fieldName="Code" columns="7" />
         <dataField fieldName="Notes" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
@@ -91,6 +98,7 @@ from "dbo"."Budget" "Budget"
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
             <dataField fieldName="BudgetType" columns="15" />
+            <dataField fieldName="Code" columns="10" />
             <dataField fieldName="Notes" hidden="true" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
@@ -112,6 +120,7 @@ from "dbo"."Budget" "Budget"
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
             <dataField fieldName="BudgetType" columns="15" />
+            <dataField fieldName="Code" columns="10" />
             <dataField fieldName="Notes" />
             <dataField fieldName="CreatedDate" columns="20" hidden="true" />
             <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
@@ -179,4 +188,10 @@ from "dbo"."Budget" "Budget"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert|update" type="Sql" phase="After" name="setDefaultCurrency"><![CDATA[update Budget
+SET CurrencyID = curr.CurrencyID, Code = curr.Code
+FROM Budget
+CROSS JOIN zlkp_currency curr WHERE curr.IsDefault = 1]]></rule>
+  </businessRules>
 </dataController>

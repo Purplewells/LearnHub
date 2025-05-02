@@ -37,7 +37,7 @@ from "dbo"."StockTakeHeader" "StockTakeHeader"
     <field name="LocationID" type="Int32" label="Location ID" showInSummary="true">
       <items style="Lookup" dataController="InventoryLocations" newDataView="createForm1" dataValueField="LocationID" dataTextField="LocationName" />
     </field>
-    <field name="LocationName" type="String" readOnly="true" label="Location Name" length="40" />
+    <field name="LocationName" type="String" readOnly="true" label="Location Name" length="20" />
     <field name="DateFrozen" type="DateTime" dataFormatString="g" label="Date Frozen" showInSummary="true" />
     <field name="DateUpdated" type="DateTime" dataFormatString="g" label="Date Updated" showInSummary="true" />
     <field name="LinesFrozen" type="Int32" label="Lines Frozen" showInSummary="true" />
@@ -50,21 +50,24 @@ from "dbo"."StockTakeHeader" "StockTakeHeader"
     <field name="CreatedBy" type="String" allowNulls="false" label="Created By" length="50" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="StockTakeDetail" type="DataView" label="Stock Take Detail">
+      <dataView controller="StockTakeDetail" view="grid1" filterFields="StockTakeHeaderID" />
+    </field>
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Active StockTake Header" filter="IsActive = 1">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="StockTakeNo" columns="15" />
+        <dataField fieldName="StockTakeNo" columns="10" />
         <dataField fieldName="LocationID" aliasFieldName="LocationName" />
-        <dataField fieldName="DateFrozen" columns="20" />
+        <dataField fieldName="DateFrozen" columns="20" hidden="true" />
         <dataField fieldName="StockTakeDate" columns="20" />
         <dataField fieldName="DateUpdated" columns="20" hidden="true" />
         <dataField fieldName="LinesFrozen" columns="15" hidden="true" />
         <dataField fieldName="IsUpdated" hidden="true" />
         <dataField fieldName="IsActive" />
         <dataField fieldName="IsPublished" columns="18" />
-        <dataField fieldName="Comments" />
+        <dataField fieldName="Comments" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
@@ -106,6 +109,12 @@ from "dbo"."StockTakeHeader" "StockTakeHeader"
             <dataField fieldName="IsActive" />
             <dataField fieldName="IsPublished" />
             <dataField fieldName="Comments" />
+          </dataFields>
+        </category>
+        <category id="c3" tab="Stock Take Plan" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="StockTakeDetail" columns="15" tag="modal-fit-content&#xD;&#xA;modal-content-stub-none" />
           </dataFields>
         </category>
         <category id="c2" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
@@ -164,6 +173,11 @@ from "dbo"."StockTakeHeader" "StockTakeHeader"
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
       <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+      <action commandName="SQL" headerText="Prepare StockTake Records" cssClass="material-icon-swap_vertical_circle" id="a100">
+        <data><![CDATA[-- EXEC [zusp_stock_p5_autopopulate_stocktake_due_items] @StockHeaderID, @DaysThreshold = 30, @VarianceThreshold = 10;
+
+ EXEC [zusp_stock_p5_autopopulate_stocktake_due_items] @StockTakeHeaderID]]></data>
+      </action>
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
       <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
@@ -173,10 +187,20 @@ from "dbo"."StockTakeHeader" "StockTakeHeader"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
+      <action commandName="SQL" headerText="Generate StockTake Plan" cssClass="material-icon-swap_vertical_circle" id="a100">
+        <data><![CDATA[-- EXEC [zusp_stock_p5_autopopulate_stocktake_due_items] @StockHeaderID, @DaysThreshold = 30, @VarianceThreshold = 10;
+
+ EXEC [zusp_stock_p5_autopopulate_stocktake_due_items] @StockTakeHeaderID
+
+SET @Result_ShowMessage = 'Stock Take sheets have been successfully prepared' ]]></data>
+      </action>
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" />
-      <action id="a4" commandName="ExportRss" />
+      <action id="a1" commandName="ExportCsv" whenKeySelected="true" headerText="Export To CSV" />
+      <action id="a103" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a101" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Export To RSS" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -189,10 +213,7 @@ from "dbo"."StockTakeHeader" "StockTakeHeader"
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" />
       <action id="a2" commandName="ReportAsImage" />
-      <action id="a3" commandName="ReportAsExcel" />
-      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

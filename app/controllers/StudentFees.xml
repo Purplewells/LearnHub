@@ -105,10 +105,10 @@ from "dbo"."student_fees" "student_fees"
         <dataField fieldName="DueDate" columns="10" hidden="true" />
         <dataField fieldName="FeeDescription" columns="30" hidden="true" />
         <dataField fieldName="FeeTypes" columns="20" hidden="true" />
-        <dataField fieldName="YearStartDate" columns="10" hidden="true" />
+        <dataField fieldName="YearStartDate" columns="10" />
         <dataField fieldName="YearEndDate" columns="10" hidden="true" />
         <dataField fieldName="CalendarCode" columns="10" />
-        <dataField fieldName="CSY" hidden="true" />
+        <dataField fieldName="CSY" />
         <dataField fieldName="SchoolName" columns="50" hidden="true" />
         <dataField fieldName="CurrentBalance" columns="15" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
@@ -142,7 +142,7 @@ from "dbo"."student_fees" "student_fees"
         <dataField fieldName="CalendarCode" columns="10" />
         <dataField fieldName="CSY" />
         <dataField fieldName="SchoolName" columns="50" hidden="true" />
-        <dataField fieldName="CurrentBalance" columns="15" />
+        <dataField fieldName="CurrentBalance" columns="15" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
@@ -174,7 +174,7 @@ from "dbo"."student_fees" "student_fees"
         <dataField fieldName="CalendarCode" columns="10" />
         <dataField fieldName="CSY" />
         <dataField fieldName="SchoolName" columns="50" hidden="true" />
-        <dataField fieldName="CurrentBalance" columns="15" />
+        <dataField fieldName="CurrentBalance" columns="15" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />

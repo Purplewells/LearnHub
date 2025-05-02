@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="PurchaseOrderDetailVendor" conflictDetection="overwriteChanges" label="Purchase Order Detail Vendor" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="PurchaseOrderDetailVendor" conflictDetection="overwriteChanges" label="Purchase Order Detail Vendor" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.PurchaseOrderDetailVendorBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -54,13 +54,13 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
     <field name="ProductCategory" type="String" readOnly="true" label="Category" length="20" />
     <field name="PurchaseDate" type="DateTime" dataFormatString="D" label="Order Date" showInSummary="true" />
     <field name="ArrivalDate" type="DateTime" dataFormatString="D" label="Receipt Date" showInSummary="true" />
-    <field name="Quantity" type="Int32" label="Ordered Qty" showInSummary="true" />
-    <field name="UnitPrice" type="Decimal" dataFormatString="c" label="Unit Price" showInSummary="true" />
+    <field name="Quantity" type="Int32" label="Ordered Qty" showInSummary="true" causesCalculate="true" />
+    <field name="UnitPrice" type="Decimal" dataFormatString="c" label="Unit Price" showInSummary="true" causesCalculate="true" />
     <field name="ExtendedCost" type="Decimal" readOnly="true" dataFormatString="c" label="Extended Cost" computed="true">
       <formula>PurchaseOrderDetail.UnitPrice * PurchaseOrderDetail.Quantity</formula>
     </field>
     <field name="IsArrived" type="Boolean" label="Received" />
-    <field name="IsFullyReceived" type="Boolean" label="Fully Received" />
+    <field name="IsFullyReceived" type="Boolean" label="Fully Received" causesCalculate="true" />
     <field name="Note" type="String" label="Note" length="1024" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />
@@ -93,26 +93,28 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
         <dataField fieldName="ProductID" aliasFieldName="ProductName" />
         <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
         <dataField fieldName="ProductCategory" columns="20" />
-        <dataField fieldName="PurchaseDate" columns="20" />
+        <dataField fieldName="PurchaseDate" columns="20" hidden="true" />
+        <dataField fieldName="Quantity" columns="15">
+          <headerText>Qty Ordered</headerText>
+        </dataField>
+        <dataField fieldName="UnitPrice" columns="15" />
+        <dataField fieldName="ExtendedCost" columns="15" />
+        <dataField fieldName="QuantityReceived" columns="15" />
         <dataField fieldName="ArrivalDate" columns="20" />
-        <dataField fieldName="Quantity" columns="15" hidden="true" />
-        <dataField fieldName="UnitPrice" columns="15" hidden="true" />
-        <dataField fieldName="ExtendedCost" columns="15" hidden="true" />
+        <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
         <dataField fieldName="IsArrived" hidden="true" />
-        <dataField fieldName="IsFullyReceived" />
+        <dataField fieldName="IsFullyReceived" columns="15" />
         <dataField fieldName="Note" hidden="true" />
-        <dataField fieldName="ContactEmail" columns="35" />
-        <dataField fieldName="ContactPhone" columns="20" />
-        <dataField fieldName="SupplierAddress" columns="25" />
-        <dataField fieldName="City" columns="20" />
+        <dataField fieldName="ContactEmail" columns="35" hidden="true" />
+        <dataField fieldName="ContactPhone" columns="20" hidden="true" />
+        <dataField fieldName="SupplierAddress" columns="25" hidden="true" />
+        <dataField fieldName="City" columns="20" hidden="true" />
         <dataField fieldName="State" columns="15" hidden="true" />
         <dataField fieldName="Country" columns="25" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
-        <dataField fieldName="QuantityReceived" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Purchase Order Detail Vendor">
@@ -160,38 +162,60 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Purchase Order Detail Vendor">
+    <view id="editForm1_received" type="Form" commandId="command1" label="Record Receipt Item">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Purchase Order Detail Vendor" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ProductID" aliasFieldName="ProductName" />
+            <dataField fieldName="ProductCategory" columns="20" />
+            <dataField fieldName="PurchaseDate" columns="10" />
+            <dataField fieldName="ArrivalDate" columns="10" />
+            <dataField fieldName="Quantity" columns="15" />
+            <dataField fieldName="QuantityReceived" columns="15" />
+            <dataField fieldName="IsArrived" />
+            <dataField fieldName="IsFullyReceived" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="UnitPrice" columns="15" />
+            <dataField fieldName="ExtendedCost" columns="15" />
+            <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
+            <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
+            <dataField fieldName="Note" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New PO Detail ">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description />
           <dataFields>
             <dataField fieldName="ProductID" aliasFieldName="ProductName" />
-            <dataField fieldName="ProductCategory" columns="20" />
-            <dataField fieldName="PurchaseDate" columns="10" />
-            <dataField fieldName="ArrivalDate" columns="10" />
-            <dataField fieldName="UnitPrice" columns="15" />
+            <dataField fieldName="PurchaseDate" columns="10" hidden="true" />
+            <dataField fieldName="ArrivalDate" columns="10" hidden="true" />
             <dataField fieldName="Quantity" columns="15" />
-            <dataField fieldName="ExtendedCost" columns="15" />
-            <dataField fieldName="Note" />
+            <dataField fieldName="QuantityReceived" columns="15" hidden="true" />
+            <dataField fieldName="UnitPrice" columns="15" />
+            <dataField fieldName="IsArrived" />
             <dataField fieldName="IsFullyReceived" />
             <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
-            <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
-            <dataField fieldName="QuantityReceived" columns="15" />
           </dataFields>
         </category>
         <category id="c2" flow="NewColumn">
           <description />
           <dataFields>
+            <dataField fieldName="ExtendedCost" columns="15" />
+            <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
+            <dataField fieldName="ProductCategory" columns="20" />
             <dataField fieldName="SupplierName" columns="50" />
             <dataField fieldName="ContactName" columns="50" />
-            <dataField fieldName="ContactEmail" columns="50" />
-            <dataField fieldName="ContactPhone" columns="20" />
-            <dataField fieldName="SupplierAddress" />
-            <dataField fieldName="City" columns="30" />
-            <dataField fieldName="State" columns="15" />
-            <dataField fieldName="Country" columns="50" />
-            <dataField fieldName="IsArrived" />
+            <dataField fieldName="Note" />
           </dataFields>
         </category>
       </categories>
@@ -228,12 +252,17 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action commandName="SQL" headerText="Initiate GR Process" confirmation="This process will initiate acknowledge all items have been received ( Ordered Qty = Received Qty). Do you want to continue ?" id="a100">
+        <data><![CDATA[SELECT 1]]></data>
+      </action>
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a100" commandName="ReportAsPdf" headerText="Print Purchase Order" />
+      <action commandName="Edit" commandArgument="editForm1_received" cssClass="material-icon-spa" whenKeySelected="true" id="a102" headerText="Receive Goods" />
+      <action id="a2" />
       <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
       <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a100" commandName="ReportAsPdf" headerText="Print Purchase Order" />
-      <action id="a2" />
+      <action id="a103" />
       <action id="a3" commandName="ExportRowset" headerText="Send IPY" />
       <action id="a4" commandName="ExportRss" headerText="Send API RSS" />
       <action id="a5" />
@@ -258,4 +287,10 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute" name="setItemOrderDate"><![CDATA[SET @PurchaseDate = GETDATE()
+SET @IsArrived = 0
+SET @IsFullyReceived = 0]]></rule>
+    <rule id="r101" commandName="Insert|update|Calculate" type="Code" phase="After" name="ProcessPurchaseOrder" />
+  </businessRules>
 </dataController>

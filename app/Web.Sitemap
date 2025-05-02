@@ -60,8 +60,8 @@
         <siteMapNode title="Stock Rec'd Locations" description="View Stock Level Movement Receiving Location" url="~/pages/stock-level-movement-receiving-location" roles="xxxx" cssClass="material-icon-shield_with_heart" />
         <siteMapNode title="StockHeader" description="View Stock Take Header" url="~/pages/stock-take-header" cssClass="material-icon-lightbulb" />
         <siteMapNode title="StockTake" description="View Stock Take" url="~/pages/stock-take" cssClass="material-icon-code" />
-        <siteMapNode title="StockVariances" description="Stock variances refer to discrepancies between the recorded inventory levels and the actual physical count of items on hand. " url="~/pages/stock-variance-overtime" cssClass="material-icon-pending" />
-        <siteMapNode title="StockAdjustment" description="Stock adjustment is the process of updating inventory records to reflect changes in stock levels." url="~/pages/stock-adjustment" cssClass="material-icon-upload_file" />
+        <siteMapNode title="StockVariances" description="View Stock Variance Overtime" url="~/pages/stock-variance-overtime" cssClass="material-icon-pending" />
+        <siteMapNode title="StockAdjustment" description="View Stock Adjustment" url="~/pages/stock-adjustment" cssClass="material-icon-upload_file" />
       </siteMapNode>
       <siteMapNode title="MEALS HUB" description="" roles="Administrators, AccountManagers, Management, FeeManagers, MealCoordinators">
         <siteMapNode title="Meals Plan" description="" url="~/pages/meals-planning" roles="Administrators, AccountManagers, Management, FeeManagers, MealCoordinators" cssClass="material-icon-set_meal" />
