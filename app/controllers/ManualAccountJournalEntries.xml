@@ -96,30 +96,30 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
           <description />
           <dataFields>
             <dataField fieldName="Description" />
-            <dataField fieldName="Amount" columns="15" />
             <dataField fieldName="TransactionDate" columns="10" />
+            <dataField fieldName="Amount" columns="15" />
             <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
             <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
             <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
             <dataField fieldName="CreatedDate" columns="10" hidden="true" />
             <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="EnteredBy" columns="50" hidden="true" />
+            <dataField fieldName="EnteredBy" columns="50" />
             <dataField fieldName="CreatedBy" columns="50" hidden="true" />
             <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="Add New Entry">
+    <view id="createForm1" type="Form" commandId="command1" label="Create Journal Entry">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="Description" />
-            <dataField fieldName="Amount" columns="15" />
             <dataField fieldName="TransactionDate" columns="10" />
+            <dataField fieldName="Amount" columns="15" />
             <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
             <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
@@ -196,10 +196,4 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="New" type="Sql" phase="Execute" name="setTransactionDate"><![CDATA[
-IF @TransactionDate IS NULL
- SET @TransactionDate = GETDATE()
-]]></rule>
-  </businessRules>
 </dataController>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="StudentInterventionAssociation" alias="StudentInterventionAssociation" created="2025-05-01T20:26:07" modified="2025-05-02T02:59:47" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="OrganisationalPersonRole" parentTableSchema="dbo" parentTableName="OrganizationPersonRole" x="424" y="20">
+      <foreignKeyColumn columnName="OrganisationalPersonRoleID" parentColumnName="OrganizationPersonRoleID" />
+    </foreignKey>
+    <foreignKey id="OrganisationalPersonRoleOrganisation" parentTableSchema="dbo" parentTableName="Organisation" baseForeignKey="OrganisationalPersonRole" x="772" y="20">
+      <foreignKeyColumn columnName="OrganisationID" parentColumnName="OrganizationID" />
+    </foreignKey>
+    <foreignKey id="OrganisationalPersonRolePerson" parentTableSchema="dbo" parentTableName="Person" baseForeignKey="OrganisationalPersonRole" x="772" y="221">
+      <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="StudentInterventionAssociationID" fieldName="StudentInterventionAssociationID" label="Student Intervention Association ID" />
+    <column name="InterventionEffectiveness" fieldName="InterventionEffectiveness" label="Intervention Effectiveness" />
+    <column name="DiagnosisStatement" fieldName="DiagnosisStatement" label="Diagnosis Statement" />
+    <column name="OrganisationalPersonRoleID" fieldName="OrganisationalPersonRoleID" label="Organisational Person Role ID" />
+    <column name="OrganisationID" fieldName="OrganisationalPersonRoleOrganisationID" foreignKey="OrganisationalPersonRole" />
+    <column name="Name" fieldName="Name" label="Name" foreignKey="OrganisationalPersonRoleOrganisation" />
+    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="OrganisationalPersonRolePerson" />
+    <column name="FirstName" fieldName="FirstName" label="First Name" foreignKey="OrganisationalPersonRolePerson" />
+    <column name="LastName" fieldName="LastName" label="Last Name" foreignKey="OrganisationalPersonRolePerson" />
+    <column name="InterventionID" fieldName="InterventionID" label="Intervention ID" />
+  </columns>
+</dataModel>

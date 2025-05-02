@@ -74,7 +74,15 @@
           <DataField>Year</DataField>
           <rd:TypeName>System.Int16</rd:TypeName>
         </Field>
-      </Fields>
+      <Field Name="Code">
+  <DataField>Code</DataField>
+  <rd:TypeName>System.String</rd:TypeName>
+</Field>
+<Field Name="CurrencyName">
+  <DataField>CurrencyName</DataField>
+  <rd:TypeName>System.String</rd:TypeName>
+</Field>
+</Fields>
       <Query>
         <DataSourceName>IncomeExpenseSummaryDataSource</DataSourceName>
         <CommandText />

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="PurchaseOrder" conflictDetection="overwriteChanges" label="Purchase Order" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="PurchaseOrder" conflictDetection="overwriteChanges" label="Purchase Order" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.PurchaseOrderBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -52,7 +52,7 @@ from "dbo"."PurchaseOrder" "PurchaseOrder"
     <field name="PurchaseOrderStatusID" type="Int32" label="Purchase Order Status ID">
       <items style="Lookup" dataController="PurchaseOrderStatus" newDataView="createForm1" dataValueField="PurchaseOrderStatusID" dataTextField="PurchaseOrderStatus" />
     </field>
-    <field name="Status" type="String" readOnly="true" label="Status" length="20" />
+    <field name="Status" type="String" readOnly="true" label="Status" length="12" />
     <field name="PaymentStatusID" type="Int32" label="Payment Status ID">
       <items style="Lookup" dataController="PaymentStatus" newDataView="createForm1" dataValueField="PaymentStatusID" dataTextField="PaymentStatus" />
     </field>
@@ -67,7 +67,7 @@ from "dbo"."PurchaseOrder" "PurchaseOrder"
     <field name="CreatedBy" type="String" label="Created By" length="50" />
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
     <field name="PurchaseOrderDetail" type="DataView" label="Purchase Order Detail" causesCalculate="true">
-      <dataView controller="PurchaseOrderDetailVendor" view="grid1" filterFields="PurchaseOrderID" />
+      <dataView controller="PurchaseOrderDetail" view="grid1" filterFields="PurchaseOrderID" />
     </field>
   </fields>
   <views>
@@ -82,11 +82,13 @@ from "dbo"."PurchaseOrder" "PurchaseOrder"
           <headerText>Expected Date</headerText>
         </dataField>
         <dataField fieldName="ActualDeliveryDate" columns="20" />
-        <dataField fieldName="FreightCharge" columns="15">
+        <dataField fieldName="FreightCharge" columns="10" hidden="true">
           <headerText>Freight</headerText>
         </dataField>
         <dataField fieldName="TotalAmount" columns="15" />
-        <dataField fieldName="PurchaseOrderStatusID" aliasFieldName="Status" />
+        <dataField fieldName="PurchaseOrderStatusID" aliasFieldName="Status" columns="12">
+          <headerText>Status</headerText>
+        </dataField>
         <dataField fieldName="PaymentStatusID" aliasFieldName="PaymentStatus" hidden="true" />
         <dataField fieldName="POHeader" hidden="true" tag="header-text" />
         <dataField fieldName="Comment" columns="30" />
@@ -132,7 +134,7 @@ from "dbo"."PurchaseOrder" "PurchaseOrder"
         </category>
         <category id="d1">
           <dataFields>
-            <dataField fieldName="PurchaseOrderDetail" tag="modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;modal-auto-grow&#xD;&#xA;modal-max-sm" />
+            <dataField fieldName="PurchaseOrderDetail" tag="modal-fit-content&#xD;&#xA;modal-auto-grow&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-content-stub-none" />
           </dataFields>
         </category>
       </categories>
@@ -143,33 +145,41 @@ from "dbo"."PurchaseOrder" "PurchaseOrder"
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="SupplierID" aliasFieldName="SupplierName" />
-            <dataField fieldName="TrackingNumber" columns="50" />
             <dataField fieldName="OrderDate" columns="10" />
             <dataField fieldName="ExpectedDeliveryDate" columns="10" />
-            <dataField fieldName="ActualDeliveryDate" columns="10" />
+            <dataField fieldName="SupplierID" aliasFieldName="SupplierName" />
             <dataField fieldName="PurchaseOrderStatusID" aliasFieldName="Status" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Purchase Order Others" flow="NewRow">
+          <description />
+          <dataFields>
             <dataField fieldName="PaymentStatusID" aliasFieldName="PaymentStatus" />
+            <dataField fieldName="ActualDeliveryDate" columns="10" />
             <dataField fieldName="FreightCharge" columns="15" />
             <dataField fieldName="TotalAmount" columns="15" />
-            <dataField fieldName="Comment" />
+            <dataField fieldName="Comment" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c3" collapsed="true" flow="NewRow">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
             <dataField fieldName="CreatedDate" columns="20" hidden="true" />
             <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
             <dataField fieldName="CreatedBy" columns="50" hidden="true" />
             <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+            <dataField fieldName="TrackingNumber" columns="50" hidden="true" />
           </dataFields>
-        </category>
-        <category id="d1">
-          <dataFields>
-            <dataField fieldName="PurchaseOrderDetail" />
-          </dataFields>
+          <visibility>
+            <expression test="[1]==[1]" type="ClientScript" />
+          </visibility>
         </category>
       </categories>
     </view>
   </views>
   <actions>
     <actionGroup id="ag1" scope="Grid">
-      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a1" commandName="Edit" commandArgument="editForm1" />
       <action id="a2" commandName="Edit" />
       <action id="a3" commandName="Delete" />
       <action id="a6" />
@@ -191,8 +201,36 @@ from "dbo"."PurchaseOrder" "PurchaseOrder"
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
       <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Edit" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
-      <action commandName="SQL" cssClass="material-icon-book" id="a100" headerText="Process Order" whenKeySelected="true">
+      <action commandName="SQL" cssClass="material-icon-local_shipping" id="a100" headerText="Confirm PO" whenKeySelected="true">
         <data><![CDATA[EXEC zusp_ops_process_purchase_order @PurchaseOrderID]]></data>
+      </action>
+      <action commandName="SQL" headerText="Process All Goods Receipts" id="a101" cssClass="material-icon-sync" confirmation="The action will update and sync stock levels. Do you want to continue this process to confirm All  Goods Receipt ?" whenLastCommandName="Edit" whenClientScript="[ActualDeliveryDate] !== ''&#xD;&#xA;">
+        <data><![CDATA[/***********************************************************************************************
+    Procedure Name : [dbo].[zusp_ops_process_received_purchase_order_all]
+    Description    : Automatically processes full goods receipt by setting ReceivedQuantity = OrderedQuantity,
+                     and updates StockLevel accordingly.
+
+    Parameters     : 
+        @PurchaseOrderID INT - ID of the purchase order being fully received
+        @ReceivedBy NVARCHAR(100) - Username or ID of person receiving the goods
+
+    Created By     : ChatGPT
+    Created Date   : 2025-04-18
+    Modified By    : 
+
+    Usage Example  :
+        EXEC [dbo].[zusp_ops_process_received_purchase_order_all] 10;
+
+    Notes          :
+        - Assumes all items in the PO are received exactly as ordered.
+        - Validates against missing or closed orders.
+        - Updates Product and StockLevels accordingly.
+
+***********************************************************************************************
+*/ 
+
+  EXEC [dbo].[zusp_ops_process_received_purchase_order_all] @PurchaseOrderID
+  SET @Result_ShowMessage = 'You have successfully processed all goods receipt for this PO' ]]></data>
       </action>
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
@@ -210,9 +248,12 @@ SET @Result_ShowMessage = 'The process updates for inventory items ' + CONVERT(N
 
 ]]></data>
       </action>
+      <action id="a101" commandName="ReportAsPdf" headerText="Print PDF Report" />
       <action id="a2" />
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
       <action id="a3" commandName="ExportRowset" headerText="Export To Excel" />
+      <action id="a103" commandName="ReportAsWord" headerText="Ptint To Word" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
       <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
       <action id="a7" commandName="DataSheet" headerText="Send To IPY" />
       <action id="a5" />
@@ -226,10 +267,7 @@ SET @Result_ShowMessage = 'The process updates for inventory items ' + CONVERT(N
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" />
       <action id="a2" commandName="ReportAsImage" />
-      <action id="a3" commandName="ReportAsExcel" />
-      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
@@ -242,7 +280,9 @@ SET @Result_ShowMessage = 'The process updates for inventory items ' + CONVERT(N
     <rule id="r100" commandName="New" type="JavaScript" phase="After" name="setPurchaseOrderDate"><![CDATA[[OrderDate] = new Date();
 
 ]]></rule>
-    <rule id="r101" commandName="New" type="Sql" phase="Execute" name="setExpecteddeliveryDate"><![CDATA[SET @ExpectedDeliveryDate = DATEADD(DAY, 21, GETDATE())]]></rule>
+    <rule id="r101" commandName="New" type="Sql" phase="Execute" name="calculateExpectedDate"><![CDATA[SET @ExpectedDeliveryDate = DATEADD(DAY, 21, GETDATE())]]></rule>
+    <rule id="r102" commandName="Insert" type="Sql" phase="After" name="setTrackingNumber"><![CDATA[ EXEC zusp_ops_generate_purchase_order_number @PurchaseOrderID ;]]></rule>
+    <rule id="r103" commandName="Insert|update|Calculate" type="Code" phase="After" name="ProcessPurchaseOrder" />
   </businessRules>
   <statusBar><![CDATA[Status: Pending
 Order Placed > [Order waiting for approval] >Approved Order > Preparing shipment > Shipped > 

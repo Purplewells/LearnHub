@@ -58,9 +58,9 @@ from "dbo"."vw_fee_collection_accounting_ledger_mini" "vw_fee_collection_account
         <dataField fieldName="YearGroup" columns="5" />
         <dataField fieldName="FeeType" columns="12" />
         <dataField fieldName="Description" columns="20" />
-        <dataField fieldName="TransactionDate" columns="18" />
-        <dataField fieldName="Debit" columns="10" aggregate="Sum" />
-        <dataField fieldName="Credit" columns="10" aggregate="Sum" />
+        <dataField fieldName="TransactionDate" columns="18" tag="pivot1-row1-column-year&#xD;&#xA;pivot1-row2-Quarter&#xD;&#xA;pivot1-title:&quot;Total Amount Paid By Relation Type&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" />
+        <dataField fieldName="Debit" columns="10" aggregate="Sum" tag="pivot1-val1-sum" />
+        <dataField fieldName="Credit" columns="10" aggregate="Sum" tag="pivot1-val2-sum" />
         <dataField fieldName="Balance" columns="10" />
         <dataField fieldName="Currency" columns="10" />
         <dataField fieldName="ReceiptNo" columns="12" hidden="true" />

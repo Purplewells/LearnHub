@@ -21,11 +21,14 @@ select
 	,"DebitAccount"."AccountName" "DebitAccountName"
 	,"IncomeExpense"."CreditAccountID" "CreditAccountID"
 	,"CreditAccount"."AccountName" "CreditAccountName"
+	,"IncomeExpense"."CurrencyID" "CurrencyID"
+	,"Currency"."CurrencyName" "CurrencyName"
 from "dbo"."IncomeExpense" "IncomeExpense"
 	left join "dbo"."Budget" "Budget" on "IncomeExpense"."BudgetID" = "Budget"."BudgetID"
 	left join "dbo"."zlkpExpenseCategory" "Category" on "IncomeExpense"."CategoryID" = "Category"."CategoryID"
 	left join "dbo"."chart_of_accounts" "DebitAccount" on "IncomeExpense"."DebitAccountID" = "DebitAccount"."AccountID"
 	left join "dbo"."chart_of_accounts" "CreditAccount" on "IncomeExpense"."CreditAccountID" = "CreditAccount"."AccountID"
+	left join "dbo"."zlkp_currency" "Currency" on "IncomeExpense"."CurrencyID" = "Currency"."CurrencyID"
 ]]></text>
     </command>
     <command id="IncomeExpenseIDIdentityCommand" type="Text" event="Inserted">
@@ -61,6 +64,10 @@ from "dbo"."IncomeExpense" "IncomeExpense"
       <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" />
     </field>
     <field name="CreditAccountName" type="String" readOnly="true" label="Credit Account" length="30" />
+    <field name="CurrencyID" type="Int32" label="Currency ID">
+      <items style="Lookup" dataController="Currency" newDataView="createForm1" dataValueField="CurrencyID" dataTextField="CurrencyName" />
+    </field>
+    <field name="CurrencyName" type="String" readOnly="true" label="Curr" length="10" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Income Expense" sortExpression="EventDate DESC">
@@ -69,8 +76,9 @@ from "dbo"."IncomeExpense" "IncomeExpense"
         <dataField fieldName="EventName" columns="50" />
         <dataField fieldName="EventDate" columns="18" tag="pivot4-row1-columnstacked-Year&#xD;&#xA;pivot4-title:&quot;Top 10 Budgets by Event Date&quot;&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked-year&#xD;&#xA;pivot5-row2-quarter&#xD;&#xA;pivot5-title:&quot;Top 10 Budgets by Event Date&quot;" />
         <dataField fieldName="Amount" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum&#xD;&#xA;pivot3-val1-sum&#xD;&#xA;pivot4-val1-sum&#xD;&#xA;pivot5-val1-sum&#xD;&#xA;pivot6-val1-sum" />
+        <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
         <dataField fieldName="CategoryID" aliasFieldName="CategoryName" columns="30" tag="pivot1-row1-barstacked&#xD;&#xA;pivot1-title:&quot;Total Budget Value by Category&quot;" />
-        <dataField fieldName="Description" columns="40" />
+        <dataField fieldName="Description" columns="40" hidden="true" />
         <dataField fieldName="BudgetID" aliasFieldName="BudgetName" tag="pivot4-col1-top10-other&#xD;&#xA;pivot5-col1-top10-other&#xD;&#xA;&#xD;&#xA;pivot2-row1-barstacked&#xD;&#xA;pivot2-title:&quot;Total Budget Value by Budget Descriptor&quot;&#xD;&#xA;&#xD;&#xA;pivot3-row1-donut&#xD;&#xA;pivot3-title:&quot;Total Income Expense Budget Value by Budget Descriptor&quot;" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
@@ -89,6 +97,7 @@ from "dbo"."IncomeExpense" "IncomeExpense"
             <dataField fieldName="EventName" columns="50" />
             <dataField fieldName="BudgetID" aliasFieldName="BudgetName" tag="lookup-distinct&#xD;&#xA;lookup-null-value-none&#xD;&#xA;lookup-auto-advance" />
             <dataField fieldName="Amount" columns="15" />
+            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
             <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
             <dataField fieldName="EventDate" columns="10" />
             <dataField fieldName="Description" columns="50" />
@@ -111,6 +120,7 @@ from "dbo"."IncomeExpense" "IncomeExpense"
             <dataField fieldName="EventName" columns="50" />
             <dataField fieldName="BudgetID" aliasFieldName="BudgetDescriptor" tag="lookup-distinct&#xD;&#xA;lookup-null-value-none&#xD;&#xA;lookup-auto-advance" />
             <dataField fieldName="Amount" columns="15" />
+            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
             <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
             <dataField fieldName="EventDate" columns="10" />
             <dataField fieldName="Description" columns="50" />

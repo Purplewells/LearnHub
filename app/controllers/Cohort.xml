@@ -58,6 +58,9 @@ from "dbo"."Cohort" "Cohort"
     <field name="CohortStaffAssociation" type="DataView" label="Cohort Staff Association">
       <dataView controller="CohortStaffAssociation" view="grid1" filterFields="CohortID" />
     </field>
+    <field name="StudentInterventionAssociation" type="DataView" label="Student Intervention Association">
+      <dataView controller="StudentInterventionAssociation" view="grid1" filterFields="OrganisationalPersonRoleID" />
+    </field>
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Cohort">
@@ -85,7 +88,14 @@ from "dbo"."Cohort" "Cohort"
             <dataField fieldName="ProgramReference" />
           </dataFields>
         </category>
-        <category id="d1" tab="COHORT PROGRAM" flow="NewRow">
+        <category id="c2" tab="INTERVENTION DIAGNOSIS" flow="NewRow">
+          <dataFields>
+            <dataField fieldName="StudentInterventionAssociation" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none">
+              <headerText>Intervention Diagnosis</headerText>
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="d1" tab="COHORT PROGRAM">
           <dataFields>
             <dataField fieldName="CohortProgram" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none" />
           </dataFields>

@@ -33,7 +33,7 @@ from "dbo"."CohortStaffAssociation" "CohortStaffAssociation"
     <field name="StartDate" type="DateTime" label="Start Date" showInSummary="true" />
     <field name="EndDate" type="DateTime" label="End Date" showInSummary="true" />
     <field name="StaffID" type="Int32" label="Staff ID" showInSummary="true">
-      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="FirstName" copy="StaffLastName=LastName" />
+      <items style="Lookup" dataController="zlkpStaffList" dataValueField="PersonID" dataTextField="StaffNameTitle" copy="StaffLastName=LastName" dataView="grid1" autoSelect="true" />
     </field>
     <field name="StaffFirstName" type="String" readOnly="true" label="Staff First Name" length="35" />
     <field name="StaffLastName" type="String" readOnly="true" label="Staff Last Name" length="35" />
@@ -48,8 +48,8 @@ from "dbo"."CohortStaffAssociation" "CohortStaffAssociation"
         <dataField fieldName="CohortID" aliasFieldName="CohortDescription" />
         <dataField fieldName="StartDate" columns="10" />
         <dataField fieldName="EndDate" columns="10" />
-        <dataField fieldName="StaffID" aliasFieldName="StaffFirstName" />
-        <dataField fieldName="StaffLastName" columns="35" />
+        <dataField fieldName="StaffID" aliasFieldName="StaffName" />
+        <dataField fieldName="StaffLastName" columns="35" hidden="true" />
         <dataField fieldName="StaffName" />
       </dataFields>
     </view>
