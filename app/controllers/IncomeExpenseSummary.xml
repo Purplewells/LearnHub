@@ -154,10 +154,13 @@ from "dbo"."vw_metric_income_expense_summary" "vw_metric_income_expense_summary"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a102" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a100" commandName="ReportAsWord" headerText="Export To Word" />
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" />
-      <action id="a4" commandName="ExportRss" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send RSS API" />
       <action id="a7" commandName="DataSheet" />
       <action id="a8" commandName="Grid" />
     </actionGroup>
@@ -167,12 +170,7 @@ from "dbo"."vw_metric_income_expense_summary" "vw_metric_income_expense_summary"
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" />
-      <action id="a2" commandName="ReportAsImage" />
-      <action id="a3" commandName="ReportAsExcel" />
-      <action id="a4" commandName="ReportAsWord" />
-    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report" />
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />

@@ -2,6 +2,9 @@
 using zLearnHub.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using Newtonsoft.Json;
+//using System.Net.Http;
+//using System.Net.Http.Headers;
 
 namespace zLearnHub.Rules
 {
@@ -126,6 +129,20 @@ namespace zLearnHub.Rules
 
             }
 
+            if ((controllerName == "WorkBenchTheStock" || controllerName == "MovementMode"  && !UserIsInRole("Administrators")))
+            {
+                // make the controller read-only by removing editing actions
+             
+                NodeSet().SelectCategory("c5").Hide();
+                NodeSet().SelectCategory("c5").Delete();
+            }
+
+        }
+
+        [ControllerAction ("Custom", "Insert, Update, Calculate", ActionPhase.After)]
+        public void GenerateSummarisedNotes()
+        {
+            //string subject = args.Values.FirstOrDefault(v => v.Name == "SubjectName")?.NewValue?.ToString() ?? "";
         }
 
         protected override void BeforeSqlAction(ActionArgs args, ActionResult result)
@@ -362,13 +379,99 @@ namespace zLearnHub.Rules
 
         }
 
-        // navigate to another page 
-        [ControllerAction("navigate_to_page", "Insert, Update, Calculate", ActionPhase.After)]
-       // navigate to another CodeOnTime page or controlller
-        public void navigate_to_page()
+        [ControllerAction("StudentGradeBookEntry", "Custom", "generate_summarised_notes", ActionPhase.Execute)]
+        public void write_ai_supported_remarks()
         {
-            //string url = "https://www.google.com";
-            //Result.NavigateUrl(url);
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+            string sql = @"
+                SELECT TOP 1 
+                    s.FirstName,
+                    s.LastName,
+                    g.SubjectName,
+                    g.NumericGradeEarned,
+                    g.OverallScore,
+                    g.StudentGradeBookEntryID
+                FROM 
+                    StudentGradeBookEntry g
+                    JOIN Students s ON g.StudentID = s.StudentID
+                WHERE 
+                    g.Remarks IS NULL 
+                    AND g.Term = 'Term 1'
+                    AND g.SessionID IN (SELECT SessionID FROM AcademicSession WHERE IsActive = 1)
+            ";
+
+            using (var con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                using (var cmd = new SqlCommand(sql, con))
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        string firstName = reader["FirstName"].ToString();
+                        string subject = reader["SubjectName"].ToString();
+                        string grade = reader["NumericGradeEarned"].ToString();
+                        string score = reader["OverallScore"].ToString();
+                        int entryId = Convert.ToInt32(reader["StudentGradeBookEntryID"]);
+
+                        string prompt = string.Format(
+                                               "Write a personalized remark for a student named {0} based on the following performance:\n" +
+                                               "Subject: {1}, Grade: {2}, Overall Score: {3}.\n" +
+                                               "Mention strengths, one area for improvement, and include motivation.",
+                                               firstName, subject, grade, score
+                                           );
+
+
+                        //CallChatGptAndSave(prompt, entryId);
+                    }
+                    else
+                    {
+                        Result.ShowMessage("No matching records found.");
+                    }
+                }
+            }
+
         }
+
+        //private void CallChatGptAndSave(string prompt, int entryId)
+        //{
+        //    string apiKey = "YOUR_OPENAI_API_KEY";
+
+        //    var requestBody = new
+        //    {
+        //        model = "gpt-3.5-turbo",
+        //        messages = new[] {
+        //            new { role = "user", content = prompt }
+        //        }
+        //    };
+
+        //    var jsonContent = new StringContent(JsonConvert.SerializeObject(requestBody), System.Text.Encoding.UTF8, "application/json");
+
+        //    using (var client = new HttpClient())
+        //    {
+        //        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+        //        var response = client.PostAsync("https://api.openai.com/v1/chat/completions", jsonContent).Result;
+
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var responseContent = response.Content.ReadAsStringAsync().Result;
+        //            dynamic parsed = JsonConvert.DeserializeObject(responseContent);
+        //            string generatedRemark = parsed.choices[0].message.content;
+
+        //            SqlText sql = new SqlText("UPDATE StudentGradeBookEntry SET Remarks = @Remarks WHERE StudentGradeBookEntryID = @ID");
+        //            sql.AddParameter("@Remarks", generatedRemark);
+        //            sql.AddParameter("@ID", entryId);
+        //            sql.ExecuteNonQuery();
+
+        //            Result.ShowMessage("Remark successfully generated and saved.");
+        //        }
+        //        else
+        //        {
+        //            Result.ShowMessage("Error from ChatGPT: " + response.StatusCode);
+        //        }
+        //    }
+        //}
     }
 }
+

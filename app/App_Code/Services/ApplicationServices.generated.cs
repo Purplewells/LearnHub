@@ -11,7 +11,7 @@ namespace zLearnHub.Services
         {
             ApplicationServices.FrameworkAppName = "LearnHub";
             ApplicationServices.FrameworkSiteContentControllerName = "SiteContent";
-            ApplicationServices.Version = "8.9.23.389";
+            ApplicationServices.Version = "8.9.23.406";
             ApplicationServices.HostVersion = "1.2.5.0";
             var compilation = ((CompilationSection)(WebConfigurationManager.GetSection("system.web/compilation")));
             var releaseMode = !compilation.Debug;

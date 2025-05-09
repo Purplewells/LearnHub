@@ -44,16 +44,16 @@
         <siteMapNode title="Fee Notes" description="" url="~/pages/custom-fee-note-report" roles="Administrators, AccountManagers, FeeManagers, DONOTDISPLAY" cssClass="material-icon-receipt" />
         <siteMapNode title="Debtors Bill" description="" url="~/pages/debtors-bill" roles="*" cssClass="material-icon-account_balance_wallet" />
       </siteMapNode>
-      <siteMapNode title="ACCOUNTS" description="" roles="Administrators, Accountants, ContentEditors">
-        <siteMapNode title="Finances" description="View Finance Overview" url="~/pages/finance-plan" roles="Administrators, Accountants" cssClass="material-icon-attach_money" />
-        <siteMapNode title="Manual Entries" description="View Manual Account Journal Entries" url="~/pages/manual-account-journal-entries" roles="Administrators, Accountants" cssClass="material-icon-sync_alt" />
-        <siteMapNode title="GL Journal" description="Keep records all financial transactions" url="~/pages/account-general-ledger" roles="Administrators, Accountants" cssClass="material-icon-point_of_sale" />
-        <siteMapNode title="Trial Balance" description="" url="~/pages/trial-balance" roles="Administrators, Accountants" cssClass="material-icon-account_balance_wallet" />
+      <siteMapNode title="ACCOUNTS" description="" roles="Administrators, AccountManagers, Accountants">
+        <siteMapNode title="Finances" description="View Finance Overview" url="~/pages/finance-plan" roles="Administrators, AccountManagers, Accountants" cssClass="material-icon-attach_money" />
+        <siteMapNode title="Manual Entries" description="View Manual Account Journal Entries" url="~/pages/manual-account-journal-entries" roles="Administrators, AccountManagers, Accountants" cssClass="material-icon-sync_alt" />
+        <siteMapNode title="GL Journal" description="Keep records all financial transactions" url="~/pages/account-general-ledger" roles="Administrators, AccountManagers, Accountants" cssClass="material-icon-point_of_sale" />
+        <siteMapNode title="Trial Balance" description="" url="~/pages/trial-balance" roles="Administrators, AccountManagers, Accountants" cssClass="material-icon-account_balance_wallet" />
       </siteMapNode>
-      <siteMapNode title="INVENTORY" description="" roles="Administrators, AccountManagers, StoreOfficers">
-        <siteMapNode title="Requisition Orders" description="View Orders" url="~/pages/orders" roles="xxxx" cssClass="material-icon-alarm" />
-        <siteMapNode title="Purchase Order" description="View Purchase Order" url="~/pages/purchase-order" roles="*" cssClass="material-icon-casino" />
-        <siteMapNode title="Stock Hub" description="" url="~/pages/stock-hub" roles="*" cssClass="material-icon-home_plan" />
+      <siteMapNode title="INVENTORY" description="" roles="Administrators, AccountManagers, Accountants, StoreOfficers, ContentEditors">
+        <siteMapNode title="Requisitions" description="View Orders" url="~/pages/orders" roles="xxxx" cssClass="material-icon-alarm" />
+        <siteMapNode title="PO" description="View Purchase Order" url="~/pages/purchase-order" roles="*" cssClass="material-icon-casino" />
+        <siteMapNode title="Stock Hub" description="" url="~/pages/stock-hub" roles="*" cssClass="material-icon-shopping_basket" />
         <siteMapNode title="Stock Items" description="View Stock Items" url="~/pages/product" cssClass="material-icon-spa" />
         <siteMapNode title="Stock Trans" description="View Stock Transactions" url="~/pages/stock-transactions" roles="xxxxx" cssClass="material-icon-ad_units" />
         <siteMapNode title="Stock Movement" description="View Stock Level Movement" url="~/pages/stock-level-movement" roles="xxxx" />
@@ -67,9 +67,9 @@
         <siteMapNode title="Meals Plan" description="" url="~/pages/meals-planning" roles="Administrators, AccountManagers, Management, FeeManagers, MealCoordinators" cssClass="material-icon-set_meal" />
       </siteMapNode>
       <siteMapNode title="COMPENSATION" description="" roles="Administrators, AccountManagers, HeadTeacher">
-        <siteMapNode title="Salaries Overview" description="View List Of Salaries" url="~/pages/list-of-salaries" roles="Administrators, AccountManagers" cssClass="material-icon-pending" />
-        <siteMapNode title="Run Salaries" description="View Payment Records" url="~/pages/payment-records" roles="Administrators, AccountManagers, FeeManagers" cssClass="material-icon-credit_card" />
-        <siteMapNode title="Renumeration Slips" description="View Get Salary Information For Bank" url="~/pages/get-salary-information-for-bank" roles="Administrators, AccountManagers" cssClass="material-icon-paid" />
+        <siteMapNode title="Salaries" description="View List Of Salaries" url="~/pages/list-of-salaries" roles="Administrators, AccountManagers" cssClass="material-icon-pending" />
+        <siteMapNode title="Salaries Run" description="View Payment Records" url="~/pages/payment-records" roles="Administrators, AccountManagers, FeeManagers" cssClass="material-icon-credit_card" />
+        <siteMapNode title="PaySlips" description="View Get Salary Information For Bank" url="~/pages/get-salary-information-for-bank" roles="Administrators, AccountManagers" cssClass="material-icon-paid" />
       </siteMapNode>
       <siteMapNode title="TRANSPORT" description="" roles="XXXX">
         <siteMapNode title="Service Attendance" description="View Service Attendance" url="~/pages/service-attendance" cssClass="material-icon-business" />
@@ -138,8 +138,8 @@
         <siteMapNode title="Absence Followup" description="" url="~/pages/absence-followup" roles="*" cssClass="material-icon-hail" />
         <siteMapNode title="Behaviour Activities" description="View Behaviour Activities" url="~/pages/behaviour-activities" cssClass="material-icon-inbox" />
         <siteMapNode title="Behaviour Insights" description="View Behaviour Management" url="~/pages/behaviour-management" cssClass="material-icon-mood" />
-        <siteMapNode title="CHRABS TermBased" description="View Term Basis Person Centred Evaluation" url="~/pages/term-basis-person-centred-evaluation" cssClass="material-icon-cached" />
-        <siteMapNode title="CHRABS SchoolBased" description="" url="~/pages/absence-metrics" roles="*" cssClass="material-icon-check-box_outline_blank" />
+        <siteMapNode title="CHRABS Term" description="View Term Basis Person Centred Evaluation" url="~/pages/term-basis-person-centred-evaluation" cssClass="material-icon-cached" />
+        <siteMapNode title="CHRABS School" description="" url="~/pages/absence-metrics" roles="*" cssClass="material-icon-check-box_outline_blank" />
         <siteMapNode title="CHRABS Indicators" description="View Attendance Anomaly Detection Indicators" url="~/pages/ewindicators" cssClass="material-icon-sports" />
         <siteMapNode title="CHRABS YoY" description="" url="~/pages/chrabyo-y" roles="*" cssClass="material-icon-monitoring" />
       </siteMapNode>

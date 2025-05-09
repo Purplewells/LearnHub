@@ -112,15 +112,14 @@ from "dbo"."StockTake" "StockTake"
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="STH" />
-            <dataField fieldName="ProductID" aliasFieldName="sProductName" />
-            <dataField fieldName="StockTakeNumber" columns="20" />
-            <dataField fieldName="SKU" columns="10" />
-            <dataField fieldName="ProductName" hidden="true" />
             <dataField fieldName="StockTakeHeaderID" aliasFieldName="StockTakeNo" />
+            <dataField fieldName="StockTakeNumber" columns="20" hidden="true" />
+            <dataField fieldName="ProductID" aliasFieldName="sProductName" />
+            <dataField fieldName="ProductName" hidden="true" />
+            <dataField fieldName="SKU" columns="10" />
+            <dataField fieldName="Barcode" columns="30" tag="input-scanner&#xD;&#xA;barcode" />
             <dataField fieldName="LocationName" columns="40" />
             <dataField fieldName="Variance" columns="15" />
-            <dataField fieldName="Barcode" columns="30" tag="input-scanner&#xD;&#xA;barcode" />
-            <dataField fieldName="StockTakeReason" columns="50" />
             <dataField fieldName="LocationID" columns="15" hidden="true" />
           </dataFields>
         </category>
@@ -132,6 +131,7 @@ from "dbo"."StockTake" "StockTake"
             <dataField fieldName="SystemQuantity" columns="15" textMode="Static" />
             <dataField fieldName="ScannedQuantity" columns="15" />
             <dataField fieldName="StockDifference" columns="15" />
+            <dataField fieldName="StockTakeReason" columns="50" />
             <dataField fieldName="IsVarianceAccepted" />
             <dataField fieldName="Notes" />
           </dataFields>
