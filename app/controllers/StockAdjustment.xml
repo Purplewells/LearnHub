@@ -99,16 +99,26 @@ from "dbo"."StockAdjustment" "StockAdjustment"
         <category id="c1" headerText="Stock Adjustment" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="ProductID" columns="15" />
+            <dataField fieldName="ProductID" columns="15" hidden="true" />
             <dataField fieldName="ProductName" columns="50" />
             <dataField fieldName="AdjustmentDate" columns="10" />
             <dataField fieldName="SystemQuantity" columns="15" />
             <dataField fieldName="ScannedQuantity" columns="15" />
             <dataField fieldName="AdjustedQuantity" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <description />
+          <dataFields>
             <dataField fieldName="Reason" />
             <dataField fieldName="IsAdjustmentComplete" />
             <dataField fieldName="ApprovedBy" columns="50" />
             <dataField fieldName="ApprovalDate" columns="20" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedDate" columns="20" />
@@ -119,22 +129,24 @@ from "dbo"."StockAdjustment" "StockAdjustment"
     <view id="createForm1" type="Form" commandId="command1" label="New Stock Adjustment">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="Stock Adjustment" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="ProductID" columns="15" />
+            <dataField fieldName="ProductID" columns="15" hidden="true" />
             <dataField fieldName="ProductName" columns="50" />
             <dataField fieldName="AdjustmentDate" columns="10" />
             <dataField fieldName="SystemQuantity" columns="15" />
             <dataField fieldName="ScannedQuantity" columns="15" />
             <dataField fieldName="AdjustedQuantity" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <description />
+          <dataFields>
             <dataField fieldName="Reason" />
             <dataField fieldName="IsAdjustmentComplete" />
             <dataField fieldName="ApprovedBy" columns="50" />
             <dataField fieldName="ApprovalDate" columns="20" />
-            <dataField fieldName="CreatedDate" columns="20" />
-            <dataField fieldName="CreatedBy" columns="50" />
-            <dataField fieldName="ModifiedDate" columns="20" />
           </dataFields>
         </category>
       </categories>
@@ -173,7 +185,7 @@ from "dbo"."StockAdjustment" "StockAdjustment"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="SQL" headerText="Post Update Product Qty" id="a100" cssClass="material-icon-swap_horizontal_circle">
+      <action commandName="SQL" headerText="Post &amp; Update Item Onhand" id="a100" cssClass="material-icon-swap_horizontal_circle" confirmation="This action would post item quantities to update item OnHand. do you want to continue ?">
         <data><![CDATA[EXEC zusp_stock_p7_post_adjustment_approval]]></data>
       </action>
       <action id="a2" />

@@ -95,13 +95,15 @@ from "dbo"."Budget" "Budget"
             <dataField fieldName="BudgetDescriptor" />
             <dataField fieldName="BudgetNameID" aliasFieldName="BudgetName" />
             <dataField fieldName="BudgetValue" columns="15" />
+            <dataField fieldName="Code" columns="10">
+              <headerText>Currency</headerText>
+            </dataField>
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
             <dataField fieldName="BudgetType" columns="15" />
-            <dataField fieldName="Code" columns="10" />
             <dataField fieldName="Notes" hidden="true" />
-            <dataField fieldName="CreatedDate" columns="20" />
-            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
             <dataField fieldName="CreatedBy" columns="50" hidden="true" />
             <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
           </dataFields>
@@ -120,8 +122,8 @@ from "dbo"."Budget" "Budget"
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
             <dataField fieldName="BudgetType" columns="15" />
-            <dataField fieldName="Code" columns="10" />
-            <dataField fieldName="Notes" />
+            <dataField fieldName="Code" columns="10" hidden="true" />
+            <dataField fieldName="Notes" hidden="true" />
             <dataField fieldName="CreatedDate" columns="20" hidden="true" />
             <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
             <dataField fieldName="CreatedBy" columns="50" hidden="true" />
@@ -157,7 +159,7 @@ from "dbo"."Budget" "Budget"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
@@ -169,7 +171,7 @@ from "dbo"."Budget" "Budget"
       <action id="a100" commandName="ReportAsPdf" headerText="Export To PDF" />
       <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -193,5 +195,19 @@ from "dbo"."Budget" "Budget"
 SET CurrencyID = curr.CurrencyID, Code = curr.Code
 FROM Budget
 CROSS JOIN zlkp_currency curr WHERE curr.IsDefault = 1]]></rule>
+    <rule id="r101" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateBudgetDescriptor"><![CDATA[var fieldValue = [BudgetDescriptor];
+if (fieldValue == null) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('BudgetDescriptor', 'Budget Descriptor is required.');
+}]]></rule>
+    <rule id="r102" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateBudgetValue"><![CDATA[var fieldValue = [BudgetValue];
+if (fieldValue == null) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('BudgetValue', 'Budget Value is required.');
+}]]></rule>
   </businessRules>
 </dataController>

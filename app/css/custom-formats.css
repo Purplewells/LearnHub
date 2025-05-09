@@ -492,12 +492,12 @@ ui-btn app-is-link {
 
 .app-bar-aggregates .app-field{
     font-weight: bold !important;
-    font-size : 12px !important;
-    color: red !important;
+    font-size : 10px !important;
+    color: steelblue !important;
 }
 
 .app-bar-aggregates .app-static-text{
-    font-size: 12px !important;
+    font-size: 10px !important;
 }
 
 

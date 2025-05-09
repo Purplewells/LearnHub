@@ -68,9 +68,11 @@ FROM (
         <dataField fieldName="Category" columns="20" />
         <dataField fieldName="BudgetName" columns="30" />
         <dataField fieldName="RecordTypeID" columns="15" hidden="true" />
-        <dataField fieldName="Date" columns="10" />
-        <dataField fieldName="Income" columns="15" />
-        <dataField fieldName="Expense" columns="15" />
+        <dataField fieldName="Date" columns="18">
+          <headerText>Event Date</headerText>
+        </dataField>
+        <dataField fieldName="Income" columns="15" aggregate="Sum" />
+        <dataField fieldName="Expense" columns="15" aggregate="Sum" />
         <dataField fieldName="Curr" columns="7" />
         <dataField fieldName="CreatedDate" columns="10" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="10" hidden="true" />
@@ -150,10 +152,10 @@ FROM (
       <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" whenView="grid1000" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid10000" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">

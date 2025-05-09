@@ -149,7 +149,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
         <dataField fieldName="TransDate" columns="10" />
         <dataField fieldName="FeeID" aliasFieldName="Status" />
         <dataField fieldName="BillAmount" columns="15" hidden="true" />
-        <dataField fieldName="AmountPaid" columns="15" />
+        <dataField fieldName="AmountPaid" columns="20" />
         <dataField fieldName="PersonID" textMode="Static" columns="15" />
         <dataField fieldName="TransactionStatusCode" columns="20" hidden="true" />
         <dataField fieldName="Note" columns="50" hidden="true" />
@@ -180,7 +180,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
         <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" hidden="true" />
         <dataField fieldName="HeaderInfo" hidden="true" />
         <dataField fieldName="RefundedAmount" columns="15" />
-        <dataField fieldName="RefundReason" columns="30" />
+        <dataField fieldName="RefundReason" columns="30" hidden="true" />
       </dataFields>
       <styles>
         <expression type="ClientScript" result="fee-collection-grid" test="[1]!=[1]" />
@@ -460,7 +460,7 @@ TransactionID=TransactionID]]></data>
     </actionGroup>
   </actions>
   <businessRules>
-    <rule id="r101" commandName="New|Calculate|Update" type="Sql" phase="Execute" name="setReceiptNo"><![CDATA[If @ReceiptNo  IS Null
+    <rule id="r101" commandName="New" type="Sql" phase="Execute" name="setReceiptNo"><![CDATA[If @ReceiptNo  IS Null
    DECLARE @Random BIGINT;
    DECLARE @Upper BIGINT;
    DECLARE @Lower BIGINT;

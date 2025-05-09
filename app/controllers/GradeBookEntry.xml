@@ -125,7 +125,7 @@ where CalendarSession.IsActive=1
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active GBA Plans" groupExpression="Session, GL, Course" sortExpression="GLSO ASC" filter="SSIA=1 ">
+    <view id="grid1" type="Grid" commandId="command1" label="Active GBA Plans" sortExpression="ModifiedDate DESC, GLSO ASC" filter="SSIA=1 ">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="GradeBook" columns="15" tag="calendar-text" />
@@ -150,9 +150,9 @@ where CalendarSession.IsActive=1
         <dataField fieldName="CSIA" columns="4" hidden="true" />
         <dataField fieldName="UserID" columns="15" hidden="true" />
         <dataField fieldName="Owner" columns="50" hidden="true" />
-        <dataField fieldName="SSIA" />
+        <dataField fieldName="SSIA" hidden="true" />
         <dataField fieldName="ACS" columns="4" hidden="true" />
-        <dataField fieldName="CSY" />
+        <dataField fieldName="CSY" hidden="true" />
         <dataField fieldName="IsActive" hidden="true" />
         <dataField fieldName="SchoolName" columns="50" hidden="true" />
         <dataField fieldName="GLSO" columns="15" hidden="true" />
@@ -163,7 +163,7 @@ where CalendarSession.IsActive=1
         <dataField fieldName="GBID" columns="5" />
       </dataFields>
     </view>
-    <view id="grid1_historical_gba" type="Grid" commandId="command1" label="Historical GBA Plans" groupExpression="Session, GL, Course" sortExpression="GLSO ASC" filter="SSIA=0">
+    <view id="grid1_historical_gba" type="Grid" commandId="command1" label="Historical GBA Plans" sortExpression="GLSO ASC" filter="SSIA=0">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="GradeBook" columns="15" />
@@ -273,7 +273,7 @@ where CalendarSession.IsActive=1
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New GBA">
+    <view id="createForm1" type="Form" commandId="command1" label="New GBA Plan">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
@@ -352,7 +352,23 @@ where CalendarSession.IsActive=1
       <action id="a7" commandName="New" commandArgument="grid1" />
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
       <action id="a101" />
-      <action commandName="SQL" headerText="SYNC Scoresheet" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a100" whenKeySelected="true">
+      <action commandName="SQL" headerText="SYNC To Scoresheet" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a102" whenKeySelected="true">
+        <data><![CDATA[EXEC [usp_ops_sync_student_gradebook_entries] @GradeBookEntryID
+SET @Result_RefreshChildren = 1
+SET @Result_ShowMessage = 'Student scoresheets have been successfully prepared' 
+]]></data>
+      </action>
+      <action commandName="SQL" headerText="Remove Plan" cssClass="material-icon-cleaning_services" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a103" whenKeySelected="true">
+        <data><![CDATA[/*
+	Date : 20th Sept 2019
+	Desc : This statement removes the GradebookEntry record and its associated child StudentGradeBookEntry
+*/
+delete from StudentGradeBookEntry where GradeBookEntryID = @GradeBookEntryID
+delete from GradeBookEntry where  GradeBookEntryID = @GradeBookEntryID
+SET @Result_Refresh = 1
+SET @Result_ShowMessage = @GradeBook + ' and its associated child records ' + 'has been removed successfully' ]]></data>
+      </action>
+      <action commandName="SQL" headerText="SYNC Scoresheet OnHold" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a100" whenKeySelected="true" whenView="grid1000">
         <data><![CDATA[/*
 	Date: 13th Dec 2019
 	Modification : Amended the update process to ensure only one record  per student person s affected
@@ -444,81 +460,11 @@ where (sgbe.extSGID  IS NULL or sgbe.extSCID is NULL) and extIsActiveSession = 1
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
       <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
-      <action commandName="SQL" headerText="SYNC Scoresheet" cssClass="material-icon-sync" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a100">
-        <data><![CDATA[/*
-	Date: 13th Dec 2019
-	Modification : Amended the update process to ensure only one record  per student person s affected
-	Version		Date				Description								Author
-	-- 0.2		14th July 2021
-    -- 0.3      1st August 2021		Removed extCalendarSessionI as  comparison predicate to reduce duplicate	Benjamin Ohene-Adu
-*/
-
---select * from vw_merge_app_current_enrollment_for_gradebookentries src
-
-MERGE StudentGradeBookEntry tgt USING vw_merge_app_current_enrollment_for_gradebookentries src
-ON      tgt.StudentCourseSectionID	= src.StudentCourseSectionID 
-	AND tgt.GradeBookEntryID		= src.GradeBookEntryID
-	AND tgt.[GradeBookEntryTypeID]	= src.[GradeBookEntryTypeID]
-	AND tgt.[RefSchoolStreamID]		= src.[RefSchoolStreamID]
-	AND tgt.[GradingPeriodID]		= [src].[GradingPeriodID] -- v 0.2
-    --AND tgt.[extCalendarSessionID] = src.[CalendarSessionID] -- v 0.3
-
-WHEN MATCHED 
-			AND src.[RefSchoolStreamID]	= @RefSchoolStreamID 
-			AND src.[GradeBookEntryID]	= @GradeBookEntryID
-			AND src.GradingPeriodiD		= @GradingPeriodID
-
-	THEN UPDATE
-		SET 
-		    tgt.GradeBookEntryID			= src.GradeBookEntryID
-		   ,tgt.SubmittedDate				= src.SubmittedDate
-		   ,tgt.Weight					= src.WeightMultiplier
-		   ,tgt.extMaxScore				= src.MaxScore
-		   ,tgt.extIsActiveSession			= src.extIsActiveSession
-		   ,tgt.[extActiveCourseSection]	        = src.[ActiveCourseSection]
-		   ,tgt.extIsCSY =
-			CASE
-				WHEN src.extIsActiveSession = 1 THEN 1
-				ELSE 0
-			END
-			,tgt.[RefSchoolStreamID]	= src.RefSchoolStreamID
-			,tgt.[AssessmentCategoryID] = src.[AssessmentCategoryID]
-			,tgt.[AssessmentCategory]	= src.[AssessmentCategory]
-			,tgt.[GradingPeriodID]		= src.[GradingPeriodID]
-			,tgt.[UserID]				= src.[UserID]
-			,tgt.[CreatedBy]			= src.[CreatedBy]
-			,tgt.ModifiedDate			= GETDATE()
-			,tgt.ModifiedBy				= src.ModifiedBy
-			,tgt.extCalendarSessionID = src.CalendarSessionID	
-                        ,tgt.[GlobalID]				= [src].[GlobalID]
-			,tgt.AssessmentFamilyID		= src.AssessmentFamilyID
-			,tgt.AssessmentFamily		= src.AssessmentFamily
-			,tgt.PublishItem			= src.PublishItem
-			,tgt.PostToFamilyAccess		= src.PostToFamilyAccess
-			,tgt.PostToStudentAccess	= src.PostToStudentAccess
-			,tgt.PublishResults			= src.PublishResults
-			,tgt.Adaptive				= src.Adaptive
-			
-
-WHEN NOT MATCHED BY TARGET 
-          AND src.[GradeBookEntryID]  = @GradeBookEntryID
-          AND src.[RefSchoolStreamID] = @RefSchoolStreamID
-          AND src.GradingPeriodiD	  = @GradingPeriodID
-
-	THEN INSERT (StudentCourseSectionID, SubmittedDate, GradeBookEntryID, CreatedDate, ModifiedDate, GradeBookEntryTypeID, Weight, extMaxScore, UserID, extIsActiveSession, extActiveCourseSection, extIsCSY, [RefSchoolStreamID], [AssessmentCategoryID], [AssessmentCategory], [CreatedBy], [ModifiedBy], [GradingPeriodID], GlobalID, extCalendarSessionID,AssessmentFamilyID, AssessmentFamily, PublishItem, PostToFamilyAccess, PublishResults, Adaptive, PostToStudentAccess)
-			VALUES (src.StudentCourseSectionID, COALESCE(src.Submitteddate, GETDATE()), src.GradeBookEntryID, GETDATE(), GETDATE(), src.GradeBookEntryTypeID, src.WeightMultiplier, src.MaxScore, src.UserID, src.extIsActiveSession, src.ActiveCourseSection, 1, src.RefSchoolStreamID, [src].[AssessmentCategoryID], src.[AssessmentCategory], [src].[CreatedBy], [src].[ModifiedBy], [src].[GradingPeriodID], src.GlobalID,src.[CalendarSessionID], src.AssessmentFamilyID, src.AssessmentFamily, src.PublishItem, src.PostToFamilyAccess, src.PublishResults, src.Adaptive, src.PostToStudentAccess)
-
-OUTPUT
-   $action,
-   inserted.*,
-   deleted.*;
+      <action commandName="SQL" headerText="SYNC To Scoresheet" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a101" whenLastCommandName="Any">
+        <data><![CDATA[EXEC [usp_ops_sync_student_gradebook_entries] @GradeBookEntryID
+SET @Result_RefreshChildren = 1
 SET @Result_ShowMessage = 'Student scoresheets have been successfully prepared' 
-
--- 15th April 2024
-UPDATE sgbe
-SET extSGID = sgbe.StudentGradeBookEntryID, extSCID = sgbe.StudentCourseSectionID
-from StudentGradeBookEntry sgbe
-where (sgbe.extSGID  IS NULL or sgbe.extSCID is NULL) and extIsActiveSession = 1]]></data>
+]]></data>
       </action>
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
@@ -527,7 +473,12 @@ where (sgbe.extSGID  IS NULL or sgbe.extSCID is NULL) and extIsActiveSession = 1
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
-      <action commandName="SQL" headerText="SYNC To Scoresheet" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a100" whenKeySelected="true">
+      <action commandName="SQL" headerText="SYNC To Scoresheet" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a101" whenKeySelected="true">
+        <data><![CDATA[EXEC [usp_ops_sync_student_gradebook_entries] @GradeBookEntryID
+SET @Result_ShowMessage = 'Student scoresheets have been successfully prepared' 
+]]></data>
+      </action>
+      <action commandName="SQL" headerText="SYNC To Scoresheet OnHold" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a100" whenKeySelected="true" whenView="grid1000">
         <data><![CDATA[/*
 	Date: 13th Dec 2019
 	Modification : Amended the update process to ensure only one record  per student person s affected
@@ -605,7 +556,14 @@ where (sgbe.extSGID  IS NULL or sgbe.extSCID is NULL) and extIsActiveSession = 1
       </action>
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="SQL" headerText="SYNC To Scoresheet_revived" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a100" whenKeySelected="true">
+      <action commandName="SQL" headerText="SYNC To Scoresheet" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a100" whenKeySelected="true">
+        <data><![CDATA[EXEC [usp_ops_sync_student_gradebook_entries] @GradeBookEntryID
+-- force refresh of child views
+SET @Result_RefreshChildren = 1
+SET @Result_ShowMessage = 'Student scoresheets have been successfully prepared' 
+]]></data>
+      </action>
+      <action commandName="SQL" headerText="SYNC To Scoresheet_revived" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a107" whenKeySelected="true" whenView="grid1000">
         <data><![CDATA[/*
 	Date: 13th Dec 2019
 	Modification : Amended the update process to ensure only one record  per student person s affected
@@ -681,10 +639,10 @@ SET extSGID = sgbe.StudentGradeBookEntryID, extSCID = sgbe.StudentCourseSectionI
 from StudentGradeBookEntry sgbe
 where (sgbe.extSGID  IS NULL or sgbe.extSCID is NULL) and extIsActiveSession = 1]]></data>
       </action>
-      <action commandName="SQL" headerText="SYNC ALTERNATIVE EXPERIMENTAL" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a106" whenKeySelected="true">
-        <data><![CDATA[EXEC dbo.usp_ops_sync_gradebooks_to_student_gradebook_entries_experimental  @GradeBookEntryID, @RefSchoolStreamID]]></data>
+      <action commandName="SQL" headerText="SYNC ALTERNATIVE EXPERIMENTAL onHold" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a106" whenKeySelected="true" whenView="grid1000">
+        <data><![CDATA[EXEC dbo.usp_ops_sync_gradebooks_to_student_gradebook_entries_experimental  @GradeBookEntryID]]></data>
       </action>
-      <action commandName="SQL" headerText="SYNC To Scoresheet" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a105" whenKeySelected="true">
+      <action commandName="SQL" headerText="SYNC To Scoresheet OnHold" cssClass="material-icon-compare_arrows" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a105" whenKeySelected="true" whenView="grid1000">
         <data><![CDATA[/*
 	Date: 13th Dec 2019
 	Modification : Amended the update process to ensure only one record  per student person s affected
@@ -706,7 +664,7 @@ EXEC usp_ops_sync_gradebooks_to_student_gradebook_entries
 
 ]]></data>
       </action>
-      <action commandName="SQL" headerText="Remove Plan" cssClass="material-icon-sync" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a101" whenKeySelected="true">
+      <action commandName="SQL" headerText="Remove Plan" cssClass="material-icon-cleaning_services" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a101" whenKeySelected="true">
         <data><![CDATA[/*
 	Date : 20th Sept 2019
 	Desc : This statement removes the GradebookEntry record and its associated child StudentGradeBookEntry

@@ -70,11 +70,11 @@ from "dbo"."StockLevels" "StockLevels"
     <field name="srcLocationID" type="Int32" label="Src Location ID">
       <items style="Lookup" dataController="InventoryLocations" newDataView="createForm1" dataValueField="LocationID" dataTextField="LocationName" />
     </field>
-    <field name="srcLocationName" type="String" readOnly="true" label="Source Location" length="20" />
+    <field name="srcLocationName" type="String" readOnly="true" label="Source Locn" length="20" />
     <field name="RecLocationID" type="Int32" label="Rec Location ID">
       <items style="Lookup" dataController="InventoryLocations" newDataView="createForm1" dataValueField="LocationID" dataTextField="LocationName" />
     </field>
-    <field name="recLocationName" type="String" readOnly="true" label="Receiving Location" length="20" />
+    <field name="recLocationName" type="String" readOnly="true" label="Receiving Loc'n" length="20" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />

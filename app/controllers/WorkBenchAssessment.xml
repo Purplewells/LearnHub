@@ -37,11 +37,6 @@
             </dataField>
           </dataFields>
         </category>
-        <category id="c6" tab="ASSESSMENT CATEGORY">
-          <dataFields>
-            <dataField fieldName="AssessmentCategory" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content" />
-          </dataFields>
-        </category>
       </categories>
       <headerText>The Assessment Workbench facillitates quick access to planning and outcomes data.</headerText>
     </view>

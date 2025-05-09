@@ -111,7 +111,7 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="Create Journal Entry">
+    <view id="createForm1" type="Form" commandId="command1" label="New Journal Entry">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
@@ -196,4 +196,27 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r101" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateDescription"><![CDATA[var fieldValue = [Description];
+if (fieldValue == null) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('Description', 'Description is required.');
+}]]></rule>
+    <rule id="r102" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateTransactionDate"><![CDATA[var fieldValue = [TransactionDate];
+if (fieldValue == null) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('TransactionDate', 'Transaction Date is required.');
+}]]></rule>
+    <rule id="r100" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateAmount"><![CDATA[var fieldValue = [Amount];
+if (fieldValue == null) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('Amount', 'Required field.');
+}]]></rule>
+  </businessRules>
 </dataController>

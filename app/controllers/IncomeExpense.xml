@@ -117,19 +117,19 @@ from "dbo"."IncomeExpense" "IncomeExpense"
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="EventName" columns="50" />
+            <dataField fieldName="EventDate" columns="10" />
+            <dataField fieldName="EventName" columns="50" tag="focus-auto" watermark="Write event name ..." />
+            <dataField fieldName="Description" columns="50" watermark="Provide a brief description ..." />
             <dataField fieldName="BudgetID" aliasFieldName="BudgetDescriptor" tag="lookup-distinct&#xD;&#xA;lookup-null-value-none&#xD;&#xA;lookup-auto-advance" />
+            <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
             <dataField fieldName="Amount" columns="15" />
             <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
-            <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
-            <dataField fieldName="EventDate" columns="10" />
-            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
+            <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
             <dataField fieldName="CreatedDate" columns="20" hidden="true" />
             <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
             <dataField fieldName="CreatedBy" columns="50" hidden="true" />
             <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-            <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
-            <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
           </dataFields>
         </category>
       </categories>
@@ -197,6 +197,21 @@ from "dbo"."IncomeExpense" "IncomeExpense"
     </actionGroup>
   </actions>
   <businessRules>
+    <rule id="r101" commandName="New" type="Sql" phase="Execute" name="setEventDate"><![CDATA[SET @EventDate = GETDATE()]]></rule>
+    <rule id="r102" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateEventName"><![CDATA[var fieldValue = [EventName];
+if (fieldValue == null) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('EventName', 'Financial event name is required field.');
+}]]></rule>
+    <rule id="r103" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateDescription"><![CDATA[var fieldValue = [Description];
+if (fieldValue == null) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('Description', 'Provide a short description.');
+}]]></rule>
     <rule id="r100" commandName="Insert|update" type="Sql" phase="After" name="post_inc_exp_to_account_general"><![CDATA[EXECUTE usp_ops_auto_p3_post_inc_exp_to_account_ledger @IncomeExpenseID]]></rule>
   </businessRules>
 </dataController>
