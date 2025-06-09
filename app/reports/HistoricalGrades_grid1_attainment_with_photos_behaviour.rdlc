@@ -2214,7 +2214,7 @@
                                     <TextRun>
                                       <Value>Teacher' s Remarks :</Value>
                                       <Style>
-                                        <FontSize>8pt</FontSize>
+                                        <FontSize>7pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -2226,7 +2226,7 @@
                                     <TextRun>
                                       <Value>=Fields!Remark.Value</Value>
                                       <Style>
-                                        <FontSize>8pt</FontSize>
+                                        <FontSize>7pt</FontSize>
                                         <FontWeight>Normal</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -2235,10 +2235,10 @@
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>Textbox37</rd:DefaultName>
-                              <Top>6.33889in</Top>
-                              <Left>0.10351in</Left>
+                              <Top>6.12639in</Top>
+                              <Left>0.12264in</Left>
                               <Height>0.74446in</Height>
-                              <Width>6.40256in</Width>
+                              <Width>6.4333in</Width>
                               <ZIndex>3</ZIndex>
                               <Style>
                                 <Border>
@@ -2601,10 +2601,10 @@
                                 </Style>
                               </ChartNoDataMessage>
                               <DataSetName>HistoricalGrades</DataSetName>
-                              <Top>3.3625in</Top>
+                              <Top>2.90278in</Top>
                               <Left>0.12264in</Left>
-                              <Height>1.46667in</Height>
-                              <Width>6.40256in</Width>
+                              <Height>1.32084in</Height>
+                              <Width>6.42339in</Width>
                               <ZIndex>4</ZIndex>
                               <Style>
                                 <Border>
@@ -3009,10 +3009,10 @@
                                 </Style>
                               </ChartNoDataMessage>
                               <DataSetName>HistoricalGrades</DataSetName>
-                              <Top>4.89723in</Top>
-                              <Left>4.41702in</Left>
+                              <Top>4.25973in</Top>
+                              <Left>4.41897in</Left>
                               <Height>1.35139in</Height>
-                              <Width>2.08905in</Width>
+                              <Width>2.14113in</Width>
                               <ZIndex>5</ZIndex>
                               <Style>
                                 <Border>
@@ -3395,7 +3395,7 @@
                                   </ChartNoDataMessage>
                                   <DataSetName>HistoricalGrades</DataSetName>
                                   <Top>0.05001in</Top>
-                                  <Left>0.14383in</Left>
+                                  <Left>0.13303in</Left>
                                   <Height>1.17639in</Height>
                                   <Width>3.97105in</Width>
                                   <Style>
@@ -3410,8 +3410,8 @@
                                 </Chart>
                               </ReportItems>
                               <KeepTogether>true</KeepTogether>
-                              <Top>4.89723in</Top>
-                              <Left>0.11184in</Left>
+                              <Top>4.25973in</Top>
+                              <Left>0.12264in</Left>
                               <Height>1.35139in</Height>
                               <Width>4.23574in</Width>
                               <ZIndex>6</ZIndex>
@@ -3840,10 +3840,9 @@
                                                   <Paragraph>
                                                     <TextRuns>
                                                       <TextRun>
-                                                        <Value>Academic &amp; Conduct Score :  </Value>
+                                                        <Value>Social Conduct Score :  </Value>
                                                         <Style>
                                                           <FontStyle>Normal</FontStyle>
-                                                          <FontFamily>Times New Roman</FontFamily>
                                                           <FontSize>7pt</FontSize>
                                                           <FontWeight>Bold</FontWeight>
                                                           <TextDecoration>None</TextDecoration>
@@ -3855,7 +3854,6 @@
                                                         <Value>=Fields!FinalBehaviorScore.Value</Value>
                                                         <Style>
                                                           <FontStyle>Normal</FontStyle>
-                                                          <FontFamily>Times New Roman</FontFamily>
                                                           <FontSize>7pt</FontSize>
                                                           <FontWeight>Bold</FontWeight>
                                                           <TextDecoration>None</TextDecoration>
@@ -3870,11 +3868,12 @@
                                                 <Top>0.07083in</Top>
                                                 <Left>0.08547in</Left>
                                                 <Height>0.25in</Height>
-                                                <Width>1.73679in</Width>
+                                                <Width>1.7637in</Width>
                                                 <Style>
                                                   <Border>
                                                     <Style>None</Style>
                                                   </Border>
+                                                  <VerticalAlign>Middle</VerticalAlign>
                                                   <PaddingLeft>2pt</PaddingLeft>
                                                   <PaddingRight>2pt</PaddingRight>
                                                   <PaddingTop>4pt</PaddingTop>
@@ -3899,14 +3898,15 @@
                                                 </Paragraphs>
                                                 <rd:DefaultName>BehaviourComment</rd:DefaultName>
                                                 <Top>0.07083in</Top>
-                                                <Left>1.82503in</Left>
+                                                <Left>1.88736in</Left>
                                                 <Height>0.25in</Height>
-                                                <Width>4.56214in</Width>
+                                                <Width>4.46926in</Width>
                                                 <ZIndex>1</ZIndex>
                                                 <Style>
                                                   <Border>
                                                     <Style>None</Style>
                                                   </Border>
+                                                  <VerticalAlign>Middle</VerticalAlign>
                                                   <PaddingLeft>2pt</PaddingLeft>
                                                   <PaddingRight>2pt</PaddingRight>
                                                   <PaddingTop>2pt</PaddingTop>
@@ -3945,15 +3945,16 @@
                                 </TablixMembers>
                               </TablixRowHierarchy>
                               <DataSetName>HistoricalGrades</DataSetName>
-                              <Top>2.91667in</Top>
-                              <Left>0.1268in</Left>
+                              <Top>5.66667in</Top>
+                              <Left>0.12264in</Left>
                               <Height>0.39167in</Height>
                               <Width>6.4333in</Width>
                               <ZIndex>8</ZIndex>
                               <Style>
                                 <Border>
-                                  <Color>DimGray</Color>
-                                  <Style>None</Style>
+                                  <Color>LightGrey</Color>
+                                  <Style>Solid</Style>
+                                  <Width>0.3pt</Width>
                                 </Border>
                               </Style>
                             </Tablix>
@@ -4333,6 +4334,7 @@ u5yNvGrmpBslkZsh/WrbiVI3UB0o5sD4o6RoTU2sJ3FWspKf9DRgONndhOQNTH6SlODNUD9r0rnmFg7y
     </EmbeddedImage>
   </EmbeddedImages>
   <Language>en-US</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>c4091cd6-b09d-4bda-9e25-a504992908fd</rd:ReportID>
 </Report>

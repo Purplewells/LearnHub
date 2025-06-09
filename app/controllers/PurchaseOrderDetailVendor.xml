@@ -101,9 +101,13 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
         <dataField fieldName="ExtendedCost" columns="15" />
         <dataField fieldName="QuantityReceived" columns="15" />
         <dataField fieldName="ArrivalDate" columns="20" />
-        <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
+        <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure">
+          <headerText>UOM</headerText>
+        </dataField>
         <dataField fieldName="IsArrived" hidden="true" />
-        <dataField fieldName="IsFullyReceived" columns="15" />
+        <dataField fieldName="IsFullyReceived" columns="15">
+          <headerText>Is Received</headerText>
+        </dataField>
         <dataField fieldName="Note" hidden="true" />
         <dataField fieldName="ContactEmail" columns="35" hidden="true" />
         <dataField fieldName="ContactPhone" columns="20" hidden="true" />

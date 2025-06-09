@@ -108,19 +108,29 @@ from "dbo"."PurchaseOrder" "PurchaseOrder"
             <dataField fieldName="SupplierID" aliasFieldName="SupplierName" />
             <dataField fieldName="TrackingNumber" columns="50" />
             <dataField fieldName="OrderDate" columns="10" />
+          </dataFields>
+        </category>
+        <category id="c4" flow="NewColumn">
+          <description />
+          <dataFields>
             <dataField fieldName="ExpectedDeliveryDate" columns="10" />
             <dataField fieldName="ActualDeliveryDate" columns="10" />
             <dataField fieldName="POHeader" hidden="true" />
+            <dataField fieldName="Comment" />
           </dataFields>
         </category>
-        <category id="c3" flow="NewColumn">
+        <category id="d1" flow="NewRow">
+          <dataFields>
+            <dataField fieldName="PurchaseOrderDetail" tag="modal-fit-content&#xD;&#xA;modal-auto-grow&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c3" flow="NewRow">
           <description />
           <dataFields>
             <dataField fieldName="PaymentStatusID" aliasFieldName="PaymentStatus" />
             <dataField fieldName="PurchaseOrderStatusID" aliasFieldName="Status" />
             <dataField fieldName="FreightCharge" columns="15" />
             <dataField fieldName="TotalAmount" columns="15" />
-            <dataField fieldName="Comment" />
           </dataFields>
         </category>
         <category id="c2" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
@@ -132,18 +142,13 @@ from "dbo"."PurchaseOrder" "PurchaseOrder"
             <dataField fieldName="ModifiedBy" columns="50" />
           </dataFields>
         </category>
-        <category id="d1">
-          <dataFields>
-            <dataField fieldName="PurchaseOrderDetail" tag="modal-fit-content&#xD;&#xA;modal-auto-grow&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-content-stub-none" />
-          </dataFields>
-        </category>
       </categories>
     </view>
     <view id="createForm1" type="Form" commandId="command1" label="New Purchase Order">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+          <description />
           <dataFields>
             <dataField fieldName="OrderDate" columns="10" />
             <dataField fieldName="ExpectedDeliveryDate" columns="10" />
@@ -151,7 +156,7 @@ from "dbo"."PurchaseOrder" "PurchaseOrder"
             <dataField fieldName="PurchaseOrderStatusID" aliasFieldName="Status" />
           </dataFields>
         </category>
-        <category id="c2" headerText="Purchase Order Others" flow="NewRow">
+        <category id="c2" flow="NewColumn">
           <description />
           <dataFields>
             <dataField fieldName="PaymentStatusID" aliasFieldName="PaymentStatus" />
@@ -159,6 +164,12 @@ from "dbo"."PurchaseOrder" "PurchaseOrder"
             <dataField fieldName="FreightCharge" columns="15" />
             <dataField fieldName="TotalAmount" columns="15" />
             <dataField fieldName="Comment" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c4" collapsed="true" tab="PURCHASE ORDER DETAILS" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="PurchaseOrderDetail" columns="15" />
           </dataFields>
         </category>
         <category id="c3" collapsed="true" flow="NewRow">
@@ -199,9 +210,9 @@ from "dbo"."PurchaseOrder" "PurchaseOrder"
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
-      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Edit" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a13" whenLastCommandName="Edit" whenLastCommandArgument="Save" whenView="createForm1" commandName="Edit" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
-      <action commandName="SQL" cssClass="material-icon-local_shipping" id="a100" headerText="Confirm PO" whenKeySelected="true">
+      <action commandName="SQL" cssClass="material-icon-local_shipping" id="a100" headerText="Confirm Purchase Order" whenKeySelected="true">
         <data><![CDATA[EXEC zusp_ops_process_purchase_order @PurchaseOrderID]]></data>
       </action>
       <action commandName="SQL" headerText="Process All Goods Receipts" id="a101" cssClass="material-icon-sync" confirmation="The action will update and sync stock levels. Do you want to continue this process to confirm All  Goods Receipt ?" whenLastCommandName="Edit" whenClientScript="[ActualDeliveryDate] !== ''&#xD;&#xA;">
@@ -294,9 +305,9 @@ Status: Shipped
 Order Placed > Order has been approved > Preparing shipment > Shipped > [On its way to you] >
 
 Status: Received
-Order Placed > [Order received in good condition] > Shipped >
+Order Placed > Shipped > [Order received in good condition]>
 
 Status: Cancelled
-Order Placed > [Your order has been cancelled] >
+Order Placed > [Order has been cancelled] >
 ]]></statusBar>
 </dataController>

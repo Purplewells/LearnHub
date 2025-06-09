@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkBenchTheStockSetup" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="Suppliers" type="DataView" label="Suppliers">
+      <dataView controller="Suppliers" view="grid1" />
+    </field>
+    <field name="StockTransactionType" type="DataView" label="Stock Transaction Type">
+      <dataView controller="StockTransactionType" view="grid1" />
+    </field>
+    <field name="UnitOfMeasure" type="DataView" label="Unit Of Measure">
+      <dataView controller="UnitOfMeasure" view="grid1" />
+    </field>
+    <field name="ProductUoM" type="DataView" label="Product Uo M">
+      <dataView controller="ProductUoM" view="grid1" />
+    </field>
+    <field name="InventoryLocations" type="DataView" label="Inventory Locations">
+      <dataView controller="InventoryLocations" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="StockReference" type="Form" label="Stock Reference" tags="material-icon-bolt">
+      <headerText>This is a setup module for stock reference data</headerText>
+      <categories>
+        <category id="c1" tab="SUPPLIER" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="Suppliers" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c5" tab="LOCATIONS">
+          <dataFields>
+            <dataField fieldName="InventoryLocations" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c3" tab="UNIT OF MEASURE">
+          <dataFields>
+            <dataField fieldName="UnitOfMeasure" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;material-icon-arrow_circle_up" />
+          </dataFields>
+        </category>
+        <category id="c4" tab="UOM MAPPING">
+          <dataFields>
+            <dataField fieldName="ProductUoM" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;material-icon-arrow_circle_up" />
+          </dataFields>
+        </category>
+        <category id="c2" tab="TRANSACTION TYPE">
+          <dataFields>
+            <dataField fieldName="StockTransactionType" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;material-icon-arrow_circle_up" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+</dataController>

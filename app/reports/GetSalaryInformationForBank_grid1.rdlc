@@ -121,7 +121,11 @@
           <DataField>Occupation</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-      </Fields>
+      <Field Name="BatchID">
+  <DataField>BatchID</DataField>
+  <rd:TypeName>System.Int32</rd:TypeName>
+</Field>
+</Fields>
     </DataSet>
   </DataSets>
   <ReportSections>

@@ -114,7 +114,7 @@ from "dbo"."StudentSectionAttendanceEvents" "StudentSectionAttendanceEvents"
             <dataField fieldName="Fullname" />
             <dataField fieldName="OrganizationPersonRoleID" aliasFieldName="Fullname" />
             <dataField fieldName="UPN" columns="10" hidden="true" />
-            <dataField fieldName="GL" columns="10" />
+            <dataField fieldName="GL" columns="10" hidden="true" />
             <dataField fieldName="RefAttendanceStatusID" aliasFieldName="AttendanceStatus" columns="2" />
             <dataField fieldName="RefAbsentAttendanceCategoryID" aliasFieldName="RefAbsentAttendanceCategoryDescription" />
             <dataField fieldName="RefPresentAttendanceCategoryID" aliasFieldName="RefPresentAttendanceCategoryDescription" hidden="true" />
@@ -133,25 +133,25 @@ from "dbo"."StudentSectionAttendanceEvents" "StudentSectionAttendanceEvents"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Attendance Take">
+    <view id="createForm1" type="Form" commandId="command1" label="New Attendance Log">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="OrganizationPersonRoleID" aliasFieldName="Fullname" />
-            <dataField fieldName="UPN" columns="10" />
-            <dataField fieldName="GL" columns="10" />
+            <dataField fieldName="UPN" columns="10" hidden="true" />
+            <dataField fieldName="GL" columns="10" hidden="true" />
             <dataField fieldName="RefAbsentAttendanceCategoryID" aliasFieldName="RefAbsentAttendanceCategoryDescription" />
             <dataField fieldName="RefAttendanceStatusID" aliasFieldName="AttendanceStatus" />
             <dataField fieldName="RefPresentAttendanceCategoryID" aliasFieldName="RefPresentAttendanceCategoryDescription" />
             <dataField fieldName="AttendanceEventID" aliasFieldName="AttendanceEventDurationCode" />
             <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" textMode="Static" />
-            <dataField fieldName="CreatedDate" columns="20" />
-            <dataField fieldName="ModifiedDate" columns="20" />
-            <dataField fieldName="CreatedBy" columns="50" />
-            <dataField fieldName="ModifiedBy" columns="50" />
-            <dataField fieldName="Fullname" />
+            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+            <dataField fieldName="Fullname" hidden="true" />
           </dataFields>
         </category>
       </categories>

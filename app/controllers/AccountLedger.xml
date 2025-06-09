@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="AccountLedger" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="AccountGeneralLedger" type="DataView" label="Account General Ledger">
+      <dataView controller="AccountGeneralLedger" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="AccountLedgerForm" type="Form" label="GENERAL ACCOUNT LEDGER">
+      <categories>
+        <category id="c1" headerText="Account Ledger" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="AccountGeneralLedger" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+      <headerText>A primary accounting record that contains all financial transactions of a specific account over a period of time.</headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="All Actions" flat="false" />
+  </actions>
+</dataController>

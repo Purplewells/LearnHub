@@ -24,9 +24,9 @@ namespace zLearnHub.Services
                     loginReponse = new JObject();
                     var user = Membership.GetUser(username);
                     if (user != null && user.IsLockedOut)
-                        loginReponse["alert"] = "This user account has been locked";
+                        loginReponse["alert"] = "This user account has been locked. Please contact your administrator";
                     else
-                        loginReponse["notify"] = "Login has failed";
+                        loginReponse["notify"] = "Login has failed.";
                 }
             }
             return loginReponse;

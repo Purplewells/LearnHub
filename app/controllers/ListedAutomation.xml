@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ListedAutomation" conflictDetection="overwriteChanges" label="ListedAutomation" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands />
+  <fields>
+    <field name="TriggerName" type="String" allowNulls="false" label="Trigger Name" length="128" showInSummary="true" />
+    <field name="SchemaName" type="String" allowNulls="false" label="Schema Name" length="128" showInSummary="true" />
+    <field name="TableName" type="String" allowNulls="false" label="Table Name" length="128" showInSummary="true" />
+    <field name="TriggerType" type="String" allowNulls="false" label="Trigger Type" readOnly="true" length="10" showInSummary="true" />
+    <field name="IsUpdateTrigger" type="Int32" label="Is Update Trigger" readOnly="true" showInSummary="true" />
+    <field name="IsDeleteTrigger" type="Int32" label="Is Delete Trigger" readOnly="true" />
+    <field name="IsInsertTrigger" type="Int32" label="Is Insert Trigger" readOnly="true" />
+    <field name="create_date" type="DateTime" allowNulls="false" label="Create Date" />
+    <field name="modify_date" type="DateTime" allowNulls="false" label="Modify Date" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Listed Automation">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="TriggerName" columns="40" />
+        <dataField fieldName="SchemaName" columns="12" />
+        <dataField fieldName="TableName" columns="30" />
+        <dataField fieldName="TriggerType" columns="10" />
+        <dataField fieldName="IsUpdateTrigger" columns="15" />
+        <dataField fieldName="IsDeleteTrigger" columns="15" />
+        <dataField fieldName="IsInsertTrigger" columns="15" />
+        <dataField fieldName="create_date" columns="10" hidden="true" />
+        <dataField fieldName="modify_date" columns="10" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Listed Automation">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Listed Automation" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="TriggerName" />
+            <dataField fieldName="SchemaName" />
+            <dataField fieldName="TableName" />
+            <dataField fieldName="TriggerType" columns="10" />
+            <dataField fieldName="IsUpdateTrigger" columns="15" />
+            <dataField fieldName="IsDeleteTrigger" columns="15" />
+            <dataField fieldName="IsInsertTrigger" columns="15" />
+            <dataField fieldName="create_date" columns="10" />
+            <dataField fieldName="modify_date" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Listed Automation">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Listed Automation" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="TriggerName" />
+            <dataField fieldName="SchemaName" />
+            <dataField fieldName="TableName" />
+            <dataField fieldName="create_date" columns="10" />
+            <dataField fieldName="modify_date" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[SELECT 
+    tr.name AS TriggerName,
+    s.name AS SchemaName,
+    tb.name AS TableName,
+    CASE 
+        WHEN tr.is_instead_of_trigger = 1 THEN 'INSTEAD OF'
+        ELSE 'AFTER'
+    END AS TriggerType,
+    OBJECTPROPERTY(tr.object_id, 'ExecIsUpdateTrigger') AS IsUpdateTrigger,
+    OBJECTPROPERTY(tr.object_id, 'ExecIsDeleteTrigger') AS IsDeleteTrigger,
+    OBJECTPROPERTY(tr.object_id, 'ExecIsInsertTrigger') AS IsInsertTrigger,
+    tr.create_date,
+    tr.modify_date
+FROM sys.triggers tr
+INNER JOIN sys.tables tb ON tr.parent_id = tb.object_id
+INNER JOIN sys.schemas s ON tb.schema_id = s.schema_id
+ORDER BY s.name, tb.name, tr.name;
+]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement delete here]]></rule>
+  </businessRules>
+</dataController>

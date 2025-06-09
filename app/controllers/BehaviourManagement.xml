@@ -44,7 +44,7 @@ from "dwh"."pbi_vw_metric_discipline_behaviour_management" "pbi_vw_metric_discip
     <field name="Alignment" type="String" label="Alignment" length="18" />
     <field name="Code" type="String" label="Code" length="40" />
     <field name="Title" type="String" label="Title" length="50" />
-    <field name="IncidentDate" type="DateTime" label="Incident Date" readOnly="true" />
+    <field name="IncidentDate" type="DateTime" label="Incident Date" />
     <field name="TimeCode" type="String" label="Time Code" length="100" />
     <field name="IncidentStatus" type="String" label="Incident Status" length="20" />
     <field name="CategoryType" type="String" label="Category Type" length="100" />

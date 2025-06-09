@@ -41,7 +41,7 @@ from "dbo"."Budget" "Budget"
     <field name="BudgetType" type="String" readOnly="true" label="Budget Type" length="15" />
     <field name="StartDate" type="DateTime" label="Start Date" showInSummary="true" />
     <field name="EndDate" type="DateTime" label="End Date" showInSummary="true" />
-    <field name="BudgetValue" type="Decimal" label="Budget Value" showInSummary="true" />
+    <field name="BudgetValue" type="Decimal" label="Budget Value" showInSummary="true" dataFormatString="N" />
     <field name="Code" type="String" label="Code" length="10" />
     <field name="Notes" type="String" label="Notes" length="500" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
@@ -69,7 +69,7 @@ from "dbo"."Budget" "Budget"
         <dataField fieldName="CurrencyID" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="grid1_all_budgets" type="Grid" commandId="command1" label="All Budget Allocations">
+    <view id="grid1_all_budgets" type="Grid" commandId="command1" label="All Allocations">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="BudgetDescriptor" columns="30" />

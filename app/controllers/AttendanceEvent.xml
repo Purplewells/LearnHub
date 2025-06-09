@@ -121,7 +121,7 @@ from "dbo"."AttendanceEvent" "AttendanceEvent"
             <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" columns="3" />
           </dataFields>
         </category>
-        <category id="d1" tab="ATTENDANCE LOGS" flow="NewRow">
+        <category id="d1" flow="NewRow">
           <dataFields>
             <dataField fieldName="StudentSectionAttendanceEvents" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;content-stub-none">
               <headerText>Attendance Takes</headerText>
@@ -163,7 +163,11 @@ from "dbo"."AttendanceEvent" "AttendanceEvent"
           </dataFields>
         </category>
         <category id="d1" tab="ATTENDANCE LOGS" flow="NewRow">
-          <dataFields />
+          <dataFields>
+            <dataField fieldName="StudentSectionAttendanceEvents" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;content-stub-none">
+              <headerText>Attendance Takes</headerText>
+            </dataField>
+          </dataFields>
         </category>
       </categories>
     </view>
@@ -263,6 +267,7 @@ SET @Result_RefreshChildren = 1]]></data>
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a101" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" headerText="Ben Add" whenLastCommandArgument="Save" />
       <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
@@ -307,5 +312,12 @@ SET @Result_RefreshChildren = 1]]></data>
   </actions>
   <businessRules>
     <rule id="r101" commandName="New" type="Sql" phase="Execute" name="setEventDate"><![CDATA[SET @EventDate = GETDATE()]]></rule>
+    <rule id="r100" type="JavaScript" commandName="Insert|Update" phase="Before" name="RefSchoolStreamID_Validator"><![CDATA[var fieldValue = [RefSchoolStreamID];
+if (fieldValue == null) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('RefSchoolStreamID', 'Please choose one stream as it is required.');
+}]]></rule>
   </businessRules>
 </dataController>

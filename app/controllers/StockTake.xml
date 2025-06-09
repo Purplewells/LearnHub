@@ -262,5 +262,12 @@ WHERE p.ProductID = @ProductID
     <rule id="r101" commandName="Insert|update|Calculate" type="Code" phase="Execute" name="calculateDifference" />
     <rule id="r102" commandName="New|Update" type="Sql" phase="Execute" name="setIsVarianceAccepted"><![CDATA[if @IsVarianceAccepted IS NULL 
     SET @IsVarianceAccepted = 0]]></rule>
+    <rule id="r104" commandName="Custom" type="JavaScript" phase="After" name="Prevent ScreenFromClosing"><![CDATA[if (args.commandName === 'Custom' && args.commandArgument === 'zusp_stock_p7_post_adjustment_approval') {
+    // Prevent the screen from closing
+    $app.touch.keepFocus = true;
+    args.preventDefault(); // stop default redirection
+    alert('Adjustment approvals processed successfully.');
+}
+]]></rule>
   </businessRules>
 </dataController>

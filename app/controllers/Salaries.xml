@@ -293,14 +293,14 @@ SET @TaxablePay = 0.00
 SET @ProposedDate = GETDATE()
 SET @StartDate = GETDATE()
 SET @EndDate = DATEADD(YEAR, 10, @StartDate)]]></rule>
-    <rule id="r102" type="JavaScript" commandName="Insert|Update" phase="Before" name="validate_StartDate"><![CDATA[var fieldValue = [StartDate];
+    <rule id="r102" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateStartDate"><![CDATA[var fieldValue = [StartDate];
 if (fieldValue == null) {
     // prevent the default action processing
     this.preventDefault();
     // set the focus on the field and display an error
     this.result.focus('StartDate', 'StartDate is a required field.');
 }]]></rule>
-    <rule id="r103" type="JavaScript" commandName="Insert|Update" phase="Before" name="validate_SalaryName"><![CDATA[var fieldValue = [SalaryName];
+    <rule id="r103" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateSalaryName"><![CDATA[var fieldValue = [SalaryName];
 if (fieldValue == null) {
     // prevent the default action processing
     this.preventDefault();
@@ -309,5 +309,13 @@ if (fieldValue == null) {
 }]]></rule>
     <rule id="r101" commandName="New|Calculate|Update" type="Code" phase="Before" name="setBaseSalaryAmount" />
     <rule id="r104" commandName="Insert|Update|Calculate" type="Code" phase="After" name="UpdateCompensation" />
+    <rule id="r105" commandName="Insert|Update" type="Sql" phase="After" name="UpdateSalariesInformation"><![CDATA[-- Temporarily disabled
+
+/*
+EXEC [dbo].[zusp_ops_salary_p1_prepare_information_specific] @SalaryID
+SET @Result_ExecuteOnClient = '$appfactory.find("Salaries", "Controller").sync();'
+SET @Result_ShowMessage = 'Salary computation setup and processing ' + ' ' + 'has completed successfully' 
+
+*/]]></rule>
   </businessRules>
 </dataController>

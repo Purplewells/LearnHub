@@ -113,7 +113,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
     </field>
     <field name="TransactionType" type="String" readOnly="true" label="Transaction Type" length="20" />
     <field name="TransactionTypeCode" type="String" readOnly="true" label="Transaction Type Code" length="20">
-      <items style="AutoComplete" dataView="grid1" />
+      <items style="AutoComplete" dataView="grid1" dataController="TransactionType" dataTextField="TransactionType" dataValueField="TransactionTypeID" />
     </field>
     <field name="TransactionStatusID" type="Int32" label="Transaction Status ID">
       <items style="RadioButtonList" dataController="TransactionStatus" dataValueField="TransactionStatusID" dataTextField="TransactionStatus" dataView="grid1" />
@@ -130,7 +130,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
     <field name="HeaderInfo" type="String" readOnly="true" label="Header Info" computed="true">
       <formula>Person.FirstName + ' ' + Person.LastName + ' &gt;&gt; ' + 'ReceiptNo: ' + fee_collection_transaction.ReceiptNo</formula>
     </field>
-    <field name="RefundedAmount" type="Decimal" default="((0))" label="Refund Amount" />
+    <field name="RefundedAmount" type="Decimal" default="((0))" label="Refund Amount" causesCalculate="true" />
     <field name="RefundReason" type="String" label="Refund Reason" length="50" />
     <field name="RefundAmount" type="Double" label="Refund Amount" allowLEV="true" causesCalculate="true" isVirtual="true" />
   </fields>
@@ -179,7 +179,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
         <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" hidden="true" />
         <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" hidden="true" />
         <dataField fieldName="HeaderInfo" hidden="true" />
-        <dataField fieldName="RefundedAmount" columns="15" />
+        <dataField fieldName="RefundedAmount" columns="15" hidden="true" />
         <dataField fieldName="RefundReason" columns="30" hidden="true" />
       </dataFields>
       <styles>
@@ -235,79 +235,23 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
         </category>
       </categories>
     </view>
-    <view id="editForm1_Details" type="Form" commandId="command1" label="Review Payment Transaction">
+    <view id="editForm1_Refund" type="Form" commandId="command1" label="Refund Transaction Screen">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description />
           <dataFields>
-            <dataField fieldName="TransDate" columns="10" />
+            <dataField fieldName="TransDate" columns="10" readOnly="true" hidden="true" />
             <dataField fieldName="FeeID" aliasFieldName="Status" />
             <dataField fieldName="BillAmount" columns="15" />
             <dataField fieldName="FeeDescription" columns="30" />
-            <dataField fieldName="AmountPaid" columns="15" />
-            <dataField fieldName="CurrentBalance" columns="15" />
-            <dataField fieldName="Description" columns="50" />
-            <dataField fieldName="FeeType" columns="20" hidden="true" />
-            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" columns="4" />
-            <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" columns="3" tag="lookup-null-value-none" />
-            <dataField fieldName="TransactionStatusID" aliasFieldName="TransactionStatus" columns="3" />
-            <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" />
-            <dataField fieldName="PersonID" textMode="Static" columns="15" />
-            <dataField fieldName="NameOfPayee" columns="25" />
-            <dataField fieldName="ReceiptNo" columns="50" />
-            <dataField fieldName="Note" columns="50" />
-            <dataField fieldName="UPN" columns="10" />
-            <dataField fieldName="GL" columns="10" />
-            <dataField fieldName="Firstname" columns="35" />
-            <dataField fieldName="Lastname" columns="35" />
-            <dataField fieldName="SchoolName" hidden="true" />
-            <dataField fieldName="Address" hidden="true" />
-            <dataField fieldName="Fullname" hidden="true" />
-            <dataField fieldName="HeaderLabel" hidden="true" />
-            <dataField fieldName="TransactionTypeCode" columns="3" tag="lookup-null-value-none" />
-            <dataField fieldName="TransactionStatusCode" columns="3" tag="lookup-null-value-none" hidden="true" />
-            <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
-            <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
-            <dataField fieldName="HeaderInfo" hidden="true" />
-            <dataField fieldName="RefundedAmount" columns="15" hidden="true" />
-            <dataField fieldName="RefundReason" columns="50" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Originator" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" />
-            <dataField fieldName="CreatedBy" columns="50" />
-            <dataField fieldName="ModifiedBy" columns="50" />
-          </dataFields>
-        </category>
-      </categories>
-    </view>
-    <view id="editForm1_Refund" type="Form" commandId="command1" label="Review Payment Transaction">
-      <headerText>$DefaultEditViewDescription</headerText>
-      <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="TransDate" columns="10" />
-            <dataField fieldName="FeeID" aliasFieldName="Status" />
-            <dataField fieldName="BillAmount" columns="15" />
-            <dataField fieldName="FeeDescription" columns="30" />
-            <dataField fieldName="AmountPaid" columns="15" />
-            <dataField fieldName="RefundedAmount" columns="15" />
+            <dataField fieldName="Description" columns="50" readOnly="true" />
+            <dataField fieldName="AmountPaid" columns="15" readOnly="true" />
+            <dataField fieldName="RefundedAmount" columns="15" tag="focus-auto" />
             <dataField fieldName="RefundReason" columns="50" />
-            <dataField fieldName="CurrentBalance" columns="15" hidden="true" />
-            <dataField fieldName="Description" columns="50" />
             <dataField fieldName="FeeType" columns="20" hidden="true" />
-            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" columns="4" />
-            <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" columns="3" tag="lookup-null-value-none" />
             <dataField fieldName="TransactionStatusID" aliasFieldName="TransactionStatus" columns="3" hidden="true" />
-            <dataField fieldName="NameOfPayee" columns="25">
-              <headerText>Who Paid</headerText>
-            </dataField>
-            <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" />
+            <dataField fieldName="CurrentBalance" columns="15" hidden="true" />
             <dataField fieldName="PersonID" textMode="Static" columns="15" />
             <dataField fieldName="ReceiptNo" columns="50" hidden="true" />
             <dataField fieldName="Note" columns="50" />
@@ -324,6 +268,12 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
             <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" hidden="true" />
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" hidden="true" />
             <dataField fieldName="HeaderInfo" hidden="true" />
+            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" columns="2" hidden="true" />
+            <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" columns="2" tag="lookup-null-value-none" hidden="true" />
+            <dataField fieldName="NameOfPayee" columns="25">
+              <headerText>Who Received</headerText>
+            </dataField>
+            <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" />
           </dataFields>
         </category>
       </categories>
@@ -375,9 +325,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Edit" commandArgument="editForm1" headerText="Review" cssClass="material-icon-recommend" />
       <action id="a101" />
-      <action commandName="Custom" commandArgument="Custom" headerText="Issue Refund" id="a103" description="Refund Process Alert" confirmation="Are you sure you want to process this refund ?" cssClass="material-icon-preview" />
-      <action commandName="Edit" headerText="Reverse Payment" id="a105" description="Refund Process Alert" cssClass="material-icon-preview" whenKeySelected="true" commandArgument="editForm1_Refund" />
-      <action commandName="Select" commandArgument="editForm1_Refund" headerText="Refund Fees" id="a104" description="Refund Process Alert" cssClass="material-icon-reply" />
+      <action commandName="Select" commandArgument="editForm1_Refund" headerText="Issue Refund" id="a104" description="Refund Process Alert" cssClass="material-icon-refresh" />
       <action commandName="ReportAsPdf" headerText="Print Receipt" id="a100" whenKeySelected="true" cssClass="material-icon-print">
         <data><![CDATA[_controller=fee_collection_transaction_itemised
 _view=editForm1
@@ -397,6 +345,7 @@ TransactionID=TransactionID]]></data>
       <action id="a1" commandName="Edit" headerText="Review" />
       <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
+      <action commandName="Custom" commandArgument="ProcessRefundTransaction" headerText="Process Refund Transaction" id="a102" whenLastCommandName="Edit" whenKeySelected="true" />
       <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" headerText="Process Transaction" />
@@ -423,13 +372,12 @@ _view=editForm1
 _template=fee_collection_transaction_itemised_editForm1.rdlc
 TransactionID=TransactionID]]></data>
       </action>
-      <action commandName="Confirm" commandArgument="IssueRefund" headerText="Issue Refund" whenKeySelected="true" confirmation="_controller=fee_collection_transaction_refund&#xD;&#xA;_title=Specify Refund Amount&#xD;&#xA;_width=500&#xD;&#xA;_height = 100" id="a102" cssClass="material-icon-reply" />
+      <action commandName="Select" commandArgument="editForm1_Refund" headerText="Issue Refund" id="a104" description="Refund Process Alert" cssClass="material-icon-refresh" whenKeySelected="true" />
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="material-icon-brush" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
       <action commandName="Search" cssClass="material-icon-filter_alt" id="a101" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="Custom" commandArgument="ProcessRefund" headerText="Issue Refund" id="a103" description="Refund Process Alert" confirmation="_controller=fee_collection_transaction&#xD;&#xA;_title=Specify Refund Amount&#xD;&#xA;_width=500" cssClass="material-icon-reply" whenKeySelected="true" />
       <action id="a2" />
       <action id="a100" commandName="ReportAsPdf" headerText="Print Receipt" whenKeySelected="true" key="CTRL + P" cssClass="material-icon-print">
         <data><![CDATA[_controller=fee_collection_transaction_itemised
@@ -474,21 +422,21 @@ SELECT @ReceiptNo = RIGHT('000000' +
 
   ]]></rule>
     <rule id="r102" commandName="New" type="Sql" phase="Execute" name="setTransactionDate"><![CDATA[SET @TransDate = GETUTCDATE()]]></rule>
-    <rule id="r103" type="JavaScript" commandName="Insert|Update" phase="Before" name="validate_PaymentMethodID"><![CDATA[var fieldValue = [PaymentMethodID];
+    <rule id="r103" type="JavaScript" commandName="Insert|Update" phase="Before" name="validate_PaymentMethod"><![CDATA[var fieldValue = [PaymentMethodID];
 if (fieldValue == null) {
     // prevent the default action processing
     this.preventDefault();
     // set the focus on the field and display an error
     this.result.focus('PaymentMethodID', 'A payment method is required.');
 }]]></rule>
-    <rule id="r104" type="JavaScript" commandName="Insert|Update" phase="Before" name="validate_TransactionTypeID"><![CDATA[var fieldValue = [TransactionTypeID];
+    <rule id="r104" type="JavaScript" commandName="Insert|Update" phase="Before" name="validate_TransactionType"><![CDATA[var fieldValue = [TransactionTypeID];
 if (fieldValue == null) {
     // prevent the default action processing
     this.preventDefault();
     // set the focus on the field and display an error
     this.result.focus('TransactionTypeID', 'You are required to choose a transaction type.');
 }]]></rule>
-    <rule id="r105" type="JavaScript" commandName="Insert|Update" phase="Before" name="validate_TransactionStatusID"><![CDATA[var fieldValue = [TransactionStatusID];
+    <rule id="r105" type="JavaScript" commandName="Insert|Update" phase="Before" name="validate_TransactionStatus"><![CDATA[var fieldValue = [TransactionStatusID];
 if (fieldValue == null) {
     // prevent the default action processing
     this.preventDefault();
@@ -515,10 +463,29 @@ EXEC [dbo].[usp_ops_auto_p1_post_account_using_mapping_table] @TransactionID;
 
 ]]></rule>
     <rule id="r109" commandName="Insert|update" type="Sql" phase="After" name="post_fee_to_account_ledger"><![CDATA[EXEC [dbo].[usp_ops_auto_p2_post_fee_to_account_ledger] @TransactionID]]></rule>
-    <rule id="r108" commandName="Insert|Update" type="Sql" phase="After" name="updateCurrentFeeBalance"><![CDATA[--EXEC update_fee_collection_current_balance @FeeID, @PersonID]]></rule>
-    <rule id="r110" commandName="Update|Insert|Calculate" type="Sql" phase="After" name="setAccountLedgerModifiedBy"><![CDATA[--DECLARE @BusinessRules_UserName NVARCHAR(50)
+    <rule id="r110" commandName="Update|Insert|Calculate" type="Sql" phase="After" name="setWhoModifiedAccountLedger"><![CDATA[--DECLARE @BusinessRules_UserName NVARCHAR(50)
 UPDATE account_general_ledger
 SET ModifiedBy = @BusinessRules_UserName
 WHERE TransactionID = @TransactionID]]></rule>
+    <rule id="r112" commandName="Custom" commandArgument="ProcessRefundTransaction" type="Sql" phase="Execute" name="post_refund_update_account_ledger"><![CDATA[/*
+
+EXEC [dbo].[usp_ops_auto_p4_post_fee_transaction_refund]
+    @OriginalTransactionID = 3625, -- Replace with the actual ID of the transaction you want to refund
+    @RefundAmountToProcess = 1.99; -- Replace with the specific amount you wish to refund
+*/
+
+
+
+DECLARE @OriginalTransactionID INT = @TransactionID
+DECLARE @RefundAmountToProcess DECIMAL(10,2) = @RefundedAmount
+DECLARE @NameOfRecepient NVARCHAR(50) = @NameOfPayee
+
+EXEC [dbo].[usp_ops_auto_p4_post_fee_transaction_refund]
+    @OriginalTransactionID,  @RefundAmountToProcess, @RefundReason, @NameOfRecepient
+
+SET @Result_ShowViewMessage = 
+    'A refund of ' + cast(@RefundAmountToProcess as nvarchar) +  ' has been effected. Now click Save button to commit the record.'
+]]></rule>
+    <rule id="r108" commandName="Insert|Update" type="Sql" phase="After" name="updateCurrentFeeBalance"><![CDATA[--EXEC update_fee_collection_current_balance @FeeID, @PersonID]]></rule>
   </businessRules>
 </dataController>

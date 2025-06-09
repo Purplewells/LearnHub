@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="vw_ops_update_get_salary_information_for_bank" alias="vw_ops_update_get_salary_information_for_bank" created="2024-03-25T19:03:24" modified="2024-12-30T11:21:28" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="vw_ops_update_get_salary_information_for_bank" alias="vw_ops_update_get_salary_information_for_bank" created="2024-03-25T19:03:24" modified="2025-05-31T10:52:08" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys />
   <columns>
     <column name="EmployeeID" fieldName="EmployeeID" label="Employee ID" />
@@ -27,5 +27,6 @@
     <column name="BankName" fieldName="BankName" label="Bank Name" />
     <column name="CurrencyName" fieldName="Curr" label="Curr" />
     <column name="Occupation" fieldName="Occupation" label="Occupation" />
+    <column name="BatchID" fieldName="BatchID" label="BatchID" />
   </columns>
 </dataModel>

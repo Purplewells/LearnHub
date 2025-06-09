@@ -29,12 +29,22 @@ from "dbo"."zlkpIncidentTimeDescriptionCode" "zlkpIncidentTimeDescriptionCode"
     <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Incident Time Description Code">
+    <view id="grid1" type="Grid" commandId="command1" label="Event Time Code" filter="IsActive = 1">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Description" />
-        <dataField fieldName="Code" columns="50" />
-        <dataField fieldName="Definition" rows="5" />
+        <dataField fieldName="Description" columns="30" />
+        <dataField fieldName="Code" columns="20" />
+        <dataField fieldName="Definition" />
+        <dataField fieldName="SortOrder" columns="15" />
+        <dataField fieldName="IsActive" />
+      </dataFields>
+    </view>
+    <view id="grid1_all_timecodes" type="Grid" commandId="command1" label="All Event Time Code">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Description" columns="30" />
+        <dataField fieldName="Code" columns="20" />
+        <dataField fieldName="Definition" />
         <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="IsActive" />
       </dataFields>
@@ -42,8 +52,8 @@ from "dbo"."zlkpIncidentTimeDescriptionCode" "zlkpIncidentTimeDescriptionCode"
     <view id="editForm1" type="Form" commandId="command1" label="Review Incident Time Description Code">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Incident Time Description Code" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="Description" />
             <dataField fieldName="Code" columns="50" />

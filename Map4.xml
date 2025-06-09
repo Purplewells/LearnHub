@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<map xmlns="urn:codeontime:data-map">
+  <node name="amt_Home" schema="amt" label="Amt" type="Content" />
+  <node name="dbo_Home" schema="dbo" label="Dbo" type="Content">
+    <node name="CourseSection" refs="8" depth="0" schema="dbo" label="Course Section">
+      <node name="StudentSectionAssociation" refs="3" depth="1" schema="dbo" label="Student Section Association">
+        <node name="StudentAssessment" refs="1" depth="2" schema="dbo" label="Student Assessment">
+          <node name="AssessmentScore" refs="0" depth="3" schema="dbo" label="Assessment Score" />
+        </node>
+        <node name="StudentGradeBookEntry" refs="0" depth="2" schema="dbo" label="Student Grade Book Entry" />
+        <node name="SBLScoresheet" refs="0" depth="2" schema="dbo" label="SBL Scoresheet" />
+      </node>
+      <node name="AttendanceEvent" refs="2" depth="1" schema="dbo" label="Attendance Event">
+        <node name="StudentSectionAttendanceEvents" refs="0" depth="2" schema="dbo" label="Student Section Attendance Events" />
+        <node name="znStudentAttendanceEvents" refs="0" depth="2" schema="dbo" label="zn Student Attendance Events" />
+      </node>
+      <node name="GradeBookEntries" refs="1" depth="1" schema="dbo" label="Grade Book Entries">
+        <node name="StudentGradeBookEntry" refs="0" depth="2" schema="dbo" label="Student Grade Book Entry" />
+      </node>
+      <node name="LearningObjective" refs="1" depth="1" schema="dbo" label="Learning Objective">
+        <node name="SBLScoresheet" refs="0" depth="2" schema="dbo" label="SBL Scoresheet" />
+      </node>
+      <node name="CourseSectionSchedule" refs="0" depth="1" schema="dbo" label="Course Section Schedule" />
+      <node name="GradeBookEntry" refs="0" depth="1" schema="dbo" label="Grade Book Entry" />
+      <node name="LessonPlanTemplates" refs="0" depth="1" schema="dbo" label="Lesson Plan Templates" />
+      <node name="TeacherSectionAssociation" refs="0" depth="1" schema="dbo" label="Teacher Section Association" />
+    </node>
+    <node name="OnboardReset" refs="8" depth="0" schema="dbo" label="Onboard Reset">
+      <node name="K12StaffAssignment" refs="3" depth="1" schema="dbo" label="K12 Staff Assignment">
+        <node name="ListOfSalaries" refs="1" depth="2" schema="dbo" label="List Of Salaries">
+          <node name="SalaryComponentElement" refs="0" depth="3" schema="dbo" label="Salary Component Element" />
+        </node>
+        <node name="Salaries" refs="0" depth="2" schema="dbo" label="Salaries" />
+      </node>
+      <node name="StudentSchoolAssociation" refs="2" depth="1" schema="dbo" label="Student School Association">
+        <node name="StudentComments" refs="0" depth="2" schema="dbo" label="Student Comments" />
+      </node>
+      <node name="znStaffAssignment" refs="0" depth="1" schema="dbo" label="zn Staff Assignment" />
+      <node name="StudentInterventionAssociation" refs="0" depth="1" schema="dbo" label="Student Intervention Association" />
+      <node name="StudentSchoolAssociations" refs="0" depth="1" schema="dbo" label="Student School Associations" />
+    </node>
+    <node name="GradeLevel" refs="8" depth="0" schema="dbo" label="Grade Level">
+      <node name="Course" refs="2" depth="1" schema="dbo" label="Course">
+        <node name="Assessment" refs="1" depth="2" schema="dbo" label="Assessment" />
+      </node>
+      <node name="PerformanceIndicator" refs="2" depth="1" schema="dbo" label="Performance Indicator" />
+      <node name="mlinkFeesGrade" refs="0" depth="1" schema="dbo" label="mlink Fees Grade" />
+      <node name="PromotionScheme" refs="0" depth="1" schema="dbo" label="Promotion Scheme" />
+    </node>
+    <node name="Session" refs="7" depth="0" schema="dbo" label="Session">
+      <node name="GradingPeriod" refs="5" depth="1" schema="dbo" label="Grading Period" />
+      <node name="DisciplineIncident" refs="1" depth="1" schema="dbo" label="Discipline Incident">
+        <node name="StudentDisciplineIncidentAssociation" refs="0" depth="2" schema="dbo" label="Student Discipline Incident Association" />
+      </node>
+      <node name="SessionEnrollmentScheme" refs="0" depth="1" schema="dbo" label="Session Enrollment Scheme" />
+    </node>
+    <node name="ChartOfAccounts" refs="6" depth="0" schema="dbo" label="Chart Of Accounts">
+      <node name="AccountGeneralLedger" refs="0" depth="1" schema="dbo" label="Account General Ledger" />
+      <node name="fee_collection_transaction" refs="0" depth="1" schema="dbo" label="Fee Collection Transaction" />
+      <node name="IncomeExpense" refs="0" depth="1" schema="dbo" label="Income Expense" />
+      <node name="ManualAccountJournalEntries" refs="0" depth="1" schema="dbo" label="Manual Account Journal Entries" />
+      <node name="TransactionAccountMapping" refs="0" depth="1" schema="dbo" label="Transaction Account Mapping" />
+    </node>
+    <node name="Role" refs="6" depth="0" schema="dbo" label="Role">
+      <node name="OrganizationPersonRole" refs="0" depth="1" schema="dbo" label="Organization Person Role" />
+      <node name="OrganizationPersonRoleParent" refs="0" depth="1" schema="dbo" label="Organization Person Role Parent" />
+      <node name="OrganizationPersonRoles" refs="0" depth="1" schema="dbo" label="Organization Person Roles" />
+      <node name="OrganizationPersonRoleStaff" refs="0" depth="1" schema="dbo" label="Organization Person Role Staff" />
+      <node name="OrganizationPersonRoleStudent" refs="0" depth="1" schema="dbo" label="Organization Person Role Student" />
+    </node>
+    <node name="UnitOfMeasure" refs="4" depth="0" schema="dbo" label="Unit Of Measure">
+      <node name="Product" refs="10" depth="1" schema="dbo" label="Product">
+        <node name="StockTransactions" refs="1" depth="2" schema="dbo" label="Stock Transactions" />
+        <node name="mlinkProductColour" refs="0" depth="2" schema="dbo" label="mlink Product Colour" />
+        <node name="SalesOrderDetail" refs="0" depth="2" schema="dbo" label="Sales Order Detail" />
+        <node name="StockLevels" refs="0" depth="2" schema="dbo" label="Stock Levels" />
+        <node name="StockTake" refs="0" depth="2" schema="dbo" label="Stock Take" />
+        <node name="StockVarianceOvertime" refs="0" depth="2" schema="dbo" label="Stock Variance Overtime" />
+        <node name="TransactionsMovement" refs="0" depth="2" schema="dbo" label="Transactions Movement" />
+      </node>
+      <node name="ProductUoM" refs="0" depth="1" schema="dbo" label="Product Uo M" />
+      <node name="PurchaseOrderDetail" refs="0" depth="1" schema="dbo" label="Purchase Order Detail" />
+      <node name="PurchaseOrderDetailVendor" refs="0" depth="1" schema="dbo" label="Purchase Order Detail Vendor" />
+    </node>
+    <node name="AssessmentCategory" refs="4" depth="0" schema="dbo" label="Assessment Category" />
+    <node name="TransactionType" refs="4" depth="0" schema="dbo" label="Transaction Type">
+      <node name="FeeCollectionTransactionOverTime" refs="0" depth="1" schema="dbo" label="Fee Collection Transaction Over Time" />
+      <node name="fee_collection_transaction_itemised" refs="0" depth="1" schema="dbo" label="Fee Collection Transaction Itemised" />
+    </node>
+    <node name="Calendar" refs="3" depth="0" schema="dbo" label="Calendar">
+      <node name="FeeStructure" refs="2" depth="1" schema="dbo" label="Fee Structure">
+        <node name="StudentFees" refs="3" depth="2" schema="dbo" label="Student Fees" />
+      </node>
+      <node name="CalendarEventNational" refs="0" depth="1" schema="dbo" label="Calendar Event National" />
+    </node>
+    <node name="Cohort" refs="3" depth="0" schema="dbo" label="Cohort">
+      <node name="CohortProgram" refs="0" depth="1" schema="dbo" label="Cohort Program" />
+      <node name="CohortStaffAssociation" refs="0" depth="1" schema="dbo" label="Cohort Staff Association" />
+      <node name="StudentCohortAssociation" refs="0" depth="1" schema="dbo" label="Student Cohort Association" />
+    </node>
+    <node name="Department" refs="3" depth="0" schema="dbo" label="Department" />
+    <node name="Currency" refs="3" depth="0" schema="dbo" label="Currency" />
+    <node name="AssessmentType" refs="3" depth="0" schema="dbo" label="Assessment Type" />
+    <node name="Country" refs="3" depth="0" schema="dbo" label="Country">
+      <node name="Contact" refs="21" depth="1" schema="dbo" label="Contact">
+        <node name="PersonAllergy" refs="0" depth="2" schema="dbo" label="Person Allergy" />
+        <node name="PersonContactPoint" refs="0" depth="2" schema="dbo" label="Person Contact Point" />
+        <node name="PersonCredential" refs="0" depth="2" schema="dbo" label="Person Credential" />
+        <node name="PersonDisability" refs="0" depth="2" schema="dbo" label="Person Disability" />
+        <node name="PersonHealth" refs="0" depth="2" schema="dbo" label="Person Health" />
+        <node name="PersonIdentifier" refs="0" depth="2" schema="dbo" label="Person Identifier" />
+        <node name="PersonImmunisation" refs="0" depth="2" schema="dbo" label="Person Immunisation" />
+        <node name="PersonRelationship" refs="0" depth="2" schema="dbo" label="Person Relationship" />
+        <node name="ServiceAttendance" refs="0" depth="2" schema="dbo" label="Service Attendance" />
+        <node name="StudentProgramParticipation" refs="0" depth="2" schema="dbo" label="Student Program Participation" />
+      </node>
+      <node name="SchoolList" refs="0" depth="1" schema="dbo" label="School List" />
+      <node name="PersonAddress" refs="0" depth="1" schema="dbo" label="Person Address" />
+    </node>
+    <node name="InventoryLocations" refs="3" depth="0" schema="dbo" label="Inventory Locations">
+      <node name="StockTakeHeader" refs="1" depth="1" schema="dbo" label="Stock Take Header" />
+    </node>
+    <node name="Occupation" refs="3" depth="0" schema="dbo" label="Occupation">
+      <node name="PhotoAlbum" refs="0" depth="1" schema="dbo" label="Photo Album" />
+    </node>
+    <node name="PaymentBy" refs="3" depth="0" schema="dbo" label="Payment By" />
+    <node name="PaymentMethod" refs="3" depth="0" schema="dbo" label="Payment Method" />
+    <node name="PerformanceBaseConversion" refs="3" depth="0" schema="dbo" label="Performance Base Conversion" />
+    <node name="PersonLocationType" refs="3" depth="0" schema="dbo" label="Person Location Type" />
+    <node name="Sex" refs="3" depth="0" schema="dbo" label="Sex" />
+    <node name="Title" refs="3" depth="0" schema="dbo" label="Title" />
+    <node name="Town" refs="3" depth="0" schema="dbo" label="Town" />
+    <node name="Buses" refs="2" depth="0" schema="dbo" label="Buses">
+      <node name="BusSchedules" refs="0" depth="1" schema="dbo" label="Bus Schedules" />
+    </node>
+    <node name="Program" refs="2" depth="0" schema="dbo" label="Program" />
+    <node name="PurchaseOrder" refs="2" depth="0" schema="dbo" label="Purchase Order" />
+    <node name="Routes" refs="2" depth="0" schema="dbo" label="Routes" />
+    <node name="Suppliers" refs="2" depth="0" schema="dbo" label="Suppliers" />
+    <node name="GradeType" refs="2" depth="0" schema="dbo" label="Grade Type" />
+    <node name="Language" refs="2" depth="0" schema="dbo" label="Language" />
+    <node name="Religion" refs="2" depth="0" schema="dbo" label="Religion" />
+    <node name="AbsenceReason" refs="2" depth="0" schema="dbo" label="Absence Reason" />
+    <node name="AttendanceStatus" refs="2" depth="0" schema="dbo" label="Attendance Status" />
+    <node name="CitizenshipStatus" refs="2" depth="0" schema="dbo" label="Citizenship Status" />
+    <node name="ClassroomPositionType" refs="2" depth="0" schema="dbo" label="Classroom Position Type" />
+    <node name="CourseSubjectArea" refs="2" depth="0" schema="dbo" label="Course Subject Area" />
+    <node name="EndOfTermStatus" refs="2" depth="0" schema="dbo" label="End Of Term Status" />
+    <node name="EnrollmentStatus" refs="2" depth="0" schema="dbo" label="Enrollment Status" />
+    <node name="EntryType" refs="2" depth="0" schema="dbo" label="Entry Type" />
+    <node name="ExitOrWithdrawalStatus" refs="2" depth="0" schema="dbo" label="Exit Or Withdrawal Status" />
+    <node name="ExitOrWithdrawalType" refs="2" depth="0" schema="dbo" label="Exit Or Withdrawal Type" />
+    <node name="FoodServices" refs="2" depth="0" schema="dbo" label="Food Services" />
+    <node name="MovementMode" refs="2" depth="0" schema="dbo" label="Movement Mode" />
+    <node name="NonPromotionReason" refs="2" depth="0" schema="dbo" label="Non Promotion Reason" />
+    <node name="PresentAttendanceCategory" refs="2" depth="0" schema="dbo" label="Present Attendance Category" />
+    <node name="EducationJobClassification" refs="2" depth="0" schema="dbo" label="Education Job Classification" />
+    <node name="PromotionReason" refs="2" depth="0" schema="dbo" label="Promotion Reason" />
+    <node name="IdentificationProof" refs="2" depth="0" schema="dbo" label="Identification Proof" />
+    <node name="HouseResidence" refs="2" depth="0" schema="dbo" label="House Residence" />
+    <node name="SalaryAction" refs="2" depth="0" schema="dbo" label="Salary Action" />
+    <node name="AwardState" refs="2" depth="0" schema="dbo" label="Award State" />
+    <node name="TransactionStatus" refs="2" depth="0" schema="dbo" label="Transaction Status" />
+    <node name="Organisation" refs="11" depth="0" schema="dbo" label="Organisation">
+      <node name="School" refs="1" depth="1" schema="dbo" label="School" />
+    </node>
+    <node name="SchoolStream" refs="10" depth="0" schema="dbo" label="School Stream" />
+    <node name="AccountType" refs="1" depth="0" schema="dbo" label="Account Type" />
+    <node name="Books" refs="1" depth="0" schema="dbo" label="Books">
+      <node name="BorrowTransactions" refs="0" depth="1" schema="dbo" label="Borrow Transactions" />
+    </node>
+    <node name="Budget" refs="1" depth="0" schema="dbo" label="Budget" />
+    <node name="SchoolEvents" refs="1" depth="0" schema="dbo" label="School Events" />
+    <node name="Schedules" refs="1" depth="0" schema="dbo" label="Schedules" />
+    <node name="ClassPeriod" refs="1" depth="0" schema="dbo" label="Class Period" />
+    <node name="Colour" refs="1" depth="0" schema="dbo" label="Colour" />
+    <node name="GradingPeriodDescriptor" refs="1" depth="0" schema="dbo" label="Grading Period Descriptor" />
+    <node name="Members" refs="1" depth="0" schema="dbo" label="Members" />
+    <node name="Orders" refs="1" depth="0" schema="dbo" label="Orders" />
+    <node name="Room" refs="1" depth="0" schema="dbo" label="Room" />
+    <node name="SalaryBasis" refs="1" depth="0" schema="dbo" label="Salary Basis" />
+    <node name="AttendanceCategory" refs="1" depth="0" schema="dbo" label="Attendance Category" />
+    <node name="AttendanceReason" refs="1" depth="0" schema="dbo" label="Attendance Reason" />
+    <node name="ContactPointUse" refs="1" depth="0" schema="dbo" label="Contact Point Use" />
+    <node name="DisciplineAlignment" refs="1" depth="0" schema="dbo" label="Discipline Alignment" />
+    <node name="GradeScaleType" refs="1" depth="0" schema="dbo" label="Grade Scale Type" />
+    <node name="LearningObjectiveEntry" refs="1" depth="0" schema="dbo" label="Learning Objective Entry" />
+    <node name="AccommodationsNeededType" refs="1" depth="0" schema="dbo" label="Accommodations Needed Type" />
+    <node name="ActionTaken" refs="1" depth="0" schema="dbo" label="Action Taken" />
+    <node name="AllergySeverity" refs="1" depth="0" schema="dbo" label="Allergy Severity" />
+    <node name="AllergyType" refs="1" depth="0" schema="dbo" label="Allergy Type" />
+    <node name="AssessmentElementType" refs="1" depth="0" schema="dbo" label="Assessment Element Type" />
+    <node name="AssessmentReasonNotTested" refs="1" depth="0" schema="dbo" label="Assessment Reason Not Tested" />
+    <node name="BehaviourActivityType" refs="1" depth="0" schema="dbo" label="Behaviour Activity Type" />
+    <node name="BehaviourCategory" refs="1" depth="0" schema="dbo" label="Behaviour Category" />
+    <node name="BudgetName" refs="1" depth="0" schema="dbo" label="Budget Name" />
+    <node name="BudgetType" refs="1" depth="0" schema="dbo" label="Budget Type" />
+    <node name="ChartAccountCategory" refs="1" depth="0" schema="dbo" label="Chart Account Category" />
+    <node name="ChartAccountUsage" refs="1" depth="0" schema="dbo" label="Chart Account Usage" />
+    <node name="CharterSchoolType" refs="1" depth="0" schema="dbo" label="Charter School Type" />
+    <node name="ClassPeriodTypeDescriptor" refs="1" depth="0" schema="dbo" label="Class Period Type Descriptor" />
+    <node name="CohortScope" refs="1" depth="0" schema="dbo" label="Cohort Scope" />
+    <node name="CohortTypeDescription" refs="1" depth="0" schema="dbo" label="Cohort Type Description" />
+    <node name="ContactPointSystem" refs="1" depth="0" schema="dbo" label="Contact Point System" />
+    <node name="ContactRelationship" refs="1" depth="0" schema="dbo" label="Contact Relationship" />
+    <node name="CourseCreditUnit" refs="1" depth="0" schema="dbo" label="Course Credit Unit" />
+    <node name="CourseGPA" refs="1" depth="0" schema="dbo" label="Course GPA" />
+    <node name="CourseInteractionMode" refs="1" depth="0" schema="dbo" label="Course Interaction Mode" />
+    <node name="CourseLevelCharacteristic" refs="1" depth="0" schema="dbo" label="Course Level Characteristic" />
+    <node name="CourseSectionDeliveryMode" refs="1" depth="0" schema="dbo" label="Course Section Delivery Mode" />
+    <node name="CourseSectionEnrollmentStatusType" refs="1" depth="0" schema="dbo" label="Course Section Enrollment Status Type" />
+    <node name="CourseSectionEntryType" refs="1" depth="0" schema="dbo" label="Course Section Entry Type" />
+    <node name="CourseSectionExitType" refs="1" depth="0" schema="dbo" label="Course Section Exit Type" />
+    <node name="CredentialType" refs="1" depth="0" schema="dbo" label="Credential Type" />
+    <node name="CreditTypeEarned" refs="1" depth="0" schema="dbo" label="Credit Type Earned" />
+    <node name="DisabilityConditionStatusCode" refs="1" depth="0" schema="dbo" label="Disability Condition Status Code" />
+    <node name="DisabilityConditionType" refs="1" depth="0" schema="dbo" label="Disability Condition Type" />
+    <node name="DisabilityDeterminationSourceType" refs="1" depth="0" schema="dbo" label="Disability Determination Source Type" />
+    <node name="DisabilityType" refs="1" depth="0" schema="dbo" label="Disability Type" />
+    <node name="EndOfCourseRequirement" refs="1" depth="0" schema="dbo" label="End Of Course Requirement" />
+    <node name="EnvironmentSetting" refs="1" depth="0" schema="dbo" label="Environment Setting" />
+    <node name="ExpenseCategory" refs="1" depth="0" schema="dbo" label="Expense Category" />
+    <node name="FeeType" refs="1" depth="0" schema="dbo" label="Fee Type" />
+    <node name="GradeLevelType" refs="1" depth="0" schema="dbo" label="Grade Level Type" />
+    <node name="HealthCheckType" refs="1" depth="0" schema="dbo" label="Health Check Type" />
+    <node name="HealthInsuranceCoverage" refs="1" depth="0" schema="dbo" label="Health Insurance Coverage" />
+    <node name="ImmunizationType" refs="1" depth="0" schema="dbo" label="Immunization Type" />
+    <node name="IncidentBehavior" refs="1" depth="0" schema="dbo" label="Incident Behavior" />
+    <node name="IncidentLocation" refs="1" depth="0" schema="dbo" label="Incident Location" />
+    <node name="IncidentParticipation" refs="1" depth="0" schema="dbo" label="Incident Participation" />
+    <node name="IncidentReporterType" refs="1" depth="0" schema="dbo" label="Incident Reporter Type" />
+    <node name="IncidentStatus" refs="1" depth="0" schema="dbo" label="Incident Status" />
+    <node name="IncidentTimeDescriptionCode" refs="1" depth="0" schema="dbo" label="Incident Time Description Code" />
+    <node name="MealMenu" refs="1" depth="0" schema="dbo" label="Meal Menu">
+      <node name="MealLogs" refs="0" depth="1" schema="dbo" label="Meal Logs" />
+    </node>
+    <node name="MealPlans" refs="1" depth="0" schema="dbo" label="Meal Plans">
+      <node name="FeedingFeeCollections" refs="0" depth="1" schema="dbo" label="Feeding Fee Collections" />
+    </node>
+    <node name="MedicalAlertIndicator" refs="1" depth="0" schema="dbo" label="Medical Alert Indicator" />
+    <node name="MovementTransactionType" refs="1" depth="0" schema="dbo" label="Movement Transaction Type" />
+    <node name="NatureOfBehaviour" refs="1" depth="0" schema="dbo" label="Nature Of Behaviour" />
+    <node name="OrganizationElementType" refs="1" depth="0" schema="dbo" label="Organization Element Type">
+      <node name="OrganizationType" refs="1" depth="1" schema="dbo" label="Organization Type" />
+    </node>
+    <node name="ParameterType" refs="1" depth="0" schema="dbo" label="Parameter Type">
+      <node name="GeneralParameters" refs="0" depth="1" schema="dbo" label="General Parameters" />
+    </node>
+    <node name="PaymentStatus" refs="1" depth="0" schema="dbo" label="Payment Status" />
+    <node name="InformationVerification" refs="1" depth="0" schema="dbo" label="Information Verification" />
+    <node name="PersonIdentificationSystem" refs="1" depth="0" schema="dbo" label="Person Identification System" />
+    <node name="ProductCategory" refs="1" depth="0" schema="dbo" label="Product Category" />
+    <node name="ProgramType" refs="1" depth="0" schema="dbo" label="Program Type" />
+    <node name="ProgressLevel" refs="1" depth="0" schema="dbo" label="Progress Level" />
+    <node name="PurchaseOrderStatus" refs="1" depth="0" schema="dbo" label="Purchase Order Status" />
+    <node name="SalaryBasisFrequency" refs="1" depth="0" schema="dbo" label="Salary Basis Frequency" />
+    <node name="SalaryBasisType" refs="1" depth="0" schema="dbo" label="Salary Basis Type" />
+    <node name="SalaryComponent" refs="1" depth="0" schema="dbo" label="Salary Component" />
+    <node name="SalaryComponentType" refs="1" depth="0" schema="dbo" label="Salary Component Type" />
+    <node name="SalaryStatus" refs="1" depth="0" schema="dbo" label="Salary Status" />
+    <node name="SchoolLevel" refs="1" depth="0" schema="dbo" label="School Level" />
+    <node name="SchoolType" refs="1" depth="0" schema="dbo" label="School Type" />
+    <node name="ScreeningStatus" refs="1" depth="0" schema="dbo" label="Screening Status" />
+    <node name="SectionCharacteristics" refs="1" depth="0" schema="dbo" label="Section Characteristics" />
+    <node name="SessionType" refs="1" depth="0" schema="dbo" label="Session Type" />
+    <node name="StaffClassification" refs="1" depth="0" schema="dbo" label="Staff Classification" />
+    <node name="StockTransactionType" refs="1" depth="0" schema="dbo" label="Stock Transaction Type" />
+    <node name="TeachingAssignmentRole" refs="1" depth="0" schema="dbo" label="Teaching Assignment Role" />
+    <node name="TermDescriptor" refs="1" depth="0" schema="dbo" label="Term Descriptor" />
+    <node name="DocumentStore" refs="0" depth="0" schema="dbo" label="Document Store" />
+    <node name="ProgramGoal" refs="0" depth="0" schema="dbo" label="Program Goal" />
+    <node name="ReportParameters" refs="0" depth="0" schema="dbo" label="Report Parameters" />
+    <node name="SiteContent" refs="0" depth="0" schema="dbo" label="Site Content" />
+    <node name="StockAdjustment" refs="0" depth="0" schema="dbo" label="Stock Adjustment" />
+    <node name="FeeCollectionAccountingLedgerMini" refs="0" depth="0" schema="dbo" label="Fee Collection Accounting Ledger Mini" />
+    <node name="MiniFeeReminder" refs="0" depth="0" schema="dbo" label="Mini Fee Reminder" />
+    <node name="AccountDocumentSource" refs="0" depth="0" schema="dbo" label="Account Document Source" />
+    <node name="DisciplinaryActionTaken" refs="0" depth="0" schema="dbo" label="Disciplinary Action Taken" />
+    <node name="HearingScreeningStatus" refs="0" depth="0" schema="dbo" label="Hearing Screening Status" />
+    <node name="MealType" refs="0" depth="0" schema="dbo" label="Meal Type" />
+    <node name="SalaryComponentReason" refs="0" depth="0" schema="dbo" label="Salary Component Reason" />
+    <node name="CredentialBasis" refs="0" depth="0" schema="dbo" label="Credential Basis" />
+    <node name="AttendanceRates" refs="0" depth="0" schema="dbo" label="Attendance Rates" />
+  </node>
+  <node name="dwh_Home" schema="dwh" label="Dwh" type="Content">
+    <node name="ContinousClassPerformanceOvertimeCurrentSession" refs="0" depth="0" schema="dwh" label="Continous Class Performance Overtime Current Session" />
+  </node>
+  <node name="reports_Home" schema="reports" label="Reports" type="Content" />
+</map>

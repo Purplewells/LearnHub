@@ -19,9 +19,12 @@
     <field name="DisciplineAlignment" type="DataView" label="Discipline Alignment">
       <dataView controller="DisciplineAlignment" view="grid1" />
     </field>
+    <field name="IncidentTimeDescriptionCode" type="DataView" label="Incident Time Description Code">
+      <dataView controller="IncidentTimeDescriptionCode" view="grid1" />
+    </field>
   </fields>
   <views>
-    <view id="BehaviourForm" type="Form" label="BEHAVIOUR WORK HUB">
+    <view id="BehaviourForm" type="Form" label="BEHAVIOUR WORK HUB" tags="material-icon-self_improvement">
       <categories>
         <category headerText="DISCIPLINE ALIGNMENT" tab="DISCIPLINE ALIGNMENT" id="c6" flow="NewColumn">
           <dataFields>
@@ -51,6 +54,11 @@
         <category headerText="BEHAVIOUR ACTIVITY TYPE" tab="BEHAVIOUR ACTIVITY TYPE" id="c3">
           <dataFields>
             <dataField fieldName="BehaviourActivityType" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-dock-bottom" />
+          </dataFields>
+        </category>
+        <category tab="INCIDENT TIME" id="c7">
+          <dataFields>
+            <dataField fieldName="IncidentTimeDescriptionCode" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-dock-bottom" />
           </dataFields>
         </category>
       </categories>
