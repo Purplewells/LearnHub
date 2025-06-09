@@ -189,7 +189,7 @@ from "dbo"."Person" "Person"
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Contact" sortExpression="ModifiedDate DESC" filter="(ExtendedLiveStatusEndDate &gt;= GETDATE() OR ExtendedLiveStatusEndDate IS NULL  AND CurrentYearStatus &lt;&gt; 'No' )" reportLabel="List of Contacts" reportTemplate="true">
+    <view id="grid1" type="Grid" commandId="command1" label="Contact" filter="(ExtendedLiveStatusEndDate &gt;= GETDATE() OR ExtendedLiveStatusEndDate IS NULL  AND CurrentYearStatus &lt;&gt; 'No' )" reportLabel="List of Contacts" reportTemplate="true">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="FirstName" columns="18" />

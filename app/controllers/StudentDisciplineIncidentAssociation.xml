@@ -50,20 +50,20 @@ from "dbo"."StudentDisciplineIncidentAssociation" "StudentDisciplineIncidentAsso
     <field name="FirstName" type="String" readOnly="true" label="First Name" length="35" />
     <field name="LastName" type="String" readOnly="true" label="Last Name" length="35" />
     <field name="IncidentParticipationID" type="Int32" label="Incident Participation ID" showInSummary="true">
-      <items style="Lookup" dataController="IncidentParticipation" newDataView="createForm1" dataValueField="IncidentParticipationID" dataTextField="ParticipationDescription" />
+      <items style="DropDownList" dataController="IncidentParticipation" dataValueField="IncidentParticipationID" dataTextField="ParticipationDescription" dataView="grid1" />
     </field>
     <field name="IncidentParticipationDescription" type="String" readOnly="true" label="Incident Involvement" length="20" />
     <field name="BehaviourCategoryTypeID" type="Int32" label="Behaviour Category Type ID" showInSummary="true">
-      <items style="Lookup" dataController="BehaviourCategory" newDataView="createForm1" dataValueField="BehaviourCategoryTypeID" dataTextField="CategoryType" copy="BehaviourCategoryTypePoints=Points" />
+      <items style="DropDownList" dataController="BehaviourCategory" dataValueField="BehaviourCategoryTypeID" dataTextField="CategoryType" copy="BehaviourCategoryTypePoints=Points" dataView="grid1" />
     </field>
     <field name="BehaviourCategoryType" type="String" readOnly="true" label="Behaviour Category Type" length="60" />
     <field name="BehaviourCategoryTypePoints" type="Single" readOnly="true" label="Points" />
     <field name="ActionTakenID" type="Int32" label="Action Taken ID" showInSummary="true">
-      <items style="Lookup" dataController="ActionTaken" newDataView="createForm1" dataValueField="ActionTakenID" dataTextField="ActionTaken" />
+      <items style="DropDownList" dataController="ActionTaken" dataValueField="ActionTakenID" dataTextField="ActionTaken" dataView="grid1" />
     </field>
     <field name="ActionTaken" type="String" readOnly="true" label="Action Taken" length="50" />
     <field name="PersonID" type="Int32" label="Person ID">
-      <items style="Lookup" dataController="zlkpStaffList" newDataView="createForm1" dataValueField="PersonID" dataTextField="StaffNameTitle" copy="FirstName=FirstName, LastName=LastName" dataView="grid1" />
+      <items style="Lookup" dataController="zlkpStaffList" dataValueField="PersonID" dataTextField="StaffNameTitle" copy="FirstName=FirstName, LastName=LastName" dataView="grid1" />
     </field>
     <field name="StaffFirstName" type="String" readOnly="true" label="Staff First Name" length="35" />
     <field name="StaffLastName" type="String" readOnly="true" label="Staff Last Name" length="35" />

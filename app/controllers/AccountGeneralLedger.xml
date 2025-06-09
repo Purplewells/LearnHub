@@ -41,15 +41,15 @@ from "dbo"."account_general_ledger" "account_general_ledger"
     <field name="AccountID" type="Int32" label="Account ID" showInSummary="true">
       <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" copy="AccountNumber=AccountNumber, LFT=LFT, RGT=RGT, AccountType=AccountType" />
     </field>
-    <field name="AccountName" type="String" readOnly="true" label="Account Name" length="25" />
+    <field name="AccountName" type="String" readOnly="true" label="Account Name" length="20" />
     <field name="AccountNumber" type="String" readOnly="true" label="Account No." length="20" />
     <field name="LFT" type="Int32" readOnly="true" label="LFT" />
     <field name="RGT" type="Int32" readOnly="true" label="RGT" />
     <field name="AccountType" type="String" readOnly="true" label="Account Type" length="20" />
     <field name="ExtSourceName" type="String" label="Source Name" length="40" showInSummary="true" />
-    <field name="DebitAmount" type="Decimal" default="((0.00))" label="Debit Amount" showInSummary="true" />
-    <field name="CreditAmount" type="Decimal" default="((0.00))" label="Credit Amount" showInSummary="true" />
-    <field name="TransactionDate" type="DateTime" dataFormatString="d" default="(getdate())" label="Transaction Date" />
+    <field name="DebitAmount" type="Decimal" default="((0.00))" label="Debit Amount" showInSummary="true" formatOnClient="false" />
+    <field name="CreditAmount" type="Decimal" default="((0.00))" label="Credit Amount" showInSummary="true" formatOnClient="false" />
+    <field name="TransactionDate" type="DateTime" dataFormatString="" default="(getdate())" label="Transaction Date" />
     <field name="Memo" type="String" label="Memo" length="255" />
     <field name="ReferenceNumber" type="String" label="Reference No." length="20" />
     <field name="PostingDate" type="DateTime" dataFormatString="g" label="Posting Date" />
@@ -63,20 +63,26 @@ from "dbo"."account_general_ledger" "account_general_ledger"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="TransactionID" columns="15" hidden="true" />
-        <dataField fieldName="AccountID" aliasFieldName="AccountName" />
-        <dataField fieldName="AccountNumber" columns="15" />
+        <dataField fieldName="AccountID" aliasFieldName="AccountName" columns="20" />
+        <dataField fieldName="AccountNumber" columns="10" />
         <dataField fieldName="AccountType" columns="20" />
-        <dataField fieldName="DebitAmount" columns="15" />
-        <dataField fieldName="CreditAmount" columns="15" />
+        <dataField fieldName="DebitAmount" columns="20" aggregate="Sum" dataFormatString="N">
+          <headerText />
+        </dataField>
+        <dataField fieldName="CreditAmount" columns="20" aggregate="Sum" dataFormatString="N">
+          <headerText />
+        </dataField>
         <dataField fieldName="LFT" columns="5" hidden="true" />
         <dataField fieldName="RGT" columns="5" hidden="true" />
-        <dataField fieldName="ReferenceNumber" columns="12">
+        <dataField fieldName="ReferenceNumber" columns="12" hidden="true">
           <headerText>Ref No.</headerText>
         </dataField>
         <dataField fieldName="TransactionDate" columns="20" />
         <dataField fieldName="PostingDate" columns="20" />
-        <dataField fieldName="ExtSourceName" columns="25" />
-        <dataField fieldName="Memo" columns="40" />
+        <dataField fieldName="ExtSourceName" columns="15">
+          <headerText>Source</headerText>
+        </dataField>
+        <dataField fieldName="Memo" columns="50" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
@@ -90,8 +96,8 @@ from "dbo"."account_general_ledger" "account_general_ledger"
         <dataField fieldName="AccountID" aliasFieldName="AccountName" />
         <dataField fieldName="AccountNumber" columns="15" />
         <dataField fieldName="AccountType" columns="20" />
-        <dataField fieldName="DebitAmount" columns="15" />
-        <dataField fieldName="CreditAmount" columns="15" />
+        <dataField fieldName="DebitAmount" columns="15" aggregate="Sum" />
+        <dataField fieldName="CreditAmount" columns="15" aggregate="Sum" />
         <dataField fieldName="LFT" columns="5" hidden="true" />
         <dataField fieldName="RGT" columns="5" hidden="true" />
         <dataField fieldName="ReferenceNumber" columns="12">
@@ -124,7 +130,7 @@ from "dbo"."account_general_ledger" "account_general_ledger"
         <category id="c2" flow="NewColumn">
           <description />
           <dataFields>
-            <dataField fieldName="TransactionDate" columns="10" />
+            <dataField fieldName="TransactionDate" columns="20" />
             <dataField fieldName="PostingDate" columns="20" />
             <dataField fieldName="ExtSourceName" columns="40" />
             <dataField fieldName="ReferenceNumber" columns="20" />
@@ -170,7 +176,7 @@ from "dbo"."account_general_ledger" "account_general_ledger"
         <category id="c2" flow="NewColumn">
           <description />
           <dataFields>
-            <dataField fieldName="TransactionDate" columns="10" />
+            <dataField fieldName="TransactionDate" columns="20" />
             <dataField fieldName="PostingDate" columns="20" />
             <dataField fieldName="ExtSourceName" columns="40" />
             <dataField fieldName="ReferenceNumber" columns="20" />
@@ -182,17 +188,17 @@ from "dbo"."account_general_ledger" "account_general_ledger"
   <actions>
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
-      <action id="a3" commandName="Delete" />
+      <action id="a2" commandName="Edit" whenView="grid200" />
+      <action id="a3" commandName="Delete" whenView="grid200" />
       <action id="a6" />
-      <action id="a7" commandName="New" commandArgument="grid1" />
-      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a7" commandName="New" commandArgument="grid1" whenView="grid200" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" whenView="grid200" />
       <action id="a9" />
       <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
-      <action id="a1" commandName="Edit" />
-      <action id="a2" commandName="Delete" />
+      <action id="a1" commandName="Edit" whenView="grid200" />
+      <action id="a2" commandName="Delete" whenView="grid200" />
       <action id="a3" commandName="Cancel" />
       <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
@@ -205,17 +211,19 @@ from "dbo"."account_general_ledger" "account_general_ledger"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" whenView="grid200" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid200" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid200" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a100" commandName="ReportAsPdf" headerText="Export To PDF" />
+      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" />
-      <action id="a4" commandName="ExportRss" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Export To RSS" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -226,12 +234,6 @@ from "dbo"."account_general_ledger" "account_general_ledger"
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
-    </actionGroup>
-    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" />
-      <action id="a2" commandName="ReportAsImage" />
-      <action id="a3" commandName="ReportAsExcel" />
-      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

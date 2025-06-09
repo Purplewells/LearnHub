@@ -63,12 +63,29 @@ from "dbo"."chart_of_accounts" "chart_of_accounts"
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Modified Date" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Chart Of Accounts">
+    <view id="grid1" type="Grid" commandId="command1" label="Chart Of Accounts" filter="IsActive = 1">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="AccountName" columns="25" />
         <dataField fieldName="AccountNumber" columns="20" />
-        <dataField fieldName="Label" columns="20" />
+        <dataField fieldName="Label" columns="35" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="AccountTypeID" aliasFieldName="AccountType" />
+        <dataField fieldName="AccountCategoryID" aliasFieldName="AccountCategory" />
+        <dataField fieldName="AccountUsageID" aliasFieldName="AccountUsage" />
+        <dataField fieldName="LFT" columns="5" />
+        <dataField fieldName="RGT" columns="5" />
+        <dataField fieldName="ParentAccountID" aliasFieldName="ParentAccountName" columns="25" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="all_chart_of_accounts" type="Grid" commandId="command1" label="All Chart Of Accounts">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="AccountName" columns="25" />
+        <dataField fieldName="AccountNumber" columns="20" />
+        <dataField fieldName="Label" columns="35" />
         <dataField fieldName="IsActive" />
         <dataField fieldName="AccountTypeID" aliasFieldName="AccountType" />
         <dataField fieldName="AccountCategoryID" aliasFieldName="AccountCategory" />

@@ -782,7 +782,7 @@ SET @Result_ShowMessage = 'Base Reporting has been reset successfully for curren
  EXEC [dbo].[usp_term_basis_person_centred_evaluation]
 SET @Result_ShowMessage = 'Attendance metrics has been refreshed successfully for current academic session.' ]]></data>
       </action>
-      <action commandName="Custom" commandArgument="generate_summarised_notes" headerText="Write AI Supported Remarks" id="a113" cssClass="material-icon-text_rotation_none" confirmation="This action supports teachers to auto generate student remarks. Implementation still in progress." notify="This action supports teachers to auto generate student remarks. Implementation still in progress." />
+      <action commandName="Custom" commandArgument="generate_summarised_remarks" headerText="Write AI Supported Remarks" id="a113" cssClass="material-icon-text_rotation_none" confirmation="This action supports teachers to auto generate student remarks. Implementation still in progress." notify="This action supports teachers to auto generate student remarks. Implementation still in progress." whenLastCommandName="Any" />
       <action id="a107" />
       <action id="a6" commandName="Import" commandArgument="createForm1_import_assessment" />
       <action id="a7" commandName="DataSheet" />

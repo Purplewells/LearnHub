@@ -41,8 +41,8 @@ from "dwh"."pbi_vw_metric_discipline_incidents_per_academic_year" "pbi_vw_metric
     <field name="Location" type="String" label="Location" length="100" />
     <field name="Incident" type="String" allowQBE="false" allowSorting="false" label="Incident" />
     <field name="ReporterType" type="String" label="Reporter Type" length="100" />
-    <field name="Rvd" type="String" allowNulls="false" label="Rvd" readOnly="true" length="3" />
-    <field name="Disability" type="String" allowNulls="false" label="Disability" readOnly="true" length="3" />
+    <field name="Rvd" type="String" allowNulls="false" label="Rvd" length="3" />
+    <field name="Disability" type="String" allowNulls="false" label="Disability" length="3" />
     <field name="ActionTaken" type="String" label="Action Taken" length="50" />
     <field name="ParticipationDescription" type="String" label="Participation" length="20" />
   </fields>

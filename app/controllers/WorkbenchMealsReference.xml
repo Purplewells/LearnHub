@@ -12,7 +12,7 @@
     </field>
   </fields>
   <views>
-    <view id="MealsWorkbench" type="Form" label="MEALS CONFIG WORKBENCH">
+    <view id="MealsWorkbench" type="Form" label="MEALS CONFIG WORKBENCH" tags="material-icon-inventory">
       <headerText>&lt;strong&gt;The Meals Workbench allows user to configure the meal services module.&lt;/strong&gt;</headerText>
       <categories>
         <category tab="MEAL MENU" id="c1" flow="NewColumn">

@@ -89,7 +89,7 @@ from "dbo"."StockTransactions" "StockTransactions"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="ProductID" aliasFieldName="ProductName" />
-        <dataField fieldName="SKUCode" columns="10" />
+        <dataField fieldName="SKUCode" columns="15" />
         <dataField fieldName="ProductCategoryName" columns="20" tag="pivot1-col1&#xD;&#xA;&#xD;&#xA;pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;Number of Transactions By Product Category&quot;" />
         <dataField fieldName="TransactionDate" columns="20" tag="pivot1-row1-columnstacked-year&#xD;&#xA;pivot1-row2-month&#xD;&#xA;pivot1-title:&quot;Count of Transactions By Transaction Date&quot;&#xD;&#xA;&#xD;&#xA;pivot7-row1-line-date&#xD;&#xA;pivot7-title:&quot;Count of Stock Movements Over Time&quot;&#xD;&#xA;pivot7-medium&#xD;&#xA;pivot7-haxistitle:&quot;Transaction Date&quot;&#xD;&#xA;pivot7-vaxistitle:&quot;No. of Transactions&quot;&#xD;&#xA;&#xD;&#xA;" />
         <dataField fieldName="Quantity" columns="5">

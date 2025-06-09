@@ -31,8 +31,10 @@
             <dataField fieldName="BudgetType" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
           </dataFields>
         </category>
-        <category tab="ACCOUNT TYPE SOURCE" id="c6">
-          <dataFields />
+        <category tab="ACCOUNT SOURCE" id="c6">
+          <dataFields>
+            <dataField fieldName="AccountDocumentSource" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
         </category>
         <category tab="ACCOUNT TYPE" id="c7">
           <dataFields>
@@ -96,6 +98,9 @@
     </field>
     <field name="ChartAccountCategory" type="DataView" label="Chart Account Category">
       <dataView controller="ChartAccountCategory" view="grid1" />
+    </field>
+    <field name="AccountDocumentSource" type="DataView" label="Account Source">
+      <dataView controller="AccountDocumentSource" view="grid1" />
     </field>
   </fields>
   <actions>

@@ -13,12 +13,13 @@ select
 	,"CreditAccount"."AccountName" "CreditAccountName"
 	,"CreditAccountType"."AccountType" "CreditAccountType"
 	,"manual_account_journal_entries"."Amount" "Amount"
+	,"manual_account_journal_entries"."Currency" "Currency"
 	,"manual_account_journal_entries"."Description" "Description"
 	,"manual_account_journal_entries"."EnteredBy" "EnteredBy"
-	,"manual_account_journal_entries"."CreatedAt" "CreatedDate"
 	,"manual_account_journal_entries"."ModifiedDate" "ModifiedDate"
 	,"manual_account_journal_entries"."CreatedBy" "CreatedBy"
 	,"manual_account_journal_entries"."ModifiedBy" "ModifiedBy"
+	,"manual_account_journal_entries"."CreatedDate" "CreatedDate"
 from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
 	left join "dbo"."chart_of_accounts" "DebitAccount" on "manual_account_journal_entries"."DebitAccountID" = "DebitAccount"."AccountID"
 	left join "dbo"."account_type" "DebitAccountType" on "DebitAccount"."AccountTypeID" = "DebitAccountType"."AccountTypeID"
@@ -46,13 +47,14 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
     </field>
     <field name="CreditAccountName" type="String" readOnly="true" label="Credit Account" length="30" />
     <field name="CreditAccountType" type="String" readOnly="true" label="Credit Account Type" length="20" />
-    <field name="Amount" type="Decimal" label="Amount" showInSummary="true" dataFormatString="D" />
-    <field name="Description" type="String" label="Description" length="255" showInSummary="true" />
+    <field name="Amount" type="Decimal" label="Amount" showInSummary="true" dataFormatString="N" formatOnClient="false" />
+    <field name="Currency" type="String" label="Curr" length="10" showInSummary="true" />
+    <field name="Description" type="String" label="Description" length="255" />
     <field name="EnteredBy" type="String" label="Entered By" length="50" />
-    <field name="CreatedDate" type="DateTime" dataFormatString="d" default="(getdate())" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" default="(getutcdate())" label="Modified Date" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Created Date" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Active Manual Entries" sortExpression="TransactionDate DESC" filter="CAST(TransactionDate AS DATE) = CAST(GETDATE() AS DATE)">
@@ -62,14 +64,15 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
         <dataField fieldName="TransactionDate" columns="20" />
         <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
         <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
-        <dataField fieldName="Amount" columns="15" dataFormatString="D" />
+        <dataField fieldName="Amount" columns="20" dataFormatString="D" />
+        <dataField fieldName="Currency" columns="10" />
         <dataField fieldName="EnteredBy" columns="30" hidden="true" />
-        <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
-        <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
         <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
+        <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
       </dataFields>
     </view>
     <view id="grid1_historical_entries" type="Grid" commandId="command1" label="All Historical Entries" sortExpression="TransactionDate DESC">
@@ -79,14 +82,15 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
         <dataField fieldName="TransactionDate" columns="20" />
         <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
         <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
-        <dataField fieldName="Amount" columns="15" dataFormatString="D" />
+        <dataField fieldName="Amount" columns="20" dataFormatString="D" />
+        <dataField fieldName="Currency" columns="10" />
         <dataField fieldName="EnteredBy" columns="30" hidden="true" />
-        <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
-        <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
         <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
+        <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Enter &amp; Maintain Journal Entry">
@@ -102,11 +106,14 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
             <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
             <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
-            <dataField fieldName="CreatedDate" columns="10" hidden="true" />
+            <dataField fieldName="Currency" columns="10" />
             <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="EnteredBy" columns="50" />
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+            <dataField fieldName="EnteredBy" columns="50" hidden="true" />
+            <dataField fieldName="CreatedBy" columns="50">
+              <headerText>Provenance</headerText>
+            </dataField>
             <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -120,15 +127,16 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
             <dataField fieldName="Description" />
             <dataField fieldName="TransactionDate" columns="10" />
             <dataField fieldName="Amount" columns="15" />
+            <dataField fieldName="Currency" columns="10" />
             <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
             <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
             <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
             <dataField fieldName="EnteredBy" columns="50" hidden="true" />
-            <dataField fieldName="CreatedDate" columns="10" hidden="true" />
             <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
             <dataField fieldName="CreatedBy" columns="50" hidden="true" />
             <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -218,5 +226,14 @@ if (fieldValue == null) {
     // set the focus on the field and display an error
     this.result.focus('Amount', 'Required field.');
 }]]></rule>
+    <rule id="r103" commandName="New|Insert|Update" type="Sql" phase="After" name="setEnteredBy"><![CDATA[--SET @EnteredBy = CreatedBy]]></rule>
+    <rule id="r104" commandName="New|Insert|Update" type="Sql" phase="After" name="setCurrency"><![CDATA[SET @CURRENCY  = ( select top 1 Code from zlkp_currency where IsActive = 1 and IsDefault = 1)
+
+UPDATE man
+SET Currency = @CURRENCY
+FROM manual_account_journal_entries man
+WHERE man.JournalEntryID = @JournalEntryID]]></rule>
+    <rule id="r105" commandName="Custom" type="Sql" phase="Execute" name="post_manual_to_account_gl"><![CDATA[--DECLARE @JournalEntryID INT = @JournalEntryID
+--EXEC usp_ops_auto_p2_post_manual_to_account_ledger @JournalEntryID]]></rule>
   </businessRules>
 </dataController>

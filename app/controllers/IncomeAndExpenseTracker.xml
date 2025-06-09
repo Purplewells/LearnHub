@@ -60,7 +60,7 @@ FROM (
     <field name="Curr" type="String" label="Curr" length="20" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Income And Expense Tracker">
+    <view id="grid1" type="Grid" commandId="command1" label="Income And Expense Tracker" reportLabel="Income &amp; Expense Tracker" reportTemplate="true">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="BudgetID" columns="15" hidden="true" />

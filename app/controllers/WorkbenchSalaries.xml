@@ -30,7 +30,7 @@
     </field>
   </fields>
   <views>
-    <view id="SalariesWorkBench" type="Form" label="SALARY CONFIGURATION WORKBENCH">
+    <view id="SalariesWorkBench" type="Form" label="SALARY CONFIGURATION WORKBENCH" tags="material-icon-arrow_circle_up">
       <categories>
         <category id="c2" tab="SALARY BASIS" flow="NewColumn">
           <dataFields>

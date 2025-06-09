@@ -9,6 +9,9 @@ select
 	,"ProductCategory"."CategoryName" "ProductCategory"
 	,"PurchaseOrderDetail"."Quantity" "Quantity"
 	,"PurchaseOrderDetail"."UnitPrice" "UnitPrice"
+	,"PurchaseOrderDetail"."QuantityReceived" "QuantityReceived"
+	,"PurchaseOrderDetail"."UnitOfMeasureID" "UnitOfMeasureID"
+	,"UnitOfMeasure"."UOMName" "UnitOfMeasure"
 	,"PurchaseOrderDetail"."IsArrived" "IsArrived"
 	,"PurchaseOrderDetail"."ArrivalDate" "ArrivalDate"
 	,"PurchaseOrderDetail"."Note" "Note"
@@ -19,9 +22,6 @@ select
 	,"PurchaseOrderDetail"."PurchaseOrderID" "PurchaseOrderID"
 	,"PurchaseOrder"."TrackingNumber" "TrackingNumber"
 	,"PurchaseOrderSupplier"."SupplierName" "SupplierName"
-	,"PurchaseOrderDetail"."UnitOfMeasureID" "UnitOfMeasureID"
-	,"UnitOfMeasure"."UOMName" "UnitOfMeasure"
-	,"PurchaseOrderDetail"."QuantityReceived" "QuantityReceived"
 from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
 	left join "dbo"."Product" "Product" on "PurchaseOrderDetail"."ProductID" = "Product"."ProductID"
 	left join "dbo"."zlkpProductCategory" "ProductCategory" on "Product"."CategoryID" = "ProductCategory"."ProductCategoryID"
@@ -42,13 +42,18 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
       <items style="Lookup" dataController="Product" newDataView="createForm1" dataValueField="ProductID" dataTextField="ProductName" copy="ProductCategory=CategoryName&#xD;&#xA;UnitPrice = UnitPrice" />
     </field>
     <field name="ProductName" type="String" readOnly="true" label="Product Name" length="45" />
-    <field name="ProductCategory" type="String" readOnly="true" label="Product Category" length="20" />
+    <field name="ProductCategory" type="String" readOnly="true" label="Category" length="20" />
     <field name="Quantity" type="Int32" label="Quantity" showInSummary="true" causesCalculate="true" />
     <field name="UnitPrice" type="Decimal" dataFormatString="c" label="Unit Price" showInSummary="true" causesCalculate="true" />
-    <field name="ExtendedCost" type="Decimal" readOnly="true" dataFormatString="c" label="Extended Cost" computed="true" showInSummary="true">
+    <field name="QuantityReceived" type="Decimal" label="Qty Rec'd" showInSummary="true" />
+    <field name="UnitOfMeasureID" type="Int32" label="Unit Of Measure ID" showInSummary="true">
+      <items style="Lookup" dataController="UnitOfMeasure" newDataView="createForm1" dataValueField="UnitOfMeasureID" dataTextField="Uomname" />
+    </field>
+    <field name="UnitOfMeasure" type="String" readOnly="true" label="UOM" length="20" />
+    <field name="ExtendedCost" type="Decimal" readOnly="true" dataFormatString="c" label="Extended Cost" computed="true">
       <formula>PurchaseOrderDetail.UnitPrice * PurchaseOrderDetail.Quantity</formula>
     </field>
-    <field name="IsArrived" type="Boolean" label="Is Arrived" showInSummary="true" />
+    <field name="IsArrived" type="Boolean" label="Is Arrived" />
     <field name="ArrivalDate" type="DateTime" label="Arrival Date" />
     <field name="Note" type="String" label="Note" length="1024" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
@@ -60,11 +65,6 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
     </field>
     <field name="TrackingNumber" type="String" readOnly="true" label="Tracking Number" length="15" />
     <field name="SupplierName" type="String" readOnly="true" label="Supplier Name" length="50" />
-    <field name="UnitOfMeasureID" type="Int32" label="Unit Of Measure ID">
-      <items style="Lookup" dataController="UnitOfMeasure" newDataView="createForm1" dataValueField="UnitOfMeasureID" dataTextField="Uomname" />
-    </field>
-    <field name="UnitOfMeasure" type="String" readOnly="true" label="Unit Of Measure" length="20" />
-    <field name="QuantityReceived" type="Decimal" label="Qty Rec'd" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Purchase Order Detail">
@@ -79,6 +79,7 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
         <dataField fieldName="Quantity" columns="15" />
         <dataField fieldName="QuantityReceived" columns="15" />
         <dataField fieldName="UnitPrice" columns="15" />
+        <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
         <dataField fieldName="ExtendedCost" columns="15" aggregate="Sum" />
         <dataField fieldName="IsArrived" hidden="true" />
         <dataField fieldName="ArrivalDate" columns="10" hidden="true" />
@@ -87,7 +88,6 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
         <dataField fieldName="SupplierName" columns="50" />
-        <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Enter &amp; Maintain PO Line Item">
@@ -135,6 +135,7 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
             <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
             <dataField fieldName="Quantity" columns="15" />
             <dataField fieldName="UnitPrice" columns="15" />
+            <dataField fieldName="ProductCategory" columns="20" hidden="true" />
             <dataField fieldName="ExtendedCost" columns="15" />
             <dataField fieldName="IsArrived" />
             <dataField fieldName="ArrivalDate" columns="10" />
@@ -144,7 +145,6 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
             <dataField fieldName="Note" />
             <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
             <dataField fieldName="SupplierName" columns="50" hidden="true" />
-            <dataField fieldName="ProductCategory" columns="20" hidden="true" />
           </dataFields>
         </category>
       </categories>

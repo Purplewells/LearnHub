@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="StockVarianceOvertime" conflictDetection="overwriteChanges" label="Stock Variance Overtime" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="StockVarianceOvertime" conflictDetection="overwriteChanges" label="Stock Variance Overtime" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.StockVarianceOvertimeBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -43,14 +43,32 @@ from "dbo"."StockVarianceOvertime" "StockVarianceOvertime"
     <field name="StockTakeDate" type="DateTime" label="Stock Take Date" showInSummary="true" />
     <field name="Variance" type="Int32" label="Variance" showInSummary="true" />
     <field name="VariancePercentage" type="Decimal" dataFormatString="" label="% Variance" />
-    <field name="IsVarianceApproved" type="Boolean" label="IsApproved" />
+    <field name="IsVarianceApproved" type="Boolean" label="IsApproved" causesCalculate="true" />
     <field name="ApprovalDate" type="DateTime" dataFormatString="g" label="Approval Date" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Stock Variance">
+    <view id="grid1" type="Grid" commandId="command1" label="Outstanding Stock Variances" filter="IsVarianceApproved = 0">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ProductID" aliasFieldName="ProductName" />
+        <dataField fieldName="SKU" columns="10" />
+        <dataField fieldName="StockTakeDate" columns="20" />
+        <dataField fieldName="ProductQuantity" columns="15" hidden="true" />
+        <dataField fieldName="SystemQuantity" columns="15" />
+        <dataField fieldName="QuantityCounted" columns="20" />
+        <dataField fieldName="Variance" columns="15" />
+        <dataField fieldName="VariancePercentage" columns="15" dataFormatString="p" />
+        <dataField fieldName="IsVarianceApproved" columns="18" />
+        <dataField fieldName="ApprovalDate" columns="20" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_all_StockVarianceOvertime" type="Grid" commandId="command1" label="All Stock Variances">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="ProductID" aliasFieldName="ProductName" />
@@ -126,7 +144,7 @@ from "dbo"."StockVarianceOvertime" "StockVarianceOvertime"
   <actions>
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Edit" commandArgument="editForm1" headerText="Select" />
-      <action id="a2" commandName="Edit" headerText="Edit In-Line" />
+      <action id="a2" commandName="Edit" headerText="Edit Like Excel" cssClass="material-icon-tune" />
       <action id="a3" commandName="Delete" />
       <action id="a6" />
       <action id="a7" commandName="New" commandArgument="grid1" />
@@ -181,4 +199,22 @@ from "dbo"."StockVarianceOvertime" "StockVarianceOvertime"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert|Update|Calculate" type="Sql" phase="After" name="setApprovalDate"><![CDATA[IF @IsVarianceApproved = 1
+BEGIN
+    UPDATE svh
+    SET svh.ApprovalDate = GETDATE()
+    FROM StockVarianceOvertime svh
+    WHERE svh.VarianceID = @VarianceID;
+END
+ELSE
+BEGIN
+    UPDATE svh
+    SET svh.ApprovalDate = NULL
+    FROM StockVarianceOvertime svh
+    WHERE svh.VarianceID = @VarianceID;
+END
+]]></rule>
+    <rule id="r101" commandName="Calculate|Update" type="Code" phase="After" name="detectApprovalDate" />
+  </businessRules>
 </dataController>

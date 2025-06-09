@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="account_general_ledger" alias="account_general_ledger" created="2025-03-19T22:31:51" modified="2025-04-10T12:11:56" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="account_general_ledger" alias="account_general_ledger" created="2025-03-19T22:31:51" modified="2025-05-10T05:24:23" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Account" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="356" y="20">
       <foreignKeyColumn columnName="AccountID" parentColumnName="AccountID" />
     </foreignKey>
-    <foreignKey id="AccountType" parentTableSchema="dbo" parentTableName="account_type" baseForeignKey="Account" x="741" y="63">
+    <foreignKey id="AccountType" parentTableSchema="dbo" parentTableName="account_type" baseForeignKey="Account" x="741" y="64">
       <foreignKeyColumn columnName="AccountTypeID" parentColumnName="AccountTypeID" />
     </foreignKey>
   </foreignKeys>
@@ -20,7 +20,7 @@
     <column name="extSourceName" fieldName="ExtSourceName" label="Source Name" />
     <column name="DebitAmount" fieldName="DebitAmount" label="Debit Amount" />
     <column name="CreditAmount" fieldName="CreditAmount" label="Credit Amount" />
-    <column name="TransactionDate" fieldName="TransactionDate" label="Transaction Date" format="d" />
+    <column name="TransactionDate" fieldName="TransactionDate" label="Transaction Date" format="" />
     <column name="Memo" fieldName="Memo" label="Memo" />
     <column name="ReferenceNumber" fieldName="ReferenceNumber" label="Reference No." />
     <column name="PostingDate" fieldName="PostingDate" label="Posting Date" format="g" />

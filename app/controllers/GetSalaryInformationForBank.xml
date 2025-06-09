@@ -29,6 +29,7 @@ select
 	,"vw_ops_update_get_salary_information_for_bank"."BankName" "BankName"
 	,"vw_ops_update_get_salary_information_for_bank"."CurrencyName" "Curr"
 	,"vw_ops_update_get_salary_information_for_bank"."Occupation" "Occupation"
+	,"vw_ops_update_get_salary_information_for_bank"."BatchID" "BatchID"
 from "dbo"."vw_ops_update_get_salary_information_for_bank" "vw_ops_update_get_salary_information_for_bank"
 ]]></text>
     </command>
@@ -59,6 +60,7 @@ from "dbo"."vw_ops_update_get_salary_information_for_bank" "vw_ops_update_get_sa
     <field name="BankName" type="String" label="Bank Name" length="50" />
     <field name="Curr" type="String" label="Curr" length="20" />
     <field name="Occupation" type="String" label="Occupation" length="100" />
+    <field name="BatchID" type="Int32" label="BatchID" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Current Pay Composition" reportLabel="PAYSLIPS FOR BANK" reportTemplate="true" filter="IsCurrent = 1">
@@ -85,7 +87,7 @@ from "dbo"."vw_ops_update_get_salary_information_for_bank" "vw_ops_update_get_sa
         <dataField fieldName="Code" columns="20" hidden="true" />
         <dataField fieldName="PaymentDate" columns="20" />
         <dataField fieldName="IsApproved" hidden="true" />
-        <dataField fieldName="IsCurrent" columns="15">
+        <dataField fieldName="IsCurrent" columns="7">
           <headerText>ISC</headerText>
         </dataField>
         <dataField fieldName="SchoolName" hidden="true" />
@@ -95,9 +97,10 @@ from "dbo"."vw_ops_update_get_salary_information_for_bank" "vw_ops_update_get_sa
         <dataField fieldName="SSNo" columns="20" hidden="true" />
         <dataField fieldName="BankName" columns="50" hidden="true" />
         <dataField fieldName="Occupation" hidden="true" />
+        <dataField fieldName="BatchID" columns="8" />
       </dataFields>
     </view>
-    <view id="grid1_slip_report" type="Grid" commandId="command1" label="Historic Compensations" reportLabel="PAYSLIPS FOR BANK" reportTemplate="true" filter="IsCurrent = 0" groupExpression="EmployeeID, UPN">
+    <view id="grid1_slip_report" type="Grid" commandId="command1" label="Historic Compensations" reportLabel="PAYSLIPS FOR BANK" reportTemplate="true" filter="IsCurrent = 0" groupExpression="BatchID, UPN">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="EmployeeID" columns="15" hidden="true" />
@@ -121,7 +124,7 @@ from "dbo"."vw_ops_update_get_salary_information_for_bank" "vw_ops_update_get_sa
         <dataField fieldName="Code" columns="20" hidden="true" />
         <dataField fieldName="PaymentDate" columns="20" />
         <dataField fieldName="IsApproved" hidden="true" />
-        <dataField fieldName="IsCurrent" columns="15">
+        <dataField fieldName="IsCurrent" columns="7">
           <headerText>ISC</headerText>
         </dataField>
         <dataField fieldName="SchoolName" hidden="true" />
@@ -131,6 +134,7 @@ from "dbo"."vw_ops_update_get_salary_information_for_bank" "vw_ops_update_get_sa
         <dataField fieldName="SSNo" columns="20" hidden="true" />
         <dataField fieldName="BankName" columns="50" hidden="true" />
         <dataField fieldName="Occupation" hidden="true" />
+        <dataField fieldName="BatchID" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Get Salary Information For Bank">
@@ -164,6 +168,7 @@ from "dbo"."vw_ops_update_get_salary_information_for_bank" "vw_ops_update_get_sa
             <dataField fieldName="BankName" columns="50" />
             <dataField fieldName="Curr" columns="20" />
             <dataField fieldName="Occupation" />
+            <dataField fieldName="BatchID" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -199,6 +204,7 @@ from "dbo"."vw_ops_update_get_salary_information_for_bank" "vw_ops_update_get_sa
             <dataField fieldName="BankName" columns="50" />
             <dataField fieldName="Curr" columns="20" />
             <dataField fieldName="Occupation" />
+            <dataField fieldName="BatchID" columns="15" />
           </dataFields>
         </category>
       </categories>

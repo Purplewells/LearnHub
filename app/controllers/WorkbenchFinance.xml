@@ -13,6 +13,9 @@
     <field name="IncomeExpenseSummary" type="DataView" label="Income Expense Summary">
       <dataView controller="IncomeExpenseSummary" view="grid1" />
     </field>
+    <field name="AccountDocumentSource" type="DataView" label="Account Document Source">
+      <dataView controller="AccountDocumentSource" view="grid1" />
+    </field>
   </fields>
   <views>
     <view id="FinanceWorkbench" type="Form" label="FINANCE WORKBENCH">

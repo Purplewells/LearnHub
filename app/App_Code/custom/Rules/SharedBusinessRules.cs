@@ -3,8 +3,10 @@ using zLearnHub.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using Newtonsoft.Json;
-//using System.Net.Http;
-//using System.Net.Http.Headers;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Collections.Generic;
+using System.Text;
 
 namespace zLearnHub.Rules
 {
@@ -139,11 +141,7 @@ namespace zLearnHub.Rules
 
         }
 
-        [ControllerAction ("Custom", "Insert, Update, Calculate", ActionPhase.After)]
-        public void GenerateSummarisedNotes()
-        {
-            //string subject = args.Values.FirstOrDefault(v => v.Name == "SubjectName")?.NewValue?.ToString() ?? "";
-        }
+       
 
         protected override void BeforeSqlAction(ActionArgs args, ActionResult result)
         {
@@ -271,7 +269,7 @@ namespace zLearnHub.Rules
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand("zusp_ops_salary_p2_prepare_information_specific", connection))
+                using (SqlCommand command = new SqlCommand("zusp_ops_salary_p1_prepare_information_specific", connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@SalaryID", salaryID);
@@ -286,7 +284,7 @@ namespace zLearnHub.Rules
  
         }
 
-       
+
 
         [ControllerAction("usp_process_fee_collection_transaction", "Insert, Update, Calculate", ActionPhase.After)]
         public void process_fee_collection_transaction()
@@ -295,7 +293,7 @@ namespace zLearnHub.Rules
             object transactionIDValue = SelectFieldValue("TransactionID");
 
             if (transactionIDValue == null)
-                throw new Exception("Salary ID is required.");
+                throw new Exception("TransactionID is required.");
 
             int transactionID;
             try
@@ -330,8 +328,8 @@ namespace zLearnHub.Rules
 
         }
 
-        [ControllerAction("process_fee_refund", "Refund, Custom, Adjustment", ActionPhase.After)]
-        public void usp_ops_auto_p4_process_fee_refund (int transactionID)
+        [ControllerAction("fee_collection_transaction", "Custom, ProcessRefund", ActionPhase.After)]
+        public void ProcessFeeRefund (int OriginalTransactionID, decimal RefundAmountToProcess)
         {
             // Get connection string from configuration
             string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
@@ -339,10 +337,11 @@ namespace zLearnHub.Rules
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand("usp_ops_auto_p4_process_fee_refund", connection))
+                using (SqlCommand command = new SqlCommand("usp_ops_p9_create_fee_refund_transaction_revised_2", connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@TransactionID", transactionID);
+                    command.Parameters.AddWithValue("@TransactionID", OriginalTransactionID);
+                    command.Parameters.AddWithValue("@RefundAmountToProcess", RefundAmountToProcess);
                     command.ExecuteNonQuery();
                 }
             }
@@ -352,9 +351,8 @@ namespace zLearnHub.Rules
             Result.RefreshChildren();
             Result.ShowMessage("Refund processed successfully.");
 
-            
-
         }
+
 
         [ControllerAction("ProcessPurchaseOrder", "Insert, Update, Calculate", ActionPhase.After)]
         public void process_purchase_order_from_order_details(int purchaseOrderID)
@@ -379,27 +377,28 @@ namespace zLearnHub.Rules
 
         }
 
-        [ControllerAction("StudentGradeBookEntry", "Custom", "generate_summarised_notes", ActionPhase.Execute)]
+        [ControllerAction("StudentGradeBookEntry", "Custom", "generate_summarised_remarks", ActionPhase.Execute)]
         public void write_ai_supported_remarks()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+            string apiKey = ConfigurationManager.AppSettings["OpenAIApiKey"];
 
             string sql = @"
-                SELECT TOP 1 
-                    s.FirstName,
-                    s.LastName,
-                    g.SubjectName,
-                    g.NumericGradeEarned,
-                    g.OverallScore,
-                    g.StudentGradeBookEntryID
-                FROM 
-                    StudentGradeBookEntry g
-                    JOIN Students s ON g.StudentID = s.StudentID
-                WHERE 
-                    g.Remarks IS NULL 
-                    AND g.Term = 'Term 1'
-                    AND g.SessionID IN (SELECT SessionID FROM AcademicSession WHERE IsActive = 1)
-            ";
+                    SELECT  
+                        s.FirstName,
+                        s.LastName,
+                        g.SubjectName,
+                        g.NumericGradeEarned,
+                        g.OverallScore,
+                        g.StudentGradeBookEntryID
+                    FROM 
+                        StudentGradeBookEntry g
+                        JOIN Students s ON g.StudentID = s.StudentID
+                    WHERE 
+                        g.Statement IS NULL 
+                        AND g.extIsAciveSession = 1
+
+                ";
 
             using (var con = new SqlConnection(connectionString))
             {
@@ -407,71 +406,122 @@ namespace zLearnHub.Rules
                 using (var cmd = new SqlCommand(sql, con))
                 using (var reader = cmd.ExecuteReader())
                 {
-                    if (reader.Read())
+                    
+                    var entries = new List<dynamic>();
+
+                    while (reader.Read())
                     {
-                        string firstName = reader["FirstName"].ToString();
-                        string subject = reader["SubjectName"].ToString();
-                        string grade = reader["NumericGradeEarned"].ToString();
-                        string score = reader["OverallScore"].ToString();
-                        int entryId = Convert.ToInt32(reader["StudentGradeBookEntryID"]);
-
-                        string prompt = string.Format(
-                                               "Write a personalized remark for a student named {0} based on the following performance:\n" +
-                                               "Subject: {1}, Grade: {2}, Overall Score: {3}.\n" +
-                                               "Mention strengths, one area for improvement, and include motivation.",
-                                               firstName, subject, grade, score
-                                           );
-
-
-                        //CallChatGptAndSave(prompt, entryId);
+                        entries.Add(new
+                        {
+                            FirstName = reader["FirstName"].ToString(),
+                            SubjectName = reader["SubjectName"].ToString(),
+                            NumericGrade = reader["NumericGradeEarned"].ToString(),
+                            OverallScore = reader["OverallScore"].ToString(),
+                            EntryID = Convert.ToInt32(reader["StudentGradeBookEntryID"])
+                        });
                     }
-                    else
+
+                    if (entries.Count == 0)
                     {
                         Result.ShowMessage("No matching records found.");
+
+                        return;
                     }
+
+                    foreach (var entry in entries)
+                    {
+                        string prompt = string.Format(
+                        "Write a personalized remark for a student named {0} based on the following performance:\n" +
+                        "Subject: {1}, Grade: {2}, Overall Score: {3}.\n" +
+                        "Mention strengths, one area for improvement, and include motivation.",
+                        entry.FirstName, entry.SubjectName, entry.NumericGrade, entry.OverallScore
+                    );
+                        CallChatGptAndSave(prompt, entry.EntryID, apiKey);
+                    }
+
+                    Result.ShowMessage(string.Format("{0} remark(s) successfully generated and saved.", entries.Count));
                 }
             }
 
         }
 
         //private void CallChatGptAndSave(string prompt, int entryId)
-        //{
-        //    string apiKey = "YOUR_OPENAI_API_KEY";
+        private void CallChatGptAndSave(string prompt, int entryId, string apiKey)
+        {
+            //string apiKey = "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";
 
-        //    var requestBody = new
-        //    {
-        //        model = "gpt-3.5-turbo",
-        //        messages = new[] {
-        //            new { role = "user", content = prompt }
-        //        }
-        //    };
+            var requestBody = new
+            {
+                model = "gpt-3.5-turbo",
+                messages = new[] {
+                        new { role = "user", content = prompt }
+                    }
+            };
 
-        //    var jsonContent = new StringContent(JsonConvert.SerializeObject(requestBody), System.Text.Encoding.UTF8, "application/json");
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(requestBody), System.Text.Encoding.UTF8, "application/json");
 
-        //    using (var client = new HttpClient())
-        //    {
-        //        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
-        //        var response = client.PostAsync("https://api.openai.com/v1/chat/completions", jsonContent).Result;
+            ////using (HttpClient client = new HttpClient())
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+                var response = client.PostAsync("https://api.openai.com/v1/chat/completions", jsonContent).Result;
 
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var responseContent = response.Content.ReadAsStringAsync().Result;
-        //            dynamic parsed = JsonConvert.DeserializeObject(responseContent);
-        //            string generatedRemark = parsed.choices[0].message.content;
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = response.Content.ReadAsStringAsync().Result;
+                    dynamic parsed = JsonConvert.DeserializeObject(responseContent);
+                    string generatedRemark = parsed.choices[0].message.content;
 
-        //            SqlText sql = new SqlText("UPDATE StudentGradeBookEntry SET Remarks = @Remarks WHERE StudentGradeBookEntryID = @ID");
-        //            sql.AddParameter("@Remarks", generatedRemark);
-        //            sql.AddParameter("@ID", entryId);
-        //            sql.ExecuteNonQuery();
+                    SqlText sql = new SqlText("UPDATE StudentGradeBookEntry SET Statement = @Statement WHERE StudentGradeBookEntryID = @ID");
+                    sql.AddParameter("@Statement", generatedRemark);
+                    sql.AddParameter("@ID", entryId);
+                    sql.ExecuteNonQuery();
 
-        //            Result.ShowMessage("Remark successfully generated and saved.");
-        //        }
-        //        else
-        //        {
-        //            Result.ShowMessage("Error from ChatGPT: " + response.StatusCode);
-        //        }
-        //    }
-        //}
+                    Result.ShowMessage("Remark successfully generated and saved.");
+                }
+                else
+                {
+                    Result.ShowMessage("Error from ChatGPT: " + response.StatusCode);
+                    //AiLogger aiLogger = new AiLogger();
+                    
+                }
+            }
+        }
+
+       
+
+
+        public class AiLogger
+        {
+            public void LogAiFailure(int entryId, string prompt, string error)
+            {
+                try
+                {
+                    SqlText log = new SqlText("INSERT INTO AIInteractionLog (EntryID, Prompt, ErrorMessage, CreatedOn) VALUES (@ID, @Prompt, @Error, @CreatedOn)");
+                    log.AddParameter("@ID", entryId);
+                    log.AddParameter("@Prompt", prompt);
+                    log.AddParameter("@Error", error);
+                    log.AddParameter("@CreatedOn", DateTime.UtcNow);
+                    log.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error logging AI failure: " + ex.Message);
+                }
+            }
+        }
+
+
+
     }
+
+           
+
+           
+      
+
 }
+          
+
+
 

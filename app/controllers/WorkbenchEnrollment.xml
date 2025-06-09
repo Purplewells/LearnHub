@@ -30,7 +30,7 @@
     </field>
   </fields>
   <views>
-    <view id="EnrollmentWorkbench" type="Form" label="ENROLLMENT CONFIGURATION WORKBENCH">
+    <view id="EnrollmentWorkbench" type="Form" label="ENROLLMENT CONFIGURATION WORKBENCH" tags="material-icon-ad_units">
       <headerText>&lt;strong&gt;This interface facilitates the configuration and registration default values for the enrollment experience. &lt;/strong&gt;</headerText>
       <categories>
         <category tab="ENROLLMENT STATUS" id="c1" flow="NewColumn">

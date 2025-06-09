@@ -18,7 +18,7 @@
     </field>
   </fields>
   <views>
-    <view id="AttendanceAttributes" type="Form" label="ATTENDANCE CONFIGURATION WORKBENCH">
+    <view id="AttendanceAttributes" type="Form" label="ATTENDANCE CONFIGURATION WORKBENCH" tags="material-icon-arrow_drop_down_circle">
       <categories>
         <category id="c3" tab="ATTENDANCE EVENT REASON" flow="NewColumn">
           <dataFields>

@@ -39,7 +39,7 @@
     </field>
   </fields>
   <views>
-    <view id="StockHubs" type="Form" label="INVENTORY MANAGEMENT HUB">
+    <view id="StockHubs" type="Form" label="INVENTORY MANAGEMENT HUB" tags="material-icon-bolt">
       <categories>
         <category id="c1" tab="ITEMS" flow="NewColumn">
           <dataFields>
@@ -64,7 +64,7 @@
             </dataField>
           </dataFields>
         </category>
-        <category id="c8" tab="HOME STOCK LEVEL">
+        <category id="c8" tab="STORE STOCK LEVEL">
           <dataFields>
             <dataField fieldName="StockLevelMovement" columns="15" tag="modal-max-sm&#xD;&#xA;modal-fit-content">
               <dataView pageSize="16" />
@@ -83,6 +83,9 @@
           <dataFields>
             <dataField fieldName="Suppliers" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none" />
           </dataFields>
+          <visibility>
+            <expression test="[1]==[1]" type="ClientScript" />
+          </visibility>
         </category>
         <category id="c6" tab="LOCATIONS">
           <dataFields>
@@ -90,6 +93,9 @@
               <headerText>LOCATION</headerText>
             </dataField>
           </dataFields>
+          <visibility>
+            <expression test="[1]==[1]" type="ClientScript" />
+          </visibility>
         </category>
         <category id="c5" tab="MOVEMENT CODES">
           <dataFields>
@@ -97,6 +103,9 @@
               <headerText>MOVEMENT MODES</headerText>
             </dataField>
           </dataFields>
+          <visibility>
+            <expression test="[1]==[1]" type="ClientScript" />
+          </visibility>
         </category>
         <category id="c3" tab="ORDERS">
           <dataFields>
@@ -110,16 +119,25 @@
           <dataFields>
             <dataField fieldName="StockTransactionType" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;material-icon-arrow_circle_up" />
           </dataFields>
+          <visibility>
+            <expression test="[1]==[1]" type="ClientScript" />
+          </visibility>
         </category>
         <category id="c11" tab="UNIT OF MEASURE">
           <dataFields>
             <dataField fieldName="UnitOfMeasure" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;material-icon-arrow_circle_up" />
           </dataFields>
+          <visibility>
+            <expression test="[1]==[1]" type="ClientScript" />
+          </visibility>
         </category>
         <category id="c12" tab="PRODUCT UoM">
           <dataFields>
             <dataField fieldName="ProductUoM" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;material-icon-arrow_circle_up" />
           </dataFields>
+          <visibility>
+            <expression test="[1]==[1]" type="ClientScript" />
+          </visibility>
         </category>
       </categories>
       <headerText>This interface allows users to manage inventory of the instituition's estate.</headerText>

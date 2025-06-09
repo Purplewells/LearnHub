@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkp_account_document_source" alias="zlkp_account_document_source" created="2025-06-08T13:45:00" modified="2025-06-08T13:45:18" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="AccountDocumentSourceID" fieldName="AccountDocumentSourceID" label="Account Document Source ID" />
+    <column name="SourceTypeName" fieldName="SourceTypeName" label="Source Type Name" />
+    <column name="SourceCode" fieldName="SourceCode" label="Source Code" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

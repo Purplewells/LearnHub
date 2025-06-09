@@ -285,7 +285,7 @@ BEGIN
   
 END]]></rule>
     <rule id="r100" commandName="Calculate" type="Code" phase="Execute" name="calculateAmountValue" />
-    <rule id="r103" commandName="Insert|Update|Calculate" type="Sql" phase="After" name="refreshSalaryValues"><![CDATA[EXEC [dbo].[zusp_ops_salary_p2_prepare_information_specific] @SalaryID
+    <rule id="r103" commandName="Save|Insert|Update" type="Sql" phase="After" name="refreshSalaryValues"><![CDATA[EXEC [dbo].[zusp_ops_salary_p1_prepare_information_specific] @SalaryID
 SET @Result_ExecuteOnClient = '$appfactory.find("Salaries", "Controller").sync();'
 SET @Result_ShowMessage = 'Salary computation setup and processing ' + ' ' + 'has completed successfully' ]]></rule>
   </businessRules>
