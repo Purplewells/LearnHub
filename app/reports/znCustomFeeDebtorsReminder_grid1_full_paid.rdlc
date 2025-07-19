@@ -1112,7 +1112,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>FEE ARREARS REMINDER</Value>
+                      <Value>FEE STATEMENT</Value>
                       <Style>
                         <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>

@@ -9,6 +9,7 @@
       <siteMapNode title="Staff" description="The staff screen enables administrators to manage staff profiles, track roles, update information." url="~/pages/organization-person-role-staff" roles="Administrators, ContentEditors, AccountManagers" cssClass="material-icon-perm_contact_calendar" />
       <siteMapNode title="Parents" description="View Parents" url="~/pages/organization-person-role-parent" roles="Administrators, ContentEditors" cssClass="material-icon-family_restroom" />
       <siteMapNode title="Album" description="View Photo Album" url="~/pages/photo-album" cssClass="material-icon-10mp" />
+      <siteMapNode title="Contacts" description="View Contacts" url="~/pages/contacts" cssClass="material-icon-10mp" />
     </siteMapNode>
     <siteMapNode title="ADMISSION" description="Manages enrollments, class rosters and progression events of the system." roles="Administrators, ContentEditors">
       <siteMapNode title="Enrollment" description="This entity represents a student's enrollment information in a school." url="~/pages/student-school-association" cssClass="material-icon-group" />
@@ -41,13 +42,15 @@
       <siteMapNode title="FINANCE" description="" roles="Administrators, AccountManagers, FeeManagers, FeeClerks, ContentEditors, Accountants">
         <siteMapNode title="Fees &amp; Bills" description="View Fees &amp; Bills" url="~/pages/feemanagement" roles="*" cssClass="material-icon-money" />
         <siteMapNode title="Bill Note" description="A reminder note to parents/guardians to request for outstanding balance." url="~/pages/mini-fee-reminder" cssClass="material-icon-receipt" />
-        <siteMapNode title="Fee Notes" description="" url="~/pages/custom-fee-note-report" roles="Administrators, AccountManagers, FeeManagers, DONOTDISPLAY" cssClass="material-icon-receipt" />
         <siteMapNode title="Debtors Bill" description="" url="~/pages/debtors-bill" roles="*" cssClass="material-icon-account_balance_wallet" />
+        <siteMapNode title="Bill Advise" description="Generates a fee note summary and reminder for each student" url="~/pages/fees-and-bills-advise" cssClass="material-icon-savings" />
       </siteMapNode>
       <siteMapNode title="ACCOUNTS" description="" roles="Administrators, AccountManagers, Accountants">
         <siteMapNode title="Finances" description="View Finance Overview" url="~/pages/finance-plan" roles="Administrators, AccountManagers, Accountants" cssClass="material-icon-attach_money" />
         <siteMapNode title="Manual Entries" description="View Manual Account Journal Entries" url="~/pages/manual-account-journal-entries" roles="Administrators, AccountManagers, Accountants" cssClass="material-icon-sync_alt" />
         <siteMapNode title="GL Journal" description="Keep records all financial transactions" url="~/pages/account-general-ledger" roles="Administrators, AccountManagers, Accountants" cssClass="material-icon-point_of_sale" />
+        <siteMapNode title="Cash Flow" description="" url="~/pages/cash-flow" roles="*" cssClass="material-icon-spa" />
+        <siteMapNode title="Balance Sheet" description="A statement or snapshot of this organisation's financial position." url="~/pages/balance-sheet" roles="*" cssClass="material-icon-account_balance_wallet" />
         <siteMapNode title="Trial Balance" description="" url="~/pages/trial-balance" roles="Administrators, AccountManagers, Accountants" cssClass="material-icon-account_balance_wallet" />
       </siteMapNode>
       <siteMapNode title="INVENTORY" description="" roles="Administrators, AccountManagers, Accountants, StoreOfficers, ContentEditors">
@@ -68,7 +71,7 @@
       </siteMapNode>
       <siteMapNode title="COMPENSATION" description="" roles="Administrators, AccountManagers, HeadTeacher">
         <siteMapNode title="Salaries Run" description="View Payment Records" url="~/pages/payment-records" roles="Administrators, AccountManagers, FeeManagers" cssClass="material-icon-credit_card" />
-        <siteMapNode title="View PSlips" description="View Get Salary Information For Bank" url="~/pages/get-salary-information-for-bank" roles="Administrators, AccountManagers" cssClass="material-icon-paid" />
+        <siteMapNode title="View Payslips" description="View Get Salary Information For Bank" url="~/pages/get-salary-information-for-bank" roles="Administrators, AccountManagers" cssClass="material-icon-paid" />
         <siteMapNode title="Salaries Overview" description="View List Of Salaries" url="~/pages/list-of-salaries" roles="Administrators, AccountManagers" cssClass="material-icon-pending" />
       </siteMapNode>
       <siteMapNode title="TRANSPORT" description="" roles="XXXX">
@@ -87,7 +90,7 @@
     </siteMapNode>
     <siteMapNode title="SETTINGS" description="" roles="Administrators, ContentEditors">
       <siteMapNode title="Initial Setup" description="" roles="*" />
-      <siteMapNode title="Instituition" description="This entity represents any public or private institution, organisation, or agency that provides instructional or support services to students or staff at any level." url="~/pages/school" cssClass="material-icon-business" />
+      <siteMapNode title="Instituition" description="This entity represents any public or private institution, organisation, or agency that provides instructional or support services to students or staff at any level." url="~/pages/school-instituition" cssClass="material-icon-business" />
       <siteMapNode title="Calendars" description="" url="~/pages/calendars" roles="*" cssClass="material-icon-event_available" />
       <siteMapNode title="Grading Levels" description="Grade Level Settings" url="~/pages/gradehub" roles="*" cssClass="material-icon-signal_cellular_alt" />
       <siteMapNode title="Course Section" description="Courses represent the organisation of subject matter and related learning experiences provided for the instruction of students on a regular or systematic basis." url="~/pages/courses-hub" roles="*" cssClass="material-icon-dvr" />
@@ -95,12 +98,12 @@
       <siteMapNode title="Workbench Hub" description="" roles="*" />
       <siteMapNode title="Hub-Attendance" description="An interface for managing attendance reference attributes." url="~/pages/attendance-attribute" roles="*" cssClass="material-icon-arrow_drop_down_circle" />
       <siteMapNode title="Hub-Behaviour" description="" url="~/pages/behaviour-work-hub" roles="*" cssClass="material-icon-self_improvement" />
-      <siteMapNode title="Hub - Enrollment" description="" url="~/pages/enrollment-benchmark" roles="*" cssClass="material-icon-ad_units" />
-      <siteMapNode title="Hub - Compensation" description="This interface allows users to provide configuration or default values for slary determination." url="~/pages/salaries-benchmark" roles="*" cssClass="material-icon-arrow_circle_up" />
-      <siteMapNode title="Hub - Meal Service" description="Meal services configuration" url="~/pages/meal-services" roles="*" cssClass="material-icon-inventory" />
-      <siteMapNode title="Hub - Financial" description="" url="~/pages/monetary-work-bench" roles="*" cssClass="material-icon-savings" />
-      <siteMapNode title="Hub - Registration" description="View Registration Workbench" url="~/pages/registration-workbench" roles="*" cssClass="material-icon-send" />
-      <siteMapNode title="Hub - Stocks" description="" url="~/pages/hub_stocks" roles="*" cssClass="material-icon-bolt" />
+      <siteMapNode title="Hub-Enrollment" description="" url="~/pages/enrollment-benchmark" roles="*" cssClass="material-icon-ad_units" />
+      <siteMapNode title="Hub-Compensation" description="This interface allows users to provide configuration or default values for slary determination." url="~/pages/salaries-benchmark" roles="*" cssClass="material-icon-arrow_circle_up" />
+      <siteMapNode title="Hub-Meal Service" description="Meal services configuration" url="~/pages/meal-services" roles="*" cssClass="material-icon-inventory" />
+      <siteMapNode title="Hub-Financial" description="" url="~/pages/monetary-work-bench" roles="*" cssClass="material-icon-savings" />
+      <siteMapNode title="Hub-Registration" description="View Registration Workbench" url="~/pages/registration-workbench" roles="*" cssClass="material-icon-send" />
+      <siteMapNode title="Hub-Stocks" description="" url="~/pages/hub_stocks" roles="*" cssClass="material-icon-bolt" />
       <siteMapNode title="Other Setup" description="" roles="*" />
       <siteMapNode title="Assessment Type" description="View Assessment Type" url="~/pages/assessment-type" cssClass="material-icon-settings_applications" />
       <siteMapNode title="Buses" description="View Buses" url="~/pages/buses" cssClass="material-icon-arrow_drop_down_circle" />
@@ -155,7 +158,7 @@
         <siteMapNode title="Fee Settlements" description="View Fee Collection Overtime" url="~/pages/fee-collection-transaction-over-time" roles="Administrators, AccountManagers, Management" cssClass="material-icon-topic" />
       </siteMapNode>
     </siteMapNode>
-    <siteMapNode title="ADMIN" description="" roles="Administrators">
+    <siteMapNode title="GATEWAY" description="" roles="Administrators">
       <siteMapNode title="^MembershipPath^Membership^MembershipPath^" description="^MembershipDesc^User and role manager^MembershipDesc^" url="~/pages/membership" roles="Administrators" cssClass="material-icon-badge" />
       <siteMapNode title="App Customisation" description="View Site Content" url="~/pages/site-content" roles="Administrators, Developers" cssClass="material-icon-ballot" />
       <siteMapNode title="Search Models" description="^HomeDesc^Application home page^HomeDesc^" url="~/pages/search-models" roles="*" cssClass="Wide material-icon-window" />

@@ -22,7 +22,7 @@ select
 from "dbo"."Budget" "Budget"
 	left join "dbo"."zlkpBudgetName" "BudgetName" on "Budget"."BudgetNameID" = "BudgetName"."BudgetNameID"
 	left join "dbo"."zlkpBudgetType" "BudgetNameBudgetType" on "BudgetName"."BudgetTypeID" = "BudgetNameBudgetType"."BudgetTypeID"
-]]></text>
+order by "Budget"."StartDate" desc]]></text>
     </command>
     <command id="BudgetIDIdentityCommand" type="Text" event="Inserted">
       <text><![CDATA[select @@identity]]></text>
@@ -51,15 +51,15 @@ from "dbo"."Budget" "Budget"
     <field name="CurrencyID" type="Int32" label="Currency ID" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Budgets" filter="EndDate &gt;= GETDATE()">
+    <view id="grid1" type="Grid" commandId="command1" label="Active Budgets" sortExpression="StartDate desc" filter="EndDate &gt;= GETDATE()">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="BudgetDescriptor" columns="30" />
-        <dataField fieldName="BudgetNameID" aliasFieldName="BudgetName" columns="30" />
-        <dataField fieldName="BudgetType" columns="15" />
-        <dataField fieldName="StartDate" columns="10" />
+        <dataField fieldName="BudgetNameID" aliasFieldName="BudgetName" columns="30" tag="pivot3-row1-columnstacked-top 10&#xD;&#xA;pivot3-title:&quot;Top 10 Budget Allocation Value by Budget Name&quot;" />
+        <dataField fieldName="BudgetType" columns="15" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;Total Budget Allocation By Budget Type&quot;&#xD;&#xA;&#xD;&#xA;pivot2-row1-donut&#xD;&#xA;pivot2-title:&quot;Budget Allocation Distribution By Budget Type&quot;&#xD;&#xA;&#xD;&#xA;pivot3-col1&#xD;&#xA;pivot4-col1&#xD;&#xA;pivot5-col1" />
+        <dataField fieldName="StartDate" columns="10" tag="pivot4-row1-columnstacked-Year&#xD;&#xA;pivot4-row2-columnstacked-month&#xD;&#xA;pivot4-title:&quot;Count of Allocations by Event Date and Budget Type&quot;&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked-Year&#xD;&#xA;pivot5-row2-columnstacked-month&#xD;&#xA;pivot5-title:&quot;Total Allocations Value by Event Date and Budget Type&quot;" />
         <dataField fieldName="EndDate" columns="10" />
-        <dataField fieldName="BudgetValue" columns="15" />
+        <dataField fieldName="BudgetValue" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum&#xD;&#xA;pivot3-val1-sum&#xD;&#xA;pivot5-val1-sum&#xD;&#xA;" />
         <dataField fieldName="Code" columns="7" />
         <dataField fieldName="Notes" hidden="true" columns="200" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
@@ -69,15 +69,15 @@ from "dbo"."Budget" "Budget"
         <dataField fieldName="CurrencyID" columns="15" hidden="true" />
       </dataFields>
     </view>
-    <view id="grid1_all_budgets" type="Grid" commandId="command1" label="All Allocations">
+    <view id="grid1_all_budgets" type="Grid" commandId="command1" label="All Allocations" sortExpression="StartDate desc">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="BudgetDescriptor" columns="30" />
-        <dataField fieldName="BudgetNameID" aliasFieldName="BudgetName" columns="30" />
-        <dataField fieldName="BudgetType" columns="15" />
-        <dataField fieldName="StartDate" columns="10" />
+        <dataField fieldName="BudgetNameID" aliasFieldName="BudgetName" columns="30" tag="pivot3-row1-columnstacked-top 10&#xD;&#xA;pivot3-title:&quot;Top 10 Budget Allocation Value by Budget Name&quot;" />
+        <dataField fieldName="BudgetType" columns="15" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;Total Budget Allocation By Budget Type&quot;&#xD;&#xA;&#xD;&#xA;pivot2-row1-donut&#xD;&#xA;pivot2-title:&quot;Budget Allocation Distribution By Budget Type&quot;&#xD;&#xA;&#xD;&#xA;pivot3-col1&#xD;&#xA;pivot4-col1&#xD;&#xA;pivot5-col1" />
+        <dataField fieldName="StartDate" columns="10" tag="pivot4-row1-columnstacked-month&#xD;&#xA;pivot4-row2-columnstacked-Year&#xD;&#xA;pivot4-title:&quot;Count of Allocations by Event Date&quot;&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked-month&#xD;&#xA;pivot5-row2-columnstacked-Year&#xD;&#xA;pivot5-title:&quot;Total Allocations Value by Event Date&quot;" />
         <dataField fieldName="EndDate" columns="10" />
-        <dataField fieldName="BudgetValue" columns="15" />
+        <dataField fieldName="BudgetValue" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum&#xD;&#xA;pivot3-val1-sum&#xD;&#xA;pivot5-val1-sum&#xD;&#xA;" />
         <dataField fieldName="Code" columns="7" />
         <dataField fieldName="Notes" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />

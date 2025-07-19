@@ -112,8 +112,8 @@ from "dbo"."Product" "Product"
         <dataField fieldName="ProductName" tag="item-heading" columns="30" />
         <dataField fieldName="Skucode" columns="15" hidden="true" />
         <dataField fieldName="Barcode" columns="18" tag="barcode" />
-        <dataField fieldName="CategoryID" aliasFieldName="CategoryName" tag="pivot1-row1-column" />
-        <dataField fieldName="SupplierID" aliasFieldName="SupplierName" tag="pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;Proportion Supply Value By Supplier&quot;" />
+        <dataField fieldName="CategoryID" aliasFieldName="CategoryName" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;Sum of inventory value by category&quot;" />
+        <dataField fieldName="SupplierID" aliasFieldName="SupplierName" tag="pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;Proportion Supply Value By Supplier&quot;&#xD;&#xA;pivot2-medium" />
         <dataField fieldName="Description" columns="50" hidden="true" />
         <dataField fieldName="CostPrice" columns="10" hidden="true" />
         <dataField fieldName="SellingPrice" columns="15" hidden="true" />
@@ -225,44 +225,44 @@ from "dbo"."Product" "Product"
     <view id="editForm1" type="Form" commandId="command1" label="Review Item">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c2" headerText="Product Detail" flow="NewColumn">
+        <category id="c2" headerText="Basic Details" flow="NewColumn">
           <description />
           <dataFields>
             <dataField fieldName="ProductName" />
             <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="Skucode" columns="10" />
+            <dataField fieldName="Barcode" columns="50" />
             <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
-            <dataField fieldName="Quantity" columns="15" textMode="Text" />
+            <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Cost &amp; Price" floating="true" flow="NewColumn">
+          <description />
+          <dataFields>
             <dataField fieldName="ConversionFactor" columns="5">
               <headerText>Quantity Per Unit</headerText>
             </dataField>
-            <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
-            <dataField fieldName="Skucode" columns="10" />
-            <dataField fieldName="Barcode" columns="50" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="Cost &amp; Price" floating="true">
-          <description />
-          <dataFields>
             <dataField fieldName="CostPrice" columns="15" />
             <dataField fieldName="UnitPrice" columns="15" />
             <dataField fieldName="SellingPrice" columns="15" />
+            <dataField fieldName="Sellable" />
+            <dataField fieldName="IsActive" />
           </dataFields>
         </category>
-        <category id="c4" headerText="Quantities &amp; Thresholds" floating="true" flow="NewColumn">
+        <category id="c4" headerText="Quantities" floating="true" flow="NewRow">
           <description />
           <dataFields>
+            <dataField fieldName="Quantity" columns="15" textMode="Text" />
             <dataField fieldName="UnitsOnHold" columns="50" />
             <dataField fieldName="UnitsOnOrder" columns="15" />
             <dataField fieldName="ReOrderLevel" columns="15">
               <headerText>Reorder Qunatity</headerText>
             </dataField>
-            <dataField fieldName="Sellable" />
-            <dataField fieldName="IsActive" />
             <dataField fieldName="ProductColour" rows="5" />
             <dataField fieldName="UnitOfMeasure" columns="20" hidden="true" />
           </dataFields>
         </category>
-        <category id="c5" headerText="Supplier Details">
+        <category id="c5" headerText="Supplier Details" floating="true" flow="NewRow">
           <description />
           <dataFields>
             <dataField fieldName="SupplierID" aliasFieldName="SupplierName" />
@@ -290,14 +290,13 @@ from "dbo"."Product" "Product"
           <dataFields>
             <dataField fieldName="ProductName" />
             <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="Skucode" columns="10" />
+            <dataField fieldName="Barcode" columns="50" />
             <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
-            <dataField fieldName="Quantity" columns="15" textMode="Static" />
+            <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
             <dataField fieldName="ConversionFactor" columns="5">
               <headerText>Quantity Per Unit</headerText>
             </dataField>
-            <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
-            <dataField fieldName="Skucode" columns="10" />
-            <dataField fieldName="Barcode" columns="50" />
           </dataFields>
         </category>
         <category id="c3" headerText="Cost &amp; Price" floating="true">
@@ -306,11 +305,14 @@ from "dbo"."Product" "Product"
             <dataField fieldName="CostPrice" columns="15" />
             <dataField fieldName="UnitPrice" columns="15" />
             <dataField fieldName="SellingPrice" columns="15" />
+            <dataField fieldName="Sellable" />
+            <dataField fieldName="IsActive" />
           </dataFields>
         </category>
         <category id="c4" headerText="Quantities &amp; Thresholds" floating="true" flow="NewColumn">
           <description />
           <dataFields>
+            <dataField fieldName="Quantity" columns="15" textMode="Static" />
             <dataField fieldName="UnitsOnHold" columns="50" />
             <dataField fieldName="UnitsOnOrder" columns="15" />
             <dataField fieldName="ReOrderLevel" columns="15">
@@ -318,8 +320,6 @@ from "dbo"."Product" "Product"
             </dataField>
             <dataField fieldName="ProductColour" rows="5" />
             <dataField fieldName="UnitOfMeasure" columns="20" hidden="true" />
-            <dataField fieldName="Sellable" />
-            <dataField fieldName="IsActive" />
           </dataFields>
         </category>
         <category id="c5" headerText="Supplier Details">

@@ -2,7 +2,7 @@
 <dataController name="WorkBenchMonetary" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <views>
     <view id="MonetaryWorkBench" type="Form" label="MONETARY REFERENCE WORKBENCH">
-      <headerText>This workbench focuses on grouping the finance and payment related references.</headerText>
+      <headerText>This workbench helps to manage and group reference data for finance and payment operations.</headerText>
       <categories>
         <category id="c1" tab="PAYMENT METHOD" flow="NewColumn">
           <dataFields>

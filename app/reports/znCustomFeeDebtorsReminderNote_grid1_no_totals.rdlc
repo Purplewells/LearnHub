@@ -1096,11 +1096,11 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>FEE ARREARS PAYMENT REMINDER</Value>
+                      <Value>FEE STATEMENT</Value>
                       <Style>
                         <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
-                        <Color>DarkViolet</Color>
+                        <Color>SteelBlue</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>

@@ -24,7 +24,7 @@
             RegisterHandler("ContactPhotoUrl", "\"dbo\".\"Person\"", "\"PhotoUrl\"", new string[] {
                         "\"PersonID\""}, "Contact Photo", "Contact", "PhotoUrl");
             RegisterHandler("PersonPhotoUrl", "\"dbo\".\"Person\"", "\"PhotoUrl\"", new string[] {
-                        "\"PersonID\""}, "Photo Album Photo", "PhotoAlbum", "PhotoUrl");
+                        "\"PersonID\""}, "Contacts Photo", "Contacts", "PhotoUrl");
             RegisterHandler("ProductProductImage", "\"dbo\".\"Product\"", "\"ProductImage\"", new string[] {
                         "\"ProductID\""}, "Product Product Image", "Product", "ProductImage");
             RegisterHandler("ProductPhotoHandler", "\"dbo\".\"Product\"", "\"Photo\"", new string[] {

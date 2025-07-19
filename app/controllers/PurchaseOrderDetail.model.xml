@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="PurchaseOrderDetail" alias="PurchaseOrderDetail" created="2024-07-10T22:17:04" modified="2025-05-10T05:42:58" x="20" y="27" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="PurchaseOrderDetail" alias="PurchaseOrderDetail" created="2024-07-10T22:17:04" modified="2025-06-27T12:21:45" x="20" y="27" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Product" parentTableSchema="dbo" parentTableName="Product" x="367" y="20">
       <foreignKeyColumn columnName="ProductID" parentColumnName="ProductID" />

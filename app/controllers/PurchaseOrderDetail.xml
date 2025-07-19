@@ -45,7 +45,7 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
     <field name="ProductCategory" type="String" readOnly="true" label="Category" length="20" />
     <field name="Quantity" type="Int32" label="Quantity" showInSummary="true" causesCalculate="true" />
     <field name="UnitPrice" type="Decimal" dataFormatString="c" label="Unit Price" showInSummary="true" causesCalculate="true" />
-    <field name="QuantityReceived" type="Decimal" label="Qty Rec'd" showInSummary="true" />
+    <field name="QuantityReceived" type="Decimal" label="Qty Rec'd" showInSummary="true" causesCalculate="true" />
     <field name="UnitOfMeasureID" type="Int32" label="Unit Of Measure ID" showInSummary="true">
       <items style="Lookup" dataController="UnitOfMeasure" newDataView="createForm1" dataValueField="UnitOfMeasureID" dataTextField="Uomname" />
     </field>
@@ -71,9 +71,6 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="ProductID" aliasFieldName="ProductName" />
-        <dataField fieldName="CreatedDate" columns="20">
-          <headerText>RecordDate</headerText>
-        </dataField>
         <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
         <dataField fieldName="ProductCategory" columns="20" />
         <dataField fieldName="Quantity" columns="15" />
@@ -83,6 +80,9 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
         <dataField fieldName="ExtendedCost" columns="15" aggregate="Sum" />
         <dataField fieldName="IsArrived" hidden="true" />
         <dataField fieldName="ArrivalDate" columns="10" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true">
+          <headerText />
+        </dataField>
         <dataField fieldName="Note" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
@@ -90,31 +90,36 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
         <dataField fieldName="SupplierName" columns="50" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Enter &amp; Maintain PO Line Item">
+    <view id="editForm1" type="Form" commandId="command1" label="Enter &amp; Maintain Line Item">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Purchase Order Detail" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="ProductID" aliasFieldName="ProductName" />
             <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
             <dataField fieldName="Quantity" columns="15" />
-            <dataField fieldName="UnitPrice" columns="15" />
-            <dataField fieldName="ExtendedCost" columns="15">
-              <headerText>Extended Cost Value</headerText>
-            </dataField>
-            <dataField fieldName="IsArrived" />
-            <dataField fieldName="ArrivalDate" columns="10" />
             <dataField fieldName="QuantityReceived" columns="15">
               <headerText>Quantity Received </headerText>
             </dataField>
-            <dataField fieldName="Note" hidden="true" />
-            <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
-            <dataField fieldName="SupplierName" columns="50" hidden="true" />
-            <dataField fieldName="ProductCategory" columns="20" hidden="true" />
+            <dataField fieldName="UnitPrice" columns="15" />
           </dataFields>
         </category>
-        <category id="c2" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
+        <category id="c3" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
+            <dataField fieldName="SupplierName" columns="50" />
+            <dataField fieldName="ExtendedCost" columns="15">
+              <headerText>Extended Cost</headerText>
+            </dataField>
+            <dataField fieldName="IsArrived" />
+            <dataField fieldName="ArrivalDate" columns="10" />
+            <dataField fieldName="ProductCategory" columns="20" />
+            <dataField fieldName="Note" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2" collapsed="true" headerText="Audit" floating="true" flow="NewRow">
           <description />
           <dataFields>
             <dataField fieldName="CreatedDate" columns="20" />
@@ -125,26 +130,33 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New PO Line Items">
+    <view id="createForm1" type="Form" commandId="command1" label="New Line Item">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Purchase Order Detail" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="ProductID" aliasFieldName="ProductName" />
             <dataField fieldName="UnitOfMeasureID" aliasFieldName="UnitOfMeasure" />
             <dataField fieldName="Quantity" columns="15" />
-            <dataField fieldName="UnitPrice" columns="15" />
-            <dataField fieldName="ProductCategory" columns="20" hidden="true" />
-            <dataField fieldName="ExtendedCost" columns="15" />
-            <dataField fieldName="IsArrived" />
-            <dataField fieldName="ArrivalDate" columns="10" />
             <dataField fieldName="QuantityReceived" columns="15">
               <headerText>Quantity Received </headerText>
             </dataField>
-            <dataField fieldName="Note" />
+            <dataField fieldName="UnitPrice" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c3" flow="NewColumn">
+          <description />
+          <dataFields>
             <dataField fieldName="PurchaseOrderID" aliasFieldName="TrackingNumber" />
-            <dataField fieldName="SupplierName" columns="50" hidden="true" />
+            <dataField fieldName="SupplierName" columns="50" />
+            <dataField fieldName="ExtendedCost" columns="15">
+              <headerText>Extended Cost</headerText>
+            </dataField>
+            <dataField fieldName="IsArrived" />
+            <dataField fieldName="ArrivalDate" columns="10" />
+            <dataField fieldName="ProductCategory" columns="20" />
+            <dataField fieldName="Note" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -176,7 +188,7 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New Line Item" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
@@ -213,5 +225,8 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
   </actions>
   <businessRules>
     <rule id="r100" commandName="Calculate" type="Code" phase="After" name="calculateExtendedCost" />
+    <rule id="r101" commandName="New" type="Sql" phase="Execute" name="setFlags"><![CDATA[SET @IsArrived = 0
+SET @QuantityReceived = 0]]></rule>
+    <rule id="r102" commandName="Calculate" type="Sql" phase="Execute" name="setArrivalDate"><![CDATA[SET @ArrivalDate = CAST(GETDATE() AS DATE)]]></rule>
   </businessRules>
 </dataController>

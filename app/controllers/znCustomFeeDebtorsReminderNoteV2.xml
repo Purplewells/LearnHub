@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="znCustomFeeDebtorsReminderNoteV2" conflictDetection="overwriteChanges" label="znCustomFeeDebtorsReminderNoteV2" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands />
+  <fields>
+    <field name="PersonID" type="Int32" allowNulls="false" label="Person#" showInSummary="true" isPrimaryKey="true" />
+    <field name="FeeID" type="Int32" allowNulls="false" label="Fee#" showInSummary="true" />
+    <field name="FirstName" type="String" label="First Name" length="35" showInSummary="true" />
+    <field name="LastName" type="String" label="Last Name" length="35" showInSummary="true" />
+    <field name="UPN" type="String" label="Upn" length="10" showInSummary="true" />
+    <field name="CYG" type="String" label="Cyg" length="10" />
+    <field name="Description" type="String" label="Description" length="50" />
+    <field name="FeeType" type="String" label="Fee Type" length="20" />
+    <field name="Currency" type="String" label="Currency" length="5" />
+    <field name="Debit" type="Decimal" label="Debit" />
+    <field name="Credit" type="Decimal" allowNulls="false" label="Credit" />
+    <field name="LineBalance" type="Decimal" label="Line Balance" />
+    <field name="IsPaidInFull" type="String" allowNulls="false" label="Is Paid In Full" length="3" />
+    <field name="Display" type="String" allowNulls="false" label="Display" length="3" />
+    <field name="SessionCode" type="String" label="Session Code" length="20" />
+    <field name="State" type="Int32" allowNulls="false" label="State" />
+    <field name="SchoolName" type="String" label="School Name" length="50" />
+    <field name="Address" type="String" label="Address" length="500" />
+    <field name="Website" type="String" label="Website" length="50" />
+    <field name="Email" type="String" label="Email" length="50" />
+    <field name="Attribute1" type="String" allowQBE="false" allowSorting="false" label="Attribute1" />
+    <field name="Attribute2" type="String" label="Attribute2" length="1024" />
+    <field name="ShowOnReport" type="Boolean" label="Show On Report" />
+    <field name="OverallBilled" type="Decimal" label="Overall Billed" />
+    <field name="OverallPaid" type="Decimal" label="Overall Paid" />
+    <field name="OverallOutstanding" type="Decimal" label="Overall Outstanding" />
+    <field name="HasOutstanding" type="String" allowNulls="false" label="Has Outstanding" length="3" />
+    <field name="IsAdvanceCredit" type="String" allowNulls="false" label="Is Advance Credit" length="3" />
+    <field name="UnpaidOrUnderpaid" type="String" allowNulls="false" label="Unpaid Or Underpaid" readOnly="true" length="3" />
+    <field name="UnusedAdvanceBalance" type="Decimal" label="Unused Advance Balance" />
+    <field name="HasUnusedAdvance" type="String" allowNulls="false" label="Has Unused Advance" length="3" />
+    <field name="TransDate" type="DateTime" label="Trans Date" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Fee and Bills Advise">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="FeeID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="UPN" columns="10">
+          <headerText>UPN</headerText>
+        </dataField>
+        <dataField fieldName="CYG" columns="5" tag="pivot1-row1-column-sortdescbyvalue&#xD;&#xA;pivot1-title:&quot;Total Line Balance via Grade Level&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Grade Level&quot;        &#xD;&#xA;pivot1-vaxistitle:&quot;Amount&quot;&#xD;&#xA;&#xD;&#xA;pivot2-row1-columnstacked-top10-sortdescbyvalue&#xD;&#xA;pivot2-title:&quot;Total Debt or Credit By Grade Level&quot;&#xD;&#xA;pivot2-haxistitle:&quot;Grade Level&quot;        &#xD;&#xA;pivot2-vaxistitle:&quot;Amount&quot;&#xD;&#xA;&#xD;&#xA;">
+          <headerText>CYG</headerText>
+        </dataField>
+        <dataField fieldName="Description" columns="25" />
+        <dataField fieldName="FeeType" columns="15" tag="pivot3-row1-columnstacked-top10-sortdescbyvalue&#xD;&#xA;pivot3-title:&quot;Outstanding amount per class vs fee type&quot;&#xD;&#xA;pivot3-haxistitle:&quot;Fee Type&quot;        &#xD;&#xA;pivot3-vaxistitle:&quot;Amount&quot;&#xD;&#xA;&#xD;&#xA;pivot6-row1-pie-sortdescbyvalue&#xD;&#xA;pivot6-title:&quot;Outstanding unpaid amount vrs fee type&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Fee Type&quot;        &#xD;&#xA;pivot6-vaxistitle:&quot;Amount&quot;&#xD;&#xA;&#xD;&#xA;pivot10-col1&#xD;&#xA;pivot11-col1" />
+        <dataField fieldName="Currency" columns="5">
+          <headerText>CURR</headerText>
+        </dataField>
+        <dataField fieldName="Debit" columns="7" tag="pivot2-val1-sum" />
+        <dataField fieldName="Credit" columns="7" tag="pivot2-val2-sum&#xD;&#xA;pivot8-val1-sum&#xD;&#xA;pivot9-val1-sum&#xD;&#xA;pivot11-val1-sum" />
+        <dataField fieldName="TransDate" columns="20" tag="pivot8-row1-column-date&#xD;&#xA;pivot8-title:&quot;Count of Fees and Bills by Date&quot;&#xD;&#xA;&#xD;&#xA;pivot9-row1-column-date&#xD;&#xA;pivot9-title:&quot;Total Fees Paid by Date&quot;&#xD;&#xA;&#xD;&#xA;pivot10-row1-columnstacked-date&#xD;&#xA;pivot10-title:&quot;Count of Fees Paid by Date and Fee Type&quot;&#xD;&#xA;&#xD;&#xA;pivot11-row1-columnstacked-date-all&#xD;&#xA;pivot11-title:&quot;Sum of Fees Paid by Transaction Date and Fee Type&quot;&#xD;&#xA;&#xD;&#xA;pivot12-row1-columnstacked-date-all&#xD;&#xA;pivot12-title:&quot;Sum of Balances of Fees by Date and Fee Type&quot;" />
+        <dataField fieldName="LineBalance" columns="8" tag="pivot1-val1-sum&#xD;&#xA;pivot12-val1-sum">
+          <headerText>Balance</headerText>
+        </dataField>
+        <dataField fieldName="IsPaidInFull" columns="10" tag="pivot7-row1-pie&#xD;&#xA;pivot7-title:&quot;Count of Fees and Bills by Paid In Full&quot;">
+          <headerText>Paid In Full</headerText>
+        </dataField>
+        <dataField fieldName="SessionCode" columns="12">
+          <headerText>Session</headerText>
+        </dataField>
+        <dataField fieldName="State" columns="15" hidden="true" />
+        <dataField fieldName="SchoolName" columns="50" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="Website" columns="50" hidden="true" />
+        <dataField fieldName="Email" columns="50" hidden="true" />
+        <dataField fieldName="Attribute1" rows="5" hidden="true" />
+        <dataField fieldName="Attribute2" hidden="true" />
+        <dataField fieldName="ShowOnReport" hidden="true" />
+        <dataField fieldName="OverallBilled" columns="10">
+          <headerText>Billed</headerText>
+        </dataField>
+        <dataField fieldName="OverallPaid" columns="10">
+          <headerText>Overall Paid</headerText>
+        </dataField>
+        <dataField fieldName="OverallOutstanding" columns="12" tag="pivot3-val1-sum&#xD;&#xA;">
+          <headerText>Oustanding</headerText>
+        </dataField>
+        <dataField fieldName="HasOutstanding" columns="12" tag="pivot3-col1&#xD;&#xA;">
+          <headerText>Has Outstanding </headerText>
+        </dataField>
+        <dataField fieldName="IsAdvanceCredit" columns="3" hidden="true" />
+        <dataField fieldName="Display" columns="3">
+          <headerText>DSP</headerText>
+        </dataField>
+        <dataField fieldName="UnpaidOrUnderpaid" columns="5">
+          <headerText>ODSP</headerText>
+        </dataField>
+        <dataField fieldName="UnusedAdvanceBalance" columns="15" hidden="true" />
+        <dataField fieldName="HasUnusedAdvance" columns="3" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review zn Custom Fee Debtors Reminder Note V2">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="zn Custom Fee Debtors Reminder Note V2" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FeeID" columns="15" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="CYG" columns="10" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="FeeType" columns="20" />
+            <dataField fieldName="Currency" columns="5" />
+            <dataField fieldName="Debit" columns="15" />
+            <dataField fieldName="Credit" columns="15" />
+            <dataField fieldName="LineBalance" columns="15" />
+            <dataField fieldName="IsPaidInFull" columns="3" />
+            <dataField fieldName="Display" columns="3" />
+            <dataField fieldName="SessionCode" columns="20" />
+            <dataField fieldName="State" columns="15" />
+            <dataField fieldName="SchoolName" columns="50" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="Website" columns="50" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="Attribute1" rows="5" />
+            <dataField fieldName="Attribute2" />
+            <dataField fieldName="ShowOnReport" />
+            <dataField fieldName="OverallBilled" columns="15" />
+            <dataField fieldName="OverallPaid" columns="15" />
+            <dataField fieldName="OverallOutstanding" columns="15" />
+            <dataField fieldName="HasOutstanding" columns="3" />
+            <dataField fieldName="IsAdvanceCredit" columns="3" />
+            <dataField fieldName="UnpaidOrUnderpaid" columns="3" />
+            <dataField fieldName="UnusedAdvanceBalance" columns="15" />
+            <dataField fieldName="HasUnusedAdvance" columns="3" />
+            <dataField fieldName="TransDate" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New zn Custom Fee Debtors Reminder Note V2">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New zn Custom Fee Debtors Reminder Note V2" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FeeID" columns="15" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="CYG" columns="10" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="FeeType" columns="20" />
+            <dataField fieldName="Currency" columns="5" />
+            <dataField fieldName="Debit" columns="15" />
+            <dataField fieldName="Credit" columns="15" />
+            <dataField fieldName="LineBalance" columns="15" />
+            <dataField fieldName="IsPaidInFull" columns="3" />
+            <dataField fieldName="Display" columns="3" />
+            <dataField fieldName="SessionCode" columns="20" />
+            <dataField fieldName="State" columns="15" />
+            <dataField fieldName="SchoolName" columns="50" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="Website" columns="50" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="Attribute1" rows="5" />
+            <dataField fieldName="Attribute2" />
+            <dataField fieldName="ShowOnReport" />
+            <dataField fieldName="OverallBilled" columns="15" />
+            <dataField fieldName="OverallPaid" columns="15" />
+            <dataField fieldName="OverallOutstanding" columns="15" />
+            <dataField fieldName="HasOutstanding" columns="3" />
+            <dataField fieldName="IsAdvanceCredit" columns="3" />
+            <dataField fieldName="UnusedAdvanceBalance" columns="15" />
+            <dataField fieldName="HasUnusedAdvance" columns="3" />
+            <dataField fieldName="TransDate" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" headerText="Print Fee Statement" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[EXEC [dbo].[usp_fee_collection_summaries_fee_note_reminder_v2]]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement delete here]]></rule>
+  </businessRules>
+</dataController>

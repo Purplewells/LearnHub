@@ -122,6 +122,7 @@ namespace zLearnHub.Rules
                 // make the controller read-only by removing editing actions
                 NodeSet("view[@id='grid1']").SelectActions("Delete").Delete();
                 NodeSet("view[@id='editForm1']").SelectActions("Delete").Delete();
+                
             }
 
             if (controllerName == "Contact" && !UserIsInRole("Administrators, ContentEditors"))
@@ -139,6 +140,13 @@ namespace zLearnHub.Rules
                 NodeSet().SelectCategory("c5").Delete();
             }
 
+            if(controllerName == "account_general_ledger" || controllerName == "ManualAccountJournalEntries" && !UserIsInRole("Administrators"))
+                {
+                NodeSet("view[@id='grid1']").SelectView("grid1").SelectActions("Delete").Delete();
+                NodeSet().SelectAction("Delete").Delete();
+            }
+
+
         }
 
        
@@ -149,12 +157,49 @@ namespace zLearnHub.Rules
             // Check if the request is trying to delete a payment in FeeCollections
             if (args.Controller == "fee_collection_transaction" && args.CommandName == "Delete")
             {
-                if (!UserIsInRole("Administrators"))
+                if (!UserIsInRole("Administrators, HeadTeachers"))
                 {
                     // Add a custom error message
-                    result.Errors.Add("You do not have permission to delete payment records. Please contact an administrator.");
+                    //result.Errors.Add("You do not have permission to delete payment records. Please contact an administrator.");
+                    result.ShowAlert("You do not have permission to delete payment records. Escalate to a higher authority");
                     
                 }
+            }
+
+            if(args.Controller == "account_general_ledger" && args.CommandName == "Delete")
+            {
+                if (!UserIsInRole("Administrators, HeadTeachers"))
+                {
+                    //result.Errors.Add("You do not have permission to delete account general ledger records. Please contact an administrator.");
+                    result.ShowAlert("Sorry, You do have permission to delete financial records. Please discuss with administrative head.");
+                }
+            }
+
+            if (args.Controller == "ManualAccountJournalEntries" && args.CommandName == "Delete")
+            {
+                if (!UserIsInRole("Administrators, HeadTeachers"))
+                {
+                    result.ShowAlert("You do not have permission to delete financial records. Please discuss with administrative head.");
+                }
+            }
+
+            // this is to prevent editing of purchase orders that have been received
+
+            if (args.Controller == "PurchaseOrder" && args.CommandName == "Update")
+            {
+                if (UserIsInRole("Administrators, HeadTeachers"))
+                {
+                    
+                        var status = Convert.ToString(SelectFieldValue("Status"));
+                        if (status == "Received")
+                        {
+                            throw new Exception("Received purchase orders cannot be edited.");
+                        }
+                    
+                    //result.ShowAlert("You do not have permission to delete financial records. Please discuss with administrative head.");
+                }
+
+                
             }
         }
 

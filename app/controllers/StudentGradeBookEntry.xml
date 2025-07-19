@@ -204,7 +204,6 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
         <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
         <dataField fieldName="UserID" columns="15" hidden="true" />
         <dataField fieldName="extIsActiveSession" columns="15" hidden="true" />
-        <dataField fieldName="SessionIsActive" hidden="true" />
         <dataField fieldName="ASTY" columns="5" />
         <dataField fieldName="ExtIsCsy" columns="15" hidden="true" />
         <dataField fieldName="ExtActiveCourseSection" hidden="true" />
@@ -214,6 +213,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
         <dataField fieldName="Session" columns="50" hidden="true" tag="pivot9-col1" />
         <dataField fieldName="calYear" columns="15" hidden="true" />
         <dataField fieldName="CSY" hidden="true" />
+        <dataField fieldName="SessionIsActive" />
         <dataField fieldName="SGID" columns="8" textMode="Static" tag="import-duplicate-accept" />
         <dataField fieldName="SCID" columns="8" textMode="Static" tag="import-duplicate-accept" />
         <dataField fieldName="extSGID" columns="15" hidden="true" tag="import-duplicate-accept" />
@@ -782,7 +782,7 @@ SET @Result_ShowMessage = 'Base Reporting has been reset successfully for curren
  EXEC [dbo].[usp_term_basis_person_centred_evaluation]
 SET @Result_ShowMessage = 'Attendance metrics has been refreshed successfully for current academic session.' ]]></data>
       </action>
-      <action commandName="Custom" commandArgument="generate_summarised_remarks" headerText="Write AI Supported Remarks" id="a113" cssClass="material-icon-text_rotation_none" confirmation="This action supports teachers to auto generate student remarks. Implementation still in progress." notify="This action supports teachers to auto generate student remarks. Implementation still in progress." whenLastCommandName="Any" />
+      <action commandName="Custom" commandArgument="generate_summarised_remarks" headerText="Write AI Remarks" id="a113" cssClass="material-icon-text_rotation_none" confirmation="This action supports teachers to auto generate student remarks. Implementation still in progress." notify="This action supports teachers to auto generate student remarks. Implementation still in progress." whenLastCommandName="Any" />
       <action id="a107" />
       <action id="a6" commandName="Import" commandArgument="createForm1_import_assessment" />
       <action id="a7" commandName="DataSheet" />

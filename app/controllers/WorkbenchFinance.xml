@@ -18,7 +18,7 @@
     </field>
   </fields>
   <views>
-    <view id="FinanceWorkbench" type="Form" label="FINANCE WORKBENCH">
+    <view id="FinanceWorkbench" type="Form" label="FINANCE WORKBENCH" tags="material-icon-money_bag">
       <categories>
         <category tab="BUDGET ALLOCATION" id="c1" flow="NewColumn">
           <dataFields>

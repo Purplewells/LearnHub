@@ -2,25 +2,50 @@
 <dataController name="TrialBalanceStatement" conflictDetection="overwriteChanges" label="TrialBalanceStatement" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands />
   <fields>
+    <field name="AccountNumber" type="String" allowQBE="false" allowSorting="false" label="Account Number" readOnly="true" showInSummary="true" />
     <field name="AccountID" type="Int32" allowNulls="false" label="Account#" readOnly="true" showInSummary="true" />
     <field name="AccountType" type="String" label="Account Type" readOnly="true" length="20" showInSummary="true" />
     <field name="AccountName" type="String" label="Account Name" readOnly="true" length="100" showInSummary="true" />
     <field name="TransactionDate" type="DateTime" label="Transaction Date" readOnly="true" showInSummary="true" />
-    <field name="Debit" type="Decimal" label="Debit" readOnly="true" showInSummary="true" />
+    <field name="Debit" type="Decimal" label="Debit" readOnly="true" />
     <field name="Credit" type="Decimal" label="Credit" readOnly="true" />
+    <field name="Name" type="String" label="Name" length="60" />
+    <field name="ShortName" type="String" label="Short Name" length="30" />
+    <field name="Address" type="String" label="Address" length="150" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Trial Balance Statement" reportTemplate="true">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="AccountID" columns="15">
-          <headerText>AccountID</headerText>
+        <dataField fieldName="AccountID" columns="15" hidden="true" />
+        <dataField fieldName="AccountNumber" columns="12">
+          <headerText>Account No.</headerText>
         </dataField>
         <dataField fieldName="AccountType" columns="20" />
-        <dataField fieldName="AccountName" columns="35" />
+        <dataField fieldName="AccountName" columns="25" />
         <dataField fieldName="TransactionDate" columns="20" />
-        <dataField fieldName="Debit" columns="15" />
-        <dataField fieldName="Credit" columns="15" />
+        <dataField fieldName="Debit" columns="15" aggregate="Sum" />
+        <dataField fieldName="Credit" columns="15" aggregate="Sum" />
+        <dataField fieldName="Name" hidden="true" />
+        <dataField fieldName="ShortName" columns="30" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_compact" type="Grid" commandId="command1" label="Compact Trial Balance " reportTemplate="true">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="AccountID" columns="15" hidden="true" />
+        <dataField fieldName="AccountNumber" columns="12">
+          <headerText>Account No.</headerText>
+        </dataField>
+        <dataField fieldName="AccountType" columns="20" />
+        <dataField fieldName="AccountName" columns="25" />
+        <dataField fieldName="TransactionDate" columns="20" />
+        <dataField fieldName="Debit" columns="15" aggregate="Sum" />
+        <dataField fieldName="Credit" columns="15" aggregate="Sum" />
+        <dataField fieldName="Name" hidden="true" />
+        <dataField fieldName="ShortName" columns="30" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Trial Balance Statement">
@@ -29,12 +54,16 @@
         <category id="c1" headerText="Trial Balance Statement" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
+            <dataField fieldName="AccountNumber" rows="5" />
             <dataField fieldName="AccountID" columns="15" />
             <dataField fieldName="AccountType" columns="20" />
             <dataField fieldName="AccountName" />
             <dataField fieldName="TransactionDate" columns="10" />
             <dataField fieldName="Debit" columns="15" />
             <dataField fieldName="Credit" columns="15" />
+            <dataField fieldName="Name" />
+            <dataField fieldName="ShortName" columns="30" />
+            <dataField fieldName="Address" />
           </dataFields>
         </category>
       </categories>
@@ -44,7 +73,11 @@
       <categories>
         <category id="c1" headerText="New Trial Balance Statement" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
-          <dataFields />
+          <dataFields>
+            <dataField fieldName="Name" />
+            <dataField fieldName="ShortName" columns="30" />
+            <dataField fieldName="Address" />
+          </dataFields>
         </category>
       </categories>
     </view>
@@ -81,22 +114,24 @@
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
+      <action id="a100" commandName="ReportAsPdf" headerText="Print Trial Balance" />
+      <action id="a103" commandName="ReportAsPdf" headerText="Print Trial Balance (Compact)" cssClass="material-icon-assignment">
+        <data><![CDATA[_controller = TrialBalanceStatement
+_view = grid1_compact
+_template = TrialBalanceStatement_grid1_compact.rdlc]]></data>
+      </action>
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a101" commandName="ReportAsWord" />
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" />
-      <action id="a4" commandName="ExportRss" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a4" commandName="ExportRss" headerText="Export To RSS" />
     </actionGroup>
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
-    </actionGroup>
-    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" />
-      <action id="a2" commandName="ReportAsImage" />
-      <action id="a3" commandName="ReportAsExcel" />
-      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

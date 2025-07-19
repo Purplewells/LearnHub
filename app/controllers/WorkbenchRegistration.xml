@@ -22,7 +22,7 @@
   </fields>
   <views>
     <view id="RegistrationWorkbench" type="Form" label="REGISTRATION WORKBENCH">
-      <headerText>This workbench focuses on registration related reference data.</headerText>
+      <headerText>This workbench provides tools to manage and configure registration-related reference data.</headerText>
       <categories>
         <category tab="CONTACT SYSTEM" id="c6" flow="NewColumn">
           <dataFields>

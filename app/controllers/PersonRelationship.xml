@@ -113,9 +113,9 @@ from "dbo"."PersonRelationship" "PersonRelationship"
           <dataFields>
             <dataField fieldName="RelatedPersonID" aliasFieldName="GuardianName" />
             <dataField fieldName="RefPersonRelationshipID" aliasFieldName="Relationship" />
-            <dataField fieldName="LivesWith" tag="lookup-null-value-none" />
+            <dataField fieldName="LivesWith" tag="lookup-null-value-none" columns="4" />
             <dataField fieldName="IsPrimaryContact" />
-            <dataField fieldName="PriorityNo" rows="3" tag="lookup-null-value-none" />
+            <dataField fieldName="PriorityNo" tag="lookup-null-value-none" columns="4" />
             <dataField fieldName="Restrictions" rows="5" />
             <dataField fieldName="GuardianName" />
             <dataField fieldName="ContactRelationID" columns="15" hidden="true" />
