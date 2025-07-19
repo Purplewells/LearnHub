@@ -99,14 +99,13 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
         <category id="c1" flow="NewColumn">
           <description />
           <dataFields>
-            <dataField fieldName="Description" />
             <dataField fieldName="TransactionDate" columns="10" />
+            <dataField fieldName="Description" tag="focus-auto" />
             <dataField fieldName="Amount" columns="15" />
             <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
             <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
             <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
-            <dataField fieldName="Currency" columns="10" />
             <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
             <dataField fieldName="EnteredBy" columns="50" hidden="true" />
             <dataField fieldName="CreatedBy" columns="50">
@@ -114,24 +113,25 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
             </dataField>
             <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
             <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+            <dataField fieldName="Currency" columns="10" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Journal Entry">
+    <view id="createForm1" type="Form" commandId="command1" label="New Transaction ">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="Description" />
             <dataField fieldName="TransactionDate" columns="10" />
-            <dataField fieldName="Amount" columns="15" />
-            <dataField fieldName="Currency" columns="10" />
+            <dataField fieldName="Description" tag="focus-auto" />
+            <dataField fieldName="Amount" columns="15" dataFormatString="N" />
             <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
             <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
             <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
+            <dataField fieldName="Currency" columns="10" />
             <dataField fieldName="EnteredBy" columns="50" hidden="true" />
             <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
             <dataField fieldName="CreatedBy" columns="50" hidden="true" />
@@ -226,14 +226,35 @@ if (fieldValue == null) {
     // set the focus on the field and display an error
     this.result.focus('Amount', 'Required field.');
 }]]></rule>
+    <rule id="r106" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateDebitAccountID"><![CDATA[var fieldValue = [DebitAccountID];
+if (fieldValue == null) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('DebitAccountID', 'Account to Debit is required.');
+}]]></rule>
+    <rule id="r107" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateCreditAccountID"><![CDATA[var fieldValue = [CreditAccountID];
+if (fieldValue == null) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('CreditAccountID', 'Account to Credit is required.');
+}]]></rule>
     <rule id="r103" commandName="New|Insert|Update" type="Sql" phase="After" name="setEnteredBy"><![CDATA[--SET @EnteredBy = CreatedBy]]></rule>
-    <rule id="r104" commandName="New|Insert|Update" type="Sql" phase="After" name="setCurrency"><![CDATA[SET @CURRENCY  = ( select top 1 Code from zlkp_currency where IsActive = 1 and IsDefault = 1)
+    <rule id="r104" commandName="New" type="Sql" phase="Execute" name="setDefaultValues"><![CDATA[-- SET @CURRENCY  = ( SELECT TOP 1 Code from zlkp_currency where IsActive = 1 and IsDefault = 1)
 
-UPDATE man
-SET Currency = @CURRENCY
-FROM manual_account_journal_entries man
-WHERE man.JournalEntryID = @JournalEntryID]]></rule>
+SET @CURRENCY  = 'GHS'
+SET @TransactionDate = GETDATE()
+
+
+
+
+]]></rule>
     <rule id="r105" commandName="Custom" type="Sql" phase="Execute" name="post_manual_to_account_gl"><![CDATA[--DECLARE @JournalEntryID INT = @JournalEntryID
 --EXEC usp_ops_auto_p2_post_manual_to_account_ledger @JournalEntryID]]></rule>
+    <rule id="r108" commandName="New |Insert|Update" type="Sql" phase="Before" name="setDefaultCurrency"><![CDATA[UPDATE man
+SET Currency = 'GHS'
+FROM manual_account_journal_entries man
+WHERE man.JournalEntryID = @JournalEntryID]]></rule>
   </businessRules>
 </dataController>

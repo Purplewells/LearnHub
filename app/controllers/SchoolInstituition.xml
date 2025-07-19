@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="SchoolInstituition" conflictDetection="overwriteChanges" label="School Instituition" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.SchoolInstituitionBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"School"."SchoolName" "SchoolName"
+	,"School"."RefSchoolTypeId" "RefSchoolTypeID"
+	,"RefSchoolType"."Description" "RefSchoolTypeDescription"
+	,"School"."RefSchoolLevelId" "RefSchoolLevelID"
+	,"RefSchoolLevel"."Description" "RefSchoolLevelDescription"
+	,"School"."RefAdministrativeFundingControlId" "RefAdministrativeFundingControlID"
+	,"RefAdministrativeFundingControl"."Description" "RefAdministrativeFundingControlDescription"
+	,"School"."CharterSchoolIndicator" "CharterSchoolIndicator"
+	,"School"."RefCharterSchoolTypeId" "RefCharterSchoolTypeID"
+	,"RefCharterSchoolType"."Description" "RefCharterSchoolTypeDescription"
+	,"School"."ApprovalYear" "ApprovalYear"
+	,"School"."RefCharterSchoolApprovalAgencyTypeId" "RefCharterSchoolApprovalAgencyTypeID"
+	,"RefCharterSchoolApprovalAgencyType"."Description" "RefCharterSchoolApprovalAgencyTypeDescription"
+	,"School"."ContractApprovalDate" "ContractApprovalDate"
+	,"School"."ContractNumber" "ContractNumber"
+	,"School"."ContractRenewalDate" "ContractRenewalDate"
+	,"School"."RefCharterSchoolManagementOrganizationTypeId" "RefCharterSchoolManagementOrganizationTypeID"
+	,"RefCharterSchoolManagementOrganizationType"."Description" "RefCharterSchoolManagementOrganizationTypeDescription"
+	,"School"."OrganizationID" "OrganizationID"
+	,"OrganisationType"."Description" "OrganisationTypeDescription"
+	,"OrganisationTypeElementType"."Description" "OrganisationTypeElementTypeDescription"
+	,"Organisation"."Name" "OrganisationName"
+	,"Organisation"."TypeID" "OrganisationTypeID"
+	,"Organisation"."ShortName" "OrganisationShortName"
+	,"Organisation"."Website" "OrganisationWebsite"
+	,"Organisation"."Email" "OrganisationEmail"
+	,"Organisation"."IsActive" "OrganisationIsActive"
+	,"Organisation"."Logo" "OrganisationLogo"
+	,"Organisation"."Address" "OrganisationAddress"
+	,"Organisation"."CreatedDate" "CreatedDate"
+	,"Organisation"."ModifiedDate" "ModifiedDate"
+	,"Organisation"."ModifiedBy" "ModifiedBy"
+	,"Organisation"."CreatedBy" "CreatedBy"
+	,"School"."Address" "Address"
+from "dbo"."School" "School"
+	left join "dbo"."zlkpSchoolType" "RefSchoolType" on "School"."RefSchoolTypeId" = "RefSchoolType"."RefSchoolTypeId"
+	left join "dbo"."zlkpSchoolLevel" "RefSchoolLevel" on "School"."RefSchoolLevelId" = "RefSchoolLevel"."RefSchoolLevelId"
+	left join "dbo"."zlkpAdministrativeFundingControl" "RefAdministrativeFundingControl" on "School"."RefAdministrativeFundingControlId" = "RefAdministrativeFundingControl"."RefAdministrativeFundingControlId"
+	left join "dbo"."zlkpCharterSchoolType" "RefCharterSchoolType" on "School"."RefCharterSchoolTypeId" = "RefCharterSchoolType"."RefCharterSchoolTypeId"
+	left join "dbo"."zlkpCharterSchoolApprovalAgencyType" "RefCharterSchoolApprovalAgencyType" on "School"."RefCharterSchoolApprovalAgencyTypeId" = "RefCharterSchoolApprovalAgencyType"."RefCharterSchoolApprovalAgencyTypeId"
+	left join "dbo"."zlkpCharterSchoolManagementOrganizationType" "RefCharterSchoolManagementOrganizationType" on "School"."RefCharterSchoolManagementOrganizationTypeId" = "RefCharterSchoolManagementOrganizationType"."RefCharterSchoolManagementOrganizationTypeId"
+	left join "dbo"."Organisation" "Organisation" on "School"."OrganizationID" = "Organisation"."OrganizationID"
+	left join "dbo"."zlkpOrganizationType" "OrganisationType" on "Organisation"."TypeID" = "OrganisationType"."TypeID"
+	left join "dbo"."zlkpOrganizationElementType" "OrganisationTypeElementType" on "OrganisationType"."ElementTypeID" = "OrganisationTypeElementType"."ElementTypeID"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="SchoolName" type="String" label="School Name" length="50" showInSummary="true" causesCalculate="true" />
+    <field name="RefSchoolTypeID" type="Int32" label="Ref School Type Id" showInSummary="true">
+      <items style="Lookup" dataController="SchoolType" newDataView="createForm1" dataValueField="RefSchoolTypeID" dataTextField="Description" />
+    </field>
+    <field name="RefSchoolTypeDescription" type="String" readOnly="true" label="School Type" length="100" />
+    <field name="RefSchoolLevelID" type="Int32" label="Ref School Level Id" showInSummary="true">
+      <items style="Lookup" dataController="SchoolLevel" newDataView="createForm1" dataValueField="RefSchoolLevelID" dataTextField="Description" />
+    </field>
+    <field name="RefSchoolLevelDescription" type="String" readOnly="true" label="School Level" length="100" />
+    <field name="RefAdministrativeFundingControlID" type="Int32" label="Ref Administrative Funding Control Id" showInSummary="true" />
+    <field name="RefAdministrativeFundingControlDescription" type="String" readOnly="true" label="Administrative Control" length="100" />
+    <field name="CharterSchoolIndicator" type="Boolean" label="Chartered" showInSummary="true" />
+    <field name="RefCharterSchoolTypeID" type="Int32" label="Ref Charter School Type Id">
+      <items style="Lookup" dataController="CharterSchoolType" newDataView="createForm1" dataValueField="RefCharterSchoolTypeID" dataTextField="Description" />
+    </field>
+    <field name="RefCharterSchoolTypeDescription" type="String" readOnly="true" label="School Type" length="100" />
+    <field name="ApprovalYear" type="String" label="Approval Year" length="9" />
+    <field name="RefCharterSchoolApprovalAgencyTypeID" type="Int32" label="Ref Charter School Approval Agency Type Id" />
+    <field name="RefCharterSchoolApprovalAgencyTypeDescription" type="String" readOnly="true" label="Approval Agency" length="100" />
+    <field name="ContractApprovalDate" type="DateTime" label="Contract Approval Date" />
+    <field name="ContractNumber" type="String" label="Contract Number" length="30" />
+    <field name="ContractRenewalDate" type="DateTime" label="Contract Renewal Date" />
+    <field name="RefCharterSchoolManagementOrganizationTypeID" type="Int32" label="Ref Charter School Management Organization Type Id" />
+    <field name="RefCharterSchoolManagementOrganizationTypeDescription" type="String" readOnly="true" label="Organization Type" length="100" />
+    <field name="OrganizationID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Organization ID">
+      <items style="OneToOne" dataController="Organisation" dataValueField="OrganizationID" copy="OrganisationTypeElementTypeDescription=OrganisationType, OrganisationName=Name, OrganisationTypeID=TypeID, OrganisationShortName=ShortName, OrganisationWebsite=Website, OrganisationEmail=Email, OrganisationIsActive=IsActive, OrganisationLogo=Logo, OrganisationAddress=Address, " />
+    </field>
+    <field name="OrganisationTypeDescription" type="String" readOnly="true" label="Organisation Type" length="100" />
+    <field name="OrganisationTypeElementTypeDescription" type="String" readOnly="true" label="Element Type" length="100" />
+    <field name="OrganisationName" type="String" isVirtual="true" label="Organisation Name" length="60" />
+    <field name="OrganisationTypeID" type="Int32" isVirtual="true" label="Organisation Type ID" />
+    <field name="OrganisationShortName" type="String" isVirtual="true" label="Short Name" length="30" />
+    <field name="OrganisationWebsite" type="String" isVirtual="true" label="Website" length="50" />
+    <field name="OrganisationEmail" type="String" isVirtual="true" label="Email" length="50" />
+    <field name="OrganisationIsActive" type="Boolean" isVirtual="true" label="IsActive" />
+    <field name="OrganisationLogo" type="Byte[]" isVirtual="true" onDemand="true" sourceFields="OrganizationID" onDemandHandler="OrganisationLogo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Logo" />
+    <field name="OrganisationAddress" type="String" isVirtual="true" label="Address" length="150" />
+    <field name="Address" type="String" label="Address" length="500" causesCalculate="true" />
+    <field name="CreatedDate" type="DateTime" isVirtual="true" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" isVirtual="true" label="Modified Date" />
+    <field name="ModifiedBy" type="String" isVirtual="true" label="Modified By" length="50" />
+    <field name="CreatedBy" type="String" isVirtual="true" label="Created By" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Instituition">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="SchoolName" columns="50" tag="header-text" />
+        <dataField fieldName="OrganisationName" tag="header-text" />
+        <dataField fieldName="OrganisationShortName" columns="30" />
+        <dataField fieldName="RefSchoolTypeID" aliasFieldName="RefSchoolTypeDescription" />
+        <dataField fieldName="RefSchoolLevelID" aliasFieldName="RefSchoolLevelDescription" />
+        <dataField fieldName="RefCharterSchoolTypeID" aliasFieldName="RefCharterSchoolTypeDescription" />
+        <dataField fieldName="ApprovalYear" columns="9" />
+        <dataField fieldName="ContractApprovalDate" columns="10" />
+        <dataField fieldName="ContractNumber" columns="30" hidden="true" />
+        <dataField fieldName="OrganisationWebsite" columns="50" hidden="true" />
+        <dataField fieldName="OrganisationEmail" columns="50" />
+        <dataField fieldName="CharterSchoolIndicator" hidden="true" />
+        <dataField fieldName="OrganisationIsActive" />
+        <dataField fieldName="OrganisationLogo" columns="15" />
+        <dataField fieldName="OrganisationAddress" />
+        <dataField fieldName="Address" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review School Instituition">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="SchoolName" columns="50" hidden="true" />
+            <dataField fieldName="OrganisationName" />
+            <dataField fieldName="OrganisationShortName" columns="30" />
+            <dataField fieldName="RefSchoolTypeID" aliasFieldName="RefSchoolTypeDescription" />
+            <dataField fieldName="RefSchoolLevelID" aliasFieldName="RefSchoolLevelDescription" />
+            <dataField fieldName="RefCharterSchoolTypeID" aliasFieldName="RefCharterSchoolTypeDescription" />
+            <dataField fieldName="OrganizationID" aliasFieldName="OrganisationTypeDescription" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Indicators">
+          <description />
+          <dataFields>
+            <dataField fieldName="ContractNumber" columns="30" />
+            <dataField fieldName="ApprovalYear" columns="9" />
+            <dataField fieldName="ContractApprovalDate" columns="10" />
+            <dataField fieldName="ContractRenewalDate" columns="10" />
+            <dataField fieldName="OrganisationIsActive" />
+            <dataField fieldName="CharterSchoolIndicator" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Address Details">
+          <description />
+          <dataFields>
+            <dataField fieldName="Address" />
+            <dataField fieldName="OrganisationAddress" hidden="true" />
+            <dataField fieldName="OrganisationWebsite" columns="50" />
+            <dataField fieldName="OrganisationEmail" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Branding" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="OrganisationLogo" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c5" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="10" />
+            <dataField fieldName="ModifiedDate" columns="10" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="CreatedBy" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New School Instituition">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="SchoolName" columns="50" hidden="true" />
+            <dataField fieldName="OrganisationName" />
+            <dataField fieldName="OrganisationShortName" columns="30" />
+            <dataField fieldName="RefSchoolTypeID" aliasFieldName="RefSchoolTypeDescription" />
+            <dataField fieldName="RefSchoolLevelID" aliasFieldName="RefSchoolLevelDescription" />
+            <dataField fieldName="RefCharterSchoolTypeID" aliasFieldName="RefCharterSchoolTypeDescription" />
+            <dataField fieldName="OrganizationID" aliasFieldName="OrganisationTypeDescription" hidden="true" />
+          </dataFields>
+        </category>
+        <category id="c2" headerText="Indicators">
+          <description />
+          <dataFields>
+            <dataField fieldName="ContractNumber" columns="30" />
+            <dataField fieldName="ApprovalYear" columns="9" />
+            <dataField fieldName="ContractApprovalDate" columns="10" />
+            <dataField fieldName="ContractRenewalDate" columns="10" />
+            <dataField fieldName="OrganisationIsActive" />
+            <dataField fieldName="CharterSchoolIndicator" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Address Details">
+          <description />
+          <dataFields>
+            <dataField fieldName="Address" />
+            <dataField fieldName="OrganisationAddress" hidden="true" />
+            <dataField fieldName="OrganisationWebsite" columns="50" />
+            <dataField fieldName="OrganisationEmail" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Branding" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="OrganisationLogo" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Insert|update|Calculate" type="Code" phase="After" name="UpdateOrganisationDetails" />
+  </businessRules>
+</dataController>

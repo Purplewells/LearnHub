@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="PurchaseOrder" alias="PurchaseOrder" created="2024-07-12T08:15:41" modified="2025-04-25T01:59:07" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="PurchaseOrder" alias="PurchaseOrder" created="2024-07-12T08:15:41" modified="2025-06-18T16:37:01" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Supplier" parentTableSchema="dbo" parentTableName="Suppliers" x="362" y="20">
       <foreignKeyColumn columnName="SupplierID" parentColumnName="SupplierID" />
@@ -18,9 +18,9 @@
     </column>
     <column name="SupplierID" fieldName="SupplierID" label="Supplier ID" aliasColumnName="SupplierName" aliasForeignKey="Supplier" />
     <column name="SupplierName" fieldName="SupplierName" label="Supplier Name" foreignKey="Supplier" />
-    <column name="OrderDate" fieldName="OrderDate" label="Order Date" format="d" />
-    <column name="ExpectedDeliveryDate" fieldName="ExpectedDeliveryDate" label="Expected Date" format="d" />
-    <column name="ActualDeliveryDate" fieldName="ActualDeliveryDate" label="Delivered On" format="d" />
+    <column name="OrderDate" fieldName="OrderDate" label="Order Date" format="D" />
+    <column name="ExpectedDeliveryDate" fieldName="ExpectedDeliveryDate" label="Expected Date" format="D" />
+    <column name="ActualDeliveryDate" fieldName="ActualDeliveryDate" label="Delivered On" format="D" />
     <column name="FreightCharge" fieldName="FreightCharge" label="Freight" />
     <column name="TotalAmount" fieldName="TotalAmount" label="Total Amount" format="c" />
     <column name="PurchaseOrderStatusID" fieldName="PurchaseOrderStatusID" label="Purchase Order Status ID" aliasColumnName="PurchaseOrderStatus" aliasForeignKey="PurchaseOrderStatus" />

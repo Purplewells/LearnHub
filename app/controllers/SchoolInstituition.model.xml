@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="School" alias="School" created="2025-06-10T12:35:54" modified="2025-06-10T13:06:34" x="20" y="25" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="RefSchoolType" parentTableSchema="dbo" parentTableName="zlkpSchoolType" x="525" y="80">
+      <foreignKeyColumn columnName="RefSchoolTypeId" parentColumnName="RefSchoolTypeId" />
+    </foreignKey>
+    <foreignKey id="RefSchoolLevel" parentTableSchema="dbo" parentTableName="zlkpSchoolLevel" x="526" y="187">
+      <foreignKeyColumn columnName="RefSchoolLevelId" parentColumnName="RefSchoolLevelId" />
+    </foreignKey>
+    <foreignKey id="RefAdministrativeFundingControl" parentTableSchema="dbo" parentTableName="zlkpAdministrativeFundingControl" x="529" y="296">
+      <foreignKeyColumn columnName="RefAdministrativeFundingControlId" parentColumnName="RefAdministrativeFundingControlId" />
+    </foreignKey>
+    <foreignKey id="RefCharterSchoolType" parentTableSchema="dbo" parentTableName="zlkpCharterSchoolType" x="537" y="545">
+      <foreignKeyColumn columnName="RefCharterSchoolTypeId" parentColumnName="RefCharterSchoolTypeId" />
+    </foreignKey>
+    <foreignKey id="RefCharterSchoolApprovalAgencyType" parentTableSchema="dbo" parentTableName="zlkpCharterSchoolApprovalAgencyType" x="773" y="416">
+      <foreignKeyColumn columnName="RefCharterSchoolApprovalAgencyTypeId" parentColumnName="RefCharterSchoolApprovalAgencyTypeId" />
+    </foreignKey>
+    <foreignKey id="RefCharterSchoolManagementOrganizationType" parentTableSchema="dbo" parentTableName="zlkpCharterSchoolManagementOrganizationType" x="32" y="546">
+      <foreignKeyColumn columnName="RefCharterSchoolManagementOrganizationTypeId" parentColumnName="RefCharterSchoolManagementOrganizationTypeId" />
+    </foreignKey>
+    <foreignKey id="OrganisationType" parentTableSchema="dbo" parentTableName="zlkpOrganizationType" baseForeignKey="Organisation" x="1291" y="57">
+      <foreignKeyColumn columnName="TypeID" parentColumnName="TypeID" />
+    </foreignKey>
+    <foreignKey id="OrganisationTypeElementType" parentTableSchema="dbo" parentTableName="zlkpOrganizationElementType" baseForeignKey="OrganisationType" x="1792" y="25">
+      <foreignKeyColumn columnName="ElementTypeID" parentColumnName="ElementTypeID" />
+    </foreignKey>
+    <foreignKey id="Organisation" parentTableSchema="dbo" parentTableName="Organisation" type="1-to-1" x="917" y="20">
+      <foreignKeyColumn columnName="OrganizationID" parentColumnName="OrganizationID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="SchoolName" fieldName="SchoolName" label="School Name" />
+    <column name="RefSchoolTypeId" fieldName="RefSchoolTypeID" label="Ref School Type Id" aliasColumnName="Description" aliasForeignKey="RefSchoolType" />
+    <column name="Description" fieldName="RefSchoolTypeDescription" label="School Type" foreignKey="RefSchoolType" />
+    <column name="RefSchoolLevelId" fieldName="RefSchoolLevelID" label="Ref School Level Id" aliasColumnName="Description" aliasForeignKey="RefSchoolLevel" />
+    <column name="Description" fieldName="RefSchoolLevelDescription" label="School Level" foreignKey="RefSchoolLevel" />
+    <column name="RefAdministrativeFundingControlId" fieldName="RefAdministrativeFundingControlID" label="Ref Administrative Funding Control Id" aliasColumnName="Description" aliasForeignKey="RefAdministrativeFundingControl" />
+    <column name="Description" fieldName="RefAdministrativeFundingControlDescription" label="Administrative Control" foreignKey="RefAdministrativeFundingControl" />
+    <column name="CharterSchoolIndicator" fieldName="CharterSchoolIndicator" label="Chartered" />
+    <column name="RefCharterSchoolTypeId" fieldName="RefCharterSchoolTypeID" label="Ref Charter School Type Id" aliasColumnName="Description" aliasForeignKey="RefCharterSchoolType" />
+    <column name="Description" fieldName="RefCharterSchoolTypeDescription" label="School Type" foreignKey="RefCharterSchoolType" />
+    <column name="ApprovalYear" fieldName="ApprovalYear" label="Approval Year" />
+    <column name="RefCharterSchoolApprovalAgencyTypeId" fieldName="RefCharterSchoolApprovalAgencyTypeID" label="Ref Charter School Approval Agency Type Id" aliasColumnName="Description" aliasForeignKey="RefCharterSchoolApprovalAgencyType" />
+    <column name="Description" fieldName="RefCharterSchoolApprovalAgencyTypeDescription" label="Approval Agency" foreignKey="RefCharterSchoolApprovalAgencyType" />
+    <column name="ContractApprovalDate" fieldName="ContractApprovalDate" label="Contract Approval Date" />
+    <column name="ContractNumber" fieldName="ContractNumber" label="Contract Number" />
+    <column name="ContractRenewalDate" fieldName="ContractRenewalDate" label="Contract Renewal Date" />
+    <column name="RefCharterSchoolManagementOrganizationTypeId" fieldName="RefCharterSchoolManagementOrganizationTypeID" label="Ref Charter School Management Organization Type Id" aliasColumnName="Description" aliasForeignKey="RefCharterSchoolManagementOrganizationType" />
+    <column name="Description" fieldName="RefCharterSchoolManagementOrganizationTypeDescription" label="Organization Type" foreignKey="RefCharterSchoolManagementOrganizationType" />
+    <column name="OrganizationID" fieldName="OrganizationID" label="Organization ID" aliasColumnName="Description" aliasForeignKey="OrganisationType" />
+    <column name="Description" fieldName="OrganisationTypeDescription" label="Organisation Type" foreignKey="OrganisationType" />
+    <column name="Description" fieldName="OrganisationTypeElementTypeDescription" label="Element Type" foreignKey="OrganisationTypeElementType" />
+    <column name="Name" fieldName="OrganisationName" label="Organisation Name" foreignKey="Organisation" />
+    <column name="TypeID" fieldName="OrganisationTypeID" label="Organisation Type ID" foreignKey="Organisation" />
+    <column name="ShortName" fieldName="OrganisationShortName" label="Short Name" foreignKey="Organisation" />
+    <column name="Website" fieldName="OrganisationWebsite" label="Website" foreignKey="Organisation" />
+    <column name="Email" fieldName="OrganisationEmail" label="Email" foreignKey="Organisation" />
+    <column name="IsActive" fieldName="OrganisationIsActive" label="IsActive" foreignKey="Organisation" />
+    <column name="Logo" fieldName="OrganisationLogo" label="Logo" foreignKey="Organisation" />
+    <column name="Address" fieldName="OrganisationAddress" label="Address" foreignKey="Organisation" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" foreignKey="Organisation" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" foreignKey="Organisation" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" foreignKey="Organisation" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" foreignKey="Organisation" />
+    <column name="Address" fieldName="Address" label="Address" />
+  </columns>
+</dataModel>

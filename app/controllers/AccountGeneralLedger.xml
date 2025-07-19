@@ -59,7 +59,61 @@ from "dbo"."account_general_ledger" "account_general_ledger"
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Account General Ledger">
+    <view id="grid1" type="Grid" commandId="command1" label="Account General Ledger" sortExpression="PostingDate DESC, TransactionDate DESC">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="TransactionID" columns="15" hidden="true" />
+        <dataField fieldName="AccountID" aliasFieldName="AccountName" columns="20" />
+        <dataField fieldName="AccountNumber" columns="10" />
+        <dataField fieldName="AccountType" columns="20" />
+        <dataField fieldName="DebitAmount" columns="20" aggregate="Sum" dataFormatString="N">
+          <headerText />
+        </dataField>
+        <dataField fieldName="CreditAmount" columns="20" aggregate="Sum" dataFormatString="N">
+          <headerText />
+        </dataField>
+        <dataField fieldName="LFT" columns="5" hidden="true" />
+        <dataField fieldName="RGT" columns="5" hidden="true" />
+        <dataField fieldName="ReferenceNumber" columns="12" hidden="true">
+          <headerText>Ref No.</headerText>
+        </dataField>
+        <dataField fieldName="TransactionDate" columns="20" />
+        <dataField fieldName="PostingDate" columns="20" />
+        <dataField fieldName="ExtSourceName" columns="15" hidden="true">
+          <headerText>Source</headerText>
+        </dataField>
+        <dataField fieldName="Memo" columns="100" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_all_entries" type="Grid" commandId="command1" label="All Account General Ledger">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="TransactionID" columns="15" hidden="true" />
+        <dataField fieldName="AccountID" aliasFieldName="AccountName" />
+        <dataField fieldName="AccountNumber" columns="15" />
+        <dataField fieldName="AccountType" columns="20" tag="pivot1-row1-column" />
+        <dataField fieldName="DebitAmount" columns="15" aggregate="Sum" />
+        <dataField fieldName="CreditAmount" columns="15" aggregate="Sum" />
+        <dataField fieldName="LFT" columns="5" hidden="true" />
+        <dataField fieldName="RGT" columns="5" hidden="true" />
+        <dataField fieldName="ReferenceNumber" columns="12">
+          <headerText>Ref No.</headerText>
+        </dataField>
+        <dataField fieldName="TransactionDate" columns="20" />
+        <dataField fieldName="PostingDate" columns="20" />
+        <dataField fieldName="ExtSourceName" columns="25" />
+        <dataField fieldName="Memo" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_other_attributes" type="Grid" commandId="command1" label="Other GL Attributes" sortExpression="PostingDate DESC, TransactionDate DESC">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="TransactionID" columns="15" hidden="true" />
@@ -89,35 +143,11 @@ from "dbo"."account_general_ledger" "account_general_ledger"
         <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
       </dataFields>
     </view>
-    <view id="grid1_all_entries" type="Grid" commandId="command1" label="All Account General Ledger">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="TransactionID" columns="15" hidden="true" />
-        <dataField fieldName="AccountID" aliasFieldName="AccountName" />
-        <dataField fieldName="AccountNumber" columns="15" />
-        <dataField fieldName="AccountType" columns="20" />
-        <dataField fieldName="DebitAmount" columns="15" aggregate="Sum" />
-        <dataField fieldName="CreditAmount" columns="15" aggregate="Sum" />
-        <dataField fieldName="LFT" columns="5" hidden="true" />
-        <dataField fieldName="RGT" columns="5" hidden="true" />
-        <dataField fieldName="ReferenceNumber" columns="12">
-          <headerText>Ref No.</headerText>
-        </dataField>
-        <dataField fieldName="TransactionDate" columns="20" />
-        <dataField fieldName="PostingDate" columns="20" />
-        <dataField fieldName="ExtSourceName" columns="25" />
-        <dataField fieldName="Memo" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Account General Ledger">
+    <view id="editForm1" type="Form" commandId="command1" label="Review General Ledger">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Account General Ledger" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" flow="NewColumn">
+          <description />
           <dataFields>
             <dataField fieldName="TransactionID" columns="15" hidden="true" />
             <dataField fieldName="AccountID" aliasFieldName="AccountName" />

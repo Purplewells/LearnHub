@@ -79,7 +79,7 @@ from "dbo"."vw_fee_collection_accounting_ledger_mini_fee_reminder" "vw_fee_colle
     <field name="ShowOnReport" type="Boolean" label="Show On Report" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Payment Advice Note" reportLabel="Bill Reminder" reportTemplate="true">
+    <view id="grid1" type="Grid" commandId="command1" label="Payment Advice Note" reportLabel="Bill Reminder" reportTemplate="true" showInSelector="false">
       <headerText>This report provides a list of debtors a reminder to make their payment. </headerText>
       <dataFields>
         <dataField fieldName="Fullname" columns="30" />
@@ -117,7 +117,7 @@ from "dbo"."vw_fee_collection_accounting_ledger_mini_fee_reminder" "vw_fee_colle
     <view id="mini_bill_statement" type="Grid" commandId="command1" label="Mini Bill Statement" reportLabel="Bill Reminder" reportTemplate="true" showInSelector="false">
       <headerText>This report provides a list of debtors a reminder to make their payment. </headerText>
       <dataFields>
-        <dataField fieldName="Fullname" columns="35" />
+        <dataField fieldName="Fullname" columns="20" />
         <dataField fieldName="UPN" columns="10" />
         <dataField fieldName="NameOfPayee" columns="25" hidden="true" />
         <dataField fieldName="YearGroup" columns="5" />
@@ -304,10 +304,10 @@ from "dbo"."vw_fee_collection_accounting_ledger_mini_fee_reminder" "vw_fee_colle
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid100" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ReportAsPdf" headerText="Print Bill With Note">
+      <action id="a1" commandName="ReportAsPdf" headerText="Print Bill With Note" whenView="grid100">
         <data />
       </action>
-      <action id="a102" commandName="ReportAsPdf" headerText="Print Detailed Mini Statement" cssClass="material-icon-credit_card">
+      <action id="a102" commandName="ReportAsPdf" headerText="Print Mini Statement" cssClass="material-icon-credit_card">
         <data><![CDATA[_controller = MiniFeeReminder
 _view = mini_bill_statement
 _template = MiniFeeReminder_mini_bill_statement.rdlc]]></data>

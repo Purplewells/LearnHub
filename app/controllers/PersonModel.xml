@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="PersonModel" conflictDetection="overwriteChanges" label="Person Model" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Person"."PersonID" "PersonID"
+	,"Person"."IdentificationCode" "IdentificationCode"
+	,"Person"."FirstName" "FirstName"
+	,"Person"."MiddleName" "MiddleName"
+	,"Person"."LastName" "LastName"
+	,"Person"."BirthDate" "BirthDate"
+	,"Person"."RefSexID" "RefSexID"
+	,"RefSex"."Description" "RefSexDescription"
+	,"Person"."RefCitizenshipStatusID" "RefCitizenshipStatusID"
+	,"RefCitizenshipStatus"."Description" "RefCitizenshipStatusDescription"
+	,"Person"."RefVisaTypeID" "RefVisaTypeID"
+	,"RefVisaType"."Description" "RefVisaTypeDescription"
+	,"Person"."RefResidenceID" "RefResidenceID"
+	,"Person"."RefProofOfResidencyTypeID" "RefProofOfResidencyTypeID"
+	,"RefProofOfResidencyType"."Description" "RefProofOfResidencyTypeDescription"
+	,"Person"."EthnicOriginID" "EthnicOriginID"
+	,"Person"."PersonalInfoVerificationID" "PersonalInfoVerificationID"
+	,"PersonalInfoVerification"."Description" "PersonalInfoVerificationDescription"
+	,"Person"."CreatedBy" "CreatedBy"
+	,"Person"."CreatedDate" "CreatedDate"
+	,"Person"."ModifiedDate" "ModifiedDate"
+	,"Person"."ModifiedBy" "ModifiedBy"
+	,"Person"."UserName" "UserName"
+	,"Person"."Password" "Password"
+	,"Person"."Email" "Email"
+	,"Person"."PhoneNo" "PhoneNo"
+	,"Person"."CurrentYearStatus" "CurrentYearStatus"
+	,"Person"."CurrentYearGradeLevel" "CurrentYearGradeLevel"
+	,"Person"."CurrentYearCoursesEnrolled" "CurrentYearCoursesEnrolled"
+	,"Person"."ExtendedRole" "ExtendedRole"
+	,"Person"."ExtendedLiveStatusStartDate" "ExtendedLiveStatusStartDate"
+	,"Person"."ExtendedLiveStatusEndDate" "ExtendedLiveStatusEndDate"
+	,"Person"."TitleID" "TitleID"
+	,"Title"."Description" "TitleDescription"
+	,"Person"."LanguageID" "LanguageID"
+	,"Language"."Language" "Language"
+	,"Person"."ReligionID" "ReligionID"
+	,"Religion"."Religion" "Religion"
+	,"Person"."PhotoUrl" "PhotoUrl"
+	,"Person"."OrganizationID" "OrganizationID"
+	,"Organization"."Name" "OrganizationName"
+	,"Person"."UserID" "UserID"
+	,"Person"."Address" "Address"
+	,"Person"."SuiteNumber" "SuiteNumber"
+	,"Person"."TownID" "TownID"
+	,"Town"."Town" "Town"
+	,"Person"."PostalCode" "PostalCode"
+	,"Person"."CountryID" "CountryID"
+	,"Country"."Description" "CountryDescription"
+	,"Person"."LocationTypeID" "LocationTypeID"
+	,"LocationType"."Description" "LocationTypeDescription"
+	,"Person"."PhotoFileName" "PhotoFileName"
+	,"Person"."ContentType" "ContentType"
+	,"Person"."FileLength" "FileLength"
+	,"Person"."Owner" "Owner"
+	,"Person"."GlobalID" "GlobalID"
+	,"Person"."CreatedByID" "CreatedByID"
+	,"Person"."extSetGradeLevel" "ExtSetGradeLevel"
+	,"Person"."extImportGradeLevel" "ExtImportGradeLevel"
+	,"Person"."MarkedForDeletion" "MarkedForDeletion"
+	,"Person"."RefOccupationId" "RefOccupationID"
+	,"RefOccupation"."Occupation" "RefOccupation"
+	,"Person"."SocialSecurityNumber" "SocialSecurityNumber"
+	,"Person"."AccountNo" "AccountNo"
+	,"Person"."BankName" "BankName"
+	,"Person"."FatherName" "FatherName"
+	,"Person"."MotherName" "MotherName"
+from "dbo"."Person" "Person"
+	left join "dbo"."zlkpSex" "RefSex" on "Person"."RefSexID" = "RefSex"."GenderID"
+	left join "dbo"."zlkpCitizenshipStatus" "RefCitizenshipStatus" on "Person"."RefCitizenshipStatusID" = "RefCitizenshipStatus"."RefCitizenshipStatusId"
+	left join "dbo"."zlkpVisaType" "RefVisaType" on "Person"."RefVisaTypeID" = "RefVisaType"."RefVisaTypeId"
+	left join "dbo"."zlkpProofOfResidencyType" "RefProofOfResidencyType" on "Person"."RefProofOfResidencyTypeID" = "RefProofOfResidencyType"."RefProofOfResidencyTypeId"
+	left join "dbo"."zlkpPersonalInformationVerification" "PersonalInfoVerification" on "Person"."PersonalInfoVerificationID" = "PersonalInfoVerification"."RefPersonalInformationVerificationId"
+	left join "dbo"."zlkpTitle" "Title" on "Person"."TitleID" = "Title"."TitleID"
+	left join "dbo"."zlkp_language" "Language" on "Person"."LanguageID" = "Language"."LanguageID"
+	left join "dbo"."zlkp_Religion" "Religion" on "Person"."ReligionID" = "Religion"."ReligionID"
+	left join "dbo"."Organisation" "Organization" on "Person"."OrganizationID" = "Organization"."OrganizationID"
+	left join "dbo"."zlkpTown" "Town" on "Person"."TownID" = "Town"."TownID"
+	left join "dbo"."zlkpCountry" "Country" on "Person"."CountryID" = "Country"."CountryID"
+	left join "dbo"."zlkpPersonLocationType" "LocationType" on "Person"."LocationTypeID" = "LocationType"."LocationTypeID"
+	left join "dbo"."zlkpOccupation" "RefOccupation" on "Person"."RefOccupationId" = "RefOccupation"."RefOccupationId"
+]]></text>
+    </command>
+    <command id="PersonIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="PersonID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="PersonID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Person ID" readOnly="true" />
+    <field name="IdentificationCode" type="String" label="Identification Code" length="10" showInSummary="true" />
+    <field name="FirstName" type="String" label="First Name" length="35" showInSummary="true" />
+    <field name="MiddleName" type="String" label="Middle Name" length="35" showInSummary="true" />
+    <field name="LastName" type="String" label="Last Name" length="35" showInSummary="true" />
+    <field name="BirthDate" type="DateTime" label="Birth Date" showInSummary="true" />
+    <field name="RefSexID" type="Int32" label="Ref Sex ID">
+      <items style="Lookup" dataController="Sex" newDataView="createForm1" dataValueField="GenderID" dataTextField="Description" />
+    </field>
+    <field name="RefSexDescription" type="String" readOnly="true" label="Ref Sex Description" length="100" />
+    <field name="RefCitizenshipStatusID" type="Int32" label="Ref Citizenship Status ID">
+      <items style="Lookup" dataController="CitizenshipStatus" newDataView="createForm1" dataValueField="RefCitizenshipStatusID" dataTextField="Description" />
+    </field>
+    <field name="RefCitizenshipStatusDescription" type="String" readOnly="true" label="Ref Citizenship Status Description" length="100" />
+    <field name="RefVisaTypeID" type="Int32" label="Ref Visa Type ID" />
+    <field name="RefVisaTypeDescription" type="String" readOnly="true" label="Ref Visa Type Description" length="100" />
+    <field name="RefResidenceID" type="Int32" label="Ref Residence ID" />
+    <field name="RefProofOfResidencyTypeID" type="Int32" label="Ref Proof Of Residency Type ID">
+      <items style="Lookup" dataController="IdentificationProof" newDataView="createForm1" dataValueField="RefProofOfResidencyTypeID" dataTextField="Description" />
+    </field>
+    <field name="RefProofOfResidencyTypeDescription" type="String" readOnly="true" label="Ref Proof Of Residency Type Description" length="100" />
+    <field name="EthnicOriginID" type="Int32" label="Ethnic Origin ID" />
+    <field name="PersonalInfoVerificationID" type="Int32" label="Personal Info Verification ID">
+      <items style="Lookup" dataController="InformationVerification" newDataView="createForm1" dataValueField="RefPersonalInformationVerificationID" dataTextField="Description" />
+    </field>
+    <field name="PersonalInfoVerificationDescription" type="String" readOnly="true" label="Personal Info Verification Description" length="100" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="UserName" type="String" label="User Name" length="50" />
+    <field name="Password" type="String" label="Password" length="50" />
+    <field name="Email" type="String" label="Email" length="50" />
+    <field name="PhoneNo" type="String" label="Phone No" length="15" />
+    <field name="CurrentYearStatus" type="String" label="Current Year Status" length="10" />
+    <field name="CurrentYearGradeLevel" type="String" label="Current Year Grade Level" length="10" />
+    <field name="CurrentYearCoursesEnrolled" type="Int32" label="Current Year Courses Enrolled" />
+    <field name="ExtendedRole" type="String" label="Extended Role" length="20" />
+    <field name="ExtendedLiveStatusStartDate" type="DateTime" label="Extended Live Status Start Date" />
+    <field name="ExtendedLiveStatusEndDate" type="DateTime" label="Extended Live Status End Date" />
+    <field name="TitleID" type="Int32" label="Title ID">
+      <items style="Lookup" dataController="Title" newDataView="createForm1" dataValueField="TitleID" dataTextField="Description" />
+    </field>
+    <field name="TitleDescription" type="String" readOnly="true" label="Title Description" length="15" />
+    <field name="LanguageID" type="Int32" label="Language ID">
+      <items style="Lookup" dataController="Language" newDataView="createForm1" dataValueField="LanguageID" dataTextField="Language" />
+    </field>
+    <field name="Language" type="String" readOnly="true" label="Language" length="30" />
+    <field name="ReligionID" type="Int32" label="Religion ID">
+      <items style="Lookup" dataController="Religion" newDataView="createForm1" dataValueField="ReligionID" dataTextField="Religion" />
+    </field>
+    <field name="Religion" type="String" readOnly="true" label="Religion" length="20" />
+    <field name="PhotoUrl" type="Byte[]" onDemand="true" sourceFields="PersonID" onDemandHandler="PersonPhotoUrl" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Photo Url" />
+    <field name="OrganizationID" type="Int32" label="Organization ID">
+      <items style="Lookup" dataController="Organisation" newDataView="createForm1" dataValueField="OrganizationID" dataTextField="Name" />
+    </field>
+    <field name="OrganizationName" type="String" readOnly="true" label="Organization Name" length="60" />
+    <field name="UserID" type="Guid" label="User ID" />
+    <field name="Address" type="String" label="Address" length="50" />
+    <field name="SuiteNumber" type="String" label="Suite Number" length="5" />
+    <field name="TownID" type="Int32" label="Town ID">
+      <items style="Lookup" dataController="Town" newDataView="createForm1" dataValueField="TownID" dataTextField="Town" />
+    </field>
+    <field name="Town" type="String" readOnly="true" label="Town" length="30" />
+    <field name="PostalCode" type="String" label="Postal Code" length="12" />
+    <field name="CountryID" type="Int32" label="Country ID">
+      <items style="Lookup" dataController="Country" newDataView="createForm1" dataValueField="CountryID" dataTextField="Description" />
+    </field>
+    <field name="CountryDescription" type="String" readOnly="true" label="Country Description" length="100" />
+    <field name="LocationTypeID" type="Int32" label="Location Type ID">
+      <items style="Lookup" dataController="PersonLocationType" newDataView="createForm1" dataValueField="LocationTypeID" dataTextField="Description" />
+    </field>
+    <field name="LocationTypeDescription" type="String" readOnly="true" label="Location Type Description" length="100" />
+    <field name="PhotoFileName" type="String" label="Photo File Name" length="100" />
+    <field name="ContentType" type="String" label="Content Type" length="100" />
+    <field name="FileLength" type="Int32" label="File Length" />
+    <field name="Owner" type="String" label="Owner" length="50" />
+    <field name="GlobalID" type="Guid" label="Global ID" />
+    <field name="CreatedByID" type="String" label="Created By ID" length="50" />
+    <field name="ExtSetGradeLevel" type="String" label="ext Set Grade Level" length="20" />
+    <field name="ExtImportGradeLevel" type="String" label="ext Import Grade Level" length="10" />
+    <field name="MarkedForDeletion" type="Boolean" label="Marked For Deletion" />
+    <field name="RefOccupationID" type="Int32" label="Ref Occupation Id">
+      <items style="Lookup" dataController="Occupation" newDataView="createForm1" dataValueField="RefOccupationID" dataTextField="Occupation" />
+    </field>
+    <field name="RefOccupation" type="String" readOnly="true" label="Ref Occupation" length="100" />
+    <field name="SocialSecurityNumber" type="String" label="Social Security Number" length="20" />
+    <field name="AccountNo" type="String" label="Account No" length="20" />
+    <field name="BankName" type="String" label="Bank Name" length="50" />
+    <field name="FatherName" type="String" label="Father Name" length="50" />
+    <field name="MotherName" type="String" label="Mother Name" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Person Model">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="IdentificationCode" columns="10" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="MiddleName" columns="35" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="BirthDate" columns="10" />
+        <dataField fieldName="RefSexID" aliasFieldName="RefSexDescription" />
+        <dataField fieldName="RefCitizenshipStatusID" aliasFieldName="RefCitizenshipStatusDescription" />
+        <dataField fieldName="RefVisaTypeID" aliasFieldName="RefVisaTypeDescription" />
+        <dataField fieldName="RefResidenceID" columns="15" />
+        <dataField fieldName="RefProofOfResidencyTypeID" aliasFieldName="RefProofOfResidencyTypeDescription" />
+        <dataField fieldName="EthnicOriginID" columns="15" />
+        <dataField fieldName="PersonalInfoVerificationID" aliasFieldName="PersonalInfoVerificationDescription" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="UserName" columns="50" />
+        <dataField fieldName="Password" textMode="Password" columns="50" />
+        <dataField fieldName="Email" columns="50" />
+        <dataField fieldName="PhoneNo" columns="15" />
+        <dataField fieldName="CurrentYearStatus" columns="10" />
+        <dataField fieldName="CurrentYearGradeLevel" columns="10" />
+        <dataField fieldName="CurrentYearCoursesEnrolled" columns="15" />
+        <dataField fieldName="ExtendedRole" columns="20" />
+        <dataField fieldName="ExtendedLiveStatusStartDate" columns="10" />
+        <dataField fieldName="ExtendedLiveStatusEndDate" columns="10" />
+        <dataField fieldName="TitleID" aliasFieldName="TitleDescription" />
+        <dataField fieldName="LanguageID" aliasFieldName="Language" />
+        <dataField fieldName="ReligionID" aliasFieldName="Religion" />
+        <dataField fieldName="PhotoUrl" columns="15" />
+        <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" />
+        <dataField fieldName="UserID" columns="15" />
+        <dataField fieldName="Address" columns="50" />
+        <dataField fieldName="SuiteNumber" columns="5" />
+        <dataField fieldName="TownID" aliasFieldName="Town" />
+        <dataField fieldName="PostalCode" columns="12" />
+        <dataField fieldName="CountryID" aliasFieldName="CountryDescription" />
+        <dataField fieldName="LocationTypeID" aliasFieldName="LocationTypeDescription" />
+        <dataField fieldName="PhotoFileName" />
+        <dataField fieldName="ContentType" />
+        <dataField fieldName="FileLength" columns="15" />
+        <dataField fieldName="Owner" columns="50" />
+        <dataField fieldName="GlobalID" columns="15" />
+        <dataField fieldName="CreatedByID" columns="50" />
+        <dataField fieldName="ExtSetGradeLevel" columns="20" />
+        <dataField fieldName="ExtImportGradeLevel" columns="10" />
+        <dataField fieldName="MarkedForDeletion" />
+        <dataField fieldName="RefOccupationID" aliasFieldName="RefOccupation" />
+        <dataField fieldName="SocialSecurityNumber" columns="20" />
+        <dataField fieldName="AccountNo" columns="20" />
+        <dataField fieldName="BankName" columns="50" />
+        <dataField fieldName="FatherName" columns="50" />
+        <dataField fieldName="MotherName" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Person Model">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="IdentificationCode" columns="10" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="MiddleName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="BirthDate" columns="10" />
+            <dataField fieldName="RefSexID" aliasFieldName="RefSexDescription" />
+            <dataField fieldName="TitleID" aliasFieldName="TitleDescription" />
+            <dataField fieldName="LanguageID" aliasFieldName="Language" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="ReligionID" aliasFieldName="Religion" />
+            <dataField fieldName="RefVisaTypeID" aliasFieldName="RefVisaTypeDescription" />
+            <dataField fieldName="RefProofOfResidencyTypeID" aliasFieldName="RefProofOfResidencyTypeDescription" />
+            <dataField fieldName="RefCitizenshipStatusID" aliasFieldName="RefCitizenshipStatusDescription" />
+            <dataField fieldName="PersonalInfoVerificationID" aliasFieldName="PersonalInfoVerificationDescription" />
+          </dataFields>
+        </category>
+        <category id="c3" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="PhotoUrl" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c4" headerText="Address" collapsed="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="Address" columns="50" />
+            <dataField fieldName="SuiteNumber" columns="5" />
+            <dataField fieldName="TownID" aliasFieldName="Town" />
+            <dataField fieldName="PostalCode" columns="12" />
+            <dataField fieldName="CountryID" aliasFieldName="CountryDescription" />
+            <dataField fieldName="LocationTypeID" aliasFieldName="LocationTypeDescription" />
+          </dataFields>
+        </category>
+        <category id="c5" headerText="Banking Details" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="AccountNo" columns="20" />
+            <dataField fieldName="BankName" columns="50" />
+            <dataField fieldName="SocialSecurityNumber" columns="20" />
+          </dataFields>
+        </category>
+        <category id="c6" headerText="Person Model">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields />
+        </category>
+        <category id="c7" headerText="Person Model">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields />
+        </category>
+        <category id="c8" headerText="Person Model">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="RefResidenceID" columns="15" />
+            <dataField fieldName="EthnicOriginID" columns="15" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="UserName" columns="50" />
+            <dataField fieldName="Password" textMode="Password" columns="50" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="PhoneNo" columns="15" />
+            <dataField fieldName="CurrentYearStatus" columns="10" />
+            <dataField fieldName="CurrentYearGradeLevel" columns="10" />
+            <dataField fieldName="CurrentYearCoursesEnrolled" columns="15" />
+            <dataField fieldName="ExtendedRole" columns="20" />
+            <dataField fieldName="ExtendedLiveStatusStartDate" columns="10" />
+            <dataField fieldName="ExtendedLiveStatusEndDate" columns="10" />
+            <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="PhotoFileName" />
+            <dataField fieldName="ContentType" />
+            <dataField fieldName="FileLength" columns="15" />
+            <dataField fieldName="Owner" columns="50" />
+            <dataField fieldName="GlobalID" columns="15" />
+            <dataField fieldName="CreatedByID" columns="50" />
+            <dataField fieldName="ExtSetGradeLevel" columns="20" />
+            <dataField fieldName="ExtImportGradeLevel" columns="10" />
+            <dataField fieldName="MarkedForDeletion" />
+            <dataField fieldName="RefOccupationID" aliasFieldName="RefOccupation" />
+            <dataField fieldName="FatherName" columns="50" />
+            <dataField fieldName="MotherName" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Person Model">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="IdentificationCode" columns="10" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="MiddleName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="BirthDate" columns="10" />
+            <dataField fieldName="RefSexID" aliasFieldName="RefSexDescription" />
+            <dataField fieldName="RefCitizenshipStatusID" aliasFieldName="RefCitizenshipStatusDescription" />
+            <dataField fieldName="RefVisaTypeID" aliasFieldName="RefVisaTypeDescription" />
+            <dataField fieldName="RefResidenceID" columns="15" />
+            <dataField fieldName="RefProofOfResidencyTypeID" aliasFieldName="RefProofOfResidencyTypeDescription" />
+            <dataField fieldName="EthnicOriginID" columns="15" />
+            <dataField fieldName="PersonalInfoVerificationID" aliasFieldName="PersonalInfoVerificationDescription" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="UserName" columns="50" />
+            <dataField fieldName="Password" textMode="Password" columns="50" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="PhoneNo" columns="15" />
+            <dataField fieldName="CurrentYearStatus" columns="10" />
+            <dataField fieldName="CurrentYearGradeLevel" columns="10" />
+            <dataField fieldName="CurrentYearCoursesEnrolled" columns="15" />
+            <dataField fieldName="ExtendedRole" columns="20" />
+            <dataField fieldName="ExtendedLiveStatusStartDate" columns="10" />
+            <dataField fieldName="ExtendedLiveStatusEndDate" columns="10" />
+            <dataField fieldName="TitleID" aliasFieldName="TitleDescription" />
+            <dataField fieldName="LanguageID" aliasFieldName="Language" />
+            <dataField fieldName="ReligionID" aliasFieldName="Religion" />
+            <dataField fieldName="PhotoUrl" columns="15" />
+            <dataField fieldName="OrganizationID" aliasFieldName="OrganizationName" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="Address" columns="50" />
+            <dataField fieldName="SuiteNumber" columns="5" />
+            <dataField fieldName="TownID" aliasFieldName="Town" />
+            <dataField fieldName="PostalCode" columns="12" />
+            <dataField fieldName="CountryID" aliasFieldName="CountryDescription" />
+            <dataField fieldName="LocationTypeID" aliasFieldName="LocationTypeDescription" />
+            <dataField fieldName="PhotoFileName" />
+            <dataField fieldName="ContentType" />
+            <dataField fieldName="FileLength" columns="15" />
+            <dataField fieldName="Owner" columns="50" />
+            <dataField fieldName="GlobalID" columns="15" />
+            <dataField fieldName="CreatedByID" columns="50" />
+            <dataField fieldName="ExtSetGradeLevel" columns="20" />
+            <dataField fieldName="ExtImportGradeLevel" columns="10" />
+            <dataField fieldName="MarkedForDeletion" />
+            <dataField fieldName="RefOccupationID" aliasFieldName="RefOccupation" />
+            <dataField fieldName="SocialSecurityNumber" columns="20" />
+            <dataField fieldName="AccountNo" columns="20" />
+            <dataField fieldName="BankName" columns="50" />
+            <dataField fieldName="FatherName" columns="50" />
+            <dataField fieldName="MotherName" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

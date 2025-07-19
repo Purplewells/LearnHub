@@ -18,8 +18,8 @@
     </field>
   </fields>
   <views>
-    <view id="StockReference" type="Form" label="Stock Reference" tags="material-icon-bolt">
-      <headerText>This is a setup module for stock reference data</headerText>
+    <view id="StockReference" type="Form" label="STOCK REFERENCE MAPPINGS" tags="material-icon-bolt">
+      <headerText>This module is designed to configure and manage stock reference data</headerText>
       <categories>
         <category id="c1" tab="SUPPLIER" flow="NewColumn">
           <dataFields>
@@ -36,10 +36,13 @@
             <dataField fieldName="UnitOfMeasure" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;material-icon-arrow_circle_up" />
           </dataFields>
         </category>
-        <category id="c4" tab="UOM MAPPING">
+        <category id="c4" tab="ITEM UOM MAPPING">
           <dataFields>
-            <dataField fieldName="ProductUoM" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;material-icon-arrow_circle_up" />
+            <dataField fieldName="ProductUoM" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none&#xD;&#xA;material-icon-arrow_circle_up">
+              <headerText>Item UoM Product Mapping</headerText>
+            </dataField>
           </dataFields>
+          <description />
         </category>
         <category id="c2" tab="TRANSACTION TYPE">
           <dataFields>
@@ -49,4 +52,7 @@
       </categories>
     </view>
   </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="Stock Actions" flat="false" />
+  </actions>
 </dataController>

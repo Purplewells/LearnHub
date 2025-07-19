@@ -6,11 +6,11 @@
     </field>
   </fields>
   <views>
-    <view id="AccountLedgerForm" type="Form" label="GENERAL ACCOUNT LEDGER">
+    <view id="AccountLedgerForm" type="Form" label="GENERAL ACCOUNT LEDGER" tags="material-icon-point_of_sale">
       <categories>
         <category id="c1" headerText="Account Ledger" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="AccountGeneralLedger" columns="15" />
+            <dataField fieldName="AccountGeneralLedger" columns="15" tag="modal-max-sm&#xD;&#xA;modal-fit-content" />
           </dataFields>
         </category>
       </categories>

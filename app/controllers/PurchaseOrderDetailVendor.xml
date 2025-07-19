@@ -296,5 +296,6 @@ from "dbo"."PurchaseOrderDetail" "PurchaseOrderDetail"
 SET @IsArrived = 0
 SET @IsFullyReceived = 0]]></rule>
     <rule id="r101" commandName="Insert|update|Calculate" type="Code" phase="After" name="ProcessPurchaseOrder" />
+    <rule id="r102" commandName="Calculate" type="Sql" phase="Execute" name="setArrivalDate"><![CDATA[SET @ArrivalDate = CAST(GETDATE() AS DATE)]]></rule>
   </businessRules>
 </dataController>

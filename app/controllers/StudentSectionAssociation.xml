@@ -152,7 +152,7 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
         <dataField fieldName="SectionName" columns="12" hidden="true" />
         <dataField fieldName="StartDate" columns="18" />
         <dataField fieldName="EndDate" columns="18" />
-        <dataField fieldName="RefProgressLevelId" aliasFieldName="RefProgressLevelDescription" />
+        <dataField fieldName="RefProgressLevelId" aliasFieldName="RefProgressLevelDescription" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
@@ -190,7 +190,7 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
         <dataField fieldName="SectionName" columns="12" hidden="true" />
         <dataField fieldName="StartDate" columns="18" />
         <dataField fieldName="EndDate" columns="18" />
-        <dataField fieldName="RefProgressLevelId" aliasFieldName="RefProgressLevelDescription" />
+        <dataField fieldName="RefProgressLevelId" aliasFieldName="RefProgressLevelDescription" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
