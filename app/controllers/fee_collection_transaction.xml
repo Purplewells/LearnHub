@@ -278,7 +278,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Payment">
+    <view id="createForm1" type="Form" commandId="command1" label="New Transaction">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
@@ -294,7 +294,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
             <dataField fieldName="FeeType" columns="20" hidden="true" />
             <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" rows="3" columns="4" />
             <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" />
-            <dataField fieldName="TransactionStatusID" aliasFieldName="TransactionStatus" rows="2" columns="3" />
+            <dataField fieldName="TransactionStatusID" aliasFieldName="TransactionStatus" rows="2" columns="3" hidden="true" />
             <dataField fieldName="NameOfPayee" columns="25">
               <headerText>Name of Payee</headerText>
             </dataField>
