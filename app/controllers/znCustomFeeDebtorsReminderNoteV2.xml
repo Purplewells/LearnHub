@@ -36,7 +36,68 @@
     <field name="TransDate" type="DateTime" label="Trans Date" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Fee and Bills Advise">
+    <view id="grid1" type="Grid" commandId="command1" label="Bill Advise">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="FeeID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="UPN" columns="10">
+          <headerText>UPN</headerText>
+        </dataField>
+        <dataField fieldName="CYG" columns="5" tag="pivot1-row1-column-sortdescbyvalue&#xD;&#xA;pivot1-title:&quot;Total Line Balance via Grade Level&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Grade Level&quot;        &#xD;&#xA;pivot1-vaxistitle:&quot;Amount&quot;&#xD;&#xA;&#xD;&#xA;pivot2-row1-columnstacked-top10-sortdescbyvalue&#xD;&#xA;pivot2-title:&quot;Total Debt or Credit By Grade Level&quot;&#xD;&#xA;pivot2-haxistitle:&quot;Grade Level&quot;        &#xD;&#xA;pivot2-vaxistitle:&quot;Amount&quot;&#xD;&#xA;&#xD;&#xA;">
+          <headerText>CYG</headerText>
+        </dataField>
+        <dataField fieldName="Description" columns="25" />
+        <dataField fieldName="FeeType" columns="15" tag="pivot3-row1-columnstacked-top10-sortdescbyvalue&#xD;&#xA;pivot3-title:&quot;Outstanding amount per class vs fee type&quot;&#xD;&#xA;pivot3-haxistitle:&quot;Fee Type&quot;        &#xD;&#xA;pivot3-vaxistitle:&quot;Amount&quot;&#xD;&#xA;&#xD;&#xA;pivot6-row1-pie-sortdescbyvalue&#xD;&#xA;pivot6-title:&quot;Outstanding unpaid amount vrs fee type&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Fee Type&quot;        &#xD;&#xA;pivot6-vaxistitle:&quot;Amount&quot;&#xD;&#xA;&#xD;&#xA;pivot10-col1&#xD;&#xA;pivot11-col1" />
+        <dataField fieldName="Currency" columns="5">
+          <headerText>CURR</headerText>
+        </dataField>
+        <dataField fieldName="Debit" columns="7" tag="pivot2-val1-sum" />
+        <dataField fieldName="Credit" columns="7" tag="pivot2-val2-sum&#xD;&#xA;pivot8-val1-sum&#xD;&#xA;pivot9-val1-sum&#xD;&#xA;pivot11-val1-sum" />
+        <dataField fieldName="TransDate" columns="20" tag="pivot8-row1-column-date&#xD;&#xA;pivot8-title:&quot;Count of Fees and Bills by Date&quot;&#xD;&#xA;&#xD;&#xA;pivot9-row1-column-date&#xD;&#xA;pivot9-title:&quot;Total Fees Paid by Date&quot;&#xD;&#xA;&#xD;&#xA;pivot10-row1-columnstacked-date&#xD;&#xA;pivot10-title:&quot;Count of Fees Paid by Date and Fee Type&quot;&#xD;&#xA;&#xD;&#xA;pivot11-row1-columnstacked-date-all&#xD;&#xA;pivot11-title:&quot;Sum of Fees Paid by Transaction Date and Fee Type&quot;&#xD;&#xA;&#xD;&#xA;pivot12-row1-columnstacked-date-all&#xD;&#xA;pivot12-title:&quot;Sum of Balances of Fees by Date and Fee Type&quot;" />
+        <dataField fieldName="LineBalance" columns="8" tag="pivot1-val1-sum&#xD;&#xA;pivot12-val1-sum">
+          <headerText>Balance</headerText>
+        </dataField>
+        <dataField fieldName="IsPaidInFull" columns="10" tag="pivot7-row1-pie&#xD;&#xA;pivot7-title:&quot;Count of Fees and Bills by Paid In Full&quot;">
+          <headerText>Paid In Full</headerText>
+        </dataField>
+        <dataField fieldName="SessionCode" columns="12">
+          <headerText>Session</headerText>
+        </dataField>
+        <dataField fieldName="State" columns="15" hidden="true" />
+        <dataField fieldName="SchoolName" columns="50" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="Website" columns="50" hidden="true" />
+        <dataField fieldName="Email" columns="50" hidden="true" />
+        <dataField fieldName="Attribute1" rows="5" hidden="true" />
+        <dataField fieldName="Attribute2" hidden="true" />
+        <dataField fieldName="ShowOnReport" hidden="true" />
+        <dataField fieldName="OverallBilled" columns="10">
+          <headerText>Billed</headerText>
+        </dataField>
+        <dataField fieldName="OverallPaid" columns="10">
+          <headerText>Overall Paid</headerText>
+        </dataField>
+        <dataField fieldName="OverallOutstanding" columns="12" tag="pivot3-val1-sum&#xD;&#xA;">
+          <headerText>Oustanding</headerText>
+        </dataField>
+        <dataField fieldName="HasOutstanding" columns="12" tag="pivot3-col1&#xD;&#xA;">
+          <headerText>Has Outstanding </headerText>
+        </dataField>
+        <dataField fieldName="IsAdvanceCredit" columns="3" hidden="true" />
+        <dataField fieldName="Display" columns="3">
+          <headerText>DSP</headerText>
+        </dataField>
+        <dataField fieldName="UnpaidOrUnderpaid" columns="5">
+          <headerText>ODSP</headerText>
+        </dataField>
+        <dataField fieldName="UnusedAdvanceBalance" columns="15" hidden="true" />
+        <dataField fieldName="HasUnusedAdvance" columns="3" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_totals_included" type="Grid" commandId="command1" label="Full Bill Advise " reportTemplate="true">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="PersonID" columns="15" hidden="true" />
@@ -226,6 +287,9 @@
     </actionGroup>
     <actionGroup id="ag7" scope="ActionBar" headerText="Report">
       <action id="a1" commandName="ReportAsPdf" headerText="Print Fee Statement" />
+      <action id="a100" commandName="ReportAsPdf" headerText="Print Fee Statement (Totals)">
+        <data />
+      </action>
       <action id="a2" commandName="ReportAsImage" />
       <action id="a3" commandName="ReportAsExcel" headerText="Export To Excel" />
       <action id="a4" commandName="ReportAsWord" />
