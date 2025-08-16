@@ -120,6 +120,8 @@ namespace zLearnHub.Models
         extSCID,
 
         Fullname,
+
+        RefGradeLevelID,
     }
 
     public partial class znStudentGradeBookEntryModel : BusinessRulesObjectModel
@@ -292,6 +294,9 @@ namespace zLearnHub.Models
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private string _fullname;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private int? _refGradeLevelID;
 
         public znStudentGradeBookEntryModel()
         {
@@ -1027,6 +1032,19 @@ namespace zLearnHub.Models
             {
                 _fullname = value;
                 UpdateFieldValue("Fullname", value);
+            }
+        }
+
+        public int? RefGradeLevelID
+        {
+            get
+            {
+                return _refGradeLevelID;
+            }
+            set
+            {
+                _refGradeLevelID = value;
+                UpdateFieldValue("RefGradeLevelID", value);
             }
         }
 

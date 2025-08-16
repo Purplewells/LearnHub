@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ProcessClassResultset" conflictDetection="overwriteChanges" label="ProcessClassResultset" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands />
+  <fields>
+    <field name="PersonID" type="Int32" label="Person#" showInSummary="true" />
+    <field name="FirstName" type="String" label="First Name" length="35" showInSummary="true" />
+    <field name="LastName" type="String" label="Last Name" length="35" showInSummary="true" />
+    <field name="UPN" type="String" label="Upn" length="10" showInSummary="true" />
+    <field name="GradeLevel" type="String" label="Grade Level" length="10" showInSummary="true" />
+    <field name="Subject" type="String" label="Subject" length="30" />
+    <field name="ClassScore" type="Decimal" label="Class Score" />
+    <field name="ExamScore" type="Decimal" label="Exam Score" />
+    <field name="TotalScore" type="Decimal" label="Total Score" />
+    <field name="GrandTotal" type="Decimal" label="Grand Total" />
+    <field name="SubjectRanking" type="Int32" label="Subject Ranking" />
+    <field name="SubjectRank" type="String" label="Subject Rank" length="8" />
+    <field name="ClassRanking" type="Int32" label="Class Ranking" />
+    <field name="ClassRank" type="String" label="Class Rank" length="8" />
+    <field name="NoInClass" type="Int32" label="No In Class" />
+    <field name="StudentGLScore" type="Decimal" label="Student GL Score" />
+    <field name="StudentAVGScore" type="Decimal" label="Student AVG Score" />
+    <field name="StudentGLCoursesTaken" type="Int32" label="Student GL Courses Taken" />
+    <field name="StudentTermCoursesTaken" type="Int32" label="Student Term Courses Taken" />
+    <field name="ClassAVGScore" type="Decimal" label="Class AVG Score" />
+    <field name="LG" type="String" label="Lg" length="5" />
+    <field name="NG" type="String" label="Ng" length="10" />
+    <field name="Passed" type="String" label="Passed" length="3" />
+    <field name="Descriptor" type="String" label="Descriptor" length="30" />
+    <field name="Remark" type="String" label="Remark" length="1024" />
+    <field name="IsActive" type="Boolean" label="Is Active" />
+    <field name="CSY" type="Boolean" label="Csy" />
+    <field name="Term" type="String" label="Term" length="20" />
+    <field name="calYear" type="String" label="cal Year" length="30" />
+    <field name="Address" type="String" label="Address" length="150" />
+    <field name="SchoolName" type="String" label="School Name" length="50" />
+    <field name="Presence" type="Int32" label="Presence" />
+    <field name="Absence" type="Int32" label="Absence" />
+    <field name="PossibleAttendances" type="Int32" label="Possible Attendances" />
+    <field name="TotalBilledAmount" type="Decimal" label="Total Billed Amount" />
+    <field name="TotalPaid" type="Decimal" label="Total Paid" />
+    <field name="Balance" type="Decimal" label="Balance" />
+    <field name="StudentGradeBookEntryID" type="Int32" label="Student Grade Book Entry#" />
+    <field name="StudentCourseSectionID" type="Int32" label="Student Course Section#" />
+    <field name="CGDW_HashKey" type="String" label="CGDW Hash Key" length="45" />
+    <field name="pctAbsence" type="Int32" label="pct Absence" />
+    <field name="pctAttended" type="Int32" label="pct Attended" />
+    <field name="PerAbsence" type="Int32" label="Per Absence" />
+    <field name="PerPresence" type="Int32" label="Per Presence" />
+    <field name="Presences" type="Int32" label="Presences" />
+    <field name="ExcusedAbsences" type="Int32" label="Excused Absences" />
+    <field name="UnExcusedAbsences" type="Int32" label="Un Excused Absences" />
+    <field name="Tardies" type="Int32" label="Tardies" />
+    <field name="extRefSchoolStreamID" type="Int32" label="ext Ref School Stream#" />
+    <field name="extRefGradeLevelID" type="Int32" label="ext Ref Grade Level#" />
+    <field name="extCalendarSessionID" type="Int32" label="ext Calendar Session#" />
+    <field name="NextSessionStartDate" type="DateTime" label="Next Session Start Date" />
+    <field name="NextSessionEndDate" type="DateTime" label="Next Session End Date" />
+    <field name="GlobalID" type="Guid" label="Global#" />
+    <field name="Stream" type="String" label="Stream" length="12" />
+    <field name="LoadDateTime" type="DateTime" label="Load Date Time" />
+    <field name="CreatedDate" type="DateTime" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" label="Modified Date" />
+    <field name="OrganizationID" type="Int32" label="Organization#" />
+    <field name="IsAtRisk" type="Int32" label="Is At Risk" />
+    <field name="IsCHRAB" type="Int32" label="Is CHRAB" />
+    <field name="OnTheVerge" type="Int32" label="On The Verge" />
+    <field name="prevIsAtRiskCount" type="Int32" label="prev Is At Risk Count" />
+    <field name="prevIsCHRABCount" type="Int32" label="prev Is CHRAB Count" />
+    <field name="prevOnTheVergeCount" type="Int32" label="prev On The Verge Count" />
+    <field name="PerfectAttenance_Count" type="Int32" label="Perfect Attenance Count" />
+    <field name="AttendanceRate" type="Decimal" label="Attendance Rate" />
+    <field name="TotalIncidents" type="Int32" label="Total Incidents" />
+    <field name="FinalBehaviorScore" type="Int32" label="Final Behavior Score" />
+    <field name="BehaviourTypes" type="String" label="Behaviour Types" length="1028" />
+    <field name="BehaviourComment" type="String" label="Behaviour Comment" length="1024" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Process Class Resultset">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="PersonID" columns="15" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="GradeLevel" columns="10" />
+        <dataField fieldName="Subject" columns="30" />
+        <dataField fieldName="ClassScore" columns="15" />
+        <dataField fieldName="ExamScore" columns="15" />
+        <dataField fieldName="TotalScore" columns="15" />
+        <dataField fieldName="GrandTotal" columns="15" />
+        <dataField fieldName="SubjectRanking" columns="15" />
+        <dataField fieldName="SubjectRank" columns="8" />
+        <dataField fieldName="ClassRanking" columns="15" />
+        <dataField fieldName="ClassRank" columns="8" />
+        <dataField fieldName="NoInClass" columns="15" />
+        <dataField fieldName="StudentGLScore" columns="15" />
+        <dataField fieldName="StudentAVGScore" columns="15" />
+        <dataField fieldName="StudentGLCoursesTaken" columns="15" />
+        <dataField fieldName="StudentTermCoursesTaken" columns="15" />
+        <dataField fieldName="ClassAVGScore" columns="15" />
+        <dataField fieldName="LG" columns="5" />
+        <dataField fieldName="NG" columns="10" />
+        <dataField fieldName="Passed" columns="3" />
+        <dataField fieldName="Descriptor" columns="30" />
+        <dataField fieldName="Remark" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="CSY" />
+        <dataField fieldName="Term" columns="20" />
+        <dataField fieldName="calYear" columns="30" />
+        <dataField fieldName="Address" />
+        <dataField fieldName="SchoolName" columns="50" />
+        <dataField fieldName="Presence" columns="15" />
+        <dataField fieldName="Absence" columns="15" />
+        <dataField fieldName="PossibleAttendances" columns="15" />
+        <dataField fieldName="TotalBilledAmount" dataFormatString="c" columns="15" />
+        <dataField fieldName="TotalPaid" dataFormatString="c" columns="15" />
+        <dataField fieldName="Balance" dataFormatString="c" columns="15" />
+        <dataField fieldName="StudentGradeBookEntryID" columns="15" />
+        <dataField fieldName="StudentCourseSectionID" columns="15" />
+        <dataField fieldName="CGDW_HashKey" columns="45" />
+        <dataField fieldName="pctAbsence" columns="15" />
+        <dataField fieldName="pctAttended" columns="15" />
+        <dataField fieldName="PerAbsence" columns="15" />
+        <dataField fieldName="PerPresence" columns="15" />
+        <dataField fieldName="Presences" columns="15" />
+        <dataField fieldName="ExcusedAbsences" columns="15" />
+        <dataField fieldName="UnExcusedAbsences" columns="15" />
+        <dataField fieldName="Tardies" columns="15" />
+        <dataField fieldName="extRefSchoolStreamID" columns="15" />
+        <dataField fieldName="extRefGradeLevelID" columns="15" />
+        <dataField fieldName="extCalendarSessionID" columns="15" />
+        <dataField fieldName="NextSessionStartDate" columns="10" />
+        <dataField fieldName="NextSessionEndDate" columns="10" />
+        <dataField fieldName="GlobalID" columns="15" />
+        <dataField fieldName="Stream" columns="12" />
+        <dataField fieldName="LoadDateTime" dataFormatString="t" columns="10" />
+        <dataField fieldName="CreatedDate" columns="10" />
+        <dataField fieldName="ModifiedDate" columns="10" />
+        <dataField fieldName="OrganizationID" columns="15" />
+        <dataField fieldName="IsAtRisk" columns="15" />
+        <dataField fieldName="IsCHRAB" columns="15" />
+        <dataField fieldName="OnTheVerge" columns="15" />
+        <dataField fieldName="prevIsAtRiskCount" columns="15" />
+        <dataField fieldName="prevIsCHRABCount" columns="15" />
+        <dataField fieldName="prevOnTheVergeCount" columns="15" />
+        <dataField fieldName="PerfectAttenance_Count" columns="15" />
+        <dataField fieldName="AttendanceRate" columns="15" />
+        <dataField fieldName="TotalIncidents" columns="15" />
+        <dataField fieldName="FinalBehaviorScore" columns="15" />
+        <dataField fieldName="BehaviourTypes" />
+        <dataField fieldName="BehaviourComment" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Process Class Resultset">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Process Class Resultset" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="GradeLevel" columns="10" />
+            <dataField fieldName="Subject" columns="30" />
+            <dataField fieldName="ClassScore" columns="15" />
+            <dataField fieldName="ExamScore" columns="15" />
+            <dataField fieldName="TotalScore" columns="15" />
+            <dataField fieldName="GrandTotal" columns="15" />
+            <dataField fieldName="SubjectRanking" columns="15" />
+            <dataField fieldName="SubjectRank" columns="8" />
+            <dataField fieldName="ClassRanking" columns="15" />
+            <dataField fieldName="ClassRank" columns="8" />
+            <dataField fieldName="NoInClass" columns="15" />
+            <dataField fieldName="StudentGLScore" columns="15" />
+            <dataField fieldName="StudentAVGScore" columns="15" />
+            <dataField fieldName="StudentGLCoursesTaken" columns="15" />
+            <dataField fieldName="StudentTermCoursesTaken" columns="15" />
+            <dataField fieldName="ClassAVGScore" columns="15" />
+            <dataField fieldName="LG" columns="5" />
+            <dataField fieldName="NG" columns="10" />
+            <dataField fieldName="Passed" columns="3" />
+            <dataField fieldName="Descriptor" columns="30" />
+            <dataField fieldName="Remark" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="CSY" />
+            <dataField fieldName="Term" columns="20" />
+            <dataField fieldName="calYear" columns="30" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="SchoolName" columns="50" />
+            <dataField fieldName="Presence" columns="15" />
+            <dataField fieldName="Absence" columns="15" />
+            <dataField fieldName="PossibleAttendances" columns="15" />
+            <dataField fieldName="TotalBilledAmount" dataFormatString="c" columns="15" />
+            <dataField fieldName="TotalPaid" dataFormatString="c" columns="15" />
+            <dataField fieldName="Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="StudentGradeBookEntryID" columns="15" />
+            <dataField fieldName="StudentCourseSectionID" columns="15" />
+            <dataField fieldName="CGDW_HashKey" columns="45" />
+            <dataField fieldName="pctAbsence" columns="15" />
+            <dataField fieldName="pctAttended" columns="15" />
+            <dataField fieldName="PerAbsence" columns="15" />
+            <dataField fieldName="PerPresence" columns="15" />
+            <dataField fieldName="Presences" columns="15" />
+            <dataField fieldName="ExcusedAbsences" columns="15" />
+            <dataField fieldName="UnExcusedAbsences" columns="15" />
+            <dataField fieldName="Tardies" columns="15" />
+            <dataField fieldName="extRefSchoolStreamID" columns="15" />
+            <dataField fieldName="extRefGradeLevelID" columns="15" />
+            <dataField fieldName="extCalendarSessionID" columns="15" />
+            <dataField fieldName="NextSessionStartDate" columns="10" />
+            <dataField fieldName="NextSessionEndDate" columns="10" />
+            <dataField fieldName="GlobalID" columns="15" />
+            <dataField fieldName="Stream" columns="12" />
+            <dataField fieldName="LoadDateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="CreatedDate" columns="10" />
+            <dataField fieldName="ModifiedDate" columns="10" />
+            <dataField fieldName="OrganizationID" columns="15" />
+            <dataField fieldName="IsAtRisk" columns="15" />
+            <dataField fieldName="IsCHRAB" columns="15" />
+            <dataField fieldName="OnTheVerge" columns="15" />
+            <dataField fieldName="prevIsAtRiskCount" columns="15" />
+            <dataField fieldName="prevIsCHRABCount" columns="15" />
+            <dataField fieldName="prevOnTheVergeCount" columns="15" />
+            <dataField fieldName="PerfectAttenance_Count" columns="15" />
+            <dataField fieldName="AttendanceRate" columns="15" />
+            <dataField fieldName="TotalIncidents" columns="15" />
+            <dataField fieldName="FinalBehaviorScore" columns="15" />
+            <dataField fieldName="BehaviourTypes" />
+            <dataField fieldName="BehaviourComment" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Process Class Resultset">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Process Class Resultset" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="PersonID" columns="15" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="GradeLevel" columns="10" />
+            <dataField fieldName="Subject" columns="30" />
+            <dataField fieldName="ClassScore" columns="15" />
+            <dataField fieldName="ExamScore" columns="15" />
+            <dataField fieldName="TotalScore" columns="15" />
+            <dataField fieldName="GrandTotal" columns="15" />
+            <dataField fieldName="SubjectRanking" columns="15" />
+            <dataField fieldName="SubjectRank" columns="8" />
+            <dataField fieldName="ClassRanking" columns="15" />
+            <dataField fieldName="ClassRank" columns="8" />
+            <dataField fieldName="NoInClass" columns="15" />
+            <dataField fieldName="StudentGLScore" columns="15" />
+            <dataField fieldName="StudentAVGScore" columns="15" />
+            <dataField fieldName="StudentGLCoursesTaken" columns="15" />
+            <dataField fieldName="StudentTermCoursesTaken" columns="15" />
+            <dataField fieldName="ClassAVGScore" columns="15" />
+            <dataField fieldName="LG" columns="5" />
+            <dataField fieldName="NG" columns="10" />
+            <dataField fieldName="Passed" columns="3" />
+            <dataField fieldName="Descriptor" columns="30" />
+            <dataField fieldName="Remark" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="CSY" />
+            <dataField fieldName="Term" columns="20" />
+            <dataField fieldName="calYear" columns="30" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="SchoolName" columns="50" />
+            <dataField fieldName="Presence" columns="15" />
+            <dataField fieldName="Absence" columns="15" />
+            <dataField fieldName="PossibleAttendances" columns="15" />
+            <dataField fieldName="TotalBilledAmount" dataFormatString="c" columns="15" />
+            <dataField fieldName="TotalPaid" dataFormatString="c" columns="15" />
+            <dataField fieldName="Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="StudentGradeBookEntryID" columns="15" />
+            <dataField fieldName="StudentCourseSectionID" columns="15" />
+            <dataField fieldName="CGDW_HashKey" columns="45" />
+            <dataField fieldName="pctAbsence" columns="15" />
+            <dataField fieldName="pctAttended" columns="15" />
+            <dataField fieldName="PerAbsence" columns="15" />
+            <dataField fieldName="PerPresence" columns="15" />
+            <dataField fieldName="Presences" columns="15" />
+            <dataField fieldName="ExcusedAbsences" columns="15" />
+            <dataField fieldName="UnExcusedAbsences" columns="15" />
+            <dataField fieldName="Tardies" columns="15" />
+            <dataField fieldName="extRefSchoolStreamID" columns="15" />
+            <dataField fieldName="extRefGradeLevelID" columns="15" />
+            <dataField fieldName="extCalendarSessionID" columns="15" />
+            <dataField fieldName="NextSessionStartDate" columns="10" />
+            <dataField fieldName="NextSessionEndDate" columns="10" />
+            <dataField fieldName="GlobalID" columns="15" />
+            <dataField fieldName="Stream" columns="12" />
+            <dataField fieldName="LoadDateTime" dataFormatString="t" columns="10" />
+            <dataField fieldName="CreatedDate" columns="10" />
+            <dataField fieldName="ModifiedDate" columns="10" />
+            <dataField fieldName="OrganizationID" columns="15" />
+            <dataField fieldName="IsAtRisk" columns="15" />
+            <dataField fieldName="IsCHRAB" columns="15" />
+            <dataField fieldName="OnTheVerge" columns="15" />
+            <dataField fieldName="prevIsAtRiskCount" columns="15" />
+            <dataField fieldName="prevIsCHRABCount" columns="15" />
+            <dataField fieldName="prevOnTheVergeCount" columns="15" />
+            <dataField fieldName="PerfectAttenance_Count" columns="15" />
+            <dataField fieldName="AttendanceRate" columns="15" />
+            <dataField fieldName="TotalIncidents" columns="15" />
+            <dataField fieldName="FinalBehaviorScore" columns="15" />
+            <dataField fieldName="BehaviourTypes" />
+            <dataField fieldName="BehaviourComment" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[
+
+
+IF @Parameters_GradeLevelID IS NOT NULL AND @Parameters_StreamID IS NOT NULL
+   EXEC [dbo].[usp_merge_master_student_grades_gradebooks_p4_gradelevel_based_ds] @Parameters_GradeLevelID, @Parameters_StreamID]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement delete here]]></rule>
+  </businessRules>
+</dataController>

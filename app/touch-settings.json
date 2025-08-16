@@ -18,7 +18,7 @@
         }
       },
       "location": "toolbar",
-      "multiSelectMaxRowCount": 4000
+      "multiSelectMaxRowCount": 5000
     },
     "state": {
       "storage": "local", // Options: "local" (persist across sessions), "session" (current session only)
@@ -112,7 +112,7 @@
         "enabled": true,
         "twoFactorAuthentication": {
           "enabled": false, // Options: true (enable 2FA), false (disable)
-          "delivery": "email" // Method of 2FA code delivery (e.g., "email", "sms")
+          "delivery": "sms" // Method of 2FA code delivery (e.g., "email", "sms")
         }
       }
     },

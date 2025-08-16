@@ -156,12 +156,12 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>6.98046in</Width>
+                  <Width>5.13048in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>3.49666in</Height>
+                  <Height>3.36124in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -228,13 +228,13 @@
                               <TablixBody>
                                 <TablixColumns>
                                   <TablixColumn>
-                                    <Width>1.42289in</Width>
+                                    <Width>1.08935in</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>1.5in</Width>
+                                    <Width>1.16646in</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>1.08275in</Width>
+                                    <Width>0.80265in</Width>
                                   </TablixColumn>
                                 </TablixColumns>
                                 <TablixRows>
@@ -250,7 +250,7 @@
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=IIf(Fields!State.Value = 1, Fields!Debit.Value, NOTHING)</Value>
+                                                    <Value>=SUM(Fields!Debit.Value)</Value>
                                                     <Style>
                                                       <FontSize>8pt</FontSize>
                                                       <Format>#,0.00;(#,0.00);'-'</Format>
@@ -324,7 +324,7 @@
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Fields!LineBalance.Value</Value>
+                                                    <Value>=SUM(Fields!LineBalance.Value)</Value>
                                                     <Style>
                                                       <FontSize>8pt</FontSize>
                                                       <Format>'GH₵' #,0;('GH₵' #,0);'-'</Format>
@@ -545,14 +545,18 @@
                               <TablixRowHierarchy>
                                 <TablixMembers>
                                   <TablixMember>
-                                    <Group Name="Description" />
+                                    <Group Name="Description">
+                                      <GroupExpressions>
+                                        <GroupExpression>=Fields!Description.Value</GroupExpression>
+                                      </GroupExpressions>
+                                    </Group>
                                     <SortExpressions>
                                       <SortExpression>
                                         <Value>=Fields!Description.Value</Value>
                                       </SortExpression>
                                     </SortExpressions>
                                     <TablixHeader>
-                                      <Size>2.81249in</Size>
+                                      <Size>1.93134in</Size>
                                       <CellContents>
                                         <Textbox Name="Description2">
                                           <CanGrow>true</CanGrow>
@@ -580,7 +584,7 @@
                                               <Width>0.5pt</Width>
                                             </Border>
                                             <VerticalAlign>Middle</VerticalAlign>
-                                            <PaddingLeft>60pt</PaddingLeft>
+                                            <PaddingLeft>10pt</PaddingLeft>
                                             <PaddingRight>2pt</PaddingRight>
                                             <PaddingTop>2pt</PaddingTop>
                                             <PaddingBottom>2pt</PaddingBottom>
@@ -594,11 +598,12 @@
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
+                              <KeepTogether>true</KeepTogether>
                               <DataSetName>znCustomFeeDebtorsReminderNoteV2</DataSetName>
-                              <Top>0.59944in</Top>
-                              <Left>0.09166in</Left>
+                              <Top>0.71194in</Top>
+                              <Left>0.07916in</Left>
                               <Height>0.525in</Height>
-                              <Width>6.81813in</Width>
+                              <Width>4.9898in</Width>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -690,9 +695,9 @@
                               </Paragraphs>
                               <rd:DefaultName>Textbox12</rd:DefaultName>
                               <Top>0.025in</Top>
-                              <Left>0.06666in</Left>
-                              <Height>0.52583in</Height>
-                              <Width>6.84028in</Width>
+                              <Left>0.07916in</Left>
+                              <Height>0.6425in</Height>
+                              <Width>4.98979in</Width>
                               <ZIndex>1</ZIndex>
                               <Style>
                                 <Border>
@@ -976,7 +981,7 @@
                                   </TablixRowHierarchy>
                                   <DataSetName>MiniFeeReminder</DataSetName>
                                   <Top>0.08958in</Top>
-                                  <Left>1.96153in</Left>
+                                  <Left>0.96678in</Left>
                                   <Height>0.75in</Height>
                                   <Width>2in</Width>
                                   <Style>
@@ -988,10 +993,10 @@
                                 </Tablix>
                               </ReportItems>
                               <KeepTogether>true</KeepTogether>
-                              <Top>1.18in</Top>
-                              <Left>2.86551in</Left>
+                              <Top>1.3175in</Top>
+                              <Left>1.99776in</Left>
                               <Height>0.92583in</Height>
-                              <Width>4.03736in</Width>
+                              <Width>3.04261in</Width>
                               <ZIndex>2</ZIndex>
                               <Style>
                                 <Border>
@@ -1024,9 +1029,9 @@
                               </Paragraphs>
                               <rd:DefaultName>Attribute1</rd:DefaultName>
                               <Top>2.29447in</Top>
-                              <Left>2.90415in</Left>
+                              <Left>1.99776in</Left>
                               <Height>0.97438in</Height>
-                              <Width>3.95133in</Width>
+                              <Width>3.02022in</Width>
                               <ZIndex>3</ZIndex>
                               <Style>
                                 <Border>
@@ -1073,10 +1078,10 @@
             </TablixRowHierarchy>
             <KeepTogether>true</KeepTogether>
             <DataSetName>znCustomFeeDebtorsReminderNoteV2</DataSetName>
-            <Top>0.10556in</Top>
+            <Top>0.08056in</Top>
             <Left>0.11394in</Left>
-            <Height>3.49666in</Height>
-            <Width>6.98046in</Width>
+            <Height>3.36124in</Height>
+            <Width>5.13048in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1084,13 +1089,13 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>3.74736in</Height>
+        <Height>3.53903in</Height>
         <Style />
       </Body>
-      <Width>7.20833in</Width>
+      <Width>5.42708in</Width>
       <Page>
         <PageHeader>
-          <Height>0.9in</Height>
+          <Height>0.78542in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1143,10 +1148,11 @@
               </Paragraphs>
               <rd:DefaultName>textbox5</rd:DefaultName>
               <Top>0.15698cm</Top>
-              <Left>0.60042cm</Left>
-              <Height>0.77639in</Height>
-              <Width>6.73556in</Width>
+              <Left>0.40992cm</Left>
+              <Height>0.64097in</Height>
+              <Width>5.08303in</Width>
               <Style>
+                <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1189,7 +1195,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox37</rd:DefaultName>
               <Top>0.1243in</Top>
-              <Left>4.5964in</Left>
+              <Left>3.2214in</Left>
               <Height>0.25139in</Height>
               <Width>1.33649in</Width>
               <Style>
@@ -1208,7 +1214,7 @@
               <Value>TelleionLogoIcon_50x95</Value>
               <Sizing>FitProportional</Sizing>
               <Top>0.1243in</Top>
-              <Left>5.96892in</Left>
+              <Left>4.59392in</Left>
               <Height>0.25139in</Height>
               <Width>0.5in</Width>
               <ZIndex>1</ZIndex>
@@ -1247,7 +1253,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox37</rd:DefaultName>
               <Top>0.1243in</Top>
-              <Left>0.73941in</Left>
+              <Left>0.16441in</Left>
               <Height>0.25139in</Height>
               <Width>1.83649in</Width>
               <ZIndex>2</ZIndex>
@@ -1265,12 +1271,12 @@
           </ReportItems>
           <Style />
         </PageFooter>
-        <PageHeight>7in</PageHeight>
-        <PageWidth>8.27in</PageWidth>
+        <PageHeight>5.5in</PageHeight>
+        <PageWidth>6.5in</PageWidth>
         <LeftMargin>0.5in</LeftMargin>
         <RightMargin>0.5in</RightMargin>
-        <TopMargin>0.5in</TopMargin>
-        <BottomMargin>0.5in</BottomMargin>
+        <TopMargin>0.25in</TopMargin>
+        <BottomMargin>0.25in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>

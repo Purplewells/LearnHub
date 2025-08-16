@@ -56,6 +56,7 @@ select
 	,"Course"."CourseTitle" "Course"
 	,"StudentGradeBookEntry"."extSGID" "extSGID"
 	,"StudentGradeBookEntry"."extSCID" "extSCID"
+	,"StudentGradeBookEntry"."RefGradeLevelID" "RefGradeLevelID"
 from "dbo"."StudentGradeBookEntry" "StudentGradeBookEntry"
 	left join "dbo"."StudentSectionAssociation" "StudentCourseSection" on "StudentGradeBookEntry"."StudentCourseSectionID" = "StudentCourseSection"."StudentCourseSectionID"
 	left join "dbo"."StudentSchoolAssociation" "StudentEnrollment" on "StudentCourseSection"."StudentEnrollmentID" = "StudentEnrollment"."StudentEnrollmentID"
@@ -126,8 +127,9 @@ from "dbo"."StudentGradeBookEntry" "StudentGradeBookEntry"
     <field name="ExtActiveCourseSection" type="Boolean" label="ACS" />
     <field name="ExtPBSG" type="Decimal" label="extPBSG" />
     <field name="ExtCalendarSessionID" type="Int32" label="ext Calendar Session ID" />
-    <field name="RefSchoolStreamID" type="Int32" label="Ref School Stream ID">
-      <items style="Lookup" dataController="SchoolStream" newDataView="createForm1" dataValueField="RefSchoolStreamID" dataTextField="Description" />
+    <field name="RefGradeLevelID" type="Int32" label="RefGradeLevelID" />
+    <field name="RefSchoolStreamID" type="Int32" label="Ref School Stream ID" causesCalculate="true">
+      <items style="Lookup" dataController="SchoolStream" newDataView="createForm1" dataValueField="RefSchoolStreamID" dataTextField="Description" dataView="grid1" />
     </field>
     <field name="Stream" type="String" readOnly="true" label="STM" length="8" />
     <field name="ExtIsPassing" type="Boolean" label="extIsPassing" />
@@ -179,6 +181,136 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
         <dataField fieldName="ExtPBSG" columns="7" readOnly="true" hidden="true">
           <headerText>%PBSG</headerText>
         </dataField>
+        <dataField fieldName="ExtPWS" columns="5" tag="pivot9-val1-avg" textMode="Static" hidden="true">
+          <headerText>PWS</headerText>
+        </dataField>
+        <dataField fieldName="ExtOWS" columns="5" hidden="true">
+          <headerText>OWS</headerText>
+        </dataField>
+        <dataField fieldName="CWS" columns="5" tag="pivot2-val1-AVG&#xD;&#xA;pivot8-val1-AVG" />
+        <dataField fieldName="StudentCourseSectionID" aliasFieldName="StudentCourseSectionCreatedBy" hidden="true" />
+        <dataField fieldName="GradeBookEntryTypeID" aliasFieldName="GBEntryType" hidden="true" />
+        <dataField fieldName="SubmittedDate" columns="10" hidden="true" />
+        <dataField fieldName="PerformanceBaseConversionID" aliasFieldName="PerformanceBaseConversion" hidden="true" tag="pivot3-row1-pie&#xD;&#xA;pivot3-title:&quot;What is the outlook of performance outcomes&quot;" />
+        <dataField fieldName="PerformanceBaseConversionDescription" hidden="true" />
+        <dataField fieldName="MinScore" columns="15" hidden="true" />
+        <dataField fieldName="MaxScore" columns="15" hidden="true" />
+        <dataField fieldName="NG" columns="20" hidden="true" />
+        <dataField fieldName="Passing" columns="5" tag="pivot4-row1-donut-sortbyvalue&#xD;&#xA;pivot4-title:&quot;What is the distribution of performance outcomes (Pass/Fail)&quot;&#xD;&#xA;pivot4-medium" />
+        <dataField fieldName="ExtIsPassing" hidden="true" />
+        <dataField fieldName="LG" columns="5" />
+        <dataField fieldName="GradeRank" columns="15" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="UserID" columns="15" hidden="true" />
+        <dataField fieldName="extIsActiveSession" columns="15" hidden="true" />
+        <dataField fieldName="ASTY" columns="5" />
+        <dataField fieldName="ExtIsCsy" columns="15" hidden="true" />
+        <dataField fieldName="ExtActiveCourseSection" hidden="true" />
+        <dataField fieldName="ExtCalendarSessionID" columns="15" hidden="true" />
+        <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" columns="12" />
+        <dataField fieldName="Session" columns="50" hidden="true" tag="pivot9-col1" />
+        <dataField fieldName="calYear" columns="15" hidden="true" />
+        <dataField fieldName="CSY" hidden="true" />
+        <dataField fieldName="SessionIsActive" hidden="true" />
+        <dataField fieldName="SGID" columns="8" textMode="Static" tag="import-duplicate-accept" hidden="true" />
+        <dataField fieldName="SCID" columns="8" textMode="Static" tag="import-duplicate-accept" hidden="true" />
+        <dataField fieldName="extSGID" columns="15" hidden="true" tag="import-duplicate-accept" />
+        <dataField fieldName="extSCID" columns="15" hidden="true" tag="import-duplicate-accept" />
+        <dataField fieldName="RefGradeLevelID" columns="5" hidden="true">
+          <headerText>GLID</headerText>
+        </dataField>
+      </dataFields>
+      <styles>
+        <expression type="ClientScript" result="GBAScore" test="$row.NumericGradeEarned &gt;= 0" />
+        <expression type="ClientScript" result="PassOrFail" test="$row.Passing==0" />
+      </styles>
+    </view>
+    <view id="grid1_mobi" type="Grid" commandId="command1" label="Mobile View" groupExpression="GradeLevel, Stream, Session, Course" filter="SessionIsActive = 1">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Firstname" columns="18" hidden="true" />
+        <dataField fieldName="Lastname" columns="18" hidden="true" />
+        <dataField fieldName="Fullname" />
+        <dataField fieldName="UPN" columns="10" readOnly="true" hidden="true" />
+        <dataField fieldName="GradeLevel" columns="5" tag="pivot2-row1-column&#xD;&#xA;pivot2-title:&quot;What is the averge score across grade levels&quot;" />
+        <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" columns="5" />
+        <dataField fieldName="Course" columns="20" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;What is the averge score by subject&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Subject&quot;&#xD;&#xA;pivot1-vaxistitle:&quot;Earned Score&quot;&#xD;&#xA;pivot1-medium&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked-top10-sortdescbyvalue&#xD;&#xA;pivot5-title:&quot;What is the top 10 performing subject areas&quot;&#x9;" />
+        <dataField fieldName="GradeBookEntryID" aliasFieldName="GradeBookTitle" columns="15" tag="&#xD;&#xA;&#xD;&#xA;pivot6-row1-columnstacked-other-sortbyvalue&#xD;&#xA;pivot6-title:&quot;What is the distribution avg score by gradebook&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Gradebook&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;Computed Score&quot;&#x9;" />
+        <dataField fieldName="LetterGrade" columns="5" hidden="true" />
+        <dataField fieldName="NumericGradeEarned" columns="5" tag="&#xD;&#xA;pivot1-val1-AVG&#xD;&#xA;pivot5-val1-AVG&#xD;&#xA;pivot6-val1-AVG&#xD;&#xA;&#xD;&#xA;" />
+        <dataField fieldName="extMaxScore" columns="5" readOnly="true" hidden="true" />
+        <dataField fieldName="Weight" columns="5" readOnly="true" hidden="true" />
+        <dataField fieldName="ExtPBSG" columns="7" readOnly="true" hidden="true">
+          <headerText>%PBSG</headerText>
+        </dataField>
+        <dataField fieldName="ExtPWS" columns="5" tag="pivot9-val1-avg" textMode="Static" hidden="true">
+          <headerText>PWS</headerText>
+        </dataField>
+        <dataField fieldName="ExtOWS" columns="5" hidden="true">
+          <headerText>OWS</headerText>
+        </dataField>
+        <dataField fieldName="CWS" columns="5" tag="pivot2-val1-AVG" hidden="true" />
+        <dataField fieldName="StudentCourseSectionID" aliasFieldName="StudentCourseSectionCreatedBy" hidden="true" />
+        <dataField fieldName="GradeBookEntryTypeID" aliasFieldName="GBEntryType" hidden="true" />
+        <dataField fieldName="SubmittedDate" columns="10" hidden="true" />
+        <dataField fieldName="PerformanceBaseConversionID" aliasFieldName="PerformanceBaseConversion" hidden="true" tag="pivot3-row1-pie&#xD;&#xA;pivot3-title:&quot;What is the outlook of performance outcomes&quot;" />
+        <dataField fieldName="PerformanceBaseConversionDescription" hidden="true" />
+        <dataField fieldName="MinScore" columns="15" hidden="true" />
+        <dataField fieldName="MaxScore" columns="15" hidden="true" />
+        <dataField fieldName="NG" columns="20" hidden="true" />
+        <dataField fieldName="Passing" columns="5" tag="pivot4-row1-donut-sortbyvalue&#xD;&#xA;pivot4-title:&quot;What is the distribution of performance outcomes (Pass/Fail)&quot;&#xD;&#xA;pivot4-medium" hidden="true" />
+        <dataField fieldName="ExtIsPassing" hidden="true" />
+        <dataField fieldName="LG" columns="5" hidden="true" />
+        <dataField fieldName="GradeRank" columns="15" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="UserID" columns="15" hidden="true" />
+        <dataField fieldName="extIsActiveSession" columns="15" hidden="true" />
+        <dataField fieldName="SessionIsActive" hidden="true" />
+        <dataField fieldName="ASTY" columns="5" />
+        <dataField fieldName="ExtIsCsy" columns="15" hidden="true" />
+        <dataField fieldName="ExtActiveCourseSection" hidden="true" />
+        <dataField fieldName="ExtCalendarSessionID" columns="15" hidden="true" />
+        <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" columns="12" />
+        <dataField fieldName="Session" columns="50" hidden="true" />
+        <dataField fieldName="calYear" columns="15" hidden="true" />
+        <dataField fieldName="CSY" hidden="true" />
+        <dataField fieldName="SGID" columns="8" textMode="Static" tag="import-duplicate-accept" hidden="true" />
+        <dataField fieldName="SCID" columns="8" textMode="Static" tag="import-duplicate-accept" hidden="true" />
+        <dataField fieldName="extSGID" columns="15" hidden="true" tag="import-duplicate-accept" />
+        <dataField fieldName="extSCID" columns="15" hidden="true" tag="import-duplicate-accept" />
+        <dataField fieldName="RefGradeLevelID" columns="15" hidden="true" />
+      </dataFields>
+      <styles>
+        <expression type="ClientScript" result="GBAScore" test="$row.NumericGradeEarned &gt;= 0" />
+        <expression type="ClientScript" result="PassOrFail" test="$row.Passing==0" />
+      </styles>
+    </view>
+    <view id="grid1_expanded_view" type="Grid" commandId="command1" label="Expanded View" groupExpression="GradeLevel, Stream, Session, Course" filter="SessionIsActive = 1">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Firstname" columns="18" />
+        <dataField fieldName="Lastname" columns="18" />
+        <dataField fieldName="Fullname" hidden="true" />
+        <dataField fieldName="UPN" columns="10" readOnly="true" />
+        <dataField fieldName="GradeLevel" columns="5" tag="pivot2-row1-column&#xD;&#xA;pivot2-title:&quot;What is the average score across grade levels?&quot;" />
+        <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" columns="5" />
+        <dataField fieldName="Course" columns="20" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;What is the average score by subject?&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Subject&quot;&#xD;&#xA;pivot1-vaxistitle:&quot;Earned Score&quot;&#xD;&#xA;pivot1-medium&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked-top10-sortdescbyvalue&#xD;&#xA;pivot5-title:&quot;What is the top 10 performing subject areas&quot;&#xD;&#xA;&#xD;&#xA;pivot8-row1-column&#xD;&#xA;pivot8-title:&quot;What is the average cumulative weighted Score by Subject and Year&quot;&#xD;&#xA;pivot8-haxistitle:&quot;Subject&quot;&#xD;&#xA;pivot8-vaxistitle:&quot;Earned Score&quot;&#xD;&#xA;pivot8-format: &quot;p&quot;&#xD;&#xA;&#xD;&#xA;pivot9-row1-column&#xD;&#xA;pivot9-title:&quot;What is the average cumulative weighted Score by subject and term&quot;&#xD;&#xA;pivot9-haxistitle:&quot;Subject&quot;&#xD;&#xA;pivot9-vaxistitle:&quot;Earned Score&quot;&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;" />
+        <dataField fieldName="GradeBookEntryID" aliasFieldName="GradeBookTitle" columns="15" tag="pivot6-row1-columnstacked-other-sortbyvalue&#xD;&#xA;pivot6-title:&quot;What is the distribution average score by gradebook&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Gradebook&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;Computed Score&quot;&#x9;" />
+        <dataField fieldName="LetterGrade" columns="5" hidden="true" />
+        <dataField fieldName="NumericGradeEarned" columns="5" tag="pivot1-val1-AVG&#xD;&#xA;pivot5-val1-AVG&#xD;&#xA;pivot6-val1-AVG" />
+        <dataField fieldName="extMaxScore" columns="5" readOnly="true" />
+        <dataField fieldName="Weight" columns="5" readOnly="true" />
+        <dataField fieldName="ExtPBSG" columns="7" readOnly="true" hidden="true">
+          <headerText>%PBSG</headerText>
+        </dataField>
         <dataField fieldName="ExtPWS" columns="5" tag="pivot9-val1-avg" textMode="Static">
           <headerText>PWS</headerText>
         </dataField>
@@ -213,149 +345,26 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
         <dataField fieldName="Session" columns="50" hidden="true" tag="pivot9-col1" />
         <dataField fieldName="calYear" columns="15" hidden="true" />
         <dataField fieldName="CSY" hidden="true" />
-        <dataField fieldName="SessionIsActive" />
+        <dataField fieldName="SessionIsActive" hidden="true" />
         <dataField fieldName="SGID" columns="8" textMode="Static" tag="import-duplicate-accept" />
         <dataField fieldName="SCID" columns="8" textMode="Static" tag="import-duplicate-accept" />
         <dataField fieldName="extSGID" columns="15" hidden="true" tag="import-duplicate-accept" />
         <dataField fieldName="extSCID" columns="15" hidden="true" tag="import-duplicate-accept" />
+        <dataField fieldName="RefGradeLevelID" columns="5">
+          <headerText>GLID</headerText>
+        </dataField>
       </dataFields>
       <styles>
         <expression type="ClientScript" result="GBAScore" test="$row.NumericGradeEarned &gt;= 0" />
         <expression type="ClientScript" result="PassOrFail" test="$row.Passing==0" />
       </styles>
     </view>
-    <view id="grid1_mobi" type="Grid" commandId="command1" label="Mobile Active Scores" groupExpression="GradeLevel, Stream, Session, Course" filter="SessionIsActive = 1">
+    <view id="grid1_all_assessment_scores" type="Grid" commandId="command1" label="Historical View" groupExpression="GradeLevel, Stream, Session, Course">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Firstname" columns="18" />
         <dataField fieldName="Lastname" columns="18" />
-        <dataField fieldName="Fullname" />
-        <dataField fieldName="UPN" columns="10" readOnly="true" hidden="true" />
-        <dataField fieldName="GradeLevel" columns="5" tag="pivot2-row1-column&#xD;&#xA;pivot2-title:&quot;What is the averge score across grade levels&quot;" />
-        <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" columns="5" />
-        <dataField fieldName="Course" columns="20" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;What is the averge score by subject&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Subject&quot;&#xD;&#xA;pivot1-vaxistitle:&quot;Earned Score&quot;&#xD;&#xA;pivot1-medium&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked-top10-sortdescbyvalue&#xD;&#xA;pivot5-title:&quot;What is the top 10 performing subject areas&quot;&#x9;" />
-        <dataField fieldName="GradeBookEntryID" aliasFieldName="GradeBookTitle" columns="15" tag="pivot6-row1-columnstacked-other-sortbyvalue&#xD;&#xA;pivot6-title:&quot;What is the distribution avg score by gradebook&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Gradebook&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;Computed Score&quot;&#x9;" />
-        <dataField fieldName="LetterGrade" columns="5" hidden="true" />
-        <dataField fieldName="NumericGradeEarned" columns="5" tag="pivot1-val1-AVG&#xD;&#xA;pivot5-val1-AVG&#xD;&#xA;pivot6-val1-AVG" />
-        <dataField fieldName="extMaxScore" columns="5" readOnly="true" />
-        <dataField fieldName="Weight" columns="5" readOnly="true" />
-        <dataField fieldName="ExtPBSG" columns="7" readOnly="true" hidden="true">
-          <headerText>%PBSG</headerText>
-        </dataField>
-        <dataField fieldName="ExtPWS" columns="5" tag="pivot9-val1-avg" textMode="Static" hidden="true">
-          <headerText>PWS</headerText>
-        </dataField>
-        <dataField fieldName="ExtOWS" columns="5" hidden="true">
-          <headerText>OWS</headerText>
-        </dataField>
-        <dataField fieldName="CWS" columns="5" tag="pivot2-val1-AVG" />
-        <dataField fieldName="StudentCourseSectionID" aliasFieldName="StudentCourseSectionCreatedBy" hidden="true" />
-        <dataField fieldName="GradeBookEntryTypeID" aliasFieldName="GBEntryType" hidden="true" />
-        <dataField fieldName="SubmittedDate" columns="10" hidden="true" />
-        <dataField fieldName="PerformanceBaseConversionID" aliasFieldName="PerformanceBaseConversion" hidden="true" tag="pivot3-row1-pie&#xD;&#xA;pivot3-title:&quot;What is the outlook of performance outcomes&quot;" />
-        <dataField fieldName="PerformanceBaseConversionDescription" hidden="true" />
-        <dataField fieldName="MinScore" columns="15" hidden="true" />
-        <dataField fieldName="MaxScore" columns="15" hidden="true" />
-        <dataField fieldName="NG" columns="20" hidden="true" />
-        <dataField fieldName="Passing" columns="5" tag="pivot4-row1-donut-sortbyvalue&#xD;&#xA;pivot4-title:&quot;What is the distribution of performance outcomes (Pass/Fail)&quot;&#xD;&#xA;pivot4-medium" hidden="true" />
-        <dataField fieldName="ExtIsPassing" hidden="true" />
-        <dataField fieldName="LG" columns="5" hidden="true" />
-        <dataField fieldName="GradeRank" columns="15" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="UserID" columns="15" hidden="true" />
-        <dataField fieldName="extIsActiveSession" columns="15" hidden="true" />
-        <dataField fieldName="SessionIsActive" hidden="true" />
-        <dataField fieldName="ASTY" columns="5" />
-        <dataField fieldName="ExtIsCsy" columns="15" hidden="true" />
-        <dataField fieldName="ExtActiveCourseSection" hidden="true" />
-        <dataField fieldName="ExtCalendarSessionID" columns="15" hidden="true" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" columns="12" />
-        <dataField fieldName="Session" columns="50" hidden="true" />
-        <dataField fieldName="calYear" columns="15" hidden="true" />
-        <dataField fieldName="CSY" hidden="true" />
-        <dataField fieldName="SGID" columns="8" textMode="Static" tag="import-duplicate-accept" hidden="true" />
-        <dataField fieldName="SCID" columns="8" textMode="Static" tag="import-duplicate-accept" hidden="true" />
-        <dataField fieldName="extSGID" columns="15" hidden="true" tag="import-duplicate-accept" />
-        <dataField fieldName="extSCID" columns="15" hidden="true" tag="import-duplicate-accept" />
-      </dataFields>
-      <styles>
-        <expression type="ClientScript" result="GBAScore" test="$row.NumericGradeEarned &gt;= 0" />
-        <expression type="ClientScript" result="PassOrFail" test="$row.Passing==0" />
-      </styles>
-    </view>
-    <view id="grid1_expanded_view" type="Grid" commandId="command1" label="Expanded Score View" groupExpression="GradeLevel, Stream, Session, Course" filter="SessionIsActive = 1">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Firstname" columns="18" />
-        <dataField fieldName="Lastname" columns="18" />
-        <dataField fieldName="Fullname" />
-        <dataField fieldName="UPN" columns="10" readOnly="true" />
-        <dataField fieldName="GradeLevel" columns="5" tag="pivot2-row1-column&#xD;&#xA;pivot2-title:&quot;What is the averge score across grade levels&quot;" />
-        <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" columns="5" />
-        <dataField fieldName="Course" columns="20" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;What is the averge score by subject&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Subject&quot;&#xD;&#xA;pivot1-vaxistitle:&quot;Earned Score&quot;&#xD;&#xA;pivot1-medium&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked-top10-sortdescbyvalue&#xD;&#xA;pivot5-title:&quot;What is the top 10 performing subject areas&quot;&#x9;" />
-        <dataField fieldName="GradeBookEntryID" aliasFieldName="GradeBookTitle" columns="15" tag="pivot6-row1-columnstacked-other-sortbyvalue&#xD;&#xA;pivot6-title:&quot;What is the distribution avg score by gradebook&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Gradebook&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;Computed Score&quot;&#x9;" />
-        <dataField fieldName="LetterGrade" columns="5" hidden="true" />
-        <dataField fieldName="NumericGradeEarned" columns="5" tag="pivot1-val1-AVG&#xD;&#xA;pivot5-val1-AVG&#xD;&#xA;pivot6-val1-AVG" />
-        <dataField fieldName="extMaxScore" columns="5" readOnly="true" />
-        <dataField fieldName="Weight" columns="5" readOnly="true" />
-        <dataField fieldName="ExtPBSG" columns="7" readOnly="true" hidden="true">
-          <headerText>%PBSG</headerText>
-        </dataField>
-        <dataField fieldName="ExtPWS" columns="5" tag="pivot9-val1-avg" textMode="Static">
-          <headerText>PWS</headerText>
-        </dataField>
-        <dataField fieldName="ExtOWS" columns="5" hidden="true">
-          <headerText>OWS</headerText>
-        </dataField>
-        <dataField fieldName="CWS" columns="5" tag="pivot2-val1-AVG" />
-        <dataField fieldName="StudentCourseSectionID" aliasFieldName="StudentCourseSectionCreatedBy" hidden="true" />
-        <dataField fieldName="GradeBookEntryTypeID" aliasFieldName="GBEntryType" hidden="true" />
-        <dataField fieldName="SubmittedDate" columns="10" hidden="true" />
-        <dataField fieldName="PerformanceBaseConversionID" aliasFieldName="PerformanceBaseConversion" hidden="true" tag="pivot3-row1-pie&#xD;&#xA;pivot3-title:&quot;What is the outlook of performance outcomes&quot;" />
-        <dataField fieldName="PerformanceBaseConversionDescription" hidden="true" />
-        <dataField fieldName="MinScore" columns="15" hidden="true" />
-        <dataField fieldName="MaxScore" columns="15" hidden="true" />
-        <dataField fieldName="NG" columns="20" hidden="true" />
-        <dataField fieldName="Passing" columns="5" tag="pivot4-row1-donut-sortbyvalue&#xD;&#xA;pivot4-title:&quot;What is the distribution of performance outcomes (Pass/Fail)&quot;&#xD;&#xA;pivot4-medium" />
-        <dataField fieldName="ExtIsPassing" hidden="true" />
-        <dataField fieldName="LG" columns="5" />
-        <dataField fieldName="GradeRank" columns="15" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="UserID" columns="15" hidden="true" />
-        <dataField fieldName="extIsActiveSession" columns="15" hidden="true" />
-        <dataField fieldName="SessionIsActive" hidden="true" />
-        <dataField fieldName="ASTY" columns="5" />
-        <dataField fieldName="ExtIsCsy" columns="15" hidden="true" />
-        <dataField fieldName="ExtActiveCourseSection" hidden="true" />
-        <dataField fieldName="ExtCalendarSessionID" columns="15" hidden="true" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" columns="12" />
-        <dataField fieldName="Session" columns="50" hidden="true" />
-        <dataField fieldName="calYear" columns="15" hidden="true" />
-        <dataField fieldName="CSY" hidden="true" />
-        <dataField fieldName="SGID" columns="8" textMode="Static" tag="import-duplicate-accept" />
-        <dataField fieldName="SCID" columns="8" textMode="Static" tag="import-duplicate-accept" />
-        <dataField fieldName="extSGID" columns="15" hidden="true" tag="import-duplicate-accept" />
-        <dataField fieldName="extSCID" columns="15" hidden="true" tag="import-duplicate-accept" />
-      </dataFields>
-      <styles>
-        <expression type="ClientScript" result="GBAScore" test="$row.NumericGradeEarned &gt;= 0" />
-        <expression type="ClientScript" result="PassOrFail" test="$row.Passing==0" />
-      </styles>
-    </view>
-    <view id="grid1_all_assessment_scores" type="Grid" commandId="command1" label="Historical Assessments" groupExpression="GradeLevel, Stream, Session, Course">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Firstname" columns="18" />
-        <dataField fieldName="Lastname" columns="18" />
-        <dataField fieldName="Fullname" />
+        <dataField fieldName="Fullname" hidden="true" />
         <dataField fieldName="UPN" columns="10" readOnly="true" />
         <dataField fieldName="GradeLevel" columns="5" tag="pivot2-row1-column&#xD;&#xA;pivot2-title:&quot;What is the averge score across grade levels&quot;" />
         <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" columns="5" tag="pivot7-row1-column-sortbyvalue&#xD;&#xA;pivot7-title:&quot;What is the average cumulative weighted score by stream&quot;&#xD;&#xA;pivot7-format: &quot;p&quot;" />
@@ -407,14 +416,17 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
         <dataField fieldName="SCID" columns="8" textMode="Static" tag="import-duplicate-accept" />
         <dataField fieldName="extSGID" columns="15" hidden="true" tag="import-duplicate-accept" />
         <dataField fieldName="extSCID" columns="15" hidden="true" tag="import-duplicate-accept" />
+        <dataField fieldName="RefGradeLevelID" columns="5">
+          <headerText>GLID</headerText>
+        </dataField>
       </dataFields>
       <styles>
         <expression type="ClientScript" result="GBAScore" test="$row.NumericGradeEarned &gt;= 0" />
         <expression type="ClientScript" result="PassOrFail" test="$row.Passing==0" />
       </styles>
     </view>
-    <view id="exportGrid" type="Grid" commandId="command1" label="Export To Import Scores" groupExpression=" Course, GradeLevel, Stream, Session" sortExpression="GLSO ASC" reportOrientation="Landscape">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="exportGrid" type="Grid" commandId="command1" label="Import External Scores" groupExpression=" Course, GradeLevel, Stream, Session" sortExpression="GLSO ASC" reportOrientation="Landscape">
+      <headerText>Facilitates the import scores or assessment from external systems.</headerText>
       <dataFields>
         <dataField fieldName="Firstname" columns="18" />
         <dataField fieldName="Lastname" columns="18" />
@@ -427,7 +439,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
         <dataField fieldName="NumericGradeEarned" columns="5" />
         <dataField fieldName="extMaxScore" columns="5" />
         <dataField fieldName="Weight" columns="5" />
-        <dataField fieldName="ExtPBSG" columns="5">
+        <dataField fieldName="ExtPBSG" columns="5" hidden="true">
           <headerText>%PBSG</headerText>
         </dataField>
         <dataField fieldName="ExtPWS" columns="5">
@@ -461,10 +473,10 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
         <dataField fieldName="ExtCalendarSessionID" columns="15" hidden="true" />
         <dataField fieldName="GLSO" columns="15" hidden="true" />
         <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" columns="12" />
-        <dataField fieldName="SessionIsActive" />
+        <dataField fieldName="SessionIsActive" hidden="true" />
         <dataField fieldName="Session" columns="50" hidden="true" />
         <dataField fieldName="calYear" columns="15" hidden="true" />
-        <dataField fieldName="CSY" />
+        <dataField fieldName="CSY" hidden="true" />
         <dataField fieldName="SGID" columns="5" hidden="true" />
         <dataField fieldName="SCID" columns="5" hidden="true" />
         <dataField fieldName="extSGID" columns="5">
@@ -474,6 +486,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
           <headerText>SCID</headerText>
         </dataField>
         <dataField fieldName="Fullname" hidden="true" />
+        <dataField fieldName="RefGradeLevelID" columns="15" hidden="true" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Assessment Score">
@@ -496,6 +509,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
             <dataField fieldName="extSGID" columns="15" hidden="true" />
             <dataField fieldName="extSCID" columns="15" hidden="true" />
             <dataField fieldName="Fullname" hidden="true" />
+            <dataField fieldName="RefGradeLevelID" columns="15" />
           </dataFields>
         </category>
         <category id="c2">
@@ -577,6 +591,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
             <dataField fieldName="extSGID" columns="15" hidden="true" />
             <dataField fieldName="extSCID" columns="15" hidden="true" />
             <dataField fieldName="Fullname" hidden="true" />
+            <dataField fieldName="RefGradeLevelID" columns="15" />
           </dataFields>
         </category>
         <category id="c2">
@@ -663,6 +678,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
             <dataField fieldName="extSGID" columns="15" tag="import-duplicate-test" />
             <dataField fieldName="extSCID" columns="15" tag="import-duplicate-test" />
             <dataField fieldName="Fullname" />
+            <dataField fieldName="RefGradeLevelID" columns="15" />
           </dataFields>
         </category>
         <category id="c2">
@@ -730,34 +746,40 @@ EXECUTE dbo.usp_merge_master_student_grades_gradebooks_p3
 SET @Result_ShowMessage = 'Step 2 of Preparing aggregates grade records to completed!!!'
 ]]></data>
       </action>
-      <action commandName="SQL" headerText="Step 2: Post Scores" description="Post Scores To AMT Repo" cssClass="material-icon-speaker_phone" confirmation="This action would synchronise current grades to the Analytical Middle Tier (AMT). Do you want to continue ?" roles="Administrators, ContentEditors,ClassTeachers" id="a101">
-        <data><![CDATA[EXECUTE dbo.usp_merge_master_student_grades_gradebooks_p4
-SET @Result_Refresh = 1
+      <action commandName="Custom" headerText="Step 2: Post Scores" description="Post Scores To AMT Repo" cssClass="material-icon-local_florist" confirmation="This action would synchronise current grades to the central reporting. Do you want to continue ?" roles="Administrators, ContentEditors" id="a116" commandArgument="PostUnfilteredScoreRecords">
+        <data />
+      </action>
+      <action commandName="Custom" commandArgument="ProcessFilteredRecords" headerText="Option 2a. Post Filtered Scores" confirmation="This action would merge curent class gradebook entries to central repo. Do you want to continue?" id="a115" cssClass="material-icon-shield_with_heart" />
+      <action commandName="Custom" commandArgument="PowerPostScores" headerText="Option 2b. Power Post Scores" confirmation="This action would merge curent class gradebook entries to central repo. Do you want to continue?" id="a118" cssClass="material-icon-speaker_phone" />
+      <action commandName="SQL" headerText="Step 2a: Post Class Scores" description="Post Scores To AMT Repo" cssClass="material-icon-speaker_phone" confirmation="This action would post current scores for your class and stream to the central repo. Do you want to continue ?" roles="Administrators, ContentEditors,ClassTeachers" id="a114" whenKeySelected="true" whenLastCommandName="Any" whenView="grid10000">
+        <data><![CDATA[EXEC [dbo].[usp_merge_master_student_grades_gradebooks_p4_gradelevel_based] @RefGradeLevelID, @RefSchoolStreamID
 SET @Result_ShowMessage = 'Grades posting to central repo completed!!!' 
 
 ]]></data>
       </action>
       <action id="a2" />
-      <action commandName="SQL" headerText="Step A: Post Photos" description="Post and sync Photos" cssClass="material-icon-auto-stories" confirmation="This action would synchronise current photos to the AMT and expire images of existing inactive records. Do you want to continue ?" roles="Administrators, ContentEditors" id="a102">
+      <action commandName="Custom" headerText="Step A: Refresh Photos" description="Post and update student report photos" cssClass="material-icon-auto-stories" confirmation="This action would synchronise current photos to the central repo and expire inactive records. Do you want to continue ?" roles="Administrators, ContentEditors" id="a102" commandArgument="reset_and_update_photos">
         <data><![CDATA[/*
 Name	: usp_ops_reset_and_update_photos
 Date		: 21st April 2024
-Description : -- This procedure deactivates existing logo for each repeating student record and set the logo to only new current records
+Description : -- This procedure deactivates existing logo for each repeating student record and set the photo to only new current records
 
-*/
+
 
 EXEC usp_ops_reset_and_update_photos
-SET @Result_ShowMessage = 'Updating photos to central repo completed!!!' ]]></data>
+SET @Result_ShowMessage = 'Updating photos to central repo completed!!!' 
+*/]]></data>
       </action>
-      <action commandName="SQL" headerText="Step B: Update Logo" description="Post and Sync Scores To AMT Repo" cssClass="material-icon-image" confirmation="This action would update report with logo of the school to the AMT. Do you want to continue ?" roles="Administrators, ContentEditors" id="a103">
+      <action commandName="Custom" headerText="Step B: Refresh Logos" description="Update reports with logo" cssClass="material-icon-image" confirmation="This action would update report with logo of the school to the AMT. Do you want to continue ?" roles="Administrators, ContentEditors" id="a103" commandArgument="reset_and_update_logos">
         <data><![CDATA[/*
 Name		: usp_ops_reset_and_update_logos
 Date		: 21st April 2024
 Description : -- This procedure deactivates existing logo for each repeating student record and set the logo to only new current records
 
-*/
+
  EXEC usp_ops_reset_and_update_logos
 SET @Result_ShowMessage = 'Updating logo to central repo completed!!!' 
+*/
 ]]></data>
       </action>
       <action id="a5" />

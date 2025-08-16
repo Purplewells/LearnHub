@@ -90,13 +90,10 @@ from "dbo"."StudentRemarks" "StudentRemarks"
         <dataField fieldName="PersonID" columns="15" hidden="true" />
         <dataField fieldName="SessionCode" columns="20" hidden="true" />
         <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="ExtFirstName" columns="35" hidden="true" />
-        <dataField fieldName="ExtLastName" columns="35" hidden="true" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="Fullname" hidden="true" tag="header-text" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Comment">

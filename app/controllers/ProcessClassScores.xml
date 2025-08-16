@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ProcessClassScores" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="GradeLevel" type="Int16" label="Grade Level" length="20">
+      <items style="DropDownList" dataController="GradeLevel" dataView="grid1" dataTextField="Description" dataValueField="RefGradeLevelID" />
+    </field>
+    <field name="Stream" type="Int16" label="Stream" length="20">
+      <items style="DropDownList" dataController="SchoolStream" dataView="grid1" dataTextField="Description" dataValueField="RefSchoolStreamID" />
+    </field>
+    <field name="ProcessClassResultset" type="DataView" label="Process Class Resultset">
+      <dataView controller="ProcessClassResultset" view="grid1" />
+    </field>
+  </fields>
+  <views>
+    <view id="form1" type="Form" label="Process Class GBA" tags="material-icon-spa&#xD;&#xA;modal-max-sm">
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="GradeLevel" columns="20" />
+            <dataField fieldName="Stream" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+      <headerText>Please select a GradeLevel and Stream to process scores</headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="Form" flat="false">
+      <action commandName="Confirm" commandArgument="ProcessClassResultset" headerText="Process Class Scores" cssClass="material-icon-search" whenLastCommandName="Edit" key="Enter" id="a100" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Confirm" type="JavaScript" phase="After"><![CDATA[$app.input.focus();]]></rule>
+  </businessRules>
+</dataController>

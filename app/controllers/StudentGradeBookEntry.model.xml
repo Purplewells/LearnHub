@@ -1,31 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="StudentGradeBookEntry" alias="StudentGradeBookEntry" created="2024-02-02T16:05:25" modified="2024-06-04T11:25:07" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="StudentGradeBookEntry" alias="StudentGradeBookEntry" created="2024-02-02T16:05:25" modified="2025-08-10T15:29:26" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="StudentCourseSection" parentTableSchema="dbo" parentTableName="StudentSectionAssociation" x="414" y="20">
       <foreignKeyColumn columnName="StudentCourseSectionID" parentColumnName="StudentCourseSectionID" />
     </foreignKey>
-    <foreignKey id="GradeBookEntry" parentTableSchema="dbo" parentTableName="GradeBookEntry" x="426" y="500">
+    <foreignKey id="GradeBookEntry" parentTableSchema="dbo" parentTableName="GradeBookEntry" x="425" y="500">
       <foreignKeyColumn columnName="GradeBookEntryID" parentColumnName="GradeBookEntryID" />
     </foreignKey>
-    <foreignKey id="GradeBookEntryType" parentTableSchema="dbo" parentTableName="zlkp_GradeBookEntryType" x="424" y="746">
+    <foreignKey id="GradeBookEntryType" parentTableSchema="dbo" parentTableName="zlkp_GradeBookEntryType" x="423" y="746">
       <foreignKeyColumn columnName="GradeBookEntryTypeID" parentColumnName="GradeBookEntryTypeID" />
     </foreignKey>
     <foreignKey id="GradingPeriod" parentTableSchema="dbo" parentTableName="GradingPeriod" x="423" y="856">
       <foreignKeyColumn columnName="GradingPeriodID" parentColumnName="GradingPeriodID" />
     </foreignKey>
-    <foreignKey id="PerformanceBaseConversion" parentTableSchema="dbo" parentTableName="zlkpPerformanceBaseConversion" x="411" y="319">
+    <foreignKey id="PerformanceBaseConversion" parentTableSchema="dbo" parentTableName="zlkpPerformanceBaseConversion" x="410" y="319">
       <foreignKeyColumn columnName="PerformanceBaseConversionID" parentColumnName="PerformanceBaseConversionID" />
     </foreignKey>
-    <foreignKey id="RefSchoolStream" parentTableSchema="dbo" parentTableName="zlkpSchoolStream" x="426" y="1010">
+    <foreignKey id="RefSchoolStream" parentTableSchema="dbo" parentTableName="zlkpSchoolStream" x="425" y="1010">
       <foreignKeyColumn columnName="RefSchoolStreamID" parentColumnName="RefSchoolStreamID" />
     </foreignKey>
-    <foreignKey id="StudentEnrollment" parentTableSchema="dbo" parentTableName="StudentSchoolAssociation" x="848" y="20" baseForeignKey="StudentCourseSection">
+    <foreignKey id="StudentEnrollment" parentTableSchema="dbo" parentTableName="StudentSchoolAssociation" x="847" y="20" baseForeignKey="StudentCourseSection">
       <foreignKeyColumn columnName="StudentEnrollmentID" parentColumnName="StudentEnrollmentID" />
     </foreignKey>
     <foreignKey id="RefEntryGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="1241" y="20" baseForeignKey="StudentEnrollment">
       <foreignKeyColumn columnName="RefEntryGradeLevelId" parentColumnName="RefGradeLevelId" />
     </foreignKey>
-    <foreignKey id="CalendarSession" parentTableSchema="dbo" parentTableName="Session" x="1241" y="195" baseForeignKey="StudentEnrollment">
+    <foreignKey id="CalendarSession" parentTableSchema="dbo" parentTableName="Session" x="1241" y="196" baseForeignKey="StudentEnrollment">
       <foreignKeyColumn columnName="CalendarSessionID" parentColumnName="CalendarSessionID" />
     </foreignKey>
     <foreignKey id="OrganizationCalendar" parentTableSchema="dbo" parentTableName="Calendar" x="1582" y="20" baseForeignKey="CalendarSession">
@@ -111,5 +111,6 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
     <column fieldName="Fullname" type="nvarchar(72)" dataType="String" label="Fullname">
       <formula>UPPER(Person.FirstName + ', ' + Person.LastName)</formula>
     </column>
+    <column name="RefGradeLevelID" fieldName="RefGradeLevelID" label="RefGradeLevelID" />
   </columns>
 </dataModel>
