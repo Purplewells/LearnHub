@@ -56,6 +56,7 @@ select
 	,"Course"."CourseTitle" "Course"
 	,"StudentGradeBookEntry"."extSGID" "extSGID"
 	,"StudentGradeBookEntry"."extSCID" "extSCID"
+	,"StudentGradeBookEntry"."RefGradeLevelID" "RefGradeLevelID"
 from "dbo"."StudentGradeBookEntry" "StudentGradeBookEntry"
 	left join "dbo"."StudentSectionAssociation" "StudentCourseSection" on "StudentGradeBookEntry"."StudentCourseSectionID" = "StudentCourseSection"."StudentCourseSectionID"
 	left join "dbo"."StudentSchoolAssociation" "StudentEnrollment" on "StudentCourseSection"."StudentEnrollmentID" = "StudentEnrollment"."StudentEnrollmentID"
@@ -159,6 +160,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
     <field name="Fullname" type="String" readOnly="true" label="Fullname" computed="true">
       <formula>UPPER(Person.FirstName + ', ' + Person.LastName)</formula>
     </field>
+    <field name="RefGradeLevelID" type="Int32" label="RefGradeLevelID" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Active Scores" groupExpression="GLSO, Course, GradeLevel, Stream, Session" filter="SessionIsActive = 1">
@@ -218,6 +220,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
         <dataField fieldName="extSGID" columns="15" hidden="true" />
         <dataField fieldName="extSCID" columns="15" hidden="true" />
         <dataField fieldName="Fullname" />
+        <dataField fieldName="RefGradeLevelID" columns="15" />
       </dataFields>
     </view>
     <view id="grid1_mobi" type="Grid" commandId="command1" label="Mobile Active Scores" groupExpression=" Course, GradeLevel, Stream, Session" sortExpression="GLSO ASC" filter="SessionIsActive = 1">
@@ -277,6 +280,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
         <dataField fieldName="extSGID" columns="15" />
         <dataField fieldName="extSCID" columns="15" />
         <dataField fieldName="Fullname" />
+        <dataField fieldName="RefGradeLevelID" columns="15" />
       </dataFields>
     </view>
     <view id="grid1_all_assessments" type="Grid" commandId="command1" label="All Assessment Scores" groupExpression=" Course, GradeLevel, Stream, Session" sortExpression="GLSO ASC" filter="SessionIsActive = 0">
@@ -336,6 +340,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
         <dataField fieldName="extSGID" columns="15" />
         <dataField fieldName="extSCID" columns="15" />
         <dataField fieldName="Fullname" />
+        <dataField fieldName="RefGradeLevelID" columns="15" />
       </dataFields>
     </view>
     <view id="export_assessment" type="Grid" commandId="command1" label="Export Assessment Scores" groupExpression=" Course, GradeLevel, Stream, Session" sortExpression="GLSO ASC" reportOrientation="Landscape" showInSelector="false">
@@ -395,6 +400,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
         <dataField fieldName="extSGID" columns="15" />
         <dataField fieldName="extSCID" columns="15" />
         <dataField fieldName="Fullname" />
+        <dataField fieldName="RefGradeLevelID" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Assessment Score">
@@ -415,6 +421,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
             <dataField fieldName="extSGID" columns="15" />
             <dataField fieldName="extSCID" columns="15" />
             <dataField fieldName="Fullname" />
+            <dataField fieldName="RefGradeLevelID" columns="15" />
           </dataFields>
         </category>
         <category id="c2">
@@ -525,6 +532,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
             <dataField fieldName="extSGID" columns="15" />
             <dataField fieldName="extSCID" columns="15" />
             <dataField fieldName="Fullname" />
+            <dataField fieldName="RefGradeLevelID" columns="15" />
           </dataFields>
         </category>
       </categories>

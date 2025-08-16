@@ -79,6 +79,8 @@ namespace zLearnHub.Models
 
         ExtCalendarSessionID,
 
+        RefGradeLevelID,
+
         RefSchoolStreamID,
 
         Stream,
@@ -229,6 +231,9 @@ namespace zLearnHub.Models
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private int? _extCalendarSessionID;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private int? _refGradeLevelID;
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private int? _refSchoolStreamID;
@@ -754,6 +759,19 @@ namespace zLearnHub.Models
             {
                 _extCalendarSessionID = value;
                 UpdateFieldValue("ExtCalendarSessionID", value);
+            }
+        }
+
+        public int? RefGradeLevelID
+        {
+            get
+            {
+                return _refGradeLevelID;
+            }
+            set
+            {
+                _refGradeLevelID = value;
+                UpdateFieldValue("RefGradeLevelID", value);
             }
         }
 

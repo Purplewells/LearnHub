@@ -75,7 +75,7 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
       </dataFields>
     </view>
-    <view id="grid1_historical_entries" type="Grid" commandId="command1" label="All Historical Entries" sortExpression="TransactionDate DESC">
+    <view id="grid1_historical_entries" type="Grid" commandId="command1" label="Historical Manual Entries" sortExpression="TransactionDate DESC">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Description" tag="header-text" columns="40" />

@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
 
 namespace zLearnHub.Rules
 {
@@ -15,23 +16,6 @@ namespace zLearnHub.Rules
         public SharedBusinessRules()
         {
         }
-       
-        //[AccessControl("UserId", Sql =
-        //    @"SELECT
-        //    aur.UserId
-        //    FROM vw_aspnet_Roles ar
-        //    INNER JOIN aspnet_UsersInRoles aur ON aur.RoleId = ar.RoleId
-        //    INNER JOIN table_of_interest p on p.RoleID = aur.RoleID
-        //    WHERE UserId = @UserId")]
-        //public void RestrictAccessToTableOfInterest()
-        //{
-        //    if (!UserIsInRole("Administrators", "HeadTeacher", "ContentEditors"))
-        //        RestrictAccess("@UserId", UserId);
-        //    else
-        //        RestrictAccess("@UserId", null); // Replace AllowAccess() with appropriate method
-        //}
-
-
 
         // access restrictions to Gradebook Entry
         [AccessControl("UserId", Sql =
@@ -67,11 +51,11 @@ namespace zLearnHub.Rules
                     .SelectView("grid1")
                     .SetTag("view-style-grid-disabled view-style-list view-style-cards view-style-charts")
                     .SelectDataField("Fullname").Show();
-                
+
                 NodeSet().SelectView("grid1_mobi")
                     .SetTag("view-style-grid-disabled view-style-list view-style-cards view-style-charts");
             }
-       
+
             if (controllerName == "StudentSchoolAssociation")
             {
                 NodeSet()
@@ -85,7 +69,7 @@ namespace zLearnHub.Rules
                     .SelectDataField("Lastname").Hide();
             }
 
-           
+
 
             //hide Fullname field in the StudentGradeBookEntry controller nodeset
             if (!isMobile && controllerName == "StudentGradeEntryBook")
@@ -100,7 +84,9 @@ namespace zLearnHub.Rules
                 NodeSet().SelectView("grid1_expanded_view").SetShowInSelector("true");
 
             }
-            
+
+         
+
 
             if (controllerName == "OrganizationPersonRoleStudent")
             {
@@ -113,7 +99,7 @@ namespace zLearnHub.Rules
             {
                 NodeSet()
                     .SelectField("SCID").Hide();
-                    
+
             }
 
             //detail access controll formulation
@@ -122,7 +108,7 @@ namespace zLearnHub.Rules
                 // make the controller read-only by removing editing actions
                 NodeSet("view[@id='grid1']").SelectActions("Delete").Delete();
                 NodeSet("view[@id='editForm1']").SelectActions("Delete").Delete();
-                
+
             }
 
             if (controllerName == "Contact" && !UserIsInRole("Administrators, ContentEditors"))
@@ -132,16 +118,16 @@ namespace zLearnHub.Rules
 
             }
 
-            if ((controllerName == "WorkBenchTheStock" || controllerName == "MovementMode"  && !UserIsInRole("Administrators")))
+            if ((controllerName == "WorkBenchTheStock" || controllerName == "MovementMode" && !UserIsInRole("Administrators")))
             {
                 // make the controller read-only by removing editing actions
-             
+
                 NodeSet().SelectCategory("c5").Hide();
                 NodeSet().SelectCategory("c5").Delete();
             }
 
-            if(controllerName == "account_general_ledger" || controllerName == "ManualAccountJournalEntries" && !UserIsInRole("Administrators"))
-                {
+            if (controllerName == "account_general_ledger" || controllerName == "ManualAccountJournalEntries" && !UserIsInRole("Administrators"))
+            {
                 NodeSet("view[@id='grid1']").SelectView("grid1").SelectActions("Delete").Delete();
                 NodeSet().SelectAction("Delete").Delete();
             }
@@ -149,7 +135,7 @@ namespace zLearnHub.Rules
 
         }
 
-       
+
 
         protected override void BeforeSqlAction(ActionArgs args, ActionResult result)
         {
@@ -162,11 +148,11 @@ namespace zLearnHub.Rules
                     // Add a custom error message
                     //result.Errors.Add("You do not have permission to delete payment records. Please contact an administrator.");
                     result.ShowAlert("You do not have permission to delete payment records. Escalate to a higher authority");
-                    
+
                 }
             }
 
-            if(args.Controller == "account_general_ledger" && args.CommandName == "Delete")
+            if (args.Controller == "account_general_ledger" && args.CommandName == "Delete")
             {
                 if (!UserIsInRole("Administrators, HeadTeachers"))
                 {
@@ -189,17 +175,18 @@ namespace zLearnHub.Rules
             {
                 if (UserIsInRole("Administrators, HeadTeachers"))
                 {
-                    
-                        var status = Convert.ToString(SelectFieldValue("Status"));
-                        if (status == "Received")
-                        {
-                            throw new Exception("Received purchase orders cannot be edited.");
-                        }
-                    
-                    //result.ShowAlert("You do not have permission to delete financial records. Please discuss with administrative head.");
+
+                    var status = Convert.ToString(SelectFieldValue("Status"));
+                    if (status == "Received")
+                    {
+                        //throw new Exception("Received purchase orders cannot be edited.");
+                        result.ShowAlert("You do not have permission to edit financial records. Please discuss with administrative head.");
+                    }
+
+
                 }
 
-                
+
             }
         }
 
@@ -208,7 +195,7 @@ namespace zLearnHub.Rules
         {
 
             object transactionsIDValue = SelectFieldValue("TransactionsID");
-            
+
             if (transactionsIDValue == null)
                 throw new Exception("Transactions ID is required.");
 
@@ -233,6 +220,7 @@ namespace zLearnHub.Rules
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@TransactionsID", transactionsID);
+                    command.CommandTimeout = 0; // Set timeout to 0 for no limit
                     command.ExecuteNonQuery();
                 }
 
@@ -242,7 +230,7 @@ namespace zLearnHub.Rules
 
         }
 
-    
+
 
         [ControllerAction("BorrowTransactions", "Insert, Update, Calculate", ActionPhase.After)]
         public void BeforeInsertBorrowTransaction()
@@ -252,7 +240,7 @@ namespace zLearnHub.Rules
 
             if (bookIDValue == null)
                 throw new Exception("Book ID is required.");
-            
+
             int bookID;
             try
             {
@@ -275,14 +263,15 @@ namespace zLearnHub.Rules
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@BookID", bookID);
+                    command.CommandTimeout = 0; // Set timeout to 0 for no limit
                     command.ExecuteNonQuery();
                 }
 
             }
 
             Result.ShowAlert("Lending transaction added successfully.");
-            
-            
+
+
 
         }
 
@@ -318,15 +307,16 @@ namespace zLearnHub.Rules
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@SalaryID", salaryID);
+                    command.CommandTimeout = 0; // Set timeout to 0 for no limit
                     command.ExecuteNonQuery();
                 }
 
             }
-            
+
             Result.Refresh();
             Result.RefreshChildren();
             Result.ShowAlert("Salary information updated successfully.");
- 
+
         }
 
 
@@ -362,6 +352,7 @@ namespace zLearnHub.Rules
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@TransactionID", transactionID);
+                    command.CommandTimeout = 0; // Set timeout to 0 for no limit
                     command.ExecuteNonQuery();
                 }
 
@@ -374,7 +365,7 @@ namespace zLearnHub.Rules
         }
 
         [ControllerAction("fee_collection_transaction", "Custom, ProcessRefund", ActionPhase.After)]
-        public void ProcessFeeRefund (int OriginalTransactionID, decimal RefundAmountToProcess)
+        public void ProcessFeeRefund(int OriginalTransactionID, decimal RefundAmountToProcess)
         {
             // Get connection string from configuration
             string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
@@ -394,7 +385,7 @@ namespace zLearnHub.Rules
             // Optional: Add a user notification
             Result.Refresh();
             Result.RefreshChildren();
-            Result.ShowMessage("Refund processed successfully.");
+            Result.ShowAlert("Refund processed successfully.");
 
         }
 
@@ -422,7 +413,7 @@ namespace zLearnHub.Rules
 
         }
 
-        [ControllerAction("StudentGradeBookEntry", "Custom", "generate_summarised_remarks", ActionPhase.Execute)]
+        [ControllerAction("StudentGradeBookEntry", "Custom", "generate_summarised_remarks")]
         public void write_ai_supported_remarks()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
@@ -451,7 +442,7 @@ namespace zLearnHub.Rules
                 using (var cmd = new SqlCommand(sql, con))
                 using (var reader = cmd.ExecuteReader())
                 {
-                    
+
                     var entries = new List<dynamic>();
 
                     while (reader.Read())
@@ -528,12 +519,12 @@ namespace zLearnHub.Rules
                 {
                     Result.ShowMessage("Error from ChatGPT: " + response.StatusCode);
                     //AiLogger aiLogger = new AiLogger();
-                    
+
                 }
             }
         }
 
-       
+
 
 
         public class AiLogger
@@ -557,15 +548,268 @@ namespace zLearnHub.Rules
         }
 
 
+        // implemented to circumvent the issue of not being able to update the large no. of records table directly from the UI
+        [ControllerAction("StudentGradeBookEntry", "Custom", "PostUnfilteredScoreRecords")]
+
+        public void PostUnFilteredScoreRecords()
+        {
+
+            // Get connection string from configuration
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("usp_merge_master_student_grades_gradebooks_p4", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.CommandTimeout = 0; // Set timeout to 0 for no limit
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            Result.Refresh();
+            Result.RefreshChildren();
+            Result.ShowAlert("GBA Scores have been updated successfully for the selected class and streams.");
+
+        }
+
+        // implemented to circumvent the issue of not being able to update the large no. of records table directly from the UI
+        [ControllerAction("StudentGradeBookEntry", "Custom", "PowerPostScores")]
+
+        public void PowerPostScores()
+        {
+
+            // Get connection string from configuration
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("usp_merge_master_student_grades_gradebooks_p4_powerpost", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.CommandTimeout = 0; // Set timeout to 0 for no limit
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            Result.Refresh();
+            Result.RefreshChildren();
+            Result.ShowAlert("GBA Scores have been updated successfully via Power Post.");
+
+        }
+
+        // still in development and testing
+        [ControllerAction("StudentGradeBookEntry", "Custom", "ProcessFilteredRecords")]
+
+        public void ProcessFilteredScoreRecords(ActionArgs args)
+        {
+
+            if (args == null)
+                args = new ActionArgs();
+            args.Filter = args.Filter ?? new string[] { }; // Ensure Filter is not null
+
+            int? RefGradeLevelID = null;
+            int? RefSchoolStreamID = null;
+
+
+            if (args.Filter != null)
+            {
+                foreach (var filter in args.Filter) // each filter is like "FieldName:=Value"
+                {
+                    if (filter.Equals("GradeLevelID", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var parts = filter.Split(new[] { ":=" }, StringSplitOptions.None);
+                        if (parts.Length > 1)
+                        {
+                            int gradeLevel;
+                            if (int.TryParse(parts[1], out gradeLevel))
+                                RefGradeLevelID = gradeLevel;
+                        }
+                    }
+                    else if (filter.Equals("StreamID", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var parts = filter.Split(new[] { ":=" }, StringSplitOptions.None);
+                        if (parts.Length > 1)
+                        {
+                            int stream;
+                            if (int.TryParse(parts[1], out stream))
+                                RefSchoolStreamID = stream;
+                        }
+                    }
+                }
+            }
+
+            // Get connection string from configuration
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("usp_merge_master_student_grades_gradebooks_p4_gradelevel_based_ds", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@RefGradeLevelID", RefGradeLevelID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@RefSchoolStreamID", RefSchoolStreamID ?? (object)DBNull.Value);
+                    command.CommandTimeout = 0; // Set timeout to 0 for no limit
+                    command.ExecuteNonQuery();
+                }
+            }
+            if (args.Filter != null)
+            {
+                Result.Refresh();
+                Result.RefreshChildren();
+                Result.ShowAlert("GBA Scores have been updated successfully for the selected class and streams.");
+
+            }
+
+
+        }
+
+        // implemented to circumvent the issue of not being able to update the large no. of records table directly from the UI
+        [ControllerAction("ChronicAbsenteeReport", "Custom", "UpdateAttendanceRepo")]
+
+        public void RefreshAttendancesBaseHist()
+        {
+
+            // Get connection string from configuration
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("zusp_etl_zvw_metric_attendances_base_hist", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.CommandTimeout = 0; // Set timeout to 0 for no limit
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            Result.Refresh();
+            Result.RefreshChildren();
+            Result.ShowAlert("The student attendance update has completed successfully");
+
+        }
+
+        //[ControllerAction("StudentGradeBookEntry", "Custom", "MergeGrades")]
+        //public void MergeGrades()
+        //{
+        //    // Extract filter values from the current view
+        //    //var filter = this.Controller.Filter; // raw filter expression
+        //    // Get filter parameters directly from request
+        //    var gradeLevelId = Convert.ToInt32(SelectFieldValue("GradeLevelID"));
+        //    var schoolStreamId = Convert.ToInt32(SelectFieldValue("SchoolStreamID"));
+
+        //    if (gradeLevelId == 0 || schoolStreamId == 0)
+        //    {
+        //        Result.ShowAlert("Please filter by Grade Level and School Stream before running merge.");
+        //        return;
+        //    }
+
+
+        //    // Call the stored procedure
+        //    // Get connection string from configuration
+        //    string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        connection.Open();
+        //        using (SqlCommand command = new SqlCommand("usp_merge_master_student_grades_gradebooks_p4_gradelevel_based", connection))
+        //        {
+        //            command.CommandType = System.Data.CommandType.StoredProcedure;
+        //            command.Parameters.AddWithValue("@RefGradeLevelID", gradeLevelId);
+        //            command.Parameters.AddWithValue("@RefSchoolStreamID", schoolStreamId);
+        //            command.CommandTimeout = 0; // Set timeout to 0 for no limit
+        //            command.ExecuteNonQuery();
+        //        }
+        //    }
+
+
+        //    Result.ShowAlert("Merge completed for Grade Level, School Stream.");
+        //}
+
+
+        [ControllerAction("GradeBookEntry", "Custom", "GenerateScoresheet")]
+        public void master_student_gradebooks_scoresheet(int gradeBookEntryID)
+        {
+
+            // Get connection string from configuration
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("usp_merge_master_student_grades_gradebooks_p1", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@GradeBookEntryID", gradeBookEntryID);
+                    command.ExecuteNonQuery();
+                }
+            }
+            
+            Result.RefreshChildren();
+            Result.ShowAlert("Student scoresheets have been successfully prepared.");
+
+        }
+
+        [ControllerAction("StudentGradeBookEntry", "Custom", "reset_and_update_logos")]
+        public void usp_ops_reset_and_update_logos(int gradeBookEntryID)
+        {
+
+            // Get connection string from configuration
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("usp_ops_reset_and_update_logos", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            Result.RefreshChildren();
+            Result.ShowAlert("Logos have been successfully updated for reports.");
+
+        }
+
+        [ControllerAction("StudentGradeBookEntry", "Custom", "reset_and_update_photos")]
+        public void usp_ops_reset_and_update_photos(int gradeBookEntryID)
+        {
+
+            // Get connection string from configuration
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("usp_ops_reset_and_update_photos ", connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            Result.RefreshChildren();
+            Result.ShowAlert("Photos have been successfully updated for reports.");
+
+        }
 
     }
 
-           
 
-           
-      
+    
+        
 
-}
+
+
+
+
+    }
           
 
 

@@ -33,11 +33,11 @@ from "dbo"."vw_process__missing_attendance_registers" "vw_process__missing_atten
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="SessionCode" columns="12" />
-        <dataField fieldName="Date" columns="18" />
+        <dataField fieldName="Date" columns="18" tag="pivot1-row1-columnstacked-date&#xD;&#xA;pivot1-title:&quot;Count of attendance capture by event date&quot;" />
         <dataField fieldName="EventDate" columns="18" />
-        <dataField fieldName="GL" columns="8" />
+        <dataField fieldName="GL" columns="8" tag="pivot3-row1-columnstacked-date&#xD;&#xA;pivot3-title:&quot;Count of attendance capture by grade level&quot;&#xD;&#xA;" />
         <dataField fieldName="Stream" columns="8" />
-        <dataField fieldName="RG" columns="5" />
+        <dataField fieldName="RG" columns="5" tag="pivot1-col1&#xD;&#xA;pivot3-col1&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot4-row1-columnstacked&#xD;&#xA;pivot4-title:&quot;Count of attendance capture via register&quot;&#xD;&#xA;&#xD;&#xA;pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;Overview of attendance capture&quot;" />
         <dataField fieldName="SortOrder" columns="15" hidden="true" />
         <dataField fieldName="IsCurrentTerm" columns="3" />
         <dataField fieldName="CSY" columns="3" />

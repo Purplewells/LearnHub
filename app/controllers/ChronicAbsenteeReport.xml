@@ -321,9 +321,29 @@ END</formula>
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action commandName="SQL" headerText="Update Attendance Repo" cssClass="material-icon-reduce_capacity" id="a100">
-        <data><![CDATA[EXECUTE zusp_etl_zvw_metric_attendances_base_hist ]]></data>
+        <data><![CDATA[EXECUTE zusp_etl_zvw_metric_attendances_base_hist 
+SET @Result_ExecuteOnClient = '$appfactory.find("ChronicAbsenteeReport", "Controller").sync();'
+SET @Result_ShowMessage = 'The student attendance update ' + CONVERT(NVARCHAR(12), GETDATE()) + ' ' + 'has completed successfully' 
+
+]]></data>
+      </action>
+      <action commandName="Custom" headerText="Option 2 : Update Attendance (LDS)" cssClass="material-icon-sports" id="a101" commandArgument="UpdateAttendanceRepo" confirmation="This action would refresh the latest attendance records using large dataset model. Do you want to continue ?">
+        <data />
       </action>
       <action id="a2" />
+      <action id="a102" commandName="ReportAsPdf" headerText="Print Certificate Report" />
+      <action id="a104" commandName="ReportAsPdf" headerText="Print Status Report">
+        <data><![CDATA[_controller=ChronicAbsenteeReport
+_view=all_attendance_statuses
+_template=ChronicAbsenteeReport_all_attendance_statuses.rdlc
+]]></data>
+      </action>
+      <action id="a105" />
+      <action id="a103" commandName="ReportAsExcel" headerText="Print To Excel" />
+      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a4" commandName="ReportAsWord" headerText="Excport To Word" />
+      <action id="a106" commandName="ExportRss" headerText="Send To RSS API" />
     </actionGroup>
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />
@@ -332,19 +352,7 @@ END</formula>
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a101" commandName="ReportAsPdf" headerText="Print Absence Report" />
-      <action id="a104" commandName="ReportAsPdf" headerText="Print Attendance Status Report">
-        <data><![CDATA[_controller=ChronicAbsenteeReport
-_view=all_attendance_statuses
-_template=ChronicAbsenteeReport_all_attendance_statuses.rdlc
-]]></data>
-      </action>
-      <action id="a102" commandName="ReportAsExcel" headerText="Print To Excel" />
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a4" commandName="ReportAsWord" headerText="Excport To Word" />
       <action id="a103" />
-      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
-      <action id="a100" commandName="ExportRss" headerText="Send To RSS API" />
       <action id="a2" commandName="ReportAsImage" />
       <action id="a7" commandName="DataSheet" />
       <action id="a8" commandName="Grid" />

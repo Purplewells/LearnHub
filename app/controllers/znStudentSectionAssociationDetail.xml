@@ -100,7 +100,7 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
     <field name="RefProgressLevelId" type="Int32" label="Ref Progress Level Id">
       <items style="Lookup" dataController="ProgressLevel" newDataView="createForm1" dataValueField="RefProgressLevelID" dataTextField="Description" />
     </field>
-    <field name="RefProgressLevelDescription" type="String" readOnly="true" label="Progress Level" length="100" />
+    <field name="RefProgressLevelDescription" type="String" readOnly="true" label="Progress Level" length="15" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />
@@ -151,7 +151,7 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
         <dataField fieldName="SectionName" columns="12" hidden="true" />
         <dataField fieldName="StartDate" columns="18" />
         <dataField fieldName="EndDate" columns="18" />
-        <dataField fieldName="RefProgressLevelId" aliasFieldName="RefProgressLevelDescription" />
+        <dataField fieldName="RefProgressLevelId" aliasFieldName="RefProgressLevelDescription" columns="15" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
         <dataField fieldName="CreatedBy" columns="50" hidden="true" />
@@ -203,10 +203,10 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
         <dataField fieldName="Header" hidden="true" tag="header-text" />
         <dataField fieldName="SCID" columns="5" />
         <dataField fieldName="SEID" columns="5" />
-        <dataField fieldName="Name" />
+        <dataField fieldName="Name" hidden="true" />
       </dataFields>
     </view>
-    <view id="expired_course_sections" type="Grid" commandId="command1" label="All Class Rosters" sortExpression="GLSO ASC" groupExpression="GL, UPN" filter=" ACS=0">
+    <view id="expired_course_sections" type="Grid" commandId="command1" label="Inactive Class Rosters" sortExpression="GLSO ASC" groupExpression="GL, UPN" filter=" ACS=0">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="StudentEnrollmentID" aliasFieldName="StudentEnrollmentCreatedBy" hidden="true" />
@@ -241,7 +241,7 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
         <dataField fieldName="Header" hidden="true" tag="header-text" />
         <dataField fieldName="SCID" columns="5" />
         <dataField fieldName="SEID" columns="5" />
-        <dataField fieldName="Name" />
+        <dataField fieldName="Name" hidden="true" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Class Roster">

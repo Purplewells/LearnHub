@@ -29,7 +29,7 @@ from "dbo"."ProductUOM" "ProductUOM"
       <items style="Lookup" dataController="Product" newDataView="createForm1" dataValueField="ProductID" dataTextField="ProductName" />
     </field>
     <field name="ProductName" type="String" readOnly="true" label="Product Name" length="100" />
-    <field name="UnitOfMeasureID" type="Int32" allowNulls="false" label="Unit Of Measure ID" showInSummary="true">
+    <field name="UnitOfMeasureID" type="Int32" label="Unit Of Measure ID" showInSummary="true">
       <items style="Lookup" dataController="UnitOfMeasure" newDataView="createForm1" dataValueField="UnitOfMeasureID" dataTextField="Uomname" />
     </field>
     <field name="UnitOfMeasureUomname" type="String" readOnly="true" label="Unit Of Measure" length="20" />
