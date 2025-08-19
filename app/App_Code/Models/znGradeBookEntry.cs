@@ -88,6 +88,8 @@ namespace zLearnHub.Models
         GLSO,
 
         GBID,
+
+        WMC,
     }
 
     public partial class znGradeBookEntryModel : BusinessRulesObjectModel
@@ -212,6 +214,9 @@ namespace zLearnHub.Models
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private int? _gBID;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private decimal? _wMC;
 
         public znGradeBookEntryModel()
         {
@@ -739,6 +744,19 @@ namespace zLearnHub.Models
             {
                 _gBID = value;
                 UpdateFieldValue("GBID", value);
+            }
+        }
+
+        public decimal? WMC
+        {
+            get
+            {
+                return _wMC;
+            }
+            set
+            {
+                _wMC = value;
+                UpdateFieldValue("WMC", value);
             }
         }
 

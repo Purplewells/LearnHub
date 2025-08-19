@@ -457,6 +457,11 @@ ui-btn app-is-link {
     background-color: beige !important;
 }
 
+.app-grid .GBAWeightingCheck {
+ 
+    background-color: orange !important;
+}
+
 /*experimentation with custom grid headers*/
 /*.app-grid-header{
     background-color: steelblue !important;

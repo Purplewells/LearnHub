@@ -85,7 +85,7 @@ from "dbo"."GradeBookEntry" "GradeBookEntry"
     <field name="PTSA" type="Boolean" label="PTSA" />
     <field name="PUIT" type="Boolean" label="PUIT" />
     <field name="PURE" type="Boolean" label="PURE" />
-    <field name="Adaptive" type="Boolean" label="Adaptive" />
+    <field name="Adaptive" type="Boolean" default="((0))" label="Adaptive" />
     <field name="AssessmentCategoryID" type="Int32" label="Assessment Category ID">
       <items style="Lookup" dataController="AssessmentCategory" newDataView="createForm1" dataValueField="AssessmentCategoryID" dataTextField="Category" />
     </field>
