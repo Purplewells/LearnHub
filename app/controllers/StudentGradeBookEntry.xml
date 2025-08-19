@@ -746,12 +746,11 @@ EXECUTE dbo.usp_merge_master_student_grades_gradebooks_p3
 SET @Result_ShowMessage = 'Step 2 of Preparing aggregates grade records to completed!!!'
 ]]></data>
       </action>
-      <action commandName="Custom" headerText="Step 2: Post Scores" description="Post Scores To AMT Repo" cssClass="material-icon-local_florist" confirmation="This action would synchronise current grades to the central reporting. Do you want to continue ?" roles="Administrators, ContentEditors" id="a116" commandArgument="PostUnfilteredScoreRecords">
+      <action commandName="Custom" headerText="Step 2: Post Scores" description="Post Scores To AMT Repo" cssClass="material-icon-local_florist" confirmation="This action would synchronise current grades for central reporting. Do you want to continue ?" roles="Administrators, ContentEditors" id="a116" commandArgument="PostCurrentGBAScoreRecords">
         <data />
       </action>
-      <action commandName="Custom" commandArgument="ProcessFilteredRecords" headerText="Option 2a. Post Filtered Scores" confirmation="This action would merge curent class gradebook entries to central repo. Do you want to continue?" id="a115" cssClass="material-icon-shield_with_heart" />
-      <action commandName="Custom" commandArgument="PowerPostScores" headerText="Option 2b. Power Post Scores" confirmation="This action would merge curent class gradebook entries to central repo. Do you want to continue?" id="a118" cssClass="material-icon-speaker_phone" />
-      <action commandName="SQL" headerText="Step 2a: Post Class Scores" description="Post Scores To AMT Repo" cssClass="material-icon-speaker_phone" confirmation="This action would post current scores for your class and stream to the central repo. Do you want to continue ?" roles="Administrators, ContentEditors,ClassTeachers" id="a114" whenKeySelected="true" whenLastCommandName="Any" whenView="grid10000">
+      <action commandName="Custom" commandArgument="PostScoresWithOptimisedProc" headerText="Option 2b. Power Post Scores" confirmation="This action would merge curent class gradebook entries to central repo. Do you want to continue?" id="a118" cssClass="material-icon-speaker_phone" roles="Administrators, ContentEditors" />
+      <action commandName="Custom" headerText="Step 2a: Post Class Scores" description="Post Scores To AMT Repo" cssClass="material-icon-speaker_phone" confirmation="This action would post current scores for your class and stream to the central repo. Do you want to continue ?" roles="Administrators, ContentEditors,ClassTeachers" id="a114" whenKeySelected="true" whenLastCommandName="Any" whenView="grid10000" commandArgument="ProcessFilteredRecords">
         <data><![CDATA[EXEC [dbo].[usp_merge_master_student_grades_gradebooks_p4_gradelevel_based] @RefGradeLevelID, @RefSchoolStreamID
 SET @Result_ShowMessage = 'Grades posting to central repo completed!!!' 
 

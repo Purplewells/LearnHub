@@ -168,7 +168,7 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
         <dataField fieldName="Name" hidden="true" />
       </dataFields>
     </view>
-    <view id="expired_course_sections" type="Grid" commandId="command1" label="Inactive Class Rosters" sortExpression="GLSO ASC" groupExpression="GL, UPN" filter=" ACS=0">
+    <view id="expired_course_sections" type="Grid" commandId="command1" label="Expired Class Rosters" sortExpression="GLSO ASC" groupExpression="GL, UPN" filter=" ACS=0">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="StudentEnrollmentID" aliasFieldName="StudentEnrollmentCreatedBy" hidden="true" />
@@ -244,7 +244,7 @@ from "dbo"."StudentSectionAssociation" "StudentSectionAssociation"
         <dataField fieldName="Name" hidden="true" />
       </dataFields>
     </view>
-    <view id="all_higher_education" type="Grid" commandId="command1" label="Higher Education Rosters" sortExpression="GLSO ASC" groupExpression="GL, Name" filter=" ACS=1 ">
+    <view id="all_higher_education" type="Grid" commandId="command1" label="HIE Rosters" sortExpression="GLSO ASC" groupExpression="GL, Name" filter=" ACS=1 ">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="StudentEnrollmentID" aliasFieldName="StudentEnrollmentCreatedBy" hidden="true" />

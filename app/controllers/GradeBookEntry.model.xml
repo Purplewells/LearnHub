@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="GradeBookEntry" alias="GradeBookEntry" created="2024-01-31T17:39:28" modified="2024-11-04T12:22:14" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="GradeBookEntry" alias="GradeBookEntry" created="2024-01-31T17:39:28" modified="2025-08-18T08:41:12" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <where>CalendarSession.IsActive=1</where>
   <foreignKeys>
     <foreignKey id="GradeBookEntryType" parentTableSchema="dbo" parentTableName="zlkp_GradeBookEntryType" x="373" y="20">
@@ -32,7 +32,7 @@
     <foreignKey id="Course" parentTableSchema="dbo" parentTableName="Course" x="864" y="418" baseForeignKey="CourseSection">
       <foreignKeyColumn columnName="CourseID" parentColumnName="CourseID" />
     </foreignKey>
-    <foreignKey id="RefGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="875" y="762" baseForeignKey="Course">
+    <foreignKey id="RefGradeLevel" parentTableSchema="dbo" parentTableName="zlkpGradeLevel" x="876" y="762" baseForeignKey="Course">
       <foreignKeyColumn columnName="RefGradeLevelId" parentColumnName="RefGradeLevelId" />
     </foreignKey>
     <foreignKey id="GradingPeriodCalendarSession" parentTableSchema="dbo" parentTableName="Session" x="392" y="571" baseForeignKey="GradingPeriod">
@@ -82,5 +82,6 @@
     <column fieldName="GBID" type="int" dataType="Int32" label="GBID">
       <formula>GradeBookEntry.GradeBookEntryID</formula>
     </column>
+    <column name="extWMC" fieldName="WMC" label="WMC" />
   </columns>
 </dataModel>
