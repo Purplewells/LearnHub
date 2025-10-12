@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpCashFlowCategory" alias="zlkpCashFlowCategory" created="2025-09-02T10:09:56" modified="2025-09-02T10:10:12" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="CashFlowCategoryID" fieldName="CashFlowCategoryID" label="Cash Flow Category ID" />
+    <column name="CashFlowCategory" fieldName="CashFlowCategory" label="Cash Flow Category" />
+    <column name="CashFlowCode" fieldName="CashFlowCode" label="Cash Flow Code" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+  </columns>
+</dataModel>

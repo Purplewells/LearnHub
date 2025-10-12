@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpPayrollTags" alias="zlkpPayrollTags" created="2025-10-10T08:13:44" modified="2025-10-11T09:21:52" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="PayrollCategory" parentTableSchema="dbo" parentTableName="zlkpPayrollTagCategory" x="341" y="20">
+      <foreignKeyColumn columnName="PayrollCategoryID" parentColumnName="PayrollCategoryID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="TagID" fieldName="TagID" label="Tag ID" />
+    <column name="TagName" fieldName="TagName" label="Tag Name" />
+    <column name="TagCode" fieldName="TagCode" label="Tag Code" />
+    <column name="PayrollCategoryID" fieldName="PayrollCategoryID" label="Payroll Category ID" aliasColumnName="TagCategoryCode" aliasForeignKey="PayrollCategory" />
+    <column name="TagCategoryName" fieldName="CategoryName" label="Category Name" foreignKey="PayrollCategory" />
+    <column name="TagCategoryCode" fieldName="CategoryCode" label="Category Code" foreignKey="PayrollCategory" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+  </columns>
+</dataModel>

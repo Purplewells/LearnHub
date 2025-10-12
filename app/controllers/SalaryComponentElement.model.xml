@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="salary_component_element" alias="salary_component_element" created="2024-02-22T20:10:30" modified="2024-09-15T19:51:26" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="salary_component_element" alias="salary_component_element" created="2024-02-22T20:10:30" modified="2025-10-09T22:01:40" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Salary" parentTableSchema="dbo" parentTableName="salary" x="387" y="20">
       <foreignKeyColumn columnName="SalaryID" parentColumnName="SalaryID" />
@@ -7,7 +7,7 @@
     <foreignKey id="Currency" parentTableSchema="dbo" parentTableName="zlkp_currency" x="387" y="249">
       <foreignKeyColumn columnName="CurrencyID" parentColumnName="CurrencyID" />
     </foreignKey>
-    <foreignKey id="Element" parentTableSchema="dbo" parentTableName="zlkpSalaryComponents" x="387" y="411">
+    <foreignKey id="Element" parentTableSchema="dbo" parentTableName="zlkpSalaryComponents" x="382" y="361">
       <foreignKeyColumn columnName="ElementID" parentColumnName="ElementID" />
     </foreignKey>
     <foreignKey id="ElementComponentType" parentTableSchema="dbo" parentTableName="zlkpSalaryComponentType" baseForeignKey="Element" x="718" y="489">
@@ -35,7 +35,7 @@
     <column name="ElementID" fieldName="ElementID" label="Element ID" aliasColumnName="ElementName" aliasForeignKey="Element" />
     <column name="ElementName" fieldName="ElementName" label="Element Name" foreignKey="Element" />
     <column name="SortOrder" fieldName="ElementSortOrder" label="ESO" foreignKey="Element" sortType="Ascending" sortOrder="1" />
-    <column name="ComponentType" fieldName="ComponentType" label="Component Type" foreignKey="ElementComponentType" />
+    <column name="ComponentType" fieldName="ComponentType" label="Element Type" foreignKey="ElementComponentType" />
     <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
     <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
     <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />

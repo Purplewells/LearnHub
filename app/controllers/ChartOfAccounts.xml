@@ -12,9 +12,14 @@ select
 	,"AccountType"."AccountType" "AccountType"
 	,"chart_of_accounts"."AccountCategoryID" "AccountCategoryID"
 	,"AccountCategory"."AccountCategory" "AccountCategory"
+	,"chart_of_accounts"."AccountSubCategoryID" "AccountSubCategoryID"
+	,"AccountSubCategory"."AccountSubCategory" "AccountSubCategory"
+	,"chart_of_accounts"."CashFlowCategoryID" "CashFlowCategoryID"
+	,"CashFlowCategory"."CashFlowCategory" "CashFlowCategory"
 	,"chart_of_accounts"."AccountUsageID" "AccountUsageID"
 	,"AccountUsage"."AccountUsage" "AccountUsage"
 	,"chart_of_accounts"."IsActive" "IsActive"
+	,"chart_of_accounts"."IsCashAccount" "IsCashAccount"
 	,"chart_of_accounts"."LFT" "LFT"
 	,"chart_of_accounts"."RGT" "RGT"
 	,"chart_of_accounts"."ParentAccountID" "ParentAccountID"
@@ -26,6 +31,8 @@ from "dbo"."chart_of_accounts" "chart_of_accounts"
 	left join "dbo"."chart_of_accounts" "ParentAccount" on "chart_of_accounts"."ParentAccountID" = "ParentAccount"."AccountID"
 	left join "dbo"."zlkpChartAccountCategory" "AccountCategory" on "chart_of_accounts"."AccountCategoryID" = "AccountCategory"."AccountCategoryID"
 	left join "dbo"."zlkpChartAccountUsage" "AccountUsage" on "chart_of_accounts"."AccountUsageID" = "AccountUsage"."AccountUsageID"
+	left join "dbo"."zlkpAccountSubCategory" "AccountSubCategory" on "chart_of_accounts"."AccountSubCategoryID" = "AccountSubCategory"."AccountSubCategoryID"
+	left join "dbo"."zlkpCashFlowCategory" "CashFlowCategory" on "chart_of_accounts"."CashFlowCategoryID" = "CashFlowCategory"."CashFlowCategoryID"
 ]]></text>
     </command>
     <command id="AccountIDIdentityCommand" type="Text" event="Inserted">
@@ -37,8 +44,8 @@ from "dbo"."chart_of_accounts" "chart_of_accounts"
   </commands>
   <fields>
     <field name="AccountID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Account ID" readOnly="true" />
-    <field name="AccountName" type="String" label="Account Name" length="100" showInSummary="true" />
-    <field name="AccountNumber" type="String" label="Account Number" length="20" showInSummary="true" />
+    <field name="AccountName" type="String" label="Account" length="100" showInSummary="true" />
+    <field name="AccountNumber" type="String" label="A/C No" length="20" showInSummary="true" />
     <field name="Label" type="String" label="Label" length="50" showInSummary="true" />
     <field name="AccountTypeID" type="Int32" label="Account Type ID" showInSummary="true">
       <items style="Lookup" dataController="AccountType" newDataView="createForm1" dataValueField="AccountTypeID" dataTextField="AccountType" />
@@ -48,17 +55,26 @@ from "dbo"."chart_of_accounts" "chart_of_accounts"
       <items style="Lookup" dataController="ChartAccountCategory" newDataView="createForm1" dataValueField="AccountCategoryID" dataTextField="AccountCategory" />
     </field>
     <field name="AccountCategory" type="String" readOnly="true" label="Category" length="20" />
+    <field name="AccountSubCategoryID" type="Int32" label="Account Sub Category ID">
+      <items style="Lookup" dataController="AccountSubCategory" newDataView="createForm1" dataValueField="AccountSubCategoryID" dataTextField="AccountSubCategory" />
+    </field>
+    <field name="AccountSubCategory" type="String" readOnly="true" label="SubCategory" length="20" />
+    <field name="CashFlowCategoryID" type="Int32" label="Cash Flow Category ID">
+      <items style="Lookup" dataController="CashFlowCategory" newDataView="createForm1" dataValueField="CashFlowCategoryID" dataTextField="CashFlowCategory" />
+    </field>
+    <field name="CashFlowCategory" type="String" readOnly="true" label="CashFlow" length="12" />
     <field name="AccountUsageID" type="Int32" label="Account Usage ID">
       <items style="Lookup" dataController="ChartAccountUsage" newDataView="createForm1" dataValueField="AccountUsageID" dataTextField="AccountUsage" />
     </field>
-    <field name="AccountUsage" type="String" readOnly="true" label="Usage" length="20" />
+    <field name="AccountUsage" type="String" readOnly="true" label="Usage" length="12" />
     <field name="IsActive" type="Boolean" default="((1))" label="IsActive" />
+    <field name="IsCashAccount" type="Boolean" default="((0))" label="Cash" />
     <field name="LFT" type="Int32" label="LFT" />
     <field name="RGT" type="Int32" label="RGT" />
     <field name="ParentAccountID" type="Int32" label="Parent Account ID">
       <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" />
     </field>
-    <field name="ParentAccountName" type="String" readOnly="true" label="Parent Account" length="30" />
+    <field name="ParentAccountName" type="String" readOnly="true" label="Parent" length="30" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Modified Date" />
   </fields>
@@ -72,7 +88,10 @@ from "dbo"."chart_of_accounts" "chart_of_accounts"
         <dataField fieldName="IsActive" />
         <dataField fieldName="AccountTypeID" aliasFieldName="AccountType" />
         <dataField fieldName="AccountCategoryID" aliasFieldName="AccountCategory" />
+        <dataField fieldName="AccountSubCategoryID" aliasFieldName="AccountSubCategory" />
+        <dataField fieldName="CashFlowCategoryID" aliasFieldName="CashFlowCategory" />
         <dataField fieldName="AccountUsageID" aliasFieldName="AccountUsage" />
+        <dataField fieldName="IsCashAccount" />
         <dataField fieldName="LFT" columns="5" />
         <dataField fieldName="RGT" columns="5" />
         <dataField fieldName="ParentAccountID" aliasFieldName="ParentAccountName" columns="25" />
@@ -89,7 +108,10 @@ from "dbo"."chart_of_accounts" "chart_of_accounts"
         <dataField fieldName="IsActive" />
         <dataField fieldName="AccountTypeID" aliasFieldName="AccountType" />
         <dataField fieldName="AccountCategoryID" aliasFieldName="AccountCategory" />
+        <dataField fieldName="AccountSubCategoryID" aliasFieldName="AccountSubCategory" />
+        <dataField fieldName="CashFlowCategoryID" aliasFieldName="CashFlowCategory" />
         <dataField fieldName="AccountUsageID" aliasFieldName="AccountUsage" />
+        <dataField fieldName="IsCashAccount" />
         <dataField fieldName="LFT" columns="5" />
         <dataField fieldName="RGT" columns="5" />
         <dataField fieldName="ParentAccountID" aliasFieldName="ParentAccountName" columns="25" />
@@ -108,8 +130,11 @@ from "dbo"."chart_of_accounts" "chart_of_accounts"
             <dataField fieldName="Label" columns="50" />
             <dataField fieldName="AccountTypeID" aliasFieldName="AccountType" />
             <dataField fieldName="AccountCategoryID" aliasFieldName="AccountCategory" />
+            <dataField fieldName="AccountSubCategoryID" aliasFieldName="AccountSubCategory" />
+            <dataField fieldName="CashFlowCategoryID" aliasFieldName="CashFlowCategory" />
             <dataField fieldName="AccountUsageID" aliasFieldName="AccountUsage" />
             <dataField fieldName="IsActive" />
+            <dataField fieldName="IsCashAccount" />
             <dataField fieldName="LFT" columns="15" />
             <dataField fieldName="RGT" columns="15" />
             <dataField fieldName="ParentAccountID" aliasFieldName="ParentAccountName" />
@@ -130,8 +155,11 @@ from "dbo"."chart_of_accounts" "chart_of_accounts"
             <dataField fieldName="Label" columns="50" />
             <dataField fieldName="AccountTypeID" aliasFieldName="AccountType" />
             <dataField fieldName="AccountCategoryID" aliasFieldName="AccountCategory" />
+            <dataField fieldName="AccountSubCategoryID" aliasFieldName="AccountSubCategory" />
+            <dataField fieldName="CashFlowCategoryID" aliasFieldName="CashFlowCategory" />
             <dataField fieldName="AccountUsageID" aliasFieldName="AccountUsage" />
             <dataField fieldName="IsActive" />
+            <dataField fieldName="IsCashAccount" />
             <dataField fieldName="LFT" columns="15" />
             <dataField fieldName="RGT" columns="15" />
             <dataField fieldName="ParentAccountID" aliasFieldName="ParentAccountName" />

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpTaxBasis" alias="zlkpTaxBasis" created="2025-10-09T16:24:11" modified="2025-10-09T16:24:21" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="TaxBasisID" fieldName="TaxBasisID" label="Tax Basis ID" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="IsCumulative" fieldName="IsCumulative" label="Is Cumulative" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+  </columns>
+</dataModel>

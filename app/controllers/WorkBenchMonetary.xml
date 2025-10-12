@@ -2,33 +2,18 @@
 <dataController name="WorkBenchMonetary" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <views>
     <view id="MonetaryWorkBench" type="Form" label="MONETARY REFERENCE WORKBENCH">
-      <headerText>This workbench helps to manage and group reference data for finance and payment operations.</headerText>
+      <headerText>This workbench helps to manage and group reference data for finance related operations.</headerText>
       <categories>
-        <category id="c1" tab="PAYMENT METHOD" flow="NewColumn">
+        <category tab="CHART OF ACCOUNTS" id="c9" flow="NewColumn">
           <dataFields>
-            <dataField fieldName="PaymentMethod" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+            <dataField fieldName="ChartOfAccounts" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
           </dataFields>
         </category>
-        <category tab="TRANSACTION STATUS" id="c2">
+        <category tab="ACCOUNT MAPPINGS" id="c8">
           <dataFields>
-            <dataField fieldName="TransactionStatus" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
-          </dataFields>
-        </category>
-        <category tab="TRANSACTION TYPE" id="c5">
-          <dataFields>
-            <dataField fieldName="TransactionType" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
-          </dataFields>
-        </category>
-        <category tab="BUDGET NAMES" id="c3">
-          <dataFields>
-            <dataField fieldName="BudgetName" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs">
-              <dataView pageSize="15" />
+            <dataField fieldName="TransactionAccountMapping" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs">
+              <dataView pageSize="20" />
             </dataField>
-          </dataFields>
-        </category>
-        <category tab="BUDGET TYPE" id="c4">
-          <dataFields>
-            <dataField fieldName="BudgetType" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
           </dataFields>
         </category>
         <category tab="ACCOUNT SOURCE" id="c6">
@@ -48,21 +33,71 @@
             <dataField fieldName="ChartAccountCategory" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
           </dataFields>
         </category>
+        <category tab="SUBCATEGORY" id="c12">
+          <dataFields>
+            <dataField fieldName="AccountSubCategory" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
         <category tab="ACCOUNT USAGE" id="c11">
           <dataFields>
             <dataField fieldName="ChartAccountUsage" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
           </dataFields>
         </category>
-        <category tab="ACCOUNT MAPPINGS" id="c8">
+        <category tab="CASHFLOW SECTION" id="c16">
           <dataFields>
-            <dataField fieldName="TransactionAccountMapping" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs">
-              <dataView pageSize="20" />
+            <dataField fieldName="CashFlowSection" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category tab="CASHFLOW CATEGORY" id="c13">
+          <dataFields>
+            <dataField fieldName="CashFlowCategory" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category tab="CASHFLOW CATEGORY MAP" id="c15">
+          <dataFields>
+            <dataField fieldName="CashFlowCategoryMap" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category tab="ACCOUNT CASHFLOW MAP" id="c17">
+          <dataFields>
+            <dataField fieldName="AccountCashFlowMap" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category tab="BUDGET NAMES" id="c3">
+          <dataFields>
+            <dataField fieldName="BudgetName" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs">
+              <dataView pageSize="15" />
             </dataField>
           </dataFields>
         </category>
-        <category tab="CHART OF ACCOUNTS" id="c9">
+        <category tab="BUDGET TYPE" id="c4">
           <dataFields>
-            <dataField fieldName="ChartOfAccounts" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+            <dataField fieldName="BudgetType" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
+        </category>
+        <category id="c1" tab="PAYMENT METHOD">
+          <dataFields>
+            <dataField fieldName="PaymentMethod" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
+        </category>
+        <category tab="TRANSACTION STATUS" id="c2">
+          <dataFields>
+            <dataField fieldName="TransactionStatus" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
+          </dataFields>
+        </category>
+        <category tab="TRANSACTION TYPE" id="c5">
+          <dataFields>
+            <dataField fieldName="TransactionType" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category tab="CURRENCY" id="c14">
+          <dataFields>
+            <dataField fieldName="Currency" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category tab="FISCAL PERIODS" id="c18">
+          <dataFields>
+            <dataField fieldName="CountryFiscalPeriods" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-content-stub-none" />
           </dataFields>
         </category>
       </categories>
@@ -101,6 +136,27 @@
     </field>
     <field name="AccountDocumentSource" type="DataView" label="Account Source">
       <dataView controller="AccountDocumentSource" view="grid1" />
+    </field>
+    <field name="AccountSubCategory" type="DataView" label="Account Sub Category">
+      <dataView controller="AccountSubCategory" view="grid1" />
+    </field>
+    <field name="CashFlowCategory" type="DataView" label="Cash Flow Category">
+      <dataView controller="CashFlowCategory" view="grid1" />
+    </field>
+    <field name="Currency" type="DataView" label="Currency">
+      <dataView controller="Currency" view="grid1" />
+    </field>
+    <field name="CashFlowCategoryMap" type="DataView" label="Cash Flow Category Map">
+      <dataView controller="CashFlowCategoryMap" view="grid1" />
+    </field>
+    <field name="CashFlowSection" type="DataView" label="Cash Flow Section">
+      <dataView controller="CashFlowSection" view="grid1" />
+    </field>
+    <field name="AccountCashFlowMap" type="DataView" label="Account Cash Flow Map">
+      <dataView controller="AccountCashFlowMap" view="grid1" />
+    </field>
+    <field name="CountryFiscalPeriods" type="DataView" label="Country Fiscal Periods">
+      <dataView controller="CountryFiscalPeriods" view="grid1" />
     </field>
   </fields>
   <actions>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="TaxConfiguration" alias="TaxConfiguration" created="2025-10-09T16:19:52" modified="2025-10-09T20:14:26" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="StaffAssignment" parentTableSchema="dbo" parentTableName="K12StaffAssignment" x="345" y="20">
+      <foreignKeyColumn columnName="StaffAssignmentID" parentColumnName="StaffAssignmentID" />
+    </foreignKey>
+    <foreignKey id="StaffAssignmentDepartment" parentTableSchema="dbo" parentTableName="Department" baseForeignKey="StaffAssignment" x="763" y="20">
+      <foreignKeyColumn columnName="DepartmentID" parentColumnName="DepartmentID" />
+    </foreignKey>
+    <foreignKey id="StaffAssignmentOrganizationPersonRole" parentTableSchema="dbo" parentTableName="OrganizationPersonRole" baseForeignKey="StaffAssignment" x="763" y="160">
+      <foreignKeyColumn columnName="OrganizationPersonRoleID" parentColumnName="OrganizationPersonRoleID" />
+    </foreignKey>
+    <foreignKey id="StaffAssignmentPositionType" parentTableSchema="dbo" parentTableName="zlkpClassroomPositionType" baseForeignKey="StaffAssignment" x="763" y="383">
+      <foreignKeyColumn columnName="PositionTypeID" parentColumnName="RefClassroomPositionTypeId" />
+    </foreignKey>
+    <foreignKey id="StaffAssignmentStaffClassification" parentTableSchema="dbo" parentTableName="zlkpStaffClassification" baseForeignKey="StaffAssignment" x="763" y="560">
+      <foreignKeyColumn columnName="StaffClassificationID" parentColumnName="RefEducationStaffClassificationId" />
+    </foreignKey>
+    <foreignKey id="TaxBasis" parentTableSchema="dbo" parentTableName="zlkpTaxBasis" x="355" y="364">
+      <foreignKeyColumn columnName="TaxBasisID" parentColumnName="TaxBasisID" />
+    </foreignKey>
+    <foreignKey id="NICategory" parentTableSchema="dbo" parentTableName="zlkpNICategory" x="345" y="572">
+      <foreignKeyColumn columnName="NICategoryID" parentColumnName="NICategoryID" />
+    </foreignKey>
+    <foreignKey id="TaxCode" parentTableSchema="dbo" parentTableName="zlkpTaxCode" x="29" y="347">
+      <foreignKeyColumn columnName="TaxCodeID" parentColumnName="TaxCodeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="TaxConfigurationID" fieldName="TaxConfigurationID" label="Tax Configuration ID" />
+    <column name="StaffAssignmentID" fieldName="StaffAssignmentID" label="Staff Assignment ID" />
+    <column name="StaffClassificationID" fieldName="StaffAssignmentStaffClassificationID" foreignKey="StaffAssignment" />
+    <column name="DepartmentName" fieldName="DepartmentName" label="Department Name" foreignKey="StaffAssignmentDepartment" />
+    <column name="OrganisationID" fieldName="StaffAssignmentOrganizationPersonRoleOrganisationID" foreignKey="StaffAssignmentOrganizationPersonRole" />
+    <column name="Description" fieldName="PositionType" label="Position Type" foreignKey="StaffAssignmentPositionType" />
+    <column name="Description" fieldName="Classification" label="Classification" foreignKey="StaffAssignmentStaffClassification" />
+    <column name="TaxBasisID" fieldName="TaxBasisID" label="Tax Basis ID" aliasColumnName="Description" aliasForeignKey="TaxBasis" />
+    <column name="Description" fieldName="TaxBasis" label="Tax Basis" foreignKey="TaxBasis" />
+    <column name="Code" fieldName="TaxBasisCode" label="Tax Basis Code" foreignKey="TaxBasis" />
+    <column name="TaxCodeID" fieldName="TaxCodeID" label="Tax Code ID" aliasColumnName="TaxCode" aliasForeignKey="TaxCode" />
+    <column name="TaxCode" fieldName="TaxCode" label="Tax Code" foreignKey="TaxCode" />
+    <column name="NICategoryID" fieldName="NicategoryID" label="NI Category ID" aliasColumnName="Description" aliasForeignKey="NICategory" />
+    <column name="Description" fieldName="NICategory" label="NI Category" foreignKey="NICategory" />
+    <column name="Code" fieldName="NICode" label="NI Code" foreignKey="NICategory" />
+    <column name="TaxReference" fieldName="TaxReference" label="Tax Reference" />
+    <column name="EffectiveDate" fieldName="EffectiveDate" label="Effective Date" />
+    <column name="ExpirationDate" fieldName="ExpirationDate" label="Expiration Date" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

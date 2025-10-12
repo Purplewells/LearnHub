@@ -163,7 +163,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Scores" groupExpression="GradeLevel, Stream, Session, Course" filter="SessionIsActive = 1">
+    <view id="grid1" type="Grid" commandId="command1" label="Active Scores" groupExpression="GradeLevel, Stream, Session, Course" filter="SessionIsActive = 1" reportTemplate="true">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Firstname" columns="18" />

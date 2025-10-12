@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zmap_AccountCashFlow" alias="zmap_AccountCashFlow" created="2025-10-08T21:35:07" modified="2025-10-08T21:37:41" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Account" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="346" y="20">
+      <foreignKeyColumn columnName="AccountID" parentColumnName="AccountID" />
+    </foreignKey>
+    <foreignKey id="AccountType" parentTableSchema="dbo" parentTableName="account_type" baseForeignKey="Account" x="687" y="20">
+      <foreignKeyColumn columnName="AccountTypeID" parentColumnName="AccountTypeID" />
+    </foreignKey>
+    <foreignKey id="AccountSubCategory" parentTableSchema="dbo" parentTableName="zlkpAccountSubCategory" baseForeignKey="Account" x="687" y="181">
+      <foreignKeyColumn columnName="AccountSubCategoryID" parentColumnName="AccountSubCategoryID" />
+    </foreignKey>
+    <foreignKey id="AccountCategory" parentTableSchema="dbo" parentTableName="zlkpChartAccountCategory" baseForeignKey="Account" x="687" y="519">
+      <foreignKeyColumn columnName="AccountCategoryID" parentColumnName="AccountCategoryID" />
+    </foreignKey>
+    <foreignKey id="AccountUsage" parentTableSchema="dbo" parentTableName="zlkpChartAccountUsage" baseForeignKey="Account" x="687" y="680">
+      <foreignKeyColumn columnName="AccountUsageID" parentColumnName="AccountUsageID" />
+    </foreignKey>
+    <foreignKey id="CashFlowCategory" parentTableSchema="dbo" parentTableName="zlkpCashFlowCategory" x="346" y="319">
+      <foreignKeyColumn columnName="CashFlowCategoryID" parentColumnName="CashFlowCategoryID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="AccountID" fieldName="AccountID" label="Account ID" aliasColumnName="AccountName" aliasForeignKey="Account" />
+    <column name="AccountName" fieldName="AccountName" label="Account Name" foreignKey="Account" />
+    <column name="AccountType" fieldName="AccountType" label="Account Type" foreignKey="AccountType" />
+    <column name="AccountSubCategory" fieldName="AccountSubCategory" label="Account Sub Category" foreignKey="AccountSubCategory" />
+    <column name="AccountCategory" fieldName="AccountCategory" label="Account Category" foreignKey="AccountCategory" />
+    <column name="AccountUsage" fieldName="AccountUsage" label="Account Usage" foreignKey="AccountUsage" />
+    <column name="CashFlowCategoryID" fieldName="CashFlowCategoryID" label="Cash Flow Category ID" aliasColumnName="CashFlowCategory" aliasForeignKey="CashFlowCategory" />
+    <column name="CashFlowCategory" fieldName="CashFlowCategory" label="Cash Flow Category" foreignKey="CashFlowCategory" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+  </columns>
+</dataModel>

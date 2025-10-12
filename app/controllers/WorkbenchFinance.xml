@@ -16,6 +16,9 @@
     <field name="AccountDocumentSource" type="DataView" label="Account Document Source">
       <dataView controller="AccountDocumentSource" view="grid1" />
     </field>
+    <field name="CountryFiscalPeriods" type="DataView" label="Country Fiscal Periods">
+      <dataView controller="CountryFiscalPeriods" view="grid1" />
+    </field>
   </fields>
   <views>
     <view id="FinanceWorkbench" type="Form" label="FINANCE WORKBENCH" tags="material-icon-money_bag">

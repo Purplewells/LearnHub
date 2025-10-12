@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zrefComponentTypeTagMap" alias="zrefComponentTypeTagMap" created="2025-10-10T08:10:30" modified="2025-10-12T10:02:25" x="20" y="22" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Tag" parentTableSchema="dbo" parentTableName="zlkpPayrollTags" x="678" y="20">
+      <foreignKeyColumn columnName="TagID" parentColumnName="TagID" />
+    </foreignKey>
+    <foreignKey id="Element" parentTableSchema="dbo" parentTableName="zlkpSalaryComponents" x="374" y="207">
+      <foreignKeyColumn columnName="ElementID" parentColumnName="ElementID" />
+    </foreignKey>
+    <foreignKey id="PayrollCategory" parentTableSchema="dbo" parentTableName="zlkpPayrollTagCategory" x="992" y="22" baseForeignKey="Tag">
+      <foreignKeyColumn columnName="PayrollCategoryID" parentColumnName="PayrollCategoryID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="TagID" fieldName="TagID" label="Tag ID" aliasColumnName="TagName" aliasForeignKey="Tag" />
+    <column name="TagName" fieldName="TagName" label="Tag Name" foreignKey="Tag" />
+    <column name="TagCode" fieldName="TagCode" label="Tag Code" foreignKey="Tag" />
+    <column name="ElementID" fieldName="ElementID" label="Element ID" aliasColumnName="ElementName" aliasForeignKey="Element" />
+    <column name="ElementName" fieldName="ElementName" label="Element Name" foreignKey="Element" />
+    <column name="IsActive" fieldName="IsActive" label="Active" />
+    <column name="EffectiveStartDate" fieldName="EffectiveStartDate" label="Effective Start Date" format="d" />
+    <column name="EffectiveEndDate" fieldName="EffectiveEndDate" label="Effective End Date" format="d" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="TagCategoryName" fieldName="TagCategoryName" label="Tag Category Name" foreignKey="PayrollCategory" />
+    <column name="TagCategoryCode" fieldName="CategoryCode" label="Category Code" foreignKey="PayrollCategory" />
+  </columns>
+</dataModel>

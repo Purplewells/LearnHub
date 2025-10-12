@@ -8,8 +8,9 @@ select
 	,"zlkpPromotionReason"."Description" "Description"
 	,"zlkpPromotionReason"."Code" "Code"
 	,"zlkpPromotionReason"."Definition" "Definition"
-	,"zlkpPromotionReason"."SortOrder" "SortOrder"
+	,"zlkpPromotionReason"."IsActive" "IsActive"
 	,"zlkpPromotionReason"."DefaultValue" "DefaultValue"
+	,"zlkpPromotionReason"."SortOrder" "SortOrder"
 from "dbo"."zlkpPromotionReason" "zlkpPromotionReason"
 ]]></text>
     </command>
@@ -25,8 +26,9 @@ from "dbo"."zlkpPromotionReason" "zlkpPromotionReason"
     <field name="Description" type="String" allowNulls="false" label="Description" length="100" showInSummary="true" />
     <field name="Code" type="String" label="Code" length="50" showInSummary="true" />
     <field name="Definition" type="String" allowQBE="false" allowSorting="false" label="Definition" length="4000" showInSummary="true" />
-    <field name="SortOrder" type="Decimal" label="Sort Order" showInSummary="true" />
+    <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
     <field name="DefaultValue" type="Boolean" default="((1))" label="Default Value" showInSummary="true" />
+    <field name="SortOrder" type="Decimal" label="Sort Order" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Promotion Reason">
@@ -35,8 +37,9 @@ from "dbo"."zlkpPromotionReason" "zlkpPromotionReason"
         <dataField fieldName="Description" />
         <dataField fieldName="Code" columns="50" />
         <dataField fieldName="Definition" />
-        <dataField fieldName="SortOrder" columns="15" />
+        <dataField fieldName="IsActive" />
         <dataField fieldName="DefaultValue" />
+        <dataField fieldName="SortOrder" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Promotion Reason">
@@ -47,9 +50,10 @@ from "dbo"."zlkpPromotionReason" "zlkpPromotionReason"
           <dataFields>
             <dataField fieldName="Description" />
             <dataField fieldName="Code" columns="50" />
-            <dataField fieldName="SortOrder" columns="15" />
+            <dataField fieldName="IsActive" />
             <dataField fieldName="DefaultValue" />
             <dataField fieldName="Definition" rows="5" />
+            <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -62,9 +66,10 @@ from "dbo"."zlkpPromotionReason" "zlkpPromotionReason"
           <dataFields>
             <dataField fieldName="Description" />
             <dataField fieldName="Code" columns="50" />
-            <dataField fieldName="SortOrder" columns="15" />
+            <dataField fieldName="IsActive" />
             <dataField fieldName="DefaultValue" />
             <dataField fieldName="Definition" rows="5" />
+            <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>
       </categories>

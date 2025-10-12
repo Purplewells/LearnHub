@@ -8,8 +8,8 @@ select
 	,"zlkpExitOrWithdrawalType"."Description" "Description"
 	,"zlkpExitOrWithdrawalType"."Code" "Code"
 	,"zlkpExitOrWithdrawalType"."IsActive" "IsActive"
-	,"zlkpExitOrWithdrawalType"."SortOrder" "SortOrder"
 	,"zlkpExitOrWithdrawalType"."DefaultValue" "DefaultValue"
+	,"zlkpExitOrWithdrawalType"."SortOrder" "SortOrder"
 from "dbo"."zlkpExitOrWithdrawalType" "zlkpExitOrWithdrawalType"
 ]]></text>
     </command>
@@ -25,8 +25,8 @@ from "dbo"."zlkpExitOrWithdrawalType" "zlkpExitOrWithdrawalType"
     <field name="Description" type="String" allowNulls="false" label="Description" length="100" showInSummary="true" />
     <field name="Code" type="String" label="Code" length="50" showInSummary="true" />
     <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
-    <field name="SortOrder" type="Decimal" label="Sort Order" showInSummary="true" />
     <field name="DefaultValue" type="Boolean" default="((1))" label="Default Value" showInSummary="true" />
+    <field name="SortOrder" type="Decimal" label="Sort Order" showInSummary="true" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Active Withdrawal Type" filter="IsActive = 1">
@@ -35,8 +35,8 @@ from "dbo"."zlkpExitOrWithdrawalType" "zlkpExitOrWithdrawalType"
         <dataField fieldName="Description" />
         <dataField fieldName="Code" columns="50" />
         <dataField fieldName="IsActive" />
-        <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="DefaultValue" />
+        <dataField fieldName="SortOrder" columns="15" />
       </dataFields>
     </view>
     <view id="grid1_all_withdrawal_types" type="Grid" commandId="command1" label="All Withdrawal Types">
@@ -45,8 +45,8 @@ from "dbo"."zlkpExitOrWithdrawalType" "zlkpExitOrWithdrawalType"
         <dataField fieldName="Description" />
         <dataField fieldName="Code" columns="50" />
         <dataField fieldName="IsActive" />
-        <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="DefaultValue" />
+        <dataField fieldName="SortOrder" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Exit Or Withdrawal Type">
@@ -58,8 +58,8 @@ from "dbo"."zlkpExitOrWithdrawalType" "zlkpExitOrWithdrawalType"
             <dataField fieldName="Description" />
             <dataField fieldName="Code" columns="50" />
             <dataField fieldName="IsActive" />
-            <dataField fieldName="SortOrder" columns="15" />
             <dataField fieldName="DefaultValue" />
+            <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -73,8 +73,8 @@ from "dbo"."zlkpExitOrWithdrawalType" "zlkpExitOrWithdrawalType"
             <dataField fieldName="Description" />
             <dataField fieldName="Code" columns="50" />
             <dataField fieldName="IsActive" />
-            <dataField fieldName="SortOrder" columns="15" />
             <dataField fieldName="DefaultValue" />
+            <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>
       </categories>
