@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="K12StaffAssignment" alias="K12StaffAssignment" created="2024-02-22T14:47:31" modified="2024-09-14T20:44:27" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="K12StaffAssignment" alias="K12StaffAssignment" created="2024-02-22T14:47:31" modified="2025-10-09T21:12:37" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="JobClassification" parentTableSchema="dbo" parentTableName="zlkpProfessionalEducationJobClassification" x="425" y="32">
       <foreignKeyColumn columnName="JobClassificationID" parentColumnName="RefProfessionalEducationJobClassificationId" />
@@ -21,6 +21,9 @@
     </foreignKey>
     <foreignKey id="Title" parentTableSchema="dbo" parentTableName="zlkpTitle" x="1272" y="651" baseForeignKey="OrganizationPersonRolePerson">
       <foreignKeyColumn columnName="TitleID" parentColumnName="TitleID" />
+    </foreignKey>
+    <foreignKey id="CountryFiscalPeriod" parentTableSchema="dbo" parentTableName="zlkpCountryFiscalPeriods" x="364" y="454">
+      <foreignKeyColumn columnName="CountryFiscalPeriodID" parentColumnName="CountryFiscalPeriodID" />
     </foreignKey>
   </foreignKeys>
   <columns>
@@ -44,5 +47,7 @@
     <column name="Name" fieldName="Organisation" label="Organisation" foreignKey="OrganizationPersonRoleOrganisation" />
     <column name="DepartmentID" fieldName="DepartmentID" label="Department ID" aliasColumnName="DepartmentName" aliasForeignKey="Department" />
     <column name="DepartmentName" fieldName="Department" label="Department" foreignKey="Department" />
+    <column name="CountryFiscalPeriodID" fieldName="CountryFiscalPeriodID" label="Country Fiscal Period ID" aliasColumnName="CountryName" aliasForeignKey="CountryFiscalPeriod" />
+    <column name="CountryName" fieldName="CountryFiscalPeriod" label="Country Fiscal Period" foreignKey="CountryFiscalPeriod" />
   </columns>
 </dataModel>

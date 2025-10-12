@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpAccountCashFlowMap" alias="zlkpAccountCashFlowMap" created="2025-09-08T18:20:25" modified="2025-09-08T20:19:18" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="AccountType" parentTableSchema="dbo" parentTableName="account_type" x="372" y="20">
+      <foreignKeyColumn columnName="AccountTypeID" parentColumnName="AccountTypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="AccountCashFlowMapID" fieldName="AccountCashFlowMapID" label="Account Cash Flow Map ID" />
+    <column name="AccountTypeID" fieldName="AccountTypeID" label="Account Type ID" aliasColumnName="AccountType" aliasForeignKey="AccountType" />
+    <column name="AccountType" fieldName="AccountType" label="Account Type" foreignKey="AccountType" />
+    <column name="DebitEffect" fieldName="DebitEffect" label="Debit Effect" />
+    <column name="CreditEffect" fieldName="CreditEffect" label="Credit Effect" />
+    <column name="IsNetIncome" fieldName="IsNetIncome" label="Is Net Income" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+  </columns>
+</dataModel>

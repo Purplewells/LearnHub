@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="TaxConfiguration" conflictDetection="overwriteChanges" label="Tax Configuration" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"TaxConfiguration"."TaxConfigurationID" "TaxConfigurationID"
+	,"TaxConfiguration"."StaffAssignmentID" "StaffAssignmentID"
+	,"StaffAssignment"."StaffClassificationID" "StaffAssignmentStaffClassificationID"
+	,"StaffAssignmentDepartment"."DepartmentName" "DepartmentName"
+	,"StaffAssignmentOrganizationPersonRole"."OrganisationID" "StaffAssignmentOrganizationPersonRoleOrganisationID"
+	,"StaffAssignmentPositionType"."Description" "PositionType"
+	,"StaffAssignmentStaffClassification"."Description" "Classification"
+	,"TaxConfiguration"."TaxBasisID" "TaxBasisID"
+	,"TaxBasis"."Description" "TaxBasis"
+	,"TaxBasis"."Code" "TaxBasisCode"
+	,"TaxConfiguration"."TaxCodeID" "TaxCodeID"
+	,"TaxCode"."TaxCode" "TaxCode"
+	,"TaxConfiguration"."NICategoryID" "NicategoryID"
+	,"NICategory"."Description" "NICategory"
+	,"NICategory"."Code" "NICode"
+	,"TaxConfiguration"."TaxReference" "TaxReference"
+	,"TaxConfiguration"."EffectiveDate" "EffectiveDate"
+	,"TaxConfiguration"."ExpirationDate" "ExpirationDate"
+	,"TaxConfiguration"."CreatedDate" "CreatedDate"
+	,"TaxConfiguration"."CreatedBy" "CreatedBy"
+	,"TaxConfiguration"."ModifiedDate" "ModifiedDate"
+	,"TaxConfiguration"."ModifiedBy" "ModifiedBy"
+from "dbo"."TaxConfiguration" "TaxConfiguration"
+	left join "dbo"."K12StaffAssignment" "StaffAssignment" on "TaxConfiguration"."StaffAssignmentID" = "StaffAssignment"."StaffAssignmentID"
+	left join "dbo"."Department" "StaffAssignmentDepartment" on "StaffAssignment"."DepartmentID" = "StaffAssignmentDepartment"."DepartmentID"
+	left join "dbo"."OrganizationPersonRole" "StaffAssignmentOrganizationPersonRole" on "StaffAssignment"."OrganizationPersonRoleID" = "StaffAssignmentOrganizationPersonRole"."OrganizationPersonRoleID"
+	left join "dbo"."zlkpClassroomPositionType" "StaffAssignmentPositionType" on "StaffAssignment"."PositionTypeID" = "StaffAssignmentPositionType"."RefClassroomPositionTypeId"
+	left join "dbo"."zlkpStaffClassification" "StaffAssignmentStaffClassification" on "StaffAssignment"."StaffClassificationID" = "StaffAssignmentStaffClassification"."RefEducationStaffClassificationId"
+	left join "dbo"."zlkpTaxBasis" "TaxBasis" on "TaxConfiguration"."TaxBasisID" = "TaxBasis"."TaxBasisID"
+	left join "dbo"."zlkpNICategory" "NICategory" on "TaxConfiguration"."NICategoryID" = "NICategory"."NICategoryID"
+	left join "dbo"."zlkpTaxCode" "TaxCode" on "TaxConfiguration"."TaxCodeID" = "TaxCode"."TaxCodeID"
+]]></text>
+    </command>
+    <command id="TaxConfigurationIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="TaxConfigurationID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="TaxConfigurationID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Tax Configuration ID" readOnly="true" />
+    <field name="StaffAssignmentID" type="Int32" allowNulls="false" label="Staff Assignment ID" showInSummary="true">
+      <items style="Lookup" dataController="K12StaffAssignment" newDataView="createForm1" dataValueField="StaffAssignmentID" dataTextField="StaffAssignmentID" copy="StaffAssignmentStaffClassificationID=StaffClassificationID, DepartmentName=Department, StaffAssignmentOrganizationPersonRoleOrganisationID=OrganizationPersonRoleOrganisationID, PositionType=PositionType, Classification=Classification" />
+    </field>
+    <field name="StaffAssignmentStaffClassificationID" type="Int32" readOnly="true" label="Staff Assignment Staff Classification ID" />
+    <field name="DepartmentName" type="String" readOnly="true" label="Department Name" length="25" />
+    <field name="StaffAssignmentOrganizationPersonRoleOrganisationID" type="Int32" readOnly="true" label="Staff Assignment Organization Person Role Organisation ID" />
+    <field name="PositionType" type="String" readOnly="true" label="Position Type" length="100" />
+    <field name="Classification" type="String" readOnly="true" label="Classification" length="100" />
+    <field name="TaxBasisID" type="Int32" label="Tax Basis ID" showInSummary="true">
+      <items style="Lookup" dataController="TaxBasis" newDataView="createForm1" dataValueField="TaxBasisID" dataTextField="Description" copy="TaxBasisCode=Code" />
+    </field>
+    <field name="TaxBasis" type="String" readOnly="true" label="Tax Basis" length="50" />
+    <field name="TaxBasisCode" type="String" readOnly="true" label="Tax Basis Code" length="10" />
+    <field name="TaxCodeID" type="Int32" allowNulls="false" label="Tax Code ID" showInSummary="true">
+      <items style="Lookup" dataController="TaxCode" newDataView="createForm1" dataValueField="TaxCodeID" dataTextField="TaxCode" />
+    </field>
+    <field name="TaxCode" type="String" readOnly="true" label="Tax Code" length="15" />
+    <field name="NicategoryID" type="Int32" allowNulls="false" label="NI Category ID" showInSummary="true">
+      <items style="Lookup" dataController="NICategory" newDataView="createForm1" dataValueField="NicategoryID" dataTextField="Description" copy="NICode=Code" />
+    </field>
+    <field name="NICategory" type="String" readOnly="true" label="NI Category" length="100" />
+    <field name="NICode" type="String" readOnly="true" label="NI Code" length="5" />
+    <field name="TaxReference" type="String" label="Tax Reference" length="20" showInSummary="true" />
+    <field name="EffectiveDate" type="DateTime" allowNulls="false" label="Effective Date" />
+    <field name="ExpirationDate" type="DateTime" label="Expiration Date" />
+    <field name="CreatedDate" type="DateTime" allowNulls="false" dataFormatString="g" default="(getutcdate())" label="Created Date" />
+    <field name="CreatedBy" type="String" allowNulls="false" default="(suser_sname())" label="Created By" length="100" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="100" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Tax Configuration">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="StaffAssignmentID" columns="15" />
+        <dataField fieldName="StaffAssignmentStaffClassificationID" columns="15" />
+        <dataField fieldName="DepartmentName" columns="25" />
+        <dataField fieldName="StaffAssignmentOrganizationPersonRoleOrganisationID" columns="15" />
+        <dataField fieldName="PositionType" />
+        <dataField fieldName="Classification" />
+        <dataField fieldName="TaxBasisID" aliasFieldName="TaxBasis" />
+        <dataField fieldName="TaxBasisCode" columns="10" />
+        <dataField fieldName="TaxCodeID" aliasFieldName="TaxCode" />
+        <dataField fieldName="NicategoryID" aliasFieldName="NICategory" />
+        <dataField fieldName="NICode" columns="5" />
+        <dataField fieldName="TaxReference" columns="20" />
+        <dataField fieldName="EffectiveDate" columns="10" />
+        <dataField fieldName="ExpirationDate" columns="10" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedBy" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Tax Configuration">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Tax Configuration" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StaffAssignmentID" columns="15" />
+            <dataField fieldName="StaffAssignmentStaffClassificationID" columns="15" />
+            <dataField fieldName="DepartmentName" columns="25" />
+            <dataField fieldName="StaffAssignmentOrganizationPersonRoleOrganisationID" columns="15" />
+            <dataField fieldName="PositionType" />
+            <dataField fieldName="Classification" />
+            <dataField fieldName="TaxBasisID" aliasFieldName="TaxBasis" />
+            <dataField fieldName="TaxBasisCode" columns="10" />
+            <dataField fieldName="TaxCodeID" aliasFieldName="TaxCode" />
+            <dataField fieldName="NicategoryID" aliasFieldName="NICategory" />
+            <dataField fieldName="NICode" columns="5" />
+            <dataField fieldName="TaxReference" columns="20" />
+            <dataField fieldName="EffectiveDate" columns="10" />
+            <dataField fieldName="ExpirationDate" columns="10" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="CreatedBy" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="ModifiedBy" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Tax Configuration">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="StaffAssignmentID" columns="15" />
+            <dataField fieldName="StaffAssignmentStaffClassificationID" columns="15" />
+            <dataField fieldName="DepartmentName" columns="25" />
+            <dataField fieldName="StaffAssignmentOrganizationPersonRoleOrganisationID" columns="15" />
+            <dataField fieldName="PositionType" />
+            <dataField fieldName="Classification" />
+            <dataField fieldName="TaxBasisID" aliasFieldName="TaxBasis" />
+            <dataField fieldName="TaxBasisCode" columns="10" />
+            <dataField fieldName="TaxCodeID" aliasFieldName="TaxCode" />
+            <dataField fieldName="NicategoryID" aliasFieldName="NICategory" />
+            <dataField fieldName="NICode" columns="5" />
+            <dataField fieldName="TaxReference" columns="20" />
+            <dataField fieldName="EffectiveDate" columns="10" />
+            <dataField fieldName="ExpirationDate" columns="10" />
+            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+            <dataField fieldName="CreatedBy" hidden="true" />
+            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+            <dataField fieldName="ModifiedBy" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

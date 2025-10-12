@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpNICategory" alias="zlkpNICategory" created="2025-10-09T16:52:24" modified="2025-10-09T16:52:55" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="NICategoryID" fieldName="NicategoryID" label="NI Category ID" />
+    <column name="Code" fieldName="Code" label="Code" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="RuleNotes" fieldName="RuleNotes" label="Rule Notes" />
+    <column name="IsActive" fieldName="IsActive" label="Active" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+  </columns>
+</dataModel>

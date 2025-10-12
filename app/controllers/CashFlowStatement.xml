@@ -16,7 +16,24 @@
     <field name="Address" type="String" label="Address" length="150" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Cash Flow Statement">
+    <view id="grid1" type="Grid" commandId="command1" label="Cash Flow Logs" groupExpression="AccountType, AccountCategory">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="JournalEntryID" columns="15" hidden="true" />
+        <dataField fieldName="AccountType" columns="20" />
+        <dataField fieldName="AccountCategory" columns="20" />
+        <dataField fieldName="AccountUsage" columns="20" />
+        <dataField fieldName="EntryType" columns="12" />
+        <dataField fieldName="TransactionDate" columns="20" />
+        <dataField fieldName="Month" hidden="true" />
+        <dataField fieldName="Memo" columns="55" />
+        <dataField fieldName="Description" columns="30" hidden="true" />
+        <dataField fieldName="Amount" columns="15" dataFormatString="D" />
+        <dataField fieldName="OrganisationName" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="grid1_cashflow_details" type="Grid" commandId="command1" label="Cash Flow Details">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="JournalEntryID" columns="15" hidden="true" />
@@ -27,8 +44,8 @@
         <dataField fieldName="TransactionDate" columns="20" />
         <dataField fieldName="Month" hidden="true" />
         <dataField fieldName="Memo" columns="50" />
-        <dataField fieldName="Description" columns="30" />
-        <dataField fieldName="Amount" columns="15" />
+        <dataField fieldName="Description" columns="30" hidden="true" />
+        <dataField fieldName="Amount" columns="15" dataFormatString="D" />
         <dataField fieldName="OrganisationName" hidden="true" />
         <dataField fieldName="Address" hidden="true" />
       </dataFields>

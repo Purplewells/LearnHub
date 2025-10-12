@@ -40,7 +40,7 @@ from "dbo"."zlkpSalaryComponents" "zlkpSalaryComponents"
         <dataField fieldName="ElementName" columns="50" />
         <dataField fieldName="Code" columns="20" />
         <dataField fieldName="IsActive" />
-        <dataField fieldName="ComponentTypeID" aliasFieldName="ComponentType" />
+        <dataField fieldName="ComponentTypeID" aliasFieldName="ComponentType" hidden="true" />
         <dataField fieldName="SortOrder" columns="15" />
       </dataFields>
     </view>
@@ -50,7 +50,7 @@ from "dbo"."zlkpSalaryComponents" "zlkpSalaryComponents"
         <dataField fieldName="ElementName" columns="50" />
         <dataField fieldName="Code" columns="20" />
         <dataField fieldName="IsActive" />
-        <dataField fieldName="ComponentTypeID" aliasFieldName="ComponentType" />
+        <dataField fieldName="ComponentTypeID" aliasFieldName="ComponentType" hidden="true" />
         <dataField fieldName="SortOrder" columns="15" />
       </dataFields>
     </view>
@@ -63,7 +63,7 @@ from "dbo"."zlkpSalaryComponents" "zlkpSalaryComponents"
             <dataField fieldName="ElementName" columns="50" />
             <dataField fieldName="Code" columns="20" />
             <dataField fieldName="IsActive" />
-            <dataField fieldName="ComponentTypeID" aliasFieldName="ComponentType" />
+            <dataField fieldName="ComponentTypeID" aliasFieldName="ComponentType" hidden="true" />
             <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>
@@ -78,7 +78,7 @@ from "dbo"."zlkpSalaryComponents" "zlkpSalaryComponents"
             <dataField fieldName="ElementName" columns="50" />
             <dataField fieldName="Code" columns="20" />
             <dataField fieldName="IsActive" />
-            <dataField fieldName="ComponentTypeID" aliasFieldName="ComponentType" />
+            <dataField fieldName="ComponentTypeID" aliasFieldName="ComponentType" hidden="true" />
             <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>

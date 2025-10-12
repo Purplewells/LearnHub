@@ -29,6 +29,9 @@ from "dbo"."zlkpSalaryComponentType" "zlkpSalaryComponentType"
     <field name="Taxable" type="Boolean" default="((0))" label="Taxable" showInSummary="true" />
     <field name="TaxRate" type="Decimal" label="Tax Rate" showInSummary="true" />
     <field name="SortOrder" type="Int32" label="Sort Order" />
+    <field name="SalaryComponent" type="DataView" label="Salary Component">
+      <dataView controller="SalaryComponent" view="grid1" filterFields="ComponentTypeID" />
+    </field>
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Salary Component Type">
@@ -37,8 +40,8 @@ from "dbo"."zlkpSalaryComponentType" "zlkpSalaryComponentType"
         <dataField fieldName="ComponentType" columns="20" />
         <dataField fieldName="ComponentCode" columns="20" />
         <dataField fieldName="IsActive" />
-        <dataField fieldName="Taxable" />
-        <dataField fieldName="TaxRate" columns="15" />
+        <dataField fieldName="Taxable" hidden="true" />
+        <dataField fieldName="TaxRate" columns="15" hidden="true" />
         <dataField fieldName="SortOrder" columns="15" />
       </dataFields>
     </view>
@@ -51,9 +54,15 @@ from "dbo"."zlkpSalaryComponentType" "zlkpSalaryComponentType"
             <dataField fieldName="ComponentType" columns="20" />
             <dataField fieldName="ComponentCode" columns="20" />
             <dataField fieldName="IsActive" />
-            <dataField fieldName="Taxable" />
-            <dataField fieldName="TaxRate" columns="15" />
+            <dataField fieldName="Taxable" hidden="true" />
+            <dataField fieldName="TaxRate" columns="15" hidden="true" />
             <dataField fieldName="SortOrder" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c2" tab="SALARY COMPONENTS" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="SalaryComponent" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs" />
           </dataFields>
         </category>
       </categories>

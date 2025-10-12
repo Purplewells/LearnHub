@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="zlkpNonPromotionReason" alias="zlkpNonPromotionReason" created="2024-01-28T17:26:53" modified="2024-07-09T11:30:02" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="zlkpNonPromotionReason" alias="zlkpNonPromotionReason" created="2024-01-28T17:26:53" modified="2025-10-04T11:40:45" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys />
   <columns>
     <column name="RefNonPromotionReasonId" fieldName="RefNonPromotionReasonID" label="Ref Non Promotion Reason Id" />
     <column name="Description" fieldName="Description" label="Description" />
     <column name="Code" fieldName="Code" label="Code" />
     <column name="Definition" fieldName="Definition" label="Definition" />
-    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
     <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
     <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
     <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
   </columns>

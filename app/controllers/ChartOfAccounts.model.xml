@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="chart_of_accounts" alias="chart_of_accounts" created="2025-02-23T13:40:32" modified="2025-04-04T14:23:34" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="chart_of_accounts" alias="chart_of_accounts" created="2025-02-23T13:40:32" modified="2025-09-08T21:15:01" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="AccountType" parentTableSchema="dbo" parentTableName="account_type" x="392" y="52">
       <foreignKeyColumn columnName="AccountTypeID" parentColumnName="AccountTypeID" />
@@ -10,26 +10,37 @@
     <foreignKey id="AccountCategory" parentTableSchema="dbo" parentTableName="zlkpChartAccountCategory" x="400" y="391">
       <foreignKeyColumn columnName="AccountCategoryID" parentColumnName="AccountCategoryID" />
     </foreignKey>
-    <foreignKey id="AccountUsage" parentTableSchema="dbo" parentTableName="zlkpChartAccountUsage" x="34" y="474">
+    <foreignKey id="AccountUsage" parentTableSchema="dbo" parentTableName="zlkpChartAccountUsage" x="35" y="537">
       <foreignKeyColumn columnName="AccountUsageID" parentColumnName="AccountUsageID" />
+    </foreignKey>
+    <foreignKey id="AccountSubCategory" parentTableSchema="dbo" parentTableName="zlkpAccountSubCategory" x="403" y="504">
+      <foreignKeyColumn columnName="AccountSubCategoryID" parentColumnName="AccountSubCategoryID" />
+    </foreignKey>
+    <foreignKey id="CashFlowCategory" parentTableSchema="dbo" parentTableName="zlkpCashFlowCategory" x="402" y="688">
+      <foreignKeyColumn columnName="CashFlowCategoryID" parentColumnName="CashFlowCategoryID" />
     </foreignKey>
   </foreignKeys>
   <columns>
     <column name="AccountID" fieldName="AccountID" label="Account ID" />
-    <column name="AccountName" fieldName="AccountName" label="Account Name" />
-    <column name="AccountNumber" fieldName="AccountNumber" label="Account Number" />
+    <column name="AccountName" fieldName="AccountName" label="Account" />
+    <column name="AccountNumber" fieldName="AccountNumber" label="A/C No" />
     <column name="Label" fieldName="Label" label="Label" />
     <column name="AccountTypeID" fieldName="AccountTypeID" label="Account Type ID" aliasColumnName="AccountType" aliasForeignKey="AccountType" />
     <column name="AccountType" fieldName="AccountType" label="Account Type" foreignKey="AccountType" />
     <column name="AccountCategoryID" fieldName="AccountCategoryID" label="Account Category ID" aliasColumnName="AccountCategory" aliasForeignKey="AccountCategory" />
     <column name="AccountCategory" fieldName="AccountCategory" label="Category" foreignKey="AccountCategory" />
+    <column name="AccountSubCategoryID" fieldName="AccountSubCategoryID" label="Account Sub Category ID" aliasColumnName="AccountSubCategory" aliasForeignKey="AccountSubCategory" />
+    <column name="AccountSubCategory" fieldName="AccountSubCategory" label="SubCategory" foreignKey="AccountSubCategory" />
+    <column name="CashFlowCategoryID" fieldName="CashFlowCategoryID" label="Cash Flow Category ID" aliasColumnName="CashFlowCategory" aliasForeignKey="CashFlowCategory" />
+    <column name="CashFlowCategory" fieldName="CashFlowCategory" label="CashFlow" foreignKey="CashFlowCategory" />
     <column name="AccountUsageID" fieldName="AccountUsageID" label="Account Usage ID" aliasColumnName="AccountUsage" aliasForeignKey="AccountUsage" />
     <column name="AccountUsage" fieldName="AccountUsage" label="Usage" foreignKey="AccountUsage" />
     <column name="IsActive" fieldName="IsActive" label="IsActive" />
+    <column name="IsCashAccount" fieldName="IsCashAccount" label="Cash" />
     <column name="LFT" fieldName="LFT" label="LFT" />
     <column name="RGT" fieldName="RGT" label="RGT" />
     <column name="ParentAccountID" fieldName="ParentAccountID" label="Parent Account ID" aliasColumnName="AccountName" aliasForeignKey="ParentAccount" />
-    <column name="AccountName" fieldName="ParentAccountName" label="Parent Account" foreignKey="ParentAccount" />
+    <column name="AccountName" fieldName="ParentAccountName" label="Parent" foreignKey="ParentAccount" />
     <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
     <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
   </columns>

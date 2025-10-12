@@ -16,6 +16,9 @@
     <field name="PresentAttendanceCategory" type="DataView" label="Present Attendance Category">
       <dataView controller="PresentAttendanceCategory" view="grid1" />
     </field>
+    <field name="SchoolEvents" type="DataView" label="School Events">
+      <dataView controller="SchoolEvents" view="grid1" />
+    </field>
   </fields>
   <views>
     <view id="AttendanceAttributes" type="Form" label="ATTENDANCE CONFIGURATION WORKBENCH" tags="material-icon-arrow_drop_down_circle">
@@ -47,6 +50,11 @@
           <visibility>
             <expression test="[1]==[10]" type="ClientScript" />
           </visibility>
+        </category>
+        <category id="c6" tab="SCHOOL HOLIDAYS">
+          <dataFields>
+            <dataField fieldName="SchoolEvents" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
         </category>
       </categories>
       <headerText>This interface provides an entry point for configuring attendance module.</headerText>

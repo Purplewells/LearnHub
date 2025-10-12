@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpCashFlowCategoryMap" alias="zlkpCashFlowCategoryMap" created="2025-09-08T18:19:54" modified="2025-09-08T20:18:46" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="CashFlowSection" parentTableSchema="dbo" parentTableName="zlkpCashFlowSection" x="350" y="20">
+      <foreignKeyColumn columnName="CashFlowSectionID" parentColumnName="CashFlowSectionID" />
+    </foreignKey>
+    <foreignKey id="CashFlowCategory" parentTableSchema="dbo" parentTableName="zlkpCashFlowCategory" x="357" y="214">
+      <foreignKeyColumn columnName="CashFlowCategoryID" parentColumnName="CashFlowCategoryID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="CashFlowCategoryMapID" fieldName="CashFlowCategoryMapID" label="Cash Flow Category Map ID" />
+    <column name="CashFlowCategoryID" fieldName="CashFlowCategoryID" label="Cash Flow Category ID" aliasColumnName="CashFlowCategory" aliasForeignKey="CashFlowCategory" />
+    <column name="CashFlowCategory" fieldName="CashFlowCategory" label="Category" foreignKey="CashFlowCategory" />
+    <column name="CashFlowCode" fieldName="CashFlowCode" label="CashFlow Code" foreignKey="CashFlowCategory" />
+    <column name="CashFlowSectionID" fieldName="CashFlowSectionID" label="Cash Flow Section ID" aliasColumnName="SectionName" aliasForeignKey="CashFlowSection" />
+    <column name="SectionName" fieldName="CashFlowSectionName" label="Section Name" foreignKey="CashFlowSection" />
+    <column name="Description" fieldName="Description" label="Description" />
+  </columns>
+</dataModel>

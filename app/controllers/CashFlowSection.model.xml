@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpCashFlowSection" alias="zlkpCashFlowSection" created="2025-09-08T18:21:11" modified="2025-09-08T18:21:27" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="CashFlowSectionID" fieldName="CashFlowSectionID" label="Cash Flow Section ID" />
+    <column name="SectionName" fieldName="SectionName" label="Section Name" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+  </columns>
+</dataModel>

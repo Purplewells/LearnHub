@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="TaxThresholds" alias="TaxThresholds" created="2025-10-09T16:24:27" modified="2025-10-09T16:24:37" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="TaxThresholdID" fieldName="TaxThresholdID" label="Tax Threshold ID" />
+    <column name="TaxType" fieldName="TaxType" label="Tax Type" />
+    <column name="TaxTypeID" fieldName="TaxTypeID" label="Tax Type ID" />
+    <column name="MinAmount" fieldName="MinAmount" label="Min Amount" />
+    <column name="MaxAmount" fieldName="MaxAmount" label="Max Amount" />
+    <column name="TaxRate" fieldName="TaxRate" label="Tax Rate" />
+    <column name="EffectiveFromDate" fieldName="EffectiveFromDate" label="Effective From Date" />
+    <column name="EffectiveToDate" fieldName="EffectiveToDate" label="Effective To Date" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

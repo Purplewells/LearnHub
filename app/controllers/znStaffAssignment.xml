@@ -21,6 +21,8 @@ select
 	,"OrganizationPersonRoleOrganisation"."Name" "Organisation"
 	,"K12StaffAssignment"."DepartmentID" "DepartmentID"
 	,"Department"."DepartmentName" "Department"
+	,"K12StaffAssignment"."CountryFiscalPeriodID" "CountryFiscalPeriodID"
+	,"CountryFiscalPeriod"."CountryName" "CountryFiscalPeriod"
 from "dbo"."K12StaffAssignment" "K12StaffAssignment"
 	left join "dbo"."zlkpProfessionalEducationJobClassification" "JobClassification" on "K12StaffAssignment"."JobClassificationID" = "JobClassification"."RefProfessionalEducationJobClassificationId"
 	left join "dbo"."zlkpClassroomPositionType" "PositionType" on "K12StaffAssignment"."PositionTypeID" = "PositionType"."RefClassroomPositionTypeId"
@@ -29,6 +31,7 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
 	left join "dbo"."Person" "OrganizationPersonRolePerson" on "OrganizationPersonRole"."PersonID" = "OrganizationPersonRolePerson"."PersonID"
 	left join "dbo"."zlkpTitle" "Title" on "OrganizationPersonRolePerson"."TitleID" = "Title"."TitleID"
 	left join "dbo"."Department" "Department" on "K12StaffAssignment"."DepartmentID" = "Department"."DepartmentID"
+	left join "dbo"."zlkpCountryFiscalPeriods" "CountryFiscalPeriod" on "K12StaffAssignment"."CountryFiscalPeriodID" = "CountryFiscalPeriod"."CountryFiscalPeriodID"
 ]]></text>
     </command>
     <command id="StaffAssignmentIDIdentityCommand" type="Text" event="Inserted">
@@ -67,8 +70,15 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
       <items style="Lookup" dataController="Department" newDataView="createForm1" dataValueField="DepartmentID" dataTextField="DepartmentName" />
     </field>
     <field name="Department" type="String" readOnly="true" label="Department" length="25" />
+    <field name="CountryFiscalPeriodID" type="Int32" label="Country Fiscal Period ID">
+      <items style="Lookup" dataController="CountryFiscalPeriods" newDataView="createForm1" dataValueField="CountryFiscalPeriodID" dataTextField="CountryName" />
+    </field>
+    <field name="CountryFiscalPeriod" type="String" readOnly="true" label="Country Fiscal Period" length="30" />
     <field name="Salaries" type="DataView" label="Salaries" roles="Administrators, AccountManagers" writeRoles="Administrators, AccountManagers">
       <dataView controller="Salaries" view="grid1" filterFields="AssignmentID" />
+    </field>
+    <field name="TaxConfiguration" type="DataView" label="Tax Configuration">
+      <dataView controller="TaxConfiguration" view="grid1" filterFields="StaffAssignmentID" />
     </field>
   </fields>
   <views>
@@ -89,6 +99,7 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
         <dataField fieldName="OrganizationPersonRoleOrganisationID" columns="15" />
         <dataField fieldName="Organisation" />
         <dataField fieldName="DepartmentID" aliasFieldName="Department" />
+        <dataField fieldName="CountryFiscalPeriodID" aliasFieldName="CountryFiscalPeriod" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Contract">
@@ -111,9 +122,16 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
             <dataField fieldName="OrganizationPersonRoleOrganisationID" columns="15" />
             <dataField fieldName="Organisation" />
             <dataField fieldName="DepartmentID" aliasFieldName="Department" />
+            <dataField fieldName="CountryFiscalPeriodID" aliasFieldName="CountryFiscalPeriod" />
           </dataFields>
         </category>
-        <category id="c2" tab="SALARIES" flow="NewRow">
+        <category id="c3" tab="TAX CONFIGURATION" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="TaxConfiguration" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-center&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c2" tab="SALARIES">
           <description />
           <dataFields>
             <dataField fieldName="Salaries" columns="15" tag="modal-fullscreen" />
@@ -141,6 +159,7 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
             <dataField fieldName="OrganizationPersonRoleOrganisationID" columns="15" />
             <dataField fieldName="Organisation" />
             <dataField fieldName="DepartmentID" aliasFieldName="Department" />
+            <dataField fieldName="CountryFiscalPeriodID" aliasFieldName="CountryFiscalPeriod" />
           </dataFields>
         </category>
       </categories>

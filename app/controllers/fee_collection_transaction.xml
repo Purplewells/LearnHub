@@ -348,7 +348,7 @@ TransactionID=TransactionID]]></data>
       <action commandName="Custom" commandArgument="ProcessRefundTransaction" headerText="Process Refund Transaction" id="a102" whenLastCommandName="Edit" whenKeySelected="true" />
       <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
-      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" headerText="Process Transaction" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
@@ -361,6 +361,7 @@ _view=editForm1
 _template=fee_collection_transaction_itemised_editForm1.rdlc
 TransactionID=TransactionID]]></data>
       </action>
+      <action id="a104" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
       <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="Take Payment" />

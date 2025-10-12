@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpCountryFiscalPeriods" alias="zlkpCountryFiscalPeriods" created="2025-10-09T12:32:17" modified="2025-10-09T16:43:42" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="CountryName" fieldName="CountryName" label="Country Name" />
+    <column name="CountryCode" fieldName="CountryCode" label="Country Code" />
+    <column name="FiscalStartDay" fieldName="FiscalStartDay" label="Fiscal Start Day" />
+    <column name="FiscalStartMonth" fieldName="FiscalStartMonth" label="Fiscal Start Month" />
+    <column name="IsActive" fieldName="IsActive" label="Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="CountryFiscalPeriodID" fieldName="CountryFiscalPeriodID" label="Country Fiscal Period ID" />
+  </columns>
+</dataModel>

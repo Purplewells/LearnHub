@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpTaxCode" alias="zlkpTaxCode" created="2025-10-09T20:09:57" modified="2025-10-09T20:12:43" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Country" parentTableSchema="dbo" parentTableName="zlkpCountry" x="380" y="20">
+      <foreignKeyColumn columnName="CountryID" parentColumnName="CountryID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="TaxCodeID" fieldName="TaxCodeID" label="Tax Code ID" />
+    <column name="TaxCode" fieldName="TaxCode" label="Tax Code" />
+    <column name="CountryID" fieldName="CountryID" label="Country ID" aliasColumnName="Description" aliasForeignKey="Country" />
+    <column name="Description" fieldName="CountryDescription" label="Country" foreignKey="Country" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="IsEmergencyCode" fieldName="IsEmergencyCode" label="Is Emergency Code" />
+    <column name="AllowsPersonalAllowance" fieldName="AllowsPersonalAllowance" label="Allows Personal Allowance" />
+    <column name="AppliesToMultipleJobs" fieldName="AppliesToMultipleJobs" label="Applies To Multiple Jobs" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

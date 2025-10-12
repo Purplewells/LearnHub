@@ -28,32 +28,53 @@
     <field name="SalaryComponentElement" type="DataView" label="Salary Component Element">
       <dataView controller="SalaryComponentElement" view="grid1" />
     </field>
+    <field name="CountryFiscalPeriods" type="DataView" label="Country Fiscal Periods">
+      <dataView controller="CountryFiscalPeriods" view="grid1" />
+    </field>
+    <field name="TaxBasis" type="DataView" label="Tax Basis">
+      <dataView controller="TaxBasis" view="grid1" />
+    </field>
+    <field name="NICategory" type="DataView" label="NICategory">
+      <dataView controller="NICategory" view="grid1" />
+    </field>
+    <field name="TaxCode" type="DataView" label="Tax Code">
+      <dataView controller="TaxCode" view="grid1" />
+    </field>
+    <field name="PayrollTags" type="DataView" label="Payroll Tags">
+      <dataView controller="PayrollTags" view="grid1" />
+    </field>
+    <field name="ComponentTypeTagMap" type="DataView" label="Component Type Tag Map">
+      <dataView controller="ComponentTypeTagMap" view="grid1" />
+    </field>
+    <field name="PayrollTagCategory" type="DataView" label="Payroll Tag Category">
+      <dataView controller="PayrollTagCategory" view="grid1" />
+    </field>
   </fields>
   <views>
     <view id="SalariesWorkBench" type="Form" label="SALARY CONFIGURATION WORKBENCH" tags="material-icon-arrow_circle_up">
       <categories>
-        <category id="c2" tab="SALARY BASIS" flow="NewColumn">
-          <dataFields>
-            <dataField fieldName="SalaryBasis" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none">
-              <dataView pageSize="15" />
-            </dataField>
-          </dataFields>
-        </category>
-        <category id="c4" tab="SALARY COMPONENTS">
+        <category id="c4" tab="COMPONENT ELEMENTS" flow="NewColumn">
           <dataFields>
             <dataField fieldName="SalaryComponent" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none">
               <dataView pageSize="15" />
             </dataField>
           </dataFields>
         </category>
-        <category id="c7" tab="COMPONENT TYPE">
+        <category id="c15" tab="PAYROLL CATEGORY">
           <dataFields>
-            <dataField fieldName="SalaryComponentType" columns="15" />
+            <dataField fieldName="PayrollTagCategory" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-center&#xD;&#xA;modal-content-stub-none" />
           </dataFields>
         </category>
-        <category id="c1" tab="ACTION">
+        <category id="c9" tab="PAYROLL TAGS">
           <dataFields>
-            <dataField fieldName="SalaryAction" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none">
+            <dataField fieldName="PayrollTags" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-center&#xD;&#xA;modal-content-stub-none">
+              <dataView showModalForms="true" pageSize="15" showRowNumber="true" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="c14" tab="COMPONENT TAGS MAPPING">
+          <dataFields>
+            <dataField fieldName="ComponentTypeTagMap" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-center&#xD;&#xA;modal-content-stub-none">
               <dataView pageSize="15" />
             </dataField>
           </dataFields>
@@ -61,6 +82,20 @@
         <category id="c6" tab="SALARY STATUS">
           <dataFields>
             <dataField fieldName="SalaryStatus" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c2" tab="SALARY BASIS">
+          <dataFields>
+            <dataField fieldName="SalaryBasis" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none">
+              <dataView pageSize="15" />
+            </dataField>
+          </dataFields>
+        </category>
+        <category id="c1" tab="ACTION">
+          <dataFields>
+            <dataField fieldName="SalaryAction" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none">
+              <dataView pageSize="15" />
+            </dataField>
           </dataFields>
         </category>
         <category id="c3" tab="PAYMENT FREQUENCY">
@@ -75,9 +110,29 @@
             <dataField fieldName="SalaryComponentReason" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
           </dataFields>
         </category>
-        <category id="c8" tab="COMPONENT ELEMENTS">
+        <category id="c7" tab="COMPONENT TYPE">
           <dataFields>
-            <dataField fieldName="SalaryComponentElement" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+            <dataField fieldName="SalaryComponentType" columns="15" />
+          </dataFields>
+        </category>
+        <category id="c12" tab="NI CATEGORY">
+          <dataFields>
+            <dataField fieldName="NICategory" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c10" tab="FISCAL PERIODS">
+          <dataFields>
+            <dataField fieldName="CountryFiscalPeriods" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c13" tab="TAX CODE">
+          <dataFields>
+            <dataField fieldName="TaxCode" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
+          </dataFields>
+        </category>
+        <category id="c11" tab="TAX BASIS">
+          <dataFields>
+            <dataField fieldName="TaxBasis" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-bottom&#xD;&#xA;modal-content-stub-none" />
           </dataFields>
         </category>
       </categories>

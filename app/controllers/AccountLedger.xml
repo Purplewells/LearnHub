@@ -14,7 +14,7 @@
           </dataFields>
         </category>
       </categories>
-      <headerText>A primary accounting record that contains all financial transactions of a specific account over a period of time.</headerText>
+      <headerText>Primary accounting record which logs financial transactions of a specific account over a period of time.</headerText>
     </view>
   </views>
   <actions>

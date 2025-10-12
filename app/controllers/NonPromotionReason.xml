@@ -8,8 +8,8 @@ select
 	,"zlkpNonPromotionReason"."Description" "Description"
 	,"zlkpNonPromotionReason"."Code" "Code"
 	,"zlkpNonPromotionReason"."Definition" "Definition"
-	,"zlkpNonPromotionReason"."SortOrder" "SortOrder"
 	,"zlkpNonPromotionReason"."IsActive" "IsActive"
+	,"zlkpNonPromotionReason"."SortOrder" "SortOrder"
 	,"zlkpNonPromotionReason"."CreatedDate" "CreatedDate"
 	,"zlkpNonPromotionReason"."ModifiedDate" "ModifiedDate"
 from "dbo"."zlkpNonPromotionReason" "zlkpNonPromotionReason"
@@ -27,8 +27,8 @@ from "dbo"."zlkpNonPromotionReason" "zlkpNonPromotionReason"
     <field name="Description" type="String" allowNulls="false" label="Description" length="100" showInSummary="true" />
     <field name="Code" type="String" label="Code" length="50" showInSummary="true" />
     <field name="Definition" type="String" allowQBE="false" allowSorting="false" label="Definition" length="4000" showInSummary="true" />
-    <field name="SortOrder" type="Decimal" label="Sort Order" showInSummary="true" />
     <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
+    <field name="SortOrder" type="Decimal" label="Sort Order" showInSummary="true" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
   </fields>
@@ -39,8 +39,8 @@ from "dbo"."zlkpNonPromotionReason" "zlkpNonPromotionReason"
         <dataField fieldName="Description" columns="30" />
         <dataField fieldName="Code" columns="10" />
         <dataField fieldName="Definition" />
-        <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="IsActive" />
+        <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="CreatedDate" columns="20" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
       </dataFields>
@@ -51,8 +51,8 @@ from "dbo"."zlkpNonPromotionReason" "zlkpNonPromotionReason"
         <dataField fieldName="Description" />
         <dataField fieldName="Code" columns="50" />
         <dataField fieldName="Definition" />
-        <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="IsActive" />
+        <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="CreatedDate" columns="20" />
         <dataField fieldName="ModifiedDate" columns="20" />
       </dataFields>
@@ -66,8 +66,8 @@ from "dbo"."zlkpNonPromotionReason" "zlkpNonPromotionReason"
             <dataField fieldName="Description" />
             <dataField fieldName="Code" columns="50" />
             <dataField fieldName="Definition" rows="5" />
-            <dataField fieldName="SortOrder" columns="15" />
             <dataField fieldName="IsActive" />
+            <dataField fieldName="SortOrder" columns="15" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
           </dataFields>
@@ -83,8 +83,8 @@ from "dbo"."zlkpNonPromotionReason" "zlkpNonPromotionReason"
             <dataField fieldName="Description" />
             <dataField fieldName="Code" columns="50" />
             <dataField fieldName="Definition" rows="5" />
-            <dataField fieldName="SortOrder" columns="15" />
             <dataField fieldName="IsActive" />
+            <dataField fieldName="SortOrder" columns="15" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
           </dataFields>

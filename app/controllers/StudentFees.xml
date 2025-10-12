@@ -83,6 +83,9 @@ from "dbo"."student_fees" "student_fees"
     <field name="fee_collection_transaction" type="DataView" label="Transaction Collection">
       <dataView controller="fee_collection_transaction" view="grid1" filterFields="FeeID,PersonID" />
     </field>
+    <field name="fee_collection_transaction_extra" type="DataView" label="PAYMENT TRANSACTION">
+      <dataView controller="fee_collection_transaction_extra" view="grid1" filterFields="FeeID,PersonID" />
+    </field>
   </fields>
   <views>
     <view id="grid1_current_year_fee" type="Grid" commandId="command1" label="Fee Bill - Current Year" filter="EffectiveDate BETWEEN YearStartDate AND YearEndDate and CSY=1" reportLabel="Current Fee Bill" reportTemplate="true">
@@ -208,12 +211,20 @@ from "dbo"."student_fees" "student_fees"
             <dataField fieldName="CSY" />
           </dataFields>
         </category>
+        <category id="c5" tab="CORE PAYMENT " flow="NewRow">
+          <dataFields>
+            <dataField fieldName="fee_collection_transaction_extra" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;" />
+          </dataFields>
+        </category>
         <category id="d1" tab="PAYMENT STUB" flow="NewRow">
           <dataFields>
             <dataField fieldName="fee_collection_transaction" tag="modal-max-sm&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-auto-grow&#xD;&#xA;content-stub-none&#xD;&#xA;header-title-none&#xD;&#xA;">
               <headerText>PAYMENTS</headerText>
             </dataField>
           </dataFields>
+          <visibility>
+            <expression test="[Fullname] == 'N'" type="ClientScript" />
+          </visibility>
         </category>
         <category id="c3" headerText="Audit" collapsed="true" flow="NewRow">
           <description />

@@ -2,19 +2,31 @@
 <dataController name="BalanceSheet" conflictDetection="overwriteChanges" label="BalanceSheet" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands />
   <fields>
-    <field name="AccountType" type="String" label="Account Type" length="20" showInSummary="true" />
+    <field name="AccountType" type="String" label="Account Type" length="20" showInSummary="true" isPrimaryKey="true" />
     <field name="Section" type="String" label="Section" length="23" showInSummary="true" />
     <field name="AccountName" type="String" label="Account Name" length="100" showInSummary="true" />
     <field name="Amount" type="Decimal" label="Amount" showInSummary="true" />
+    <field name="Code" type="String" label="Code" length="5" showInSummary="true" />
+    <field name="Name" type="String" label="Name" length="60" />
+    <field name="ShortName" type="String" label="Short Name" length="30" />
+    <field name="Website" type="String" label="Website" length="50" />
+    <field name="Email" type="String" label="Email" length="50" />
+    <field name="Address" type="String" label="Address" length="150" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Balance Sheet" groupExpression="AccountType, Section" reportLabel="Balance Sheet" reportTemplate="true">
-      <headerText>$DefaultGridViewDescription</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Balance Sheet" groupExpression="AccountType, Section">
+      <headerText>A balance sheet is a financial snapshot of a company’s financial position at a specific point in time.</headerText>
       <dataFields>
         <dataField fieldName="AccountType" columns="20" />
         <dataField fieldName="Section" columns="23" />
         <dataField fieldName="AccountName" />
         <dataField fieldName="Amount" columns="15" />
+        <dataField fieldName="Code" columns="5" />
+        <dataField fieldName="Name" hidden="true" />
+        <dataField fieldName="ShortName" columns="30" hidden="true" />
+        <dataField fieldName="Website" columns="50" hidden="true" />
+        <dataField fieldName="Email" columns="50" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Balance Sheet">
@@ -27,6 +39,12 @@
             <dataField fieldName="Section" columns="23" />
             <dataField fieldName="AccountName" />
             <dataField fieldName="Amount" columns="15" />
+            <dataField fieldName="Code" columns="5" />
+            <dataField fieldName="Name" />
+            <dataField fieldName="ShortName" columns="30" />
+            <dataField fieldName="Website" columns="50" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="Address" />
           </dataFields>
         </category>
       </categories>
@@ -41,6 +59,12 @@
             <dataField fieldName="Section" columns="23" />
             <dataField fieldName="AccountName" />
             <dataField fieldName="Amount" columns="15" />
+            <dataField fieldName="Code" columns="5" />
+            <dataField fieldName="Name" />
+            <dataField fieldName="ShortName" columns="30" />
+            <dataField fieldName="Website" columns="50" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="Address" />
           </dataFields>
         </category>
       </categories>
@@ -79,12 +103,14 @@
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a100" commandName="ReportAsPdf" headerText="Print Balance Sheet" />
-      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a102" commandName="ReportAsWord" headerText="Export To Word" />
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a3" commandName="ExportRowset" headerText="Send To IPY" />
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
-      <action id="a4" commandName="ExportRss" headerText="Send To API" />
+      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a103" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a104" />
+      <action id="a101" commandName="ReportAsImage" headerText="Export AS Image" />
     </actionGroup>
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />
@@ -92,9 +118,7 @@
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a2" commandName="ReportAsImage" />
-    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report" />
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />

@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="fee_collection_transaction_extra" conflictDetection="overwriteChanges" label="Fee Collection Transaction Extra" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.fee_collection_transaction_extraBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"fee_collection_transaction"."TransactionID" "TransactionID"
+	,"fee_collection_transaction"."TransDate" "TransDate"
+	,"fee_collection_transaction"."FeeID" "FeeID"
+	,"FeePerson"."FeeStatusCode" "Status"
+	,"FeePerson"."FeeAmount" "BillAmount"
+	,"FeePerson"."FeeDescription" "FeeDescription"
+	,"fee_collection_transaction"."Amount" "AmountPaid"
+	,"fee_collection_transaction"."CurrentBalance" "CurrentBalance"
+	,"fee_collection_transaction"."Description" "Description"
+	,"fee_collection_transaction"."FeeType" "FeeType"
+	,"fee_collection_transaction"."PersonID" "PersonID"
+	,"fee_collection_transaction"."PaymentMethodID" "PaymentMethodID"
+	,"PaymentMethod"."PaymentMethod" "PaymentMethod"
+	,"fee_collection_transaction"."TransactionStatusCode" "TransactionStatusCode"
+	,"fee_collection_transaction"."PaymentByID" "PaymentByID"
+	,"PaymentBy"."PaymentRelation" "PaymentRelation"
+	,"fee_collection_transaction"."NameOfPayee" "NameOfPayee"
+	,"fee_collection_transaction"."CreatedDate" "CreatedDate"
+	,"fee_collection_transaction"."ModifiedDate" "ModifiedDate"
+	,"fee_collection_transaction"."CreatedBy" "CreatedBy"
+	,"fee_collection_transaction"."ModifiedBy" "ModifiedBy"
+	,"fee_collection_transaction"."ReceiptNo" "ReceiptNo"
+	,"fee_collection_transaction"."FeeNote" "Note"
+	,"Person"."IdentificationCode" "UPN"
+	,"Person"."CurrentYearGradeLevel" "GL"
+	,"Person"."FirstName" "Firstname"
+	,"Person"."LastName" "Lastname"
+	,"Organization"."Name" "SchoolName"
+	,"Organization"."Address" "Address"
+	,"fee_collection_transaction"."TransactionTypeID" "TransactionTypeID"
+	,"TransactionType"."TransactionType" "TransactionType"
+	,"TransactionType"."TransactionTypeCode" "TransactionTypeCode"
+	,"fee_collection_transaction"."TransactionStatusID" "TransactionStatusID"
+	,"TransactionStatus"."TransactionStatus" "TransactionStatus"
+	,"fee_collection_transaction"."DebitAccountID" "DebitAccountID"
+	,"DebitAccount"."AccountName" "DebitAccountName"
+	,"fee_collection_transaction"."CreditAccountID" "CreditAccountID"
+	,"CreditAccount"."AccountName" "CreditAccountName"
+	,"fee_collection_transaction"."RefundedAmount" "RefundedAmount"
+	,"fee_collection_transaction"."RefundReason" "RefundReason"
+from "dbo"."fee_collection_transaction" "fee_collection_transaction"
+	left join "dbo"."student_fees" "FeePerson" on "fee_collection_transaction"."FeeID" = "FeePerson"."FeeID"
+ and "fee_collection_transaction"."PersonID" = "FeePerson"."PersonID"
+	left join "dbo"."Person" "Person" on "FeePerson"."PersonID" = "Person"."PersonID"
+	left join "dbo"."Organisation" "Organization" on "Person"."OrganizationID" = "Organization"."OrganizationID"
+	left join "dbo"."zlkpPaymentMethod" "PaymentMethod" on "fee_collection_transaction"."PaymentMethodID" = "PaymentMethod"."PaymentMethodID"
+	left join "dbo"."zlkpPaymentBy" "PaymentBy" on "fee_collection_transaction"."PaymentByID" = "PaymentBy"."PaymentByID"
+	left join "dbo"."zlkpTransactionType" "TransactionType" on "fee_collection_transaction"."TransactionTypeID" = "TransactionType"."TransactionTypeID"
+	left join "dbo"."zlkpTransactionStatus" "TransactionStatus" on "fee_collection_transaction"."TransactionStatusID" = "TransactionStatus"."TransactionStatusID"
+	left join "dbo"."chart_of_accounts" "DebitAccount" on "fee_collection_transaction"."DebitAccountID" = "DebitAccount"."AccountID"
+	left join "dbo"."chart_of_accounts" "CreditAccount" on "fee_collection_transaction"."CreditAccountID" = "CreditAccount"."AccountID"
+]]></text>
+    </command>
+    <command id="TransactionIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="TransactionID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="TransactionID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Transaction ID" readOnly="true" />
+    <field name="TransDate" type="DateTime" label="Trans Date" showInSummary="true" />
+    <field name="FeeID" type="Int32" label="Fee ID" showInSummary="true">
+      <items style="Lookup" dataController="StudentFees" newDataView="createForm1" dataValueField="FeeID" copy="PersonID=PersonID, BillAmount=FeeAmount, FeeDescription=FeeDescription, UPN=UPN, GL=CYG, Firstname=FirstName, Lastname=LastName, " />
+    </field>
+    <field name="Status" type="String" readOnly="true" label="Status" length="10" />
+    <field name="BillAmount" type="Decimal" readOnly="true" dataFormatString="" label="Bill Amount" />
+    <field name="FeeDescription" type="String" readOnly="true" label="Fee Description" length="30" causesCalculate="true" />
+    <field name="AmountPaid" type="Decimal" dataFormatString="" label="Amount Paid" showInSummary="true" />
+    <field name="CurrentBalance" type="Decimal" label="Current Balance" showInSummary="true" />
+    <field name="Description" type="String" label="Description" length="50" showInSummary="true" />
+    <field name="FeeType" type="String" label="Fee Type" length="20" causesCalculate="true" />
+    <field name="PersonID" type="Int32" label="Person ID" />
+    <field name="PaymentMethodID" type="Int32" label="Payment Method ID">
+      <items style="Lookup" dataController="PaymentMethod" newDataView="createForm1" dataValueField="PaymentMethodID" dataTextField="PaymentMethod" />
+    </field>
+    <field name="PaymentMethod" type="String" readOnly="true" label="Payment Method" length="15" />
+    <field name="TransactionStatusCode" type="String" label="Transaction Status Code" length="20" />
+    <field name="PaymentByID" type="Int32" label="Payment By ID">
+      <items style="Lookup" dataController="PaymentBy" newDataView="createForm1" dataValueField="PaymentByID" dataTextField="PaymentRelation" />
+    </field>
+    <field name="PaymentRelation" type="String" readOnly="true" label="Relationship" length="18" />
+    <field name="NameOfPayee" type="String" label="Payee Name" length="25" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+    <field name="CreatedBy" type="String" label="Created By" length="50" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="50" />
+    <field name="ReceiptNo" type="String" label="Receipt No" length="50" />
+    <field name="Note" type="String" label="Note" length="50" />
+    <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
+    <field name="GL" type="String" readOnly="true" label="GL" length="10" />
+    <field name="Firstname" type="String" readOnly="true" label="Firstname" length="35" />
+    <field name="Lastname" type="String" readOnly="true" label="Lastname" length="35" />
+    <field name="SchoolName" type="String" readOnly="true" label="School Name" length="60" />
+    <field name="Address" type="String" readOnly="true" label="Address" length="150" />
+    <field name="Fullname" type="String" readOnly="true" label="Fullname" computed="true">
+      <formula>Person.FirstName + ' ' + Person.LastName </formula>
+    </field>
+    <field name="HeaderLabel" type="String" readOnly="true" label="Header Label" computed="true">
+      <formula>COALESCE(Person.FirstName + ' ' + Person.LastName + ' &gt;&gt; ' + fee_collection_transaction.Description, 'UNKNOWN')</formula>
+    </field>
+    <field name="TransactionTypeID" type="Int32" label="Transaction Type ID">
+      <items style="Lookup" dataController="TransactionType" newDataView="createForm1" dataValueField="TransactionTypeID" dataTextField="TransactionType" copy="TransactionTypeCode=TransactionTypeCode" />
+    </field>
+    <field name="TransactionType" type="String" readOnly="true" label="Transaction Type" length="20" />
+    <field name="TransactionTypeCode" type="String" readOnly="true" label="Transaction Type Code" length="20" />
+    <field name="TransactionStatusID" type="Int32" label="Transaction Status ID">
+      <items style="Lookup" dataController="TransactionStatus" newDataView="createForm1" dataValueField="TransactionStatusID" dataTextField="TransactionStatus" />
+    </field>
+    <field name="TransactionStatus" type="String" readOnly="true" label="Transaction Status" length="20" />
+    <field name="DebitAccountID" type="Int32" label="Debit Account ID">
+      <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" />
+    </field>
+    <field name="DebitAccountName" type="String" readOnly="true" label="Debit Account Name" length="100" />
+    <field name="CreditAccountID" type="Int32" label="Credit Account ID">
+      <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" />
+    </field>
+    <field name="CreditAccountName" type="String" readOnly="true" label="Credit Account Name" length="100" />
+    <field name="HeaderInfo" type="String" readOnly="true" label="Header Info" computed="true">
+      <formula>Person.FirstName + ' ' + Person.LastName + ' &gt;&gt; ' + 'ReceiptNo: ' + fee_collection_transaction.ReceiptNo</formula>
+    </field>
+    <field name="RefundedAmount" type="Decimal" default="((0))" label="Refund Amount" />
+    <field name="RefundReason" type="String" label="Refund Reason" length="50" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Fee Collection Transaction Extra">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Description" columns="30" />
+        <dataField fieldName="TransDate" columns="10" />
+        <dataField fieldName="FeeID" aliasFieldName="Status" hidden="true" />
+        <dataField fieldName="BillAmount" columns="15" hidden="true" />
+        <dataField fieldName="FeeDescription" columns="30" hidden="true" />
+        <dataField fieldName="AmountPaid" columns="15" />
+        <dataField fieldName="CurrentBalance" columns="15" hidden="true" />
+        <dataField fieldName="FeeType" columns="20" />
+        <dataField fieldName="PersonID" textMode="Static" columns="15" hidden="true" />
+        <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" hidden="true" />
+        <dataField fieldName="TransactionStatusCode" columns="20" hidden="true" />
+        <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" />
+        <dataField fieldName="NameOfPayee" columns="25" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="ReceiptNo" columns="15" />
+        <dataField fieldName="Note" columns="50" hidden="true" />
+        <dataField fieldName="UPN" columns="10" hidden="true" />
+        <dataField fieldName="GL" columns="10" hidden="true" />
+        <dataField fieldName="Firstname" columns="35" hidden="true" />
+        <dataField fieldName="Lastname" columns="35" hidden="true" />
+        <dataField fieldName="SchoolName" hidden="true" />
+        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="Fullname" hidden="true" />
+        <dataField fieldName="HeaderLabel" tag="header-text" hidden="true" />
+        <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" hidden="true" />
+        <dataField fieldName="TransactionTypeCode" columns="20" hidden="true" />
+        <dataField fieldName="TransactionStatusID" aliasFieldName="TransactionStatus" hidden="true" />
+        <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" hidden="true" />
+        <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" hidden="true" />
+        <dataField fieldName="HeaderInfo" hidden="true" />
+        <dataField fieldName="RefundedAmount" columns="15" hidden="true" />
+        <dataField fieldName="RefundReason" columns="20" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Payment">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ReceiptNo" columns="50" />
+            <dataField fieldName="TransDate" columns="10" />
+            <dataField fieldName="AmountPaid" columns="15" />
+            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" />
+            <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" rows="4" />
+            <dataField fieldName="NameOfPayee" columns="25" />
+            <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" />
+            <dataField fieldName="Note" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c2" collapsed="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="FeeID" aliasFieldName="Status" />
+            <dataField fieldName="BillAmount" columns="15" />
+            <dataField fieldName="FeeDescription" columns="30" />
+            <dataField fieldName="CurrentBalance" columns="15" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="FeeType" columns="20" />
+            <dataField fieldName="PersonID" textMode="Static" columns="15" />
+            <dataField fieldName="TransactionStatusCode" columns="20" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="GL" columns="10" />
+            <dataField fieldName="Firstname" columns="35" />
+            <dataField fieldName="Lastname" columns="35" />
+            <dataField fieldName="SchoolName" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="Fullname" />
+            <dataField fieldName="HeaderLabel" />
+            <dataField fieldName="TransactionTypeCode" columns="20" />
+            <dataField fieldName="TransactionStatusID" aliasFieldName="TransactionStatus" />
+            <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
+            <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
+            <dataField fieldName="HeaderInfo" />
+            <dataField fieldName="RefundedAmount" columns="15" />
+            <dataField fieldName="RefundReason" columns="50" />
+          </dataFields>
+          <visibility>
+            <expression test="[ReceiptNo] == '10'" type="ClientScript" />
+          </visibility>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="Add New Payment">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="ReceiptNo" columns="50" />
+            <dataField fieldName="TransDate" columns="10" />
+            <dataField fieldName="AmountPaid" columns="15" />
+            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" />
+            <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" rows="4" />
+            <dataField fieldName="NameOfPayee" columns="25" />
+            <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" />
+            <dataField fieldName="Note" columns="50" />
+          </dataFields>
+        </category>
+        <category id="c2" collapsed="true">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="FeeID" aliasFieldName="Status" />
+            <dataField fieldName="BillAmount" columns="15" />
+            <dataField fieldName="FeeDescription" columns="30" />
+            <dataField fieldName="CurrentBalance" columns="15" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="FeeType" columns="20" />
+            <dataField fieldName="PersonID" textMode="Static" columns="15" />
+            <dataField fieldName="TransactionStatusCode" columns="20" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="GL" columns="10" />
+            <dataField fieldName="Firstname" columns="35" />
+            <dataField fieldName="Lastname" columns="35" />
+            <dataField fieldName="SchoolName" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="Fullname" />
+            <dataField fieldName="HeaderLabel" />
+            <dataField fieldName="TransactionTypeCode" columns="20" />
+            <dataField fieldName="TransactionStatusID" aliasFieldName="TransactionStatus" />
+            <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
+            <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
+            <dataField fieldName="HeaderInfo" />
+            <dataField fieldName="RefundedAmount" columns="15" />
+            <dataField fieldName="RefundReason" columns="50" />
+          </dataFields>
+          <visibility>
+            <expression test="[ReceiptNo] == '10'" type="ClientScript" />
+          </visibility>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r101" commandName="New" type="Sql" phase="Execute" name="setReceiptNo"><![CDATA[If @ReceiptNo  IS Null
+   DECLARE @Random BIGINT;
+   DECLARE @Upper BIGINT;
+   DECLARE @Lower BIGINT;
+
+---- This will create a random number between 1 and 999
+SET @Lower = 1 ---- The lowest random number
+SET @Upper = 999999 ---- The highest random number
+--SELECT @ReceiptNo =  Cast(ROUND(((@Upper - @Lower -1) * RAND() + @Lower), 0) as varchar(25)) 
+SELECT @ReceiptNo = RIGHT('000000' + 
+    				CAST(ROUND(((@Upper - @Lower -1) * RAND() + @Lower), 0) AS VARCHAR(25)), 6)
+
+  ]]></rule>
+    <rule id="r102" commandName="New" type="Sql" phase="Execute" name="setTransactionDate"><![CDATA[SET @TransDate = GETUTCDATE()]]></rule>
+    <rule id="r100" commandName="New|Update|Insert|Calculate" type="Sql" phase="Before" name="setFeeDescription"><![CDATA[/* This is update the fee_collection_transaction table with the FeeDescription for a corresponding payment */
+
+
+UPDATE fee_collection_transaction
+SET Description = f.Description, FeeTypeID = f.FeeTypeID, FeeType = zft.FeeType
+--select distinct fct.*, f.Description, f.FeeTypeID 
+FROM fee_collection_transaction fct
+INNER JOIN Fees f on f.FeeID = fct.FeeID
+INNER JOIN student_fees sf ON SF.FeeID = F.FeeID AND sf.FeeTypeID = f.FeeTypeID
+INNER JOIN Person p ON p.PersonID = fct.PersonID
+LEFT JOIN zlkpFeeType zft ON zft.FeeTypeID = f.FeeTypeID
+where p.PersonID = @PersonID
+--where f.FeeID = @FeeID and p.PersonID = @PersonID
+]]></rule>
+    <rule id="r103" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateAmountPaid"><![CDATA[var fieldValue = [AmountPaid];
+if (fieldValue == null || fieldValue < 0) {
+    // prevent the default action processing
+    this.preventDefault();
+    // set the focus on the field and display an error
+    this.result.focus('AmountPaid', 'A positive amount is required');
+}]]></rule>
+    <rule id="r106" commandName="Insert|Update|Calculate" type="Sql" phase="After" name="postDebitIDandCreditID"><![CDATA[--EXEC usp_ops_auto_p2_post_to_update_debit_credit_fee_collection_transaction @TransactionID;
+
+EXEC [dbo].[usp_ops_auto_p1_post_account_using_mapping_table] @TransactionID;
+
+]]></rule>
+    <rule id="r109" commandName="Insert|Update" type="Sql" phase="After" name="post_fee_to_account_ledger"><![CDATA[EXEC [dbo].[usp_ops_auto_p2_post_fee_to_account_ledger] @TransactionID]]></rule>
+    <rule id="r110" commandName="Update|Insert|Calculate" type="Sql" phase="After" name="setWhoModifiedAccountLedger"><![CDATA[--DECLARE @BusinessRules_UserName NVARCHAR(50)
+UPDATE account_general_ledger
+SET ModifiedBy = @BusinessRules_UserName
+WHERE TransactionID = @TransactionID]]></rule>
+    <rule id="r104" commandName="Insert|Update|Calculate" type="Code" phase="Execute" name="setFeeDescription" />
+  </businessRules>
+</dataController>

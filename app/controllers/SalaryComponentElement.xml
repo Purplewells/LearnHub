@@ -72,7 +72,7 @@ order by "Element"."SortOrder" asc]]></text>
     </field>
     <field name="ElementName" type="String" readOnly="true" label="Element Name" length="25" />
     <field name="ElementSortOrder" type="Int32" readOnly="true" label="ESO" />
-    <field name="ComponentType" type="String" readOnly="true" label="Component Type" length="20" />
+    <field name="ComponentType" type="String" readOnly="true" label="Element Type" length="20" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />

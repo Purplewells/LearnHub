@@ -338,7 +338,7 @@ namespace zLearnHub.Rules
         }
 
 
-
+        
         [ControllerAction("usp_process_fee_collection_transaction", "Insert, Update, Calculate", ActionPhase.After)]
         public void process_fee_collection_transaction()
         {
