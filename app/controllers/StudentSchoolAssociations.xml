@@ -82,7 +82,7 @@ from "dbo"."StudentSchoolAssociation" "StudentSchoolAssociation"
     <field name="RefEntryGradeLevelID" type="Int32" label="Ref Entry Grade Level Id" showInSummary="true">
       <items style="Lookup" dataController="GradeLevel" newDataView="createForm1" dataValueField="RefGradeLevelID" dataTextField="Description" copy="GLSO=SortOrder" />
     </field>
-    <field name="GL" type="String" readOnly="true" label="GL" length="5" />
+    <field name="GL" type="String" readOnly="true" label="GL" length="100" />
     <field name="GLSO" type="Decimal" readOnly="true" label="GLSO" />
     <field name="RefPublicSchoolResidence" type="Int32" label="Ref Public School Residence" showInSummary="true">
       <items style="Lookup" dataController="HouseResidence" newDataView="createForm1" dataValueField="RefPublicSchoolResidenceID" dataTextField="Description" />
@@ -91,11 +91,11 @@ from "dbo"."StudentSchoolAssociation" "StudentSchoolAssociation"
     <field name="RefEnrollmentStatusID" type="Int32" label="Ref Enrollment Status Id" showInSummary="true">
       <items style="Lookup" dataController="EnrollmentStatus" newDataView="createForm1" dataValueField="RefEnrollmentStatusID" dataTextField="Description" />
     </field>
-    <field name="RefEnrollmentStatusDescription" type="String" readOnly="true" label="eStatus" length="18" />
+    <field name="RefEnrollmentStatusDescription" type="String" readOnly="true" label="eStatus" length="100" />
     <field name="RefEntryTypeID" type="Int32" label="Ref Entry Type ID" showInSummary="true">
       <items style="Lookup" dataController="EntryType" newDataView="createForm1" dataValueField="RefEntryTypeID" dataTextField="Description" />
     </field>
-    <field name="EntryType" type="String" readOnly="true" label="EntryType" length="15" />
+    <field name="EntryType" type="String" readOnly="true" label="EntryType" length="100" />
     <field name="RefExitGradeLevel" type="Int32" label="Ref Exit Grade Level" showInSummary="true">
       <items style="Lookup" dataController="GradeLevel" newDataView="createForm1" dataValueField="RefGradeLevelID" dataTextField="Description" />
     </field>
@@ -103,7 +103,7 @@ from "dbo"."StudentSchoolAssociation" "StudentSchoolAssociation"
     <field name="RefExitOrWithdrawalStatusID" type="Int32" label="Ref Exit Or Withdrawal Status Id">
       <items style="Lookup" dataController="ExitOrWithdrawalStatus" newDataView="createForm1" dataValueField="RefExitOrWithdrawalStatusID" dataTextField="Description" />
     </field>
-    <field name="ExitOrWithdrawalStatus" type="String" readOnly="true" label="Withdrawal Status" length="12" />
+    <field name="ExitOrWithdrawalStatus" type="String" readOnly="true" label="Withdrawal Status" length="100" />
     <field name="ExitOrWithdrawTypeID" type="Int32" label="Exit Or Withdraw Type Id">
       <items style="Lookup" dataController="ExitOrWithdrawalType" newDataView="createForm1" dataValueField="RefExitOrWithdrawalTypeID" dataTextField="Description" />
     </field>
@@ -119,7 +119,7 @@ from "dbo"."StudentSchoolAssociation" "StudentSchoolAssociation"
     <field name="RefSchoolStreamID" type="Int32" label="Ref School Stream ID">
       <items style="Lookup" dataController="SchoolStream" newDataView="createForm1" dataValueField="RefSchoolStreamID" dataTextField="Description" />
     </field>
-    <field name="STM" type="String" readOnly="true" label="STM" length="8" />
+    <field name="STM" type="String" readOnly="true" label="STM" length="100" />
     <field name="RefFoodServiceEligibilityIds" type="Int32" label="Ref Food Service Eligibility Ids">
       <items style="Lookup" dataController="FoodServices" newDataView="createForm1" dataValueField="RefFoodServiceEligibilityID" dataTextField="Description" />
     </field>
@@ -127,13 +127,13 @@ from "dbo"."StudentSchoolAssociation" "StudentSchoolAssociation"
     <field name="RefPromotionReasonID" type="Int32" label="Ref Promotion Reason Id">
       <items style="Lookup" dataController="PromotionReason" newDataView="createForm1" dataValueField="RefPromotionReasonID" dataTextField="Description" />
     </field>
-    <field name="PromotionReason" type="String" readOnly="true" label="Promo Reason" length="20" />
+    <field name="PromotionReason" type="String" readOnly="true" label="Promo Reason" length="100" />
     <field name="EnrolledDate" type="DateTime" label="Enrolled On" />
     <field name="ExitWithdrawDate" type="DateTime" label="WDD" />
     <field name="CalendarSessionID" type="Int32" label="Calendar Session ID">
       <items style="Lookup" dataController="Session" newDataView="createForm1" dataValueField="CalendarSessionID" dataTextField="SessionCode" copy="CSIA=IsActive, " />
     </field>
-    <field name="Session" type="String" readOnly="true" label="Session" length="12" />
+    <field name="Session" type="String" readOnly="true" label="Session" length="20" />
     <field name="CSIA" type="Boolean" readOnly="true" label="CSIA" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
@@ -163,168 +163,119 @@ from "dbo"."StudentSchoolAssociation" "StudentSchoolAssociation"
     <field name="MarkedForDeletion" type="Boolean" label="MFD" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Student School Associations" filter=" (ExitWithdrawDate IS NULL OR ExitWithdrawDate &gt; GETDATE()) " sortExpression="GLSO ASC">
+    <view id="grid1" type="Grid" commandId="command1" label="Student School Associations">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Firstname" columns="18" />
-        <dataField fieldName="Lastname" columns="18" />
-        <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="Sex" columns="5" />
-        <dataField fieldName="RefEntryGradeLevelID" aliasFieldName="GL" columns="5" />
-        <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" columns="8" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="RefEntryTypeID" aliasFieldName="EntryType" columns="20" />
-        <dataField fieldName="EntryGradeLevelReasonID" aliasFieldName="NonPromoReason" hidden="true" />
-        <dataField fieldName="RefExitGradeLevel" aliasFieldName="WGL" hidden="true" />
+        <dataField fieldName="RefEntryGradeLevelID" aliasFieldName="GL" />
+        <dataField fieldName="GLSO" columns="15" />
+        <dataField fieldName="RefPublicSchoolResidence" aliasFieldName="HomeGroup" />
         <dataField fieldName="RefEnrollmentStatusID" aliasFieldName="RefEnrollmentStatusDescription" />
-        <dataField fieldName="RefPublicSchoolResidence" aliasFieldName="HomeGroup" hidden="true" />
-        <dataField fieldName="RefExitOrWithdrawalStatusID" aliasFieldName="ExitOrWithdrawalStatus" hidden="true" />
-        <dataField fieldName="ExitOrWithdrawTypeID" aliasFieldName="ExitOrWithdrawTypeDescription" hidden="true" />
-        <dataField fieldName="RefEndOfTermStatusID" aliasFieldName="EndOfTermStatus" hidden="true" />
-        <dataField fieldName="RefFoodServiceEligibilityIds" aliasFieldName="FoodServices" hidden="true" />
-        <dataField fieldName="RefPromotionReasonID" aliasFieldName="PromotionReason" hidden="true" />
-        <dataField fieldName="EnrolledDate" columns="18" />
+        <dataField fieldName="RefEntryTypeID" aliasFieldName="EntryType" />
+        <dataField fieldName="RefExitGradeLevel" aliasFieldName="WGL" />
+        <dataField fieldName="RefExitOrWithdrawalStatusID" aliasFieldName="ExitOrWithdrawalStatus" />
+        <dataField fieldName="ExitOrWithdrawTypeID" aliasFieldName="ExitOrWithdrawTypeDescription" />
+        <dataField fieldName="RefEndOfTermStatusID" aliasFieldName="EndOfTermStatus" />
+        <dataField fieldName="EntryGradeLevelReasonID" aliasFieldName="NonPromoReason" />
+        <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" />
+        <dataField fieldName="RefFoodServiceEligibilityIds" aliasFieldName="FoodServices" />
+        <dataField fieldName="RefPromotionReasonID" aliasFieldName="PromotionReason" />
+        <dataField fieldName="EnrolledDate" columns="10" />
         <dataField fieldName="ExitWithdrawDate" columns="10" />
         <dataField fieldName="CalendarSessionID" aliasFieldName="Session" />
         <dataField fieldName="CSIA" />
-        <dataField fieldName="OrganizationPersonRoleID" aliasFieldName="OrganizationPersonRoleOrganisationID" hidden="true" />
-        <dataField fieldName="Status" columns="10" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="OrganizationPersonRoleID" aliasFieldName="OrganizationPersonRoleOrganisationID" />
+        <dataField fieldName="Status" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="Firstname" columns="35" />
+        <dataField fieldName="Lastname" columns="35" />
+        <dataField fieldName="Sex" columns="50" />
         <dataField fieldName="CSY" />
-        <dataField fieldName="SEID" columns="8" />
-        <dataField fieldName="Header" tag="header-text" hidden="true" />
-        <dataField fieldName="Fullname" hidden="true" />
-        <dataField fieldName="MarkedForDeletion" columns="4" />
+        <dataField fieldName="YSD" columns="10" />
+        <dataField fieldName="YED" columns="10" />
+        <dataField fieldName="SEID" columns="15" />
+        <dataField fieldName="Header" />
+        <dataField fieldName="Fullname" />
+        <dataField fieldName="MarkedForDeletion" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Enrollment Attributes">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Student School Associations">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Base Properties" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Student School Associations" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="Fullname" />
-            <dataField fieldName="UPN" columns="10" />
             <dataField fieldName="RefEntryGradeLevelID" aliasFieldName="GL" />
-            <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" />
-            <dataField fieldName="EnrolledDate" columns="10" />
-            <dataField fieldName="CalendarSessionID" aliasFieldName="Session" />
-            <dataField fieldName="EntryGradeLevelReasonID" aliasFieldName="NonPromoReason" />
-          </dataFields>
-        </category>
-        <category id="c2" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="RefEntryTypeID" aliasFieldName="EntryType" />
-            <dataField fieldName="RefEnrollmentStatusID" aliasFieldName="RefEnrollmentStatusDescription" />
+            <dataField fieldName="GLSO" columns="15" />
             <dataField fieldName="RefPublicSchoolResidence" aliasFieldName="HomeGroup" />
+            <dataField fieldName="RefEnrollmentStatusID" aliasFieldName="RefEnrollmentStatusDescription" />
+            <dataField fieldName="RefEntryTypeID" aliasFieldName="EntryType" />
+            <dataField fieldName="RefExitGradeLevel" aliasFieldName="WGL" />
+            <dataField fieldName="RefExitOrWithdrawalStatusID" aliasFieldName="ExitOrWithdrawalStatus" />
+            <dataField fieldName="ExitOrWithdrawTypeID" aliasFieldName="ExitOrWithdrawTypeDescription" />
+            <dataField fieldName="RefEndOfTermStatusID" aliasFieldName="EndOfTermStatus" />
+            <dataField fieldName="EntryGradeLevelReasonID" aliasFieldName="NonPromoReason" />
+            <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" />
             <dataField fieldName="RefFoodServiceEligibilityIds" aliasFieldName="FoodServices" />
+            <dataField fieldName="RefPromotionReasonID" aliasFieldName="PromotionReason" />
+            <dataField fieldName="EnrolledDate" columns="10" />
+            <dataField fieldName="ExitWithdrawDate" columns="10" />
+            <dataField fieldName="CalendarSessionID" aliasFieldName="Session" />
+            <dataField fieldName="CSIA" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="OrganizationPersonRoleID" aliasFieldName="OrganizationPersonRoleOrganisationID" />
             <dataField fieldName="Status" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="Firstname" columns="35" />
+            <dataField fieldName="Lastname" columns="35" />
+            <dataField fieldName="Sex" columns="50" />
+            <dataField fieldName="CSY" />
+            <dataField fieldName="YSD" columns="10" />
+            <dataField fieldName="YED" columns="10" />
+            <dataField fieldName="SEID" columns="15" />
+            <dataField fieldName="Header" />
+            <dataField fieldName="Fullname" />
             <dataField fieldName="MarkedForDeletion" />
           </dataFields>
         </category>
-        <category id="c3" headerText="Progress Activities" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="RefEndOfTermStatusID" aliasFieldName="EndOfTermStatus" />
-            <dataField fieldName="RefPromotionReasonID" aliasFieldName="PromotionReason" />
-            <dataField fieldName="RefExitOrWithdrawalStatusID" aliasFieldName="ExitOrWithdrawalStatus" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Withdrawal Activities" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="ExitWithdrawDate" columns="10" />
-            <dataField fieldName="ExitOrWithdrawTypeID" aliasFieldName="ExitOrWithdrawTypeDescription" />
-            <dataField fieldName="RefExitGradeLevel" aliasFieldName="WGL" />
-          </dataFields>
-        </category>
-        <category id="c6" headerText="Audit" collapsed="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="CreatedDate" columns="20" />
-            <dataField fieldName="ModifiedDate" columns="20" />
-            <dataField fieldName="CreatedBy" columns="50" />
-            <dataField fieldName="ModifiedBy" columns="50" />
-            <dataField fieldName="GLSO" columns="15" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c7" headerText="Mess" collapsed="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="CSIA" />
-            <dataField fieldName="OrganizationPersonRoleID" aliasFieldName="OrganizationPersonRoleOrganisationID" />
-            <dataField fieldName="Firstname" columns="35" />
-            <dataField fieldName="Lastname" columns="35" />
-            <dataField fieldName="Sex" columns="50" />
-            <dataField fieldName="CSY" />
-            <dataField fieldName="YSD" columns="10" />
-            <dataField fieldName="YED" columns="10" />
-            <dataField fieldName="SEID" columns="15" />
-            <dataField fieldName="Header" hidden="true" />
-          </dataFields>
-          <visibility>
-            <expression test="1==2" type="ClientScript" />
-          </visibility>
-        </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Enrollment">
+    <view id="createForm1" type="Form" commandId="command1" label="New Student School Associations">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Base Properties" flow="NewColumn">
-          <description />
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="Fullname" hidden="true" />
-            <dataField fieldName="UPN" columns="10" />
             <dataField fieldName="RefEntryGradeLevelID" aliasFieldName="GL" />
-            <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" />
-            <dataField fieldName="EnrolledDate" columns="10" />
-            <dataField fieldName="CalendarSessionID" aliasFieldName="Session" />
-            <dataField fieldName="EntryGradeLevelReasonID" aliasFieldName="NonPromoReason" />
-          </dataFields>
-        </category>
-        <category id="c2" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="RefEntryTypeID" aliasFieldName="EntryType" />
-            <dataField fieldName="RefEnrollmentStatusID" aliasFieldName="RefEnrollmentStatusDescription" />
+            <dataField fieldName="GLSO" columns="15" />
             <dataField fieldName="RefPublicSchoolResidence" aliasFieldName="HomeGroup" />
-            <dataField fieldName="RefFoodServiceEligibilityIds" aliasFieldName="FoodServices" />
-            <dataField fieldName="Status" />
-            <dataField fieldName="MarkedForDeletion" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="Progress Activities" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="RefEndOfTermStatusID" aliasFieldName="EndOfTermStatus" />
-            <dataField fieldName="RefPromotionReasonID" aliasFieldName="PromotionReason" />
-            <dataField fieldName="RefExitOrWithdrawalStatusID" aliasFieldName="ExitOrWithdrawalStatus" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Withdrawal Activities" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="ExitWithdrawDate" columns="10" />
-            <dataField fieldName="ExitOrWithdrawTypeID" aliasFieldName="ExitOrWithdrawTypeDescription" />
+            <dataField fieldName="RefEnrollmentStatusID" aliasFieldName="RefEnrollmentStatusDescription" />
+            <dataField fieldName="RefEntryTypeID" aliasFieldName="EntryType" />
             <dataField fieldName="RefExitGradeLevel" aliasFieldName="WGL" />
-          </dataFields>
-        </category>
-        <category id="c6" headerText="Audit" collapsed="true" flow="NewRow">
-          <description />
-          <dataFields>
+            <dataField fieldName="RefExitOrWithdrawalStatusID" aliasFieldName="ExitOrWithdrawalStatus" />
+            <dataField fieldName="ExitOrWithdrawTypeID" aliasFieldName="ExitOrWithdrawTypeDescription" />
+            <dataField fieldName="RefEndOfTermStatusID" aliasFieldName="EndOfTermStatus" />
+            <dataField fieldName="EntryGradeLevelReasonID" aliasFieldName="NonPromoReason" />
+            <dataField fieldName="RefSchoolStreamID" aliasFieldName="STM" />
+            <dataField fieldName="RefFoodServiceEligibilityIds" aliasFieldName="FoodServices" />
+            <dataField fieldName="RefPromotionReasonID" aliasFieldName="PromotionReason" />
+            <dataField fieldName="EnrolledDate" columns="10" />
+            <dataField fieldName="ExitWithdrawDate" columns="10" />
+            <dataField fieldName="CalendarSessionID" aliasFieldName="Session" />
+            <dataField fieldName="CSIA" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedBy" columns="50" />
-            <dataField fieldName="GLSO" columns="15" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c7" headerText="Mess" collapsed="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="CSIA" />
             <dataField fieldName="OrganizationPersonRoleID" aliasFieldName="OrganizationPersonRoleOrganisationID" />
+            <dataField fieldName="Status" />
+            <dataField fieldName="UPN" columns="10" />
             <dataField fieldName="Firstname" columns="35" />
             <dataField fieldName="Lastname" columns="35" />
             <dataField fieldName="Sex" columns="50" />
@@ -332,11 +283,10 @@ from "dbo"."StudentSchoolAssociation" "StudentSchoolAssociation"
             <dataField fieldName="YSD" columns="10" />
             <dataField fieldName="YED" columns="10" />
             <dataField fieldName="SEID" columns="15" />
-            <dataField fieldName="Header" hidden="true" />
+            <dataField fieldName="Header" />
+            <dataField fieldName="Fullname" />
+            <dataField fieldName="MarkedForDeletion" />
           </dataFields>
-          <visibility>
-            <expression test="1==2" type="ClientScript" />
-          </visibility>
         </category>
       </categories>
     </view>
@@ -402,10 +352,4 @@ from "dbo"."StudentSchoolAssociation" "StudentSchoolAssociation"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="New" type="Sql" phase="Execute" name="setDefaultValues"><![CDATA[SET @MarkedForDeletion = 0
-SET @Status = 1
-SET @ExitWithdrawDate = DATEADD(YEAR, 10, GETDATE())
-SET @EnrolledDate = CAST(GETDATE() AS DATE)]]></rule>
-  </businessRules>
 </dataController>

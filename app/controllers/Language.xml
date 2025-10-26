@@ -43,9 +43,9 @@ from "dbo"."zlkp_language" "zlkp_language"
         <dataField fieldName="IsActive" />
         <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="CreatedDate" columns="20" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="ModifiedBy" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Language">

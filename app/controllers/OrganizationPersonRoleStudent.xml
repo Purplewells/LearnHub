@@ -63,168 +63,52 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
       <items style="Lookup" dataController="Role" newDataView="createForm1" dataValueField="RoleID" dataTextField="RoleName" />
     </field>
     <field name="Role" type="String" readOnly="true" label="Role" length="50" />
-    <field name="znStudentSchoolAssociation" type="DataView" label="Enrollment" causesCalculate="true">
-      <dataView controller="znStudentSchoolAssociation" view="grid1" filterFields="OrganizationPersonRoleID" />
-    </field>
-    <field name="znContactPoint" type="DataView" label="Contact Point" causesCalculate="true">
-      <dataView controller="znContactPoint" view="grid1" filterFields="PersonID" />
-    </field>
-    <field name="znStudentAttendanceEvents" type="DataView" label="Attendance Log">
-      <dataView controller="znStudentAttendanceEvents" view="grid1" filterFields="OrganizationPersonRoleID" />
-    </field>
-    <field name="znPersonIdentifier" type="DataView" label="Identification">
-      <dataView controller="znPersonIdentifier" view="grid1" filterFields="PersonID" />
-    </field>
-    <field name="znPersonImmunisation" type="DataView" label="Immunisation">
-      <dataView controller="znPersonImmunisation" view="grid1" filterFields="PersonID" />
-    </field>
-    <field name="znPersonHealthCheck" type="DataView" label="Health Check" causesCalculate="true">
-      <dataView controller="znPersonHealthCheck" view="grid1" filterFields="PersonID" />
-    </field>
-    <field name="znPersonAllergy" type="DataView" label="Allergy">
-      <dataView controller="znPersonAllergy" view="grid1" filterFields="PersonID" />
-    </field>
-    <field name="znPersonDisabilities" type="DataView" label="Disabilities">
-      <dataView controller="znPersonDisabilities" view="grid1" filterFields="PersonID" />
-    </field>
-    <field name="znStudentFeesDetail" type="DataView" label="Student Fees Detail">
-      <dataView controller="znStudentFeesDetail" view="grid1_current_year_fee" filterFields="PersonID" />
-    </field>
-    <field name="znfee_collection_transaction_itemised_detail" type="DataView" label="Itemised Fee Collection">
-      <dataView controller="znfee_collection_transaction_itemised_detail" view="grid1" filterFields="PersonID" />
-    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Students" filter="GETDATE() BETWEEN EntryDate AND ExitDate AND CYS &lt;&gt; 'No' AND&#xD;&#xA;Role = 'Student'">
+    <view id="grid1" type="Grid" commandId="command1" label="Organization Person Role Student">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Fullname" tag="header-text" hidden="true" />
-        <dataField fieldName="FirstName" columns="18" />
-        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="Fullname" />
+        <dataField fieldName="OrganisationID" aliasFieldName="Organisation" />
         <dataField fieldName="PersonID" aliasFieldName="UPN" />
-        <dataField fieldName="PhoneNo" columns="15" hidden="true" tag="action-call" />
-        <dataField fieldName="Email" columns="50" hidden="true" />
-        <dataField fieldName="CYG" columns="8" />
-        <dataField fieldName="CYS" columns="4" />
-        <dataField fieldName="Photo" columns="15" hidden="true" />
-        <dataField fieldName="HeaderTitle" hidden="true" tag="header-text" />
-        <dataField fieldName="EntryDate" columns="20" hidden="true">
-          <headerText>End Date</headerText>
-        </dataField>
-        <dataField fieldName="ExitDate" columns="20" />
-        <dataField fieldName="RoleID" aliasFieldName="Role" hidden="true" />
-        <dataField fieldName="OrganisationID" aliasFieldName="Organisation" hidden="true" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="PhoneNo" columns="15" />
+        <dataField fieldName="Email" columns="50" />
+        <dataField fieldName="CYS" columns="10" />
+        <dataField fieldName="CYG" columns="10" />
+        <dataField fieldName="Photo" columns="15" />
+        <dataField fieldName="HeaderTitle" />
+        <dataField fieldName="EntryDate" columns="10" />
+        <dataField fieldName="ExitDate" columns="10" />
+        <dataField fieldName="RoleID" aliasFieldName="Role" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Student">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Organization Person Role Student">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Organization Person Role Student" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="Photo" columns="15" />
-            <dataField fieldName="Email" columns="50" hidden="true" />
             <dataField fieldName="Fullname" />
-          </dataFields>
-        </category>
-        <category id="c3" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="FirstName" columns="35" hidden="true" />
-            <dataField fieldName="LastName" columns="35" hidden="true" />
-            <dataField fieldName="PersonID" aliasFieldName="UPN" hidden="true" />
-            <dataField fieldName="CYG" columns="10" hidden="true" />
-            <dataField fieldName="PhoneNo" columns="15" />
-            <dataField fieldName="EntryDate" columns="10" />
-            <dataField fieldName="CYS" columns="10" hidden="true" />
-            <dataField fieldName="HeaderTitle" hidden="true" />
-            <dataField fieldName="ExitDate" columns="10" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Other Details" collapsed="true" flow="NewRow">
-          <description />
-          <dataFields>
             <dataField fieldName="OrganisationID" aliasFieldName="Organisation" />
+            <dataField fieldName="PersonID" aliasFieldName="UPN" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="PhoneNo" columns="15" />
+            <dataField fieldName="Email" columns="50" />
+            <dataField fieldName="CYS" columns="10" />
+            <dataField fieldName="CYG" columns="10" />
+            <dataField fieldName="Photo" columns="15" />
+            <dataField fieldName="HeaderTitle" />
+            <dataField fieldName="EntryDate" columns="10" />
+            <dataField fieldName="ExitDate" columns="10" />
             <dataField fieldName="RoleID" aliasFieldName="Role" />
-          </dataFields>
-        </category>
-        <category id="c4" collapsed="true" tab="ENROLMENT" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="znStudentSchoolAssociation" columns="15" tag="modal-never&#xD;&#xA;modal-fullscreen">
-              <headerText>Enrollment Definition</headerText>
-            </dataField>
-          </dataFields>
-        </category>
-        <category id="c6" collapsed="true" tab="ATTENDANCE">
-          <description />
-          <dataFields>
-            <dataField fieldName="znStudentAttendanceEvents" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content" />
-          </dataFields>
-        </category>
-        <category id="c12" collapsed="true" tab="FEES">
-          <description />
-          <dataFields>
-            <dataField fieldName="znStudentFeesDetail" columns="15" tag="modal-fullscreen">
-              <headerText>Student  Fee Detail</headerText>
-            </dataField>
-          </dataFields>
-        </category>
-        <category id="c13" collapsed="true" tab="PAYMENTS">
-          <description />
-          <dataFields>
-            <dataField fieldName="znfee_collection_transaction_itemised_detail" columns="15" tag="modal-max-sm" />
-          </dataFields>
-        </category>
-        <category id="c5" collapsed="true" tab="CONTACT POINT">
-          <description />
-          <dataFields>
-            <dataField fieldName="znContactPoint" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content" />
-          </dataFields>
-        </category>
-        <category id="c8" collapsed="true" tab="IMMUNISATION">
-          <description />
-          <dataFields>
-            <dataField fieldName="znPersonImmunisation" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content">
-              <headerText>IMMUNISATION</headerText>
-            </dataField>
-          </dataFields>
-        </category>
-        <category id="c9" collapsed="true" tab="HEALTH CHECK">
-          <description />
-          <dataFields>
-            <dataField fieldName="znPersonHealthCheck" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content">
-              <headerText>Healthchecks</headerText>
-            </dataField>
-          </dataFields>
-        </category>
-        <category id="c7" collapsed="true" tab="IDENTIFIERS">
-          <description />
-          <dataFields>
-            <dataField fieldName="znPersonIdentifier" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content">
-              <headerText>IDENTIFIERS</headerText>
-            </dataField>
-          </dataFields>
-        </category>
-        <category id="c10" collapsed="true" tab="ALLERGY">
-          <description />
-          <dataFields>
-            <dataField fieldName="znPersonAllergy" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content">
-              <headerText>ALLERGIES</headerText>
-            </dataField>
-          </dataFields>
-        </category>
-        <category id="c11" collapsed="true" tab="DISABILITY">
-          <description />
-          <dataFields>
-            <dataField fieldName="znPersonDisabilities" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content">
-              <headerText>Disabilities</headerText>
-            </dataField>
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Student">
+    <view id="createForm1" type="Form" commandId="command1" label="New Organization Person Role Student">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">

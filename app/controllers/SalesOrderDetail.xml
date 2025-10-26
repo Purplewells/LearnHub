@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="SalesOrderDetail" conflictDetection="overwriteChanges" label="Sales Order Detail" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.SalesOrderDetailBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="SalesOrderDetail" conflictDetection="overwriteChanges" label="Sales Order Detail" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -47,13 +47,13 @@ from "dbo"."OrderDetail" "OrderDetail"
     <field name="ProductID" type="Int32" label="Product ID" showInSummary="true">
       <items style="Lookup" dataController="Product" newDataView="createForm1" dataValueField="ProductID" dataTextField="ProductName" copy="SKU=Skucode, Barcode=Barcode, Sellable=Sellable, UnitPrice=UnitPrice" />
     </field>
-    <field name="ProductName" type="String" readOnly="true" label="Product Name" length="35" />
+    <field name="ProductName" type="String" readOnly="true" label="Product Name" length="100" />
     <field name="SKU" type="String" readOnly="true" label="SKU" length="10" />
     <field name="Barcode" type="String" readOnly="true" label="Barcode" length="50" />
     <field name="Sellable" type="Boolean" readOnly="true" label="Sellable" />
     <field name="Quantity" type="Int32" label="Quantity" showInSummary="true" />
     <field name="Discount" type="Decimal" dataFormatString="p" label="Discount" showInSummary="true" />
-    <field name="UnitPrice" type="Decimal" readOnly="true" dataFormatString="c" label="Unit Price" causesCalculate="true" />
+    <field name="UnitPrice" type="Decimal" readOnly="true" dataFormatString="c" label="Unit Price" />
     <field name="extUnitPrice" type="Decimal" dataFormatString="c" label="Unit Price" />
     <field name="ExtendedPrice" type="Decimal" readOnly="true" dataFormatString="c" label="Extended Price" computed="true">
       <formula>OrderDetail.Quantity * Product.UnitPrice * ( 1 - OrderDetail.Discount)</formula>
@@ -73,18 +73,18 @@ from "dbo"."OrderDetail" "OrderDetail"
         <dataField fieldName="OrderLineNo" columns="15" />
         <dataField fieldName="ProductID" aliasFieldName="ProductName" />
         <dataField fieldName="SKU" columns="10" />
-        <dataField fieldName="Barcode" columns="18" />
+        <dataField fieldName="Barcode" columns="50" />
         <dataField fieldName="Sellable" />
         <dataField fieldName="Quantity" columns="15" />
         <dataField fieldName="Discount" columns="15" />
         <dataField fieldName="UnitPrice" columns="15" />
-        <dataField fieldName="extUnitPrice" columns="15" hidden="true" />
+        <dataField fieldName="extUnitPrice" columns="15" />
         <dataField fieldName="ExtendedPrice" columns="15" />
-        <dataField fieldName="Note" columns="50" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="Note" columns="50" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="ModifiedBy" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Sales Order Detail">
@@ -103,14 +103,9 @@ from "dbo"."OrderDetail" "OrderDetail"
             <dataField fieldName="Quantity" columns="15" />
             <dataField fieldName="Discount" columns="15" />
             <dataField fieldName="UnitPrice" columns="15" />
-            <dataField fieldName="extUnitPrice" columns="15" textMode="Static" hidden="true" />
+            <dataField fieldName="extUnitPrice" columns="15" />
             <dataField fieldName="ExtendedPrice" columns="15" />
-            <dataField fieldName="Note" columns="50" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
+            <dataField fieldName="Note" columns="50" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedDate" columns="20" />
@@ -127,7 +122,7 @@ from "dbo"."OrderDetail" "OrderDetail"
           <dataFields>
             <dataField fieldName="OrderID" aliasFieldName="OrderDate" />
             <dataField fieldName="OrderIssuedTo" columns="50" />
-            <dataField fieldName="OrderLineNo" columns="15" hidden="true" />
+            <dataField fieldName="OrderLineNo" columns="15" />
             <dataField fieldName="ProductID" aliasFieldName="ProductName" />
             <dataField fieldName="SKU" columns="10" />
             <dataField fieldName="Barcode" columns="50" />
@@ -135,9 +130,13 @@ from "dbo"."OrderDetail" "OrderDetail"
             <dataField fieldName="Quantity" columns="15" />
             <dataField fieldName="Discount" columns="15" />
             <dataField fieldName="UnitPrice" columns="15" />
-            <dataField fieldName="extUnitPrice" columns="15" hidden="true" textMode="Static" />
+            <dataField fieldName="extUnitPrice" columns="15" />
             <dataField fieldName="ExtendedPrice" columns="15" />
             <dataField fieldName="Note" columns="50" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="ModifiedBy" columns="50" />
           </dataFields>
         </category>
       </categories>
@@ -204,7 +203,4 @@ from "dbo"."OrderDetail" "OrderDetail"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="New|Update|Calculate" type="Code" phase="Execute" name="SetExtendedPrice" />
-  </businessRules>
 </dataController>

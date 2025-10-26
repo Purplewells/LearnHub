@@ -30,9 +30,9 @@ from "dbo"."zlkpCourseSubjectArea" "zlkpCourseSubjectArea"
     <view id="grid1" type="Grid" commandId="command1" label="Course Subject Area">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="SubjectAreaDescription" columns="35" />
-        <dataField fieldName="Code" columns="10" />
-        <dataField fieldName="SortOrder" columns="10" />
+        <dataField fieldName="SubjectAreaDescription" />
+        <dataField fieldName="Code" columns="50" />
+        <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="IsActive" />
       </dataFields>
     </view>

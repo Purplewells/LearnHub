@@ -46,7 +46,7 @@ from "dbo"."vw_fee_collection_accounting_ledger_mini_fee_reminder" "vw_fee_colle
     </command>
   </commands>
   <fields>
-    <field name="PersonID" type="Int32" isPrimaryKey="true" label="Person ID" readOnly="true" isVirtual="true" />
+    <field name="PersonID" type="Int32" isPrimaryKey="true" label="Person ID" readOnly="true" />
     <field name="Fullname" type="String" label="Fullname" length="71" showInSummary="true" />
     <field name="UPN" type="String" label="UPN" length="10" showInSummary="true" />
     <field name="NameOfPayee" type="String" label="Payee Name" length="25" showInSummary="true" />
@@ -79,154 +79,78 @@ from "dbo"."vw_fee_collection_accounting_ledger_mini_fee_reminder" "vw_fee_colle
     <field name="ShowOnReport" type="Boolean" label="Show On Report" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Payment Advice Note" reportLabel="Bill Reminder" reportTemplate="true" showInSelector="false">
-      <headerText>This report provides a list of debtors a reminder to make their payment. </headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Mini Fee Reminder">
+      <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Fullname" columns="30" />
+        <dataField fieldName="Fullname" />
         <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="NameOfPayee" columns="25" hidden="true" />
-        <dataField fieldName="YearGroup" columns="5" />
-        <dataField fieldName="FeeType" columns="15" />
-        <dataField fieldName="Description" columns="25" />
-        <dataField fieldName="BillDate" columns="18" />
-        <dataField fieldName="TransactionDate" columns="10" hidden="true" />
-        <dataField fieldName="Debit" columns="10" />
-        <dataField fieldName="Credit" columns="10" />
-        <dataField fieldName="Balance" columns="10" />
+        <dataField fieldName="NameOfPayee" columns="25" />
+        <dataField fieldName="YearGroup" />
+        <dataField fieldName="Description" columns="50" />
+        <dataField fieldName="FeeType" columns="20" />
+        <dataField fieldName="BillDate" columns="10" />
+        <dataField fieldName="TransactionDate" columns="10" />
+        <dataField fieldName="Debit" columns="15" />
+        <dataField fieldName="Credit" columns="15" />
+        <dataField fieldName="Balance" columns="15" />
+        <dataField fieldName="SessionCode" columns="20" />
+        <dataField fieldName="NextSessionStartDate" columns="10" />
+        <dataField fieldName="NextSessionEndDate" columns="10" />
+        <dataField fieldName="HasNextTerm" />
+        <dataField fieldName="CalendarCode" columns="30" />
+        <dataField fieldName="SchoolName" columns="50" />
+        <dataField fieldName="Address" />
         <dataField fieldName="Currency" columns="5" />
-        <dataField fieldName="SessionCode" columns="15" />
-        <dataField fieldName="NextSessionStartDate" columns="10" hidden="true" />
-        <dataField fieldName="NextSessionEndDate" columns="10" hidden="true" />
-        <dataField fieldName="HasNextTerm" hidden="true" />
-        <dataField fieldName="CalendarCode" columns="30" hidden="true" />
-        <dataField fieldName="SchoolName" columns="50" hidden="true" />
-        <dataField fieldName="Address" hidden="true" />
-        <dataField fieldName="TotalAmountBilled" columns="15" hidden="true" />
-        <dataField fieldName="TotalAmountReceived" columns="15" hidden="true" />
-        <dataField fieldName="OPS" columns="1" hidden="true" />
-        <dataField fieldName="BilledYear" columns="10" />
-        <dataField fieldName="AmountBilled" columns="15" hidden="true" />
-        <dataField fieldName="AmountPaid" columns="10" hidden="true" />
-        <dataField fieldName="RK" columns="15" hidden="true" />
-        <dataField fieldName="RN" columns="15" hidden="true" />
-        <dataField fieldName="Attribute1" rows="5" hidden="true" textMode="RichText" />
-        <dataField fieldName="Attribute2" hidden="true" textMode="RichText" />
-        <dataField fieldName="ShowOnReport" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="mini_bill_statement" type="Grid" commandId="command1" label="Mini Bill Statement" reportLabel="Bill Reminder" reportTemplate="true" showInSelector="false">
-      <headerText>This report provides a list of debtors a reminder to make their payment. </headerText>
-      <dataFields>
-        <dataField fieldName="Fullname" columns="20" />
-        <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="NameOfPayee" columns="25" hidden="true" />
-        <dataField fieldName="YearGroup" columns="5" />
-        <dataField fieldName="FeeType" columns="15" />
-        <dataField fieldName="Description" columns="20" />
-        <dataField fieldName="BillDate" columns="18" />
-        <dataField fieldName="TransactionDate" columns="10" hidden="true" />
-        <dataField fieldName="Debit" columns="10" />
-        <dataField fieldName="Credit" columns="10" />
-        <dataField fieldName="Balance" columns="10" />
-        <dataField fieldName="Currency" columns="5" hidden="true" />
-        <dataField fieldName="SessionCode" columns="15" hidden="true" />
-        <dataField fieldName="NextSessionStartDate" columns="10" hidden="true" />
-        <dataField fieldName="NextSessionEndDate" columns="10" hidden="true" />
-        <dataField fieldName="HasNextTerm" hidden="true" />
-        <dataField fieldName="CalendarCode" columns="30" hidden="true" />
-        <dataField fieldName="SchoolName" columns="50" hidden="true" />
-        <dataField fieldName="Address" hidden="true" />
-        <dataField fieldName="TotalAmountBilled" columns="15" hidden="true" />
-        <dataField fieldName="TotalAmountReceived" columns="15" hidden="true" />
-        <dataField fieldName="OPS" columns="1" hidden="true" />
-        <dataField fieldName="BilledYear" columns="10" hidden="true" />
-        <dataField fieldName="AmountBilled" columns="15" hidden="true" />
-        <dataField fieldName="AmountPaid" columns="10" hidden="true" />
-        <dataField fieldName="RK" columns="15" hidden="true" />
-        <dataField fieldName="RN" columns="15" hidden="true" />
+        <dataField fieldName="TotalAmountBilled" columns="15" />
+        <dataField fieldName="TotalAmountReceived" columns="15" />
+        <dataField fieldName="OPS" columns="1" />
+        <dataField fieldName="BilledYear" columns="15" />
+        <dataField fieldName="AmountBilled" columns="15" />
+        <dataField fieldName="AmountPaid" columns="15" />
+        <dataField fieldName="RK" columns="15" />
+        <dataField fieldName="RN" columns="15" />
         <dataField fieldName="Attribute1" rows="5" />
         <dataField fieldName="Attribute2" />
         <dataField fieldName="ShowOnReport" />
       </dataFields>
     </view>
-    <view id="mini_bill_statement_with_instruction" type="Grid" commandId="command1" label="Bill Statement Instruction" reportLabel="Bill Reminder" reportTemplate="true">
-      <headerText>This report provides a list of debtors a reminder to make their payment. </headerText>
-      <dataFields>
-        <dataField fieldName="Fullname" columns="35" />
-        <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="NameOfPayee" columns="25" hidden="true" />
-        <dataField fieldName="YearGroup" columns="5" />
-        <dataField fieldName="FeeType" columns="15" />
-        <dataField fieldName="Description" columns="15" />
-        <dataField fieldName="BillDate" columns="18" />
-        <dataField fieldName="TransactionDate" columns="10" hidden="true" />
-        <dataField fieldName="Debit" columns="10" />
-        <dataField fieldName="Credit" columns="10" />
-        <dataField fieldName="Balance" columns="10" />
-        <dataField fieldName="Currency" columns="5" />
-        <dataField fieldName="SessionCode" columns="15" />
-        <dataField fieldName="NextSessionStartDate" columns="10" hidden="true" />
-        <dataField fieldName="NextSessionEndDate" columns="10" hidden="true" />
-        <dataField fieldName="HasNextTerm" hidden="true" />
-        <dataField fieldName="CalendarCode" columns="30" hidden="true" />
-        <dataField fieldName="SchoolName" columns="50" hidden="true" />
-        <dataField fieldName="Address" hidden="true" />
-        <dataField fieldName="TotalAmountBilled" columns="15" hidden="true" />
-        <dataField fieldName="TotalAmountReceived" columns="15" hidden="true" />
-        <dataField fieldName="OPS" columns="1" hidden="true" />
-        <dataField fieldName="BilledYear" columns="10" />
-        <dataField fieldName="AmountBilled" columns="15" />
-        <dataField fieldName="AmountPaid" columns="10" />
-        <dataField fieldName="RK" columns="15" hidden="true" />
-        <dataField fieldName="RN" columns="15" hidden="true" />
-        <dataField fieldName="Attribute1" rows="5" hidden="true" />
-        <dataField fieldName="Attribute2" hidden="true" />
-        <dataField fieldName="ShowOnReport" hidden="true" />
-      </dataFields>
-    </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Mini Fee Reminder">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Mini Fee Reminder" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="Fullname" />
             <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="NameOfPayee" columns="25" />
             <dataField fieldName="YearGroup" />
             <dataField fieldName="Description" columns="50" />
             <dataField fieldName="FeeType" columns="20" />
-            <dataField fieldName="BillDate" columns="10" hidden="true" />
+            <dataField fieldName="BillDate" columns="10" />
             <dataField fieldName="TransactionDate" columns="10" />
             <dataField fieldName="Debit" columns="15" />
             <dataField fieldName="Credit" columns="15" />
             <dataField fieldName="Balance" columns="15" />
-            <dataField fieldName="Currency" columns="5" />
-          </dataFields>
-        </category>
-        <category id="c2" flow="NewColumn">
-          <description />
-          <dataFields>
+            <dataField fieldName="SessionCode" columns="20" />
+            <dataField fieldName="NextSessionStartDate" columns="10" />
+            <dataField fieldName="NextSessionEndDate" columns="10" />
+            <dataField fieldName="HasNextTerm" />
+            <dataField fieldName="CalendarCode" columns="30" />
             <dataField fieldName="SchoolName" columns="50" />
             <dataField fieldName="Address" />
+            <dataField fieldName="Currency" columns="5" />
+            <dataField fieldName="TotalAmountBilled" columns="15" />
+            <dataField fieldName="TotalAmountReceived" columns="15" />
+            <dataField fieldName="OPS" columns="1" />
             <dataField fieldName="BilledYear" columns="15" />
             <dataField fieldName="AmountBilled" columns="15" />
             <dataField fieldName="AmountPaid" columns="15" />
-            <dataField fieldName="HasNextTerm" />
-            <dataField fieldName="SessionCode" columns="20" />
-            <dataField fieldName="CalendarCode" columns="30" />
-            <dataField fieldName="NameOfPayee" columns="25" />
-          </dataFields>
-        </category>
-        <category id="c3" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="Attribute1" rows="5" textMode="RichText" />
-            <dataField fieldName="Attribute2" textMode="RichText" />
+            <dataField fieldName="RK" columns="15" />
+            <dataField fieldName="RN" columns="15" />
+            <dataField fieldName="Attribute1" rows="5" />
+            <dataField fieldName="Attribute2" />
             <dataField fieldName="ShowOnReport" />
           </dataFields>
-          <visibility>
-            <expression test="[Credit]==&quot;Ben&quot;" type="ClientScript" />
-          </visibility>
         </category>
       </categories>
     </view>
@@ -300,39 +224,30 @@ from "dbo"."vw_fee_collection_accounting_ledger_mini_fee_reminder" "vw_fee_colle
       <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid100" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid100" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ReportAsPdf" headerText="Print Bill With Note" whenView="grid100">
-        <data />
-      </action>
-      <action id="a102" commandName="ReportAsPdf" headerText="Print Mini Statement" cssClass="material-icon-credit_card">
-        <data><![CDATA[_controller = MiniFeeReminder
-_view = mini_bill_statement
-_template = MiniFeeReminder_mini_bill_statement.rdlc]]></data>
-      </action>
-      <action id="a103" commandName="ReportAsPdf" headerText="Print Bill Reminder (Statement)" whenKeySelected="true">
-        <data><![CDATA[_controller = MiniFeeReminder
-_view = mini_bill_statement_with_instruction
-_template = MiniFeeReminder_mini_bill_statement_with_instruction.rdlc
-PersonID = @Arguments_SelectedValues]]></data>
-      </action>
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a5" />
-      <action id="a101" />
-      <action id="a3" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a100" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a4" commandName="ReportAsWord" headerText="Export To Word" />
-      <action id="a2" commandName="ReportAsImage" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
       <action id="a8" commandName="Grid" />
-      <action id="a6" commandName="Import" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

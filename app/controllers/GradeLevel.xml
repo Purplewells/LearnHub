@@ -30,28 +30,17 @@ from "dbo"."zlkpGradeLevel" "zlkpGradeLevel"
     <field name="GradeLevelTypeID" type="Int32" label="Grade Level Type ID" showInSummary="true">
       <items style="Lookup" dataController="GradeLevelType" newDataView="createForm1" dataValueField="RefGradeLevelTypeID" dataTextField="Description" />
     </field>
-    <field name="GradeLevelType" type="String" readOnly="true" label="Level Type" length="20" />
+    <field name="GradeLevelType" type="String" readOnly="true" label="Level Type" length="100" />
     <field name="CourseRequired" type="Int32" label="Course Required" showInSummary="true" />
     <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
     <field name="SortOrder" type="Decimal" label="Sort Order" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Grade Level" filter="IsActive = 1" sortExpression="SortOrder ASC">
+    <view id="grid1" type="Grid" commandId="command1" label="Grade Level">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Description" columns="15" />
-        <dataField fieldName="Code" columns="10" />
-        <dataField fieldName="GradeLevelTypeID" aliasFieldName="GradeLevelType" />
-        <dataField fieldName="CourseRequired" columns="15" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="SortOrder" columns="15" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_gradelevels" type="Grid" commandId="command1" label="All Grade Levels">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Description" columns="15" />
-        <dataField fieldName="Code" columns="10" />
+        <dataField fieldName="Description" />
+        <dataField fieldName="Code" columns="50" />
         <dataField fieldName="GradeLevelTypeID" aliasFieldName="GradeLevelType" />
         <dataField fieldName="CourseRequired" columns="15" />
         <dataField fieldName="IsActive" />
@@ -152,7 +141,4 @@ from "dbo"."zlkpGradeLevel" "zlkpGradeLevel"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <restConfig>Uri:.
-Users: *
-JSON: true</restConfig>
 </dataController>

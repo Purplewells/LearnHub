@@ -47,26 +47,27 @@ from "dwh"."pbi_vw_metric_student_school_enrollments_overtime" "pbi_vw_metric_st
     <field name="Ranked" type="Int64" label="Ranked" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Enrollments Overtime">
+    <view id="grid1" type="Grid" commandId="command1" label="Student School Enrollments Overtime">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="FirstName" columns="18" />
-        <dataField fieldName="LastName" columns="18" />
-        <dataField fieldName="Role" columns="50" hidden="true" />
-        <dataField fieldName="CYG" columns="5" />
-        <dataField fieldName="EnrollStatus" columns="15" tag="pivot1-row1-pie&#xD;&#xA;pivot1-title:&quot;Enrollment status by academic session&quot; &#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="EnrolledDate" columns="22" tag="pivot5-row1-column-year&#xD;&#xA;pivot5-title:&quot;Count of Enrollment Type over time&quot;" />
-        <dataField fieldName="EntryDate" columns="18" />
-        <dataField fieldName="EntryType" columns="18" tag="pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;Enrollment Type by academic session&quot; &#xD;&#xA;&#xD;&#xA;pivot4-col1&#xD;&#xA;pivot6-col1&#xD;&#xA;pivot5-col1" />
-        <dataField fieldName="WDD" columns="18" />
-        <dataField fieldName="ExitDate" columns="18" tag="pivot6-row1-column-year&#xD;&#xA;pivot6-title:&quot;Count of leavers by Enrollment Type over time&quot;" />
-        <dataField fieldName="EGL" columns="5" />
-        <dataField fieldName="WithDrawalStatus" columns="20" tag="pivot3-row1-pie&#xD;&#xA;pivot3-title:&quot;Withdrawal Reasons by academic session&quot; " />
-        <dataField fieldName="ExitReason" columns="15" />
-        <dataField fieldName="EndOfTermStatus" columns="12" />
-        <dataField fieldName="PromotionReason" columns="30" />
-        <dataField fieldName="Ranked" columns="15" hidden="true" />
-        <dataField fieldName="Session" columns="15" tag="pivot4-row1-column&#xD;&#xA;pivot4-title:&quot;Count of Enrollment Type by academic session&quot;" />
+        <dataField fieldName="StudentEnrollmentID" columns="15" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="Role" columns="50" />
+        <dataField fieldName="CYG" />
+        <dataField fieldName="EGL" />
+        <dataField fieldName="EnrollStatus" />
+        <dataField fieldName="EndOfTermStatus" />
+        <dataField fieldName="PromotionReason" />
+        <dataField fieldName="EnrolledDate" columns="10" />
+        <dataField fieldName="WDD" columns="10" />
+        <dataField fieldName="Session" columns="50" />
+        <dataField fieldName="WithDrawalStatus" />
+        <dataField fieldName="ExitReason" />
+        <dataField fieldName="EntryType" />
+        <dataField fieldName="EntryDate" columns="10" />
+        <dataField fieldName="ExitDate" columns="10" />
+        <dataField fieldName="Ranked" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Student School Enrollments Overtime">

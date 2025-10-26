@@ -65,7 +65,7 @@ order by "DisciplineIncident"."IncidentDate" desc]]></text>
     <field name="AlignmentID" type="Int32" label="Alignment ID" showInSummary="true">
       <items style="Lookup" dataController="DisciplineAlignment" newDataView="createForm1" dataValueField="AlignmentID" dataTextField="Alignment" />
     </field>
-    <field name="Alignment" type="String" readOnly="true" label="Alignment" length="20" />
+    <field name="Alignment" type="String" readOnly="true" label="Alignment" length="18" />
     <field name="Code" type="String" label="Code" length="40" showInSummary="true" />
     <field name="Title" type="String" label="Title" length="50" showInSummary="true" />
     <field name="IncidentDate" type="DateTime" dataFormatString="d" label="Occurrence" showInSummary="true" />
@@ -73,7 +73,7 @@ order by "DisciplineIncident"."IncidentDate" desc]]></text>
     <field name="TimeCodeID" type="Int32" label="Time Code ID">
       <items style="Lookup" dataController="IncidentTimeDescriptionCode" newDataView="createForm1" dataValueField="RefIncidentTimeDescriptionCodeID" dataTextField="Description" />
     </field>
-    <field name="TimeCodeDescription" type="String" readOnly="true" label="Time Description" length="30" />
+    <field name="TimeCodeDescription" type="String" readOnly="true" label="Time Description" length="100" />
     <field name="IncidentStatusID" type="Int32" label="Incident Status ID">
       <items style="Lookup" dataController="IncidentStatus" newDataView="createForm1" dataValueField="IncidentStatusID" dataTextField="IncidentStatus" />
     </field>
@@ -82,18 +82,18 @@ order by "DisciplineIncident"."IncidentDate" desc]]></text>
     <field name="RefIncidentBehaviorID" type="Int32" label="Ref Incident Behavior Id">
       <items style="Lookup" dataController="IncidentBehavior" newDataView="createForm1" dataValueField="RefIncidentBehaviorID" dataTextField="Description" />
     </field>
-    <field name="IncidentBehavior" type="String" readOnly="true" label="Incident Behavior" length="30" />
+    <field name="IncidentBehavior" type="String" readOnly="true" label="Incident Behavior" length="100" />
     <field name="RefIncidentInjuryTypeID" type="Int32" label="Ref Incident Injury Type Id" />
     <field name="IncidentInjuryType" type="String" readOnly="true" label="Incident Injury Type" length="100" />
     <field name="IncidentCost" type="Decimal" dataFormatString="c" label="Incident Cost" />
     <field name="RefIncidentReporterTypeID" type="Int32" label="Ref Incident Reporter Type Id">
       <items style="Lookup" dataController="IncidentReporterType" newDataView="createForm1" dataValueField="RefIncidentReporterTypeID" dataTextField="Description" />
     </field>
-    <field name="ReporterType" type="String" readOnly="true" label="Reporter Type" length="20" />
+    <field name="ReporterType" type="String" readOnly="true" label="Reporter Type" length="100" />
     <field name="RefIncidentLocationID" type="Int32" label="Ref Incident Location Id">
       <items style="Lookup" dataController="IncidentLocation" newDataView="createForm1" dataValueField="RefIncidentLocationID" dataTextField="Description" />
     </field>
-    <field name="Location" type="String" readOnly="true" label="Location" length="15" />
+    <field name="Location" type="String" readOnly="true" label="Location" length="100" />
     <field name="PublishToParent" type="Boolean" label="Publish To Parent" />
     <field name="PublishToStudent" type="Boolean" label="Publish To Student" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
@@ -103,18 +103,14 @@ order by "DisciplineIncident"."IncidentDate" desc]]></text>
     <field name="ActivityTypeID" type="Int32" label="Activity Type ID">
       <items style="Lookup" dataController="BehaviourActivityType" newDataView="createForm1" dataValueField="ActivityTypeID" dataTextField="Description" />
     </field>
-    <field name="Activity" type="String" readOnly="true" label="Activity" length="25" />
+    <field name="Activity" type="String" readOnly="true" label="Activity" length="50" />
     <field name="ResponsiblePersonID" type="Int32" label="Responsible Person ID" />
-    <field name="UserID" type="Guid" label="UserID">
-      <items style="UserIdLookup" copy="Owner = UserName" />
-    </field>
-    <field name="Owner" type="String" label="Owner" length="50">
-      <items style="UserNameLookup" />
-    </field>
+    <field name="UserID" type="Guid" label="UserID" />
+    <field name="Owner" type="String" label="Owner" length="50" />
     <field name="CalendarSessionID" type="Int32" label="Calendar Session ID">
       <items style="Lookup" dataController="Session" newDataView="createForm1" dataValueField="CalendarSessionID" dataTextField="SessionName" copy="SSIA=IsActive, SessionStartDate=StartDate, SessionEndDate=EndDate" />
     </field>
-    <field name="Session" type="String" readOnly="true" label="Session" length="15" />
+    <field name="Session" type="String" readOnly="true" label="Session" length="50" />
     <field name="SSIA" type="Boolean" readOnly="true" label="SSIA" />
     <field name="SessionStartDate" type="DateTime" readOnly="true" dataFormatString="g" label="Session Start Date" />
     <field name="SessionEndDate" type="DateTime" readOnly="true" dataFormatString="g" label="Session End Date" />
@@ -123,191 +119,118 @@ order by "DisciplineIncident"."IncidentDate" desc]]></text>
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Discipline Engagements" sortExpression="IncidentDate desc" filter="IncidentDate BETWEEN SessionStartDate AND SessionEndDate">
+    <view id="grid1" type="Grid" commandId="command1" label="Discipline Incident" sortExpression="IncidentDate desc">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Code" columns="10" />
-        <dataField fieldName="Title" columns="25" tag="header-text&#xD;&#xA;calendar-text" />
-        <dataField fieldName="AlignmentID" aliasFieldName="Alignment" tag="calendar-color&#xD;&#xA;&#xD;&#xA;pivot1-row1-donut&#xD;&#xA;pivot1-title:&quot;What is the distribution of event alignment&quot;&#xD;&#xA;&#xD;&#xA;pivot3-col1&#xD;&#xA;pivot5-col1&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="IncidentDate" columns="20" tag="calendar-date&#xD;&#xA;&#xD;&#xA;pivot2-row1-bar&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="IncidentTime" columns="15" hidden="true" />
-        <dataField fieldName="TimeCodeID" aliasFieldName="TimeCodeDescription" tag="pivot4-row1-columnstacked&#xD;&#xA;pivot4-row2-columnstacked-Quarter&#xD;&#xA;pivot4-title:&quot;What is the count of incidents by Time Code&quot;&#xD;&#xA;pivot4-vaxistitle:&quot;No. of students&quot;&#xD;&#xA;pivot4-haxistitle:&quot;Time of Day&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="IncidentStatusID" aliasFieldName="Status" tag="pivot9-row1-donut&#xD;&#xA;pivot9-title:&quot;What is the overview of incident statuses&quot;&#xD;&#xA;pivot9-vaxistitle:&quot;Number of students&quot;&#xD;&#xA;pivot8-haxistitle:&quot;Incident behaviour&quot;" />
-        <dataField fieldName="Description" hidden="true" columns="25" />
-        <dataField fieldName="RefIncidentBehaviorID" aliasFieldName="IncidentBehavior" tag="pivot6-row1-columnstacked&#xD;&#xA;pivot6-title:&quot;What is the count of incidents by event conduct&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;No. of students&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Behaviour&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="RefIncidentLocationID" aliasFieldName="Location" columns="20" tag="pivot8-row1-pie&#xD;&#xA;pivot8-title:&quot;What is the overview of incidents by location&quot;&#xD;&#xA;pivot8-vaxistitle:&quot;Number of students&quot;&#xD;&#xA;pivot8-haxistitle:&quot;Incident behaviour&quot;" />
-        <dataField fieldName="RefIncidentInjuryTypeID" aliasFieldName="IncidentInjuryType" hidden="true" />
-        <dataField fieldName="RefIncidentReporterTypeID" aliasFieldName="ReporterType" tag="pivot10-row1-donut&#xD;&#xA;pivot10-title:&quot;What is the overview of reporting source&quot;&#xD;&#xA;pivot10-vaxistitle:&quot;Number of students&quot;&#xD;&#xA;pivot10-haxistitle:&quot;Incident behaviour&quot;" hidden="true" />
-        <dataField fieldName="ActivityTypeID" aliasFieldName="Activity" tag="pivot7-row1-pie&#xD;&#xA;pivot7-title:&quot;What is the count of incidents by activity&quot;&#xD;&#xA;pivot7-vaxistitle:&quot;Number of students&quot;&#xD;&#xA;pivot7-haxistitle:&quot;Incident behaviour&quot;" />
-        <dataField fieldName="IncidentCost" columns="15" hidden="true" />
-        <dataField fieldName="PublishToParent" hidden="true" />
-        <dataField fieldName="PublishToStudent" hidden="true" />
-        <dataField fieldName="CalendarSessionID" aliasFieldName="Session" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="ResponsiblePersonID" columns="15" hidden="true" />
-        <dataField fieldName="UserID" columns="15" hidden="true" />
-        <dataField fieldName="Owner" columns="50" hidden="true" />
-        <dataField fieldName="SSIA" columns="5" hidden="true" />
-        <dataField fieldName="SessionStartDate" columns="20" hidden="true" />
-        <dataField fieldName="SessionEndDate" columns="20" hidden="true" />
-      </dataFields>
-      <styles>
-        <expression type="ClientScript" result="positive-behaviour" test="$row.Alignment == 'Awards' || $row.Alignment == 'Achievement'" />
-      </styles>
-    </view>
-    <view id="grid1_all_events" type="Grid" commandId="command1" label="All Discipline Engagements" sortExpression="IncidentDate desc">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Code" columns="10" />
-        <dataField fieldName="Title" columns="25" tag="header-text&#xD;&#xA;calendar-text" />
-        <dataField fieldName="AlignmentID" aliasFieldName="Alignment" tag="calendar-color&#xD;&#xA;&#xD;&#xA;pivot1-row1-donut&#xD;&#xA;pivot1-title:&quot;What is the distribution of event alignment&quot;&#xD;&#xA;&#xD;&#xA;pivot3-col1&#xD;&#xA;pivot5-col1&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="IncidentDate" columns="20" tag="calendar-date&#xD;&#xA;&#xD;&#xA;pivot2-row1-bar&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="IncidentTime" columns="15" hidden="true" />
-        <dataField fieldName="TimeCodeID" aliasFieldName="TimeCodeDescription" tag="pivot4-row1-columnstacked&#xD;&#xA;pivot4-row2-columnstacked-Quarter&#xD;&#xA;pivot4-title:&quot;What is the count of incidents by Time Code&quot;&#xD;&#xA;pivot4-vaxistitle:&quot;No. of students&quot;&#xD;&#xA;pivot4-haxistitle:&quot;Time of Day&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="IncidentStatusID" aliasFieldName="Status" tag="pivot9-row1-donut&#xD;&#xA;pivot9-title:&quot;What is the overview of incident statuses&quot;&#xD;&#xA;pivot9-vaxistitle:&quot;Number of students&quot;&#xD;&#xA;pivot8-haxistitle:&quot;Incident behaviour&quot;" />
-        <dataField fieldName="Description" hidden="true" columns="25" />
-        <dataField fieldName="RefIncidentBehaviorID" aliasFieldName="IncidentBehavior" tag="pivot6-row1-columnstacked&#xD;&#xA;pivot6-title:&quot;What is the count of incidents by event conduct&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;No. of students&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Behaviour&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="RefIncidentLocationID" aliasFieldName="Location" columns="20" tag="pivot8-row1-pie&#xD;&#xA;pivot8-title:&quot;What is the overview of incidents by location&quot;&#xD;&#xA;pivot8-vaxistitle:&quot;Number of students&quot;&#xD;&#xA;pivot8-haxistitle:&quot;Incident behaviour&quot;" />
-        <dataField fieldName="RefIncidentInjuryTypeID" aliasFieldName="IncidentInjuryType" hidden="true" />
-        <dataField fieldName="RefIncidentReporterTypeID" aliasFieldName="ReporterType" tag="pivot10-row1-donut&#xD;&#xA;pivot10-title:&quot;What is the overview of reporting source&quot;&#xD;&#xA;pivot10-vaxistitle:&quot;Number of students&quot;&#xD;&#xA;pivot10-haxistitle:&quot;Incident behaviour&quot;" hidden="true" />
-        <dataField fieldName="ActivityTypeID" aliasFieldName="Activity" tag="pivot7-row1-pie&#xD;&#xA;pivot7-title:&quot;What is the count of incidents by activity&quot;&#xD;&#xA;pivot7-vaxistitle:&quot;Number of students&quot;&#xD;&#xA;pivot7-haxistitle:&quot;Incident behaviour&quot;" />
-        <dataField fieldName="IncidentCost" columns="15" hidden="true" />
-        <dataField fieldName="PublishToParent" hidden="true" />
-        <dataField fieldName="PublishToStudent" hidden="true" />
+        <dataField fieldName="AlignmentID" aliasFieldName="Alignment" />
+        <dataField fieldName="Code" columns="40" />
+        <dataField fieldName="Title" columns="50" />
+        <dataField fieldName="IncidentDate" columns="10" />
+        <dataField fieldName="IncidentTime" columns="15" />
+        <dataField fieldName="TimeCodeID" aliasFieldName="TimeCodeDescription" />
+        <dataField fieldName="IncidentStatusID" aliasFieldName="Status" />
+        <dataField fieldName="Description" rows="5" />
+        <dataField fieldName="RefIncidentBehaviorID" aliasFieldName="IncidentBehavior" />
+        <dataField fieldName="RefIncidentInjuryTypeID" aliasFieldName="IncidentInjuryType" />
+        <dataField fieldName="IncidentCost" columns="15" />
+        <dataField fieldName="RefIncidentReporterTypeID" aliasFieldName="ReporterType" />
+        <dataField fieldName="RefIncidentLocationID" aliasFieldName="Location" />
+        <dataField fieldName="PublishToParent" />
+        <dataField fieldName="PublishToStudent" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="ActivityTypeID" aliasFieldName="Activity" />
+        <dataField fieldName="ResponsiblePersonID" columns="15" />
+        <dataField fieldName="UserID" columns="15" />
+        <dataField fieldName="Owner" columns="50" />
         <dataField fieldName="CalendarSessionID" aliasFieldName="Session" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="ResponsiblePersonID" columns="15" hidden="true" />
-        <dataField fieldName="UserID" columns="15" hidden="true" />
-        <dataField fieldName="Owner" columns="50" hidden="true" />
-        <dataField fieldName="SSIA" columns="5" />
-        <dataField fieldName="SessionStartDate" columns="20" hidden="true" />
-        <dataField fieldName="SessionEndDate" columns="20" hidden="true" />
+        <dataField fieldName="SSIA" />
+        <dataField fieldName="SessionStartDate" columns="20" />
+        <dataField fieldName="SessionEndDate" columns="20" />
       </dataFields>
-      <styles>
-        <expression type="ClientScript" result="positive-behaviour" test="$row.Alignment == 'Awards' || $row.Alignment == 'Achievement'" />
-      </styles>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Engagement">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Discipline Incident">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Discipline Incident" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="Title" columns="50" />
             <dataField fieldName="AlignmentID" aliasFieldName="Alignment" />
+            <dataField fieldName="Code" columns="40" />
+            <dataField fieldName="Title" columns="50" />
             <dataField fieldName="IncidentDate" columns="10" />
-            <dataField fieldName="CalendarSessionID" aliasFieldName="Session" />
-            <dataField fieldName="RefIncidentBehaviorID" aliasFieldName="IncidentBehavior" />
-            <dataField fieldName="IncidentStatusID" aliasFieldName="Status" />
-            <dataField fieldName="IncidentTime" columns="15" hidden="true" />
-            <dataField fieldName="Code" columns="40" hidden="true" />
-            <dataField fieldName="UserID" columns="15" hidden="true" />
-            <dataField fieldName="SessionStartDate" columns="20" hidden="true" />
-            <dataField fieldName="SessionEndDate" columns="20" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c2" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="RefIncidentLocationID" aliasFieldName="Location" />
-            <dataField fieldName="ActivityTypeID" aliasFieldName="Activity" />
+            <dataField fieldName="IncidentTime" columns="15" />
             <dataField fieldName="TimeCodeID" aliasFieldName="TimeCodeDescription" />
-            <dataField fieldName="RefIncidentReporterTypeID" aliasFieldName="ReporterType" />
-            <dataField fieldName="SSIA" />
-            <dataField fieldName="CreatedDate" columns="20" />
-          </dataFields>
-        </category>
-        <category id="c3" collapsed="true" wrap="true" headerText="Incident Detail" flow="NewRow">
-          <description />
-          <dataFields>
+            <dataField fieldName="IncidentStatusID" aliasFieldName="Status" />
             <dataField fieldName="Description" rows="5" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Message Criteria" collapsed="true">
-          <description />
-          <dataFields>
-            <dataField fieldName="RefIncidentInjuryTypeID" aliasFieldName="IncidentInjuryType" hidden="true" />
-            <dataField fieldName="IncidentCost" columns="15" hidden="true" />
+            <dataField fieldName="RefIncidentBehaviorID" aliasFieldName="IncidentBehavior" />
+            <dataField fieldName="RefIncidentInjuryTypeID" aliasFieldName="IncidentInjuryType" />
+            <dataField fieldName="IncidentCost" columns="15" />
+            <dataField fieldName="RefIncidentReporterTypeID" aliasFieldName="ReporterType" />
+            <dataField fieldName="RefIncidentLocationID" aliasFieldName="Location" />
             <dataField fieldName="PublishToParent" />
             <dataField fieldName="PublishToStudent" />
-            <dataField fieldName="ResponsiblePersonID" columns="15" hidden="true" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="ActivityTypeID" aliasFieldName="Activity" />
+            <dataField fieldName="ResponsiblePersonID" columns="15" />
+            <dataField fieldName="UserID" columns="15" />
             <dataField fieldName="Owner" columns="50" />
+            <dataField fieldName="CalendarSessionID" aliasFieldName="Session" />
+            <dataField fieldName="SSIA" />
+            <dataField fieldName="SessionStartDate" columns="20" />
+            <dataField fieldName="SessionEndDate" columns="20" />
           </dataFields>
         </category>
         <category id="d1">
           <dataFields>
-            <dataField fieldName="StudentDisciplineIncidentAssociation" tag="modal-max-sm&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none">
-              <headerText>Involvement &amp; Participation</headerText>
-            </dataField>
-          </dataFields>
-        </category>
-        <category id="c5" headerText="Audit Timeline" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="ModifiedDate" columns="20" />
-            <dataField fieldName="CreatedBy" columns="50" />
-            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="StudentDisciplineIncidentAssociation" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Event">
+    <view id="createForm1" type="Form" commandId="command1" label="New Discipline Incident">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description />
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="Title" columns="50" />
             <dataField fieldName="AlignmentID" aliasFieldName="Alignment" />
+            <dataField fieldName="Code" columns="40" />
+            <dataField fieldName="Title" columns="50" />
             <dataField fieldName="IncidentDate" columns="10" />
-            <dataField fieldName="CalendarSessionID" aliasFieldName="Session" />
-            <dataField fieldName="RefIncidentBehaviorID" aliasFieldName="IncidentBehavior" />
-            <dataField fieldName="IncidentTime" columns="15" hidden="true" />
-            <dataField fieldName="Code" columns="40" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c2" flow="NewColumn">
-          <description />
-          <dataFields>
+            <dataField fieldName="IncidentTime" columns="15" />
             <dataField fieldName="TimeCodeID" aliasFieldName="TimeCodeDescription" />
-            <dataField fieldName="ActivityTypeID" aliasFieldName="Activity" />
-            <dataField fieldName="RefIncidentLocationID" aliasFieldName="Location" />
-            <dataField fieldName="RefIncidentReporterTypeID" aliasFieldName="ReporterType" />
             <dataField fieldName="IncidentStatusID" aliasFieldName="Status" />
-            <dataField fieldName="SSIA" hidden="true" />
-            <dataField fieldName="CreatedDate" columns="20" />
-          </dataFields>
-        </category>
-        <category id="c3" collapsed="true" wrap="true" headerText="Incident Detail" flow="NewRow">
-          <description />
-          <dataFields>
             <dataField fieldName="Description" rows="5" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Message Criteria" collapsed="true">
-          <description />
-          <dataFields>
-            <dataField fieldName="RefIncidentInjuryTypeID" aliasFieldName="IncidentInjuryType" hidden="true" />
-            <dataField fieldName="IncidentCost" columns="15" hidden="true" />
+            <dataField fieldName="RefIncidentBehaviorID" aliasFieldName="IncidentBehavior" />
+            <dataField fieldName="RefIncidentInjuryTypeID" aliasFieldName="IncidentInjuryType" />
+            <dataField fieldName="IncidentCost" columns="15" />
+            <dataField fieldName="RefIncidentReporterTypeID" aliasFieldName="ReporterType" />
+            <dataField fieldName="RefIncidentLocationID" aliasFieldName="Location" />
             <dataField fieldName="PublishToParent" />
             <dataField fieldName="PublishToStudent" />
-            <dataField fieldName="ResponsiblePersonID" columns="15" hidden="true" />
-            <dataField fieldName="UserID" columns="15" hidden="true" />
-            <dataField fieldName="Owner" columns="50" hidden="true" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="ActivityTypeID" aliasFieldName="Activity" />
+            <dataField fieldName="ResponsiblePersonID" columns="15" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="Owner" columns="50" />
+            <dataField fieldName="CalendarSessionID" aliasFieldName="Session" />
+            <dataField fieldName="SSIA" />
+            <dataField fieldName="SessionStartDate" columns="20" />
+            <dataField fieldName="SessionEndDate" columns="20" />
           </dataFields>
         </category>
         <category id="d1">
           <dataFields>
-            <dataField fieldName="StudentDisciplineIncidentAssociation">
-              <headerText>Involvement &amp; Participation</headerText>
-              <dataView showInSummary="true" />
-            </dataField>
+            <dataField fieldName="StudentDisciplineIncidentAssociation" />
           </dataFields>
         </category>
       </categories>
@@ -325,10 +248,10 @@ order by "DisciplineIncident"."IncidentDate" desc]]></text>
       <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
-      <action id="a1" commandName="Edit" headerText="Review Incident" />
+      <action id="a1" commandName="Edit" />
       <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
-      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" headerText="Submit Incident" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
@@ -339,7 +262,7 @@ order by "DisciplineIncident"."IncidentDate" desc]]></text>
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New Event" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
@@ -374,66 +297,4 @@ order by "DisciplineIncident"."IncidentDate" desc]]></text>
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r103" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateTitle"><![CDATA[var fieldValue = [Title];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('Title', 'A title is required field.');
-}]]></rule>
-    <rule id="r100" commandName="New|Update|Calculate" type="Sql" phase="Execute" name="setIncidentCodes"><![CDATA[-- SETTING UPN NUMBERS
-If @Code  IS Null
-   DECLARE @Random INT;
-   DECLARE @Upper INT;
-   DECLARE @Lower INT;
-
----- This will create a random number between 1 and 999
-SET @Lower = 1000 ---- The lowest random number
-SET @Upper = 9999 ---- The highest random number
-SELECT @Code   =  'IN'+ '-' + Cast(ROUND(((@Upper - @Lower -1) * RAND() + @Lower), 0) as varchar(25)) --+UPPER()
-]]></rule>
-    <rule id="r102" commandName="New" type="Sql" phase="Execute" name="setIncidentDate"><![CDATA[SET @IncidentDate = GETDATE()]]></rule>
-    <rule id="r101" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateAlignment"><![CDATA[var fieldValue = [AlignmentID];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('AlignmentID', 'A selection is required for conduct alignment.');
-}]]></rule>
-    <rule id="r104" commandName="New" type="Sql" phase="Execute" name="setPublishingControlDefaultValue"><![CDATA[
-SET @UserID = @BusinessRules_UserId]]></rule>
-    <rule id="r105" commandName="New|Insert" type="Sql" phase="After" name="setUserIDConfirm"><![CDATA[--Set @ModifiedBy = @BusinessRules_UserName
-
-UPDATE DisciplineIncident 
-SET UserID = @BusinessRules_UserId     
-WHERE DisciplineIncidentID = @DisciplineIncidentID
-]]></rule>
-    <rule id="r106" commandName="Insert" type="Sql" phase="Before" name="setOwnerCredentials"><![CDATA[-- Revised Date : 23rd Feb 2020
--- First set the username to the data entry person
-SET @CreatedBy = @BusinessRules_UserName
-
--- if the Owner field is not selected or filled up then set that to current user
-IF (@Owner IS NULL)
-     SET @Owner = @BusinessRules_UserName
-
--- Additional rule to set UserID 
-SET @UserID = @BusinessRules_UserId 
-
-]]></rule>
-    <rule id="r107" commandName="Update" type="Sql" phase="After" name="setRecordModifierUserName"><![CDATA[--Set @ModifiedBy = @BusinessRules_UserName
-
-UPDATE DisciplineIncident 
-SET --UserID = @BusinessRules_UserId  // amended to reflect correct filtering of records
-      ModifiedBy = @BusinessRules_UserName
-WHERE DisciplineIncidentID = @DisciplineIncidentID
-]]></rule>
-    <rule id="r108" type="JavaScript" commandName="Insert|Update" phase="Before" name="CalendarSessionID_Validator"><![CDATA[var fieldValue = [CalendarSessionID];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('CalendarSessionID', 'Academic Session is required.');
-}]]></rule>
-  </businessRules>
 </dataController>

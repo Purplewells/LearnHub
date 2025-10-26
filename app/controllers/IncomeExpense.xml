@@ -40,16 +40,16 @@ from "dbo"."IncomeExpense" "IncomeExpense"
   </commands>
   <fields>
     <field name="IncomeExpenseID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Income Expense ID" readOnly="true" />
-    <field name="EventName" type="String" label="Event Name" length="40" showInSummary="true" />
+    <field name="EventName" type="String" label="Event Name" length="50" showInSummary="true" />
     <field name="BudgetID" type="Int32" label="Budget" showInSummary="true">
-      <items style="DropDownList" dataController="Budget" newDataView="createForm1" dataValueField="BudgetID" dataTextField="BudgetName" dataView="grid1" />
+      <items style="Lookup" dataController="Budget" newDataView="createForm1" dataValueField="BudgetID" dataTextField="BudgetName" />
     </field>
-    <field name="BudgetName" type="String" readOnly="true" label="Budget Name" length="25" />
+    <field name="BudgetName" type="String" readOnly="true" label="Budget Name" length="100" />
     <field name="Amount" type="Decimal" allowNulls="false" dataFormatString="N" label="Amount" showInSummary="true" />
     <field name="CategoryID" type="Int32" label="Category ID" showInSummary="true">
       <items style="Lookup" dataController="ExpenseCategory" newDataView="createForm1" dataValueField="CategoryID" dataTextField="CategoryName" />
     </field>
-    <field name="CategoryName" type="String" readOnly="true" label="Category" length="20" />
+    <field name="CategoryName" type="String" readOnly="true" label="Category" length="100" />
     <field name="EventDate" type="DateTime" allowNulls="false" label="Event Date" showInSummary="true" />
     <field name="Description" type="String" label="Description" length="50" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
@@ -59,77 +59,77 @@ from "dbo"."IncomeExpense" "IncomeExpense"
     <field name="DebitAccountID" type="Int32" label="Debit Account ID">
       <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" />
     </field>
-    <field name="DebitAccountName" type="String" readOnly="true" label="Debit Account" length="30" />
+    <field name="DebitAccountName" type="String" readOnly="true" label="Debit Account" length="100" />
     <field name="CreditAccountID" type="Int32" label="Credit Account ID">
       <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" />
     </field>
-    <field name="CreditAccountName" type="String" readOnly="true" label="Credit Account" length="30" />
+    <field name="CreditAccountName" type="String" readOnly="true" label="Credit Account" length="100" />
     <field name="CurrencyID" type="Int32" label="Currency ID">
       <items style="Lookup" dataController="Currency" newDataView="createForm1" dataValueField="CurrencyID" dataTextField="CurrencyName" />
     </field>
-    <field name="CurrencyName" type="String" readOnly="true" label="Curr" length="10" />
+    <field name="CurrencyName" type="String" readOnly="true" label="Curr" length="20" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Income Expense" sortExpression="EventDate DESC">
+    <view id="grid1" type="Grid" commandId="command1" label="Income Expense">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="EventName" columns="50" />
-        <dataField fieldName="EventDate" columns="18" tag="pivot4-row1-columnstacked-Year&#xD;&#xA;pivot4-title:&quot;Top 10 Budgets by Event Date&quot;&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked-year&#xD;&#xA;pivot5-row2-quarter&#xD;&#xA;pivot5-title:&quot;Top 10 Budgets by Event Date&quot;" />
-        <dataField fieldName="Amount" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum&#xD;&#xA;pivot3-val1-sum&#xD;&#xA;pivot4-val1-sum&#xD;&#xA;pivot5-val1-sum&#xD;&#xA;pivot6-val1-sum" />
-        <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
-        <dataField fieldName="CategoryID" aliasFieldName="CategoryName" columns="30" tag="pivot1-row1-barstacked&#xD;&#xA;pivot1-title:&quot;Total Budget Value by Category&quot;" />
-        <dataField fieldName="Description" columns="40" hidden="true" />
-        <dataField fieldName="BudgetID" aliasFieldName="BudgetName" tag="pivot4-col1-top10-other&#xD;&#xA;pivot5-col1-top10-other&#xD;&#xA;&#xD;&#xA;pivot2-row1-barstacked&#xD;&#xA;pivot2-title:&quot;Total Budget Value by Budget Descriptor&quot;&#xD;&#xA;&#xD;&#xA;pivot3-row1-donut&#xD;&#xA;pivot3-title:&quot;Total Income Expense Budget Value by Budget Descriptor&quot;" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="BudgetID" aliasFieldName="BudgetName" />
+        <dataField fieldName="Amount" columns="15" />
+        <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
+        <dataField fieldName="EventDate" columns="10" />
+        <dataField fieldName="Description" columns="50" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
         <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
         <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
+        <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Activity">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Income Expense">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Income Expense" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="EventName" columns="50" />
-            <dataField fieldName="BudgetID" aliasFieldName="BudgetName" tag="lookup-distinct&#xD;&#xA;lookup-null-value-none&#xD;&#xA;lookup-auto-advance" />
+            <dataField fieldName="BudgetID" aliasFieldName="BudgetName" />
             <dataField fieldName="Amount" columns="15" />
-            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
             <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
             <dataField fieldName="EventDate" columns="10" />
             <dataField fieldName="Description" columns="50" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
             <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
+            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Activity">
+    <view id="createForm1" type="Form" commandId="command1" label="New Income Expense">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="EventDate" columns="10" />
-            <dataField fieldName="EventName" columns="50" tag="focus-auto" watermark="Write event name ..." />
-            <dataField fieldName="Description" columns="50" watermark="Provide a brief description ..." />
-            <dataField fieldName="BudgetID" aliasFieldName="BudgetDescriptor" tag="lookup-distinct&#xD;&#xA;lookup-null-value-none&#xD;&#xA;lookup-auto-advance" />
-            <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
+            <dataField fieldName="EventName" columns="50" />
+            <dataField fieldName="BudgetID" aliasFieldName="BudgetName" />
             <dataField fieldName="Amount" columns="15" />
-            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
-            <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
+            <dataField fieldName="CategoryID" aliasFieldName="CategoryName" />
+            <dataField fieldName="EventDate" columns="10" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
             <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+            <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
+            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
           </dataFields>
         </category>
       </categories>
@@ -141,7 +141,7 @@ from "dbo"."IncomeExpense" "IncomeExpense"
       <action id="a2" commandName="Edit" />
       <action id="a3" commandName="Delete" />
       <action id="a6" />
-      <action id="a7" commandName="New" commandArgument="grid1" headerText="New Event" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
       <action id="a9" />
       <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
@@ -161,7 +161,7 @@ from "dbo"."IncomeExpense" "IncomeExpense"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New Event" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
@@ -196,22 +196,4 @@ from "dbo"."IncomeExpense" "IncomeExpense"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r101" commandName="New" type="Sql" phase="Execute" name="setEventDate"><![CDATA[SET @EventDate = GETDATE()]]></rule>
-    <rule id="r102" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateEventName"><![CDATA[var fieldValue = [EventName];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('EventName', 'Financial event name is required field.');
-}]]></rule>
-    <rule id="r103" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateDescription"><![CDATA[var fieldValue = [Description];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('Description', 'Provide a short description.');
-}]]></rule>
-    <rule id="r100" commandName="Insert|update" type="Sql" phase="After" name="post_inc_exp_to_account_general"><![CDATA[EXECUTE usp_ops_auto_p3_post_inc_exp_to_account_ledger @IncomeExpenseID]]></rule>
-  </businessRules>
 </dataController>

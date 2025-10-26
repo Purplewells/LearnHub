@@ -42,24 +42,24 @@ from "dbo"."PersonDisability" "PersonDisability"
     <field name="PrimaryDisabilityTypeID" type="Int32" label="Primary Disability Type Id" showInSummary="true">
       <items style="Lookup" dataController="DisabilityType" newDataView="createForm1" dataValueField="RefDisabilityTypeID" dataTextField="Description" />
     </field>
-    <field name="PrimaryDisabilityTypeDescription" type="String" readOnly="true" label="Disability Type" length="30" />
+    <field name="PrimaryDisabilityTypeDescription" type="String" readOnly="true" label="Disability Type" length="100" />
     <field name="DisabilityStatus" type="Boolean" label="Disability Status" showInSummary="true" />
     <field name="RefAccommodationsNeededTypeID" type="Int32" label="Ref Accommodations Needed Type Id" showInSummary="true">
       <items style="Lookup" dataController="AccommodationsNeededType" newDataView="createForm1" dataValueField="RefAccommodationsNeededTypeID" dataTextField="Description" />
     </field>
-    <field name="NeededAccommodations" type="String" readOnly="true" label="Needed Accommodations" length="30" />
+    <field name="NeededAccommodations" type="String" readOnly="true" label="Needed Accommodations" length="100" />
     <field name="RefDisabilityConditionTypeID" type="Int32" label="Ref Disability Condition Type Id" showInSummary="true">
       <items style="Lookup" dataController="DisabilityConditionType" newDataView="createForm1" dataValueField="RefDisabilityConditionTypeID" dataTextField="Description" />
     </field>
-    <field name="ConditionType" type="String" readOnly="true" label="Condition Type" length="30" />
+    <field name="ConditionType" type="String" readOnly="true" label="Condition Type" length="100" />
     <field name="RefDisabilityDeterminationSourceTypeID" type="Int32" label="Ref Disability Determination Source Type Id" showInSummary="true">
       <items style="Lookup" dataController="DisabilityDeterminationSourceType" newDataView="createForm1" dataValueField="RefDisabilityDeterminationSourceTypeID" dataTextField="Description" />
     </field>
-    <field name="SourceDetermination" type="String" readOnly="true" label="Source Determination" length="30" />
+    <field name="SourceDetermination" type="String" readOnly="true" label="Source Determination" length="100" />
     <field name="RefDisabilityConditionStatusCodeID" type="Int32" label="Ref Disability Condition Status Code Id">
       <items style="Lookup" dataController="DisabilityConditionStatusCode" newDataView="createForm1" dataValueField="RefDisabilityConditionStatusCodeID" dataTextField="Description" />
     </field>
-    <field name="ConditionDescription" type="String" readOnly="true" label="Condition" length="30" />
+    <field name="ConditionDescription" type="String" readOnly="true" label="Condition" length="100" />
     <field name="PersonID" type="Int32" label="Person ID">
       <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="UPN" copy="FirstName=FirstName, LastName=LastName, CurrentYearGradeLevel=CYG" />
     </field>
@@ -77,56 +77,56 @@ from "dbo"."PersonDisability" "PersonDisability"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="PrimaryDisabilityTypeID" aliasFieldName="PrimaryDisabilityTypeDescription" />
+        <dataField fieldName="DisabilityStatus" />
+        <dataField fieldName="RefAccommodationsNeededTypeID" aliasFieldName="NeededAccommodations" />
         <dataField fieldName="RefDisabilityConditionTypeID" aliasFieldName="ConditionType" />
         <dataField fieldName="RefDisabilityDeterminationSourceTypeID" aliasFieldName="SourceDetermination" />
         <dataField fieldName="RefDisabilityConditionStatusCodeID" aliasFieldName="ConditionDescription" />
-        <dataField fieldName="RefAccommodationsNeededTypeID" aliasFieldName="NeededAccommodations" />
-        <dataField fieldName="DisabilityStatus" />
         <dataField fieldName="PersonID" aliasFieldName="IdentificationCode" />
         <dataField fieldName="FirstName" columns="35" />
         <dataField fieldName="LastName" columns="35" />
         <dataField fieldName="CurrentYearGradeLevel" columns="10" />
-        <dataField fieldName="HeaderTitle" hidden="true" tag="header-text" />
+        <dataField fieldName="HeaderTitle" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Special Need">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Person Disability">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Person Disability" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="RefDisabilityConditionTypeID" aliasFieldName="ConditionType" />
             <dataField fieldName="PrimaryDisabilityTypeID" aliasFieldName="PrimaryDisabilityTypeDescription" />
-            <dataField fieldName="RefDisabilityDeterminationSourceTypeID" aliasFieldName="SourceDetermination" />
-            <dataField fieldName="RefAccommodationsNeededTypeID" aliasFieldName="NeededAccommodations" />
-            <dataField fieldName="RefDisabilityConditionStatusCodeID" aliasFieldName="ConditionDescription" />
             <dataField fieldName="DisabilityStatus" />
+            <dataField fieldName="RefAccommodationsNeededTypeID" aliasFieldName="NeededAccommodations" />
+            <dataField fieldName="RefDisabilityConditionTypeID" aliasFieldName="ConditionType" />
+            <dataField fieldName="RefDisabilityDeterminationSourceTypeID" aliasFieldName="SourceDetermination" />
+            <dataField fieldName="RefDisabilityConditionStatusCodeID" aliasFieldName="ConditionDescription" />
             <dataField fieldName="PersonID" aliasFieldName="IdentificationCode" />
             <dataField fieldName="FirstName" columns="35" />
             <dataField fieldName="LastName" columns="35" />
             <dataField fieldName="CurrentYearGradeLevel" columns="10" />
-            <dataField fieldName="HeaderTitle" hidden="true" />
+            <dataField fieldName="HeaderTitle" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Special Need">
+    <view id="createForm1" type="Form" commandId="command1" label="New Person Disability">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="RefDisabilityConditionTypeID" aliasFieldName="ConditionType" />
             <dataField fieldName="PrimaryDisabilityTypeID" aliasFieldName="PrimaryDisabilityTypeDescription" />
+            <dataField fieldName="DisabilityStatus" />
+            <dataField fieldName="RefAccommodationsNeededTypeID" aliasFieldName="NeededAccommodations" />
+            <dataField fieldName="RefDisabilityConditionTypeID" aliasFieldName="ConditionType" />
             <dataField fieldName="RefDisabilityDeterminationSourceTypeID" aliasFieldName="SourceDetermination" />
             <dataField fieldName="RefDisabilityConditionStatusCodeID" aliasFieldName="ConditionDescription" />
-            <dataField fieldName="RefAccommodationsNeededTypeID" aliasFieldName="NeededAccommodations" />
-            <dataField fieldName="DisabilityStatus" />
             <dataField fieldName="PersonID" aliasFieldName="IdentificationCode" />
             <dataField fieldName="FirstName" columns="35" />
             <dataField fieldName="LastName" columns="35" />
             <dataField fieldName="CurrentYearGradeLevel" columns="10" />
-            <dataField fieldName="HeaderTitle" hidden="true" />
+            <dataField fieldName="HeaderTitle" />
           </dataFields>
         </category>
       </categories>

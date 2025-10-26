@@ -43,15 +43,15 @@ from "dbo"."Buses" "Buses"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="BusNumber" columns="10" />
-        <dataField fieldName="Make" columns="20" />
-        <dataField fieldName="Model" columns="20" />
-        <dataField fieldName="LicensePlate" columns="15" />
-        <dataField fieldName="Capacity" columns="10" />
+        <dataField fieldName="Make" columns="50" />
+        <dataField fieldName="Model" columns="50" />
+        <dataField fieldName="LicensePlate" columns="20" />
+        <dataField fieldName="Capacity" columns="15" />
         <dataField fieldName="RegisterationYear" columns="15" />
-        <dataField fieldName="LastMaintenanceDate" columns="10" hidden="true" />
-        <dataField fieldName="NextMaintenanceDate" columns="10" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="LastMaintenanceDate" columns="10" />
+        <dataField fieldName="NextMaintenanceDate" columns="10" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Buses">

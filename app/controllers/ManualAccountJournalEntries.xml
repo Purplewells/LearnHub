@@ -40,14 +40,14 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
     <field name="DebitAccountID" type="Int32" label="Debit Account ID" showInSummary="true">
       <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" copy="DebitAccountType=AccountType" />
     </field>
-    <field name="DebitAccountName" type="String" readOnly="true" label="Debit Account" length="35" />
+    <field name="DebitAccountName" type="String" readOnly="true" label="Debit Account" length="100" />
     <field name="DebitAccountType" type="String" readOnly="true" label="Debit Account Type" length="20" />
     <field name="CreditAccountID" type="Int32" label="Credit Account ID" showInSummary="true">
       <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" copy="CreditAccountType=AccountType" />
     </field>
-    <field name="CreditAccountName" type="String" readOnly="true" label="Credit Account" length="30" />
+    <field name="CreditAccountName" type="String" readOnly="true" label="Credit Account" length="100" />
     <field name="CreditAccountType" type="String" readOnly="true" label="Credit Account Type" length="20" />
-    <field name="Amount" type="Decimal" label="Amount" showInSummary="true" dataFormatString="N" formatOnClient="false" />
+    <field name="Amount" type="Decimal" label="Amount" showInSummary="true" />
     <field name="Currency" type="String" label="Curr" length="10" showInSummary="true" />
     <field name="Description" type="String" label="Description" length="255" />
     <field name="EnteredBy" type="String" label="Entered By" length="50" />
@@ -57,86 +57,66 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
     <field name="CreatedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Created Date" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Manual Entries" sortExpression="TransactionDate DESC" filter="CAST(TransactionDate AS DATE) = CAST(GETDATE() AS DATE)">
+    <view id="grid1" type="Grid" commandId="command1" label="Manual Account Journal Entries">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Description" tag="header-text" columns="40" />
-        <dataField fieldName="TransactionDate" columns="20" />
+        <dataField fieldName="TransactionDate" columns="10" />
         <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
+        <dataField fieldName="DebitAccountType" columns="20" />
         <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
-        <dataField fieldName="Amount" columns="20" dataFormatString="D" />
+        <dataField fieldName="CreditAccountType" columns="20" />
+        <dataField fieldName="Amount" columns="15" />
         <dataField fieldName="Currency" columns="10" />
-        <dataField fieldName="EnteredBy" columns="30" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
-        <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="Description" />
+        <dataField fieldName="EnteredBy" columns="50" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="CreatedDate" columns="20" />
       </dataFields>
     </view>
-    <view id="grid1_historical_entries" type="Grid" commandId="command1" label="Historical Manual Entries" sortExpression="TransactionDate DESC">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Description" tag="header-text" columns="40" />
-        <dataField fieldName="TransactionDate" columns="20" />
-        <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
-        <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
-        <dataField fieldName="Amount" columns="20" dataFormatString="D" />
-        <dataField fieldName="Currency" columns="10" />
-        <dataField fieldName="EnteredBy" columns="30" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
-        <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Enter &amp; Maintain Journal Entry">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Manual Account Journal Entries">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Manual Account Journal Entries" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="TransactionDate" columns="10" />
-            <dataField fieldName="Description" tag="focus-auto" />
-            <dataField fieldName="Amount" columns="15" dataFormatString="D" />
             <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
+            <dataField fieldName="DebitAccountType" columns="20" />
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
-            <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
-            <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="EnteredBy" columns="50" hidden="true" />
-            <dataField fieldName="CreatedBy" columns="50">
-              <headerText>Provenance</headerText>
-            </dataField>
-            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+            <dataField fieldName="CreditAccountType" columns="20" />
+            <dataField fieldName="Amount" columns="15" />
             <dataField fieldName="Currency" columns="10" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="EnteredBy" columns="50" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="CreatedDate" columns="20" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Transaction ">
+    <view id="createForm1" type="Form" commandId="command1" label="New Manual Account Journal Entries">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="TransactionDate" columns="10" />
-            <dataField fieldName="Description" tag="focus-auto" />
-            <dataField fieldName="Amount" columns="15" dataFormatString="D" />
-            <dataField fieldName="Currency" columns="10" hidden="true" />
             <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
+            <dataField fieldName="DebitAccountType" columns="20" />
             <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
-            <dataField fieldName="CreditAccountType" columns="20" hidden="true" />
-            <dataField fieldName="DebitAccountType" columns="20" hidden="true" />
-            <dataField fieldName="EnteredBy" columns="50" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+            <dataField fieldName="CreditAccountType" columns="20" />
+            <dataField fieldName="Amount" columns="15" />
+            <dataField fieldName="Currency" columns="10" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="EnteredBy" columns="50" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="CreatedDate" columns="20" />
           </dataFields>
         </category>
       </categories>
@@ -168,20 +148,16 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New Entry" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a100" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New Entry" />
-      <action commandName="Navigate" commandArgument="TrialBalance" headerText="Trial Balance" id="a103" />
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a101" commandName="ReportAsPdf" headerText="Export To PDF" />
-      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a3" commandName="ExportRowset" headerText="Send To IPY" />
+      <action id="a3" commandName="ExportRowset" />
       <action id="a4" commandName="ExportRss" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
@@ -195,7 +171,9 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
       <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
       <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
@@ -205,55 +183,4 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r103" commandName="New" type="Sql" phase="Execute" name="setTransactionDate"><![CDATA[SET @TransactionDate = GETDATE()
-]]></rule>
-    <rule id="r104" commandName="New" type="Sql" phase="Execute" name="setDefaultValues"><![CDATA[SET @CURRENCY  = ( SELECT TOP 1 Code from zlkp_currency where IsActive = 1 and IsDefault = 1)
-
---SET @CURRENCY  = 'GHS'
-
-
-
-
-
-]]></rule>
-    <rule id="r109" commandName="New" type="JavaScript" phase="After" name="setCurrencyValue"><![CDATA[[Currency] = 'GHS';]]></rule>
-    <rule id="r101" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateDescription"><![CDATA[var fieldValue = [Description];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('Description', 'Description is required.');
-}]]></rule>
-    <rule id="r102" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateTransactionDate"><![CDATA[var fieldValue = [TransactionDate];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('TransactionDate', 'Transaction Date is required.');
-}]]></rule>
-    <rule id="r100" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateAmount"><![CDATA[var fieldValue = [Amount];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('Amount', 'The amount for the transaction is required.');
-}]]></rule>
-    <rule id="r106" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateDebitAccountID"><![CDATA[var fieldValue = [DebitAccountID];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('DebitAccountID', 'Account to Debit is required.');
-}]]></rule>
-    <rule id="r107" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateCreditAccountID"><![CDATA[var fieldValue = [CreditAccountID];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('CreditAccountID', 'Account to Credit is required.');
-}]]></rule>
-    <rule id="r105" commandName="Custom" type="Sql" phase="Execute" name="post_manual_to_account_gl"><![CDATA[--DECLARE @JournalEntryID INT = @JournalEntryID
---EXEC usp_ops_auto_p2_post_manual_to_account_ledger @JournalEntryID]]></rule>
-  </businessRules>
 </dataController>

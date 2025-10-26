@@ -61,32 +61,32 @@ order by "RefGradeLevel"."SortOrder" asc]]></text>
     <field name="ModeOfInstructionID" type="Int32" label="Mode Of Instruction ID" showInSummary="true">
       <items style="Lookup" dataController="CourseSectionDeliveryMode" newDataView="createForm1" dataValueField="RefCourseSectionDeliveryModeID" dataTextField="Description" />
     </field>
-    <field name="ModeOfInstructionDescription" type="String" readOnly="true" label="Mode" length="18" />
+    <field name="ModeOfInstructionDescription" type="String" readOnly="true" label="Mode" length="100" />
     <field name="RefCreditTypeEarnedID" type="Int32" label="Ref Credit Type Earned Id">
       <items style="Lookup" dataController="CreditTypeEarned" newDataView="createForm1" dataValueField="RefCreditTypeEarnedID" dataTextField="Description" />
     </field>
-    <field name="RefCreditTypeEarnedDescription" type="String" readOnly="true" label="Credit Type" length="12" />
+    <field name="RefCreditTypeEarnedDescription" type="String" readOnly="true" label="Credit Type" length="100" />
     <field name="Capacity" type="Int32" label="Capacity" />
     <field name="GpaapplicabilityID" type="Int32" label="GPA Applicability ID">
       <items style="Lookup" dataController="CourseGPA" newDataView="createForm1" dataValueField="RefCourseGpaapplicabilityID" dataTextField="Description" />
     </field>
-    <field name="GpaapplicabilityDescription" type="String" readOnly="true" label="GPA" length="10" />
+    <field name="GpaapplicabilityDescription" type="String" readOnly="true" label="GPA" length="100" />
     <field name="SectionCharacteristicID" type="Int32" label="Section Characteristic ID">
       <items style="Lookup" dataController="SectionCharacteristics" newDataView="createForm1" dataValueField="SectionCharacteristicID" dataTextField="SectionCharacteristicDesc" />
     </field>
-    <field name="SectionCharacteristicDesc" type="String" readOnly="true" label="Characteristic" length="15" />
+    <field name="SectionCharacteristicDesc" type="String" readOnly="true" label="Characteristic" length="30" />
     <field name="CreationDate" type="DateTime" dataFormatString="g" label="Creation Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
     <field name="CalendarSessionID" type="Int32" label="Calendar Session ID">
       <items style="Lookup" dataController="Session" newDataView="createForm1" dataValueField="CalendarSessionID" dataTextField="SessionCode" />
     </field>
-    <field name="SessionCode" type="String" readOnly="true" label="Session Code" length="16" />
+    <field name="SessionCode" type="String" readOnly="true" label="Session Code" length="20" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
     <field name="CourseID" type="Int32" label="Course ID">
       <items style="Lookup" dataController="Course" newDataView="createForm1" dataValueField="CourseID" dataTextField="Code" copy="CourseTitle=Course, GLSO=GLSO, GL=GradeLevel" />
     </field>
-    <field name="CourseCode" type="String" readOnly="true" label="Course Code" length="18" />
+    <field name="CourseCode" type="String" readOnly="true" label="Course Code" length="40" />
     <field name="CourseTitle" type="String" readOnly="true" label="Course Title" length="60" />
     <field name="ACS" type="Boolean" label="ACS" />
     <field name="IsActive" type="Boolean" label="Active" />
@@ -96,116 +96,63 @@ order by "RefGradeLevel"."SortOrder" asc]]></text>
     <field name="StaffAssignmentStaffClassificationID" type="Int32" readOnly="true" label="Staff Assignment Staff Classification ID" />
     <field name="GLSO" type="Decimal" readOnly="true" label="GLSO" />
     <field name="GL" type="String" readOnly="true" label="GL" length="100" />
-    <field name="AssignedTutor" type="Guid" label="Tutor">
-      <items style="UserIdLookup" copy="ClassTutor = UserName" />
-    </field>
-    <field name="ClassTutor" type="String" label="Class Tutor" isVirtual="true" length="128" />
+    <field name="AssignedTutor" type="Guid" label="Tutor" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Course Sections" filter="ACS=1" sortExpression="GLSO ASC">
+    <view id="grid1" type="Grid" commandId="command1" label="Course Section" sortExpression="GLSO asc">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="SectionNo" columns="20" />
-        <dataField fieldName="SectionName" columns="20" hidden="true" />
-        <dataField fieldName="CourseID" aliasFieldName="CourseCode" columns="20" />
-        <dataField fieldName="CourseTitle" columns="20" />
-        <dataField fieldName="GL" columns="5" />
-        <dataField fieldName="SectionStartDate" columns="18" />
-        <dataField fieldName="SectionEndDate" columns="18" />
-        <dataField fieldName="ModeOfInstructionID" aliasFieldName="ModeOfInstructionDescription" columns="12" />
-        <dataField fieldName="RefCreditTypeEarnedID" aliasFieldName="RefCreditTypeEarnedDescription" columns="8" />
-        <dataField fieldName="GpaapplicabilityID" aliasFieldName="GpaapplicabilityDescription" hidden="true" />
-        <dataField fieldName="SectionCharacteristicID" aliasFieldName="SectionCharacteristicDesc" columns="15" />
-        <dataField fieldName="CalendarSessionID" aliasFieldName="SessionCode" columns="12" />
+        <dataField fieldName="SectionNo" columns="50" />
+        <dataField fieldName="SectionName" columns="50" />
+        <dataField fieldName="SectionStartDate" columns="10" />
+        <dataField fieldName="SectionEndDate" columns="10" />
+        <dataField fieldName="ModeOfInstructionID" aliasFieldName="ModeOfInstructionDescription" />
+        <dataField fieldName="RefCreditTypeEarnedID" aliasFieldName="RefCreditTypeEarnedDescription" />
+        <dataField fieldName="Capacity" columns="15" />
+        <dataField fieldName="GpaapplicabilityID" aliasFieldName="GpaapplicabilityDescription" />
+        <dataField fieldName="SectionCharacteristicID" aliasFieldName="SectionCharacteristicDesc" />
+        <dataField fieldName="CreationDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CalendarSessionID" aliasFieldName="SessionCode" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="CourseID" aliasFieldName="CourseCode" />
+        <dataField fieldName="CourseTitle" />
         <dataField fieldName="ACS" />
         <dataField fieldName="IsActive" />
-        <dataField fieldName="StaffAssignmentID" aliasFieldName="StaffAssignmentStaffClassificationID" hidden="true" />
-        <dataField fieldName="CreationDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="AssignedTutor" columns="15" aliasFieldName="AssignedTutor" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="grid1_expired_course_sections" type="Grid" commandId="command1" label="Expired Course Sections" sortExpression="GLSO ASC" filter="ACS=0">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="SectionNo" columns="15" />
-        <dataField fieldName="SectionName" columns="12" />
-        <dataField fieldName="CourseID" aliasFieldName="CourseCode" columns="20" />
-        <dataField fieldName="CourseTitle" columns="20" />
-        <dataField fieldName="GL" columns="5" />
-        <dataField fieldName="SectionStartDate" columns="18" />
-        <dataField fieldName="SectionEndDate" columns="18" />
-        <dataField fieldName="ModeOfInstructionID" aliasFieldName="ModeOfInstructionDescription" hidden="true" />
-        <dataField fieldName="RefCreditTypeEarnedID" aliasFieldName="RefCreditTypeEarnedDescription" columns="8" />
-        <dataField fieldName="GpaapplicabilityID" aliasFieldName="GpaapplicabilityDescription" hidden="true" />
-        <dataField fieldName="SectionCharacteristicID" aliasFieldName="SectionCharacteristicDesc" columns="15" />
-        <dataField fieldName="CalendarSessionID" aliasFieldName="SessionCode" columns="12" />
-        <dataField fieldName="ACS" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="StaffAssignmentID" aliasFieldName="StaffAssignmentStaffClassificationID" hidden="true" />
-        <dataField fieldName="CreationDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="AssignedTutor" columns="15" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_course_sections" type="Grid" commandId="command1" label="All Course Sections" sortExpression="GLSO ASC">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="SectionNo" columns="15" />
-        <dataField fieldName="SectionName" columns="18" />
-        <dataField fieldName="CourseID" aliasFieldName="CourseCode" columns="20" />
-        <dataField fieldName="CourseTitle" columns="20" />
-        <dataField fieldName="GL" columns="5" />
-        <dataField fieldName="SectionStartDate" columns="18" />
-        <dataField fieldName="SectionEndDate" columns="18" />
-        <dataField fieldName="ModeOfInstructionID" aliasFieldName="ModeOfInstructionDescription" hidden="true" />
-        <dataField fieldName="RefCreditTypeEarnedID" aliasFieldName="RefCreditTypeEarnedDescription" columns="8" />
-        <dataField fieldName="GpaapplicabilityID" aliasFieldName="GpaapplicabilityDescription" hidden="true" />
-        <dataField fieldName="SectionCharacteristicID" aliasFieldName="SectionCharacteristicDesc" columns="15" />
-        <dataField fieldName="CalendarSessionID" aliasFieldName="SessionCode" columns="12" />
-        <dataField fieldName="ACS" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="StaffAssignmentID" aliasFieldName="StaffAssignmentStaffClassificationID" hidden="true" />
-        <dataField fieldName="CreationDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="AssignedTutor" columns="15" hidden="true" />
+        <dataField fieldName="StaffAssignmentID" aliasFieldName="StaffAssignmentStaffClassificationID" />
+        <dataField fieldName="GLSO" columns="15" />
+        <dataField fieldName="GL" />
+        <dataField fieldName="AssignedTutor" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Course Section">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Course Section" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="SectionNo" columns="50" />
             <dataField fieldName="SectionName" columns="50" />
             <dataField fieldName="SectionStartDate" columns="10" />
             <dataField fieldName="SectionEndDate" columns="10" />
-            <dataField fieldName="CourseID" aliasFieldName="CourseCode" />
-            <dataField fieldName="CourseTitle" />
-            <dataField fieldName="GL" />
-            <dataField fieldName="CalendarSessionID" aliasFieldName="SessionCode" />
             <dataField fieldName="ModeOfInstructionID" aliasFieldName="ModeOfInstructionDescription" />
             <dataField fieldName="RefCreditTypeEarnedID" aliasFieldName="RefCreditTypeEarnedDescription" />
+            <dataField fieldName="Capacity" columns="15" />
             <dataField fieldName="GpaapplicabilityID" aliasFieldName="GpaapplicabilityDescription" />
             <dataField fieldName="SectionCharacteristicID" aliasFieldName="SectionCharacteristicDesc" />
-            <dataField fieldName="StaffAssignmentID" aliasFieldName="StaffAssignmentStaffClassificationID" hidden="true" />
+            <dataField fieldName="CreationDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CalendarSessionID" aliasFieldName="SessionCode" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="CourseID" aliasFieldName="CourseCode" />
+            <dataField fieldName="CourseTitle" />
             <dataField fieldName="ACS" />
             <dataField fieldName="IsActive" />
-            <dataField fieldName="CreationDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" />
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-            <dataField fieldName="GLSO" columns="15" hidden="true" />
+            <dataField fieldName="StaffAssignmentID" aliasFieldName="StaffAssignmentStaffClassificationID" />
+            <dataField fieldName="GLSO" columns="15" />
+            <dataField fieldName="GL" />
             <dataField fieldName="AssignedTutor" columns="15" />
           </dataFields>
         </category>
@@ -215,28 +162,29 @@ order by "RefGradeLevel"."SortOrder" asc]]></text>
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="SectionNo" columns="50" />
             <dataField fieldName="SectionName" columns="50" />
             <dataField fieldName="SectionStartDate" columns="10" />
             <dataField fieldName="SectionEndDate" columns="10" />
-            <dataField fieldName="CourseID" aliasFieldName="CourseCode" />
-            <dataField fieldName="CourseTitle" />
-            <dataField fieldName="GL" />
-            <dataField fieldName="CalendarSessionID" aliasFieldName="SessionCode" />
             <dataField fieldName="ModeOfInstructionID" aliasFieldName="ModeOfInstructionDescription" />
             <dataField fieldName="RefCreditTypeEarnedID" aliasFieldName="RefCreditTypeEarnedDescription" />
+            <dataField fieldName="Capacity" columns="15" />
             <dataField fieldName="GpaapplicabilityID" aliasFieldName="GpaapplicabilityDescription" />
             <dataField fieldName="SectionCharacteristicID" aliasFieldName="SectionCharacteristicDesc" />
-            <dataField fieldName="StaffAssignmentID" aliasFieldName="StaffAssignmentStaffClassificationID" hidden="true" />
+            <dataField fieldName="CreationDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CalendarSessionID" aliasFieldName="SessionCode" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="CourseID" aliasFieldName="CourseCode" />
+            <dataField fieldName="CourseTitle" />
             <dataField fieldName="ACS" />
             <dataField fieldName="IsActive" />
-            <dataField fieldName="CreationDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" />
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-            <dataField fieldName="GLSO" columns="15" hidden="true" />
+            <dataField fieldName="StaffAssignmentID" aliasFieldName="StaffAssignmentStaffClassificationID" />
+            <dataField fieldName="GLSO" columns="15" />
+            <dataField fieldName="GL" />
             <dataField fieldName="AssignedTutor" columns="15" />
           </dataFields>
         </category>

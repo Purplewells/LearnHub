@@ -42,8 +42,8 @@ from "dbo"."ReportParameters" "ReportParameters"
       <dataFields>
         <dataField fieldName="ReportName" columns="50" />
         <dataField fieldName="Code" columns="10" />
-        <dataField fieldName="Attribute1" rows="5" textMode="RichText" />
-        <dataField fieldName="Attribute2" textMode="RichText" />
+        <dataField fieldName="Attribute1" rows="5" />
+        <dataField fieldName="Attribute2" />
         <dataField fieldName="Attribute3" />
         <dataField fieldName="Attribute4" />
         <dataField fieldName="Attribute5" />
@@ -54,36 +54,36 @@ from "dbo"."ReportParameters" "ReportParameters"
     <view id="editForm1" type="Form" commandId="command1" label="Review Report Parameters">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Report Parameters" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="ReportName" columns="50" />
             <dataField fieldName="Code" columns="10" />
-            <dataField fieldName="Attribute1" rows="5" textMode="RichText" />
-            <dataField fieldName="Attribute2" textMode="RichText" />
-            <dataField fieldName="Attribute3" textMode="RichText" />
-            <dataField fieldName="Attribute4" textMode="RichText" />
-            <dataField fieldName="Attribute5" textMode="RichText" />
-            <dataField fieldName="Attribute6" textMode="RichText" />
+            <dataField fieldName="Attribute1" rows="5" />
+            <dataField fieldName="Attribute2" />
+            <dataField fieldName="Attribute3" />
+            <dataField fieldName="Attribute4" />
+            <dataField fieldName="Attribute5" />
+            <dataField fieldName="Attribute6" />
             <dataField fieldName="ShowOnReport" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Report Parameter">
+    <view id="createForm1" type="Form" commandId="command1" label="New Report Parameters">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="ReportName" columns="50" />
             <dataField fieldName="Code" columns="10" />
-            <dataField fieldName="Attribute1" rows="5" textMode="RichText" />
-            <dataField fieldName="Attribute2" textMode="RichText" />
-            <dataField fieldName="Attribute3" textMode="RichText" />
-            <dataField fieldName="Attribute4" textMode="RichText" />
-            <dataField fieldName="Attribute5" textMode="RichText" />
-            <dataField fieldName="Attribute6" textMode="RichText" />
+            <dataField fieldName="Attribute1" rows="5" />
+            <dataField fieldName="Attribute2" />
+            <dataField fieldName="Attribute3" />
+            <dataField fieldName="Attribute4" />
+            <dataField fieldName="Attribute5" />
+            <dataField fieldName="Attribute6" />
             <dataField fieldName="ShowOnReport" />
           </dataFields>
         </category>

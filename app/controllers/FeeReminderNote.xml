@@ -50,39 +50,15 @@ from "dbo"."vw_fee_collection_accounting_ledger_fee_note" "vw_fee_collection_acc
     <field name="ReportNameCode" type="String" label="Report Name Code" length="10" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Fee Statement Note" reportTemplate="true" groupExpression="Fullname">
+    <view id="grid1" type="Grid" commandId="command1" label="Fee Reminder Note">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="PersonID" columns="15" hidden="true" />
-        <dataField fieldName="FirstName" columns="18" />
-        <dataField fieldName="LastName" columns="18" />
-        <dataField fieldName="Fullname" hidden="true" />
-        <dataField fieldName="GL" columns="7" />
-        <dataField fieldName="Description" columns="20" />
-        <dataField fieldName="FeeType" columns="20" />
-        <dataField fieldName="EventDate" columns="10" />
-        <dataField fieldName="Debit" columns="10" />
-        <dataField fieldName="Credit" columns="10" />
-        <dataField fieldName="TotalAmountBilled" columns="15" />
-        <dataField fieldName="TotalAmountReceived" columns="20" />
-        <dataField fieldName="Code" columns="5" />
-        <dataField fieldName="SchoolName" columns="50" hidden="true" />
-        <dataField fieldName="Address" hidden="true" />
-        <dataField fieldName="Email" columns="50" hidden="true" />
-        <dataField fieldName="Attribute1" textMode="RichText" hidden="true" />
-        <dataField fieldName="Attribute2" textMode="Note" hidden="true" />
-        <dataField fieldName="ReportNameCode" columns="10" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="all_attributes" type="Grid" commandId="command1" label="All Fee Note Attributes" reportTemplate="true">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="PersonID" columns="15" hidden="true" />
-        <dataField fieldName="LastName" columns="18" />
-        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="PersonID" columns="15" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="FirstName" columns="35" />
         <dataField fieldName="Fullname" />
         <dataField fieldName="GL" columns="10" />
-        <dataField fieldName="Description" columns="20" />
+        <dataField fieldName="Description" columns="50" />
         <dataField fieldName="FeeType" columns="20" />
         <dataField fieldName="EventDate" columns="10" />
         <dataField fieldName="Debit" columns="15" />
@@ -90,12 +66,12 @@ from "dbo"."vw_fee_collection_accounting_ledger_fee_note" "vw_fee_collection_acc
         <dataField fieldName="TotalAmountBilled" columns="15" />
         <dataField fieldName="TotalAmountReceived" columns="15" />
         <dataField fieldName="Code" columns="5" />
-        <dataField fieldName="SchoolName" columns="50" hidden="true" />
-        <dataField fieldName="Address" hidden="true" />
-        <dataField fieldName="Email" columns="50" hidden="true" />
-        <dataField fieldName="Attribute1" textMode="RichText" hidden="true" />
-        <dataField fieldName="Attribute2" textMode="RichText" hidden="true" />
-        <dataField fieldName="ReportNameCode" columns="10" hidden="true" />
+        <dataField fieldName="SchoolName" columns="50" />
+        <dataField fieldName="Address" />
+        <dataField fieldName="Email" columns="50" />
+        <dataField fieldName="Attribute1" rows="5" />
+        <dataField fieldName="Attribute2" />
+        <dataField fieldName="ReportNameCode" columns="10" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Fee Reminder Note">
@@ -188,7 +164,14 @@ from "dbo"."vw_fee_collection_accounting_ledger_fee_note" "vw_fee_collection_acc
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
-      <action id="a100" commandName="ReportAsPdf" cssClass="material-icon-print" notify="Printing the Fee Reminder Note" headerText="Print Fee Chits" whenView="xxx" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
     </actionGroup>
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />
@@ -197,13 +180,10 @@ from "dbo"."vw_fee_collection_accounting_ledger_fee_note" "vw_fee_collection_acc
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" cssClass="material-icon-event_note" notify="Printing the Fee Reminder Note" headerText="Print Reminder Note" />
-      <action id="a2" />
-      <action id="a100" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a3" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a4" commandName="ReportAsWord" headerText="Export To Word" />
-      <action id="a101" commandName="ExportRowset" headerText="Export To IPY" />
-      <action id="a102" commandName="ExportRss" headerText="Send RSS API" />
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

@@ -7,7 +7,6 @@
     <column name="ComponentCode" fieldName="ComponentCode" label="Component Code" />
     <column name="IsActive" fieldName="IsActive" label="Is Active" />
     <column name="Taxable" fieldName="Taxable" label="Taxable" />
-    <column name="TaxRate" fieldName="TaxRate" label="Tax Rate" />
     <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
   </columns>
 </dataModel>

@@ -37,7 +37,7 @@ from "dbo"."zlkpCountryFiscalPeriods" "zlkpCountryFiscalPeriods"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="CountryName" columns="30" />
-        <dataField fieldName="CountryCode" columns="20" />
+        <dataField fieldName="CountryCode" columns="10" />
         <dataField fieldName="FiscalStartDay" columns="15" />
         <dataField fieldName="FiscalStartMonth" columns="15" />
         <dataField fieldName="IsActive" />

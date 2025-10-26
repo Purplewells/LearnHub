@@ -59,7 +59,7 @@ from "dbo"."Person" "Person"
     <field name="RefSexID" type="Int32" label="Ref Sex ID">
       <items style="Lookup" dataController="Sex" newDataView="createForm1" dataValueField="GenderID" dataTextField="Description" />
     </field>
-    <field name="Sex" type="String" readOnly="true" label="Sex" length="10" />
+    <field name="Sex" type="String" readOnly="true" label="Sex" length="100" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
     <field name="PhoneNo" type="String" label="Phone No" length="15" />
     <field name="CYS" type="String" label="CYS" length="10" />
@@ -105,101 +105,126 @@ from "dbo"."Person" "Person"
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Photo Album" filter="(ExtendedLiveStatusEndDate &gt;= GETDATE() OR ExtendedLiveStatusEndDate IS NULL  AND CurrentYearStatus &lt;&gt; 'No' )">
+    <view id="grid1" type="Grid" commandId="command1" label="Photo Album">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Name" tag="header-item" />
-        <dataField fieldName="FirstName" columns="35" hidden="true" />
-        <dataField fieldName="LastName" columns="35" hidden="true" />
-        <dataField fieldName="Fullname" columns="25" tag="header-item&#xD;&#xA;header-text&#xD;&#xA;" />
         <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="BirthDate" columns="10" hidden="true" />
-        <dataField fieldName="AGE" columns="8" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="Name" />
+        <dataField fieldName="BirthDate" columns="10" />
         <dataField fieldName="RefSexID" aliasFieldName="Sex" />
+        <dataField fieldName="ModifiedDate" columns="20" />
         <dataField fieldName="PhoneNo" columns="15" />
-        <dataField fieldName="CYS" columns="5" hidden="true" />
-        <dataField fieldName="CYG" columns="5" hidden="true" />
-        <dataField fieldName="PhotoUrl" columns="15" />
-        <dataField fieldName="ExtendedRole" columns="20" tag="item-aside" />
+        <dataField fieldName="CYS" columns="10" />
+        <dataField fieldName="CYG" columns="10" />
+        <dataField fieldName="ExtendedRole" columns="20" />
         <dataField fieldName="ExtendedLiveStatusStartDate" columns="10" />
-        <dataField fieldName="ExtendedLiveStatusEndDate" columns="10" hidden="true" />
-        <dataField fieldName="TitleID" aliasFieldName="Title" hidden="true" />
-        <dataField fieldName="Address" columns="50" tag="item-para" hidden="true" />
-        <dataField fieldName="TownID" aliasFieldName="Town" hidden="true" />
-        <dataField fieldName="PostalCode" columns="12" hidden="true" />
-        <dataField fieldName="RefOccupationID" aliasFieldName="Occupation" hidden="true" />
-        <dataField fieldName="HeaderFullname" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ExtendedLiveStatusEndDate" columns="10" />
+        <dataField fieldName="TitleID" aliasFieldName="Title" />
+        <dataField fieldName="PhotoUrl" columns="15" />
+        <dataField fieldName="Address" columns="50" />
+        <dataField fieldName="TownID" aliasFieldName="Town" />
+        <dataField fieldName="PostalCode" columns="12" />
+        <dataField fieldName="RefOccupationID" aliasFieldName="Occupation" />
+        <dataField fieldName="HeaderFullname" />
+        <dataField fieldName="Fullname" />
+        <dataField fieldName="AGE" />
+        <dataField fieldName="CreatedDate" columns="20" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Enter &amp; Review Album">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Photo Album">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Photo Album" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="PhotoUrl" columns="15" tag="thumb-person&#xD;&#xA;image-size-75x90&#xD;&#xA;image-quality-50&#xD;&#xA;image-large-cover&#xD;&#xA;image-large-clip&#xD;&#xA;image-large-reject&#xD;&#xA;image-format-jpeg &#xD;&#xA;" />
-            <dataField fieldName="Name" />
-            <dataField fieldName="Fullname" hidden="true" />
             <dataField fieldName="UPN" columns="10" />
-            <dataField fieldName="RefSexID" aliasFieldName="Sex" />
-            <dataField fieldName="CYG" columns="10" readOnly="true" />
-          </dataFields>
-        </category>
-        <category id="c2" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="ExtendedLiveStatusStartDate" columns="10" textMode="Static" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="Name" />
             <dataField fieldName="BirthDate" columns="10" />
-            <dataField fieldName="AGE" />
-            <dataField fieldName="Address" columns="50" tag="item-para" hidden="true" />
-            <dataField fieldName="PhoneNo" columns="15" />
-            <dataField fieldName="ExtendedRole" columns="20" />
-            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="RefSexID" aliasFieldName="Sex" />
             <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="PhoneNo" columns="15" />
+            <dataField fieldName="CYS" columns="10" />
+            <dataField fieldName="CYG" columns="10" />
+            <dataField fieldName="ExtendedRole" columns="20" />
+            <dataField fieldName="ExtendedLiveStatusStartDate" columns="10" />
+            <dataField fieldName="ExtendedLiveStatusEndDate" columns="10" />
+            <dataField fieldName="TitleID" aliasFieldName="Title" />
+            <dataField fieldName="PhotoUrl" columns="15" />
+            <dataField fieldName="Address" columns="50" />
+            <dataField fieldName="TownID" aliasFieldName="Town" />
+            <dataField fieldName="PostalCode" columns="12" />
+            <dataField fieldName="RefOccupationID" aliasFieldName="Occupation" />
+            <dataField fieldName="HeaderFullname" />
+            <dataField fieldName="Fullname" />
+            <dataField fieldName="AGE" />
+            <dataField fieldName="CreatedDate" columns="20" />
           </dataFields>
         </category>
-        <category id="c5" collapsed="true" floating="true" flow="NewRow">
-          <description />
+        <category id="d1">
           <dataFields>
-            <dataField fieldName="HeaderFullname" hidden="true" />
+            <dataField fieldName="PersonAllergy" />
+          </dataFields>
+        </category>
+        <category id="d2">
+          <dataFields>
+            <dataField fieldName="PersonContactPoint" />
+          </dataFields>
+        </category>
+        <category id="d3">
+          <dataFields>
+            <dataField fieldName="PersonCredential" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Album">
+    <view id="createForm1" type="Form" commandId="command1" label="New Photo Album">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description />
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
+            <dataField fieldName="UPN" columns="10" />
             <dataField fieldName="FirstName" columns="35" />
             <dataField fieldName="LastName" columns="35" />
-            <dataField fieldName="UPN" columns="10" />
-            <dataField fieldName="RefSexID" aliasFieldName="Sex" />
-            <dataField fieldName="CYG" columns="10" />
-            <dataField fieldName="ExtendedLiveStatusStartDate" columns="10" />
-            <dataField fieldName="PhoneNo" columns="15" />
             <dataField fieldName="Name" />
-          </dataFields>
-        </category>
-        <category id="c2" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="PhotoUrl" columns="15" tag="thumb-person&#xD;&#xA;image-size-75x90&#xD;&#xA;image-quality-50&#xD;&#xA;image-large-cover&#xD;&#xA;image-large-clip&#xD;&#xA;image-large-reject&#xD;&#xA;image-format-jpeg &#xD;&#xA;" />
-            <dataField fieldName="Fullname" />
             <dataField fieldName="BirthDate" columns="10" />
-            <dataField fieldName="AGE" />
+            <dataField fieldName="RefSexID" aliasFieldName="Sex" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="PhoneNo" columns="15" />
+            <dataField fieldName="CYS" columns="10" />
+            <dataField fieldName="CYG" columns="10" />
             <dataField fieldName="ExtendedRole" columns="20" />
+            <dataField fieldName="ExtendedLiveStatusStartDate" columns="10" />
+            <dataField fieldName="ExtendedLiveStatusEndDate" columns="10" />
+            <dataField fieldName="TitleID" aliasFieldName="Title" />
+            <dataField fieldName="PhotoUrl" columns="15" />
+            <dataField fieldName="Address" columns="50" />
+            <dataField fieldName="TownID" aliasFieldName="Town" />
+            <dataField fieldName="PostalCode" columns="12" />
+            <dataField fieldName="RefOccupationID" aliasFieldName="Occupation" />
+            <dataField fieldName="HeaderFullname" />
+            <dataField fieldName="Fullname" />
+            <dataField fieldName="AGE" />
+            <dataField fieldName="CreatedDate" columns="20" />
           </dataFields>
         </category>
-        <category id="c5" collapsed="true" floating="true" flow="NewRow">
-          <description />
+        <category id="d1">
           <dataFields>
-            <dataField fieldName="ModifiedDate" columns="20" />
-            <dataField fieldName="CreatedDate" columns="20" />
-            <dataField fieldName="HeaderFullname" hidden="true" />
+            <dataField fieldName="PersonAllergy" />
+          </dataFields>
+        </category>
+        <category id="d2">
+          <dataFields>
+            <dataField fieldName="PersonContactPoint" />
+          </dataFields>
+        </category>
+        <category id="d3">
+          <dataFields>
+            <dataField fieldName="PersonCredential" />
           </dataFields>
         </category>
       </categories>

@@ -35,15 +35,15 @@ from "dbo"."Cohort" "Cohort"
     <field name="CohortType" type="Int32" label="Cohort Type" showInSummary="true">
       <items style="Lookup" dataController="CohortTypeDescription" newDataView="createForm1" dataValueField="CohortTypeDescriptionID" dataTextField="CohortTypeDescription" />
     </field>
-    <field name="CohortTypeDescription" type="String" readOnly="true" label="Cohort Type" length="30" />
+    <field name="CohortTypeDescription" type="String" readOnly="true" label="Cohort Type" length="50" />
     <field name="SubjectDescriptorTypeID" type="Int32" label="Subject Descriptor Type ID" showInSummary="true">
       <items style="Lookup" dataController="CourseSubjectArea" newDataView="createForm1" dataValueField="CourseSubjectAreaID" dataTextField="SubjectAreaDescription" />
     </field>
-    <field name="SubjectDescriptorTypeSubjectAreaDescription" type="String" readOnly="true" label="Subject Area" length="25" />
+    <field name="SubjectDescriptorTypeSubjectAreaDescription" type="String" readOnly="true" label="Subject Area" length="100" />
     <field name="ResponsibleOrganisationID" type="Int32" label="Responsible Organisation ID" showInSummary="true">
       <items style="Lookup" dataController="Organisation" newDataView="createForm1" dataValueField="OrganizationID" dataTextField="Name" />
     </field>
-    <field name="ResponsibleOrganisationName" type="String" readOnly="true" label="Responsible Organisation" length="30" />
+    <field name="ResponsibleOrganisationName" type="String" readOnly="true" label="Responsible Organisation" length="60" />
     <field name="CohortScopeID" type="Int32" label="Cohort Scope ID" showInSummary="true">
       <items style="Lookup" dataController="CohortScope" newDataView="createForm1" dataValueField="CohortScopeID" dataTextField="CohortScope" />
     </field>
@@ -58,9 +58,6 @@ from "dbo"."Cohort" "Cohort"
     <field name="CohortStaffAssociation" type="DataView" label="Cohort Staff Association">
       <dataView controller="CohortStaffAssociation" view="grid1" filterFields="CohortID" />
     </field>
-    <field name="StudentInterventionAssociation" type="DataView" label="Student Intervention Association">
-      <dataView controller="StudentInterventionAssociation" view="grid1" filterFields="OrganisationalPersonRoleID" />
-    </field>
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Cohort">
@@ -69,16 +66,16 @@ from "dbo"."Cohort" "Cohort"
         <dataField fieldName="CohortDescription" columns="50" />
         <dataField fieldName="CohortType" aliasFieldName="CohortTypeDescription" />
         <dataField fieldName="SubjectDescriptorTypeID" aliasFieldName="SubjectDescriptorTypeSubjectAreaDescription" />
-        <dataField fieldName="CohortScopeID" aliasFieldName="CohortScope" />
         <dataField fieldName="ResponsibleOrganisationID" aliasFieldName="ResponsibleOrganisationName" />
+        <dataField fieldName="CohortScopeID" aliasFieldName="CohortScope" />
         <dataField fieldName="ProgramReference" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Cohort">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Cohort" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="CohortDescription" columns="50" />
             <dataField fieldName="CohortType" aliasFieldName="CohortTypeDescription" />
@@ -88,30 +85,19 @@ from "dbo"."Cohort" "Cohort"
             <dataField fieldName="ProgramReference" />
           </dataFields>
         </category>
-        <category id="c2" tab="INTERVENTION DIAGNOSIS" flow="NewRow">
+        <category id="d1">
           <dataFields>
-            <dataField fieldName="StudentInterventionAssociation" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none">
-              <headerText>Intervention Diagnosis</headerText>
-            </dataField>
+            <dataField fieldName="CohortProgram" />
           </dataFields>
         </category>
-        <category id="d1" tab="COHORT PROGRAM">
+        <category id="d2">
           <dataFields>
-            <dataField fieldName="CohortProgram" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none" />
+            <dataField fieldName="StudentCohortAssociation" />
           </dataFields>
         </category>
-        <category id="d2" tab="PARTICIPANTS">
+        <category id="d3">
           <dataFields>
-            <dataField fieldName="StudentCohortAssociation" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none">
-              <headerText>Participants</headerText>
-            </dataField>
-          </dataFields>
-        </category>
-        <category id="d3" tab="RESPONSIBLE STAFF">
-          <dataFields>
-            <dataField fieldName="CohortStaffAssociation" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none">
-              <headerText>Responsible Staff</headerText>
-            </dataField>
+            <dataField fieldName="CohortStaffAssociation" />
           </dataFields>
         </category>
       </categories>
@@ -120,7 +106,7 @@ from "dbo"."Cohort" "Cohort"
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description />
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="CohortDescription" columns="50" />
             <dataField fieldName="CohortType" aliasFieldName="CohortTypeDescription" />
@@ -130,33 +116,20 @@ from "dbo"."Cohort" "Cohort"
             <dataField fieldName="ProgramReference" />
           </dataFields>
         </category>
-        <category id="d1" tab="COHORT PROGRAM" flow="NewRow">
+        <category id="d1">
           <dataFields>
-            <dataField fieldName="CohortProgram" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none" />
+            <dataField fieldName="CohortProgram" />
           </dataFields>
-          <visibility>
-            <expression test="[1]==2" type="ClientScript" />
-          </visibility>
         </category>
-        <category id="d2" tab="PARTICIPANTS">
+        <category id="d2">
           <dataFields>
-            <dataField fieldName="StudentCohortAssociation" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none">
-              <headerText>Participants</headerText>
-            </dataField>
+            <dataField fieldName="StudentCohortAssociation" />
           </dataFields>
-          <visibility>
-            <expression test="[1]==2" type="ClientScript" />
-          </visibility>
         </category>
-        <category id="d3" tab="RESPONSIBLE STAFF">
+        <category id="d3">
           <dataFields>
-            <dataField fieldName="CohortStaffAssociation" tag="modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-content-stub-none">
-              <headerText>Responsible Staff</headerText>
-            </dataField>
+            <dataField fieldName="CohortStaffAssociation" />
           </dataFields>
-          <visibility>
-            <expression test="[1]==2" type="ClientScript" />
-          </visibility>
         </category>
       </categories>
     </view>
@@ -187,7 +160,7 @@ from "dbo"."Cohort" "Cohort"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

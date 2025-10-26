@@ -34,7 +34,7 @@ from "dbo"."StudentCohortAssociation" "StudentCohortAssociation"
     <field name="StartDate" type="DateTime" allowNulls="false" label="Start Date" showInSummary="true" />
     <field name="EndDate" type="DateTime" label="End Date" showInSummary="true" />
     <field name="StudentID" type="Int32" allowNulls="false" label="Student ID" showInSummary="true">
-      <items style="Lookup" dataController="zlkpStudentList" dataValueField="PersonID" dataTextField="StudentGradeName" copy="StudentFirstName=FirstName, StudentLastName=LastName" dataView="grid1" />
+      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="UPN" copy="StudentFirstName=FirstName, StudentLastName=LastName" />
     </field>
     <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
     <field name="StudentFirstName" type="String" readOnly="true" label="Student First Name" length="35" />
@@ -56,41 +56,47 @@ from "dbo"."StudentCohortAssociation" "StudentCohortAssociation"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="CohortID" aliasFieldName="CohortDescription" />
-        <dataField fieldName="Fullname" />
-        <dataField fieldName="Name" />
-        <dataField fieldName="StudentID" aliasFieldName="UPN" />
         <dataField fieldName="StartDate" columns="10" />
         <dataField fieldName="EndDate" columns="10" />
+        <dataField fieldName="StudentID" aliasFieldName="UPN" />
+        <dataField fieldName="StudentFirstName" columns="35" />
+        <dataField fieldName="StudentLastName" columns="35" />
+        <dataField fieldName="Fullname" />
+        <dataField fieldName="Name" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Enter &amp; maintain Participant">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Student Cohort Association">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Student Cohort Association" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="CohortID" aliasFieldName="CohortDescription" />
-            <dataField fieldName="StudentID" aliasFieldName="Fullname" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
+            <dataField fieldName="StudentID" aliasFieldName="UPN" />
+            <dataField fieldName="StudentFirstName" columns="35" />
+            <dataField fieldName="StudentLastName" columns="35" />
             <dataField fieldName="Fullname" />
-            <dataField fieldName="Name" hidden="true" />
+            <dataField fieldName="Name" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Participant">
+    <view id="createForm1" type="Form" commandId="command1" label="New Student Cohort Association">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="CohortID" aliasFieldName="CohortDescription" />
-            <dataField fieldName="StudentID" aliasFieldName="Fullname" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
+            <dataField fieldName="StudentID" aliasFieldName="UPN" />
+            <dataField fieldName="StudentFirstName" columns="35" />
+            <dataField fieldName="StudentLastName" columns="35" />
             <dataField fieldName="Fullname" />
-            <dataField fieldName="Name" hidden="true" />
+            <dataField fieldName="Name" />
           </dataFields>
         </category>
       </categories>

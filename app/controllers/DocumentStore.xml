@@ -31,41 +31,33 @@ from "dbo"."DocumentStore" "DocumentStore"
     <field name="ShortDesc" type="String" label="Short Desc" length="50" showInSummary="true" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
-    <field name="Data" type="Byte[]" label="Data" sourceFields="DocID" onDemand="true" onDemandHandler="FileHandler" onDemandStyle="Thumbnail" allowLEV="true" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Document Store">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="ShortDesc" columns="50" />
         <dataField fieldName="Filename" />
+        <dataField fieldName="ContentType" />
+        <dataField fieldName="Length" columns="15" />
         <dataField fieldName="Note" rows="5" />
-        <dataField fieldName="ContentType" hidden="true" />
-        <dataField fieldName="Length" columns="15" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="Data" columns="15" />
+        <dataField fieldName="ShortDesc" columns="50" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Document Store">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c2" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Document Store" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="ShortDesc" columns="50" />
-            <dataField fieldName="Note" rows="3" />
             <dataField fieldName="Filename" />
-            <dataField fieldName="Length" columns="15" />
             <dataField fieldName="ContentType" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c1" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="Data" columns="15" />
+            <dataField fieldName="Length" columns="15" />
+            <dataField fieldName="Note" rows="5" />
+            <dataField fieldName="ShortDesc" columns="50" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
           </dataFields>
         </category>
       </categories>
@@ -81,9 +73,8 @@ from "dbo"."DocumentStore" "DocumentStore"
             <dataField fieldName="Length" columns="15" />
             <dataField fieldName="Note" rows="5" />
             <dataField fieldName="ShortDesc" columns="50" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="Data" columns="15" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
           </dataFields>
         </category>
       </categories>
@@ -120,7 +111,6 @@ from "dbo"."DocumentStore" "DocumentStore"
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
-      <action commandName="Upload" headerText="Upload Multiple Files" cssClass="material-icon-spa" confirmation="Do you want to proceed ?" id="a100" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
@@ -151,10 +141,4 @@ from "dbo"."DocumentStore" "DocumentStore"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <blobAdapterConfig>Field: Data
-Storage-System: File 
-Path-Template: ~\App_Data\asset_documents\{DocID}-{FileName}
-File-Name-Field: FileName
-Content-Type-Field: ContentType
-Length-Field: Length</blobAdapterConfig>
 </dataController>

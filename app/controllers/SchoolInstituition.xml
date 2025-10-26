@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="SchoolInstituition" conflictDetection="overwriteChanges" label="School Instituition" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.SchoolInstituitionBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="SchoolInstituition" conflictDetection="overwriteChanges" label="School Instituition" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -52,7 +52,7 @@ from "dbo"."School" "School"
     </command>
   </commands>
   <fields>
-    <field name="SchoolName" type="String" label="School Name" length="50" showInSummary="true" causesCalculate="true" />
+    <field name="SchoolName" type="String" label="School Name" length="50" showInSummary="true" />
     <field name="RefSchoolTypeID" type="Int32" label="Ref School Type Id" showInSummary="true">
       <items style="Lookup" dataController="SchoolType" newDataView="createForm1" dataValueField="RefSchoolTypeID" dataTextField="Description" />
     </field>
@@ -89,82 +89,78 @@ from "dbo"."School" "School"
     <field name="OrganisationIsActive" type="Boolean" isVirtual="true" label="IsActive" />
     <field name="OrganisationLogo" type="Byte[]" isVirtual="true" onDemand="true" sourceFields="OrganizationID" onDemandHandler="OrganisationLogo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Logo" />
     <field name="OrganisationAddress" type="String" isVirtual="true" label="Address" length="150" />
-    <field name="Address" type="String" label="Address" length="500" causesCalculate="true" />
     <field name="CreatedDate" type="DateTime" isVirtual="true" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" isVirtual="true" label="Modified Date" />
     <field name="ModifiedBy" type="String" isVirtual="true" label="Modified By" length="50" />
     <field name="CreatedBy" type="String" isVirtual="true" label="Created By" length="50" />
+    <field name="Address" type="String" label="Address" length="500" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Instituition">
+    <view id="grid1" type="Grid" commandId="command1" label="School Instituition">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="SchoolName" columns="50" tag="header-text" />
-        <dataField fieldName="OrganisationName" tag="header-text" />
-        <dataField fieldName="OrganisationShortName" columns="30" />
+        <dataField fieldName="SchoolName" columns="50" />
         <dataField fieldName="RefSchoolTypeID" aliasFieldName="RefSchoolTypeDescription" />
         <dataField fieldName="RefSchoolLevelID" aliasFieldName="RefSchoolLevelDescription" />
+        <dataField fieldName="RefAdministrativeFundingControlID" aliasFieldName="RefAdministrativeFundingControlDescription" />
+        <dataField fieldName="CharterSchoolIndicator" />
         <dataField fieldName="RefCharterSchoolTypeID" aliasFieldName="RefCharterSchoolTypeDescription" />
         <dataField fieldName="ApprovalYear" columns="9" />
+        <dataField fieldName="RefCharterSchoolApprovalAgencyTypeID" aliasFieldName="RefCharterSchoolApprovalAgencyTypeDescription" />
         <dataField fieldName="ContractApprovalDate" columns="10" />
-        <dataField fieldName="ContractNumber" columns="30" hidden="true" />
-        <dataField fieldName="OrganisationWebsite" columns="50" hidden="true" />
+        <dataField fieldName="ContractNumber" columns="30" />
+        <dataField fieldName="ContractRenewalDate" columns="10" />
+        <dataField fieldName="RefCharterSchoolManagementOrganizationTypeID" aliasFieldName="RefCharterSchoolManagementOrganizationTypeDescription" />
+        <dataField fieldName="OrganizationID" aliasFieldName="OrganisationTypeDescription" hidden="true" />
+        <dataField fieldName="OrganisationTypeElementTypeDescription" />
+        <dataField fieldName="OrganisationName" />
+        <dataField fieldName="OrganisationTypeID" columns="15" />
+        <dataField fieldName="OrganisationShortName" columns="30" />
+        <dataField fieldName="OrganisationWebsite" columns="50" />
         <dataField fieldName="OrganisationEmail" columns="50" />
-        <dataField fieldName="CharterSchoolIndicator" hidden="true" />
         <dataField fieldName="OrganisationIsActive" />
         <dataField fieldName="OrganisationLogo" columns="15" />
         <dataField fieldName="OrganisationAddress" />
+        <dataField fieldName="CreatedDate" columns="10" />
+        <dataField fieldName="ModifiedDate" columns="10" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="CreatedBy" columns="50" />
         <dataField fieldName="Address" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review School Instituition">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="School Instituition" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="SchoolName" columns="50" hidden="true" />
-            <dataField fieldName="OrganisationName" />
-            <dataField fieldName="OrganisationShortName" columns="30" />
+            <dataField fieldName="SchoolName" columns="50" />
             <dataField fieldName="RefSchoolTypeID" aliasFieldName="RefSchoolTypeDescription" />
             <dataField fieldName="RefSchoolLevelID" aliasFieldName="RefSchoolLevelDescription" />
-            <dataField fieldName="RefCharterSchoolTypeID" aliasFieldName="RefCharterSchoolTypeDescription" />
-            <dataField fieldName="OrganizationID" aliasFieldName="OrganisationTypeDescription" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Indicators">
-          <description />
-          <dataFields>
-            <dataField fieldName="ContractNumber" columns="30" />
-            <dataField fieldName="ApprovalYear" columns="9" />
-            <dataField fieldName="ContractApprovalDate" columns="10" />
-            <dataField fieldName="ContractRenewalDate" columns="10" />
-            <dataField fieldName="OrganisationIsActive" />
+            <dataField fieldName="RefAdministrativeFundingControlID" aliasFieldName="RefAdministrativeFundingControlDescription" />
             <dataField fieldName="CharterSchoolIndicator" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="Address Details">
-          <description />
-          <dataFields>
-            <dataField fieldName="Address" />
-            <dataField fieldName="OrganisationAddress" hidden="true" />
+            <dataField fieldName="RefCharterSchoolTypeID" aliasFieldName="RefCharterSchoolTypeDescription" />
+            <dataField fieldName="ApprovalYear" columns="9" />
+            <dataField fieldName="RefCharterSchoolApprovalAgencyTypeID" aliasFieldName="RefCharterSchoolApprovalAgencyTypeDescription" />
+            <dataField fieldName="ContractApprovalDate" columns="10" />
+            <dataField fieldName="ContractNumber" columns="30" />
+            <dataField fieldName="ContractRenewalDate" columns="10" />
+            <dataField fieldName="RefCharterSchoolManagementOrganizationTypeID" aliasFieldName="RefCharterSchoolManagementOrganizationTypeDescription" />
+            <dataField fieldName="OrganizationID" aliasFieldName="OrganisationTypeDescription" hidden="true" />
+            <dataField fieldName="OrganisationTypeElementTypeDescription" />
+            <dataField fieldName="OrganisationName" />
+            <dataField fieldName="OrganisationTypeID" columns="15" />
+            <dataField fieldName="OrganisationShortName" columns="30" />
             <dataField fieldName="OrganisationWebsite" columns="50" />
             <dataField fieldName="OrganisationEmail" columns="50" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Branding" flow="NewColumn">
-          <description />
-          <dataFields>
+            <dataField fieldName="OrganisationIsActive" />
             <dataField fieldName="OrganisationLogo" columns="15" />
-          </dataFields>
-        </category>
-        <category id="c5" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
+            <dataField fieldName="OrganisationAddress" />
             <dataField fieldName="CreatedDate" columns="10" />
             <dataField fieldName="ModifiedDate" columns="10" />
             <dataField fieldName="ModifiedBy" columns="50" />
             <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="Address" />
           </dataFields>
         </category>
       </categories>
@@ -173,41 +169,35 @@ from "dbo"."School" "School"
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description />
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="SchoolName" columns="50" hidden="true" />
-            <dataField fieldName="OrganisationName" />
-            <dataField fieldName="OrganisationShortName" columns="30" />
+            <dataField fieldName="SchoolName" columns="50" />
             <dataField fieldName="RefSchoolTypeID" aliasFieldName="RefSchoolTypeDescription" />
             <dataField fieldName="RefSchoolLevelID" aliasFieldName="RefSchoolLevelDescription" />
-            <dataField fieldName="RefCharterSchoolTypeID" aliasFieldName="RefCharterSchoolTypeDescription" />
-            <dataField fieldName="OrganizationID" aliasFieldName="OrganisationTypeDescription" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Indicators">
-          <description />
-          <dataFields>
-            <dataField fieldName="ContractNumber" columns="30" />
-            <dataField fieldName="ApprovalYear" columns="9" />
-            <dataField fieldName="ContractApprovalDate" columns="10" />
-            <dataField fieldName="ContractRenewalDate" columns="10" />
-            <dataField fieldName="OrganisationIsActive" />
+            <dataField fieldName="RefAdministrativeFundingControlID" aliasFieldName="RefAdministrativeFundingControlDescription" />
             <dataField fieldName="CharterSchoolIndicator" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="Address Details">
-          <description />
-          <dataFields>
-            <dataField fieldName="Address" />
-            <dataField fieldName="OrganisationAddress" hidden="true" />
+            <dataField fieldName="RefCharterSchoolTypeID" aliasFieldName="RefCharterSchoolTypeDescription" />
+            <dataField fieldName="ApprovalYear" columns="9" />
+            <dataField fieldName="RefCharterSchoolApprovalAgencyTypeID" aliasFieldName="RefCharterSchoolApprovalAgencyTypeDescription" />
+            <dataField fieldName="ContractApprovalDate" columns="10" />
+            <dataField fieldName="ContractNumber" columns="30" />
+            <dataField fieldName="ContractRenewalDate" columns="10" />
+            <dataField fieldName="RefCharterSchoolManagementOrganizationTypeID" aliasFieldName="RefCharterSchoolManagementOrganizationTypeDescription" />
+            <dataField fieldName="OrganizationID" aliasFieldName="OrganisationTypeDescription" hidden="true" />
+            <dataField fieldName="OrganisationTypeElementTypeDescription" />
+            <dataField fieldName="OrganisationName" />
+            <dataField fieldName="OrganisationTypeID" columns="15" />
+            <dataField fieldName="OrganisationShortName" columns="30" />
             <dataField fieldName="OrganisationWebsite" columns="50" />
             <dataField fieldName="OrganisationEmail" columns="50" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Branding" flow="NewColumn">
-          <description />
-          <dataFields>
+            <dataField fieldName="OrganisationIsActive" />
             <dataField fieldName="OrganisationLogo" columns="15" />
+            <dataField fieldName="OrganisationAddress" />
+            <dataField fieldName="CreatedDate" columns="10" />
+            <dataField fieldName="ModifiedDate" columns="10" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="Address" />
           </dataFields>
         </category>
       </categories>
@@ -274,7 +264,4 @@ from "dbo"."School" "School"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="Insert|update|Calculate" type="Code" phase="After" name="UpdateOrganisationDetails" />
-  </businessRules>
 </dataController>

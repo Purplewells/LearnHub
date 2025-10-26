@@ -23,14 +23,7 @@ from "dbo"."zlkpSalaryComponentReason" "zlkpSalaryComponentReason"
     <field name="IsActive" type="Boolean" default="((1))" label="Is Active" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Component Reason" filter="IsActive = 1">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Reason" columns="30" />
-        <dataField fieldName="IsActive" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_reasons" type="Grid" commandId="command1" label="All Component Reasons">
+    <view id="grid1" type="Grid" commandId="command1" label="Salary Component Reason">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Reason" columns="30" />
@@ -40,7 +33,7 @@ from "dbo"."zlkpSalaryComponentReason" "zlkpSalaryComponentReason"
     <view id="editForm1" type="Form" commandId="command1" label="Review Salary Component Reason">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Salary Component Reason" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="Reason" columns="30" />

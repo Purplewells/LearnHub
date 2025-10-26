@@ -35,7 +35,7 @@ from "dbo"."Transactions" "Transactions"
     <field name="ProductID" type="Int32" allowNulls="false" label="Product ID" showInSummary="true">
       <items style="Lookup" dataController="Product" newDataView="createForm1" dataValueField="ProductID" dataTextField="ProductName" copy="ProductSKUCode=Skucode, ProductCategoryName=CategoryName, ProductSupplierName=SupplierName" />
     </field>
-    <field name="ProductName" type="String" readOnly="true" label="Product Name" length="50" />
+    <field name="ProductName" type="String" readOnly="true" label="Product Name" length="100" />
     <field name="ProductSKUCode" type="String" readOnly="true" label="Product SKU" length="10" />
     <field name="ProductCategoryName" type="String" readOnly="true" label="Product Category" length="20" />
     <field name="ProductSupplierName" type="String" readOnly="true" label="Supplier Name" length="50" />
@@ -55,13 +55,13 @@ from "dbo"."Transactions" "Transactions"
         <dataField fieldName="ProductSKUCode" columns="10" />
         <dataField fieldName="ProductCategoryName" columns="20" />
         <dataField fieldName="ProductSupplierName" columns="50" />
-        <dataField fieldName="TransactionDate" columns="20" />
+        <dataField fieldName="TransactionDate" columns="10" />
         <dataField fieldName="TransactionType" columns="10" />
         <dataField fieldName="Quantity" columns="15" />
         <dataField fieldName="CreatedDate" columns="20" />
         <dataField fieldName="ModifiedDate" columns="20" />
-        <dataField fieldName="CreatedBy" columns="20" />
-        <dataField fieldName="ModifiedBy" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Transactions Movement">

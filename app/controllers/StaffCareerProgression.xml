@@ -33,20 +33,20 @@ from "amt"."vw_metric_staff_assignment" "vw_metric_staff_assignment"
     <field name="ExtendedRole" type="String" label="Role" length="20" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Student CPD" filter="ExtendedRole = 'Student'">
+    <view id="grid1" type="Grid" commandId="command1" label="Staff Career Progression">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="PersonID" columns="15" hidden="true" />
-        <dataField fieldName="FirstName" columns="18" />
-        <dataField fieldName="LastName" columns="18" />
-        <dataField fieldName="BirthDate" columns="18" />
+        <dataField fieldName="PersonID" columns="15" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="LastName" />
+        <dataField fieldName="BirthDate" columns="10" />
         <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="Email" columns="25" />
+        <dataField fieldName="Email" columns="50" />
         <dataField fieldName="PhoneNo" columns="15" />
-        <dataField fieldName="Credential" columns="25" tag="pivot5-row1-columnstacked&#xD;&#xA;pivot5-title:&quot;What is the count of CPD Credentials&quot;&#xD;&#xA;pivot5-small" />
-        <dataField fieldName="AwardEntity" columns="25" tag="pivot6-row1-column&#xD;&#xA;pivot6-title:&quot;What is the distribution of credentials via award entity&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Instituition&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;No of awards&quot;" />
-        <dataField fieldName="IssuanceDate" columns="20" tag="pivot4-row1-column-date-all&#xD;&#xA;pivot4-title:&quot;What is the CPD of staff over time&quot;&#xD;&#xA;pivot4-medium" />
-        <dataField fieldName="ExtendedRole" columns="20" tag="pivot5-col1" />
+        <dataField fieldName="Credential" />
+        <dataField fieldName="AwardEntity" />
+        <dataField fieldName="IssuanceDate" columns="10" />
+        <dataField fieldName="ExtendedRole" columns="20" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Staff Career Progression">

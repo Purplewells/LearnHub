@@ -53,11 +53,11 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
     <field name="JobClassificationID" type="Int32" label="Job Classification ID" showInSummary="true">
       <items style="Lookup" dataController="EducationJobClassification" newDataView="createForm1" dataValueField="RefProfessionalEducationJobClassificationID" dataTextField="Description" />
     </field>
-    <field name="JobClass" type="String" readOnly="true" label="Job Class" length="30" />
+    <field name="JobClass" type="String" readOnly="true" label="Job Class" length="100" />
     <field name="PositionTypeID" type="Int32" label="Position Type ID" showInSummary="true">
       <items style="Lookup" dataController="ClassroomPositionType" newDataView="createForm1" dataValueField="RefClassroomPositionTypeID" dataTextField="Description" />
     </field>
-    <field name="PositionType" type="String" readOnly="true" label="Position Type" length="30" />
+    <field name="PositionType" type="String" readOnly="true" label="Position Type" length="100" />
     <field name="QTS" type="Boolean" label="QTS" showInSummary="true" />
     <field name="StartDate" type="DateTime" label="Start Date" showInSummary="true" />
     <field name="EndDate" type="DateTime" label="End Date" />
@@ -74,22 +74,16 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
       <items style="Lookup" dataController="CountryFiscalPeriods" newDataView="createForm1" dataValueField="CountryFiscalPeriodID" dataTextField="CountryName" />
     </field>
     <field name="CountryFiscalPeriod" type="String" readOnly="true" label="Country Fiscal Period" length="30" />
-    <field name="Salaries" type="DataView" label="Salaries" roles="Administrators, AccountManagers" writeRoles="Administrators, AccountManagers">
-      <dataView controller="Salaries" view="grid1" filterFields="AssignmentID" />
-    </field>
-    <field name="TaxConfiguration" type="DataView" label="Tax Configuration">
-      <dataView controller="TaxConfiguration" view="grid1" filterFields="StaffAssignmentID" />
-    </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Staff Contract">
+    <view id="grid1" type="Grid" commandId="command1" label="zn Staff Assignment">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="StaffName" hidden="true" />
+        <dataField fieldName="StaffName" />
         <dataField fieldName="FirstName" columns="35" />
         <dataField fieldName="LastName" columns="35" />
         <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="Title" columns="15" hidden="true" />
+        <dataField fieldName="Title" columns="15" />
         <dataField fieldName="JobClassificationID" aliasFieldName="JobClass" />
         <dataField fieldName="PositionTypeID" aliasFieldName="PositionType" />
         <dataField fieldName="QTS" />
@@ -102,7 +96,7 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
         <dataField fieldName="CountryFiscalPeriodID" aliasFieldName="CountryFiscalPeriod" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Contract">
+    <view id="editForm1" type="Form" commandId="command1" label="Review zn Staff Assignment">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="zn Staff Assignment" flow="NewColumn">
@@ -112,7 +106,7 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
             <dataField fieldName="FirstName" columns="35" />
             <dataField fieldName="LastName" columns="35" />
             <dataField fieldName="UPN" columns="10" />
-            <dataField fieldName="Title" columns="15" hidden="true" />
+            <dataField fieldName="Title" columns="15" />
             <dataField fieldName="JobClassificationID" aliasFieldName="JobClass" />
             <dataField fieldName="PositionTypeID" aliasFieldName="PositionType" />
             <dataField fieldName="QTS" />
@@ -125,31 +119,19 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
             <dataField fieldName="CountryFiscalPeriodID" aliasFieldName="CountryFiscalPeriod" />
           </dataFields>
         </category>
-        <category id="c3" tab="TAX CONFIGURATION" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="TaxConfiguration" columns="15" tag="material-icon-water&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-dock-center&#xD;&#xA;modal-content-stub-none" />
-          </dataFields>
-        </category>
-        <category id="c2" tab="SALARIES">
-          <description />
-          <dataFields>
-            <dataField fieldName="Salaries" columns="15" tag="modal-fullscreen" />
-          </dataFields>
-        </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Contract">
+    <view id="createForm1" type="Form" commandId="command1" label="New zn Staff Assignment">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="StaffName" hidden="true" />
+            <dataField fieldName="StaffName" />
             <dataField fieldName="FirstName" columns="35" />
             <dataField fieldName="LastName" columns="35" />
             <dataField fieldName="UPN" columns="10" />
-            <dataField fieldName="Title" columns="15" hidden="true" />
+            <dataField fieldName="Title" columns="15" />
             <dataField fieldName="JobClassificationID" aliasFieldName="JobClass" />
             <dataField fieldName="PositionTypeID" aliasFieldName="PositionType" />
             <dataField fieldName="QTS" />
@@ -191,7 +173,7 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New Contract" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
@@ -226,7 +208,4 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="New" type="Sql" phase="Execute" name="setContractEndDate"><![CDATA[SET @EndDate = DATEADD (YEAR, 10, GETDATE())]]></rule>
-  </businessRules>
 </dataController>

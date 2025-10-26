@@ -78,11 +78,11 @@ from "dbo"."Person" "Person"
     <field name="RefSexID" type="Int32" label="Ref Sex ID">
       <items style="Lookup" dataController="Sex" newDataView="createForm1" dataValueField="GenderID" dataTextField="Description" />
     </field>
-    <field name="Sex" type="String" readOnly="true" label="Sex" length="8" />
+    <field name="Sex" type="String" readOnly="true" label="Sex" length="100" />
     <field name="RefCitizenshipStatusID" type="Int32" label="Ref Citizenship Status ID">
       <items style="Lookup" dataController="CitizenshipStatus" newDataView="createForm1" dataValueField="RefCitizenshipStatusID" dataTextField="Description" />
     </field>
-    <field name="Ethnicity" type="String" readOnly="true" label="Ethnicity" length="20" />
+    <field name="Ethnicity" type="String" readOnly="true" label="Ethnicity" length="100" />
     <field name="RefProofOfResidencyTypeID" type="Int32" label="Ref Proof Of Residency Type ID">
       <items style="Lookup" dataController="IdentificationProof" newDataView="createForm1" dataValueField="RefProofOfResidencyTypeID" dataTextField="Description" />
     </field>
@@ -105,7 +105,7 @@ from "dbo"."Person" "Person"
     <field name="LanguageID" type="Int32" label="Language ID">
       <items style="Lookup" dataController="Language" newDataView="createForm1" dataValueField="LanguageID" dataTextField="Language" />
     </field>
-    <field name="Language" type="String" readOnly="true" label="Language" length="18" />
+    <field name="Language" type="String" readOnly="true" label="Language" length="30" />
     <field name="ReligionID" type="Int32" label="Religion ID">
       <items style="Lookup" dataController="Religion" newDataView="createForm1" dataValueField="ReligionID" dataTextField="Religion" />
     </field>
@@ -134,7 +134,7 @@ from "dbo"."Person" "Person"
       <formula>Person.FirstName + ', ' + Person.LastName + ' &gt;&gt; ' + '( ' + 'UPN: ' + Person.IdentificationCode + ' &gt;&gt; ' + Person.CurrentYearGradeLevel + ' )'  
  </formula>
     </field>
-    <field name="Occupation" type="String" readOnly="true" label="Occupation" length="20" />
+    <field name="Occupation" type="String" readOnly="true" label="Occupation" length="100" />
     <field name="AGE" type="String" readOnly="true" label="AGE" computed="true">
       <formula>CONVERT(NVARCHAR(10), CONVERT(int,ROUND(DATEDIFF(hour,BirthDate,GETDATE())/8766.0,0))) + ' ' + 'Yrs' 
 </formula>
@@ -159,36 +159,41 @@ from "dbo"."Person" "Person"
     <view id="grid1" type="Grid" commandId="command1" label="School List">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="FirstName" columns="18" />
-        <dataField fieldName="LastName" columns="18" />
         <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="BirthDate" columns="18" />
-        <dataField fieldName="AGE" columns="6" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="MiddleName" columns="35" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="BirthDate" columns="10" />
         <dataField fieldName="RefSexID" aliasFieldName="Sex" />
-        <dataField fieldName="CYG" columns="10" />
         <dataField fieldName="RefCitizenshipStatusID" aliasFieldName="Ethnicity" />
-        <dataField fieldName="RefProofOfResidencyTypeID" aliasFieldName="ProofOfResidency" hidden="true" />
+        <dataField fieldName="RefProofOfResidencyTypeID" aliasFieldName="ProofOfResidency" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="Email" columns="50" />
         <dataField fieldName="PhoneNo" columns="15" />
-        <dataField fieldName="CYS" columns="10" hidden="true" />
+        <dataField fieldName="CYS" columns="10" />
+        <dataField fieldName="CYG" columns="10" />
         <dataField fieldName="ExtendedRole" columns="20" />
         <dataField fieldName="ExtendedLiveStatusStartDate" columns="10" />
-        <dataField fieldName="ExtendedLiveStatusEndDate" columns="10" hidden="true" />
-        <dataField fieldName="TitleID" aliasFieldName="Title" hidden="true" />
+        <dataField fieldName="ExtendedLiveStatusEndDate" columns="10" />
+        <dataField fieldName="TitleID" aliasFieldName="Title" />
         <dataField fieldName="LanguageID" aliasFieldName="Language" />
         <dataField fieldName="ReligionID" aliasFieldName="Religion" />
-        <dataField fieldName="PhotoUrl" columns="15" hidden="true" />
-        <dataField fieldName="OrganizationName" hidden="true" />
-        <dataField fieldName="Address" columns="20" />
+        <dataField fieldName="PhotoUrl" columns="15" />
+        <dataField fieldName="OrganizationName" />
+        <dataField fieldName="Address" columns="50" />
         <dataField fieldName="TownID" aliasFieldName="Town" />
         <dataField fieldName="PostalCode" columns="12" />
-        <dataField fieldName="CountryID" aliasFieldName="Country" hidden="true" />
-        <dataField fieldName="LocationTypeID" aliasFieldName="LocationType" hidden="true" />
-        <dataField fieldName="Email" columns="20" />
-        <dataField fieldName="ExtSetGradeLevel" columns="20" hidden="true" />
+        <dataField fieldName="CountryID" aliasFieldName="Country" />
+        <dataField fieldName="LocationTypeID" aliasFieldName="LocationType" />
+        <dataField fieldName="ExtSetGradeLevel" columns="20" />
         <dataField fieldName="RefOccupationID" aliasFieldName="Occupation" />
-        <dataField fieldName="HeaderFullname" hidden="true" />
-        <dataField fieldName="Fullname" hidden="true" />
-        <dataField fieldName="OrganizationID" columns="15" hidden="true" />
+        <dataField fieldName="HeaderFullname" />
+        <dataField fieldName="AGE" />
+        <dataField fieldName="Fullname" />
+        <dataField fieldName="OrganizationID" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review School List">

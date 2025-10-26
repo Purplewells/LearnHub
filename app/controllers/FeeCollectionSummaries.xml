@@ -40,22 +40,22 @@ from "dbo"."vw_fee_collection_summaries" "vw_fee_collection_summaries"
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Fee Collection Summaries">
-      <headerText>This screen shows balances for students who have made at least one payment. It shows Billed Amount , Discount, Amount Paid and Total Balance.</headerText>
+      <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="PersonID" columns="15" hidden="true" />
-        <dataField fieldName="Fullname" columns="30" hidden="true" />
-        <dataField fieldName="LastName" columns="18" />
-        <dataField fieldName="FirstName" columns="18" />
+        <dataField fieldName="PersonID" columns="15" />
+        <dataField fieldName="Fullname" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="FirstName" columns="35" />
         <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="GL" columns="5" />
-        <dataField fieldName="TotalBilledAmount" columns="15" aggregate="Sum" />
-        <dataField fieldName="Discount" columns="15" aggregate="Sum" />
-        <dataField fieldName="AmountPaid" columns="15" aggregate="Sum" />
-        <dataField fieldName="TotalPaid" columns="15" aggregate="Sum" />
-        <dataField fieldName="Balance" columns="15" aggregate="Sum" />
-        <dataField fieldName="Currency" columns="5" />
+        <dataField fieldName="Discount" columns="15" />
+        <dataField fieldName="AmountPaid" columns="15" />
+        <dataField fieldName="TotalBilledAmount" columns="15" />
+        <dataField fieldName="TotalPaid" columns="15" />
+        <dataField fieldName="Balance" columns="15" />
         <dataField fieldName="Status" columns="11" />
-        <dataField fieldName="CSY" columns="5" />
+        <dataField fieldName="GL" columns="10" />
+        <dataField fieldName="CSY" columns="10" />
+        <dataField fieldName="Currency" columns="5" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Fee Collection Summaries">
@@ -140,11 +140,10 @@ from "dbo"."vw_fee_collection_summaries" "vw_fee_collection_summaries"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a100" commandName="ReportAsPdf" headerText="Print Fee Balances" />
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a102" commandName="ReportAsWord" />
-      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a7" commandName="DataSheet" />
       <action id="a8" commandName="Grid" />
     </actionGroup>
@@ -153,6 +152,12 @@ from "dbo"."vw_fee_collection_summaries" "vw_fee_collection_summaries"
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

@@ -74,14 +74,14 @@ from "dbo"."vw_fee_col_ac_ledger_mini_combined_extended" "vw_fee_col_ac_ledger_m
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Financial Statement Report" groupExpression="BillYear, GroupingID" reportTemplate="true">
+    <view id="grid1" type="Grid" commandId="command1" label="Custom Fee Reminder Fee Chit">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="PersonID" columns="15" hidden="true" />
-        <dataField fieldName="Fullname" columns="35" />
+        <dataField fieldName="PersonID" columns="15" />
+        <dataField fieldName="Fullname" />
         <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="YearGroup" columns="5" />
-        <dataField fieldName="Description" columns="25" />
+        <dataField fieldName="YearGroup" columns="10" />
+        <dataField fieldName="Description" columns="50" />
         <dataField fieldName="FeeType" columns="20" />
         <dataField fieldName="EventDate" columns="10" />
         <dataField fieldName="Debit" columns="15" />
@@ -90,28 +90,25 @@ from "dbo"."vw_fee_col_ac_ledger_mini_combined_extended" "vw_fee_col_ac_ledger_m
         <dataField fieldName="EachBalances" columns="15" />
         <dataField fieldName="TotAmountBilled" columns="15" />
         <dataField fieldName="TotalAmountPaid" columns="15" />
-        <dataField fieldName="LocalBalance" columns="15" hidden="true" />
-        <dataField fieldName="DebtBalance" columns="15" />
-        <dataField fieldName="Currency" columns="5" />
+        <dataField fieldName="LocalBalance" columns="15" />
         <dataField fieldName="SessionCode" columns="20" />
-        <dataField fieldName="CalendarYear" columns="12" hidden="true" />
-        <dataField fieldName="BillYear" columns="15" hidden="true" />
-        <dataField fieldName="SchoolName" columns="50" hidden="true" />
-        <dataField fieldName="Address" hidden="true" />
-        <dataField fieldName="BilledYear" columns="10" />
+        <dataField fieldName="CalendarYear" />
+        <dataField fieldName="BillYear" columns="15" />
+        <dataField fieldName="SchoolName" columns="50" />
+        <dataField fieldName="Address" />
         <dataField fieldName="CSY" />
-        <dataField fieldName="OPS" columns="2" hidden="true" />
-        <dataField fieldName="ThisYearArrears" columns="15" hidden="true" />
-        <dataField fieldName="LastYearArrears" columns="15" hidden="true" />
-        <dataField fieldName="HasArrears" columns="1" hidden="true" />
-        <dataField fieldName="Attribute1" hidden="true" />
-        <dataField fieldName="Attribute2" hidden="true" />
+        <dataField fieldName="OPS" columns="2" />
+        <dataField fieldName="Currency" columns="5" />
+        <dataField fieldName="BilledYear" columns="15" />
+        <dataField fieldName="DebtBalance" columns="15" />
+        <dataField fieldName="ThisYearArrears" columns="15" />
+        <dataField fieldName="LastYearArrears" columns="15" />
+        <dataField fieldName="HasArrears" columns="1" />
+        <dataField fieldName="Attribute1" rows="5" />
+        <dataField fieldName="Attribute2" />
         <dataField fieldName="ShowOnReport" />
         <dataField fieldName="GroupingID" />
       </dataFields>
-      <styles>
-        <expression type="ClientScript" result="student-credit-payment" test="$row.Credit&gt;0" />
-      </styles>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Custom Fee Reminder Fee Chit">
       <headerText>$DefaultEditViewDescription</headerText>
@@ -229,7 +226,10 @@ from "dbo"."vw_fee_col_ac_ledger_mini_combined_extended" "vw_fee_col_ac_ledger_m
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
       <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a7" commandName="DataSheet" />
       <action id="a8" commandName="Grid" />
     </actionGroup>
@@ -240,11 +240,10 @@ from "dbo"."vw_fee_col_ac_ledger_mini_combined_extended" "vw_fee_col_ac_ledger_m
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" headerText="Print Bill Statement" />
-      <action id="a3" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a101" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a100" />
-      <action id="a4" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

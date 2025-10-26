@@ -29,17 +29,7 @@ from "dbo"."zlkpExitOrWithdrawalType" "zlkpExitOrWithdrawalType"
     <field name="SortOrder" type="Decimal" label="Sort Order" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Withdrawal Type" filter="IsActive = 1">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Description" />
-        <dataField fieldName="Code" columns="50" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="DefaultValue" />
-        <dataField fieldName="SortOrder" columns="15" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_withdrawal_types" type="Grid" commandId="command1" label="All Withdrawal Types">
+    <view id="grid1" type="Grid" commandId="command1" label="Exit Or Withdrawal Type">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Description" />

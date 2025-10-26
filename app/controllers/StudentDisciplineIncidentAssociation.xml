@@ -44,26 +44,26 @@ from "dbo"."StudentDisciplineIncidentAssociation" "StudentDisciplineIncidentAsso
     </field>
     <field name="DisciplineIncidentCode" type="String" readOnly="true" label="Discipline Incident Code" length="40" />
     <field name="StudentID" type="Int32" allowNulls="false" label="Student ID" showInSummary="true">
-      <items style="Lookup" dataController="zlkpStudentList" newDataView="createForm1" dataValueField="PersonID" dataTextField="StudentGradeName" copy="StudentFirstName=FirstName, StudentLastName=LastName" dataView="grid1" />
+      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="UPN" copy="FirstName=FirstName, LastName=LastName" />
     </field>
     <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
     <field name="FirstName" type="String" readOnly="true" label="First Name" length="35" />
     <field name="LastName" type="String" readOnly="true" label="Last Name" length="35" />
     <field name="IncidentParticipationID" type="Int32" label="Incident Participation ID" showInSummary="true">
-      <items style="DropDownList" dataController="IncidentParticipation" dataValueField="IncidentParticipationID" dataTextField="ParticipationDescription" dataView="grid1" />
+      <items style="Lookup" dataController="IncidentParticipation" newDataView="createForm1" dataValueField="IncidentParticipationID" dataTextField="ParticipationDescription" />
     </field>
     <field name="IncidentParticipationDescription" type="String" readOnly="true" label="Incident Involvement" length="20" />
     <field name="BehaviourCategoryTypeID" type="Int32" label="Behaviour Category Type ID" showInSummary="true">
-      <items style="DropDownList" dataController="BehaviourCategory" dataValueField="BehaviourCategoryTypeID" dataTextField="CategoryType" copy="BehaviourCategoryTypePoints=Points" dataView="grid1" />
+      <items style="Lookup" dataController="BehaviourCategory" newDataView="createForm1" dataValueField="BehaviourCategoryTypeID" dataTextField="CategoryType" copy="BehaviourCategoryTypePoints=Points" />
     </field>
-    <field name="BehaviourCategoryType" type="String" readOnly="true" label="Behaviour Category Type" length="60" />
+    <field name="BehaviourCategoryType" type="String" readOnly="true" label="Behaviour Category Type" length="100" />
     <field name="BehaviourCategoryTypePoints" type="Single" readOnly="true" label="Points" />
     <field name="ActionTakenID" type="Int32" label="Action Taken ID" showInSummary="true">
-      <items style="DropDownList" dataController="ActionTaken" dataValueField="ActionTakenID" dataTextField="ActionTaken" dataView="grid1" />
+      <items style="Lookup" dataController="ActionTaken" newDataView="createForm1" dataValueField="ActionTakenID" dataTextField="ActionTaken" />
     </field>
     <field name="ActionTaken" type="String" readOnly="true" label="Action Taken" length="50" />
     <field name="PersonID" type="Int32" label="Person ID">
-      <items style="Lookup" dataController="zlkpStaffList" dataValueField="PersonID" dataTextField="StaffNameTitle" copy="FirstName=FirstName, LastName=LastName" dataView="grid1" />
+      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="FirstName" copy="StaffLastName=LastName" />
     </field>
     <field name="StaffFirstName" type="String" readOnly="true" label="Staff First Name" length="35" />
     <field name="StaffLastName" type="String" readOnly="true" label="Staff Last Name" length="35" />
@@ -79,49 +79,59 @@ from "dbo"."StudentDisciplineIncidentAssociation" "StudentDisciplineIncidentAsso
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="DisciplineIncidentID" aliasFieldName="DisciplineIncidentCode" />
-        <dataField fieldName="StudentID" aliasFieldName="Fullname" />
-        <dataField fieldName="FirstName" columns="35" hidden="true" />
-        <dataField fieldName="LastName" columns="35" hidden="true" />
+        <dataField fieldName="StudentID" aliasFieldName="UPN" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="LastName" columns="35" />
         <dataField fieldName="IncidentParticipationID" aliasFieldName="IncidentParticipationDescription" />
         <dataField fieldName="BehaviourCategoryTypeID" aliasFieldName="BehaviourCategoryType" />
         <dataField fieldName="BehaviourCategoryTypePoints" columns="15" />
         <dataField fieldName="ActionTakenID" aliasFieldName="ActionTaken" />
-        <dataField fieldName="PersonID" aliasFieldName="StaffName" />
-        <dataField fieldName="StaffLastName" columns="35" hidden="true" />
+        <dataField fieldName="PersonID" aliasFieldName="StaffFirstName" />
+        <dataField fieldName="StaffLastName" columns="35" />
         <dataField fieldName="StaffName" />
         <dataField fieldName="Fullname" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Incident">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Student Discipline Incident Association">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
+        <category id="c1" headerText="Student Discipline Incident Association" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="DisciplineIncidentID" aliasFieldName="DisciplineIncidentCode" />
-            <dataField fieldName="StudentID" aliasFieldName="Fullname" />
+            <dataField fieldName="StudentID" aliasFieldName="UPN" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
             <dataField fieldName="IncidentParticipationID" aliasFieldName="IncidentParticipationDescription" />
             <dataField fieldName="BehaviourCategoryTypeID" aliasFieldName="BehaviourCategoryType" />
             <dataField fieldName="BehaviourCategoryTypePoints" columns="15" />
             <dataField fieldName="ActionTakenID" aliasFieldName="ActionTaken" />
-            <dataField fieldName="PersonID" aliasFieldName="StaffName" />
+            <dataField fieldName="PersonID" aliasFieldName="StaffFirstName" />
+            <dataField fieldName="StaffLastName" columns="35" />
+            <dataField fieldName="StaffName" />
+            <dataField fieldName="Fullname" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Incident Action">
+    <view id="createForm1" type="Form" commandId="command1" label="New Student Discipline Incident Association">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="DisciplineIncidentID" aliasFieldName="DisciplineIncidentCode" />
-            <dataField fieldName="StudentID" aliasFieldName="Fullname" />
+            <dataField fieldName="StudentID" aliasFieldName="UPN" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
             <dataField fieldName="IncidentParticipationID" aliasFieldName="IncidentParticipationDescription" />
             <dataField fieldName="BehaviourCategoryTypeID" aliasFieldName="BehaviourCategoryType" />
             <dataField fieldName="BehaviourCategoryTypePoints" columns="15" />
             <dataField fieldName="ActionTakenID" aliasFieldName="ActionTaken" />
-            <dataField fieldName="PersonID" aliasFieldName="StaffName" />
+            <dataField fieldName="PersonID" aliasFieldName="StaffFirstName" />
+            <dataField fieldName="StaffLastName" columns="35" />
+            <dataField fieldName="StaffName" />
+            <dataField fieldName="Fullname" />
           </dataFields>
         </category>
       </categories>
@@ -139,10 +149,10 @@ from "dbo"."StudentDisciplineIncidentAssociation" "StudentDisciplineIncidentAsso
       <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
-      <action id="a1" commandName="Edit" headerText="Review Incident Action" />
+      <action id="a1" commandName="Edit" />
       <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
-      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" headerText="Submit Resolution" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />

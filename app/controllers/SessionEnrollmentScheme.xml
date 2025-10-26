@@ -19,11 +19,11 @@ from "dbo"."mlinkSessionEnrollment" "mlinkSessionEnrollment"
   </commands>
   <fields>
     <field name="CalendarSessionID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Calendar Session ID" showInSummary="true">
-      <items style="RadioButtonList" dataController="Session" dataValueField="CalendarSessionID" dataTextField="SessionCode" dataView="grid1_session_advance" />
+      <items style="Lookup" dataController="Session" newDataView="createForm1" dataValueField="CalendarSessionID" dataTextField="SessionCode" />
     </field>
     <field name="CalendarSessionCode" type="String" readOnly="true" label="Outgoing Term" length="20" />
-    <field name="NextCalendarSessionID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Next Calendar Session ID" showInSummary="true" allowLEV="true">
-      <items style="RadioButtonList" dataController="Session" dataValueField="CalendarSessionID" dataTextField="SessionCode" copy="NextSessionStartDate=StartDate, NextSessionEndDate=EndDate, IsActive=IsActive" dataView="grid1_session_advance" />
+    <field name="NextCalendarSessionID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Next Calendar Session ID" showInSummary="true">
+      <items style="Lookup" dataController="Session" newDataView="createForm1" dataValueField="CalendarSessionID" dataTextField="SessionCode" copy="NextSessionStartDate=StartDate, NextSessionEndDate=EndDate, IsActive=IsActive" />
     </field>
     <field name="NextCalendarSessionCode" type="String" readOnly="true" label="Incoming term" length="20" />
     <field name="NextSessionStartDate" type="DateTime" readOnly="true" dataFormatString="d" label="Incoming Session Start" />
@@ -36,36 +36,36 @@ from "dbo"."mlinkSessionEnrollment" "mlinkSessionEnrollment"
       <dataFields>
         <dataField fieldName="CalendarSessionID" aliasFieldName="CalendarSessionCode" />
         <dataField fieldName="NextCalendarSessionID" aliasFieldName="NextCalendarSessionCode" />
-        <dataField fieldName="NextSessionStartDate" columns="20" />
-        <dataField fieldName="NextSessionEndDate" columns="20" />
+        <dataField fieldName="NextSessionStartDate" columns="10" />
+        <dataField fieldName="NextSessionEndDate" columns="10" />
         <dataField fieldName="IsActive" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Session Advance">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Session Enrollment Scheme">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Session Enrollment Scheme" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="CalendarSessionID" aliasFieldName="CalendarSessionCode" columns="2" />
-            <dataField fieldName="NextCalendarSessionID" aliasFieldName="NextCalendarSessionCode" columns="2" />
-            <dataField fieldName="NextSessionStartDate" columns="10" hidden="true" />
-            <dataField fieldName="NextSessionEndDate" columns="10" hidden="true" />
+            <dataField fieldName="CalendarSessionID" aliasFieldName="CalendarSessionCode" />
+            <dataField fieldName="NextCalendarSessionID" aliasFieldName="NextCalendarSessionCode" />
+            <dataField fieldName="NextSessionStartDate" columns="10" />
+            <dataField fieldName="NextSessionEndDate" columns="10" />
             <dataField fieldName="IsActive" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Session Advance">
+    <view id="createForm1" type="Form" commandId="command1" label="New Session Enrollment Scheme">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="CalendarSessionID" aliasFieldName="CalendarSessionCode" columns="2" />
-            <dataField fieldName="NextCalendarSessionID" aliasFieldName="NextCalendarSessionCode" columns="2" />
-            <dataField fieldName="NextSessionStartDate" columns="10" hidden="true" />
-            <dataField fieldName="NextSessionEndDate" columns="10" hidden="true" />
+            <dataField fieldName="CalendarSessionID" aliasFieldName="CalendarSessionCode" />
+            <dataField fieldName="NextCalendarSessionID" aliasFieldName="NextCalendarSessionCode" />
+            <dataField fieldName="NextSessionStartDate" columns="10" />
+            <dataField fieldName="NextSessionEndDate" columns="10" />
             <dataField fieldName="IsActive" />
           </dataFields>
         </category>
@@ -74,7 +74,7 @@ from "dbo"."mlinkSessionEnrollment" "mlinkSessionEnrollment"
   </views>
   <actions>
     <actionGroup id="ag1" scope="Grid">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
       <action id="a2" commandName="Edit" />
       <action id="a3" commandName="Delete" />
       <action id="a6" />
@@ -103,20 +103,12 @@ from "dbo"."mlinkSessionEnrollment" "mlinkSessionEnrollment"
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
-      <action commandName="SQL" cssClass="material-icon-wifi_protected_setup" id="a100" headerText="Set Session" notify="Session progress setup completed.">
-        <data><![CDATA[EXEC usp_ops_mlinkSessionEnrollment]]></data>
-      </action>
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="SQL" cssClass="material-icon-wifi_protected_setup" id="a100" headerText="Set Sessions">
-        <data><![CDATA[EXEC usp_ops_mlinkSessionEnrollment]]></data>
-      </action>
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a101" commandName="ReportAsPdf" headerText="Export To PDF" />
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
-      <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
-      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -128,6 +120,12 @@ from "dbo"."mlinkSessionEnrollment" "mlinkSessionEnrollment"
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
@@ -135,9 +133,4 @@ from "dbo"."mlinkSessionEnrollment" "mlinkSessionEnrollment"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="Update|calculate" type="JavaScript" phase="After"><![CDATA[// Refresh the current screen after executing the stored procedure
-$app.touch.refresh();
-]]></rule>
-  </businessRules>
 </dataController>

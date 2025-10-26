@@ -43,21 +43,21 @@ from "dbo"."Books" "Books"
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Book Catalogue">
+    <view id="grid1" type="Grid" commandId="command1" label="Books">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Title" tag="header-text" columns="40" />
-        <dataField fieldName="Author" columns="40" />
+        <dataField fieldName="Title" />
+        <dataField fieldName="Author" columns="50" />
         <dataField fieldName="ISBN" columns="20" />
         <dataField fieldName="PublicationYear" columns="15" />
-        <dataField fieldName="Genre" columns="20" />
-        <dataField fieldName="Publisher" columns="25" />
-        <dataField fieldName="TotalCopies" columns="15" />
         <dataField fieldName="CopiesAvailable" columns="15" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="TotalCopies" columns="15" />
+        <dataField fieldName="Genre" columns="50" />
+        <dataField fieldName="Publisher" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Books">
@@ -70,15 +70,10 @@ from "dbo"."Books" "Books"
             <dataField fieldName="Author" columns="50" />
             <dataField fieldName="ISBN" columns="20" />
             <dataField fieldName="PublicationYear" columns="15" />
+            <dataField fieldName="CopiesAvailable" columns="15" />
             <dataField fieldName="TotalCopies" columns="15" />
-            <dataField fieldName="CopiesAvailable" columns="15" textMode="Static" />
             <dataField fieldName="Genre" columns="50" />
             <dataField fieldName="Publisher" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
@@ -97,10 +92,14 @@ from "dbo"."Books" "Books"
             <dataField fieldName="Author" columns="50" />
             <dataField fieldName="ISBN" columns="20" />
             <dataField fieldName="PublicationYear" columns="15" />
+            <dataField fieldName="CopiesAvailable" columns="15" />
             <dataField fieldName="TotalCopies" columns="15" />
-            <dataField fieldName="CopiesAvailable" columns="15" textMode="Static" />
             <dataField fieldName="Genre" columns="50" />
             <dataField fieldName="Publisher" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
           </dataFields>
         </category>
       </categories>
@@ -118,8 +117,8 @@ from "dbo"."Books" "Books"
       <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
-      <action id="a1" commandName="Edit" headerText="Review Book Details" />
-      <action id="a2" commandName="Delete" headerText="Remove Book" />
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
       <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
@@ -132,31 +131,33 @@ from "dbo"."Books" "Books"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="Add New Book" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" headerText="Review Book Details" confirmation="_survey = ThreeLevelMD" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a101" commandName="ReportAsPdf" headerText="Export To PDF" />
-      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a103" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
-      <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
       <action id="a8" commandName="Grid" />
-      <action commandName="Navigate" commandArgument="~/pages/BorrowTransactions" headerText="New Lend" id="a100" />
     </actionGroup>
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

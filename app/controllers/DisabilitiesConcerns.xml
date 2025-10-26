@@ -42,17 +42,17 @@ from "dwh"."pbi_vw_metric_student_profile_disabilities_concerns" "pbi_vw_metric_
     <view id="grid1" type="Grid" commandId="command1" label="Disabilities Concerns">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="PersonID" columns="15" hidden="true" />
+        <dataField fieldName="PersonID" columns="15" />
         <dataField fieldName="LastName" columns="35" />
         <dataField fieldName="FirstName" columns="35" />
-        <dataField fieldName="Sex" columns="10" tag="pivot1-row1-pie&#xD;&#xA;pivot1-title:&quot;What is total number of disabilities concerns by gender&quot;" />
-        <dataField fieldName="DisabilityType" tag="pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;What is total number of disabilities concerns by disability type&quot;" />
-        <dataField fieldName="ConditionType" tag="pivot3-col1" />
-        <dataField fieldName="SourceType" tag="pivot3-row1-column&#xD;&#xA;pivot3-title:&quot;What is total number of disabilities concerns by source&quot;" />
+        <dataField fieldName="Sex" />
+        <dataField fieldName="DisabilityType" />
+        <dataField fieldName="ConditionType" />
+        <dataField fieldName="SourceType" />
         <dataField fieldName="Status" columns="8" />
         <dataField fieldName="AccommodationsNeeded" />
         <dataField fieldName="ConditionStatus" />
-        <dataField fieldName="RoleName" columns="50" hidden="true" />
+        <dataField fieldName="RoleName" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Disabilities Concerns">

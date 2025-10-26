@@ -32,7 +32,7 @@ from "dbo"."zlkpCitizenshipStatus" "zlkpCitizenshipStatus"
       <dataFields>
         <dataField fieldName="Description" />
         <dataField fieldName="Code" columns="50" />
-        <dataField fieldName="Definition" />
+        <dataField fieldName="Definition" rows="5" />
         <dataField fieldName="SortOrder" columns="15" />
       </dataFields>
     </view>

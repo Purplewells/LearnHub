@@ -32,7 +32,7 @@ from "dbo"."zlkpCourseInteractionMode" "zlkpCourseInteractionMode"
       <dataFields>
         <dataField fieldName="Description" />
         <dataField fieldName="Code" columns="50" />
-        <dataField fieldName="Definition" hidden="true" />
+        <dataField fieldName="Definition" rows="5" />
         <dataField fieldName="SortOrder" columns="15" />
       </dataFields>
     </view>
@@ -50,7 +50,7 @@ from "dbo"."zlkpCourseInteractionMode" "zlkpCourseInteractionMode"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Interaction Mode">
+    <view id="createForm1" type="Form" commandId="command1" label="New Course Interaction Mode">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">

@@ -53,50 +53,32 @@ from "dbo"."Calendar" "Calendar"
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Calendar" filter="CSY = 1">
+    <view id="grid1" type="Grid" commandId="command1" label="Calendar">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="CalendarCode" columns="20" />
-        <dataField fieldName="Description" columns="20" />
-        <dataField fieldName="Year" columns="10" />
-        <dataField fieldName="YearStartDate" columns="20" />
-        <dataField fieldName="YearEndDate" columns="20" />
+        <dataField fieldName="CalendarCode" columns="30" />
+        <dataField fieldName="Description" />
+        <dataField fieldName="Year" columns="15" />
+        <dataField fieldName="YearStartDate" columns="10" />
+        <dataField fieldName="YearEndDate" columns="10" />
         <dataField fieldName="CSY" />
-        <dataField fieldName="SchoolID" aliasFieldName="School" hidden="true" />
+        <dataField fieldName="SchoolID" aliasFieldName="School" />
         <dataField fieldName="AcademicYearLength" columns="15" />
         <dataField fieldName="Sequence" columns="15" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_calendars" type="Grid" commandId="command1" label="All Calendars">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="CalendarCode" columns="20" />
-        <dataField fieldName="Description" columns="20" />
-        <dataField fieldName="Year" columns="10" />
-        <dataField fieldName="YearStartDate" columns="20" />
-        <dataField fieldName="YearEndDate" columns="20" />
-        <dataField fieldName="CSY" />
-        <dataField fieldName="SchoolID" aliasFieldName="School" hidden="true" />
-        <dataField fieldName="AcademicYearLength" columns="15" />
-        <dataField fieldName="Sequence" columns="15" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Calendar">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Calendar" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="Description" />
             <dataField fieldName="CalendarCode" columns="30" />
+            <dataField fieldName="Description" />
             <dataField fieldName="Year" columns="15" />
             <dataField fieldName="YearStartDate" columns="10" />
             <dataField fieldName="YearEndDate" columns="10" />
@@ -104,20 +86,15 @@ from "dbo"."Calendar" "Calendar"
             <dataField fieldName="SchoolID" aliasFieldName="School" />
             <dataField fieldName="AcademicYearLength" columns="15" />
             <dataField fieldName="Sequence" columns="15" />
-          </dataFields>
-        </category>
-        <category id="d1" tab="SESSION" flow="NewRow">
-          <dataFields>
-            <dataField fieldName="Session" tag="modal-fullscreen&#xD;&#xA;modal-fit-content" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Audit Trail" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedBy" columns="50" />
+          </dataFields>
+        </category>
+        <category id="d1">
+          <dataFields>
+            <dataField fieldName="Session" />
           </dataFields>
         </category>
       </categories>
@@ -135,7 +112,7 @@ from "dbo"."Calendar" "Calendar"
             <dataField fieldName="YearEndDate" columns="10" />
             <dataField fieldName="CSY" />
             <dataField fieldName="SchoolID" aliasFieldName="School" />
-            <dataField fieldName="AcademicYearLength" columns="15" hidden="true" />
+            <dataField fieldName="AcademicYearLength" columns="15" />
             <dataField fieldName="Sequence" columns="15" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
@@ -177,7 +154,7 @@ from "dbo"."Calendar" "Calendar"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New Calendar" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
@@ -212,7 +189,4 @@ from "dbo"."Calendar" "Calendar"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="Insert|Update|New" type="Sql" phase="After" name="calculateAcademicYearLength"><![CDATA[EXEC [dbo].[usp_academic_year_calculate_total_instruction_days]]]></rule>
-  </businessRules>
 </dataController>

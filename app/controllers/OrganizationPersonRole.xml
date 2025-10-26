@@ -38,7 +38,7 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
       <formula>Person.FirstName + ' ' + Person.LastName</formula>
     </field>
     <field name="OrganisationID" type="Int32" label="Organisation ID" showInSummary="true">
-      <items style="RadioButtonList" dataController="Organisation" dataValueField="OrganizationID" dataTextField="Name" dataView="grid1" />
+      <items style="Lookup" dataController="Organisation" newDataView="createForm1" dataValueField="OrganizationID" dataTextField="Name" />
     </field>
     <field name="Organisation" type="String" readOnly="true" label="Organisation" length="60" />
     <field name="PersonID" type="Int32" label="Person ID" showInSummary="true">
@@ -54,24 +54,18 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
     <field name="EntryDate" type="DateTime" label="Admission Date" showInSummary="true" />
     <field name="ExitDate" type="DateTime" label="Termination Date" showInSummary="true" />
     <field name="RoleID" type="Int32" label="Role ID">
-      <items style="RadioButtonList" dataController="Role" dataValueField="RoleID" dataTextField="RoleName" dataView="grid1" />
+      <items style="Lookup" dataController="Role" newDataView="createForm1" dataValueField="RoleID" dataTextField="RoleName" />
     </field>
     <field name="Role" type="String" readOnly="true" label="Role" length="50" />
     <field name="HeadTitle" type="String" readOnly="true" label="Head Title" computed="true">
       <formula>Person.FirstName + ' ' + Person.LastName</formula>
-    </field>
-    <field name="StudentSchoolAssociations" type="DataView" label="Student School Associations">
-      <dataView controller="StudentSchoolAssociations" view="grid1" filterFields="OrganizationPersonRoleID" />
-    </field>
-    <field name="znStudentSchoolAssociation" type="DataView" label="Student Enrollments">
-      <dataView controller="znStudentSchoolAssociation" view="grid1" filterFields="OrganizationPersonRoleID" />
     </field>
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Organization Person Role">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Fullname" hidden="true" />
+        <dataField fieldName="Fullname" />
         <dataField fieldName="OrganisationID" aliasFieldName="Organisation" />
         <dataField fieldName="PersonID" aliasFieldName="UPN" />
         <dataField fieldName="FirstName" columns="35" />
@@ -80,23 +74,20 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
         <dataField fieldName="Email" columns="50" />
         <dataField fieldName="CYS" columns="10" />
         <dataField fieldName="CYG" columns="10" />
-        <dataField fieldName="EntryDate" columns="20" />
-        <dataField fieldName="ExitDate" columns="20" />
-        <dataField fieldName="RoleID" aliasFieldName="Role" hidden="true" />
-        <dataField fieldName="HeadTitle" hidden="true" />
+        <dataField fieldName="EntryDate" columns="10" />
+        <dataField fieldName="ExitDate" columns="10" />
+        <dataField fieldName="RoleID" aliasFieldName="Role" />
+        <dataField fieldName="HeadTitle" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Admission">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Organization Person Role">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Organization Person Role" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="Fullname" hidden="true" />
-            <dataField fieldName="OrganisationID" aliasFieldName="Organisation" columns="4" />
-            <dataField fieldName="RoleID" aliasFieldName="Role" columns="4" />
-            <dataField fieldName="EntryDate" columns="10" />
-            <dataField fieldName="ExitDate" columns="10" />
+            <dataField fieldName="Fullname" />
+            <dataField fieldName="OrganisationID" aliasFieldName="Organisation" />
             <dataField fieldName="PersonID" aliasFieldName="UPN" />
             <dataField fieldName="FirstName" columns="35" />
             <dataField fieldName="LastName" columns="35" />
@@ -104,42 +95,22 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
             <dataField fieldName="Email" columns="50" />
             <dataField fieldName="CYS" columns="10" />
             <dataField fieldName="CYG" columns="10" />
-            <dataField fieldName="HeadTitle" hidden="true" />
+            <dataField fieldName="EntryDate" columns="10" />
+            <dataField fieldName="ExitDate" columns="10" />
+            <dataField fieldName="RoleID" aliasFieldName="Role" />
+            <dataField fieldName="HeadTitle" />
           </dataFields>
-        </category>
-        <category id="c2" tab="ENROLLMENT DEFINITION" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="StudentSchoolAssociations" columns="15" tag="modal-never">
-              <headerText>Enrollment Definition</headerText>
-            </dataField>
-          </dataFields>
-          <visibility>
-            <expression test="[Role]== 'Student' &amp;&amp; [1]==[1]" type="ClientScript" />
-          </visibility>
-        </category>
-        <category id="c3" tab="ENROLLMENT DEFINITION REMADE">
-          <description />
-          <dataFields>
-            <dataField fieldName="znStudentSchoolAssociation" columns="15" tag="modal-never" />
-          </dataFields>
-          <visibility>
-            <expression test="[Role]== 'Student'" type="ClientScript" />
-          </visibility>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Admission">
+    <view id="createForm1" type="Form" commandId="command1" label="New Organization Person Role">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="Fullname" hidden="true" />
-            <dataField fieldName="RoleID" aliasFieldName="Role" columns="4" />
-            <dataField fieldName="OrganisationID" aliasFieldName="Organisation" columns="3" />
-            <dataField fieldName="EntryDate" columns="10" />
-            <dataField fieldName="ExitDate" columns="10" />
+            <dataField fieldName="Fullname" />
+            <dataField fieldName="OrganisationID" aliasFieldName="Organisation" />
             <dataField fieldName="PersonID" aliasFieldName="UPN" />
             <dataField fieldName="FirstName" columns="35" />
             <dataField fieldName="LastName" columns="35" />
@@ -147,7 +118,10 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
             <dataField fieldName="Email" columns="50" />
             <dataField fieldName="CYS" columns="10" />
             <dataField fieldName="CYG" columns="10" />
-            <dataField fieldName="HeadTitle" hidden="true" />
+            <dataField fieldName="EntryDate" columns="10" />
+            <dataField fieldName="ExitDate" columns="10" />
+            <dataField fieldName="RoleID" aliasFieldName="Role" />
+            <dataField fieldName="HeadTitle" />
           </dataFields>
         </category>
       </categories>
@@ -186,13 +160,10 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a100" commandName="ReportAsPdf" headerText="Export To PDF" />
-      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a101" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" headerText="Export AS IPY" />
-      <action id="a4" commandName="ExportRss" headerText="Send RSS API" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -204,6 +175,12 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
@@ -211,20 +188,4 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="New|Insert|Calculate" type="Sql" phase="Execute" name="setExitDate"><![CDATA[-- perform validation
---DECLARE @ExitDate DATE
-
-IF @EntryDate IS NULL 
-BEGIN
-SET @EntryDate = CAST(GETDATE() AS DATE)
-END
-
-
-IF @ExitDate IS NULL 
-BEGIN
-SET @ExitDate = DATEADD(YEAR, 12, GETDATE())
-END
-]]></rule>
-  </businessRules>
 </dataController>

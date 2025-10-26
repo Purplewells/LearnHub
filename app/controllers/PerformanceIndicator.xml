@@ -65,99 +65,55 @@ from "dbo"."PerformanceIndicator" "PerformanceIndicator"
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Standards" sortExpression="GLSO ASC, SUBJECT ASC, ICODE ASC" filter="IsActive = 1">
+    <view id="grid1" type="Grid" commandId="command1" label="Performance Indicator">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Code" columns="25" />
-        <dataField fieldName="Strand" tag="header-text" />
-        <dataField fieldName="StrandCode" columns="20" />
-        <dataField fieldName="Substrand" />
-        <dataField fieldName="Subject" columns="20" />
-        <dataField fieldName="PerformanceDescription" rows="5" tag="item-desc" />
-        <dataField fieldName="SuccessStatement" tag="import-duplicate-accept" hidden="true" />
-        <dataField fieldName="StandardNo" columns="20" />
-        <dataField fieldName="ICode" columns="30" tag="import-duplicate-accept" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="ExtIsActive" hidden="true" />
-        <dataField fieldName="SubjectLearningOutcome" hidden="true" />
-        <dataField fieldName="ExtTerm" columns="15" />
-        <dataField fieldName="GradeLevelID" aliasFieldName="GL" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="PerformanceIndicator" hidden="true" />
-        <dataField fieldName="ExtContentStandard" rows="5" hidden="true" />
-        <dataField fieldName="ExtLearningStandard" rows="5" hidden="true" />
-        <dataField fieldName="StrandDescriptor" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="all_standards" type="Grid" commandId="command1" label="All Standards" sortExpression="GLSO ASC, SUBJECT ASC, ICODE ASC">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Code" columns="25" />
+        <dataField fieldName="ICode" columns="30" />
+        <dataField fieldName="PerformanceDescription" rows="5" />
+        <dataField fieldName="SuccessStatement" />
+        <dataField fieldName="StandardNo" columns="50" />
         <dataField fieldName="Strand" />
-        <dataField fieldName="StrandCode" columns="20" />
         <dataField fieldName="Substrand" />
-        <dataField fieldName="Subject" columns="20" />
-        <dataField fieldName="PerformanceDescription" rows="5" tag="item-desc" />
-        <dataField fieldName="SuccessStatement" tag="import-duplicate-accept" hidden="true" />
-        <dataField fieldName="StandardNo" columns="20" />
-        <dataField fieldName="ICode" columns="30" tag="import-duplicate-accept" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="ExtIsActive" hidden="true" />
-        <dataField fieldName="SubjectLearningOutcome" hidden="true" />
+        <dataField fieldName="StrandCode" columns="20" />
+        <dataField fieldName="Subject" columns="50" />
         <dataField fieldName="ExtTerm" columns="15" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="ExtIsActive" />
         <dataField fieldName="GradeLevelID" aliasFieldName="GL" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="PerformanceIndicator" hidden="true" />
-        <dataField fieldName="ExtContentStandard" rows="5" hidden="true" />
-        <dataField fieldName="ExtLearningStandard" rows="5" hidden="true" />
-        <dataField fieldName="StrandDescriptor" hidden="true" />
+        <dataField fieldName="GLSO" columns="15" />
+        <dataField fieldName="PerformanceIndicator" />
+        <dataField fieldName="SubjectLearningOutcome" />
+        <dataField fieldName="ExtContentStandard" rows="5" />
+        <dataField fieldName="ExtLearningStandard" rows="5" />
+        <dataField fieldName="StrandDescriptor" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Performance Indicator">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Performance Indicator" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="Subject" columns="50" textMode="Static" />
-            <dataField fieldName="ICode" columns="30" textMode="Static" />
-            <dataField fieldName="Code" columns="25" textMode="Static" />
+            <dataField fieldName="Code" columns="25" />
+            <dataField fieldName="ICode" columns="30" />
+            <dataField fieldName="PerformanceDescription" rows="5" />
+            <dataField fieldName="SuccessStatement" />
+            <dataField fieldName="StandardNo" columns="50" />
             <dataField fieldName="Strand" />
             <dataField fieldName="Substrand" />
-            <dataField fieldName="GLSO" columns="15" hidden="true" />
-            <dataField fieldName="SubjectLearningOutcome" hidden="true" />
-            <dataField fieldName="ExtLearningStandard" rows="5" hidden="true" />
-            <dataField fieldName="GradeLevelID" aliasFieldName="GL" />
-            <dataField fieldName="ExtTerm" columns="15" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Success Statement" collapsed="true" wrap="true">
-          <description />
-          <dataFields>
-            <dataField fieldName="SuccessStatement" rows="3" textMode="Note" />
-          </dataFields>
-        </category>
-        <category id="c5" headerText="Performance References" collapsed="true" wrap="true">
-          <description />
-          <dataFields>
-            <dataField fieldName="PerformanceDescription" rows="3" />
-            <dataField fieldName="PerformanceIndicator" textMode="Static" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Descriptors" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="StrandDescriptor" />
-            <dataField fieldName="StandardNo" columns="50" />
             <dataField fieldName="StrandCode" columns="20" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="Content Description" collapsed="true">
-          <description />
-          <dataFields>
-            <dataField fieldName="ExtContentStandard" rows="3" textMode="Note" />
+            <dataField fieldName="Subject" columns="50" />
+            <dataField fieldName="ExtTerm" columns="15" />
             <dataField fieldName="IsActive" />
-            <dataField fieldName="ExtIsActive" hidden="true" />
+            <dataField fieldName="ExtIsActive" />
+            <dataField fieldName="GradeLevelID" aliasFieldName="GL" />
+            <dataField fieldName="GLSO" columns="15" />
+            <dataField fieldName="PerformanceIndicator" />
+            <dataField fieldName="SubjectLearningOutcome" />
+            <dataField fieldName="ExtContentStandard" rows="5" />
+            <dataField fieldName="ExtLearningStandard" rows="5" />
+            <dataField fieldName="StrandDescriptor" />
           </dataFields>
         </category>
       </categories>
@@ -166,47 +122,27 @@ from "dbo"."PerformanceIndicator" "PerformanceIndicator"
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description />
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="Subject" columns="50" textMode="Static" />
-            <dataField fieldName="ICode" columns="30" textMode="Static" />
-            <dataField fieldName="Code" columns="25" textMode="Static" />
+            <dataField fieldName="Code" columns="25" />
+            <dataField fieldName="ICode" columns="30" />
+            <dataField fieldName="PerformanceDescription" rows="5" />
+            <dataField fieldName="SuccessStatement" />
+            <dataField fieldName="StandardNo" columns="50" />
             <dataField fieldName="Strand" />
             <dataField fieldName="Substrand" />
-            <dataField fieldName="GLSO" columns="15" hidden="true" />
-            <dataField fieldName="SubjectLearningOutcome" hidden="true" />
-            <dataField fieldName="ExtLearningStandard" rows="5" hidden="true" />
-            <dataField fieldName="GradeLevelID" aliasFieldName="GL" />
-            <dataField fieldName="ExtTerm" columns="15" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Success Statement" collapsed="true" wrap="true">
-          <description />
-          <dataFields>
-            <dataField fieldName="SuccessStatement" rows="3" textMode="Note" />
-          </dataFields>
-        </category>
-        <category id="c5" headerText="Performance References" collapsed="true" wrap="true">
-          <description />
-          <dataFields>
-            <dataField fieldName="PerformanceDescription" rows="3" />
-            <dataField fieldName="PerformanceIndicator" textMode="Static" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Descriptors" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="StrandDescriptor" />
-            <dataField fieldName="StandardNo" columns="50" />
             <dataField fieldName="StrandCode" columns="20" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="Content Description" collapsed="true">
-          <description />
-          <dataFields>
-            <dataField fieldName="ExtContentStandard" rows="3" textMode="Note" />
+            <dataField fieldName="Subject" columns="50" />
+            <dataField fieldName="ExtTerm" columns="15" />
             <dataField fieldName="IsActive" />
-            <dataField fieldName="ExtIsActive" hidden="true" />
+            <dataField fieldName="ExtIsActive" />
+            <dataField fieldName="GradeLevelID" aliasFieldName="GL" />
+            <dataField fieldName="GLSO" columns="15" />
+            <dataField fieldName="PerformanceIndicator" />
+            <dataField fieldName="SubjectLearningOutcome" />
+            <dataField fieldName="ExtContentStandard" rows="5" />
+            <dataField fieldName="ExtLearningStandard" rows="5" />
+            <dataField fieldName="StrandDescriptor" />
           </dataFields>
         </category>
       </categories>

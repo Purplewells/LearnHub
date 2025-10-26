@@ -31,18 +31,7 @@ from "dbo"."zlkpPaymentMethod" "zlkpPaymentMethod"
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Payment Method" filter="IsActive = 1">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="PaymentMethod" columns="15" />
-        <dataField fieldName="MethodCode" columns="10" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="SortOrder" columns="15" />
-        <dataField fieldName="CreatedDate" columns="20" />
-        <dataField fieldName="ModifiedDate" columns="20" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_payment_methods" type="Grid" commandId="command1" label="All Payment Methods">
+    <view id="grid1" type="Grid" commandId="command1" label="Payment Method">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="PaymentMethod" columns="15" />

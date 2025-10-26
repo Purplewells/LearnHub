@@ -43,15 +43,15 @@ from "dbo"."zlkp_Religion" "zlkp_Religion"
         <dataField fieldName="IsActive" />
         <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="CreatedDate" columns="20" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="ModifiedBy" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Religion">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Religion" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="Religion" columns="20" />
@@ -89,7 +89,7 @@ from "dbo"."zlkp_Religion" "zlkp_Religion"
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
       <action id="a2" commandName="Edit" />
-      <action id="a3" commandName="Delete" confirmation="Delete “{Religion}” supplier?" />
+      <action id="a3" commandName="Delete" />
       <action id="a6" />
       <action id="a7" commandName="New" commandArgument="grid1" />
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />

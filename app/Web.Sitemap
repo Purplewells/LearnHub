@@ -1,275 +1,295 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">
   <siteMapNode title="^SiteHome^Home^SiteHome^" description="" url="~/index.html">
-    <siteMapNode title="HOME" description="^HomeDesc^Application home page^HomeDesc^" url="~/pages/home" cssClass="Wide" />
-    <siteMapNode title="PROFILES" description="" roles="Administrators, ContentEditors, AccountManagers">
-      <siteMapNode title="The Hub" description="General Contacts Hub" url="~/pages/the-hub" roles="*" cssClass="material-icon-looks_one" />
-      <siteMapNode title="Contact" description="View General Contacts" url="~/pages/contact" cssClass="material-icon-10mp" />
-      <siteMapNode title="Student" description="The students screen allows administrators to manage student records, track enrollment, update details." url="~/pages/organization-person-role-student" cssClass="material-icon-account_circle" />
-      <siteMapNode title="Staff" description="The staff screen enables administrators to manage staff profiles, track roles, update information." url="~/pages/organization-person-role-staff" roles="Administrators, ContentEditors, AccountManagers" cssClass="material-icon-perm_contact_calendar" />
-      <siteMapNode title="Parents" description="View Parents" url="~/pages/organization-person-role-parent" roles="Administrators, ContentEditors" cssClass="material-icon-family_restroom" />
-      <siteMapNode title="Album" description="View Photo Album" url="~/pages/photo-album" cssClass="material-icon-10mp" />
-      <siteMapNode title="Contacts" description="View Contacts" url="~/pages/contacts" cssClass="material-icon-10mp" />
-    </siteMapNode>
-    <siteMapNode title="ADMISSION" description="Manages enrollments, class rosters and progression events of the system." roles="Administrators, ContentEditors">
-      <siteMapNode title="Enrollment" description="This entity represents a student's enrollment information in a school." url="~/pages/student-school-association" cssClass="material-icon-group" />
-      <siteMapNode title="Classes" description="The Classes utility provides the ability to easily formaulate and build student class sections for the entire school." url="~/pages/student-section-association" cssClass="material-icon-reduce_capacity" />
-      <siteMapNode title="Advancement" description="" url="~/pages/advancement" roles="Administrators, ContentEditors" cssClass="material-icon-sensors" />
-    </siteMapNode>
-    <siteMapNode title="ACADEMICS" description="A module for managing academic related activities." roles="Administrators, ClassTeachers, ContentEditors,CircuitSupervisors">
-      <siteMapNode title="Planning" description="" roles="*" />
-      <siteMapNode title="LSN Plan" description="Lesson Plan Notes" url="~/pages/lesson-plan-templates" roles="Administrators, ContentEditors, CircuitSupervisors, ClassTeachers" cssClass="material-icon-speaker_notes" />
-      <siteMapNode title="GBA Plans" description="The GBA Plan holds a process to demonstrate a methodical collection of actions aimed at assessing a student's proficiency, knowledge, skills, or conduct." url="~/pages/assessment" roles="Administrators, ClassTeachers, ContentEditors" cssClass="material-icon-settings" />
-      <siteMapNode title="SBA Plan" description="View Standards Based Learning Plan" url="~/pages/learning-objective" cssClass="material-icon-swipe" />
-      <siteMapNode title="Trackers" description="" roles="*" />
-      <siteMapNode title="Attendance" description="View Attendance Event" url="~/pages/attendance-event" cssClass="material-icon-font_download" />
-      <siteMapNode title="GBA Scores" description="View Attainment Records" url="~/pages/student-grade-book-entry" cssClass="material-icon-grid_4x4" />
-      <siteMapNode title="SBL Scores" description="View SBL Scoresheet" url="~/pages/sblscoresheet" cssClass="material-icon-redeem" />
-      <siteMapNode title="Comments" description="View Student Comments" url="~/pages/student-comments" cssClass="material-icon-sd" />
-      <siteMapNode title="Discipline" description="Behaviour &amp; Engagement Growth" url="~/pages/discipline-incident" roles="Administrators, ClassTeachers, ContentEditors" cssClass="material-icon-thumbs_up_down" />
-      <siteMapNode title="Standards" description="A statement that describes a specific competency or academic standard." url="~/pages/performance-indicator" roles="Administrators, ContentEditors" cssClass="material-icon-grass" />
-      <siteMapNode title="Interventions" description="The Intervention entity describes an activity intended to address a specific problem or diagnosis." url="~/pages/cohort" cssClass="material-icon-face" />
-      <siteMapNode title="TimeTable" description="View Course Section Schedule" url="~/pages/course-section-schedule" cssClass="material-icon-date_range" />
-      <siteMapNode title="New Assessment" description="" roles="xxx">
-        <siteMapNode title="Evaluation" description="" url="~/pages/evaluation" roles="*" />
-        <siteMapNode title="Student Assessment" description="View Student Assessment" url="~/pages/student-assessment" />
-        <siteMapNode title="Assessment Score" description="View Assessment Score" url="~/pages/assessment-score" />
-        <siteMapNode title="Assessment Reason Not Tested" description="View Assessment Reason Not Tested" url="~/pages/assessment-reason-not-tested" />
-        <siteMapNode title="Environment Setting" description="View Environment Setting" url="~/pages/environment-setting" />
-      </siteMapNode>
-    </siteMapNode>
-    <siteMapNode title="ACCOUNTING" description="" roles="Administrators, AccountManagers, , Accountants, FeeManagers, StoreOfficers, MealCoordinators">
-      <siteMapNode title="FINANCE" description="" roles="Administrators, AccountManagers, FeeManagers, FeeClerks, ContentEditors, Accountants">
-        <siteMapNode title="Fees &amp; Bills" description="View Fees &amp; Bills" url="~/pages/feemanagement" roles="*" cssClass="material-icon-money" />
-        <siteMapNode title="Bill Note" description="A reminder note to parents/guardians to request for outstanding balance." url="~/pages/mini-fee-reminder" cssClass="material-icon-receipt" />
-        <siteMapNode title="Debtors Bill" description="" url="~/pages/debtors-bill" roles="*" cssClass="material-icon-account_balance_wallet" />
-        <siteMapNode title="Bill Advise" description="Generates a fee note summary and reminder for each student" url="~/pages/fees-and-bills-advise" cssClass="material-icon-savings" />
-      </siteMapNode>
-      <siteMapNode title="ACCOUNTS" description="" roles="Administrators, AccountManagers, Accountants">
-        <siteMapNode title="Cash Entries" description="View Finance Overview" url="~/pages/finance-plan" roles="Administrators, AccountManagers, Accountants" cssClass="material-icon-attach_money" />
-        <siteMapNode title="Manual Entries" description="View Manual Account Journal Entries" url="~/pages/manual-account-journal-entries" roles="Administrators, AccountManagers, Accountants" cssClass="material-icon-sync_alt" />
-        <siteMapNode title="GL Journal" description="Keep records all financial transactions" url="~/pages/account-general-ledger" roles="Administrators, AccountManagers, Accountants" cssClass="material-icon-point_of_sale" />
-        <siteMapNode title="Cash Flow" description="" url="~/pages/cash-flow" roles="*" cssClass="material-icon-spa" />
-        <siteMapNode title="Net Cash Flow" description="" url="~/pages/hierarchical-cash-flow" roles="*" cssClass="material-icon-expand" />
-        <siteMapNode title="Balance Sheet" description="A statement or snapshot of this organisation's financial position." url="~/pages/balance-sheet" roles="*" cssClass="material-icon-account_balance_wallet" />
-        <siteMapNode title="Trial Balance" description="" url="~/pages/trial-balance" roles="Administrators, AccountManagers, Accountants" cssClass="material-icon-account_balance_wallet" />
-      </siteMapNode>
-      <siteMapNode title="INVENTORY" description="" roles="Administrators, AccountManagers, Accountants, StoreOfficers, ContentEditors">
-        <siteMapNode title="Requisitions" description="View Orders" url="~/pages/orders" roles="xxxx" cssClass="material-icon-alarm" />
-        <siteMapNode title="Purchase Order" description="View Purchase Order" url="~/pages/purchase-order" roles="*" cssClass="material-icon-casino" />
-        <siteMapNode title="Stock Hub" description="" url="~/pages/stock-hub" roles="*" cssClass="material-icon-shopping_basket" />
-        <siteMapNode title="Stock Items" description="View Stock Items" url="~/pages/product" cssClass="material-icon-spa" />
-        <siteMapNode title="Stock Trans" description="View Stock Transactions" url="~/pages/stock-transactions" roles="xxxxx" cssClass="material-icon-ad_units" />
-        <siteMapNode title="Stock Movement" description="View Stock Level Movement" url="~/pages/stock-level-movement" roles="xxxx" />
-        <siteMapNode title="Stock Rec'd Locations" description="View Stock Level Movement Receiving Location" url="~/pages/stock-level-movement-receiving-location" roles="xxxx" cssClass="material-icon-shield_with_heart" />
-        <siteMapNode title="StockHeader" description="View Stock Take Header" url="~/pages/stock-take-header" cssClass="material-icon-lightbulb" />
-        <siteMapNode title="StockTake" description="View Stock Take" url="~/pages/stock-take" cssClass="material-icon-code" />
-        <siteMapNode title="StockVariances" description="View Stock Variance Overtime" url="~/pages/stock-variance-overtime" cssClass="material-icon-pending" />
-        <siteMapNode title="StockAdjustment" description="View Stock Adjustment" url="~/pages/stock-adjustment" cssClass="material-icon-upload_file" />
-      </siteMapNode>
-      <siteMapNode title="MEALS HUB" description="" roles="Administrators, AccountManagers, Management, FeeManagers, MealCoordinators">
-        <siteMapNode title="Meals Plan" description="" url="~/pages/meals-planning" roles="Administrators, AccountManagers, Management, FeeManagers, MealCoordinators" cssClass="material-icon-set_meal" />
-      </siteMapNode>
-      <siteMapNode title="COMPENSATION" description="" roles="Administrators, AccountManagers, HeadTeacher">
-        <siteMapNode title="Salaries Run" description="View Payment Records" url="~/pages/payment-records" roles="Administrators, AccountManagers, FeeManagers" cssClass="material-icon-credit_card" />
-        <siteMapNode title="View Payslips" description="View Get Salary Information For Bank" url="~/pages/get-salary-information-for-bank" roles="Administrators, AccountManagers" cssClass="material-icon-paid" />
-        <siteMapNode title="Salaries Overview" description="View List Of Salaries" url="~/pages/list-of-salaries" roles="Administrators, AccountManagers" cssClass="material-icon-pending" />
-      </siteMapNode>
-      <siteMapNode title="TRANSPORT" description="" roles="XXXX">
-        <siteMapNode title="Service Attendance" description="View Service Attendance" url="~/pages/service-attendance" cssClass="material-icon-business" />
-      </siteMapNode>
-    </siteMapNode>
-    <siteMapNode title="UTILITIES" description="" roles="Administrators, StoreOfficers, ContentEditor">
-      <siteMapNode title="LIBRARY" description="" roles="Administrators, Librarian">
-        <siteMapNode title="Catalogue" description="View Books" url="~/pages/books" cssClass="material-icon-menu_book" />
-        <siteMapNode title="Members" description="View Members" url="~/pages/members" cssClass="material-icon-groups" />
-        <siteMapNode title="Lend Activities" description="View Borrow Transactions" url="~/pages/borrow-transactions" cssClass="material-icon-check_box" />
-        <siteMapNode title="Bus Schedules" description="View Bus Schedules" url="~/pages/bus-schedules" cssClass="material-icon-event_available" />
-        <siteMapNode title="Documents" description="View Document Store" url="~/pages/document-store" cssClass="material-icon-folder" />
-        <siteMapNode title="Staff CPD" description="View Career Progression Development" url="~/pages/staff-career-progression" roles="XXXX" cssClass="material-icon-campaign" />
-      </siteMapNode>
-    </siteMapNode>
-    <siteMapNode title="SETTINGS" description="" roles="Administrators, ContentEditors">
-      <siteMapNode title="Initial Setup" description="" roles="*" />
-      <siteMapNode title="Instituition" description="This entity represents any public or private institution, organisation, or agency that provides instructional or support services to students or staff at any level." url="~/pages/school-instituition" cssClass="material-icon-business" />
-      <siteMapNode title="Calendars" description="" url="~/pages/calendars" roles="*" cssClass="material-icon-event_available" />
-      <siteMapNode title="Grading Levels" description="Grade Level Settings" url="~/pages/gradehub" roles="*" cssClass="material-icon-signal_cellular_alt" />
-      <siteMapNode title="Course Section" description="Courses represent the organisation of subject matter and related learning experiences provided for the instruction of students on a regular or systematic basis." url="~/pages/courses-hub" roles="*" cssClass="material-icon-dvr" />
-      <siteMapNode title="Fee Structure" description="The Fees Structure enables defining and setting the structure of fees and it's billing components." url="~/pages/billing-structure" roles="*" cssClass="material-icon-grid_goldenratio" />
-      <siteMapNode title="Workbench Hub" description="" roles="*" />
-      <siteMapNode title="Hub-Admissions" description="View Registration Workbench" url="~/pages/registration-workbench" roles="*" cssClass="material-icon-send" />
-      <siteMapNode title="Hub-Enrollment" description="" url="~/pages/enrollment-benchmark" roles="*" cssClass="material-icon-ad_units" />
-      <siteMapNode title="Hub-Attendance" description="An interface for managing attendance reference attributes." url="~/pages/attendance-attribute" roles="*" cssClass="material-icon-arrow_drop_down_circle" />
-      <siteMapNode title="Hub-Behaviour" description="" url="~/pages/behaviour-work-hub" roles="*" cssClass="material-icon-self_improvement" />
-      <siteMapNode title="Hub-Meal Service" description="Meal services configuration" url="~/pages/meal-services" roles="*" cssClass="material-icon-inventory" />
-      <siteMapNode title="Hub-Financial" description="" url="~/pages/monetary-work-bench" roles="*" cssClass="material-icon-savings" />
-      <siteMapNode title="Hub-Compensation" description="This interface allows users to provide configuration or default values for slary determination." url="~/pages/salaries-benchmark" roles="*" cssClass="material-icon-arrow_circle_up" />
-      <siteMapNode title="Hub-Stocks" description="" url="~/pages/hub_stocks" roles="*" cssClass="material-icon-bolt" />
-      <siteMapNode title="Reports Parameters" description="View Report Parameters" url="~/pages/report-parameters" cssClass="material-icon-arrow_drop_down_circle" />
-      <siteMapNode title="General Parameters" description="View General Parameters" url="~/pages/general-parameters" cssClass="material-icon-approval" />
-      <siteMapNode title="Other Setup" description="" roles="*" />
-      <siteMapNode title="Assessment Type" description="View Assessment Type" url="~/pages/assessment-type" cssClass="material-icon-settings_applications" />
-      <siteMapNode title="Buses" description="View Buses" url="~/pages/buses" cssClass="material-icon-arrow_drop_down_circle" />
-      <siteMapNode title="Bus Routes" description="View Routes" url="~/pages/routes" cssClass="material-icon-assistant_direction" />
-      <siteMapNode title="Program Type" description="View Program Type" url="~/pages/program-type" cssClass="material-icon-radio_button_checked" />
-      <siteMapNode title="Program" description="View Program" url="~/pages/program" cssClass="material-icon-sd" />
-      <siteMapNode title="Program Goal" description="View Program Goal" url="~/pages/program-goal" cssClass="material-icon-indeterminate_check_box" />
-      <siteMapNode title="Progress Level" description="View Progress Level" url="~/pages/progress-level" cssClass="material-icon-pending" />
-      <siteMapNode title="Room" description="View Room" url="~/pages/room" cssClass="material-icon-chair" />
-      <siteMapNode title="Teacher Sections" description="View Teacher Section Association" url="~/pages/teacher-section-association" cssClass="material-icon-cast_for_education" />
-    </siteMapNode>
-    <siteMapNode title="REPORTS" description="" roles="Administrators, ContentEditors, ClassTeachers, HeadOfDepartment, HeadTeacher">
-      <siteMapNode title="Assessments" description="" roles="Administrators, ContentEditors, ClassTeachers, HeadOfDepartment, HeadTeacher">
-        <siteMapNode title="GBA Reports" description="View Historical Grades" url="~/pages/historical-grades" cssClass="material-icon-receipt_long" />
-        <siteMapNode title="CheckPoint" description="The Report provides a view of at students' in-progress grades for courses they are enrolled in." url="~/pages/continous-class-performance-overtime-current-session" cssClass="material-icon-keyboard" />
-        <siteMapNode title="The Matrix" description="" url="~/pages/the-matrix" roles="*" cssClass="material-icon-monitoring" />
-        <siteMapNode title="ReportCards" description="View Historical Outcomes" url="~/pages/historical-outcomes" cssClass="material-icon-schedule" />
-        <siteMapNode title="Grades Book P4" description="View Grades Book P4" url="~/pages/grades-book-p4" roles="xxxxx" />
-      </siteMapNode>
-      <siteMapNode title="Wellbeing" description="" roles="Administrators, Management, HeadTeachers, ContentEditors">
-        <siteMapNode title="Census" description="View School List" url="~/pages/school-list" cssClass="material-icon-people" />
-        <siteMapNode title="Enrollments" description="View Student School Enrollments Overtime" url="~/pages/student-school-enrollments-overtime" cssClass="material-icon-center_focus_strong" />
-        <siteMapNode title="Guardians" description="View vw Current Student And Parents" url="~/pages/vw-current-student-and-parents" cssClass="material-icon-face" />
-        <siteMapNode title="Disabilities" description="View Student Profile Disabilities Concerns" url="~/pages/disabilities-concerns" cssClass="material-icon-accessible" />
-        <siteMapNode title="Health Profile" description="View Health Alert Profile" url="~/pages/health-alert-profile" cssClass="material-icon-settings_accessibility" />
-      </siteMapNode>
-      <siteMapNode title="Attendances" description="" roles="Administrators, ContentEditors, ClassTeachers, HeadOfDepartment, HeadTeacher">
-        <siteMapNode title="Attendance Audit" description="" url="~/pages/attendance-audit-report" roles="*" cssClass="material-icon-app_registration" />
-        <siteMapNode title="Attendance Rates" description="View Attendance Rates" url="~/pages/attendance-rates" cssClass="material-icon-new_releases" />
-        <siteMapNode title="Attendance Overview" description="View Current Term Attendance Reporting" url="~/pages/chronic-absentee-report" cssClass="material-icon-reduce_capacity" />
-      </siteMapNode>
-      <siteMapNode title="Executive Leadership" description="" roles="Administrators, HeadTeachers, Management, ContentEditors">
-        <siteMapNode title="Absence Followup" description="" url="~/pages/absence-followup" roles="*" cssClass="material-icon-hail" />
-        <siteMapNode title="Behaviour Activities" description="View Behaviour Activities" url="~/pages/behaviour-activities" cssClass="material-icon-inbox" />
-        <siteMapNode title="Behaviour Insights" description="View Behaviour Management" url="~/pages/behaviour-management" cssClass="material-icon-mood" />
-        <siteMapNode title="CHRABS Term" description="View Term Basis Person Centred Evaluation" url="~/pages/term-basis-person-centred-evaluation" cssClass="material-icon-cached" />
-        <siteMapNode title="CHRABS School" description="" url="~/pages/absence-metrics" roles="*" cssClass="material-icon-check-box_outline_blank" />
-        <siteMapNode title="CHRABS Indicators" description="View Attendance Anomaly Detection Indicators" url="~/pages/ewindicators" cssClass="material-icon-sports" />
-        <siteMapNode title="CHRABS YoY" description="" url="~/pages/chrabyo-y" roles="*" cssClass="material-icon-monitoring" />
-      </siteMapNode>
-      <siteMapNode title="Stock Movements" description="" roles="Administrators, ContentEditors, StoreOfficers">
-        <siteMapNode title="Stock Levels" description="View Stock Levels" url="~/pages/stock-levels" cssClass="material-icon-expand" />
-        <siteMapNode title="Stock Location" description="" url="~/pages/receiving-location-stock" roles="*" cssClass="material-icon-spa" />
-        <siteMapNode title="PO Vendor Report" description="View Purchase Order Detail Vendor" url="~/pages/purchase-order-detail-vendor" cssClass="material-icon-local_shipping" />
-      </siteMapNode>
-      <siteMapNode title="Fee Reports" description="" roles="Administrators, HeadTeachers, Management, ContentEditors">
-        <siteMapNode title="Non Paid Fees" description="View Non Paid Students" url="~/pages/non-paid-students" roles="Administrators, AccountManagers, Management, FeeManagers, FeeClerks" cssClass="material-icon-request_quote" />
-        <siteMapNode title="PMT Summary" description="View Payments Current Year" url="~/pages/fee-collection-summaries-report-current-year" roles="Administrators, AccountManagers, Management, FeeManagers" cssClass="material-icon-money" />
-        <siteMapNode title="Fee Settlements" description="View Fee Collection Overtime" url="~/pages/fee-collection-transaction-over-time" roles="Administrators, AccountManagers, Management" cssClass="material-icon-topic" />
-      </siteMapNode>
-    </siteMapNode>
-    <siteMapNode title="GATEWAY" description="" roles="Administrators">
-      <siteMapNode title="^MembershipPath^Membership^MembershipPath^" description="^MembershipDesc^User and role manager^MembershipDesc^" url="~/pages/membership" roles="Administrators" cssClass="material-icon-badge" />
-      <siteMapNode title="Customisation" description="View App Customisation" url="~/pages/site-content" roles="Administrators, Developers" cssClass="material-icon-ballot" />
-      <siteMapNode title="Search Models" description="^HomeDesc^Application home page^HomeDesc^" url="~/pages/search-models" roles="*" cssClass="Wide material-icon-window" />
-      <siteMapNode title="Enrollment Reset" description="View Onboard Reset" url="~/pages/onboard-reset" roles="Administrators, Developers" cssClass="material-icon-settings_applications" />
-      <siteMapNode title="Listed Of Triggers" description="" url="~/pages/listed-of-triggers" roles="*" cssClass="material-icon-format_size" />
-    </siteMapNode>
-    <siteMapNode title="SUPPORT HELP" description="" roles="*">
-      <siteMapNode title="Tutorials" description="" url="~/pages/tutorials" roles="*" cssClass="material-icon-star" />
-      <siteMapNode title="Maps" description="" url="~/pages/maps" roles="*" cssClass="material-icon-location_on" />
-      <siteMapNode title="Locations" description="" url="~/pages/locations" roles="*" />
-    </siteMapNode>
-    <siteMapNode title="CODES" description="" roles="DONOTVIEW">
-      <siteMapNode title="Allergy Type" description="View Allergy Type" url="~/pages/allergy-type" cssClass="material-icon-science" />
-      <siteMapNode title="Allergy Severity" description="View Allergy Severity" url="~/pages/allergy-severity" cssClass="material-icon-confirmation_number" />
-      <siteMapNode title="Award State" description="View Award State" url="~/pages/award-state" cssClass="material-icon-cake" />
-      <siteMapNode title="Citizenship" description="View Citizenship Status" url="~/pages/citizenship-status" cssClass="material-icon-sports_soccer" />
-      <siteMapNode title="Charter Type" description="View Charter School Type" url="~/pages/charter-school-type" cssClass="material-icon-water" />
-      <siteMapNode title="Position Type" description="View Classroom Position Type" url="~/pages/classroom-position-type" cssClass="material-icon-sports_score" />
-      <siteMapNode title="Cohort Scope" description="View Cohort Scope" url="~/pages/cohort-scope" cssClass="material-icon-sports_gymnastics" />
-      <siteMapNode title="Cohort Type" description="View Cohort Type Description" url="~/pages/cohort-type-description" cssClass="material-icon-backpack" />
-      <siteMapNode title="Colour" description="View Colour" url="~/pages/colour" cssClass="material-icon-format_color_text" />
-      <siteMapNode title="Contact Usage" description="View Contact Point Use" url="~/pages/contact-point-use" />
-      <siteMapNode title="Relationship" description="View Contact Relationship" url="~/pages/contact-relationship" />
-      <siteMapNode title="Country" description="View Country" url="~/pages/country" />
-      <siteMapNode title="Credential Type" description="View Credential Type" url="~/pages/credential-type" />
-      <siteMapNode title="CSE Entry Type" description="View Course Section Entry Type" url="~/pages/course-section-entry-type" />
-      <siteMapNode title="CSE Status Type" description="View Course Section Enrollment Status Type" url="~/pages/course-section-enrollment-status-type" />
-      <siteMapNode title="CSE Exit Type" description="View Course Section Exit Type" url="~/pages/course-section-exit-type" />
-      <siteMapNode title="Department" description="View Department" url="~/pages/department" />
-      <siteMapNode title="Disability Type" description="View Disability Type" url="~/pages/disability-type" />
-      <siteMapNode title="Accommodations" description="View Accommodations Needed Type" url="~/pages/accommodations-needed-type" />
-      <siteMapNode title="Disability Determination" description="View Disability Determination Source Type" url="~/pages/disability-determination-source-type" />
-      <siteMapNode title="Disability Condition" description="View Disability Condition Type" url="~/pages/disability-condition-type" />
-      <siteMapNode title="Condition Status" description="View Disability Condition Status Code" url="~/pages/disability-condition-status-code" />
-      <siteMapNode title="Job Classification" description="View Education Job Classification" url="~/pages/education-job-classification" />
-      <siteMapNode title="Expense Category" description="View Expense Category" url="~/pages/expense-category" />
-      <siteMapNode title="End Of Term Status" description="View End Of Term Status" url="~/pages/end-of-term-status" />
-      <siteMapNode title="Entry Type" description="View Entry Type" url="~/pages/entry-type" />
-      <siteMapNode title="Grade Type" description="View Grade Type" url="~/pages/grade-type" />
-      <siteMapNode title="Hearing Status" description="View Hearing Screening Status" url="~/pages/hearing-screening-status" />
-      <siteMapNode title="House Residence" description="View House Residence" url="~/pages/house-residence" />
-      <siteMapNode title="Health Check Type" description="View Health Check Type" url="~/pages/health-check-type" />
-      <siteMapNode title="Health Insurance" description="View Health Insurance Coverage" url="~/pages/health-insurance-coverage" />
-      <siteMapNode title="Identification Proof" description="View Identification Proof" url="~/pages/identification-proof" />
-      <siteMapNode title="Incident Location" description="View Incident Location" url="~/pages/incident-location" />
-      <siteMapNode title="Incident Participation" description="View Incident Participation" url="~/pages/incident-participation" />
-      <siteMapNode title="Incident Reporter" description="View Incident Reporter Type" url="~/pages/incident-reporter-type" />
-      <siteMapNode title="Incident Status" description="View Incident Status" url="~/pages/incident-status" cssClass="material-icon-settings_applications" />
-      <siteMapNode title="Incident Time" description="View Incident Time Description Code" url="~/pages/incident-time-description-code" />
-      <siteMapNode title="Identification System" description="View Person Identification System" url="~/pages/person-identification-system" />
-      <siteMapNode title="Information Verification" description="View Information Verification" url="~/pages/information-verification" />
-      <siteMapNode title="Immunisation Type" description="View Immunization Type" url="~/pages/immunization-type" />
-      <siteMapNode title="Learning Objectives" description="View Learning Objective Entry" url="~/pages/learning-objective-entry" />
-      <siteMapNode title="Location Type" description="View Person Location Type" url="~/pages/person-location-type" />
-      <siteMapNode title="Medical Alert" description="View Medical Alert Indicator" url="~/pages/medical-alert-indicator" />
-      <siteMapNode title="Organisation" description="View Organisation" url="~/pages/organisation" />
-      <siteMapNode title="Organization Type" description="View Organization Type" url="~/pages/organization-type" />
-      <siteMapNode title="Organization Element" description="View Organization Element Type" url="~/pages/organization-element-type" />
-      <siteMapNode title="Parameter Type" description="View Parameter Type" url="~/pages/parameter-type" />
-      <siteMapNode title="Payment By" description="View Payment By" url="~/pages/payment-by" />
-      <siteMapNode title="Purchase Order Status" description="View Purchase Order Status" url="~/pages/purchase-order-status" />
-      <siteMapNode title="Payment Status" description="View Payment Status" url="~/pages/payment-status" />
-      <siteMapNode title="Product Category" description="View Product Category" url="~/pages/product-category" cssClass="material-icon-tune" />
-      <siteMapNode title="Role" description="View Role" url="~/pages/role" />
-      <siteMapNode title="Screening Status" description="View Screening Status" url="~/pages/screening-status" />
-      <siteMapNode title="School Type" description="View School Type" url="~/pages/school-type" />
-      <siteMapNode title="School Level" description="View School Level" url="~/pages/school-level" />
-      <siteMapNode title="Sex" description="View Sex" url="~/pages/sex" />
-      <siteMapNode title="Staff Classification" description="View Staff Classification" url="~/pages/staff-classification" />
-      <siteMapNode title="Title" description="View Title" url="~/pages/title" />
-      <siteMapNode title="Town" description="View Town" url="~/pages/town" />
-      <siteMapNode title="Movement Transaction Type" description="View Movement Transaction Type" url="~/pages/movement-transaction-type" />
-      <siteMapNode title="Movement Mode" description="View Movement Mode" url="~/pages/movement-mode" cssClass="material-icon-build_circle" />
-      <siteMapNode title="Invent Locations" description="View Inventory Locations" url="~/pages/inventory-locations" cssClass="material-icon-pin_drop" />
-    </siteMapNode>
-    <siteMapNode title="LINK MODELS" description="" roles="DONOTVIEWS">
-      <siteMapNode title="Budget" description="View Budget" url="~/pages/budget" />
-      <siteMapNode title="Cohort Program" description="View Cohort Program" url="~/pages/cohort-program" />
-      <siteMapNode title="Cohort Staff Association" description="View Cohort Staff Association" url="~/pages/cohort-staff-association" />
-      <siteMapNode title="Discipline Alignment" description="View Discipline Alignment" url="~/pages/discipline-alignment" />
-      <siteMapNode title="Disciplinary Action Taken" description="View Disciplinary Action Taken" url="~/pages/disciplinary-action-taken" />
-      <siteMapNode title="Fee Collection Transaction" description="View Fee Collection Transaction" url="~/pages/fee_collection_transaction" />
-      <siteMapNode title="Fee Collection Summaries" description="View Fee Collection Summaries" url="~/pages/fee-collection-summaries" />
-      <siteMapNode title="Itemised Fee Collections" description="View Fee Collection Transaction Itemised" url="~/pages/fee_collection_transaction_itemised" />
-      <siteMapNode title="Income Expense" description="View Income Expense" url="~/pages/income-expense" />
-      <siteMapNode title="Income Expense Summary" description="View Income Expense Summary" url="~/pages/income-expense-summary" />
-      <siteMapNode title="Meal Manifest" description="View Students In School Meal" url="~/pages/students-in-school-meal" roles="Administrators, ContentEditors" cssClass="material-icon-menu_book" />
-      <siteMapNode title="Meal Fees" description="View Feeding Fee Collections" url="~/pages/feeding-fee-collections" roles="Administrators, ContentEditors, FeeManagers" cssClass="material-icon-account_balance_wallet" />
-      <siteMapNode title="Meal Logs" description="View Meal Logs" url="~/pages/meal-logs" roles="Administrators, ContentEditors, FeeManagers" cssClass="material-icon-restaurant" />
-      <siteMapNode title="Mini Ledger" description="View Fee Collection Accounting Ledger Mini" url="~/pages/fee-collection-accounting-ledger-mini" />
-      <siteMapNode title="Organization Person Role" description="View Organization Person Role" url="~/pages/organization-person-role" />
-      <siteMapNode title="Purchase Order Detail" description="View Purchase Order Detail" url="~/pages/purchase-order-detail" cssClass="material-icon-dvr" />
-      <siteMapNode title="Person Health" description="View Person Health" url="~/pages/person-health" />
-      <siteMapNode title="Person Allergy" description="View Person Allergy" url="~/pages/person-allergy" />
-      <siteMapNode title="Person Contact Point" description="View Person Contact Point" url="~/pages/person-contact-point" />
-      <siteMapNode title="Person Credential" description="View Person Credential" url="~/pages/person-credential" />
-      <siteMapNode title="Person Immunisation" description="View Person Immunisation" url="~/pages/person-immunisation" />
-      <siteMapNode title="Person Address" description="View Person Address" url="~/pages/person-address" />
-      <siteMapNode title="Person Identifier" description="View Person Identifier" url="~/pages/person-identifier" />
-      <siteMapNode title="Person Disability" description="View Person Disability" url="~/pages/person-disability" />
-      <siteMapNode title="Person Relationship" description="View Person Relationship" url="~/pages/person-relationship" />
-      <siteMapNode title="Salaries" description="View Salaries" url="~/pages/salaries" />
-      <siteMapNode title="Student Fees" description="View Student Fees" url="~/pages/student-fees" />
-      <siteMapNode title="Student Section Attendance Events" description="View Student Section Attendance Events" url="~/pages/student-section-attendance-events" />
-      <siteMapNode title="Student Discipline Incident Association" description="View Student Discipline Incident Association" url="~/pages/student-discipline-incident-association" />
-      <siteMapNode title="Session Enrollment Scheme" description="View Session Enrollment Scheme" url="~/pages/session-enrollment-scheme" />
-      <siteMapNode title="Student Cohort Association" description="View Student Cohort Association" url="~/pages/student-cohort-association" />
-      <siteMapNode title="K12 Staff Assignment" description="View K12 Staff Assignment" url="~/pages/k12staff-assignment" />
-      <siteMapNode title="Teaching Assignment" description="View Teaching Assignment Role" url="~/pages/teaching-assignment-role" />
-      <siteMapNode title="zn Student Attendance Events" description="View zn Student Attendance Events" url="~/pages/zn-student-attendance-events" />
-      <siteMapNode title="zn Staff Assignment" description="View zn Staff Assignment" url="~/pages/zn-staff-assignment" />
-    </siteMapNode>
+    <siteMapNode title="^HomePath^Home^HomePath^" description="^HomeDesc^Application home page^HomeDesc^" url="~/pages/home" cssClass="Wide" />
+    <siteMapNode title="Calendar" description="View Calendar" url="~/pages/calendar" />
+    <siteMapNode title="Session" description="View Session" url="~/pages/session" />
+    <siteMapNode title="Grading Period" description="View Grading Period" url="~/pages/grading-period" />
+    <siteMapNode title="Calendar Event National" description="View Calendar Event National" url="~/pages/calendar-event-national" />
+    <siteMapNode title="Session Type" description="View Session Type" url="~/pages/session-type" />
+    <siteMapNode title="Term Descriptor" description="View Term Descriptor" url="~/pages/term-descriptor" />
+    <siteMapNode title="Grading Period Descriptor" description="View Grading Period Descriptor" url="~/pages/grading-period-descriptor" />
+    <siteMapNode title="Grade Level" description="View Grade Level" url="~/pages/grade-level" />
+    <siteMapNode title="Grade Level Type" description="View Grade Level Type" url="~/pages/grade-level-type" />
+    <siteMapNode title="Grade Scale Type" description="View Grade Scale Type" url="~/pages/grade-scale-type" />
+    <siteMapNode title="School Stream" description="View School Stream" url="~/pages/school-stream" />
+    <siteMapNode title="Course" description="View Course" url="~/pages/course" />
+    <siteMapNode title="Course Credit Unit" description="View Course Credit Unit" url="~/pages/course-credit-unit" />
+    <siteMapNode title="Course Subject Area" description="View Course Subject Area" url="~/pages/course-subject-area" />
+    <siteMapNode title="Course Level Characteristic" description="View Course Level Characteristic" url="~/pages/course-level-characteristic" />
+    <siteMapNode title="End Of Course Requirement" description="View End Of Course Requirement" url="~/pages/end-of-course-requirement" />
+    <siteMapNode title="Performance Base Conversion" description="View Performance Base Conversion" url="~/pages/performance-base-conversion" />
+    <siteMapNode title="Assessment Element Type" description="View Assessment Element Type" url="~/pages/assessment-element-type" />
+    <siteMapNode title="Fee Type" description="View Fee Type" url="~/pages/fee-type" />
+    <siteMapNode title="Fee Structure" description="View Fee Structure" url="~/pages/fee-structure" />
+    <siteMapNode title="mlink Fees Grade" description="View mlink Fees Grade" url="~/pages/mlink-fees-grade" />
+    <siteMapNode title="Currency" description="View Currency" url="~/pages/currency" />
+    <siteMapNode title="Course Section" description="View Course Section" url="~/pages/course-section" />
+    <siteMapNode title="Section Characteristics" description="View Section Characteristics" url="~/pages/section-characteristics" />
+    <siteMapNode title="Credit Type Earned" description="View Credit Type Earned" url="~/pages/credit-type-earned" />
+    <siteMapNode title="Course Section Delivery Mode" description="View Course Section Delivery Mode" url="~/pages/course-section-delivery-mode" />
+    <siteMapNode title="Course GPA" description="View Course GPA" url="~/pages/course-gpa" />
+    <siteMapNode title="School Events" description="View School Events" url="~/pages/school-events" />
+    <siteMapNode title="Credential Basis" description="View Credential Basis" url="~/pages/credential-basis" />
+    <siteMapNode title="Absence Reason" description="View Absence Reason" url="~/pages/absence-reason" />
+    <siteMapNode title="Attendance Reason" description="View Attendance Reason" url="~/pages/attendance-reason" />
+    <siteMapNode title="Attendance Status" description="View Attendance Status" url="~/pages/attendance-status" />
+    <siteMapNode title="Attendance Category" description="View Attendance Category" url="~/pages/attendance-category" />
+    <siteMapNode title="Assessment Type" description="View Assessment Type" url="~/pages/assessment-type" />
+    <siteMapNode title="Assessment Category" description="View Assessment Category" url="~/pages/assessment-category" />
+    <siteMapNode title="Salary Basis Frequency" description="View Salary Basis Frequency" url="~/pages/salary-basis-frequency" />
+    <siteMapNode title="Salary Basis" description="View Salary Basis" url="~/pages/salary-basis" />
+    <siteMapNode title="Salary Basis Type" description="View Salary Basis Type" url="~/pages/salary-basis-type" />
+    <siteMapNode title="Salary Status" description="View Salary Status" url="~/pages/salary-status" />
+    <siteMapNode title="Salary Action" description="View Salary Action" url="~/pages/salary-action" />
+    <siteMapNode title="Salary Component Type" description="View Salary Component Type" url="~/pages/salary-component-type" />
+    <siteMapNode title="Salary Component" description="View Salary Component" url="~/pages/salary-component" />
+    <siteMapNode title="Salary Component Reason" description="View Salary Component Reason" url="~/pages/salary-component-reason" />
+    <siteMapNode title="Occupation" description="View Occupation" url="~/pages/occupation" />
+    <siteMapNode title="Religion" description="View Religion" url="~/pages/religion" />
+    <siteMapNode title="Program Goal" description="View Program Goal" url="~/pages/program-goal" />
+    <siteMapNode title="Promotion Reason" description="View Promotion Reason" url="~/pages/promotion-reason" />
+    <siteMapNode title="Non Promotion Reason" description="View Non Promotion Reason" url="~/pages/non-promotion-reason" />
+    <siteMapNode title="Exit Or Withdrawal Status" description="View Exit Or Withdrawal Status" url="~/pages/exit-or-withdrawal-status" />
+    <siteMapNode title="Exit Or Withdrawal Type" description="View Exit Or Withdrawal Type" url="~/pages/exit-or-withdrawal-type" />
+    <siteMapNode title="Enrollment Status" description="View Enrollment Status" url="~/pages/enrollment-status" />
+    <siteMapNode title="Budget Name" description="View Budget Name" url="~/pages/budget-name" />
+    <siteMapNode title="Budget Type" description="View Budget Type" url="~/pages/budget-type" />
+    <siteMapNode title="Meal Menu" description="View Meal Menu" url="~/pages/meal-menu" />
+    <siteMapNode title="Meal Plans" description="View Meal Plans" url="~/pages/meal-plans" />
+    <siteMapNode title="Meal Type" description="View Meal Type" url="~/pages/meal-type" />
+    <siteMapNode title="Food Services" description="View Food Services" url="~/pages/food-services" />
+    <siteMapNode title="Present Attendance Category" description="View Present Attendance Category" url="~/pages/present-attendance-category" />
+    <siteMapNode title="Grade Type" description="View Grade Type" url="~/pages/grade-type" />
+    <siteMapNode title="Department" description="View Department" url="~/pages/department" />
+    <siteMapNode title="General Parameters" description="View General Parameters" url="~/pages/general-parameters" />
+    <siteMapNode title="Parameter Type" description="View Parameter Type" url="~/pages/parameter-type" />
+    <siteMapNode title="Report Parameters" description="View Report Parameters" url="~/pages/report-parameters" />
+    <siteMapNode title="Students In School Meal" description="View Students In School Meal" url="~/pages/students-in-school-meal" />
+    <siteMapNode title="Meal Logs" description="View Meal Logs" url="~/pages/meal-logs" />
+    <siteMapNode title="Feeding Fee Collections" description="View Feeding Fee Collections" url="~/pages/feeding-fee-collections" />
+    <siteMapNode title="Student Fees" description="View Student Fees" url="~/pages/student-fees" />
+    <siteMapNode title="Fee Collection Transaction Over Time" description="View Fee Collection Transaction Over Time" url="~/pages/fee-collection-transaction-over-time" />
+    <siteMapNode title="Fee Collection Transaction" description="View Fee Collection Transaction" url="~/pages/fee_collection_transaction" />
+    <siteMapNode title="Fee Collection Transaction Extra" description="View Fee Collection Transaction Extra" url="~/pages/fee_collection_transaction_extra" />
+    <siteMapNode title="Fee Collection Transaction Itemised" description="View Fee Collection Transaction Itemised" url="~/pages/fee_collection_transaction_itemised" />
+    <siteMapNode title="Payment By" description="View Payment By" url="~/pages/payment-by" />
+    <siteMapNode title="Transaction Status" description="View Transaction Status" url="~/pages/transaction-status" />
+    <siteMapNode title="Sex" description="View Sex" url="~/pages/sex" />
+    <siteMapNode title="Transaction Type" description="View Transaction Type" url="~/pages/transaction-type" />
+    <siteMapNode title="Payment Method" description="View Payment Method" url="~/pages/payment-method" />
+    <siteMapNode title="Fee Collection Accounting Ledger Mini" description="View Fee Collection Accounting Ledger Mini" url="~/pages/fee-collection-accounting-ledger-mini" />
+    <siteMapNode title="Fee Collection Summaries" description="View Fee Collection Summaries" url="~/pages/fee-collection-summaries" />
+    <siteMapNode title="Budget" description="View Budget" url="~/pages/budget" />
+    <siteMapNode title="Income Expense" description="View Income Expense" url="~/pages/income-expense" />
+    <siteMapNode title="Expense Category" description="View Expense Category" url="~/pages/expense-category" />
+    <siteMapNode title="Income Expense Summary" description="View Income Expense Summary" url="~/pages/income-expense-summary" />
+    <siteMapNode title="Payment Records" description="View Payment Records" url="~/pages/payment-records" />
+    <siteMapNode title="List Of Salaries" description="View List Of Salaries" url="~/pages/list-of-salaries" />
+    <siteMapNode title="Salaries" description="View Salaries" url="~/pages/salaries" />
+    <siteMapNode title="Mini Fee Reminder" description="View Mini Fee Reminder" url="~/pages/mini-fee-reminder" />
+    <siteMapNode title="Custom Fee Reminder Fee Chit" description="View Custom Fee Reminder Fee Chit" url="~/pages/custom-fee-reminder-fee-chit" />
+    <siteMapNode title="School" description="View School" url="~/pages/school" />
+    <siteMapNode title="School Type" description="View School Type" url="~/pages/school-type" />
+    <siteMapNode title="School Level" description="View School Level" url="~/pages/school-level" />
+    <siteMapNode title="Charter School Type" description="View Charter School Type" url="~/pages/charter-school-type" />
+    <siteMapNode title="Grade Book Entries" description="View Grade Book Entries" url="~/pages/grade-book-entries" />
+    <siteMapNode title="Grade Book Entry" description="View Grade Book Entry" url="~/pages/grade-book-entry" />
+    <siteMapNode title="Organization Type" description="View Organization Type" url="~/pages/organization-type" />
+    <siteMapNode title="Organization Element Type" description="View Organization Element Type" url="~/pages/organization-element-type" />
+    <siteMapNode title="Student Grade Book Entry" description="View Student Grade Book Entry" url="~/pages/student-grade-book-entry" />
+    <siteMapNode title="Attendance Event" description="View Attendance Event" url="~/pages/attendance-event" />
+    <siteMapNode title="Student Section Attendance Events" description="View Student Section Attendance Events" url="~/pages/student-section-attendance-events" />
+    <siteMapNode title="zn Student Attendance Events" description="View zn Student Attendance Events" url="~/pages/zn-student-attendance-events" />
+    <siteMapNode title="Student Comments" description="View Student Comments" url="~/pages/student-comments" />
+    <siteMapNode title="Discipline Incident" description="View Discipline Incident" url="~/pages/discipline-incident" />
+    <siteMapNode title="Discipline Alignment" description="View Discipline Alignment" url="~/pages/discipline-alignment" />
+    <siteMapNode title="Student Discipline Incident Association" description="View Student Discipline Incident Association" url="~/pages/student-discipline-incident-association" />
+    <siteMapNode title="Disciplinary Action Taken" description="View Disciplinary Action Taken" url="~/pages/disciplinary-action-taken" />
+    <siteMapNode title="Action Taken" description="View Action Taken" url="~/pages/action-taken" />
+    <siteMapNode title="Behaviour Category" description="View Behaviour Category" url="~/pages/behaviour-category" />
+    <siteMapNode title="Incident Status" description="View Incident Status" url="~/pages/incident-status" />
+    <siteMapNode title="Nature Of Behaviour" description="View Nature Of Behaviour" url="~/pages/nature-of-behaviour" />
+    <siteMapNode title="Incident Behavior" description="View Incident Behavior" url="~/pages/incident-behavior" />
+    <siteMapNode title="Incident Location" description="View Incident Location" url="~/pages/incident-location" />
+    <siteMapNode title="Behaviour Activity Type" description="View Behaviour Activity Type" url="~/pages/behaviour-activity-type" />
+    <siteMapNode title="Incident Participation" description="View Incident Participation" url="~/pages/incident-participation" />
+    <siteMapNode title="Incident Reporter Type" description="View Incident Reporter Type" url="~/pages/incident-reporter-type" />
+    <siteMapNode title="Incident Time Description Code" description="View Incident Time Description Code" url="~/pages/incident-time-description-code" />
+    <siteMapNode title="Performance Indicator" description="View Performance Indicator" url="~/pages/performance-indicator" />
+    <siteMapNode title="Cohort" description="View Cohort" url="~/pages/cohort" />
+    <siteMapNode title="Cohort Scope" description="View Cohort Scope" url="~/pages/cohort-scope" />
+    <siteMapNode title="Cohort Type Description" description="View Cohort Type Description" url="~/pages/cohort-type-description" />
+    <siteMapNode title="Cohort Program" description="View Cohort Program" url="~/pages/cohort-program" />
+    <siteMapNode title="Student Cohort Association" description="View Student Cohort Association" url="~/pages/student-cohort-association" />
+    <siteMapNode title="Cohort Staff Association" description="View Cohort Staff Association" url="~/pages/cohort-staff-association" />
+    <siteMapNode title="Session Enrollment Scheme" description="View Session Enrollment Scheme" url="~/pages/session-enrollment-scheme" />
+    <siteMapNode title="Promotion Scheme" description="View Promotion Scheme" url="~/pages/promotion-scheme" />
+    <siteMapNode title="Onboard Reset" description="View Onboard Reset" url="~/pages/onboard-reset" />
+    <siteMapNode title="Role" description="View Role" url="~/pages/role" />
+    <siteMapNode title="Student School Association" description="View Student School Association" url="~/pages/student-school-association" />
+    <siteMapNode title="Student School Associations" description="View Student School Associations" url="~/pages/student-school-associations" />
+    <siteMapNode title="Entry Type" description="View Entry Type" url="~/pages/entry-type" />
+    <siteMapNode title="End Of Term Status" description="View End Of Term Status" url="~/pages/end-of-term-status" />
+    <siteMapNode title="House Residence" description="View House Residence" url="~/pages/house-residence" />
+    <siteMapNode title="Student Section Association" description="View Student Section Association" url="~/pages/student-section-association" />
+    <siteMapNode title="Course Section Entry Type" description="View Course Section Entry Type" url="~/pages/course-section-entry-type" />
+    <siteMapNode title="Course Section Enrollment Status Type" description="View Course Section Enrollment Status Type" url="~/pages/course-section-enrollment-status-type" />
+    <siteMapNode title="Course Section Exit Type" description="View Course Section Exit Type" url="~/pages/course-section-exit-type" />
+    <siteMapNode title="Document Store" description="View Document Store" url="~/pages/document-store" />
+    <siteMapNode title="Historical Grades" description="View Historical Grades" url="~/pages/historical-grades" />
+    <siteMapNode title="Organization Person Role" description="View Organization Person Role" url="~/pages/organization-person-role" />
+    <siteMapNode title="Organization Person Role Parent" description="View Organization Person Role Parent" url="~/pages/organization-person-role-parent" />
+    <siteMapNode title="Organization Person Roles" description="View Organization Person Roles" url="~/pages/organization-person-roles" />
+    <siteMapNode title="Organization Person Role Staff" description="View Organization Person Role Staff" url="~/pages/organization-person-role-staff" />
+    <siteMapNode title="Organization Person Role Student" description="View Organization Person Role Student" url="~/pages/organization-person-role-student" />
+    <siteMapNode title="Continous Class Performance Overtime Current Session" description="View Continous Class Performance Overtime Current Session" url="~/pages/continous-class-performance-overtime-current-session" />
+    <siteMapNode title="Person Health" description="View Person Health" url="~/pages/person-health" />
+    <siteMapNode title="Health Check Type" description="View Health Check Type" url="~/pages/health-check-type" />
+    <siteMapNode title="Health Insurance Coverage" description="View Health Insurance Coverage" url="~/pages/health-insurance-coverage" />
+    <siteMapNode title="Screening Status" description="View Screening Status" url="~/pages/screening-status" />
+    <siteMapNode title="Medical Alert Indicator" description="View Medical Alert Indicator" url="~/pages/medical-alert-indicator" />
+    <siteMapNode title="Person Allergy" description="View Person Allergy" url="~/pages/person-allergy" />
+    <siteMapNode title="Person Contact Point" description="View Person Contact Point" url="~/pages/person-contact-point" />
+    <siteMapNode title="Allergy Type" description="View Allergy Type" url="~/pages/allergy-type" />
+    <siteMapNode title="Allergy Severity" description="View Allergy Severity" url="~/pages/allergy-severity" />
+    <siteMapNode title="Contact Point Use" description="View Contact Point Use" url="~/pages/contact-point-use" />
+    <siteMapNode title="Contact Point System" description="View Contact Point System" url="~/pages/contact-point-system" />
+    <siteMapNode title="Contact" description="View Contact" url="~/pages/contact" />
+    <siteMapNode title="Photo Album" description="View Photo Album" url="~/pages/photo-album" />
+    <siteMapNode title="School List" description="View School List" url="~/pages/school-list" />
+    <siteMapNode title="Language" description="View Language" url="~/pages/language" />
+    <siteMapNode title="Citizenship Status" description="View Citizenship Status" url="~/pages/citizenship-status" />
+    <siteMapNode title="Identification Proof" description="View Identification Proof" url="~/pages/identification-proof" />
+    <siteMapNode title="Title" description="View Title" url="~/pages/title" />
+    <siteMapNode title="Person Location Type" description="View Person Location Type" url="~/pages/person-location-type" />
+    <siteMapNode title="Town" description="View Town" url="~/pages/town" />
+    <siteMapNode title="Country" description="View Country" url="~/pages/country" />
+    <siteMapNode title="Person Credential" description="View Person Credential" url="~/pages/person-credential" />
+    <siteMapNode title="Credential Type" description="View Credential Type" url="~/pages/credential-type" />
+    <siteMapNode title="Award State" description="View Award State" url="~/pages/award-state" />
+    <siteMapNode title="Organisation" description="View Organisation" url="~/pages/organisation" />
+    <siteMapNode title="Person Identifier" description="View Person Identifier" url="~/pages/person-identifier" />
+    <siteMapNode title="Person Identification System" description="View Person Identification System" url="~/pages/person-identification-system" />
+    <siteMapNode title="Information Verification" description="View Information Verification" url="~/pages/information-verification" />
+    <siteMapNode title="Person Immunisation" description="View Person Immunisation" url="~/pages/person-immunisation" />
+    <siteMapNode title="Person Address" description="View Person Address" url="~/pages/person-address" />
+    <siteMapNode title="Immunization Type" description="View Immunization Type" url="~/pages/immunization-type" />
+    <siteMapNode title="Person Disability" description="View Person Disability" url="~/pages/person-disability" />
+    <siteMapNode title="Disability Condition Status Code" description="View Disability Condition Status Code" url="~/pages/disability-condition-status-code" />
+    <siteMapNode title="Hearing Screening Status" description="View Hearing Screening Status" url="~/pages/hearing-screening-status" />
+    <siteMapNode title="Disability Type" description="View Disability Type" url="~/pages/disability-type" />
+    <siteMapNode title="Accommodations Needed Type" description="View Accommodations Needed Type" url="~/pages/accommodations-needed-type" />
+    <siteMapNode title="Disability Determination Source Type" description="View Disability Determination Source Type" url="~/pages/disability-determination-source-type" />
+    <siteMapNode title="Disability Condition Type" description="View Disability Condition Type" url="~/pages/disability-condition-type" />
+    <siteMapNode title="Contact Relationship" description="View Contact Relationship" url="~/pages/contact-relationship" />
+    <siteMapNode title="Person Relationship" description="View Person Relationship" url="~/pages/person-relationship" />
+    <siteMapNode title="Learning Objective" description="View Learning Objective" url="~/pages/learning-objective" />
+    <siteMapNode title="Learning Objective Entry" description="View Learning Objective Entry" url="~/pages/learning-objective-entry" />
+    <siteMapNode title="Lesson Plan Templates" description="View Lesson Plan Templates" url="~/pages/lesson-plan-templates" />
+    <siteMapNode title="Chronic Absentee Report" description="View Chronic Absentee Report" url="~/pages/chronic-absentee-report" />
+    <siteMapNode title="Attendance Rates" description="View Attendance Rates" url="~/pages/attendance-rates" />
+    <siteMapNode title="Attendance Audit" description="View Attendance Audit" url="~/pages/attendance-audit" />
+    <siteMapNode title="EW Indicators" description="View EW Indicators" url="~/pages/ewindicators" />
+    <siteMapNode title="Fee Collection Summaries Report Current Year" description="View Fee Collection Summaries Report Current Year" url="~/pages/fee-collection-summaries-report-current-year" />
+    <siteMapNode title="Non Paid Students" description="View Non Paid Students" url="~/pages/non-paid-students" />
+    <siteMapNode title="vw Current Student And Parents" description="View vw Current Student And Parents" url="~/pages/vw-current-student-and-parents" />
+    <siteMapNode title="Student School Enrollments Overtime" description="View Student School Enrollments Overtime" url="~/pages/student-school-enrollments-overtime" />
+    <siteMapNode title="Disabilities Concerns" description="View Disabilities Concerns" url="~/pages/disabilities-concerns" />
+    <siteMapNode title="Health Alert Profile" description="View Health Alert Profile" url="~/pages/health-alert-profile" />
+    <siteMapNode title="Staff Career Progression" description="View Staff Career Progression" url="~/pages/staff-career-progression" />
+    <siteMapNode title="K12 Staff Assignment" description="View K12 Staff Assignment" url="~/pages/k12staff-assignment" />
+    <siteMapNode title="zn Staff Assignment" description="View zn Staff Assignment" url="~/pages/zn-staff-assignment" />
+    <siteMapNode title="Classroom Position Type" description="View Classroom Position Type" url="~/pages/classroom-position-type" />
+    <siteMapNode title="Staff Classification" description="View Staff Classification" url="~/pages/staff-classification" />
+    <siteMapNode title="Teaching Assignment Role" description="View Teaching Assignment Role" url="~/pages/teaching-assignment-role" />
+    <siteMapNode title="Education Job Classification" description="View Education Job Classification" url="~/pages/education-job-classification" />
+    <siteMapNode title="Salary Component Element" description="View Salary Component Element" url="~/pages/salary-component-element" />
+    <siteMapNode title="Behaviour Activities" description="View Behaviour Activities" url="~/pages/behaviour-activities" />
+    <siteMapNode title="Behaviour Management" description="View Behaviour Management" url="~/pages/behaviour-management" />
+    <siteMapNode title="SBL Scoresheet" description="View SBL Scoresheet" url="~/pages/sblscoresheet" />
+    <siteMapNode title="Get Salary Information For Bank" description="View Get Salary Information For Bank" url="~/pages/get-salary-information-for-bank" />
+    <siteMapNode title="Fee Reminder Note" description="View Fee Reminder Note" url="~/pages/fee-reminder-note" />
+    <siteMapNode title="Term Basis Person Centred Evaluation" description="View Term Basis Person Centred Evaluation" url="~/pages/term-basis-person-centred-evaluation" />
+    <siteMapNode title="Product" description="View Product" url="~/pages/product" />
+    <siteMapNode title="Product Category" description="View Product Category" url="~/pages/product-category" />
+    <siteMapNode title="mlink Product Colour" description="View mlink Product Colour" url="~/pages/mlink-product-colour" />
+    <siteMapNode title="Colour" description="View Colour" url="~/pages/colour" />
+    <siteMapNode title="Buses" description="View Buses" url="~/pages/buses" />
+    <siteMapNode title="Routes" description="View Routes" url="~/pages/routes" />
+    <siteMapNode title="Bus Schedules" description="View Bus Schedules" url="~/pages/bus-schedules" />
+    <siteMapNode title="Service Attendance" description="View Service Attendance" url="~/pages/service-attendance" />
+    <siteMapNode title="Orders" description="View Orders" url="~/pages/orders" />
+    <siteMapNode title="Sales Order Detail" description="View Sales Order Detail" url="~/pages/sales-order-detail" />
+    <siteMapNode title="Purchase Order Detail" description="View Purchase Order Detail" url="~/pages/purchase-order-detail" />
+    <siteMapNode title="Purchase Order Detail Vendor" description="View Purchase Order Detail Vendor" url="~/pages/purchase-order-detail-vendor" />
+    <siteMapNode title="Purchase Order" description="View Purchase Order" url="~/pages/purchase-order" />
+    <siteMapNode title="Purchase Order Status" description="View Purchase Order Status" url="~/pages/purchase-order-status" />
+    <siteMapNode title="Payment Status" description="View Payment Status" url="~/pages/payment-status" />
+    <siteMapNode title="Suppliers" description="View Suppliers" url="~/pages/suppliers" />
+    <siteMapNode title="Transactions Movement" description="View Transactions Movement" url="~/pages/transactions-movement" />
+    <siteMapNode title="Stock Levels" description="View Stock Levels" url="~/pages/stock-levels" />
+    <siteMapNode title="Stock Transaction Type" description="View Stock Transaction Type" url="~/pages/stock-transaction-type" />
+    <siteMapNode title="Stock Transactions" description="View Stock Transactions" url="~/pages/stock-transactions" />
+    <siteMapNode title="Inventory Locations" description="View Inventory Locations" url="~/pages/inventory-locations" />
+    <siteMapNode title="Movement Mode" description="View Movement Mode" url="~/pages/movement-mode" />
+    <siteMapNode title="Books" description="View Books" url="~/pages/books" />
+    <siteMapNode title="Members" description="View Members" url="~/pages/members" />
+    <siteMapNode title="Borrow Transactions" description="View Borrow Transactions" url="~/pages/borrow-transactions" />
+    <siteMapNode title="Course Section Schedule" description="View Course Section Schedule" url="~/pages/course-section-schedule" />
+    <siteMapNode title="Course Interaction Mode" description="View Course Interaction Mode" url="~/pages/course-interaction-mode" />
+    <siteMapNode title="Schedules" description="View Schedules" url="~/pages/schedules" />
+    <siteMapNode title="Class Period" description="View Class Period" url="~/pages/class-period" />
+    <siteMapNode title="Class Period Type Descriptor" description="View Class Period Type Descriptor" url="~/pages/class-period-type-descriptor" />
+    <siteMapNode title="Student Assessment" description="View Student Assessment" url="~/pages/student-assessment" />
+    <siteMapNode title="Assessment Score" description="View Assessment Score" url="~/pages/assessment-score" />
+    <siteMapNode title="Assessment" description="View Assessment" url="~/pages/assessment" />
+    <siteMapNode title="Assessment Reason Not Tested" description="View Assessment Reason Not Tested" url="~/pages/assessment-reason-not-tested" />
+    <siteMapNode title="Environment Setting" description="View Environment Setting" url="~/pages/environment-setting" />
+    <siteMapNode title="Stock Level Movement" description="View Stock Level Movement" url="~/pages/stock-level-movement" />
+    <siteMapNode title="Stock Level Movement Receiving Location" description="View Stock Level Movement Receiving Location" url="~/pages/stock-level-movement-receiving-location" />
+    <siteMapNode title="Movement Transaction Type" description="View Movement Transaction Type" url="~/pages/movement-transaction-type" />
+    <siteMapNode title="Historical Outcomes" description="View Historical Outcomes" url="~/pages/historical-outcomes" />
+    <siteMapNode title="Grades Book P4" description="View Grades Book P4" url="~/pages/grades-book-p4" />
+    <siteMapNode title="Stock Take" description="View Stock Take" url="~/pages/stock-take" />
+    <siteMapNode title="Stock Adjustment" description="View Stock Adjustment" url="~/pages/stock-adjustment" />
+    <siteMapNode title="Stock Variance Overtime" description="View Stock Variance Overtime" url="~/pages/stock-variance-overtime" />
+    <siteMapNode title="Stock Take Header" description="View Stock Take Header" url="~/pages/stock-take-header" />
+    <siteMapNode title="Program" description="View Program" url="~/pages/program" />
+    <siteMapNode title="Program Type" description="View Program Type" url="~/pages/program-type" />
+    <siteMapNode title="Teacher Section Association" description="View Teacher Section Association" url="~/pages/teacher-section-association" />
+    <siteMapNode title="Room" description="View Room" url="~/pages/room" />
+    <siteMapNode title="Account Type" description="View Account Type" url="~/pages/account-type" />
+    <siteMapNode title="Chart Of Accounts" description="View Chart Of Accounts" url="~/pages/chart-of-accounts" />
+    <siteMapNode title="Transaction Account Mapping" description="View Transaction Account Mapping" url="~/pages/transaction-account-mapping" />
+    <siteMapNode title="Manual Account Journal Entries" description="View Manual Account Journal Entries" url="~/pages/manual-account-journal-entries" />
+    <siteMapNode title="Account General Ledger" description="View Account General Ledger" url="~/pages/account-general-ledger" />
+    <siteMapNode title="Progress Level" description="View Progress Level" url="~/pages/progress-level" />
+    <siteMapNode title="Chart Account Category" description="View Chart Account Category" url="~/pages/chart-account-category" />
+    <siteMapNode title="Chart Account Usage" description="View Chart Account Usage" url="~/pages/chart-account-usage" />
+    <siteMapNode title="Student Program Participation" description="View Student Program Participation" url="~/pages/student-program-participation" />
+    <siteMapNode title="Unit Of Measure" description="View Unit Of Measure" url="~/pages/unit-of-measure" />
+    <siteMapNode title="Product Uo M" description="View Product Uo M" url="~/pages/product-uo-m" />
+    <siteMapNode title="Student Intervention Association" description="View Student Intervention Association" url="~/pages/student-intervention-association" />
+    <siteMapNode title="Account Document Source" description="View Account Document Source" url="~/pages/account-document-source" />
+    <siteMapNode title="School Instituition" description="View School Instituition" url="~/pages/school-instituition" />
+    <siteMapNode title="Contacts" description="View Contacts" url="~/pages/contacts" />
+    <siteMapNode title="Account Sub Category" description="View Account Sub Category" url="~/pages/account-sub-category" />
+    <siteMapNode title="Cash Flow Category" description="View Cash Flow Category" url="~/pages/cash-flow-category" />
+    <siteMapNode title="Cash Flow Category Map" description="View Cash Flow Category Map" url="~/pages/cash-flow-category-map" />
+    <siteMapNode title="Account Cash Flow Map" description="View Account Cash Flow Map" url="~/pages/account-cash-flow-map" />
+    <siteMapNode title="Cash Flow Section" description="View Cash Flow Section" url="~/pages/cash-flow-section" />
+    <siteMapNode title="Account Cash Flow Mapping" description="View Account Cash Flow Mapping" url="~/pages/account-cash-flow-mapping" />
+    <siteMapNode title="Country Fiscal Periods" description="View Country Fiscal Periods" url="~/pages/country-fiscal-periods" />
+    <siteMapNode title="Tax Configuration" description="View Tax Configuration" url="~/pages/tax-configuration" />
+    <siteMapNode title="Tax Basis" description="View Tax Basis" url="~/pages/tax-basis" />
+    <siteMapNode title="Tax Thresholds" description="View Tax Thresholds" url="~/pages/tax-thresholds" />
+    <siteMapNode title="NI Category" description="View NI Category" url="~/pages/nicategory" />
+    <siteMapNode title="Tax Code" description="View Tax Code" url="~/pages/tax-code" />
+    <siteMapNode title="Component Type Tag Map" description="View Component Type Tag Map" url="~/pages/component-type-tag-map" />
+    <siteMapNode title="Payroll Tags" description="View Payroll Tags" url="~/pages/payroll-tags" />
+    <siteMapNode title="Payroll Tag Category" description="View Payroll Tag Category" url="~/pages/payroll-tag-category" />
+    <siteMapNode title="^MembershipPath^Membership^MembershipPath^" description="^MembershipDesc^User and role manager^MembershipDesc^" url="~/pages/membership" roles="Administrators" />
+    <siteMapNode title="Site Content" description="View Site Content" url="~/pages/site-content" roles="Administrators, Content Editors, Developers" />
   </siteMapNode>
 </siteMap>

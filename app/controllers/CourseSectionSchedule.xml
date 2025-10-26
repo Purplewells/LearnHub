@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="CourseSectionSchedule" conflictDetection="overwriteChanges" label="Course Section Schedule" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.CourseSectionScheduleBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="CourseSectionSchedule" conflictDetection="overwriteChanges" label="Course Section Schedule" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -52,23 +52,13 @@ from "dbo"."CourseSectionSchedule" "CourseSectionSchedule"
     <field name="ClassPeriodID" type="Int32" label="Class Period ID" showInSummary="true">
       <items style="Lookup" dataController="ClassPeriod" newDataView="createForm1" dataValueField="ClassPeriodID" dataTextField="ClassPeriodName" copy="ClassPeriodStartTime=StartTime, ClassPeriodEndTime=EndTime" />
     </field>
-    <field name="ClassPeriodName" type="String" readOnly="true" label="Period Name" length="20" />
+    <field name="ClassPeriodName" type="String" readOnly="true" label="Period Name" length="30" />
     <field name="ClassPeriodStartTime" type="TimeSpan" readOnly="true" label="Start Time" length="7" />
     <field name="ScheduleID" type="Int32" label="Schedule ID">
       <items style="Lookup" dataController="Schedules" newDataView="createForm1" dataValueField="ScheduleID" dataTextField="ScheduleID" copy="ScheduleDaysOfWeek=DaysOfWeek, ScheduleWeeks=Weeks" />
     </field>
-    <field name="ScheduleDaysOfWeek" type="String" label="DaysOfWeek" length="200" isVirtual="true">
-      <items style="CheckBoxList">
-        <item value="Monday" text="Monday" />
-        <item value="Tuesday" text="Tuesday" />
-        <item value="Wednesday" text="Wednesday" />
-        <item value="Thursday" text="Thursday" />
-        <item value="Friday" text="Friday" />
-        <item value="Saturday" text="Saturday" />
-        <item value="Sunday" text="Sunday" />
-      </items>
-    </field>
-    <field name="ScheduleWeeks" type="Int32" label="Schedule Weeks" isVirtual="true" />
+    <field name="ScheduleDaysOfWeek" type="String" readOnly="true" label="DaysOfWeek" length="200" />
+    <field name="ScheduleWeeks" type="Int32" readOnly="true" label="Schedule Weeks" />
     <field name="ClassPeriodEndTime" type="TimeSpan" readOnly="true" label="End Time" length="7" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
@@ -77,115 +67,82 @@ from "dbo"."CourseSectionSchedule" "CourseSectionSchedule"
     <field name="RoomID" type="Int32" label="Room ID">
       <items style="Lookup" dataController="Room" newDataView="createForm1" dataValueField="RoomID" dataTextField="Room" />
     </field>
-    <field name="RoomName" type="String" readOnly="true" label="Room Name" length="20" />
+    <field name="RoomName" type="String" readOnly="true" label="Room Name" length="300" />
     <field name="Description" type="String" label="Description" length="500" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Course Section Schedule">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" tag="calendar-text" />
+        <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" />
         <dataField fieldName="CourseSectionName" columns="50" />
         <dataField fieldName="Title" columns="50" />
-        <dataField fieldName="Description" tag="calendar-text&#xD;&#xA;header-text" />
         <dataField fieldName="StartDate" columns="20" />
-        <dataField fieldName="EndDate" columns="20" tag="calendar-end" />
-        <dataField fieldName="RoomID" aliasFieldName="RoomName" tag="calendar-color" />
+        <dataField fieldName="EndDate" columns="20" />
         <dataField fieldName="ClassPeriodID" aliasFieldName="ClassPeriodName" />
         <dataField fieldName="ClassPeriodStartTime" columns="15" />
-        <dataField fieldName="ClassPeriodEndTime" columns="15" />
         <dataField fieldName="ScheduleID" columns="15" />
         <dataField fieldName="ScheduleDaysOfWeek" />
         <dataField fieldName="ScheduleWeeks" columns="15" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="ClassPeriodEndTime" columns="15" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="RoomID" aliasFieldName="RoomName" />
+        <dataField fieldName="Description" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review  Schedule">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Course Section Schedule">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Course Section Schedule" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" />
-            <dataField fieldName="CourseSectionName" columns="50" hidden="true" />
-            <dataField fieldName="Title" columns="50" />
-            <dataField fieldName="StartDate" columns="20" />
-            <dataField fieldName="EndDate" columns="20" />
-            <dataField fieldName="RoomID" aliasFieldName="RoomName" />
-            <dataField fieldName="ClassPeriodID" aliasFieldName="ClassPeriodName" />
-            <dataField fieldName="ClassPeriodStartTime" columns="15" />
-            <dataField fieldName="ClassPeriodEndTime" columns="15" />
-            <dataField fieldName="ScheduleID" columns="15" hidden="true" />
-            <dataField fieldName="ScheduleDaysOfWeek">
-              <headerText>Schedule Days Of Week</headerText>
-            </dataField>
-            <dataField fieldName="ScheduleWeeks" columns="15">
-              <visibility>
-                <expression test="$row.ScheduleID != null" type="ClientScript" />
-              </visibility>
-            </dataField>
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-            <dataField fieldName="Description" hidden="true" />
-          </dataFields>
-        </category>
-      </categories>
-    </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Schedule">
-      <headerText>$DefaultCreateViewDescription</headerText>
-      <categories>
-        <category id="c1" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
-          <dataFields>
-            <dataField fieldName="CourseSectionName" columns="50" hidden="true" />
-            <dataField fieldName="Title" columns="50" />
-            <dataField fieldName="StartDate" columns="20" />
-            <dataField fieldName="EndDate" columns="20" />
-            <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" />
-            <dataField fieldName="RoomID" aliasFieldName="RoomName" />
-            <dataField fieldName="ClassPeriodID" aliasFieldName="ClassPeriodName" />
-            <dataField fieldName="ClassPeriodStartTime" columns="15" hidden="true" />
-            <dataField fieldName="ClassPeriodEndTime" columns="15" hidden="true" />
-            <dataField fieldName="ScheduleID" columns="15" hidden="true" />
-            <dataField fieldName="ScheduleDaysOfWeek" columns="3" />
-            <dataField fieldName="ScheduleWeeks" columns="15" hidden="true" />
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-            <dataField fieldName="Description" hidden="true" />
-          </dataFields>
-        </category>
-      </categories>
-    </view>
-    <view id="createMeeting" type="Form" commandId="command1" label="New Schedule">
-      <headerText>$DefaultCreateViewDescription</headerText>
-      <categories>
-        <category id="c1" flow="NewColumn">
-          <description><![CDATA[$DefaultNewDescription]]></description>
-          <dataFields>
             <dataField fieldName="CourseSectionName" columns="50" />
             <dataField fieldName="Title" columns="50" />
             <dataField fieldName="StartDate" columns="20" />
             <dataField fieldName="EndDate" columns="20" />
-            <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" />
-            <dataField fieldName="RoomID" aliasFieldName="RoomName" />
             <dataField fieldName="ClassPeriodID" aliasFieldName="ClassPeriodName" />
             <dataField fieldName="ClassPeriodStartTime" columns="15" />
-            <dataField fieldName="ClassPeriodEndTime" columns="15" />
-            <dataField fieldName="ScheduleID" columns="15" hidden="true" />
+            <dataField fieldName="ScheduleID" columns="15" />
             <dataField fieldName="ScheduleDaysOfWeek" />
             <dataField fieldName="ScheduleWeeks" columns="15" />
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-            <dataField fieldName="Description" hidden="true" />
+            <dataField fieldName="ClassPeriodEndTime" columns="15" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="RoomID" aliasFieldName="RoomName" />
+            <dataField fieldName="Description" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Course Section Schedule">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" />
+            <dataField fieldName="CourseSectionName" columns="50" />
+            <dataField fieldName="Title" columns="50" />
+            <dataField fieldName="StartDate" columns="20" />
+            <dataField fieldName="EndDate" columns="20" />
+            <dataField fieldName="ClassPeriodID" aliasFieldName="ClassPeriodName" />
+            <dataField fieldName="ClassPeriodStartTime" columns="15" />
+            <dataField fieldName="ScheduleID" columns="15" />
+            <dataField fieldName="ScheduleDaysOfWeek" />
+            <dataField fieldName="ScheduleWeeks" columns="15" />
+            <dataField fieldName="ClassPeriodEndTime" columns="15" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="RoomID" aliasFieldName="RoomName" />
+            <dataField fieldName="Description" />
           </dataFields>
         </category>
       </categories>
@@ -218,7 +175,6 @@ from "dbo"."CourseSectionSchedule" "CourseSectionSchedule"
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
       <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
-      <action commandName="New" commandArgument="createMeeting" headerText="New Recurring Meeting" id="a100" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
@@ -253,26 +209,4 @@ from "dbo"."CourseSectionSchedule" "CourseSectionSchedule"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="New" type="JavaScript" phase="After" name="setScheduleTime"><![CDATA[$row.Title = "New Schedule";
-
-if (!$row.StartDate) {
-  var start = new Date();
-  start.setMinutes(0, 0, 0);
-  start.setHours(start.getHours() + 1);
-  
-  var end = new Date(start);
-  end.setHours(end.getHours() + 1);
-  
-  $row.StartDate = start;
-  $row.EndDate = end; // Changed property name to match "StartDate"
-}
-]]></rule>
-    <rule id="r101" commandName="Insert" type="Code" phase="Before" name="setRecursion" />
-    <rule id="r102" commandName="Delete" type="Code" phase="Before" name="setOnDeleteAction" />
-    <rule id="r103" commandName="Update" type="Code" phase="Before" name="setOnUpdateAction" />
-  </businessRules>
-  <restConfig>Uri: .
-Users: *
-JSON: True</restConfig>
 </dataController>

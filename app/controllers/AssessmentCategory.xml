@@ -34,21 +34,11 @@ order by "zlkp_AssessmentCategory"."SortOrder" asc]]></text>
     <field name="SortOrder" type="Int32" label="Sort Order" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Category" sortExpression="SortOrder asc" filter="IsActive = 1">
+    <view id="grid1" type="Grid" commandId="command1" label="Assessment Category" sortExpression="SortOrder asc">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Category" columns="25" />
         <dataField fieldName="Code" columns="5" />
-        <dataField fieldName="GradeTypeID" aliasFieldName="GradeType" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="SortOrder" columns="15" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_categories" type="Grid" commandId="command1" label="All Assessment Categories" sortExpression="SortOrder asc">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
         <dataField fieldName="Category" columns="25" />
-        <dataField fieldName="Code" columns="5" />
         <dataField fieldName="GradeTypeID" aliasFieldName="GradeType" />
         <dataField fieldName="IsActive" />
         <dataField fieldName="SortOrder" columns="15" />
@@ -57,7 +47,7 @@ order by "zlkp_AssessmentCategory"."SortOrder" asc]]></text>
     <view id="editForm1" type="Form" commandId="command1" label="Review Assessment Category">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Assessment Category" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="Code" columns="5" />

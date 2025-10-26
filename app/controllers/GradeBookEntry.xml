@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="GradeBookEntry" conflictDetection="overwriteChanges" label="Grade Book Entry" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.GradeBookEntryBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="GradeBookEntry" conflictDetection="overwriteChanges" label="Grade Book Entry" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -70,20 +70,20 @@ where CalendarSession.IsActive=1
   <fields>
     <field name="GradeBookEntryID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Grade Book Entry ID" readOnly="true" />
     <field name="GradeBookEntryTypeID" type="Int32" label="Grade Book Entry Type ID" showInSummary="true">
-      <items style="RadioButtonList" dataController="AssessmentType" dataValueField="GradeBookEntryTypeID" dataTextField="GradeBookEntryType" dataView="grid1" />
+      <items style="Lookup" dataController="AssessmentType" newDataView="createForm1" dataValueField="GradeBookEntryTypeID" dataTextField="GradeBookEntryType" />
     </field>
-    <field name="EntryType" type="String" readOnly="true" label="Entry Type" length="15" />
+    <field name="EntryType" type="String" readOnly="true" label="Entry Type" length="100" />
     <field name="GradeBook" type="String" allowNulls="false" label="GBA Title" length="50" showInSummary="true" />
     <field name="SubmittedDate" type="DateTime" allowNulls="false" label="Event Date" showInSummary="true" />
     <field name="DueDate" type="DateTime" label="Due Date" showInSummary="true" />
     <field name="CourseSectionID" type="Int32" allowNulls="false" label="Course Section ID" showInSummary="true">
       <items style="Lookup" dataController="CourseSection" newDataView="createForm1" dataValueField="CourseSectionID" dataTextField="SectionNo" copy="ACS=ACS, Course=CourseTitle, GL=GL, GLSO=GLSO" />
     </field>
-    <field name="CourseSectionNo" type="String" readOnly="true" label="Section No" length="20" />
+    <field name="CourseSectionNo" type="String" readOnly="true" label="Section No" length="50" />
     <field name="GradingPeriodID" type="Int32" allowNulls="false" label="Grading Period ID">
-      <items style="RadioButtonList" dataController="GradingPeriod" dataValueField="GradingPeriodID" dataTextField="GradingPeriod" copy="" dataView="grid1" />
+      <items style="Lookup" dataController="GradingPeriod" newDataView="createForm1" dataValueField="GradingPeriodID" dataTextField="GradingPeriod" copy="" />
     </field>
-    <field name="GradingPeriod" type="String" readOnly="true" label="GP" length="15" />
+    <field name="GradingPeriod" type="String" readOnly="true" label="GP" length="30" />
     <field name="MPP" type="Decimal" label="MPP" />
     <field name="Weight" type="Decimal" label="% Wt" />
     <field name="PTFA" type="Boolean" label="PTFA" />
@@ -92,26 +92,22 @@ where CalendarSession.IsActive=1
     <field name="PURE" type="Boolean" label="PURE" />
     <field name="Adaptive" type="Boolean" default="((0))" label="Adaptive" />
     <field name="AssessmentCategoryID" type="Int32" label="Assessment Category ID">
-      <items style="RadioButtonList" dataController="AssessmentCategory" dataValueField="AssessmentCategoryID" dataTextField="Category" dataView="grid1" />
+      <items style="Lookup" dataController="AssessmentCategory" newDataView="createForm1" dataValueField="AssessmentCategoryID" dataTextField="Category" />
     </field>
-    <field name="AssessmentCategory" type="String" readOnly="true" label="Category" length="20" />
+    <field name="AssessmentCategory" type="String" readOnly="true" label="Category" length="25" />
     <field name="RefSchoolStreamID" type="Int32" label="Ref School Stream ID">
       <items style="Lookup" dataController="SchoolStream" newDataView="createForm1" dataValueField="RefSchoolStreamID" dataTextField="Description" />
     </field>
-    <field name="SchoolStream" type="String" readOnly="true" label="STM" length="10" />
+    <field name="SchoolStream" type="String" readOnly="true" label="STM" length="100" />
     <field name="AssessmentFamilyID" type="Int32" label="Assessment Family ID" />
     <field name="AssessmentFamily" type="String" readOnly="true" label="Assessment Family" length="50" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
-    <field name="UserID" type="Guid" label="UserID" roles="Administrators" writeRoles="Administrators">
-      <items style="UserIdLookup" copy="Owner = UserName" />
-    </field>
-    <field name="Owner" type="String" label="Owner" length="50" roles="Administrators" writeRoles="Administrators">
-      <items style="UserNameLookup" />
-    </field>
-    <field name="Session" type="String" readOnly="true" label="Session" length="50" causesCalculate="true" />
+    <field name="UserID" type="Guid" label="UserID" />
+    <field name="Owner" type="String" label="Owner" length="50" />
+    <field name="Session" type="String" readOnly="true" label="Session" length="50" />
     <field name="CSIA" type="Boolean" readOnly="true" label="CSIA" />
     <field name="SSIA" type="Boolean" readOnly="true" label="SSIA" />
     <field name="ACS" type="Boolean" readOnly="true" label="ACS" />
@@ -127,226 +123,129 @@ where CalendarSession.IsActive=1
     <field name="WMC" type="Decimal" label="WMC" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active GBA Plans" sortExpression="ModifiedDate DESC, GLSO ASC" filter="SSIA=1 ">
+    <view id="grid1" type="Grid" commandId="command1" label="Grade Book Entry">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="GradeBook" columns="15" tag="calendar-text" />
-        <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" columns="20" />
-        <dataField fieldName="Course" columns="18" />
-        <dataField fieldName="GradeBookEntryTypeID" aliasFieldName="EntryType" tag="calendar-color" />
-        <dataField fieldName="AssessmentCategoryID" aliasFieldName="AssessmentCategory" columns="20" />
-        <dataField fieldName="AssessmentFamilyID" aliasFieldName="AssessmentFamily" hidden="true" />
-        <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" columns="15" />
-        <dataField fieldName="SubmittedDate" columns="10" tag="calendar-date&#xD;&#xA;calendar-input-future" />
-        <dataField fieldName="DueDate" columns="10" hidden="true" tag="calendar-end" />
-        <dataField fieldName="Session" columns="15" />
-        <dataField fieldName="MPP" columns="5" />
-        <dataField fieldName="Weight" columns="5" />
-        <dataField fieldName="PTFA" hidden="true" />
-        <dataField fieldName="PTSA" hidden="true" />
-        <dataField fieldName="PUIT" hidden="true" />
-        <dataField fieldName="PURE" hidden="true" />
-        <dataField fieldName="Adaptive" hidden="true" />
-        <dataField fieldName="GL" columns="5" />
-        <dataField fieldName="RefSchoolStreamID" aliasFieldName="SchoolStream" columns="8" />
-        <dataField fieldName="CSIA" columns="4" hidden="true" />
-        <dataField fieldName="UserID" columns="15" hidden="true" />
-        <dataField fieldName="Owner" columns="50" hidden="true" />
-        <dataField fieldName="SSIA" hidden="true" />
-        <dataField fieldName="ACS" columns="4" hidden="true" />
-        <dataField fieldName="CSY" hidden="true" />
-        <dataField fieldName="IsActive" hidden="true" />
-        <dataField fieldName="SchoolName" columns="50" hidden="true" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="GBID" columns="5" />
-        <dataField fieldName="WMC" columns="5" />
-      </dataFields>
-      <styles>
-        <expression type="ClientScript" result="GBAWeightingCheck" test="$row.WMC &gt; 100" />
-      </styles>
-    </view>
-    <view id="grid1_historical_gba" type="Grid" commandId="command1" label="Historical GBA Plans" sortExpression="GLSO ASC" filter="SSIA=0">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="GradeBook" columns="15" />
-        <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" columns="20" />
-        <dataField fieldName="Course" columns="18" />
         <dataField fieldName="GradeBookEntryTypeID" aliasFieldName="EntryType" />
-        <dataField fieldName="AssessmentCategoryID" aliasFieldName="AssessmentCategory" columns="20" />
-        <dataField fieldName="AssessmentFamilyID" aliasFieldName="AssessmentFamily" hidden="true" />
-        <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" columns="15" />
+        <dataField fieldName="GradeBook" columns="50" />
         <dataField fieldName="SubmittedDate" columns="10" />
-        <dataField fieldName="DueDate" columns="10" hidden="true" />
-        <dataField fieldName="Session" columns="15" />
-        <dataField fieldName="MPP" columns="5" />
-        <dataField fieldName="Weight" columns="5" />
-        <dataField fieldName="PTFA" hidden="true" />
-        <dataField fieldName="PTSA" hidden="true" />
-        <dataField fieldName="PUIT" hidden="true" />
-        <dataField fieldName="PURE" hidden="true" />
-        <dataField fieldName="Adaptive" hidden="true" />
-        <dataField fieldName="GL" columns="5" />
-        <dataField fieldName="RefSchoolStreamID" aliasFieldName="SchoolStream" columns="8" />
+        <dataField fieldName="DueDate" columns="10" />
+        <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" />
+        <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" />
+        <dataField fieldName="MPP" columns="15" />
+        <dataField fieldName="Weight" columns="15" />
+        <dataField fieldName="PTFA" />
+        <dataField fieldName="PTSA" />
+        <dataField fieldName="PUIT" />
+        <dataField fieldName="PURE" />
+        <dataField fieldName="Adaptive" />
+        <dataField fieldName="AssessmentCategoryID" aliasFieldName="AssessmentCategory" />
+        <dataField fieldName="RefSchoolStreamID" aliasFieldName="SchoolStream" />
+        <dataField fieldName="AssessmentFamilyID" aliasFieldName="AssessmentFamily" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="UserID" columns="15" />
+        <dataField fieldName="Owner" columns="50" />
+        <dataField fieldName="Session" columns="50" />
         <dataField fieldName="CSIA" />
-        <dataField fieldName="UserID" columns="15" hidden="true" />
-        <dataField fieldName="Owner" columns="50" hidden="true" />
         <dataField fieldName="SSIA" />
         <dataField fieldName="ACS" />
         <dataField fieldName="CSY" />
         <dataField fieldName="IsActive" />
-        <dataField fieldName="SchoolName" columns="50" hidden="true" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="GBID" columns="8" />
-        <dataField fieldName="WMC" columns="5" />
+        <dataField fieldName="SchoolName" columns="50" />
+        <dataField fieldName="Course" />
+        <dataField fieldName="GL" />
+        <dataField fieldName="GLSO" columns="15" />
+        <dataField fieldName="GBID" columns="15" />
+        <dataField fieldName="WMC" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Enter &amp; Maintain GBA Plan">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Grade Book Entry">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Grade Book Entry" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
+            <dataField fieldName="GradeBookEntryTypeID" aliasFieldName="EntryType" />
             <dataField fieldName="GradeBook" columns="50" />
-            <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" />
-            <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" columns="3" />
-            <dataField fieldName="GradeBookEntryTypeID" aliasFieldName="EntryType" columns="3" />
-            <dataField fieldName="AssessmentCategoryID" aliasFieldName="AssessmentCategory" columns="3" />
-            <dataField fieldName="Session" columns="50" />
-            <dataField fieldName="ACS" />
-            <dataField fieldName="Course" />
-            <dataField fieldName="WMC" columns="15" />
-          </dataFields>
-        </category>
-        <category id="c2">
-          <description />
-          <dataFields>
             <dataField fieldName="SubmittedDate" columns="10" />
             <dataField fieldName="DueDate" columns="10" />
-            <dataField fieldName="GL" />
-            <dataField fieldName="RefSchoolStreamID" aliasFieldName="SchoolStream" />
-          </dataFields>
-        </category>
-        <category id="c7">
-          <description />
-          <dataFields>
-            <dataField fieldName="CreatedBy" columns="50" />
-            <dataField fieldName="ModifiedBy" columns="50" />
-          </dataFields>
-        </category>
-        <category id="c3" flow="NewColumn">
-          <description />
-          <dataFields>
+            <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" />
+            <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" />
             <dataField fieldName="MPP" columns="15" />
             <dataField fieldName="Weight" columns="15" />
-            <dataField fieldName="IsActive" />
-          </dataFields>
-        </category>
-        <category id="c4">
-          <description />
-          <dataFields>
             <dataField fieldName="PTFA" />
             <dataField fieldName="PTSA" />
             <dataField fieldName="PUIT" />
             <dataField fieldName="PURE" />
             <dataField fieldName="Adaptive" />
-          </dataFields>
-        </category>
-        <category id="c5">
-          <description />
-          <dataFields>
-            <dataField fieldName="CSY" />
-            <dataField fieldName="CSIA" />
-            <dataField fieldName="SSIA" />
+            <dataField fieldName="AssessmentCategoryID" aliasFieldName="AssessmentCategory" />
+            <dataField fieldName="RefSchoolStreamID" aliasFieldName="SchoolStream" />
+            <dataField fieldName="AssessmentFamilyID" aliasFieldName="AssessmentFamily" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
-          </dataFields>
-        </category>
-        <category id="c6">
-          <description />
-          <dataFields>
-            <dataField fieldName="SchoolName" columns="50" hidden="true" />
-            <dataField fieldName="GLSO" columns="15" hidden="true" />
-            <dataField fieldName="AssessmentFamilyID" aliasFieldName="AssessmentFamily" hidden="true" />
-            <dataField fieldName="Owner" columns="50" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
             <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="Owner" columns="50" />
+            <dataField fieldName="Session" columns="50" />
+            <dataField fieldName="CSIA" />
+            <dataField fieldName="SSIA" />
+            <dataField fieldName="ACS" />
+            <dataField fieldName="CSY" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="SchoolName" columns="50" />
+            <dataField fieldName="Course" />
+            <dataField fieldName="GL" />
+            <dataField fieldName="GLSO" columns="15" />
+            <dataField fieldName="GBID" columns="15" />
+            <dataField fieldName="WMC" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New GBA Plan">
+    <view id="createForm1" type="Form" commandId="command1" label="New Grade Book Entry">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description />
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
+            <dataField fieldName="GradeBookEntryTypeID" aliasFieldName="EntryType" />
             <dataField fieldName="GradeBook" columns="50" />
-            <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" />
-            <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" />
-            <dataField fieldName="GradeBookEntryTypeID" aliasFieldName="EntryType">
-              <headerText>Assessment Type</headerText>
-            </dataField>
-            <dataField fieldName="AssessmentCategoryID" aliasFieldName="AssessmentCategory" />
-            <dataField fieldName="RefSchoolStreamID" aliasFieldName="SchoolStream" />
-            <dataField fieldName="WMC" columns="15" />
-          </dataFields>
-        </category>
-        <category id="c2">
-          <description />
-          <dataFields>
             <dataField fieldName="SubmittedDate" columns="10" />
             <dataField fieldName="DueDate" columns="10" />
-            <dataField fieldName="GL" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c3" flow="NewColumn">
-          <description />
-          <dataFields>
+            <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" />
+            <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" />
             <dataField fieldName="MPP" columns="15" />
             <dataField fieldName="Weight" columns="15" />
-            <dataField fieldName="IsActive" />
-          </dataFields>
-        </category>
-        <category id="c4">
-          <description />
-          <dataFields>
             <dataField fieldName="PTFA" />
             <dataField fieldName="PTSA" />
             <dataField fieldName="PUIT" />
             <dataField fieldName="PURE" />
-            <dataField fieldName="SSIA" hidden="true" />
-            <dataField fieldName="ACS" hidden="true" />
-            <dataField fieldName="Adaptive" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c5">
-          <description />
-          <dataFields>
-            <dataField fieldName="Session" columns="50" hidden="true" />
-            <dataField fieldName="Course" />
-            <dataField fieldName="CSY" hidden="true" />
-            <dataField fieldName="CSIA" hidden="true" />
+            <dataField fieldName="Adaptive" />
+            <dataField fieldName="AssessmentCategoryID" aliasFieldName="AssessmentCategory" />
+            <dataField fieldName="RefSchoolStreamID" aliasFieldName="SchoolStream" />
+            <dataField fieldName="AssessmentFamilyID" aliasFieldName="AssessmentFamily" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
-          </dataFields>
-        </category>
-        <category id="c6">
-          <description />
-          <dataFields>
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedBy" columns="50" />
-            <dataField fieldName="SchoolName" columns="50" hidden="true" />
-            <dataField fieldName="GLSO" columns="15" hidden="true" />
-            <dataField fieldName="AssessmentFamilyID" aliasFieldName="AssessmentFamily" hidden="true" />
-            <dataField fieldName="Owner" columns="50" />
             <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="Owner" columns="50" />
+            <dataField fieldName="Session" columns="50" />
+            <dataField fieldName="CSIA" />
+            <dataField fieldName="SSIA" />
+            <dataField fieldName="ACS" />
+            <dataField fieldName="CSY" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="SchoolName" columns="50" />
+            <dataField fieldName="Course" />
+            <dataField fieldName="GL" />
+            <dataField fieldName="GLSO" columns="15" />
+            <dataField fieldName="GBID" columns="15" />
+            <dataField fieldName="WMC" columns="15" />
           </dataFields>
         </category>
       </categories>
@@ -354,24 +253,12 @@ where CalendarSession.IsActive=1
   </views>
   <actions>
     <actionGroup id="ag1" scope="Grid">
-      <action id="a1" commandName="Edit" commandArgument="editForm1" />
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
       <action id="a2" commandName="Edit" />
       <action id="a3" commandName="Delete" />
       <action id="a6" />
       <action id="a7" commandName="New" commandArgument="grid1" />
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
-      <action id="a101" />
-      <action commandName="Custom" commandArgument="GenerateScoresheet" headerText="SYNC To Scoresheet" id="a105" whenKeySelected="true" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" cssClass="material-icon-sync_alt" />
-      <action commandName="SQL" headerText="Remove Plan" cssClass="material-icon-cleaning_services" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a103" whenKeySelected="true">
-        <data><![CDATA[/*
-	Date : 20th Sept 2019
-	Desc : This statement removes the GradebookEntry record and its associated child StudentGradeBookEntry
-*/
-delete from StudentGradeBookEntry where GradeBookEntryID = @GradeBookEntryID
-delete from GradeBookEntry where  GradeBookEntryID = @GradeBookEntryID
-SET @Result_Refresh = 1
-SET @Result_ShowMessage = @GradeBook + ' and its associated child records ' + 'has been removed successfully' ]]></data>
-      </action>
       <action id="a9" />
       <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
     </actionGroup>
@@ -388,34 +275,19 @@ SET @Result_ShowMessage = @GradeBook + ' and its associated child records ' + 'h
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
       <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
-      <action commandName="Custom" commandArgument="GenerateScoresheet" headerText="SYNC To Scoresheet" id="a105" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" cssClass="material-icon-sync_alt" whenLastCommandName="Any" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New Plan" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
-      <action commandName="Custom" commandArgument="GenerateScoresheet" headerText="SYNC To Scoresheet" id="a105" whenKeySelected="true" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" cssClass="material-icon-sync_alt" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="Custom" commandArgument="GenerateScoresheet" headerText="SYNC To Scoresheet" id="a105" whenKeySelected="true" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" cssClass="material-icon-sync_alt" />
-      <action commandName="SQL" headerText="Remove Plan" cssClass="material-icon-cleaning_services" confirmation="You are about to prepare the scoresheet for the selected GBA entry. Proceed only when your scores are ready. Do you want to continue ?" id="a101" whenKeySelected="true">
-        <data><![CDATA[/*
-	Date : 20th Sept 2019
-	Desc : This statement removes the GradebookEntry record and its associated child StudentGradeBookEntry
-*/
-delete from StudentGradeBookEntry where GradeBookEntryID = @GradeBookEntryID
-delete from GradeBookEntry where  GradeBookEntryID = @GradeBookEntryID
-SET @Result_Refresh = 1
-SET @Result_ShowMessage = @GradeBook + ' and its associated child records ' + 'has been removed successfully' ]]></data>
-      </action>
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a102" commandName="ReportAsPdf" headerText="Export To PDF" />
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a103" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a104" commandName="ReportAsWord" headerText="Export To Word" />
-      <action id="a4" commandName="ExportRss" headerText="Send To RSS" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -427,6 +299,12 @@ SET @Result_ShowMessage = @GradeBook + ' and its associated child records ' + 'h
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
@@ -434,200 +312,4 @@ SET @Result_ShowMessage = @GradeBook + ' and its associated child records ' + 'h
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="New" type="Code" phase="Execute" name="setGBAPlaceHolder" />
-    <rule id="r101" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateGradeBookTitle"><![CDATA[var fieldValue = [GradeBook];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('GradeBook', 'Gradebook Title is required.');
-}]]></rule>
-    <rule id="r102" type="JavaScript" commandName="Insert|Update" phase="Before" name="validate_GradingPeriodID"><![CDATA[var fieldValue = [GradingPeriodID];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('GradingPeriodID', 'A selection for grading period is required.');
-}]]></rule>
-    <rule id="r103" type="JavaScript" commandName="Insert|Update" phase="Before" name="validate_RefSchoolStreamID"><![CDATA[var fieldValue = [RefSchoolStreamID];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('RefSchoolStreamID', 'Stream is required, Please select a stream!');
-}]]></rule>
-    <rule id="r112" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateMPP"><![CDATA[var fieldValue = [MPP];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('MPP', 'Maximum score value is required.');
-}]]></rule>
-    <rule id="r111" type="JavaScript" commandName="Insert|Update" phase="Before" name="validateWeight"><![CDATA[var fieldValue = [Weight];
-if (fieldValue == null) {
-    // prevent the default action processing
-    this.preventDefault();
-    // set the focus on the field and display an error
-    this.result.focus('Weight', 'Assessment Weight is required.');
-}]]></rule>
-    <rule id="r104" commandName="New" type="Sql" phase="Execute" name="setPublishingControlDefaultValue"><![CDATA[Set @PTFA = 1
-Set @PTSA = 1
-Set @PUIT = 1
-Set @PURE = 1
-SET @IsActive=1
-SET @MPP = 100
-SET @Adaptive = 1
-SET @UserID = @BusinessRules_UserId]]></rule>
-    <rule id="r105" commandName="New|Insert" type="Sql" phase="After" name="setUserIDConfirm"><![CDATA[--Set @ModifiedBy = @BusinessRules_UserName
-
-UPDATE GradeBookEntry 
-SET UserID = @BusinessRules_UserId     
-WHERE GradeBookEntryID = @GradeBookEntryID
-]]></rule>
-    <rule id="r106" commandName="Insert" type="Sql" phase="Before" name="setOwnerCredentials"><![CDATA[
--- Revised Date : 23rd Feb 2020
--- First set the username to the data entry person
-SET @CreatedBy = @BusinessRules_UserName
-
--- if the Owner field is not selected or filled up then set that to current user
-IF (@Owner IS NULL)
-     SET @Owner = @BusinessRules_UserName
-
--- Additional rule to set UserID 
-SET @UserID = @BusinessRules_UserId 
-
-]]></rule>
-    <rule id="r107" commandName="Update" type="Sql" phase="After" name="setRecordModifierUserName"><![CDATA[
---Set @ModifiedBy = @BusinessRules_UserName
-
-UPDATE GradeBookEntry 
-SET --UserID = @BusinessRules_UserId  // amended to reflect correct filtering of records
-      ModifiedBy = @BusinessRules_UserName
-WHERE GradeBookEntryID = @GradeBookEntryID
-]]></rule>
-    <rule id="r108" commandName="Insert" type="Email" phase="After" name="sendNotificationTemplateOnCreation"><![CDATA[Host: mail.ntchosting.com
-Port: 25
-UserName: azure@dekakis.com
-Password: nanakillo,1970
-EnableSSL: false
-
-From: "Assessment Planning" azure@dekakis.com
-To:   {@BusinessRules_UserEmail}
-BCC: ben.aduohene@gmail.com
-
-Subject:  Assessment Plan for {GradeBook} in {CourseSectionNo}
-
-<span>Thank you for creating the {GradeBook} assessment plan for {GL} in the period {GradingPeriod}.</span>
-Please be reminded the schedule is as follows </br>
-
-</br>
-<table style="width: 80%;" cellpadding="1">
-<tbody>
-<tr>
-<td></td>
-<td>Submitted Date</td>
-<td>Due Date</td>
-</tr>
-<tr>
-<td>&nbsp;<strong>{GradeBook}</strong></td>
-<td>&nbsp;{SubmittedDate}</td>
-<td>&nbsp;{DueDate}</td>
-</tr>
-<tr>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-<!-- DivTable.com -->
-
-Please be aware creating assessment plan ahead of schedule
-enhances your endeavour in informed teaching. Do well to update your scoresheet as soon as assessment scores are available. <br/>
-
-<div> </div>
-<table>
-<tbody>
-<tr>
-<td>{SchoolName},</td>
-</tr>
-<tr>
-<td>Subject Instructor, &nbsp;{ModifiedBy}</td>
-</tr>
-</tbody>
-</table>
-<!-- DivTable.com -->
-]]></rule>
-    <rule id="r109" commandName="Update" type="Email" phase="After" name="sendNotificationTemplateOnUpdate"><![CDATA[Host: mail.ntchosting.com
-Port: 25
-UserName: azure@dekakis.com
-Password: nanakillo,1970
-EnableSSL: false
-
-From: "Assessment Plan Update" azure@dekakis.com
-To: {@BusinessRules_UserEmail}, ben.aduohene@gmail.com, b.adu@dekakis.com
-BCC: ben.aduohene@gmail.com
-Subject:  Assessment Plan for {CourseSectionNo} in {Course}
-
-<span>{GradeBook} assessment plan has been updated for {GL} in the period {GradingPeriod}.</span>
-Please be reminded the schedule is as follows </br>
-
-</br>
-<table style="width: 80%;" cellpadding="1">
-<tbody>
-<tr>
-<td></td>
-<td>Submitted Date</td>
-<td>Stream</td>
-</tr>
-<tr>
-<td>&nbsp;<strong>{GradeBook}</strong></td>
-<td>&nbsp;{SubmittedDate}</td>
-<td>&nbsp;{SchoolStream}</td>
-</tr>
-<tr>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-<!-- DivTable.com -->
-
-Please be aware creating assessment plan ahead of schedule
-enhances your endeavour in informed teaching.
-Please do well to update your scoresheet as soon as assessment scores are available. <br/>
-
-<div> </div>
-<table>
-<tbody>
-<tr>
-<td>{SchoolName},</td>
-</tr>
-<tr>
-<td>Subject Instructor, &nbsp;{ModifiedBy}</td>
-</tr>
-</tbody>
-</table>
-<!-- DivTable.com -->
-
-]]></rule>
-    <rule id="r110" commandName="Insert|Update" type="Sql" phase="After" name="sendEmailToUserInSession"><![CDATA[SET @BusinessRules_Whitelist = 'Empty'
-if @Arguments_CommandName = 'Insert'
-
-SET @BusinessRules_Whitelist = 
-            @BusinessRules_Whitelist + 'SendAdminEmail'
-			
-SELECT @Session_GradeBookTitle = GradeBookTitle
-        FROM GradeBookEntry 
-		WHERE GradeBookEntryID = @GradeBookEntryID		
-
--- find the email address of the current user
-SELECT @Session_EmailAddress = m.Email 
-from aspnet_Membership m 
-      inner join aspnet_Users u on m.UserId = u.UserId
-      where
-      u.UserName = @BusinessRules_UserName]]></rule>
-  </businessRules>
 </dataController>

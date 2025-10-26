@@ -34,16 +34,16 @@ from "dwh"."pbi_vw_metric_student_profile_healthalert" "pbi_vw_metric_student_pr
     <view id="grid1" type="Grid" commandId="command1" label="Health Alert Profile">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="PersonID" columns="15" hidden="true" />
-        <dataField fieldName="StudentName" columns="35" />
-        <dataField fieldName="GL" columns="5" tag="pivot1-row1-pie&#xD;&#xA;pivot1-title:&quot;What is the Health Profile Distribution of my school&quot;" />
-        <dataField fieldName="Gender" columns="8" tag="pivot4-col1&#xD;&#xA;&#xD;&#xA;pivot6-row1-columnstacked&#xD;&#xA;pivot6-title:&quot;What is the Health Profile of my school by Gender and Allergy Type&quot;" />
-        <dataField fieldName="Ethnic" columns="18" tag="pivot5-row1-donut-sortbyvalue&#xD;&#xA;pivot5-title:&quot;What is the Alergy Profile by Ethnicity&quot;&#xD;&#xA;hideblank" />
-        <dataField fieldName="AllergyType" columns="20" tag="pivot2-row1-pie-top10-sortbyvalue&#xD;&#xA;pivot2-title:&quot;What is the Students Health Profile by Alergy Type&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot3-row1-column-top10-sortbyvalue&#xD;&#xA;pivot3-title:&quot;What is the total allergies by Allergy Type&quot;&#xD;&#xA;&#xD;&#xA;pivot4-row1-barstacked-sortbyvalue&#xD;&#xA;pivot4-title:&quot;What is the Alergy Type by Gender&quot;&#xD;&#xA;&#xD;&#xA;pivot6-col1" />
-        <dataField fieldName="ReactionDescription" columns="25" />
-        <dataField fieldName="NoOfAllergies" columns="10" />
-        <dataField fieldName="CalendarYear" columns="8" />
-        <dataField fieldName="CSY" columns="3" hidden="true" />
+        <dataField fieldName="PersonID" columns="15" />
+        <dataField fieldName="StudentName" />
+        <dataField fieldName="GL" />
+        <dataField fieldName="Gender" />
+        <dataField fieldName="Ethnic" />
+        <dataField fieldName="AllergyType" />
+        <dataField fieldName="ReactionDescription" rows="5" />
+        <dataField fieldName="NoOfAllergies" columns="15" />
+        <dataField fieldName="CalendarYear" columns="15" />
+        <dataField fieldName="CSY" columns="3" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Health Alert Profile">

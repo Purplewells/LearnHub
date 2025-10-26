@@ -30,9 +30,9 @@ from "dbo"."zlkpProgressLevel" "zlkpProgressLevel"
     <view id="grid1" type="Grid" commandId="command1" label="Progress Level">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Description" columns="35" />
-        <dataField fieldName="Code" columns="25" />
-        <dataField fieldName="Definition" />
+        <dataField fieldName="Description" />
+        <dataField fieldName="Code" columns="50" />
+        <dataField fieldName="Definition" rows="5" />
         <dataField fieldName="SortOrder" columns="15" />
       </dataFields>
     </view>
@@ -44,7 +44,7 @@ from "dbo"."zlkpProgressLevel" "zlkpProgressLevel"
           <dataFields>
             <dataField fieldName="Description" />
             <dataField fieldName="Code" columns="50" />
-            <dataField fieldName="Definition" />
+            <dataField fieldName="Definition" rows="5" />
             <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>

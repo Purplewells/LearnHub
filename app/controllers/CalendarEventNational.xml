@@ -49,8 +49,8 @@ from "dbo"."CalendarEvent" "CalendarEvent"
     <view id="editForm1" type="Form" commandId="command1" label="Review Calendar Event National">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Calendar Event National" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="OrganizationCalendarID" aliasFieldName="CalendarCode" />
             <dataField fieldName="Name" columns="30" />

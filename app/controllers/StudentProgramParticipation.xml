@@ -38,7 +38,7 @@ from "dbo"."StudentProgramParticipation" "StudentProgramParticipation"
     <view id="grid1" type="Grid" commandId="command1" label="Student Program Participation">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="StudentProgramParticipationID" columns="15" hidden="true" />
+        <dataField fieldName="StudentProgramParticipationID" columns="15" />
         <dataField fieldName="ProgramID" aliasFieldName="ProgramName" />
         <dataField fieldName="PersonID" aliasFieldName="FirstName" />
         <dataField fieldName="LastName" columns="35" />

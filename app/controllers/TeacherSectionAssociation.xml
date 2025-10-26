@@ -27,7 +27,7 @@ from "dbo"."TeacherSectionAssociation" "TeacherSectionAssociation"
   </commands>
   <fields>
     <field name="OrganizationPersonRoleID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Organization Person Role ID" showInSummary="true">
-      <items style="Lookup" dataController="zlkpStaffPersonRoleID" dataValueField="OrganizationPersonRoleID" dataTextField="StaffName" copy="OrganizationPersonRoleOrganisationID=OrganisationID, Organisation=Organisation, UPN=UPN, FirstName=FirstName, LastName=LastName" dataView="grid1" />
+      <items style="Lookup" dataController="OnboardReset" newDataView="createForm1" dataValueField="OrganizationPersonRoleID" dataTextField="OrganizationPersonRoleID" copy="OrganizationPersonRoleOrganisationID=OrganisationID, Organisation=Organisation, UPN=UPN, FirstName=FirstName, LastName=LastName" />
     </field>
     <field name="OrganizationPersonRoleOrganisationID" type="Int32" readOnly="true" label="Organization Person Role Organisation ID" />
     <field name="Organisation" type="String" readOnly="true" label="Organisation" length="60" />
@@ -37,7 +37,7 @@ from "dbo"."TeacherSectionAssociation" "TeacherSectionAssociation"
     <field name="CourseSectionID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Course Section ID" showInSummary="true">
       <items style="Lookup" dataController="CourseSection" newDataView="createForm1" dataValueField="CourseSectionID" dataTextField="SectionNo" copy="CourseTitle=CourseTitle, SessionCode=SessionCode, " />
     </field>
-    <field name="CourseSectionNo" type="String" readOnly="true" label="Section No" length="20" />
+    <field name="CourseSectionNo" type="String" readOnly="true" label="Section No" length="50" />
     <field name="CourseTitle" type="String" readOnly="true" label="Course Title" length="60" />
     <field name="SessionCode" type="String" readOnly="true" label="Session Code" length="20" />
     <field name="IsActive" type="Boolean" readOnly="true" label="Is Active" />
@@ -46,34 +46,34 @@ from "dbo"."TeacherSectionAssociation" "TeacherSectionAssociation"
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Section Teachers">
+    <view id="grid1" type="Grid" commandId="command1" label="Teacher Section Association">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="OrganizationPersonRoleID" columns="15" hidden="true" />
-        <dataField fieldName="OrganizationPersonRoleOrganisationID" columns="15" hidden="true" />
+        <dataField fieldName="OrganizationPersonRoleID" columns="15" />
+        <dataField fieldName="OrganizationPersonRoleOrganisationID" columns="15" />
+        <dataField fieldName="Organisation" />
+        <dataField fieldName="UPN" columns="10" />
         <dataField fieldName="FirstName" columns="35" />
         <dataField fieldName="LastName" columns="35" />
-        <dataField fieldName="Fullname" />
-        <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="CourseTitle" columns="20" />
         <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" />
+        <dataField fieldName="CourseTitle" />
         <dataField fieldName="SessionCode" columns="20" />
-        <dataField fieldName="Organisation" columns="25" hidden="true" />
         <dataField fieldName="IsActive" />
+        <dataField fieldName="Fullname" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Teacher Section">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Teacher Section Association">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Teacher Section Association" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="OrganizationPersonRoleID" columns="15" aliasFieldName="Fullname" />
-            <dataField fieldName="OrganizationPersonRoleOrganisationID" columns="15" hidden="true" />
-            <dataField fieldName="Organisation" hidden="true" />
-            <dataField fieldName="UPN" columns="10" hidden="true" />
-            <dataField fieldName="FirstName" columns="35" hidden="true" />
-            <dataField fieldName="LastName" columns="35" hidden="true" />
+            <dataField fieldName="OrganizationPersonRoleID" columns="15" />
+            <dataField fieldName="OrganizationPersonRoleOrganisationID" columns="15" />
+            <dataField fieldName="Organisation" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
             <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" />
             <dataField fieldName="CourseTitle" />
             <dataField fieldName="SessionCode" columns="20" />
@@ -83,16 +83,16 @@ from "dbo"."TeacherSectionAssociation" "TeacherSectionAssociation"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Teacher Section">
+    <view id="createForm1" type="Form" commandId="command1" label="New Teacher Section Association">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description />
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="OrganizationPersonRoleID" columns="15" aliasFieldName="Fullname" />
-            <dataField fieldName="OrganizationPersonRoleOrganisationID" columns="15" hidden="true" />
-            <dataField fieldName="Organisation" hidden="true" />
-            <dataField fieldName="UPN" columns="10" hidden="true" />
+            <dataField fieldName="OrganizationPersonRoleID" columns="15" />
+            <dataField fieldName="OrganizationPersonRoleOrganisationID" columns="15" />
+            <dataField fieldName="Organisation" />
+            <dataField fieldName="UPN" columns="10" />
             <dataField fieldName="FirstName" columns="35" />
             <dataField fieldName="LastName" columns="35" />
             <dataField fieldName="CourseSectionID" aliasFieldName="CourseSectionNo" />

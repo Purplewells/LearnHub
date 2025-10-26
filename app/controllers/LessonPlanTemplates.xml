@@ -74,7 +74,7 @@ from "dbo"."LessonPlanTemplates" "LessonPlanTemplates"
     <field name="LessonTopics" type="String" label="Lesson Topics" length="500" showInSummary="true" />
     <field name="LessonAim" type="String" label="Lesson Aim" length="200" showInSummary="true" />
     <field name="GradeLevelID" type="Int32" label="Grade Level ID">
-      <items style="RadioButtonList" dataController="GradeLevel" dataValueField="RefGradeLevelID" dataTextField="Description" copy="GLSO=SortOrder" dataView="grid1" />
+      <items style="Lookup" dataController="GradeLevel" newDataView="createForm1" dataValueField="RefGradeLevelID" dataTextField="Description" copy="GLSO=SortOrder" />
     </field>
     <field name="GradeLevel" type="String" readOnly="true" label="Grade Level" length="100" />
     <field name="GLSO" type="Decimal" readOnly="true" label="GLSO" />
@@ -87,7 +87,7 @@ from "dbo"."LessonPlanTemplates" "LessonPlanTemplates"
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
     <field name="PerformanceIndicatorID" type="Int32" label="Performance Indicator ID">
-      <items style="DropDownList" dataController="PerformanceIndicator" dataValueField="PerformanceIndicatorID" dataTextField="SubjectLearningOutcome" copy="ICode=ICode, Performance=PerformanceDescription, SuccessCriteria=SuccessStatement, Strand=Strand, Substrand=Substrand, StrandCode=StrandCode, CourseTitle=Subject" dataView="grid1" />
+      <items style="Lookup" dataController="PerformanceIndicator" newDataView="createForm1" dataValueField="PerformanceIndicatorID" dataTextField="Code" copy="ICode=ICode, Performance=PerformanceDescription, SuccessCriteria=SuccessStatement, Strand=Strand, Substrand=Substrand, StrandCode=StrandCode, CourseTitle=Subject" />
     </field>
     <field name="IndicatorCode" type="String" readOnly="true" label="Indicator Code" length="25" />
     <field name="ICode" type="String" readOnly="true" label="ICode" length="30" />
@@ -98,19 +98,8 @@ from "dbo"."LessonPlanTemplates" "LessonPlanTemplates"
     <field name="StrandCode" type="String" readOnly="true" label="Strand Code" length="20" />
     <field name="SubstrandCode" type="String" readOnly="true" label="Substrand Code" length="20" />
     <field name="CourseTitle" type="String" readOnly="true" label="Subject" length="50" />
-    <field name="RequestApproval" type="String" label="Request Approval" length="5" contextFields="RequestApproval = Yes,  RequestApproval = No ">
-      <items style="RadioButtonList">
-        <item value="Y" text="Yes" />
-        <item value="N" text="No" />
-      </items>
-    </field>
-    <field name="ApprovalStatus" type="String" label="Approval Status" length="5">
-      <items style="RadioButtonList">
-        <item value="A" text="Approved" />
-        <item value="AR" text="Review" />
-        <item value="R" text="Rejected" />
-      </items>
-    </field>
+    <field name="RequestApproval" type="String" label="Request Approval" length="5" />
+    <field name="ApprovalStatus" type="String" label="Approval Status" length="5" />
     <field name="Reflection" type="String" label="Reflection" length="500" />
     <field name="LearningStandardsID" type="Int32" label="Learning Standards ID" />
     <field name="LearningStandardsCode" type="String" readOnly="true" label="Learning Standards Code" length="20" />
@@ -131,268 +120,144 @@ from "dbo"."LessonPlanTemplates" "LessonPlanTemplates"
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Lesson Notes" tags="reading-pane-auto" sortExpression="CreatedDate DESC, ModifiedDate DESC">
+    <view id="grid1" type="Grid" commandId="command1" label="Lesson Plan Templates">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="CourseSectionID" aliasFieldName="SectionNo" />
-        <dataField fieldName="CourseTitle" columns="50" />
+        <dataField fieldName="UnitTopic" />
+        <dataField fieldName="Duration" columns="30" />
+        <dataField fieldName="LessonTopics" />
+        <dataField fieldName="LessonAim" />
         <dataField fieldName="GradeLevelID" aliasFieldName="GradeLevel" />
-        <dataField fieldName="ICode" columns="30" hidden="true" />
-        <dataField fieldName="PerformanceIndicatorID" aliasFieldName="IndicatorCode" />
-        <dataField fieldName="Substrand" />
-        <dataField fieldName="Strand" />
-        <dataField fieldName="Session" columns="20" />
-        <dataField fieldName="UnitTopic" hidden="true" />
-        <dataField fieldName="LessonTopics" hidden="true" />
-        <dataField fieldName="LessonAim" hidden="true" />
-        <dataField fieldName="Outcomes" hidden="true" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="LessonOutline" rows="5" textMode="RichText" />
-        <dataField fieldName="Duration" columns="30" hidden="true" />
-        <dataField fieldName="ExtCol1" columns="50" />
-        <dataField fieldName="LessonObjectives" rows="5" hidden="true" />
-        <dataField fieldName="SuccessCriteria" hidden="true" />
-        <dataField fieldName="StrandCode" columns="20" hidden="true" />
-        <dataField fieldName="SubstrandCode" columns="20" hidden="true" />
-        <dataField fieldName="Reflection" hidden="true" />
-        <dataField fieldName="Resources" hidden="true" />
-        <dataField fieldName="ExtCol2" columns="50" hidden="true" />
-        <dataField fieldName="ExtCol3" columns="50" hidden="true" />
-        <dataField fieldName="LearningOutcome" hidden="true" />
-        <dataField fieldName="PerformanceIndicator" hidden="true" />
-        <dataField fieldName="ApprovalStatus" columns="5" hidden="true" />
-        <dataField fieldName="RequestApproval" columns="5" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="Performance" rows="5" />
-        <dataField fieldName="LearningStandardsID" aliasFieldName="LearningStandardsCode" hidden="true" />
-        <dataField fieldName="Attachment" columns="15" hidden="true" />
-        <dataField fieldName="CSY" hidden="true" />
-        <dataField fieldName="School" columns="50" hidden="true" />
-        <dataField fieldName="Address" hidden="true" />
-        <dataField fieldName="SchoolLogo" columns="15" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="grid1_multi_reports" type="Grid" commandId="command1" label="Multiple Reports" reportLabel="Lesson Teaching Notes" tags="reading-pane-auto" reportTemplate="true">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="CourseSectionID" aliasFieldName="SectionNo" />
-        <dataField fieldName="CourseTitle" columns="50" />
-        <dataField fieldName="GradeLevelID" aliasFieldName="GradeLevel" />
-        <dataField fieldName="ICode" columns="30" hidden="true" />
-        <dataField fieldName="PerformanceIndicatorID" aliasFieldName="IndicatorCode" />
-        <dataField fieldName="Substrand" />
-        <dataField fieldName="Strand" />
-        <dataField fieldName="Session" columns="20" />
-        <dataField fieldName="UnitTopic" hidden="true" />
-        <dataField fieldName="LessonTopics" hidden="true" />
-        <dataField fieldName="LessonAim" hidden="true" />
-        <dataField fieldName="Outcomes" hidden="true" />
         <dataField fieldName="GLSO" columns="15" />
-        <dataField fieldName="LessonOutline" rows="5" textMode="RichText" />
-        <dataField fieldName="Duration" columns="30" hidden="true" />
-        <dataField fieldName="ExtCol1" columns="50" />
-        <dataField fieldName="LessonObjectives" rows="5" hidden="true" />
-        <dataField fieldName="SuccessCriteria" hidden="true" />
-        <dataField fieldName="StrandCode" columns="20" hidden="true" />
-        <dataField fieldName="SubstrandCode" columns="20" hidden="true" />
-        <dataField fieldName="Reflection" hidden="true" />
-        <dataField fieldName="Resources" hidden="true" />
-        <dataField fieldName="ExtCol2" columns="50" hidden="true" />
-        <dataField fieldName="ExtCol3" columns="50" hidden="true" />
-        <dataField fieldName="LearningOutcome" hidden="true" />
-        <dataField fieldName="PerformanceIndicator" hidden="true" />
-        <dataField fieldName="ApprovalStatus" columns="5" hidden="true" />
-        <dataField fieldName="RequestApproval" columns="5" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="Outcomes" />
+        <dataField fieldName="LessonOutline" rows="5" />
+        <dataField fieldName="LessonObjectives" rows="5" />
+        <dataField fieldName="Resources" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="PerformanceIndicatorID" aliasFieldName="IndicatorCode" />
+        <dataField fieldName="ICode" columns="30" />
         <dataField fieldName="Performance" rows="5" />
-        <dataField fieldName="LearningStandardsID" aliasFieldName="LearningStandardsCode" hidden="true" />
-        <dataField fieldName="Attachment" columns="15" hidden="true" />
-        <dataField fieldName="CSY" hidden="true" />
-        <dataField fieldName="School" columns="50" hidden="true" />
-        <dataField fieldName="Address" hidden="true" />
-        <dataField fieldName="SchoolLogo" columns="15" hidden="true" />
+        <dataField fieldName="SuccessCriteria" />
+        <dataField fieldName="Strand" />
+        <dataField fieldName="Substrand" />
+        <dataField fieldName="StrandCode" columns="20" />
+        <dataField fieldName="SubstrandCode" columns="20" />
+        <dataField fieldName="CourseTitle" columns="50" />
+        <dataField fieldName="RequestApproval" columns="5" />
+        <dataField fieldName="ApprovalStatus" columns="5" />
+        <dataField fieldName="Reflection" />
+        <dataField fieldName="LearningStandardsID" aliasFieldName="LearningStandardsCode" />
+        <dataField fieldName="ExtCol1" columns="50" />
+        <dataField fieldName="ExtCol2" columns="50" />
+        <dataField fieldName="ExtCol3" columns="50" />
+        <dataField fieldName="Attachment" columns="15" />
+        <dataField fieldName="Session" columns="20" />
+        <dataField fieldName="CSY" />
+        <dataField fieldName="School" columns="50" />
+        <dataField fieldName="Address" />
+        <dataField fieldName="SchoolLogo" columns="15" />
+        <dataField fieldName="LearningOutcome" />
+        <dataField fieldName="PerformanceIndicator" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Lesson Plan" reportTemplate="true">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Lesson Plan Templates">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" wrap="true" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="PerformanceIndicatorID" aliasFieldName="IndicatorCode" />
-            <dataField fieldName="PerformanceIndicator" />
-            <dataField fieldName="Substrand" />
-            <dataField fieldName="ICode" columns="30" hidden="true" />
-            <dataField fieldName="Performance" rows="5" hidden="true" />
-            <dataField fieldName="LearningStandardsID" aliasFieldName="LearningStandardsCode" hidden="true" />
-            <dataField fieldName="ExtCol2" columns="50" hidden="true" />
-            <dataField fieldName="ExtCol3" columns="50" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c2" wrap="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="SuccessCriteria" />
-            <dataField fieldName="LessonTopics" hidden="true" />
-            <dataField fieldName="UnitTopic" hidden="true" />
-            <dataField fieldName="LessonAim" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="Learning Outcome" wrap="true">
-          <description />
-          <dataFields>
-            <dataField fieldName="LearningOutcome" hidden="true" />
-            <dataField fieldName="Outcomes" />
-          </dataFields>
-        </category>
-        <category id="c4" flow="NewRow">
-          <description />
+        <category id="c1" headerText="Lesson Plan Templates" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="CourseSectionID" aliasFieldName="SectionNo" />
-            <dataField fieldName="CourseTitle" columns="50" />
+            <dataField fieldName="UnitTopic" />
             <dataField fieldName="Duration" columns="30" />
-            <dataField fieldName="ExtCol1" columns="50" />
-          </dataFields>
-        </category>
-        <category id="c5" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="Session" columns="20" />
-            <dataField fieldName="Strand" />
-            <dataField fieldName="StrandCode" columns="20" />
-            <dataField fieldName="SubstrandCode" columns="20" />
-          </dataFields>
-        </category>
-        <category id="c6" wrap="false" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="GradeLevelID" aliasFieldName="GradeLevel" columns="4" />
-          </dataFields>
-        </category>
-        <category id="c7" headerText="Lesson Definition" wrap="true" collapsed="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="LessonOutline" rows="20" textMode="RichText" tag="rtf-frame&#xD;&#xA;rtf-editor-fullscreen" />
-            <dataField fieldName="LessonObjectives" rows="20" textMode="RichText" tag="focus-auto&#xD;&#xA;rtf-editor-fullscreen" hidden="true" />
-            <dataField fieldName="Resources" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c8" headerText="Approval Flags" wrap="false" collapsed="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="RequestApproval" columns="5" tag="lookup-null-value-none" />
-            <dataField fieldName="ApprovalStatus" columns="5" tag="lookup-null-value-none" />
-          </dataFields>
-        </category>
-        <category id="c9" headerText="Reflection" wrap="true" collapsed="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="Reflection" rows="5" textMode="RichText" tag="rtf-editor-fullscreen" />
-          </dataFields>
-        </category>
-        <category id="c10" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
+            <dataField fieldName="LessonTopics" />
+            <dataField fieldName="LessonAim" />
+            <dataField fieldName="GradeLevelID" aliasFieldName="GradeLevel" />
+            <dataField fieldName="GLSO" columns="15" />
+            <dataField fieldName="Outcomes" />
+            <dataField fieldName="LessonOutline" rows="5" />
+            <dataField fieldName="LessonObjectives" rows="5" />
+            <dataField fieldName="Resources" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="ModifiedBy" columns="50" />
-            <dataField fieldName="GLSO" columns="15" hidden="true" />
+            <dataField fieldName="PerformanceIndicatorID" aliasFieldName="IndicatorCode" />
+            <dataField fieldName="ICode" columns="30" />
+            <dataField fieldName="Performance" rows="5" />
+            <dataField fieldName="SuccessCriteria" />
+            <dataField fieldName="Strand" />
+            <dataField fieldName="Substrand" />
+            <dataField fieldName="StrandCode" columns="20" />
+            <dataField fieldName="SubstrandCode" columns="20" />
+            <dataField fieldName="CourseTitle" columns="50" />
+            <dataField fieldName="RequestApproval" columns="5" />
+            <dataField fieldName="ApprovalStatus" columns="5" />
+            <dataField fieldName="Reflection" />
+            <dataField fieldName="LearningStandardsID" aliasFieldName="LearningStandardsCode" />
+            <dataField fieldName="ExtCol1" columns="50" />
+            <dataField fieldName="ExtCol2" columns="50" />
+            <dataField fieldName="ExtCol3" columns="50" />
+            <dataField fieldName="Attachment" columns="15" />
+            <dataField fieldName="Session" columns="20" />
+            <dataField fieldName="CSY" />
+            <dataField fieldName="School" columns="50" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="SchoolLogo" columns="15" />
+            <dataField fieldName="LearningOutcome" />
+            <dataField fieldName="PerformanceIndicator" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Lesson Plan">
+    <view id="createForm1" type="Form" commandId="command1" label="New Lesson Plan Templates">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
-        <category id="c1" wrap="true" flow="NewColumn">
-          <description />
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="PerformanceIndicatorID" aliasFieldName="IndicatorCode" />
-            <dataField fieldName="PerformanceIndicator" textMode="Static" hidden="true" />
             <dataField fieldName="CourseSectionID" aliasFieldName="SectionNo" />
-            <dataField fieldName="ICode" columns="30" hidden="true" />
-            <dataField fieldName="Performance" rows="5" hidden="true" />
-            <dataField fieldName="LearningStandardsID" aliasFieldName="LearningStandardsCode" hidden="true" />
-            <dataField fieldName="ExtCol2" columns="50" hidden="true" />
-            <dataField fieldName="ExtCol3" columns="50" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c2" wrap="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="SuccessCriteria" hidden="true" />
-            <dataField fieldName="LessonTopics" hidden="true" />
-            <dataField fieldName="UnitTopic" hidden="true" />
-            <dataField fieldName="LessonAim" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="Learning Outcome" wrap="true">
-          <description />
-          <dataFields>
-            <dataField fieldName="LearningOutcome" hidden="true" />
-            <dataField fieldName="Outcomes" />
-          </dataFields>
-        </category>
-        <category id="c4" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="CourseTitle" columns="50" />
+            <dataField fieldName="UnitTopic" />
             <dataField fieldName="Duration" columns="30" />
-            <dataField fieldName="ExtCol1" columns="50" />
-          </dataFields>
-        </category>
-        <category id="c5" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="Session" columns="20" />
-            <dataField fieldName="Strand" />
-            <dataField fieldName="StrandCode" columns="20" />
-            <dataField fieldName="Substrand" textMode="Static" />
-            <dataField fieldName="SubstrandCode" columns="20" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c6" wrap="false" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="GradeLevelID" aliasFieldName="GradeLevel" columns="4" />
-          </dataFields>
-        </category>
-        <category id="c7" headerText="Lesson Definition" wrap="true" collapsed="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="LessonOutline" rows="20" textMode="RichText" tag="rtf-frame&#xD;&#xA;rtf-editor-fullscreen" />
-            <dataField fieldName="LessonObjectives" rows="20" textMode="RichText" tag="focus-auto&#xD;&#xA;rtf-editor-fullscreen" hidden="true" />
-            <dataField fieldName="Resources" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c8" headerText="Approval Flags" wrap="false" collapsed="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="RequestApproval" columns="5" tag="lookup-null-value-none" />
-            <dataField fieldName="ApprovalStatus" columns="5" tag="lookup-null-value-none" />
-          </dataFields>
-        </category>
-        <category id="c9" headerText="Reflection" wrap="true" collapsed="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="Reflection" rows="5" textMode="RichText" tag="rtf-editor-fullscreen" />
-          </dataFields>
-        </category>
-        <category id="c10" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
+            <dataField fieldName="LessonTopics" />
+            <dataField fieldName="LessonAim" />
+            <dataField fieldName="GradeLevelID" aliasFieldName="GradeLevel" />
+            <dataField fieldName="GLSO" columns="15" />
+            <dataField fieldName="Outcomes" />
+            <dataField fieldName="LessonOutline" rows="5" />
+            <dataField fieldName="LessonObjectives" rows="5" />
+            <dataField fieldName="Resources" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="ModifiedBy" columns="50" />
-            <dataField fieldName="GLSO" columns="15" hidden="true" />
+            <dataField fieldName="PerformanceIndicatorID" aliasFieldName="IndicatorCode" />
+            <dataField fieldName="ICode" columns="30" />
+            <dataField fieldName="Performance" rows="5" />
+            <dataField fieldName="SuccessCriteria" />
+            <dataField fieldName="Strand" />
+            <dataField fieldName="Substrand" />
+            <dataField fieldName="StrandCode" columns="20" />
+            <dataField fieldName="SubstrandCode" columns="20" />
+            <dataField fieldName="CourseTitle" columns="50" />
+            <dataField fieldName="RequestApproval" columns="5" />
+            <dataField fieldName="ApprovalStatus" columns="5" />
+            <dataField fieldName="Reflection" />
+            <dataField fieldName="LearningStandardsID" aliasFieldName="LearningStandardsCode" />
+            <dataField fieldName="ExtCol1" columns="50" />
+            <dataField fieldName="ExtCol2" columns="50" />
+            <dataField fieldName="ExtCol3" columns="50" />
+            <dataField fieldName="Attachment" columns="15" />
+            <dataField fieldName="Session" columns="20" />
+            <dataField fieldName="CSY" />
+            <dataField fieldName="School" columns="50" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="SchoolLogo" columns="15" />
+            <dataField fieldName="LearningOutcome" />
+            <dataField fieldName="PerformanceIndicator" />
           </dataFields>
         </category>
       </categories>
@@ -408,39 +273,14 @@ from "dbo"."LessonPlanTemplates" "LessonPlanTemplates"
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
       <action id="a9" />
       <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
-      <action commandName="ReportAsPdf" headerText="Print This Note" id="a100" description="Print lesson notes with headers" cssClass="material-icon-article" whenKeySelected="true" notify="This action would provide a printable PDF document of select lesson notes. Do you want to continue ?">
-        <data><![CDATA[_controller=LessonPlanTemplates
-_view=editForm1
-_template=LessonPlanTemplates_editForm1.rdlc
-LessonPlanTemplateID=LessonPlanTemplateID]]></data>
-      </action>
-      <action commandName="ReportAsPdf" headerText="Print All Selected Notes" id="a101" whenKeySelected="true">
-        <data><![CDATA[_controller=LessonPlanTemplates
-_view=grid1_multi_reports
-_template=LessonPlanTemplates_grid1_multi_reports.rdlc
-]]></data>
-      </action>
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
       <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
-      <action commandName="ReportAsPdf" headerText="Print LSN Notes" id="a101" whenKeySelected="true" cssClass="material-icon-chrome_reader_mode" whenView="grid100">
-        <data><![CDATA[_controller=LessonPlanTemplates
-_view=grid1_multi_reports
-_template=LessonPlanTemplates_grid1_multi_reports.rdlc
-]]></data>
-      </action>
-      <action commandName="ReportAsPdf" headerText="Print This Note" id="a100" cssClass="material-icon-chrome_reader_mode">
-        <data><![CDATA[_controller=LessonPlanTemplates
-_view=editForm1
-_template=LessonPlanTemplates_editForm1.rdlc
-LessonPlanTemplateID=LessonPlanTemplateID]]></data>
-      </action>
       <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
-      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" whenView="grid1000" />
-      <action commandName="Insert" commandArgument="Save" headerText="Commit" cssClass="material-icon-spa" whenLastCommandName="New" id="a102" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
@@ -456,18 +296,6 @@ LessonPlanTemplateID=LessonPlanTemplateID]]></data>
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="ReportAsPdf" headerText="Print This Note" id="a100" description="Print lesson notes with headers" cssClass="material-icon-article" whenKeySelected="true" notify="This action would provide a printable PDF document of select lesson notes. Do you want to continue ?">
-        <data><![CDATA[_controller=LessonPlanTemplates
-_view=editForm1
-_template=LessonPlanTemplates_editForm1.rdlc
-LessonPlanTemplateID=LessonPlanTemplateID]]></data>
-      </action>
-      <action commandName="ReportAsPdf" headerText="Print All Selected Notes" id="a101" whenKeySelected="true">
-        <data><![CDATA[_controller=LessonPlanTemplates
-_view=grid1_multi_reports
-_template=LessonPlanTemplates_grid1_multi_reports.rdlc
-]]></data>
-      </action>
       <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
       <action id="a3" commandName="ExportRowset" />
@@ -496,7 +324,4 @@ _template=LessonPlanTemplates_grid1_multi_reports.rdlc
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="New" type="Sql" phase="Execute" name="setRequestApprovalValue"><![CDATA[SET @RequestApproval = 'N']]></rule>
-  </businessRules>
 </dataController>

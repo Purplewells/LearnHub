@@ -46,7 +46,7 @@ from "dbo"."Session" "Session"
     <field name="RefSessionTypeID" type="Int32" label="Ref Session Type Id" showInSummary="true">
       <items style="Lookup" dataController="SessionType" newDataView="createForm1" dataValueField="RefSessionTypeID" dataTextField="Description" />
     </field>
-    <field name="RefSessionTypeDescription" type="String" readOnly="true" label="Session Type" length="20" />
+    <field name="RefSessionTypeDescription" type="String" readOnly="true" label="Session Type" length="100" />
     <field name="TotalInstructionDays" type="Int32" label="No. of Days" />
     <field name="OrganizationCalendarID" type="Int32" label="Organization Calendar ID">
       <items style="Lookup" dataController="Calendar" newDataView="createForm1" dataValueField="OrganizationCalendarID" dataTextField="CalendarCode" />
@@ -55,8 +55,8 @@ from "dbo"."Session" "Session"
     <field name="TermDescriptorID" type="Int32" label="Term Descriptor ID">
       <items style="Lookup" dataController="TermDescriptor" newDataView="createForm1" dataValueField="TermDescriptorID" dataTextField="Description" />
     </field>
-    <field name="TermDescriptor" type="String" readOnly="true" label="Term Descriptor" length="20" />
-    <field name="IsActive" type="Boolean" label="Is Active" allowNulls="false" />
+    <field name="TermDescriptor" type="String" readOnly="true" label="Term Descriptor" length="100" />
+    <field name="IsActive" type="Boolean" label="Is Active" />
     <field name="NextSessionEndDate" type="DateTime" label="This Session End" />
     <field name="NextSessionStartDate" type="DateTime" label="Next Session Start" />
     <field name="HasNextTerm" type="Boolean" label="Has Next Term" />
@@ -72,113 +72,56 @@ from "dbo"."Session" "Session"
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Sessions" filter="IsActive =1">
+    <view id="grid1" type="Grid" commandId="command1" label="Session">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="SessionName" columns="20" />
+        <dataField fieldName="SessionName" columns="50" />
         <dataField fieldName="SessionCode" columns="20" />
         <dataField fieldName="StartDate" columns="10" />
         <dataField fieldName="EndDate" columns="10" />
-        <dataField fieldName="RefSessionTypeID" aliasFieldName="RefSessionTypeDescription" columns="20" hidden="true" />
-        <dataField fieldName="TermDescriptorID" aliasFieldName="TermDescriptor" columns="20" />
-        <dataField fieldName="TotalInstructionDays" columns="10">
-          <headerText>No. of Days</headerText>
-        </dataField>
-        <dataField fieldName="OrganizationCalendarID" aliasFieldName="CalendarCode" hidden="true" />
-        <dataField fieldName="SEQ" columns="5" />
-        <dataField fieldName="IsActive" columns="10" />
-        <dataField fieldName="NextSessionEndDate" columns="20" />
-        <dataField fieldName="NextSessionStartDate" columns="20" />
-        <dataField fieldName="HasNextTerm" hidden="true" columns="12" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_sessions" type="Grid" commandId="command1" label="All Sessions">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="SessionName" columns="20" />
-        <dataField fieldName="SessionCode" columns="20" />
-        <dataField fieldName="StartDate" columns="10" />
-        <dataField fieldName="EndDate" columns="10" />
-        <dataField fieldName="RefSessionTypeID" aliasFieldName="RefSessionTypeDescription" columns="20" hidden="true" />
-        <dataField fieldName="TermDescriptorID" aliasFieldName="TermDescriptor" columns="20" />
-        <dataField fieldName="OrganizationCalendarID" aliasFieldName="CalendarCode" hidden="true" />
-        <dataField fieldName="TotalInstructionDays" columns="10">
-          <headerText>No. of Days</headerText>
-        </dataField>
-        <dataField fieldName="IsActive" columns="10" />
-        <dataField fieldName="SEQ" columns="5" />
-        <dataField fieldName="NextSessionEndDate" columns="20" />
-        <dataField fieldName="NextSessionStartDate" columns="20" />
-        <dataField fieldName="HasNextTerm" columns="12" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="grid1_session_advance" type="Grid" commandId="command1" label="Advancement Sessions " filter="DATEDIFF(MONTH, ENDDATE, GETDATE()) &lt; 12" sortExpression="StartDate DESC">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="SessionName" columns="20" />
-        <dataField fieldName="SessionCode" columns="20" />
-        <dataField fieldName="StartDate" columns="10" />
-        <dataField fieldName="EndDate" columns="10" />
-        <dataField fieldName="RefSessionTypeID" aliasFieldName="RefSessionTypeDescription" columns="20" hidden="true" />
-        <dataField fieldName="TermDescriptorID" aliasFieldName="TermDescriptor" columns="20" />
-        <dataField fieldName="OrganizationCalendarID" aliasFieldName="CalendarCode" hidden="true" />
-        <dataField fieldName="TotalInstructionDays" columns="10" />
-        <dataField fieldName="IsActive" columns="10" />
-        <dataField fieldName="SEQ" columns="5" />
-        <dataField fieldName="NextSessionEndDate" columns="20" />
-        <dataField fieldName="NextSessionStartDate" columns="20" />
-        <dataField fieldName="HasNextTerm" columns="12" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="RefSessionTypeID" aliasFieldName="RefSessionTypeDescription" />
+        <dataField fieldName="TotalInstructionDays" columns="15" />
+        <dataField fieldName="OrganizationCalendarID" aliasFieldName="CalendarCode" />
+        <dataField fieldName="TermDescriptorID" aliasFieldName="TermDescriptor" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="NextSessionEndDate" columns="10" />
+        <dataField fieldName="NextSessionStartDate" columns="10" />
+        <dataField fieldName="HasNextTerm" />
+        <dataField fieldName="SEQ" columns="15" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Session">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Session" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="SessionName" columns="50" />
             <dataField fieldName="SessionCode" columns="20" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
             <dataField fieldName="RefSessionTypeID" aliasFieldName="RefSessionTypeDescription" />
-            <dataField fieldName="TermDescriptorID" aliasFieldName="TermDescriptor" />
+            <dataField fieldName="TotalInstructionDays" columns="15" />
             <dataField fieldName="OrganizationCalendarID" aliasFieldName="CalendarCode" />
-          </dataFields>
-        </category>
-        <category id="c2" flow="NewColumn">
-          <description />
-          <dataFields>
+            <dataField fieldName="TermDescriptorID" aliasFieldName="TermDescriptor" />
+            <dataField fieldName="IsActive" />
             <dataField fieldName="NextSessionEndDate" columns="10" />
             <dataField fieldName="NextSessionStartDate" columns="10" />
             <dataField fieldName="HasNextTerm" />
-            <dataField fieldName="TotalInstructionDays" columns="15" />
-            <dataField fieldName="IsActive" />
-          </dataFields>
-        </category>
-        <category id="d1" tab="GRADING PERIOD" flow="NewRow">
-          <dataFields>
-            <dataField fieldName="GradingPeriod" tag="modal-max-xs&#xD;&#xA;modal-fit-content" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="AUDIT TRAIL" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
+            <dataField fieldName="SEQ" columns="15" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedBy" columns="50" />
+          </dataFields>
+        </category>
+        <category id="d1">
+          <dataFields>
+            <dataField fieldName="GradingPeriod" />
           </dataFields>
         </category>
       </categories>
@@ -187,29 +130,28 @@ from "dbo"."Session" "Session"
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description />
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="SessionName" columns="50" />
             <dataField fieldName="SessionCode" columns="20" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
             <dataField fieldName="RefSessionTypeID" aliasFieldName="RefSessionTypeDescription" />
+            <dataField fieldName="TotalInstructionDays" columns="15" />
             <dataField fieldName="OrganizationCalendarID" aliasFieldName="CalendarCode" />
             <dataField fieldName="TermDescriptorID" aliasFieldName="TermDescriptor" />
-            <dataField fieldName="TotalInstructionDays" columns="15" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c2" flow="NewColumn">
-          <description />
-          <dataFields>
+            <dataField fieldName="IsActive" />
             <dataField fieldName="NextSessionEndDate" columns="10" />
             <dataField fieldName="NextSessionStartDate" columns="10" />
             <dataField fieldName="HasNextTerm" />
-            <dataField fieldName="IsActive" />
+            <dataField fieldName="SEQ" columns="15" />
             <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
           </dataFields>
         </category>
-        <category id="d1" flow="NewRow">
+        <category id="d1">
           <dataFields>
             <dataField fieldName="GradingPeriod" />
           </dataFields>
@@ -243,19 +185,17 @@ from "dbo"."Session" "Session"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New Session" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a100" commandName="ReportAsPdf" headerText="Export To PDF" />
-      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" headerText="Export As IPY" />
-      <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -267,6 +207,12 @@ from "dbo"."Session" "Session"
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
@@ -274,8 +220,4 @@ from "dbo"."Session" "Session"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="Insert|Update|New" type="Sql" phase="After" name="calculateAcademicYearLength"><![CDATA[--EXEC [dbo].[usp_session_calculate_total_instructional_period]
-EXEC [dbo].[usp_session_calculate_total_instruction_days]]]></rule>
-  </businessRules>
 </dataController>

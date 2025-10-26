@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="StockTake" conflictDetection="overwriteChanges" label="Stock Take" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.StockTakeBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="StockTake" conflictDetection="overwriteChanges" label="Stock Take" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -46,9 +46,9 @@ from "dbo"."StockTake" "StockTake"
       <formula>RIGHT(REPLICATE('0', 5) + CAST(StockTake.StockTakeHeaderID AS VARCHAR(5)), 5)</formula>
     </field>
     <field name="ProductID" type="Int32" allowNulls="false" label="Product ID" showInSummary="true">
-      <items style="Lookup" dataController="Product" newDataView="createForm1" dataValueField="ProductID" dataTextField="ProductName" copy="SKU=Skucode&#xD;&#xA;ProductName=sProductName&#xD;&#xA;SystemQuantity=refProductQuantity" />
+      <items style="Lookup" dataController="Product" newDataView="createForm1" dataValueField="ProductID" dataTextField="ProductName" copy="SKU=Skucode, refProductQuantity=Quantity" />
     </field>
-    <field name="sProductName" type="String" readOnly="true" label="Item Name" length="45" />
+    <field name="sProductName" type="String" readOnly="true" label="Item Name" length="100" />
     <field name="StockTakeNo" type="Int32" readOnly="true" label="StockHeaderNo" />
     <field name="StockTakeNumber" type="String" label="Stock Take No" length="20" showInSummary="true" />
     <field name="LocationName" type="String" readOnly="true" label="Location" length="40" />
@@ -56,10 +56,10 @@ from "dbo"."StockTake" "StockTake"
     <field name="StockTakeHeaderID" type="Int32" label="Stock Take Header ID" showInSummary="true">
       <items style="Lookup" dataController="StockTakeHeader" newDataView="createForm1" dataValueField="StockTakeHeaderID" dataTextField="StockTakeNo" copy="LocationName=LocationName" />
     </field>
-    <field name="refProductQuantity" type="Int32" readOnly="true" label="refProductQuantity" causesCalculate="true" />
+    <field name="refProductQuantity" type="Int32" readOnly="true" label="refProductQuantity" />
     <field name="ProductName" type="String" label="Product" length="100" showInSummary="true" />
-    <field name="SystemQuantity" type="Decimal" label="System Qty" causesCalculate="true" />
-    <field name="ScannedQuantity" type="Decimal" label="Counted Qty" causesCalculate="true" />
+    <field name="SystemQuantity" type="Decimal" label="System Qty" />
+    <field name="ScannedQuantity" type="Decimal" label="Counted Qty" />
     <field name="StockTakeDate" type="DateTime" label="Event Date" />
     <field name="StockDifference" type="Decimal" label="Variance" />
     <field name="Variance" type="Decimal" readOnly="true" dataFormatString="P" label="Variance" computed="true">
@@ -79,30 +79,28 @@ from "dbo"."StockTake" "StockTake"
     <view id="grid1" type="Grid" commandId="command1" label="Stock Take">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="STH" columns="15" />
-        <dataField fieldName="StockTakeHeaderID" aliasFieldName="StockTakeNo" columns="30" />
+        <dataField fieldName="STH" />
         <dataField fieldName="ProductID" aliasFieldName="sProductName" />
-        <dataField fieldName="StockTakeNumber" columns="20" hidden="true" />
-        <dataField fieldName="SKU" columns="15" />
-        <dataField fieldName="ProductName" hidden="true" />
-        <dataField fieldName="StockTakeDate" columns="20" />
-        <dataField fieldName="LocationName" columns="20" />
-        <dataField fieldName="StockTakeReason" columns="15" />
-        <dataField fieldName="refProductQuantity" columns="15" hidden="true" />
-        <dataField fieldName="SystemQuantity" columns="15" readOnly="true" />
+        <dataField fieldName="StockTakeNumber" columns="20" />
+        <dataField fieldName="LocationName" columns="40" />
+        <dataField fieldName="SKU" columns="10" />
+        <dataField fieldName="StockTakeHeaderID" aliasFieldName="StockTakeNo" />
+        <dataField fieldName="refProductQuantity" columns="15" />
+        <dataField fieldName="ProductName" />
+        <dataField fieldName="SystemQuantity" columns="15" />
         <dataField fieldName="ScannedQuantity" columns="15" />
-        <dataField fieldName="StockDifference" columns="5">
-          <headerText>Diff</headerText>
-        </dataField>
+        <dataField fieldName="StockTakeDate" columns="10" />
+        <dataField fieldName="StockDifference" columns="15" />
         <dataField fieldName="Variance" columns="15" />
-        <dataField fieldName="IsVarianceAccepted" columns="20" />
-        <dataField fieldName="Barcode" columns="18" hidden="true" />
-        <dataField fieldName="LocationID" columns="15" hidden="true" />
-        <dataField fieldName="Notes" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="IsVarianceAccepted" />
+        <dataField fieldName="Barcode" columns="30" />
+        <dataField fieldName="StockTakeReason" columns="50" />
+        <dataField fieldName="LocationID" columns="15" />
+        <dataField fieldName="Notes" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="ModifiedBy" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Stock Take">
@@ -112,37 +110,27 @@ from "dbo"."StockTake" "StockTake"
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="STH" />
-            <dataField fieldName="StockTakeHeaderID" aliasFieldName="StockTakeNo" />
-            <dataField fieldName="StockTakeNumber" columns="20" hidden="true" />
             <dataField fieldName="ProductID" aliasFieldName="sProductName" />
-            <dataField fieldName="ProductName" hidden="true" />
-            <dataField fieldName="SKU" columns="10" />
-            <dataField fieldName="Barcode" columns="30" tag="input-scanner&#xD;&#xA;barcode" />
+            <dataField fieldName="StockTakeNumber" columns="20" />
             <dataField fieldName="LocationName" columns="40" />
-            <dataField fieldName="Variance" columns="15" />
-            <dataField fieldName="LocationID" columns="15" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c2" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="StockTakeDate" columns="10" />
-            <dataField fieldName="refProductQuantity" columns="15" hidden="true" />
-            <dataField fieldName="SystemQuantity" columns="15" textMode="Static" />
+            <dataField fieldName="SKU" columns="10" />
+            <dataField fieldName="StockTakeHeaderID" aliasFieldName="StockTakeNo" />
+            <dataField fieldName="refProductQuantity" columns="15" />
+            <dataField fieldName="ProductName" />
+            <dataField fieldName="SystemQuantity" columns="15" />
             <dataField fieldName="ScannedQuantity" columns="15" />
+            <dataField fieldName="StockTakeDate" columns="10" />
             <dataField fieldName="StockDifference" columns="15" />
-            <dataField fieldName="StockTakeReason" columns="50" />
+            <dataField fieldName="Variance" columns="15" />
             <dataField fieldName="IsVarianceAccepted" />
+            <dataField fieldName="Barcode" columns="30" />
+            <dataField fieldName="StockTakeReason" columns="50" />
+            <dataField fieldName="LocationID" columns="15" />
             <dataField fieldName="Notes" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="ModifiedBy" columns="50" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -153,28 +141,28 @@ from "dbo"."StockTake" "StockTake"
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="STH" hidden="true" />
-            <dataField fieldName="StockTakeDate" columns="10" tag="auto-focus" />
-            <dataField fieldName="StockTakeHeaderID" aliasFieldName="StockTakeNo" />
+            <dataField fieldName="STH" />
             <dataField fieldName="ProductID" aliasFieldName="sProductName" />
-            <dataField fieldName="StockTakeNumber" columns="20" hidden="true" />
+            <dataField fieldName="StockTakeNumber" columns="20" />
             <dataField fieldName="LocationName" columns="40" />
             <dataField fieldName="SKU" columns="10" />
-            <dataField fieldName="refProductQuantity" columns="15" hidden="true" />
-            <dataField fieldName="ProductName" hidden="true" />
-            <dataField fieldName="SystemQuantity" columns="15" hidden="true" />
+            <dataField fieldName="StockTakeHeaderID" aliasFieldName="StockTakeNo" />
+            <dataField fieldName="refProductQuantity" columns="15" />
+            <dataField fieldName="ProductName" />
+            <dataField fieldName="SystemQuantity" columns="15" />
             <dataField fieldName="ScannedQuantity" columns="15" />
-            <dataField fieldName="StockDifference" columns="15" hidden="true" />
+            <dataField fieldName="StockTakeDate" columns="10" />
+            <dataField fieldName="StockDifference" columns="15" />
             <dataField fieldName="Variance" columns="15" />
-            <dataField fieldName="IsVarianceAccepted" hidden="true" />
-            <dataField fieldName="Barcode" columns="30" tag="input-scanner&#xD;&#xA;barcode" hidden="true" />
+            <dataField fieldName="IsVarianceAccepted" />
+            <dataField fieldName="Barcode" columns="30" />
             <dataField fieldName="StockTakeReason" columns="50" />
-            <dataField fieldName="LocationID" columns="15" hidden="true" />
+            <dataField fieldName="LocationID" columns="15" />
             <dataField fieldName="Notes" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="ModifiedBy" columns="50" />
           </dataFields>
         </category>
       </categories>
@@ -213,19 +201,10 @@ from "dbo"."StockTake" "StockTake"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="SQL" headerText="Generate Stock Overtime " id="a104" cssClass="material-icon-position_bottom_right">
-        <data><![CDATA[EXEC [zusp_stock_p3_calculate_stockvarianceovertime] @StockTakeHeaderID]]></data>
-      </action>
-      <action commandName="SQL" headerText="Post Adjustment Approval" cssClass="material-icon-change_circle" confirmation="This action would post variances within tolerance to the items to update the item quantity. Do you want to continue ?" id="a100">
-        <data><![CDATA[EXECUTE zusp_stock_p7_post_adjustment_approval]]></data>
-      </action>
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
-      <action id="a4" commandName="ExportRss" headerText="Export To RSS APi" />
-      <action id="a101" commandName="ReportAsPdf" headerText="Export To PDF" />
-      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a103" commandName="ReportAsWord" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -237,6 +216,12 @@ from "dbo"."StockTake" "StockTake"
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
@@ -244,30 +229,4 @@ from "dbo"."StockTake" "StockTake"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="New|Update" type="Sql" phase="Execute" name="setStockTakeDate"><![CDATA[IF @ScannedQuantity IS NOT NULL AND @StockTakeDate IS NULL
-	SET @StockTakeDate = GETDATE()
-ELSE 
-   SET @StockTakeDate = NULL]]></rule>
-    <rule id="r103" commandName="Insert|Calculate|Update" type="Sql" phase="After" name="setSystemQuantity"><![CDATA[/*
-UPDATE st
-SET st.ProductName = p.ProductName
-	, st.SystemQuantity = ISNULL( st.SystemQuantity, p.Quantity)
-	, st.StockDifference = st.ScannedQuantity - p.Quantity
-
-FROM StockTake st
-INNER JOIN Product p on p.ProductID = st.ProductID
-WHERE p.ProductID = @ProductID
-*/]]></rule>
-    <rule id="r101" commandName="Insert|update|Calculate" type="Code" phase="Execute" name="calculateDifference" />
-    <rule id="r102" commandName="New|Update" type="Sql" phase="Execute" name="setIsVarianceAccepted"><![CDATA[if @IsVarianceAccepted IS NULL 
-    SET @IsVarianceAccepted = 0]]></rule>
-    <rule id="r104" commandName="Custom" type="JavaScript" phase="After" name="Prevent ScreenFromClosing"><![CDATA[if (args.commandName === 'Custom' && args.commandArgument === 'zusp_stock_p7_post_adjustment_approval') {
-    // Prevent the screen from closing
-    $app.touch.keepFocus = true;
-    args.preventDefault(); // stop default redirection
-    alert('Adjustment approvals processed successfully.');
-}
-]]></rule>
-  </businessRules>
 </dataController>

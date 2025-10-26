@@ -30,9 +30,9 @@ from "dbo"."zlkpCourseSectionDeliveryMode" "zlkpCourseSectionDeliveryMode"
     <view id="grid1" type="Grid" commandId="command1" label="Course Section Delivery Mode">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Description" columns="30" />
-        <dataField fieldName="Code" columns="30" />
-        <dataField fieldName="Definition" />
+        <dataField fieldName="Description" />
+        <dataField fieldName="Code" columns="50" />
+        <dataField fieldName="Definition" rows="5" />
         <dataField fieldName="SortOrder" columns="15" />
       </dataFields>
     </view>

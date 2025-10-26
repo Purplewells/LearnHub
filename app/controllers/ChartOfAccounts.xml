@@ -54,19 +54,19 @@ from "dbo"."chart_of_accounts" "chart_of_accounts"
     <field name="AccountCategoryID" type="Int32" label="Account Category ID" showInSummary="true">
       <items style="Lookup" dataController="ChartAccountCategory" newDataView="createForm1" dataValueField="AccountCategoryID" dataTextField="AccountCategory" />
     </field>
-    <field name="AccountCategory" type="String" readOnly="true" label="Category" length="20" />
+    <field name="AccountCategory" type="String" readOnly="true" label="Category" length="50" />
     <field name="AccountSubCategoryID" type="Int32" label="Account Sub Category ID">
       <items style="Lookup" dataController="AccountSubCategory" newDataView="createForm1" dataValueField="AccountSubCategoryID" dataTextField="AccountSubCategory" />
     </field>
-    <field name="AccountSubCategory" type="String" readOnly="true" label="SubCategory" length="20" />
+    <field name="AccountSubCategory" type="String" readOnly="true" label="SubCategory" length="40" />
     <field name="CashFlowCategoryID" type="Int32" label="Cash Flow Category ID">
       <items style="Lookup" dataController="CashFlowCategory" newDataView="createForm1" dataValueField="CashFlowCategoryID" dataTextField="CashFlowCategory" />
     </field>
-    <field name="CashFlowCategory" type="String" readOnly="true" label="CashFlow" length="12" />
+    <field name="CashFlowCategory" type="String" readOnly="true" label="CashFlow" length="50" />
     <field name="AccountUsageID" type="Int32" label="Account Usage ID">
       <items style="Lookup" dataController="ChartAccountUsage" newDataView="createForm1" dataValueField="AccountUsageID" dataTextField="AccountUsage" />
     </field>
-    <field name="AccountUsage" type="String" readOnly="true" label="Usage" length="12" />
+    <field name="AccountUsage" type="String" readOnly="true" label="Usage" length="25" />
     <field name="IsActive" type="Boolean" default="((1))" label="IsActive" />
     <field name="IsCashAccount" type="Boolean" default="((0))" label="Cash" />
     <field name="LFT" type="Int32" label="LFT" />
@@ -74,49 +74,29 @@ from "dbo"."chart_of_accounts" "chart_of_accounts"
     <field name="ParentAccountID" type="Int32" label="Parent Account ID">
       <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" />
     </field>
-    <field name="ParentAccountName" type="String" readOnly="true" label="Parent" length="30" />
+    <field name="ParentAccountName" type="String" readOnly="true" label="Parent" length="100" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Modified Date" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Chart Of Accounts" filter="IsActive = 1">
+    <view id="grid1" type="Grid" commandId="command1" label="Chart Of Accounts">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="AccountName" columns="25" />
+        <dataField fieldName="AccountName" />
         <dataField fieldName="AccountNumber" columns="20" />
-        <dataField fieldName="Label" columns="35" />
-        <dataField fieldName="IsActive" />
+        <dataField fieldName="Label" columns="50" />
         <dataField fieldName="AccountTypeID" aliasFieldName="AccountType" />
         <dataField fieldName="AccountCategoryID" aliasFieldName="AccountCategory" />
         <dataField fieldName="AccountSubCategoryID" aliasFieldName="AccountSubCategory" />
         <dataField fieldName="CashFlowCategoryID" aliasFieldName="CashFlowCategory" />
         <dataField fieldName="AccountUsageID" aliasFieldName="AccountUsage" />
-        <dataField fieldName="IsCashAccount" />
-        <dataField fieldName="LFT" columns="5" />
-        <dataField fieldName="RGT" columns="5" />
-        <dataField fieldName="ParentAccountID" aliasFieldName="ParentAccountName" columns="25" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="all_chart_of_accounts" type="Grid" commandId="command1" label="All Chart Of Accounts">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="AccountName" columns="25" />
-        <dataField fieldName="AccountNumber" columns="20" />
-        <dataField fieldName="Label" columns="35" />
         <dataField fieldName="IsActive" />
-        <dataField fieldName="AccountTypeID" aliasFieldName="AccountType" />
-        <dataField fieldName="AccountCategoryID" aliasFieldName="AccountCategory" />
-        <dataField fieldName="AccountSubCategoryID" aliasFieldName="AccountSubCategory" />
-        <dataField fieldName="CashFlowCategoryID" aliasFieldName="CashFlowCategory" />
-        <dataField fieldName="AccountUsageID" aliasFieldName="AccountUsage" />
         <dataField fieldName="IsCashAccount" />
-        <dataField fieldName="LFT" columns="5" />
-        <dataField fieldName="RGT" columns="5" />
-        <dataField fieldName="ParentAccountID" aliasFieldName="ParentAccountName" columns="25" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="LFT" columns="15" />
+        <dataField fieldName="RGT" columns="15" />
+        <dataField fieldName="ParentAccountID" aliasFieldName="ParentAccountName" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Chart Of Accounts">

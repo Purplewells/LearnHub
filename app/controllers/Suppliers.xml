@@ -45,16 +45,16 @@ from "dbo"."Suppliers" "Suppliers"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="SupplierName" columns="50" />
-        <dataField fieldName="ContactName" columns="30" />
-        <dataField fieldName="ContactEmail" columns="30" />
-        <dataField fieldName="Address" columns="35" />
+        <dataField fieldName="Address" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="ContactName" columns="50" />
+        <dataField fieldName="ContactEmail" columns="50" />
         <dataField fieldName="ContactPhone" columns="20" />
         <dataField fieldName="City" columns="30" />
-        <dataField fieldName="State" columns="15" hidden="true" />
+        <dataField fieldName="State" columns="15" />
         <dataField fieldName="PostalCode" columns="15" />
-        <dataField fieldName="Country" columns="20" />
-        <dataField fieldName="Website" columns="50" hidden="true" />
-        <dataField fieldName="IsActive" columns="8" />
+        <dataField fieldName="Country" columns="50" />
+        <dataField fieldName="Website" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Suppliers">
@@ -65,6 +65,7 @@ from "dbo"."Suppliers" "Suppliers"
           <dataFields>
             <dataField fieldName="SupplierName" columns="50" />
             <dataField fieldName="Address" />
+            <dataField fieldName="IsActive" />
             <dataField fieldName="ContactName" columns="50" />
             <dataField fieldName="ContactEmail" columns="50" />
             <dataField fieldName="ContactPhone" columns="20" />
@@ -73,7 +74,6 @@ from "dbo"."Suppliers" "Suppliers"
             <dataField fieldName="PostalCode" columns="15" />
             <dataField fieldName="Country" columns="50" />
             <dataField fieldName="Website" columns="50" />
-            <dataField fieldName="IsActive" />
           </dataFields>
         </category>
       </categories>
@@ -86,6 +86,7 @@ from "dbo"."Suppliers" "Suppliers"
           <dataFields>
             <dataField fieldName="SupplierName" columns="50" />
             <dataField fieldName="Address" />
+            <dataField fieldName="IsActive" />
             <dataField fieldName="ContactName" columns="50" />
             <dataField fieldName="ContactEmail" columns="50" />
             <dataField fieldName="ContactPhone" columns="20" />
@@ -94,7 +95,6 @@ from "dbo"."Suppliers" "Suppliers"
             <dataField fieldName="PostalCode" columns="15" />
             <dataField fieldName="Country" columns="50" />
             <dataField fieldName="Website" columns="50" />
-            <dataField fieldName="IsActive" />
           </dataFields>
         </category>
       </categories>

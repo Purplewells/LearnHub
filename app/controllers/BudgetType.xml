@@ -35,7 +35,7 @@ from "dbo"."zlkpBudgetType" "zlkpBudgetType"
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Budget Type" filter="IsActive = 1">
+    <view id="grid1" type="Grid" commandId="command1" label="Budget Type">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="BudgetType" columns="15" />
@@ -44,27 +44,14 @@ from "dbo"."zlkpBudgetType" "zlkpBudgetType"
         <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="CreatedDate" columns="20" />
         <dataField fieldName="ModifiedDate" columns="20" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_budget_types" type="Grid" commandId="command1" label="All Budget Types">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="BudgetType" columns="15" />
-        <dataField fieldName="BudegtTypeCode" columns="15" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="SortOrder" columns="15" />
-        <dataField fieldName="CreatedDate" columns="20" />
-        <dataField fieldName="ModifiedDate" columns="20" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Budget Type">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Budget Type" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="BudgetType" columns="15" />

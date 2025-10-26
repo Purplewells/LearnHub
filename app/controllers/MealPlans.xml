@@ -40,28 +40,31 @@ from "dbo"."zlkpMealPlans" "zlkpMealPlans"
     <view id="grid1" type="Grid" commandId="command1" label="Meal Plans">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="SchoolID" columns="15" hidden="true" />
-        <dataField fieldName="PlanName" columns="20" />
-        <dataField fieldName="PlanCode" columns="10" />
+        <dataField fieldName="SchoolID" columns="15" />
+        <dataField fieldName="PlanName" />
+        <dataField fieldName="PlanCode" columns="5" />
         <dataField fieldName="Description" />
         <dataField fieldName="Price" columns="15" />
         <dataField fieldName="NumberOfDays" columns="15" />
-        <dataField fieldName="EffectiveFrom" columns="20" hidden="true" />
-        <dataField fieldName="EffectiveTo" columns="20" hidden="true" />
+        <dataField fieldName="EffectiveFrom" columns="20" />
+        <dataField fieldName="EffectiveTo" columns="20" />
         <dataField fieldName="IsActive" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Meal Plans">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Meal Plans" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
+            <dataField fieldName="SchoolID" columns="15" />
             <dataField fieldName="PlanName" />
             <dataField fieldName="PlanCode" columns="5" />
             <dataField fieldName="Description" />
             <dataField fieldName="Price" columns="15" />
             <dataField fieldName="NumberOfDays" columns="15" />
+            <dataField fieldName="EffectiveFrom" columns="20" />
+            <dataField fieldName="EffectiveTo" columns="20" />
             <dataField fieldName="IsActive" />
           </dataFields>
         </category>
@@ -73,11 +76,14 @@ from "dbo"."zlkpMealPlans" "zlkpMealPlans"
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
+            <dataField fieldName="SchoolID" columns="15" />
             <dataField fieldName="PlanName" />
             <dataField fieldName="PlanCode" columns="5" />
             <dataField fieldName="Description" />
             <dataField fieldName="Price" columns="15" />
             <dataField fieldName="NumberOfDays" columns="15" />
+            <dataField fieldName="EffectiveFrom" columns="20" />
+            <dataField fieldName="EffectiveTo" columns="20" />
             <dataField fieldName="IsActive" />
           </dataFields>
         </category>

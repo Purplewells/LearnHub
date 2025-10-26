@@ -44,7 +44,7 @@ from "dbo"."ServiceAttendance" "ServiceAttendance"
     <field name="RouteID" type="Int32" label="Route ID" showInSummary="true">
       <items style="Lookup" dataController="Routes" newDataView="createForm1" dataValueField="RouteID" dataTextField="RouteName" />
     </field>
-    <field name="RouteName" type="String" readOnly="true" label="Route Name" length="20" />
+    <field name="RouteName" type="String" readOnly="true" label="Route Name" length="100" />
     <field name="Date" type="DateTime" label="Date" showInSummary="true" />
     <field name="IsPresent" type="Boolean" label="Is Present" />
   </fields>

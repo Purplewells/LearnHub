@@ -33,7 +33,7 @@ from "dbo"."zlkpMovementMode" "zlkpMovementMode"
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Movement Modes" filter="IsActive = 1">
+    <view id="grid1" type="Grid" commandId="command1" label="Movement Mode">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="MovementMode" columns="20" />
@@ -41,20 +41,8 @@ from "dbo"."zlkpMovementMode" "zlkpMovementMode"
         <dataField fieldName="IsActive" />
         <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="Description" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_movement" type="Grid" commandId="command1" label="All Movement Modes">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="MovementMode" columns="20" />
-        <dataField fieldName="MovementModeCode" columns="5" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="SortOrder" columns="15" />
-        <dataField fieldName="Description" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Movement Mode">
@@ -65,9 +53,9 @@ from "dbo"."zlkpMovementMode" "zlkpMovementMode"
           <dataFields>
             <dataField fieldName="MovementMode" columns="20" />
             <dataField fieldName="MovementModeCode" columns="5" />
-            <dataField fieldName="Description" />
             <dataField fieldName="IsActive" />
             <dataField fieldName="SortOrder" columns="15" />
+            <dataField fieldName="Description" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
           </dataFields>

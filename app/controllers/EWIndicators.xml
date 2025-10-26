@@ -63,35 +63,35 @@ from "dbo"."master_cte_attendance_analysis" "master_cte_attendance_analysis"
     <field name="Organisation" type="String" label="Organisation" length="60" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Early Warning Indicators" reportLabel="EARLY WARNING INDICATOR" reportTemplate="true">
+    <view id="grid1" type="Grid" commandId="command1" label="EW Indicators">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="PersonID" columns="15" hidden="true" />
-        <dataField fieldName="Name" columns="25" />
+        <dataField fieldName="PersonID" columns="15" />
+        <dataField fieldName="Name" />
         <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="Sex" columns="3" tag="pivot1-row1-donut&#xD;&#xA;pivot1-title:&quot;What is the count of students by Gender&quot;&#xD;&#xA;pivot1-medium&#xD;&#xA;&#xD;&#xA;pivot18-col1" />
-        <dataField fieldName="GL" columns="5" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="Language" columns="18" tag="pivot3-row1-donut-sortbyvalue-top5-other&#xD;&#xA;pivot3-title:&quot;Distribution of main languages spoken by students&quot;" />
-        <dataField fieldName="Religion" columns="12" />
-        <dataField fieldName="Attendances" columns="5" />
-        <dataField fieldName="Absences" columns="5" tag="pivot7-val1-sum&#xD;&#xA;pivot8-val1-sum" />
-        <dataField fieldName="PossibleAttendances" columns="3" />
-        <dataField fieldName="TU" columns="15" hidden="true" />
-        <dataField fieldName="TD" columns="15" hidden="true" />
-        <dataField fieldName="TED" columns="15" hidden="true" />
-        <dataField fieldName="ADA" columns="8" tag="pivot9-val1-avg&#xD;&#xA;pivot9-vaxis:&quot;percent&quot;&#xD;&#xA;" />
-        <dataField fieldName="ARate" columns="9" />
-        <dataField fieldName="EPA" columns="10" />
-        <dataField fieldName="CHRABRate" columns="10" />
-        <dataField fieldName="ISD" columns="1" hidden="true" />
-        <dataField fieldName="OnTheVerge" columns="7" tag="pivot10-val1-count&#xD;&#xA;pivot10-col1&#xD;&#xA;pivot15-col1&#xD;&#xA;&#xD;&#xA;pivot12-row1-donut&#xD;&#xA;pivot12-title:&quot;What is proportion of students On the Verge of chronic absence&quot;&#xD;&#xA;pivot12-medium" />
-        <dataField fieldName="IsChrab" columns="10" tag="pivot6-val1-COUNT&#xD;&#xA;&#xD;&#xA;pivot11-val1-count&#xD;&#xA;pivot11-col1&#xD;&#xA;pivot17-col1&#xD;&#xA;&#xD;&#xA;pivot13-row1-donut&#xD;&#xA;pivot13-title:&quot;What is the proportion of students Chronically Absent&quot;&#xD;&#xA;" />
-        <dataField fieldName="IsAtRisk" columns="7" tag="pivot4-col1&#xD;&#xA;pivot5-val1-COUNT&#xD;&#xA;pivot16-col1&#xD;&#xA;&#xD;&#xA;pivot14-row1-donut&#xD;&#xA;pivot14-title:&quot;What is the proportion of students at risk of dropout&quot;&#xD;&#xA;&#xD;&#xA;pivot18-row1-columnstacked&#xD;&#xA;pivot18-title:&quot;Count of students at Risk of Dropout by gender&quot;&#xD;&#xA;pivot18-large" />
-        <dataField fieldName="PARate" columns="15" hidden="true" />
-        <dataField fieldName="Session" columns="12" tag="pivot9-row1-columnstacked&#xD;&#xA;pivot9-title:&quot;What is the average attendance rate by Term&quot;&#xD;&#xA;pivot9-vaxisformat:&quot;percent&quot;" />
-        <dataField fieldName="Year" columns="8" />
-        <dataField fieldName="Organisation" hidden="true" />
+        <dataField fieldName="GL" columns="10" />
+        <dataField fieldName="GLSO" columns="15" />
+        <dataField fieldName="Language" columns="30" />
+        <dataField fieldName="Religion" columns="20" />
+        <dataField fieldName="Sex" columns="30" />
+        <dataField fieldName="Attendances" columns="15" />
+        <dataField fieldName="Absences" columns="15" />
+        <dataField fieldName="PossibleAttendances" columns="15" />
+        <dataField fieldName="TU" columns="15" />
+        <dataField fieldName="TD" columns="15" />
+        <dataField fieldName="TED" columns="15" />
+        <dataField fieldName="ADA" columns="15" />
+        <dataField fieldName="EPA" columns="15" />
+        <dataField fieldName="ISD" columns="1" />
+        <dataField fieldName="OnTheVerge" columns="3" />
+        <dataField fieldName="IsChrab" columns="3" />
+        <dataField fieldName="IsAtRisk" columns="3" />
+        <dataField fieldName="CHRABRate" columns="15" />
+        <dataField fieldName="ARate" columns="15" />
+        <dataField fieldName="PARate" columns="15" />
+        <dataField fieldName="Session" columns="20" />
+        <dataField fieldName="Year" columns="15" />
+        <dataField fieldName="Organisation" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review EW Indicators">

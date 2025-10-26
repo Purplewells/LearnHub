@@ -28,13 +28,13 @@ from "dbo"."vw_ops_student_in_school_meal" "vw_ops_student_in_school_meal"
     <view id="grid1" type="Grid" commandId="command1" label="Students In School Meal">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="PersonID" columns="15" hidden="true" />
-        <dataField fieldName="LastName" columns="20" />
-        <dataField fieldName="FirstName" columns="20" />
+        <dataField fieldName="PersonID" columns="15" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="FirstName" columns="35" />
         <dataField fieldName="IdentificationCode" columns="10" />
+        <dataField fieldName="EventDate" columns="10" />
         <dataField fieldName="GL" columns="10" />
-        <dataField fieldName="EventDate" columns="20" />
-        <dataField fieldName="IsPresent" columns="12" />
+        <dataField fieldName="IsPresent" columns="1" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Students In School Meal">

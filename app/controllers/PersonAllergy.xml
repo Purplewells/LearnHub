@@ -30,11 +30,11 @@ from "dbo"."PersonAllergy" "PersonAllergy"
   <fields>
     <field name="PersonAllergyID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Person Allergy ID" readOnly="true" />
     <field name="RefAllergyTypeID" type="Int32" allowNulls="false" label="Ref Allergy Type Id" showInSummary="true">
-      <items style="Lookup" dataController="AllergyType" dataValueField="RefAllergyTypeID" dataTextField="Description" dataView="grid1" newDataView="createForm1" />
+      <items style="Lookup" dataController="AllergyType" newDataView="createForm1" dataValueField="RefAllergyTypeID" dataTextField="Description" />
     </field>
     <field name="AllergyType" type="String" readOnly="true" label="Allergy Type" length="100" />
     <field name="RefAllergySeverityID" type="Int32" label="Ref Allergy Severity Id" showInSummary="true">
-      <items style="RadioButtonList" dataController="AllergySeverity" dataValueField="RefAllergySeverityID" dataTextField="Description" dataView="grid1" />
+      <items style="Lookup" dataController="AllergySeverity" newDataView="createForm1" dataValueField="RefAllergySeverityID" dataTextField="Description" />
     </field>
     <field name="Severity" type="String" readOnly="true" label="Severity" length="100" />
     <field name="Reaction" type="String" allowQBE="false" allowSorting="false" label="Reaction" length="2000" showInSummary="true" />
@@ -55,43 +55,43 @@ from "dbo"."PersonAllergy" "PersonAllergy"
       <dataFields>
         <dataField fieldName="RefAllergyTypeID" aliasFieldName="AllergyType" />
         <dataField fieldName="RefAllergySeverityID" aliasFieldName="Severity" />
-        <dataField fieldName="Reaction" />
+        <dataField fieldName="Reaction" rows="5" />
         <dataField fieldName="PersonID" aliasFieldName="Firstname" />
         <dataField fieldName="Lastname" columns="35" />
         <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="HeaderTitle" hidden="true" tag="header-text" />
+        <dataField fieldName="HeaderTitle" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Allergy">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Person Allergy">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Person Allergy" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="RefAllergyTypeID" aliasFieldName="AllergyType" />
             <dataField fieldName="RefAllergySeverityID" aliasFieldName="Severity" />
-            <dataField fieldName="Reaction" rows="2" />
+            <dataField fieldName="Reaction" rows="5" />
             <dataField fieldName="PersonID" aliasFieldName="Firstname" />
             <dataField fieldName="Lastname" columns="35" />
             <dataField fieldName="UPN" columns="10" />
-            <dataField fieldName="HeaderTitle" hidden="true" />
+            <dataField fieldName="HeaderTitle" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Allergy">
+    <view id="createForm1" type="Form" commandId="command1" label="New Person Allergy">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description />
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="RefAllergyTypeID" aliasFieldName="AllergyType" />
             <dataField fieldName="RefAllergySeverityID" aliasFieldName="Severity" />
-            <dataField fieldName="Reaction" rows="2" />
+            <dataField fieldName="Reaction" rows="5" />
             <dataField fieldName="PersonID" aliasFieldName="Firstname" />
             <dataField fieldName="Lastname" columns="35" />
             <dataField fieldName="UPN" columns="10" />
-            <dataField fieldName="HeaderTitle" hidden="true" />
+            <dataField fieldName="HeaderTitle" />
           </dataFields>
         </category>
       </categories>
@@ -103,7 +103,7 @@ from "dbo"."PersonAllergy" "PersonAllergy"
       <action id="a2" commandName="Edit" />
       <action id="a3" commandName="Delete" />
       <action id="a6" />
-      <action id="a7" commandName="New" commandArgument="grid1" headerText="New Allergy" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
       <action id="a9" />
       <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
@@ -123,7 +123,7 @@ from "dbo"."PersonAllergy" "PersonAllergy"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />

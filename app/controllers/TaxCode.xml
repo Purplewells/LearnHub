@@ -50,13 +50,13 @@ from "dbo"."zlkpTaxCode" "zlkpTaxCode"
         <dataField fieldName="TaxCode" columns="15" />
         <dataField fieldName="CountryID" aliasFieldName="CountryDescription" />
         <dataField fieldName="Description" />
-        <dataField fieldName="IsEmergencyCode" columns="20" />
-        <dataField fieldName="AllowsPersonalAllowance" columns="30" />
-        <dataField fieldName="AppliesToMultipleJobs" columns="30" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedBy" hidden="true" />
+        <dataField fieldName="IsEmergencyCode" />
+        <dataField fieldName="AllowsPersonalAllowance" />
+        <dataField fieldName="AppliesToMultipleJobs" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="CreatedBy" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="ModifiedBy" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Tax Code">

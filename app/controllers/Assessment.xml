@@ -59,7 +59,7 @@ from "dbo"."Assessment" "Assessment"
     <field name="CourseID" type="Int32" label="Course ID" showInSummary="true">
       <items style="Lookup" dataController="Course" newDataView="createForm1" dataValueField="CourseID" dataTextField="Course" />
     </field>
-    <field name="CourseTitle" type="String" readOnly="true" label="Course Title" length="25" />
+    <field name="CourseTitle" type="String" readOnly="true" label="Course Title" length="60" />
     <field name="IdentifIcationID" type="Int32" label="Identification ID" showInSummary="true" />
     <field name="IdentifIcationCode" type="String" readOnly="true" label="Identif Ication Code" length="20" />
     <field name="SubmittedDate" type="DateTime" label="Submitted Date" showInSummary="true" />
@@ -70,9 +70,9 @@ from "dbo"."Assessment" "Assessment"
     <field name="AssessmentPeriod" type="Int32" label="Assessment Period" />
     <field name="Objective" type="String" label="Objective" length="100" />
     <field name="RefAssessmentPurposeID" type="Int32" label="Ref Assessment Purpose Id" />
-    <field name="RefAssessmentPurposeDescription" type="String" readOnly="true" label="Purpose" length="20" />
+    <field name="RefAssessmentPurposeDescription" type="String" readOnly="true" label="Purpose" length="100" />
     <field name="RefAssessmentTypeID" type="Int32" label="Ref Assessment Type Id" />
-    <field name="RefAssessmentTypeDescription" type="String" readOnly="true" label="Assessment Type" length="20" />
+    <field name="RefAssessmentTypeDescription" type="String" readOnly="true" label="Assessment Type" length="100" />
     <field name="AssessmentFamilyID" type="Int32" label="Assessment Family ID" />
     <field name="AssessmentFamily" type="String" readOnly="true" label="Assessment Family" length="50" />
     <field name="Adaptive" type="Boolean" label="Adaptive" />
@@ -96,29 +96,29 @@ from "dbo"."Assessment" "Assessment"
     <view id="grid1" type="Grid" commandId="command1" label="Assessment">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="AssessmentTitle" />
         <dataField fieldName="Code" columns="15" />
+        <dataField fieldName="AssessmentTitle" />
         <dataField fieldName="CourseID" aliasFieldName="CourseTitle" />
+        <dataField fieldName="IdentifIcationID" aliasFieldName="IdentifIcationCode" />
         <dataField fieldName="SubmittedDate" columns="10" />
         <dataField fieldName="DueDate" columns="10" />
-        <dataField fieldName="MaxRawScore" columns="15" />
-        <dataField fieldName="Sequence" columns="10" />
-        <dataField fieldName="AssessmentPeriod" columns="10" />
-        <dataField fieldName="Objective" columns="25" hidden="true" />
         <dataField fieldName="ContentStandardID" aliasFieldName="ContentStandardTitle" />
+        <dataField fieldName="MaxRawScore" columns="15" />
+        <dataField fieldName="AssessmentPeriod" columns="15" />
+        <dataField fieldName="Objective" />
         <dataField fieldName="RefAssessmentPurposeID" aliasFieldName="RefAssessmentPurposeDescription" />
         <dataField fieldName="RefAssessmentTypeID" aliasFieldName="RefAssessmentTypeDescription" />
         <dataField fieldName="AssessmentFamilyID" aliasFieldName="AssessmentFamily" />
+        <dataField fieldName="Adaptive" />
         <dataField fieldName="AssessmentCategoryID" aliasFieldName="AssessmentCategory" />
-        <dataField fieldName="IdentifIcationID" aliasFieldName="IdentifIcationCode" hidden="true" />
-        <dataField fieldName="Adaptive" hidden="true" />
-        <dataField fieldName="PublishItem" hidden="true" />
-        <dataField fieldName="PublishResult" hidden="true" />
-        <dataField fieldName="RevisionDate" columns="10" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="RevisionDate" columns="10" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="Sequence" columns="15" />
+        <dataField fieldName="PublishItem" />
+        <dataField fieldName="PublishResult" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Assessment">
@@ -130,51 +130,31 @@ from "dbo"."Assessment" "Assessment"
             <dataField fieldName="Code" columns="15" />
             <dataField fieldName="AssessmentTitle" />
             <dataField fieldName="CourseID" aliasFieldName="CourseTitle" />
-            <dataField fieldName="ContentStandardID" aliasFieldName="ContentStandardTitle" />
+            <dataField fieldName="IdentifIcationID" aliasFieldName="IdentifIcationCode" />
             <dataField fieldName="SubmittedDate" columns="10" />
             <dataField fieldName="DueDate" columns="10" />
+            <dataField fieldName="ContentStandardID" aliasFieldName="ContentStandardTitle" />
+            <dataField fieldName="MaxRawScore" columns="15" />
+            <dataField fieldName="AssessmentPeriod" columns="15" />
             <dataField fieldName="Objective" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Classifications">
-          <description />
-          <dataFields>
-            <dataField fieldName="AssessmentCategoryID" aliasFieldName="AssessmentCategory" />
-            <dataField fieldName="AssessmentFamilyID" aliasFieldName="AssessmentFamily" />
             <dataField fieldName="RefAssessmentPurposeID" aliasFieldName="RefAssessmentPurposeDescription" />
             <dataField fieldName="RefAssessmentTypeID" aliasFieldName="RefAssessmentTypeDescription" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="Sequence &amp; Period" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="AssessmentPeriod" columns="15" />
-            <dataField fieldName="RevisionDate" columns="10" />
-            <dataField fieldName="Sequence" columns="15" />
-            <dataField fieldName="IdentifIcationID" aliasFieldName="IdentifIcationCode" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Assessment">
-          <description><![CDATA[$DefaultEditDescription]]></description>
-          <dataFields>
-            <dataField fieldName="MaxRawScore" columns="15" />
-            <dataField fieldName="PublishItem" />
-            <dataField fieldName="PublishResult" />
+            <dataField fieldName="AssessmentFamilyID" aliasFieldName="AssessmentFamily" />
             <dataField fieldName="Adaptive" />
-          </dataFields>
-        </category>
-        <category id="c5" headerText="Audit" collapsed="true">
-          <description />
-          <dataFields>
+            <dataField fieldName="AssessmentCategoryID" aliasFieldName="AssessmentCategory" />
+            <dataField fieldName="RevisionDate" columns="10" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="Sequence" columns="15" />
+            <dataField fieldName="PublishItem" />
+            <dataField fieldName="PublishResult" />
           </dataFields>
         </category>
-        <category id="d1" tab="Student Assessment" flow="NewRow">
+        <category id="d1">
           <dataFields>
-            <dataField fieldName="StudentAssessment" tag="modal-never" />
+            <dataField fieldName="StudentAssessment" />
           </dataFields>
         </category>
       </categories>

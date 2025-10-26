@@ -31,26 +31,11 @@ from "dbo"."zlkpTransactionStatus" "zlkpTransactionStatus"
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Transaction Status" filter="IsActive = 1">
+    <view id="grid1" type="Grid" commandId="command1" label="Transaction Status">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="TransactionStatus" columns="20" />
-        <dataField fieldName="TransactionStatusCode" columns="15">
-          <headerText>Code</headerText>
-        </dataField>
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="SortOrder" columns="15" />
-        <dataField fieldName="CreatedDate" columns="20" />
-        <dataField fieldName="ModifiedDate" columns="20" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_status_records" type="Grid" commandId="command1" label="All Transaction Statuses">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="TransactionStatus" columns="20" />
-        <dataField fieldName="TransactionStatusCode" columns="15">
-          <headerText>Code</headerText>
-        </dataField>
+        <dataField fieldName="TransactionStatusCode" columns="15" />
         <dataField fieldName="IsActive" />
         <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="CreatedDate" columns="20" />

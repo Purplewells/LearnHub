@@ -63,77 +63,34 @@ from "dbo"."vw_ops_update_get_salary_information_for_bank" "vw_ops_update_get_sa
     <field name="BatchID" type="Int32" label="BatchID" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Current Pay Composition" reportLabel="PAYSLIPS FOR BANK" reportTemplate="true" filter="IsCurrent = 1">
+    <view id="grid1" type="Grid" commandId="command1" label="Get Salary Information For Bank">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="EmployeeID" columns="15" hidden="true" />
-        <dataField fieldName="FirstName" columns="18" />
-        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="EmployeeID" columns="15" />
+        <dataField fieldName="FirstName" columns="40" />
+        <dataField fieldName="LastName" columns="40" />
         <dataField fieldName="UPN" columns="15" />
-        <dataField fieldName="SalaryName" columns="20" />
-        <dataField fieldName="ElementName" columns="20" />
-        <dataField fieldName="ComponentType" columns="20" />
-        <dataField fieldName="GrossEarnings" columns="10">
-          <headerText>Gross</headerText>
-        </dataField>
-        <dataField fieldName="TotalDeductions" columns="10">
-          <headerText>Deductions</headerText>
-        </dataField>
+        <dataField fieldName="PaymentDate" columns="10" />
+        <dataField fieldName="GrossEarnings" columns="15" />
+        <dataField fieldName="TotalDeductions" columns="15" />
         <dataField fieldName="TaxAmount" columns="15" />
         <dataField fieldName="NetSalary" columns="15" />
-        <dataField fieldName="SalaryID" columns="15" hidden="true" />
+        <dataField fieldName="SalaryID" columns="15" />
+        <dataField fieldName="SalaryName" columns="30" />
         <dataField fieldName="AmountValue" columns="15" />
-        <dataField fieldName="Curr" columns="5" />
-        <dataField fieldName="Code" columns="20" hidden="true" />
-        <dataField fieldName="PaymentDate" columns="20" />
-        <dataField fieldName="IsApproved" hidden="true" />
-        <dataField fieldName="IsCurrent" columns="7">
-          <headerText>ISC</headerText>
-        </dataField>
-        <dataField fieldName="SchoolName" hidden="true" />
-        <dataField fieldName="Address" hidden="true" />
-        <dataField fieldName="SortOrder" columns="15" hidden="true" />
-        <dataField fieldName="AccountNo" columns="20" hidden="true" />
-        <dataField fieldName="SSNo" columns="20" hidden="true" />
-        <dataField fieldName="BankName" columns="50" hidden="true" />
-        <dataField fieldName="Occupation" hidden="true" />
-        <dataField fieldName="BatchID" columns="8" />
-      </dataFields>
-    </view>
-    <view id="grid1_slip_report" type="Grid" commandId="command1" label="Historic Compensations" reportLabel="PAYSLIPS FOR BANK" reportTemplate="true" filter="IsCurrent = 0" groupExpression="BatchID, UPN">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="EmployeeID" columns="15" hidden="true" />
-        <dataField fieldName="FirstName" columns="18" />
-        <dataField fieldName="LastName" columns="18" />
-        <dataField fieldName="UPN" columns="15" />
-        <dataField fieldName="SalaryName" columns="20" />
-        <dataField fieldName="ElementName" columns="20" />
+        <dataField fieldName="Code" columns="20" />
+        <dataField fieldName="ElementName" columns="50" />
         <dataField fieldName="ComponentType" columns="20" />
-        <dataField fieldName="GrossEarnings" columns="10">
-          <headerText>Gross</headerText>
-        </dataField>
-        <dataField fieldName="TotalDeductions" columns="10">
-          <headerText>Deductions</headerText>
-        </dataField>
-        <dataField fieldName="TaxAmount" columns="15" />
-        <dataField fieldName="NetSalary" columns="15" />
-        <dataField fieldName="SalaryID" columns="15" hidden="true" />
-        <dataField fieldName="AmountValue" columns="15" />
-        <dataField fieldName="Curr" columns="5" />
-        <dataField fieldName="Code" columns="20" hidden="true" />
-        <dataField fieldName="PaymentDate" columns="20" />
-        <dataField fieldName="IsApproved" hidden="true" />
-        <dataField fieldName="IsCurrent" columns="7">
-          <headerText>ISC</headerText>
-        </dataField>
-        <dataField fieldName="SchoolName" hidden="true" />
-        <dataField fieldName="Address" hidden="true" />
-        <dataField fieldName="SortOrder" columns="15" hidden="true" />
-        <dataField fieldName="AccountNo" columns="20" hidden="true" />
-        <dataField fieldName="SSNo" columns="20" hidden="true" />
-        <dataField fieldName="BankName" columns="50" hidden="true" />
-        <dataField fieldName="Occupation" hidden="true" />
+        <dataField fieldName="IsApproved" />
+        <dataField fieldName="IsCurrent" />
+        <dataField fieldName="SchoolName" />
+        <dataField fieldName="Address" />
+        <dataField fieldName="SortOrder" columns="15" />
+        <dataField fieldName="AccountNo" columns="20" />
+        <dataField fieldName="SSNo" columns="20" />
+        <dataField fieldName="BankName" columns="50" />
+        <dataField fieldName="Curr" columns="20" />
+        <dataField fieldName="Occupation" />
         <dataField fieldName="BatchID" columns="15" />
       </dataFields>
     </view>
@@ -242,9 +199,13 @@ from "dbo"."vw_ops_update_get_salary_information_for_bank" "vw_ops_update_get_sa
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
-    <actionGroup id="ag100" scope="ActionBar" headerText="Actionsxxx" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
     </actionGroup>
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />
@@ -253,14 +214,10 @@ from "dbo"."vw_ops_update_get_salary_information_for_bank" "vw_ops_update_get_sa
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a104" commandName="ReportAsPdf" headerText="Issue Payslips (Top)" />
-      <action id="a103" commandName="ReportAsPdf" headerText="Issue Payslips (Bottom)" />
-      <action id="a2" />
-      <action id="a100" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a3" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a4" commandName="ReportAsWord" headerText="Export To Word" />
-      <action id="a102" commandName="ExportRowset" headerText="Export To IPY" />
-      <action id="a101" commandName="ExportRss" headerText="RSS To API" />
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

@@ -25,17 +25,7 @@ from "dbo"."zlkp_AttendanceEventReason" "zlkp_AttendanceEventReason"
     <field name="Code" type="String" label="Code" length="5" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Attendance Reason" filter="IsActive = 1">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="AttendanceEventReason" columns="35">
-          <headerText>Event Reason</headerText>
-        </dataField>
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="Code" columns="5" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_attendance_reasons" type="Grid" commandId="command1" label="All Attendance Reasons">
+    <view id="grid1" type="Grid" commandId="command1" label="Attendance Reason">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="AttendanceEventReason" columns="20" />
@@ -46,7 +36,7 @@ from "dbo"."zlkp_AttendanceEventReason" "zlkp_AttendanceEventReason"
     <view id="editForm1" type="Form" commandId="command1" label="Review Attendance Reason">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Attendance Reason" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="AttendanceEventReason" columns="20" />

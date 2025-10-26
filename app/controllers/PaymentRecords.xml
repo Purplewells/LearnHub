@@ -51,70 +51,29 @@ from "dbo"."PaymentRecords" "PaymentRecords"
     <field name="BatchID" type="Int32" label="Batch ID" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="PAYROLL RESULTS" filter="IsCurrent = 1" sortExpression="BatchID DESC" reportTemplate="true">
-      <headerText>Please specify the pay period in the General Parameters module before running payroll.</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Payment Records">
+      <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="EmployeeID" columns="15" hidden="true" />
-        <dataField fieldName="FirstName" columns="20" />
-        <dataField fieldName="LastName" columns="20" />
-        <dataField fieldName="UPN" columns="15">
-          <headerText>StaffNo.</headerText>
-        </dataField>
-        <dataField fieldName="Ssno" columns="20" hidden="true" />
-        <dataField fieldName="PeriodType" columns="15" />
-        <dataField fieldName="PaymentDate" columns="10" />
-        <dataField fieldName="BaseSalary" columns="10" />
-        <dataField fieldName="TotalEarnings" columns="18" aggregate="Sum">
-          <headerText>Total Earnings</headerText>
-        </dataField>
-        <dataField fieldName="TaxAmount" columns="15" />
-        <dataField fieldName="GrossEarnings" columns="10" aggregate="Sum" hidden="true">
-          <headerText>Gross</headerText>
-        </dataField>
-        <dataField fieldName="TotalDeductions" columns="10" aggregate="Sum">
-          <headerText>Deductions</headerText>
-        </dataField>
-        <dataField fieldName="NetSalary" columns="15" aggregate="Sum" />
-        <dataField fieldName="NextRunDate" columns="10" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="IsCurrent" columns="5">
-          <headerText>ISC</headerText>
-        </dataField>
-        <dataField fieldName="BatchID" columns="12">
-          <headerText />
-        </dataField>
-      </dataFields>
-    </view>
-    <view id="grid1_historical_runs" type="Grid" commandId="command1" label="PREVIOUS BATCHES" sortExpression="BatchID DESC" filter="IsCurrent = 0">
-      <headerText>&lt;strong&gt;To run the payroll please specify the pay period in the General Parameters module. &lt;/strong&gt;</headerText>
-      <dataFields>
-        <dataField fieldName="EmployeeID" columns="15" hidden="true" />
-        <dataField fieldName="FirstName" columns="20" />
-        <dataField fieldName="LastName" columns="20" />
+        <dataField fieldName="EmployeeID" columns="15" />
+        <dataField fieldName="PeriodType" columns="20" />
+        <dataField fieldName="FirstName" columns="40" />
+        <dataField fieldName="LastName" columns="40" />
         <dataField fieldName="UPN" columns="15" />
-        <dataField fieldName="Ssno" columns="20" hidden="true" />
-        <dataField fieldName="PeriodType" columns="12" />
-        <dataField fieldName="PaymentDate" columns="10" tag="pivot1-row1-column-date&#xD;&#xA;pivot1-title:&quot;Gross Earnings By Payment  Period&quot;&#xD;&#xA;&#xD;&#xA;pivot2-row1-column-date&#xD;&#xA;pivot2-title:&quot;Gross Earnings By Payment  Period&quot;" />
+        <dataField fieldName="Ssno" columns="20" />
+        <dataField fieldName="PaymentDate" columns="10" />
         <dataField fieldName="BaseSalary" columns="15" />
-        <dataField fieldName="TotalEarnings" columns="10" aggregate="Sum" />
-        <dataField fieldName="GrossEarnings" columns="15" aggregate="Sum" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum" />
-        <dataField fieldName="TaxAmount" columns="15" tag="pivot2-val2-sum" />
-        <dataField fieldName="TotalDeductions" columns="10" aggregate="Sum" />
-        <dataField fieldName="NetSalary" columns="15" aggregate="Sum" />
+        <dataField fieldName="TotalEarnings" columns="15" />
+        <dataField fieldName="GrossEarnings" columns="15" />
+        <dataField fieldName="TaxAmount" columns="15" />
+        <dataField fieldName="TotalDeductions" columns="15" />
+        <dataField fieldName="NetSalary" columns="15" />
         <dataField fieldName="NextRunDate" columns="10" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="IsCurrent" columns="5">
-          <headerText>ISC</headerText>
-        </dataField>
-        <dataField fieldName="BatchID" columns="8">
-          <headerText>BID</headerText>
-        </dataField>
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="IsCurrent" />
+        <dataField fieldName="BatchID" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Payment Records">
@@ -207,49 +166,14 @@ from "dbo"."PaymentRecords" "PaymentRecords"
       <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action commandName="SQL" headerText="Run Payroll" description="PAYROLL RUN ALERT" cssClass="material-icon-account_box" confirmation="This action would generate a new payment list for the current specified period. Are you ok to continue ?" id="a100">
-        <data><![CDATA[/*
-Author : Benjamin Ohene-Adu
-Name   : zusp_ops_prepare_payroll
-Description : 
-Version		Date			Note 
--- 0.1		07/10/2023		Initial Version
-
-EXEC zusp_ops_salary_p3_prepare_payroll
---SELECT * FROM PaymentRecords WHERE EMPLOYEEID = 51
---SELECT * FROM GENERALPARAMETERS
-
-*/
-
-EXEC zusp_ops_salary_p3_prepare_payroll]]></data>
-      </action>
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="SQL" headerText="Run Payroll" description="PAYROLL RUN ALERT" cssClass="material-icon-directions_run" confirmation="This action would generate a new payment list for the current specified period. Are you ok to continue ?" id="a100">
-        <data><![CDATA[/*
-Author : Benjamin Ohene-Adu
-Name   : zusp_ops_prepare_payroll
-Description : 
-Version		Date			Note 
--- 0.1		07/10/2023		Initial Version
-
--- EXEC zusp_ops_p2_prepare_payroll
---SELECT * FROM PaymentRecords WHERE EMPLOYEEID = 51
---SELECT * FROM GENERALPARAMETERS
-
-*/
-
-EXEC zusp_ops_salary_p3_prepare_payroll]]></data>
-      </action>
-      <action id="a101" commandName="ReportAsPdf" headerText="Print To Bank" />
-      <action id="a2" />
       <action id="a1" commandName="ExportCsv" />
-      <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a103" commandName="ReportAsWord" headerText="Export To Word" />
-      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
-      <action id="a4" commandName="ExportRss" headerText="Send RSS API" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a7" commandName="DataSheet" />
       <action id="a8" commandName="Grid" />
     </actionGroup>
@@ -258,6 +182,12 @@ EXEC zusp_ops_salary_p3_prepare_payroll]]></data>
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

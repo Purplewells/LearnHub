@@ -63,38 +63,35 @@ from "dwh"."pbi_vw_metric_discipline_behaviour_management" "pbi_vw_metric_discip
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Behaviour Management" sortExpression="SortOrder ASC">
+    <view id="grid1" type="Grid" commandId="command1" label="Behaviour Management">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="StudentID" columns="15" hidden="true" />
-        <dataField fieldName="Participant" columns="30" />
+        <dataField fieldName="StudentID" columns="15" />
+        <dataField fieldName="Participant" />
         <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="GradeLevel" columns="5" tag="pivot11-row1-columnstacked&#xD;&#xA;pivot11-title:&quot;Count of Incidents by Grade Level and Gender&quot;&#xD;&#xA;&#xD;&#xA;pivot14-row1-columnstacked&#xD;&#xA;pivot14-title:&quot;What is the number of Incidents by GradeLevel, Gender, Alignment&quot;&#xD;&#xA;" />
-        <dataField fieldName="SortOrder" columns="15" hidden="true" />
-        <dataField fieldName="IncidentType" columns="30" />
-        <dataField fieldName="Alignment" columns="18" tag="pivot2-col1&#xD;&#xA;pivot6-col1&#xD;&#xA;pivot14-col2&#xD;&#xA;&#xD;&#xA;pivot3-row1-pie&#xD;&#xA;pivot3-title:&quot;Count of Incidents by Alignment&quot;&#xD;&#xA;pivot3-haxistitle:&quot;Incident Month&quot;&#xD;&#xA;pivot3-vaxistitle:&quot;Alignments&quot;&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="Code" columns="40" hidden="true" />
-        <dataField fieldName="Title" columns="40" />
-        <dataField fieldName="IncidentDate" columns="20" tag="pivot1-row1-column-Year&#xD;&#xA;pivot1-row2-column-month&#xD;&#xA;pivot1-title:&quot;Count of Incidents by Week&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Incident Date&quot;&#xD;&#xA;pivot1-vaxistitle:&quot;No of Incidents&quot;&#xD;&#xA;pivot1-medium&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot6-row1-columnstacked-Year&#xD;&#xA;pivot6-row2-month&#xD;&#xA;pivot6-title:&quot;Count of Incidents by Alignment&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Incident Date&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;No of Incidents&quot;&#xD;&#xA;" />
-        <dataField fieldName="TimeCode" columns="25" tag="pivot5-row1-columnstacked&#xD;&#xA;pivot5-title:&quot;What is the count of Incidents by Time of Occurrence&quot;&#xD;&#xA;pivot5-haxistitle:&quot;Time Code&quot;&#xD;&#xA;pivot5-vaxistitle:&quot;No of Incidents&quot;&#xD;&#xA;pivot5-medium" />
-        <dataField fieldName="IncidentStatus" columns="20">
-          <headerText>Status</headerText>
-        </dataField>
-        <dataField fieldName="CategoryType" columns="20" tag="pivot13-row1-columnstacked&#xD;&#xA;pivot13-title:&quot;Count of Incidents by Category&quot;&#xD;&#xA;pivot13-medium">
-          <headerText>Category</headerText>
-        </dataField>
-        <dataField fieldName="Location" columns="20" tag="pivot12-row1-columnstacked&#xD;&#xA;pivot12-title:&quot;What is the Count of Incidents by Location&quot;&#xD;&#xA;" />
-        <dataField fieldName="ActionTaken" columns="20" tag="pivot7-row1-donut&#xD;&#xA;pivot7-title:&quot;What are the Actions Taken for Incidents&quot;&#xD;&#xA;pivot7-haxistitle:&quot;Time Code&quot;&#xD;&#xA;pivot7-vaxistitle:&quot;No of Incidents&quot;&#xD;&#xA;" />
-        <dataField fieldName="ActivityType" columns="10" hidden="true" />
-        <dataField fieldName="Instructor" columns="20" hidden="true" />
-        <dataField fieldName="Points" columns="8" tag="pivot11-val1-sum" />
-        <dataField fieldName="NatureOfBehaviour" columns="20" tag="pivot4-row1-column&#xD;&#xA;pivot4-title:&quot;Count of Incidents by Nature of Behaviour&quot;&#xD;&#xA;pivot4-haxistitle:&quot;Incident Month&quot;&#xD;&#xA;pivot4-vaxistitle:&quot;Alignments&quot;">
-          <headerText>Nature</headerText>
-        </dataField>
-        <dataField fieldName="Gender" columns="10" tag="pivot10-row1-pie&#xD;&#xA;pivot10-title:&quot;Count of Incidents by Gender&quot;&#xD;&#xA;pivot10-medium&#xD;&#xA;&#xD;&#xA;pivot11-col1&#xD;&#xA;pivot14-col1&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="Description" rows="5" hidden="true" />
-        <dataField fieldName="Rvd" columns="3" hidden="true" />
-        <dataField fieldName="Disability" columns="10" />
+        <dataField fieldName="GradeLevel" />
+        <dataField fieldName="SortOrder" columns="15" />
+        <dataField fieldName="IncidentType" />
+        <dataField fieldName="Alignment" columns="18" />
+        <dataField fieldName="Code" columns="40" />
+        <dataField fieldName="Title" columns="50" />
+        <dataField fieldName="IncidentDate" columns="10" />
+        <dataField fieldName="TimeCode" />
+        <dataField fieldName="IncidentStatus" columns="20" />
+        <dataField fieldName="CategoryType" />
+        <dataField fieldName="Location" />
+        <dataField fieldName="ActionTaken" columns="50" />
+        <dataField fieldName="ActivityType" columns="10" />
+        <dataField fieldName="Instructor" />
+        <dataField fieldName="Points" columns="15" />
+        <dataField fieldName="NatureOfBehaviour" columns="20" />
+        <dataField fieldName="Gender" />
+        <dataField fieldName="Description" rows="5" />
+        <dataField fieldName="Rvd" columns="3" />
+        <dataField fieldName="Disability" columns="3" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedDate" columns="20" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Behaviour Management">

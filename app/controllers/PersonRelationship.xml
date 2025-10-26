@@ -35,91 +35,92 @@ from "dbo"."PersonRelationship" "PersonRelationship"
     </command>
   </commands>
   <fields>
-    <field name="PersonID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Person ID">
-      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="UPN" />
-    </field>
-    <field name="RelatedPersonID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Related Person ID">
-      <items style="Lookup" dataController="zlkpParentWithPersonID" dataValueField="PersonID" dataTextField="GuardianName" copy="GuardianFirstName=FirstName, GuardianPersonLastName=LastName, Title=Title, Occupation=Occupation" dataView="grid1" />
-    </field>
-    <field name="GuardianName" type="String" readOnly="true" label="Guardian Name" computed="true">
-      <formula>RelatedPerson.FirstName + ' ' + RelatedPerson.LastName + ' ' + '( ' + Title.Description + ' )' </formula>
-    </field>
-    <field name="GuardianFirstName" type="String" readOnly="true" label="Guardian First Name" length="35" />
-    <field name="GuardianPersonLastName" type="String" readOnly="true" label="Guardian Last Name" length="35" />
     <field name="ContactRelationID" type="Int32" allowNulls="false" label="Contact Relation ID" readOnly="true" showInSummary="true" />
     <field name="RefPersonRelationshipID" type="Int32" label="Ref Person Relationship ID" showInSummary="true">
       <items style="Lookup" dataController="ContactRelationship" newDataView="createForm1" dataValueField="RefPersonRelationshipID" dataTextField="PersonRelationship" />
     </field>
     <field name="Relationship" type="String" readOnly="true" label="Relationship" length="20" />
-    <field name="PriorityNo" type="String" label="Priority No" length="15" showInSummary="true">
-      <items style="RadioButtonList">
-        <item value="One" text="First" />
-        <item value="Two" text="Second" />
-        <item value="Three" text="Third" />
-      </items>
-    </field>
+    <field name="PriorityNo" type="String" label="Priority No" length="15" showInSummary="true" />
     <field name="Restrictions" type="String" allowQBE="false" allowSorting="false" label="Restrictions" length="2000" showInSummary="true" />
-    <field name="LivesWith" type="Boolean" label="Lives With" showInSummary="true">
-      <items style="RadioButtonList">
-        <item value="0" text="No" />
-        <item value="1" text="Yes" />
-      </items>
-    </field>
+    <field name="LivesWith" type="Boolean" label="Lives With" showInSummary="true" />
     <field name="IsPrimaryContact" type="Boolean" label="Is Contact" />
+    <field name="RelatedPersonID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Related Person ID">
+      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="UPN" copy="GuardianFirstName=FirstName, GuardianPersonLastName=LastName, Title=Title, Occupation=Occupation" />
+    </field>
     <field name="RUPN" type="String" readOnly="true" label="RUPN" length="10" />
+    <field name="GuardianFirstName" type="String" readOnly="true" label="Guardian First Name" length="35" />
+    <field name="GuardianPersonLastName" type="String" readOnly="true" label="Guardian Last Name" length="35" />
+    <field name="PersonID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Person ID">
+      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="UPN" />
+    </field>
     <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
     <field name="Title" type="String" readOnly="true" label="Title" length="15" />
+    <field name="GuardianName" type="String" readOnly="true" label="Guardian Name" computed="true">
+      <formula>RelatedPerson.FirstName + ' ' + RelatedPerson.LastName + ' ' + '( ' + Title.Description + ' )' </formula>
+    </field>
     <field name="Occupation" type="String" readOnly="true" label="Occupation" length="100" />
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Person Relationship">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="ContactRelationID" columns="15" hidden="true" />
-        <dataField fieldName="RelatedPersonID" aliasFieldName="GuardianName" />
+        <dataField fieldName="ContactRelationID" columns="15" />
         <dataField fieldName="RefPersonRelationshipID" aliasFieldName="Relationship" />
         <dataField fieldName="PriorityNo" columns="15" />
-        <dataField fieldName="LivesWith" columns="8" />
-        <dataField fieldName="IsPrimaryContact" columns="12" />
-        <dataField fieldName="PersonID" aliasFieldName="GuardianFirstName" />
-        <dataField fieldName="Title" columns="15" hidden="true" />
-        <dataField fieldName="GuardianName" hidden="true" />
-        <dataField fieldName="Occupation" hidden="true" />
-        <dataField fieldName="Restrictions" columns="25" />
+        <dataField fieldName="Restrictions" rows="5" />
+        <dataField fieldName="LivesWith" />
+        <dataField fieldName="IsPrimaryContact" />
+        <dataField fieldName="RelatedPersonID" aliasFieldName="RUPN" />
+        <dataField fieldName="GuardianFirstName" columns="35" />
+        <dataField fieldName="GuardianPersonLastName" columns="35" />
+        <dataField fieldName="PersonID" aliasFieldName="UPN" />
+        <dataField fieldName="Title" columns="15" />
+        <dataField fieldName="GuardianName" />
+        <dataField fieldName="Occupation" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Guardian">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Person Relationship">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Person Relationship" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="RelatedPersonID" aliasFieldName="GuardianName" />
+            <dataField fieldName="ContactRelationID" columns="15" />
             <dataField fieldName="RefPersonRelationshipID" aliasFieldName="Relationship" />
-            <dataField fieldName="IsPrimaryContact" columns="12" />
-            <dataField fieldName="PriorityNo" tag="lookup-null-value-none" columns="3" />
-            <dataField fieldName="LivesWith" tag="lookup-null-value-none" columns="3" />
-            <dataField fieldName="Restrictions" />
+            <dataField fieldName="PriorityNo" columns="15" />
+            <dataField fieldName="Restrictions" rows="5" />
+            <dataField fieldName="LivesWith" />
+            <dataField fieldName="IsPrimaryContact" />
+            <dataField fieldName="RelatedPersonID" aliasFieldName="RUPN" />
+            <dataField fieldName="GuardianFirstName" columns="35" />
+            <dataField fieldName="GuardianPersonLastName" columns="35" />
             <dataField fieldName="PersonID" aliasFieldName="UPN" />
+            <dataField fieldName="Title" columns="15" />
+            <dataField fieldName="GuardianName" />
+            <dataField fieldName="Occupation" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Guardian">
+    <view id="createForm1" type="Form" commandId="command1" label="New Person Relationship">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="RelatedPersonID" aliasFieldName="GuardianName" />
+            <dataField fieldName="ContactRelationID" columns="15" />
             <dataField fieldName="RefPersonRelationshipID" aliasFieldName="Relationship" />
-            <dataField fieldName="LivesWith" tag="lookup-null-value-none" columns="4" />
-            <dataField fieldName="IsPrimaryContact" />
-            <dataField fieldName="PriorityNo" tag="lookup-null-value-none" columns="4" />
+            <dataField fieldName="PriorityNo" columns="15" />
             <dataField fieldName="Restrictions" rows="5" />
-            <dataField fieldName="GuardianName" />
-            <dataField fieldName="ContactRelationID" columns="15" hidden="true" />
+            <dataField fieldName="LivesWith" />
+            <dataField fieldName="IsPrimaryContact" />
+            <dataField fieldName="RelatedPersonID" aliasFieldName="RUPN" />
+            <dataField fieldName="GuardianFirstName" columns="35" />
+            <dataField fieldName="GuardianPersonLastName" columns="35" />
             <dataField fieldName="PersonID" aliasFieldName="UPN" />
+            <dataField fieldName="Title" columns="15" />
+            <dataField fieldName="GuardianName" />
+            <dataField fieldName="Occupation" />
           </dataFields>
         </category>
       </categories>
@@ -158,13 +159,10 @@ from "dbo"."PersonRelationship" "PersonRelationship"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a102" commandName="ReportAsPdf" headerText="Export To PDF" />
-      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a100" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
-      <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -175,6 +173,12 @@ from "dbo"."PersonRelationship" "PersonRelationship"
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

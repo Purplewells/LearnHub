@@ -94,10 +94,10 @@ from "dbo"."TaxConfiguration" "TaxConfiguration"
         <dataField fieldName="TaxReference" columns="20" />
         <dataField fieldName="EffectiveDate" columns="10" />
         <dataField fieldName="ExpirationDate" columns="10" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedBy" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="CreatedBy" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="ModifiedBy" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Tax Configuration">
@@ -148,10 +148,10 @@ from "dbo"."TaxConfiguration" "TaxConfiguration"
             <dataField fieldName="TaxReference" columns="20" />
             <dataField fieldName="EffectiveDate" columns="10" />
             <dataField fieldName="ExpirationDate" columns="10" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-            <dataField fieldName="CreatedBy" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedBy" hidden="true" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="CreatedBy" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="ModifiedBy" />
           </dataFields>
         </category>
       </categories>

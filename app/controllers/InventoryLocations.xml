@@ -31,30 +31,15 @@ from "dbo"."zlkpInventoryLocations" "zlkpInventoryLocations"
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Locations" filter="IsActive = 1">
+    <view id="grid1" type="Grid" commandId="command1" label="Inventory Locations">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="LocationName" columns="40" />
-        <dataField fieldName="LocationCode" columns="8">
-          <headerText>Code</headerText>
-        </dataField>
+        <dataField fieldName="LocationCode" columns="5" />
         <dataField fieldName="IsActive" />
         <dataField fieldName="SortOrder" columns="15" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_locations" type="Grid" commandId="command1" label="All Locations">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="LocationName" columns="40" />
-        <dataField fieldName="LocationCode" columns="8">
-          <headerText>Code</headerText>
-        </dataField>
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="SortOrder" columns="15" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Inventory Locations">

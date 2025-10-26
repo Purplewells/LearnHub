@@ -51,48 +51,26 @@ from "dbo"."vw_ops_stock_level_movement" "vw_ops_stock_level_movement"
     <field name="RN" type="Int64" label="RN" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Current Stock Level" filter="RN=1" sortExpression="TransactionDate DESC" reportLabel="Stock Level Movement Report" reportTemplate="true">
-      <headerText>The Stock Level Movement shows the quantity of item in the our inventory at any point in time.</headerText>
+    <view id="grid1" type="Grid" commandId="command1" label="Stock Level Movement">
+      <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="StockLevelID" columns="15" hidden="true" />
-        <dataField fieldName="ProductID" columns="15" hidden="true" />
-        <dataField fieldName="Skucode" columns="15" />
-        <dataField fieldName="ProductName" columns="30" tag="pivot1-row1-columnstacked&#xD;&#xA;pivot1-title:&quot;Count of Stock Levels at Source Location&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Item&quot;&#xD;&#xA;pivot1-vaxistitle:&quot;Number of Items&quot;&#xD;&#xA;pivot1-medium&#xD;&#xA;&#xD;&#xA;pivot2-row1-columnstacked&#xD;&#xA;pivot2-title:&quot;Count of Item Stock Levels Receiving Loc&quot;&#xD;&#xA;pivot2-haxistitle:&quot;Item&quot;&#xD;&#xA;pivot2-vaxistitle:&quot;Number of Items&quot;&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="CategoryName" columns="20" tag="pivot4-col1" />
-        <dataField fieldName="TransactionDate" columns="20" />
-        <dataField fieldName="TransCode" columns="10" />
+        <dataField fieldName="StockLevelID" columns="15" />
+        <dataField fieldName="ProductID" columns="15" />
+        <dataField fieldName="Skucode" columns="10" />
+        <dataField fieldName="ProductName" />
+        <dataField fieldName="CategoryName" columns="20" />
+        <dataField fieldName="TransactionDate" columns="10" />
         <dataField fieldName="MovementMode" columns="20" />
-        <dataField fieldName="SourceLocation" columns="20" tag="pivot1-col1" />
-        <dataField fieldName="Quantity" columns="10" tag="pivot1-val1-sum&#xD;&#xA;" />
-        <dataField fieldName="ExtendedStockValue" columns="10" aggregate="Sum" />
+        <dataField fieldName="TransCode" columns="5" />
+        <dataField fieldName="SourceLocation" columns="40" />
+        <dataField fieldName="Quantity" columns="15" />
+        <dataField fieldName="ExtendedStockValue" columns="15" />
         <dataField fieldName="CURR" columns="5" />
-        <dataField fieldName="ReceivingLocation" columns="20" tag="pivot2-col1&#xD;&#xA;&#xD;&#xA;pivot3-row1-columnstacked&#xD;&#xA;pivot3-title:&quot;Resource Levels By Receiving Location&quot;&#xD;&#xA;pivot3-haxistitle:&quot;Item&quot;&#xD;&#xA;pivot3-vaxistitle:&quot;Number of Items&quot;&#xD;&#xA;&#xD;&#xA;pivot4-row1-barstacked&#xD;&#xA;pivot4-title:&quot;Resource Levels By Receiving Location and Category&quot;&#xD;&#xA;pivot4-vaxistitle:&quot;Location&quot;&#xD;&#xA;pivot4-haxistitle:&quot;Number of Items&quot;&#xD;&#xA;pivot4-large&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="TransactionQty" columns="12" tag="pivot2-val1-sum&#xD;&#xA;pivot3-val1-sum&#xD;&#xA;pivot4-val1-sum" />
-        <dataField fieldName="CostPrice" columns="10" hidden="true" />
-        <dataField fieldName="SellingPrice" columns="10" hidden="true" />
-        <dataField fieldName="RN" columns="4" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="grid1_historical_stock_movements" type="Grid" commandId="command1" label="All Stock Movement" sortExpression="TransactionDate DESC" reportLabel="Stock Level Movement Report" reportTemplate="true">
-      <headerText>The Stock Level Movement shows the quantity of item in the our inventory at any point in time.</headerText>
-      <dataFields>
-        <dataField fieldName="StockLevelID" columns="15" hidden="true" />
-        <dataField fieldName="ProductID" columns="15" hidden="true" />
-        <dataField fieldName="Skucode" columns="15" />
-        <dataField fieldName="ProductName" columns="30" tag="pivot1-row1-columnstacked&#xD;&#xA;pivot1-title:&quot;Count of Stock Levels at Source Location&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Item&quot;&#xD;&#xA;pivot1-vaxistitle:&quot;Number of Items&quot;&#xD;&#xA;pivot1-medium&#xD;&#xA;&#xD;&#xA;pivot2-row1-columnstacked&#xD;&#xA;pivot2-title:&quot;Count of Item Stock Levels Receiving Loc&quot;&#xD;&#xA;pivot2-haxistitle:&quot;Item&quot;&#xD;&#xA;pivot2-vaxistitle:&quot;Number of Items&quot;&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="CategoryName" columns="20" tag="pivot4-col1" />
-        <dataField fieldName="TransactionDate" columns="20" />
-        <dataField fieldName="TransCode" columns="10" />
-        <dataField fieldName="MovementMode" columns="20" />
-        <dataField fieldName="SourceLocation" columns="20" tag="pivot1-col1" />
-        <dataField fieldName="Quantity" columns="10" tag="pivot1-val1-sum&#xD;&#xA;" />
-        <dataField fieldName="ExtendedStockValue" columns="10" />
-        <dataField fieldName="CURR" columns="5" />
-        <dataField fieldName="ReceivingLocation" columns="20" tag="pivot2-col1&#xD;&#xA;&#xD;&#xA;pivot3-row1-columnstacked&#xD;&#xA;pivot3-title:&quot;Resource Levels By Receiving Location&quot;&#xD;&#xA;pivot3-haxistitle:&quot;Item&quot;&#xD;&#xA;pivot3-vaxistitle:&quot;Number of Items&quot;&#xD;&#xA;&#xD;&#xA;pivot4-row1-barstacked&#xD;&#xA;pivot4-title:&quot;Resource Levels By Receiving Location and Category&quot;&#xD;&#xA;pivot4-vaxistitle:&quot;Location&quot;&#xD;&#xA;pivot4-haxistitle:&quot;Number of Items&quot;&#xD;&#xA;pivot4-large&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="TransactionQty" columns="12" tag="pivot2-val1-sum&#xD;&#xA;pivot3-val1-sum&#xD;&#xA;pivot4-val1-sum" />
-        <dataField fieldName="CostPrice" columns="10" hidden="true" />
-        <dataField fieldName="SellingPrice" columns="10" hidden="true" />
-        <dataField fieldName="RN" columns="4" hidden="true" />
+        <dataField fieldName="ReceivingLocation" columns="40" />
+        <dataField fieldName="TransactionQty" columns="15" />
+        <dataField fieldName="CostPrice" columns="15" />
+        <dataField fieldName="SellingPrice" columns="15" />
+        <dataField fieldName="RN" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Stock Level Movement">
@@ -183,12 +161,10 @@ from "dbo"."vw_ops_stock_level_movement" "vw_ops_stock_level_movement"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a100" commandName="ReportAsPdf" headerText="Print SLM Report" />
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" headerText="Print To IPY" />
-      <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a7" commandName="DataSheet" />
       <action id="a8" commandName="Grid" />
     </actionGroup>
@@ -197,6 +173,12 @@ from "dbo"."vw_ops_stock_level_movement" "vw_ops_stock_level_movement"
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

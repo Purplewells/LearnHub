@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="SBLScoresheet" conflictDetection="overwriteChanges" label="SBL Scoresheet" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.SBLScoresheetBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="SBLScoresheet" conflictDetection="overwriteChanges" label="SBL Scoresheet" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -80,7 +80,7 @@ from "dbo"."StudentLearningObjective" "StudentLearningObjective"
     <field name="GradingPeriodID" type="Int32" label="Grading Period ID" showInSummary="true">
       <items style="Lookup" dataController="GradingPeriod" newDataView="createForm1" dataValueField="GradingPeriodID" dataTextField="GradingPeriod" />
     </field>
-    <field name="GradingPeriod" type="String" readOnly="true" label="GP" length="12" />
+    <field name="GradingPeriod" type="String" readOnly="true" label="GP" length="30" />
     <field name="StudentCourseSectionID" type="Int32" label="Student Course Section ID" showInSummary="true">
       <items style="Lookup" dataController="StudentSectionAssociation" newDataView="createForm1" dataValueField="StudentCourseSectionID" dataTextField="StudentEnrollmentCreatedBy" copy="FirstName=Firstname, LastName=Lastname, UPN=UPN, STM=STM" />
     </field>
@@ -89,16 +89,16 @@ from "dbo"."StudentLearningObjective" "StudentLearningObjective"
       <items style="Lookup" dataController="GradeType" newDataView="createForm1" dataValueField="GradeTypeID" dataTextField="GradeType" />
     </field>
     <field name="GradeType" type="String" readOnly="true" label="ASTY" length="15" />
-    <field name="EarnedScore" type="Decimal" label="Score" showInSummary="true" causesCalculate="true" />
+    <field name="EarnedScore" type="Decimal" label="Score" showInSummary="true" />
     <field name="LetterGrade" type="String" label="LG" length="5" />
     <field name="AssessedDate" type="DateTime" label="Assessed Date" />
-    <field name="Weight" type="Decimal" label="% Wt" causesCalculate="true" />
+    <field name="Weight" type="Decimal" label="% Wt" />
     <field name="LearningObjectiveID" type="Int32" label="Learning Objective ID">
       <items style="Lookup" dataController="LearningObjective" newDataView="createForm1" dataValueField="LearningObjectiveID" dataTextField="ItemCode" copy="MaxScore=MaxScore" />
     </field>
     <field name="LearningObjectiveItemCode" type="String" readOnly="true" label="Learning Objective Item Code" length="12" />
     <field name="MaxScore" type="Decimal" readOnly="true" label="Max Score" />
-    <field name="ExtMaxScore" type="Decimal" label="MPP" causesCalculate="true" />
+    <field name="ExtMaxScore" type="Decimal" label="MPP" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />
@@ -133,142 +133,96 @@ from "dbo"."StudentLearningObjective" "StudentLearningObjective"
     <view id="grid1" type="Grid" commandId="command1" label="SBL Scoresheet">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="FirstName" columns="18" />
-        <dataField fieldName="LastName" columns="18" />
-        <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="STM" columns="8" />
-        <dataField fieldName="ExtCourseTitle" columns="15" />
-        <dataField fieldName="ExtSectionName" columns="18" />
-        <dataField fieldName="ExtItemCode" columns="20" />
-        <dataField fieldName="LearningObjectiveID" aliasFieldName="LearningObjectiveItemCode" hidden="true" />
-        <dataField fieldName="IdentificationCode" columns="20" hidden="true" />
-        <dataField fieldName="EarnedScore" columns="5" />
-        <dataField fieldName="ExtMaxScore" columns="5" />
-        <dataField fieldName="Weight" columns="5" />
-        <dataField fieldName="ExtPWS" columns="5" />
-        <dataField fieldName="ExtPBSG" columns="5" hidden="true" />
-        <dataField fieldName="ExtOWS" columns="5" />
-        <dataField fieldName="LetterGrade" columns="3" />
-        <dataField fieldName="ExtIsPassing" />
-        <dataField fieldName="PerformanceBaseConversionID" aliasFieldName="PerformanceBaseConversionGradeName" hidden="true" />
-        <dataField fieldName="PerformanceBaseConversionDescription" columns="20" />
+        <dataField fieldName="PerformanceBaseConversionID" aliasFieldName="PerformanceBaseConversionGradeName" />
+        <dataField fieldName="PerformanceBaseConversionDescription" />
         <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" />
-        <dataField fieldName="StudentCourseSectionID" aliasFieldName="StudentCourseSectionCreatedBy" hidden="true" />
-        <dataField fieldName="GradeTypeID" aliasFieldName="GradeType" hidden="true" />
-        <dataField fieldName="AssessedDate" columns="10" hidden="true" />
-        <dataField fieldName="IsActive" hidden="true" />
-        <dataField fieldName="ExtIsActiveSession" columns="15" />
-        <dataField fieldName="MaxScore" columns="15" hidden="true" />
-        <dataField fieldName="UserID" columns="15" hidden="true" />
-        <dataField fieldName="ExtStatement" hidden="true" />
-        <dataField fieldName="ExtIsCsy" hidden="true" />
-        <dataField fieldName="ExtContentStandardNo" columns="15" hidden="true" />
-        <dataField fieldName="SuccessCriteria" hidden="true" />
-        <dataField fieldName="IsActiveGradingPeriod" hidden="true" />
-        <dataField fieldName="ExtStrandCode" columns="10" hidden="true" />
-        <dataField fieldName="ExtStrandDesc" hidden="true" />
-        <dataField fieldName="ExtStandard" hidden="true" />
-        <dataField fieldName="ExtPerformanceDescription" hidden="true" />
-        <dataField fieldName="ExtContentDescription" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="StudentCourseSectionID" aliasFieldName="StudentCourseSectionCreatedBy" />
+        <dataField fieldName="GradeTypeID" aliasFieldName="GradeType" />
+        <dataField fieldName="EarnedScore" columns="15" />
+        <dataField fieldName="LetterGrade" columns="5" />
+        <dataField fieldName="AssessedDate" columns="10" />
+        <dataField fieldName="Weight" columns="15" />
+        <dataField fieldName="LearningObjectiveID" aliasFieldName="LearningObjectiveItemCode" />
+        <dataField fieldName="MaxScore" columns="15" />
+        <dataField fieldName="ExtMaxScore" columns="15" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="UserID" columns="15" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="ExtStatement" />
+        <dataField fieldName="IdentificationCode" columns="20" />
+        <dataField fieldName="ExtIsActiveSession" />
+        <dataField fieldName="ExtIsCsy" />
+        <dataField fieldName="ExtIsPassing" />
+        <dataField fieldName="ExtPWS" columns="15" />
+        <dataField fieldName="ExtPBSG" columns="15" />
+        <dataField fieldName="ExtOWS" columns="15" />
+        <dataField fieldName="ExtContentStandardNo" columns="15" />
+        <dataField fieldName="SuccessCriteria" />
+        <dataField fieldName="IsActiveGradingPeriod" />
+        <dataField fieldName="ExtItemCode" columns="25" />
+        <dataField fieldName="ExtStrandCode" columns="10" />
+        <dataField fieldName="ExtStrandDesc" />
+        <dataField fieldName="ExtStandard" />
+        <dataField fieldName="ExtCourseTitle" />
+        <dataField fieldName="ExtSectionName" columns="50" />
+        <dataField fieldName="ExtPerformanceDescription" />
+        <dataField fieldName="ExtContentDescription" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="STM" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review SBL Scoresheet">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Assessment Details" flow="NewColumn">
+        <category id="c1" headerText="SBL Scoresheet" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="FirstName" columns="35" />
-            <dataField fieldName="LastName" columns="35" />
-            <dataField fieldName="UPN" columns="10" />
-            <dataField fieldName="STM" />
-            <dataField fieldName="IdentificationCode" columns="20" hidden="true" />
-            <dataField fieldName="ExtCourseTitle">
-              <headerText>Course</headerText>
-            </dataField>
-            <dataField fieldName="ExtSectionName" columns="50">
-              <headerText>Section Name</headerText>
-            </dataField>
-            <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Boundaries" collapsed="true">
-          <description />
-          <dataFields>
-            <dataField fieldName="EarnedScore" columns="15" />
-            <dataField fieldName="MaxScore" columns="15" />
-            <dataField fieldName="Weight" columns="15" />
-            <dataField fieldName="ExtPWS" columns="15" />
-            <dataField fieldName="ExtPBSG" columns="15" />
-            <dataField fieldName="ExtOWS" columns="15" />
-            <dataField fieldName="LetterGrade" columns="5" />
-            <dataField fieldName="ExtIsPassing" />
-            <dataField fieldName="ExtIsActiveSession" />
-            <dataField fieldName="ExtIsCsy">
-              <headerText>CSY</headerText>
-            </dataField>
-            <dataField fieldName="IsActive" />
+            <dataField fieldName="PerformanceBaseConversionID" aliasFieldName="PerformanceBaseConversionGradeName" />
             <dataField fieldName="PerformanceBaseConversionDescription" />
-            <dataField fieldName="PerformanceBaseConversionID" aliasFieldName="PerformanceBaseConversionGradeName" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="Dates &amp; Weighting" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="LearningObjectiveID" aliasFieldName="LearningObjectiveItemCode" />
-            <dataField fieldName="AssessedDate" columns="10" />
-            <dataField fieldName="IsActiveGradingPeriod" />
+            <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" />
+            <dataField fieldName="StudentCourseSectionID" aliasFieldName="StudentCourseSectionCreatedBy" />
             <dataField fieldName="GradeTypeID" aliasFieldName="GradeType" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Standards" collapsed="true">
-          <description />
-          <dataFields>
-            <dataField fieldName="ExtItemCode" columns="25" />
-            <dataField fieldName="ExtContentStandardNo" columns="15">
-              <headerText>Standard No</headerText>
-            </dataField>
-            <dataField fieldName="SuccessCriteria" />
-            <dataField fieldName="ExtStatement">
-              <headerText>Statement</headerText>
-            </dataField>
-            <dataField fieldName="ExtStandard">
-              <headerText>Standard</headerText>
-            </dataField>
-            <dataField fieldName="ExtStrandCode" columns="10" hidden="true" />
-            <dataField fieldName="ExtStrandDesc">
-              <headerText>Strand</headerText>
-            </dataField>
-            <dataField fieldName="ExtContentDescription">
-              <headerText>Content Description</headerText>
-            </dataField>
-            <dataField fieldName="ExtPerformanceDescription">
-              <headerText>Performance Description</headerText>
-            </dataField>
-          </dataFields>
-        </category>
-        <category id="c5" headerText="Other">
-          <description />
-          <dataFields>
-            <dataField fieldName="StudentCourseSectionID" aliasFieldName="StudentCourseSectionCreatedBy" hidden="true" />
-            <dataField fieldName="ExtMaxScore" columns="15" hidden="true" />
-            <dataField fieldName="UserID" columns="15" hidden="true" />
-          </dataFields>
-          <visibility>
-            <expression test="[1]==[1]" type="ClientScript" />
-          </visibility>
-        </category>
-        <category id="c6" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
-          <description><![CDATA[$DefaultEditDescription]]></description>
-          <dataFields>
+            <dataField fieldName="EarnedScore" columns="15" />
+            <dataField fieldName="LetterGrade" columns="5" />
+            <dataField fieldName="AssessedDate" columns="10" />
+            <dataField fieldName="Weight" columns="15" />
+            <dataField fieldName="LearningObjectiveID" aliasFieldName="LearningObjectiveItemCode" />
+            <dataField fieldName="MaxScore" columns="15" />
+            <dataField fieldName="ExtMaxScore" columns="15" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="ExtStatement" />
+            <dataField fieldName="IdentificationCode" columns="20" />
+            <dataField fieldName="ExtIsActiveSession" />
+            <dataField fieldName="ExtIsCsy" />
+            <dataField fieldName="ExtIsPassing" />
+            <dataField fieldName="ExtPWS" columns="15" />
+            <dataField fieldName="ExtPBSG" columns="15" />
+            <dataField fieldName="ExtOWS" columns="15" />
+            <dataField fieldName="ExtContentStandardNo" columns="15" />
+            <dataField fieldName="SuccessCriteria" />
+            <dataField fieldName="IsActiveGradingPeriod" />
+            <dataField fieldName="ExtItemCode" columns="25" />
+            <dataField fieldName="ExtStrandCode" columns="10" />
+            <dataField fieldName="ExtStrandDesc" />
+            <dataField fieldName="ExtStandard" />
+            <dataField fieldName="ExtCourseTitle" />
+            <dataField fieldName="ExtSectionName" columns="50" />
+            <dataField fieldName="ExtPerformanceDescription" />
+            <dataField fieldName="ExtContentDescription" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="STM" />
           </dataFields>
         </category>
       </categories>
@@ -276,84 +230,50 @@ from "dbo"."StudentLearningObjective" "StudentLearningObjective"
     <view id="createForm1" type="Form" commandId="command1" label="New SBL Scoresheet">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Assessment Details" flow="NewColumn">
-          <description><![CDATA[$DefaultEditDescription]]></description>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
+            <dataField fieldName="PerformanceBaseConversionID" aliasFieldName="PerformanceBaseConversionGradeName" />
+            <dataField fieldName="PerformanceBaseConversionDescription" />
+            <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" />
+            <dataField fieldName="StudentCourseSectionID" aliasFieldName="StudentCourseSectionCreatedBy" />
+            <dataField fieldName="GradeTypeID" aliasFieldName="GradeType" />
+            <dataField fieldName="EarnedScore" columns="15" />
+            <dataField fieldName="LetterGrade" columns="5" />
+            <dataField fieldName="AssessedDate" columns="10" />
+            <dataField fieldName="Weight" columns="15" />
+            <dataField fieldName="LearningObjectiveID" aliasFieldName="LearningObjectiveItemCode" />
+            <dataField fieldName="MaxScore" columns="15" />
+            <dataField fieldName="ExtMaxScore" columns="15" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="UserID" columns="15" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="ExtStatement" />
+            <dataField fieldName="IdentificationCode" columns="20" />
+            <dataField fieldName="ExtIsActiveSession" />
+            <dataField fieldName="ExtIsCsy" />
+            <dataField fieldName="ExtIsPassing" />
+            <dataField fieldName="ExtPWS" columns="15" />
+            <dataField fieldName="ExtPBSG" columns="15" />
+            <dataField fieldName="ExtOWS" columns="15" />
+            <dataField fieldName="ExtContentStandardNo" columns="15" />
+            <dataField fieldName="SuccessCriteria" />
+            <dataField fieldName="IsActiveGradingPeriod" />
+            <dataField fieldName="ExtItemCode" columns="25" />
+            <dataField fieldName="ExtStrandCode" columns="10" />
+            <dataField fieldName="ExtStrandDesc" />
+            <dataField fieldName="ExtStandard" />
+            <dataField fieldName="ExtCourseTitle" />
+            <dataField fieldName="ExtSectionName" columns="50" />
+            <dataField fieldName="ExtPerformanceDescription" />
+            <dataField fieldName="ExtContentDescription" />
             <dataField fieldName="FirstName" columns="35" />
             <dataField fieldName="LastName" columns="35" />
             <dataField fieldName="UPN" columns="10" />
             <dataField fieldName="STM" />
-            <dataField fieldName="IdentificationCode" columns="20" hidden="true" />
-            <dataField fieldName="ExtCourseTitle">
-              <headerText>Course</headerText>
-            </dataField>
-            <dataField fieldName="ExtSectionName" columns="50">
-              <headerText>Section Name</headerText>
-            </dataField>
-            <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Boundaries">
-          <description />
-          <dataFields>
-            <dataField fieldName="EarnedScore" columns="15" />
-            <dataField fieldName="MaxScore" columns="15" />
-            <dataField fieldName="ExtPWS" columns="15" />
-            <dataField fieldName="ExtPBSG" columns="15" />
-            <dataField fieldName="ExtOWS" columns="15" />
-            <dataField fieldName="LetterGrade" columns="5" />
-            <dataField fieldName="ExtIsPassing" />
-            <dataField fieldName="ExtIsActiveSession" />
-            <dataField fieldName="ExtIsCsy">
-              <headerText>CSY</headerText>
-            </dataField>
-            <dataField fieldName="IsActive" />
-            <dataField fieldName="PerformanceBaseConversionDescription" />
-            <dataField fieldName="PerformanceBaseConversionID" aliasFieldName="PerformanceBaseConversionGradeName" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="SBL Scoresheet" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="GradeTypeID" aliasFieldName="GradeType" />
-            <dataField fieldName="AssessedDate" columns="10" />
-            <dataField fieldName="Weight" columns="15" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Standards">
-          <description><![CDATA[$DefaultEditDescription]]></description>
-          <dataFields>
-            <dataField fieldName="ExtItemCode" columns="25" />
-            <dataField fieldName="ExtContentStandardNo" columns="15">
-              <headerText>Standard No</headerText>
-            </dataField>
-            <dataField fieldName="SuccessCriteria" />
-            <dataField fieldName="ExtStatement">
-              <headerText>Statement</headerText>
-            </dataField>
-            <dataField fieldName="ExtStandard">
-              <headerText>Standard</headerText>
-            </dataField>
-            <dataField fieldName="ExtStrandCode" columns="10" hidden="true" />
-            <dataField fieldName="ExtStrandDesc">
-              <headerText>Strand</headerText>
-            </dataField>
-            <dataField fieldName="ExtContentDescription">
-              <headerText>Content Description</headerText>
-            </dataField>
-            <dataField fieldName="ExtPerformanceDescription">
-              <headerText>Performance Description</headerText>
-            </dataField>
-          </dataFields>
-        </category>
-        <category id="c5" headerText="Other">
-          <description />
-          <dataFields>
-            <dataField fieldName="StudentCourseSectionID" aliasFieldName="StudentCourseSectionCreatedBy" hidden="true" />
-            <dataField fieldName="LearningObjectiveID" aliasFieldName="LearningObjectiveItemCode" />
-            <dataField fieldName="ExtMaxScore" columns="15" hidden="true" />
-            <dataField fieldName="UserID" columns="15" hidden="true" />
-            <dataField fieldName="IsActiveGradingPeriod" />
           </dataFields>
         </category>
       </categories>
@@ -392,41 +312,10 @@ from "dbo"."StudentLearningObjective" "StudentLearningObjective"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="SQL" headerText="Step 1. Update PWS" description="Update Partial Weighted Score" cssClass="material-icon-view_week" id="a100">
-        <data><![CDATA[EXEC [dbo].[usp_merge_master_student_grades_learningobjectives_p2]]]></data>
-      </action>
-      <action commandName="SQL" headerText="Step 2. Fill Missed Grades" description="Update Partial Weighted Score" cssClass="material-icon-directions_railway_filled" id="a101">
-        <data><![CDATA[-- First set the Calculated Partial Score and persist the value
-
-update sgbe
-SET 
-	ExtPBSG = (EarnedScore / extMaxScore)*100
-	,extPWS = (EarnedScore / ExtMaxScore) * Weight
-    ,extOWS = SUM((EarnedScore / extMaxScore)*100) over (PARTITION BY StudentCourseSectionID)
-
-from StudentLearningObjective sgbe
-WHERE sgbe.EarnedScore IS NOT NULL 
-
-
-SET @Result_ExecuteOnClient = '$appfactory.find("StudentLearningObjective", "Controller").sync();'
-SET @Result_ShowMessage = 'Partial Weighted Scores (PWS) records updated successfully.' ]]></data>
-      </action>
-      <action commandName="SQL" headerText="Step 3. Post To Asessments" description="Update Partial Weighted Score" cssClass="material-icon-loop" id="a102">
-        <data><![CDATA[/*
-	Date : 25th March 2020
-	Desc: This process intends to accummulate all historical scores. This would be used in the reporting suite of the application
-	      It is usefull in 1. Progress analysis of student performance per subject over time
-						   2. Overall summative scores
-						   3. Cummulative scores either by raw scores or %centages
-
-*/
-
-EXEC usp_merge_master_student_grades_learningobjectives_P3
-EXEC [dbo].[usp_merge_master_student_grades_learningobjectives_p4]
-	
-SET @Result_ShowMessage = 'SBL Central grades have been updated successfully' ]]></data>
-      </action>
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -443,9 +332,6 @@ SET @Result_ShowMessage = 'SBL Central grades have been updated successfully' ]]
       <action id="a2" commandName="ReportAsImage" />
       <action id="a3" commandName="ReportAsExcel" />
       <action id="a4" commandName="ReportAsWord" />
-      <action id="a100" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a101" commandName="ExportRss" />
-      <action id="a102" commandName="ExportRowset" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
@@ -454,7 +340,4 @@ SET @Result_ShowMessage = 'SBL Central grades have been updated successfully' ]]
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="Calculate|New|Update" type="Code" phase="Execute" name="calculatePWS" />
-  </businessRules>
 </dataController>

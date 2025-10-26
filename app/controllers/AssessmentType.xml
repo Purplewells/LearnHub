@@ -29,17 +29,7 @@ order by "zlkp_GradeBookEntryType"."SortOrder" asc]]></text>
     <field name="SortOrder" type="Decimal" label="Sort Order" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Assessment Types" sortExpression="SortOrder asc" filter="IsActive = 1">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="GradeBookEntryType" />
-        <dataField fieldName="Code" columns="50" />
-        <dataField fieldName="Weight" columns="15" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="SortOrder" columns="15" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_assessment_types" type="Grid" commandId="command1" label="All Assessment Types" sortExpression="SortOrder asc">
+    <view id="grid1" type="Grid" commandId="command1" label="Assessment Type" sortExpression="SortOrder asc">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="GradeBookEntryType" />
@@ -52,7 +42,7 @@ order by "zlkp_GradeBookEntryType"."SortOrder" asc]]></text>
     <view id="editForm1" type="Form" commandId="command1" label="Review Assessment Type">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Assessment Type" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="GradeBookEntryType" />

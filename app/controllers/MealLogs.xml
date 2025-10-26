@@ -44,7 +44,7 @@ from "dbo"."MealLogs" "MealLogs"
     <field name="MealMenuID" type="Int32" label="Meal Menu Id">
       <items style="Lookup" dataController="MealMenu" newDataView="createForm1" dataValueField="MealMenuID" dataTextField="MenuName" />
     </field>
-    <field name="MealMenuName" type="String" readOnly="true" label="Menu Name" length="25" />
+    <field name="MealMenuName" type="String" readOnly="true" label="Menu Name" length="50" />
     <field name="PlanCode" type="String" label="Plan Code" length="10" />
     <field name="PlanName" type="String" label="Plan Name" length="15" />
     <field name="MealPrice" type="Decimal" dataFormatString="" label="Meal Price" />
@@ -54,64 +54,24 @@ from "dbo"."MealLogs" "MealLogs"
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Meal Logs" filter="CAST(MealDate AS DATE) &gt;= CAST(GETDATE() AS DATE) AND Attended = 0">
+    <view id="grid1" type="Grid" commandId="command1" label="Meal Logs">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Personid" columns="15" hidden="true" />
-        <dataField fieldName="Firstname" columns="20" />
-        <dataField fieldName="Lastname" columns="20" />
-        <dataField fieldName="UPN" columns="12" />
-        <dataField fieldName="GradeLevel" columns="8" />
-        <dataField fieldName="MealDate" columns="18" />
-        <dataField fieldName="Attended" />
-        <dataField fieldName="MealMenuID" aliasFieldName="MealMenuName" hidden="true" />
-        <dataField fieldName="PlanCode" columns="10" hidden="true" />
-        <dataField fieldName="PlanName" columns="15" hidden="true" />
-        <dataField fieldName="MealPrice" columns="15" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="grid1_served_plates" type="Grid" commandId="command1" label="Served Plates" filter="Attended = 1">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Personid" columns="15" hidden="true" />
-        <dataField fieldName="Firstname" columns="20" />
-        <dataField fieldName="Lastname" columns="20" />
-        <dataField fieldName="UPN" columns="12" />
-        <dataField fieldName="GradeLevel" columns="8" />
-        <dataField fieldName="MealDate" columns="18" />
+        <dataField fieldName="Personid" columns="15" />
+        <dataField fieldName="Firstname" columns="50" />
+        <dataField fieldName="Lastname" columns="50" />
+        <dataField fieldName="UPN" columns="20" />
+        <dataField fieldName="GradeLevel" columns="10" />
+        <dataField fieldName="MealDate" columns="10" />
         <dataField fieldName="Attended" />
         <dataField fieldName="MealMenuID" aliasFieldName="MealMenuName" />
-        <dataField fieldName="PlanCode" columns="10" hidden="true" />
-        <dataField fieldName="PlanName" columns="15" hidden="true" />
-        <dataField fieldName="MealPrice" columns="15" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="meal_log_history" type="Grid" commandId="command1" label="All Meal Logs">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Personid" columns="15" hidden="true" />
-        <dataField fieldName="Firstname" columns="20" />
-        <dataField fieldName="Lastname" columns="20" />
-        <dataField fieldName="UPN" columns="12" />
-        <dataField fieldName="GradeLevel" columns="8" />
-        <dataField fieldName="MealDate" columns="18" />
-        <dataField fieldName="Attended" />
-        <dataField fieldName="MealMenuID" aliasFieldName="MealMenuName" hidden="true" />
-        <dataField fieldName="PlanCode" columns="10" hidden="true" />
-        <dataField fieldName="PlanName" columns="15" hidden="true" />
-        <dataField fieldName="MealPrice" columns="15" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="PlanCode" columns="10" />
+        <dataField fieldName="PlanName" columns="15" />
+        <dataField fieldName="MealPrice" columns="15" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Meal Logs">
@@ -196,14 +156,8 @@ from "dbo"."MealLogs" "MealLogs"
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
-      <action commandName="SQL" headerText="Prepare Meal Log" cssClass="material-icon-restaurant" id="a100">
-        <data><![CDATA[ EXEC usp_ops_feeding_fee_meal_logs]]></data>
-      </action>
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="SQL" headerText="Prepare Meal Log" cssClass="material-icon-restaurant" id="a100">
-        <data><![CDATA[ EXEC usp_ops_feeding_fee_meal_logs]]></data>
-      </action>
       <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
       <action id="a3" commandName="ExportRowset" />

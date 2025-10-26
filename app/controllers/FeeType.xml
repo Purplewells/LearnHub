@@ -33,7 +33,7 @@ from "dbo"."zlkpFeeType" "zlkpFeeType"
     <view id="editForm1" type="Form" commandId="command1" label="Review Fee Type">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Fee Type" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="FeeType" columns="20" />

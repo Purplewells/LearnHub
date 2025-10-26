@@ -38,8 +38,8 @@ from "dbo"."zlkpNICategory" "zlkpNICategory"
         <dataField fieldName="Description" />
         <dataField fieldName="RuleNotes" />
         <dataField fieldName="IsActive" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="CreatedBy" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review NI Category">

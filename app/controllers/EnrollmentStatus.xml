@@ -31,40 +31,29 @@ from "dbo"."zlkpEnrollmentStatus" "zlkpEnrollmentStatus"
     <field name="DefaultValue" type="Boolean" default="((1))" label="Default Value" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Enrollment Status" filter="IsActive =1">
+    <view id="grid1" type="Grid" commandId="command1" label="Enrollment Status">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Description" columns="20" />
-        <dataField fieldName="Code" columns="10" />
-        <dataField fieldName="Definition" hidden="true" />
-        <dataField fieldName="SortOrder" columns="10" />
+        <dataField fieldName="Description" />
+        <dataField fieldName="Code" columns="50" />
+        <dataField fieldName="Definition" rows="5" />
+        <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="IsActive" />
-        <dataField fieldName="DefaultValue" columns="12" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_enrollment_statuses" type="Grid" commandId="command1" label="All Enrollment Statuses">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Description" columns="20" />
-        <dataField fieldName="Code" columns="10" />
-        <dataField fieldName="Definition" hidden="true" />
-        <dataField fieldName="SortOrder" columns="10" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="DefaultValue" columns="12" />
+        <dataField fieldName="DefaultValue" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Enrollment Status">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Enrollment Status" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="Description" />
             <dataField fieldName="Code" columns="50" />
+            <dataField fieldName="Definition" rows="5" />
             <dataField fieldName="SortOrder" columns="15" />
             <dataField fieldName="IsActive" />
             <dataField fieldName="DefaultValue" />
-            <dataField fieldName="Definition" rows="5" />
           </dataFields>
         </category>
       </categories>
@@ -77,10 +66,10 @@ from "dbo"."zlkpEnrollmentStatus" "zlkpEnrollmentStatus"
           <dataFields>
             <dataField fieldName="Description" />
             <dataField fieldName="Code" columns="50" />
+            <dataField fieldName="Definition" rows="5" />
             <dataField fieldName="SortOrder" columns="15" />
             <dataField fieldName="IsActive" />
             <dataField fieldName="DefaultValue" />
-            <dataField fieldName="Definition" rows="5" />
           </dataFields>
         </category>
       </categories>

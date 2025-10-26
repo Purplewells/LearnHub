@@ -44,21 +44,21 @@ from "dbo"."zvw_metric_attendances_base_reportcard" "zvw_metric_attendances_base
     <view id="grid1" type="Grid" commandId="command1" label="Attendance Rates">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="PersonID" columns="15" hidden="true" />
-        <dataField fieldName="Fullname" columns="25" />
-        <dataField fieldName="Firstname" columns="18" />
-        <dataField fieldName="Lastname" columns="18" />
-        <dataField fieldName="GradeLevel" columns="5" tag="pivot2-row1-column&#xD;&#xA;pivot2-title:&quot;What is the average attendance by Grade Level&quot;&#xD;&#xA;pivot2-medium" />
-        <dataField fieldName="Absence" columns="10" aggregate="Average" />
-        <dataField fieldName="Presence" columns="10" aggregate="Average" />
-        <dataField fieldName="PossibleAttendances" columns="5" />
-        <dataField fieldName="PctAbsence" columns="10" />
-        <dataField fieldName="PctAttended" columns="10" tag="pivot1-val1-avg&#xD;&#xA;pivot2-val1-avg" />
-        <dataField fieldName="Presences" columns="10" hidden="true" />
-        <dataField fieldName="ExcusedAbsences" columns="10" hidden="true" />
-        <dataField fieldName="UnExcusedAbsences" columns="10" aggregate="Sum" hidden="true" />
-        <dataField fieldName="Tardies" columns="10" aggregate="Sum" hidden="true" />
-        <dataField fieldName="Term" columns="12" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;What is the average attendance by term&quot;" />
+        <dataField fieldName="PersonID" columns="15" />
+        <dataField fieldName="Fullname" />
+        <dataField fieldName="GradeLevel" />
+        <dataField fieldName="Term" columns="20" />
+        <dataField fieldName="Absence" columns="15" />
+        <dataField fieldName="Presence" columns="15" />
+        <dataField fieldName="PossibleAttendances" columns="15" />
+        <dataField fieldName="PctAbsence" columns="15" />
+        <dataField fieldName="PctAttended" columns="15" />
+        <dataField fieldName="Presences" columns="15" />
+        <dataField fieldName="ExcusedAbsences" columns="15" />
+        <dataField fieldName="UnExcusedAbsences" columns="15" />
+        <dataField fieldName="Tardies" columns="15" />
+        <dataField fieldName="Firstname" columns="35" />
+        <dataField fieldName="Lastname" columns="35" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Attendance Rates">

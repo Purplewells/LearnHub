@@ -53,10 +53,10 @@ from "dbo"."PersonImmunization" "PersonImmunization"
         <dataField fieldName="Fullname" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Immunisation">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Person Immunisation">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Person Immunisation" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="ImmunizationDate" columns="10" />
@@ -64,11 +64,12 @@ from "dbo"."PersonImmunization" "PersonImmunization"
             <dataField fieldName="PersonID" aliasFieldName="UPN" />
             <dataField fieldName="FirstName" columns="35" />
             <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="Fullname" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Immunisation">
+    <view id="createForm1" type="Form" commandId="command1" label="New Person Immunisation">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
@@ -79,6 +80,7 @@ from "dbo"."PersonImmunization" "PersonImmunization"
             <dataField fieldName="PersonID" aliasFieldName="UPN" />
             <dataField fieldName="FirstName" columns="35" />
             <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="Fullname" />
           </dataFields>
         </category>
       </categories>

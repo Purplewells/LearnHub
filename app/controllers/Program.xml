@@ -28,7 +28,7 @@ from "dbo"."Program" "Program"
     <field name="ProgramTypeID" type="Int32" label="Program Type ID" showInSummary="true">
       <items style="Lookup" dataController="ProgramType" newDataView="createForm1" dataValueField="RefProgramTypeID" dataTextField="Description" />
     </field>
-    <field name="ProgramType" type="String" readOnly="true" label="Program Type" length="30" />
+    <field name="ProgramType" type="String" readOnly="true" label="Program Type" length="100" />
     <field name="Characteristics" type="Int32" label="Characteristics" showInSummary="true" />
     <field name="CreditsRequired" type="Decimal" label="Credits Required" showInSummary="true" />
     <field name="Sponsor" type="Int32" label="Sponsor" showInSummary="true" />

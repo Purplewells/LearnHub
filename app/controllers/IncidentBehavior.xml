@@ -27,16 +27,7 @@ from "dbo"."zlkpIncidentBehavior" "zlkpIncidentBehavior"
     <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Incident Behavior" filter="IsActive = 1">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Description" />
-        <dataField fieldName="Code" columns="50" />
-        <dataField fieldName="SortOrder" columns="15" />
-        <dataField fieldName="IsActive" />
-      </dataFields>
-    </view>
-    <view id="all_behaviours" type="Grid" commandId="command1" label="Incident Behavior">
+    <view id="grid1" type="Grid" commandId="command1" label="Incident Behavior">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Description" />

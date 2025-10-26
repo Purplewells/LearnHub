@@ -40,7 +40,7 @@ from "dbo"."BusSchedules" "BusSchedules"
     <field name="RouteID" type="Int32" allowNulls="false" label="Route ID" showInSummary="true">
       <items style="Lookup" dataController="Routes" newDataView="createForm1" dataValueField="RouteID" dataTextField="RouteName" copy="RouteStartLocation=StartLocation, RouteEndLocation=EndLocation" />
     </field>
-    <field name="RouteName" type="String" readOnly="true" label="Route" length="10" />
+    <field name="RouteName" type="String" readOnly="true" label="Route" length="100" />
     <field name="RouteStartLocation" type="String" readOnly="true" label="Start Location" length="255" />
     <field name="RouteEndLocation" type="String" readOnly="true" label="End Location" length="255" />
     <field name="DriverID" type="Int32" label="Driver ID" showInSummary="true" />
@@ -53,13 +53,13 @@ from "dbo"."BusSchedules" "BusSchedules"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="BusID" aliasFieldName="BusNumber" />
-        <dataField fieldName="BusLicensePlate" columns="20" />
         <dataField fieldName="BusCapacity" columns="15" />
+        <dataField fieldName="BusLicensePlate" columns="20" />
         <dataField fieldName="RouteID" aliasFieldName="RouteName" />
-        <dataField fieldName="RouteStartLocation" columns="20" />
-        <dataField fieldName="RouteEndLocation" columns="20" />
-        <dataField fieldName="DriverID" columns="15" hidden="true" />
-        <dataField fieldName="DepartureTime" columns="15" dataFormatString="t" />
+        <dataField fieldName="RouteStartLocation" />
+        <dataField fieldName="RouteEndLocation" />
+        <dataField fieldName="DriverID" columns="15" />
+        <dataField fieldName="DepartureTime" columns="15" />
         <dataField fieldName="ArrivalTime" columns="15" />
         <dataField fieldName="Weekday" columns="10" />
       </dataFields>

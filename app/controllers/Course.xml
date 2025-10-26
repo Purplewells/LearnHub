@@ -59,21 +59,21 @@ from "dbo"."Course" "Course"
     <field name="SubjectAreaID" type="Int32" label="Subject Area ID" showInSummary="true">
       <items style="Lookup" dataController="CourseSubjectArea" newDataView="createForm1" dataValueField="CourseSubjectAreaID" dataTextField="SubjectAreaDescription" />
     </field>
-    <field name="SubjectArea" type="String" readOnly="true" label="Subject Area" length="30" />
+    <field name="SubjectArea" type="String" readOnly="true" label="Subject Area" length="100" />
     <field name="InstructionalMinutes" type="Int32" label="Instr Min." showInSummary="true" />
     <field name="RefCourseLevelCharacteristicsID" type="Int32" label="Ref Course Level Characteristics Id" showInSummary="true">
       <items style="Lookup" dataController="CourseLevelCharacteristic" newDataView="createForm1" dataValueField="RefCourseLevelCharacteristicID" dataTextField="Description" />
     </field>
-    <field name="Characteristics" type="String" readOnly="true" label="Characteristics" length="15" />
+    <field name="Characteristics" type="String" readOnly="true" label="Characteristics" length="100" />
     <field name="RefCourseCreditUnitID" type="Int32" label="Ref Course Credit Unit Id">
       <items style="Lookup" dataController="CourseCreditUnit" newDataView="createForm1" dataValueField="RefCourseCreditUnitID" dataTextField="Description" />
     </field>
-    <field name="CourseCredit" type="String" readOnly="true" label="Course Credit" length="12" />
+    <field name="CourseCredit" type="String" readOnly="true" label="Course Credit" length="100" />
     <field name="AvailableCreditValue" type="Decimal" label="Credit Value" />
     <field name="RefGradeLevelID" type="Int32" label="Ref Grade Level Id">
       <items style="Lookup" dataController="GradeLevel" newDataView="createForm1" dataValueField="RefGradeLevelID" dataTextField="Description" copy="GLSO=SortOrder" />
     </field>
-    <field name="GradeLevel" type="String" readOnly="true" label="GL" length="5" />
+    <field name="GradeLevel" type="String" readOnly="true" label="GL" length="100" />
     <field name="GLSO" type="Decimal" readOnly="true" label="GLSO" />
     <field name="CourseRequirement" type="Boolean" label="REQ" />
     <field name="RefCourseInteractionModeID" type="Int32" label="Ref Course Interaction Mode Id">
@@ -83,7 +83,7 @@ from "dbo"."Course" "Course"
     <field name="RefK12EndOfCourseRequirementID" type="Int32" label="Ref K12 End Of Course Requirement Id">
       <items style="Lookup" dataController="EndOfCourseRequirement" newDataView="createForm1" dataValueField="RefK12EndOfCourseRequirementID" dataTextField="Description" />
     </field>
-    <field name="EOCReq" type="String" readOnly="true" label="EOC Req" length="5" />
+    <field name="EOCReq" type="String" readOnly="true" label="EOC Req" length="100" />
     <field name="Active" type="Boolean" label="Active" />
     <field name="EffectiveFrom" type="DateTime" label="Effective From" />
     <field name="EffectiveTo" type="DateTime" label="Effective To" />
@@ -101,63 +101,37 @@ from "dbo"."Course" "Course"
     <field name="Department" type="String" readOnly="true" label="Department" length="25" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Courses" filter="Active = 1" sortExpression="GLSO ASC" groupExpression="GradeLevel">
+    <view id="grid1" type="Grid" commandId="command1" label="Course">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Course" columns="20" />
-        <dataField fieldName="Code" columns="20" />
+        <dataField fieldName="Code" columns="40" />
+        <dataField fieldName="Course" />
         <dataField fieldName="SubjectAreaID" aliasFieldName="SubjectArea" />
+        <dataField fieldName="InstructionalMinutes" columns="15" />
+        <dataField fieldName="RefCourseLevelCharacteristicsID" aliasFieldName="Characteristics" />
+        <dataField fieldName="RefCourseCreditUnitID" aliasFieldName="CourseCredit" />
+        <dataField fieldName="AvailableCreditValue" columns="15" />
         <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" />
-        <dataField fieldName="RefCourseLevelCharacteristicsID" aliasFieldName="Characteristics" columns="15" />
-        <dataField fieldName="RefCourseCreditUnitID" aliasFieldName="CourseCredit" columns="12" />
-        <dataField fieldName="AvailableCreditValue" columns="10" />
-        <dataField fieldName="InstructionalMinutes" columns="10" />
+        <dataField fieldName="GLSO" columns="15" />
         <dataField fieldName="CourseRequirement" />
-        <dataField fieldName="RefCourseInteractionModeID" aliasFieldName="Mode" hidden="true" />
+        <dataField fieldName="RefCourseInteractionModeID" aliasFieldName="Mode" />
         <dataField fieldName="RefK12EndOfCourseRequirementID" aliasFieldName="EOCReq" />
         <dataField fieldName="Active" />
         <dataField fieldName="EffectiveFrom" columns="10" />
-        <dataField fieldName="EffectiveTo" columns="10" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="OrganizationID" aliasFieldName="School" hidden="true" />
-        <dataField fieldName="DepartmentID" aliasFieldName="Department" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_courses" type="Grid" commandId="command1" label="All Courses">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Code" columns="20" />
-        <dataField fieldName="Course" columns="20" />
-        <dataField fieldName="SubjectAreaID" aliasFieldName="SubjectArea" />
-        <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" />
-        <dataField fieldName="InstructionalMinutes" columns="8" />
-        <dataField fieldName="RefCourseLevelCharacteristicsID" aliasFieldName="Characteristics" />
-        <dataField fieldName="RefCourseCreditUnitID" aliasFieldName="CourseCredit" />
-        <dataField fieldName="AvailableCreditValue" columns="10" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="CourseRequirement" />
-        <dataField fieldName="RefCourseInteractionModeID" aliasFieldName="Mode" hidden="true" />
-        <dataField fieldName="RefK12EndOfCourseRequirementID" aliasFieldName="EOCReq" />
-        <dataField fieldName="Active" />
-        <dataField fieldName="EffectiveFrom" columns="18" />
-        <dataField fieldName="EffectiveTo" columns="10" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="OrganizationID" aliasFieldName="School" hidden="true" />
+        <dataField fieldName="EffectiveTo" columns="10" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="OrganizationID" aliasFieldName="School" />
         <dataField fieldName="DepartmentID" aliasFieldName="Department" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Course">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Course" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="Code" columns="40" />
             <dataField fieldName="Course" />
@@ -167,17 +141,18 @@ from "dbo"."Course" "Course"
             <dataField fieldName="RefCourseCreditUnitID" aliasFieldName="CourseCredit" />
             <dataField fieldName="AvailableCreditValue" columns="15" />
             <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" />
+            <dataField fieldName="GLSO" columns="15" />
             <dataField fieldName="CourseRequirement" />
             <dataField fieldName="RefCourseInteractionModeID" aliasFieldName="Mode" />
             <dataField fieldName="RefK12EndOfCourseRequirementID" aliasFieldName="EOCReq" />
             <dataField fieldName="Active" />
             <dataField fieldName="EffectiveFrom" columns="10" />
             <dataField fieldName="EffectiveTo" columns="10" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-            <dataField fieldName="OrganizationID" aliasFieldName="School" hidden="true" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="OrganizationID" aliasFieldName="School" />
             <dataField fieldName="DepartmentID" aliasFieldName="Department" />
           </dataFields>
         </category>
@@ -192,17 +167,22 @@ from "dbo"."Course" "Course"
             <dataField fieldName="Code" columns="40" />
             <dataField fieldName="Course" />
             <dataField fieldName="SubjectAreaID" aliasFieldName="SubjectArea" />
-            <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" />
+            <dataField fieldName="InstructionalMinutes" columns="15" />
             <dataField fieldName="RefCourseLevelCharacteristicsID" aliasFieldName="Characteristics" />
             <dataField fieldName="RefCourseCreditUnitID" aliasFieldName="CourseCredit" />
-            <dataField fieldName="InstructionalMinutes" columns="15" />
             <dataField fieldName="AvailableCreditValue" columns="15" />
-            <dataField fieldName="Active" />
+            <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" />
+            <dataField fieldName="GLSO" columns="15" />
             <dataField fieldName="CourseRequirement" />
             <dataField fieldName="RefCourseInteractionModeID" aliasFieldName="Mode" />
             <dataField fieldName="RefK12EndOfCourseRequirementID" aliasFieldName="EOCReq" />
+            <dataField fieldName="Active" />
             <dataField fieldName="EffectiveFrom" columns="10" />
             <dataField fieldName="EffectiveTo" columns="10" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
             <dataField fieldName="OrganizationID" aliasFieldName="School" />
             <dataField fieldName="DepartmentID" aliasFieldName="Department" />
           </dataFields>
@@ -220,7 +200,6 @@ from "dbo"."Course" "Course"
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
       <action id="a9" />
       <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
-      <action commandName="BatchEdit" headerText="Batch Edit" id="a100" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
@@ -237,15 +216,19 @@ from "dbo"."Course" "Course"
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" headerText="New Course" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
       <action id="a8" commandName="Grid" />
     </actionGroup>
@@ -256,12 +239,10 @@ from "dbo"."Course" "Course"
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a100" commandName="ReportAsPdf" headerText="Export To PDF" />
-      <action id="a101" commandName="ReportAsExcel" headerText="Send To Excel" />
-      <action id="a102" />
-      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
-      <action id="a103" commandName="ExportRss" headerText="Send RSS API" />
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

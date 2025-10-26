@@ -30,7 +30,7 @@ from "dbo"."vw_ops_stock_level_movement_receiving_location" "vw_ops_stock_level_
     </command>
   </commands>
   <fields>
-    <field name="StockLevelID" type="Int32" allowNulls="false" label="Stock Level ID" showInSummary="true" isPrimaryKey="true" />
+    <field name="StockLevelID" type="Int32" allowNulls="false" label="Stock Level ID" showInSummary="true" />
     <field name="ProductID" type="Int32" label="Product ID" readOnly="true" showInSummary="true" />
     <field name="SKU" type="String" label="SKU" length="10" showInSummary="true" />
     <field name="ProductName" type="String" label="Product" length="100" showInSummary="true" />
@@ -47,57 +47,52 @@ from "dbo"."vw_ops_stock_level_movement_receiving_location" "vw_ops_stock_level_
     <field name="RN" type="Int64" label="RN" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Stock Receiving Locations" sortExpression="TransactionDate DESC, RN ASC">
+    <view id="grid1" type="Grid" commandId="command1" label="Stock Level Movement Receiving Location">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="StockLevelID" columns="15" hidden="true" />
-        <dataField fieldName="ProductID" columns="15" hidden="true" />
-        <dataField fieldName="SKU" columns="15" />
-        <dataField fieldName="ProductName" columns="35" tag="header-text&#xD;&#xA;pivot1-row1-columnstacked&#xD;&#xA;pivot1-title:&quot;Count of Items Received&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Item&quot;&#xD;&#xA;pivot1-vaxistitle:&quot;Number of Items&quot;&#xD;&#xA;pivot1-medium&#xD;&#xA;&#xD;&#xA;pivot2-row1-columnstacked&#xD;&#xA;pivot2-title:&quot;Count of Items by Received Location&quot;&#xD;&#xA;pivot2-haxistitle:&quot;Item&quot;&#xD;&#xA;pivot2-vaxistitle:&quot;Number of Items&quot;&#xD;&#xA;" />
+        <dataField fieldName="StockLevelID" columns="15" />
+        <dataField fieldName="ProductID" columns="15" />
+        <dataField fieldName="SKU" columns="10" />
+        <dataField fieldName="ProductName" />
         <dataField fieldName="Category" columns="20" />
         <dataField fieldName="TransactionDate" columns="10" />
-        <dataField fieldName="ReceivingLocation" columns="20" tag="pivot2-col1&#xD;&#xA;&#xD;&#xA;pivot3-row1-donut&#xD;&#xA;pivot3-title:&quot;Distribution of Items by Received Location&quot;&#xD;&#xA;pivot3-haxistitle:&quot;Item&quot;&#xD;&#xA;pivot3-vaxistitle:&quot;Number of Items&quot;&#xD;&#xA;" />
-        <dataField fieldName="TransactionQty" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot3-val1-sum" />
-        <dataField fieldName="ExtendedStockValue" columns="15" tag="pivot4-val1-sum" aggregate="Sum" />
+        <dataField fieldName="ReceivingLocation" columns="40" />
+        <dataField fieldName="TransCode" columns="5" />
+        <dataField fieldName="MovementMode" columns="20" />
+        <dataField fieldName="ExtendedStockValue" columns="15" />
         <dataField fieldName="CURR" columns="5" />
-        <dataField fieldName="MovementMode" columns="20" tag="pivot4-row1-pie&#xD;&#xA;pivot4-title:&quot;Value of Items by Received Location&quot;&#xD;&#xA;pivot4-haxistitle:&quot;Item&quot;&#xD;&#xA;pivot4-vaxistitle:&quot;Number of Items&quot;&#xD;&#xA;" />
-        <dataField fieldName="TransCode" columns="10" />
-        <dataField fieldName="ReOrderLevel" columns="5" hidden="true" />
-        <dataField fieldName="ReOrderQty" columns="5" hidden="true" />
-        <dataField fieldName="RN" columns="5" />
+        <dataField fieldName="ReOrderLevel" columns="15" />
+        <dataField fieldName="ReOrderQty" columns="15" />
+        <dataField fieldName="TransactionQty" columns="15" />
+        <dataField fieldName="RN" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review SLM Receiving Location">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Stock Level Movement Receiving Location">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Stock Level Movement Receiving Location" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="StockLevelID" columns="15" hidden="true" />
-            <dataField fieldName="ProductID" columns="15" hidden="true" />
-            <dataField fieldName="ProductName" textMode="Static" />
+            <dataField fieldName="StockLevelID" columns="15" />
+            <dataField fieldName="ProductID" columns="15" />
+            <dataField fieldName="SKU" columns="10" />
+            <dataField fieldName="ProductName" />
             <dataField fieldName="Category" columns="20" />
             <dataField fieldName="TransactionDate" columns="10" />
             <dataField fieldName="ReceivingLocation" columns="40" />
             <dataField fieldName="TransCode" columns="5" />
             <dataField fieldName="MovementMode" columns="20" />
-          </dataFields>
-        </category>
-        <category id="c2" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="SKU" columns="10" textMode="Static" />
-            <dataField fieldName="TransactionQty" columns="15" />
-            <dataField fieldName="ReOrderQty" columns="15" />
-            <dataField fieldName="ReOrderLevel" columns="15" />
-            <dataField fieldName="CURR" columns="5" />
             <dataField fieldName="ExtendedStockValue" columns="15" />
-            <dataField fieldName="RN" columns="15" hidden="true" />
+            <dataField fieldName="CURR" columns="5" />
+            <dataField fieldName="ReOrderLevel" columns="15" />
+            <dataField fieldName="ReOrderQty" columns="15" />
+            <dataField fieldName="TransactionQty" columns="15" />
+            <dataField fieldName="RN" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New SLM Receiving Location">
+    <view id="createForm1" type="Form" commandId="command1" label="New Stock Level Movement Receiving Location">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
@@ -125,7 +120,7 @@ from "dbo"."vw_ops_stock_level_movement_receiving_location" "vw_ops_stock_level_
   </views>
   <actions>
     <actionGroup id="ag1" scope="Grid">
-      <action id="a1" commandName="Select" commandArgument="editForm1" cssClass="material-icon-swap_vertical_circle" />
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
       <action id="a2" commandName="Edit" />
       <action id="a3" commandName="Delete" />
       <action id="a6" />
@@ -149,20 +144,17 @@ from "dbo"."vw_ops_stock_level_movement_receiving_location" "vw_ops_stock_level_
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" whenView="xxxx" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="material-icon-swap_vertical_circle" whenView="grid1" />
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a100" commandName="ReportAsPdf" headerText="Export To PDF" />
-      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
-      <action id="a4" commandName="ExportRss" headerText="Enable RSS API" />
-      <action id="a102" commandName="ReportAsWord" headerText="Export To Word" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a7" commandName="DataSheet" />
       <action id="a8" commandName="Grid" />
     </actionGroup>
@@ -171,6 +163,12 @@ from "dbo"."vw_ops_stock_level_movement_receiving_location" "vw_ops_stock_level_
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

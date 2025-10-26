@@ -63,24 +63,9 @@ from "reports"."zvw_metric_attendances_base_hist" "zvw_metric_attendances_base_h
     <field name="Organisation" type="String" label="Organisation" length="60" />
     <field name="ADA" type="Decimal" dataFormatString="p" label="ADA" />
     <field name="GADA" type="Decimal" dataFormatString="p" label="GADA" />
-    <field name="OnVerge" type="Int32" allowNulls="false" label="On Verge">
-      <items style="RadioButtonList">
-        <item value="1" text="Yes" />
-        <item value="0" text="No" />
-      </items>
-    </field>
-    <field name="IsChrab" type="Int32" allowNulls="false" label="Is CHRAB">
-      <items style="RadioButtonList">
-        <item value="1" text="Yes" />
-        <item value="0" text="No" />
-      </items>
-    </field>
-    <field name="IsAtRisk" type="Int32" allowNulls="false" label="At Risk">
-      <items style="RadioButtonList">
-        <item value="1" text="Yes" />
-        <item value="0" text="No" />
-      </items>
-    </field>
+    <field name="OnVerge" type="Int32" allowNulls="false" label="On Verge" />
+    <field name="IsChrab" type="Int32" allowNulls="false" label="Is CHRAB" />
+    <field name="IsAtRisk" type="Int32" allowNulls="false" label="At Risk" />
     <field name="ChrabRate" type="Decimal" dataFormatString="p" label="CHRAB Rate" />
     <field name="GLEDAT" type="Int32" label="GLEDAT" />
     <field name="ChrabrateDerived" type="Decimal" dataFormatString="p" label="CHRAB Rate Derived" />
@@ -112,86 +97,45 @@ END</formula>
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Attendance Report" groupExpression="GLSGroup, Name, UPN" sortExpression="GLSO ASC" reportTemplate="true">
+    <view id="grid1" type="Grid" commandId="command1" label="Chronic Absentee Report">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="PersonID" columns="15" hidden="true" />
-        <dataField fieldName="Name" hidden="true" />
-        <dataField fieldName="FirstName" columns="18" />
-        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="PersonID" columns="15" />
+        <dataField fieldName="Name" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="LastName" columns="35" />
         <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="GradeLevel" columns="5" tag="pivot4-row1-columnstacked&#xD;&#xA;pivot4-title:&quot;What is the school's attendances by grade level&quot;&#xD;&#xA;pivot4-haxistitle:&quot;Grade Level&quot;&#xD;&#xA;pivot4-vaxisformat:&quot;percent&quot;&#xD;&#xA;pivot4-small&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked&#xD;&#xA;pivot5-title:&quot;What is the average daily attendance (ADA) By GL xxx&quot;&#xD;&#xA;" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="Stream" columns="6" />
-        <dataField fieldName="Sex" columns="4" />
-        <dataField fieldName="EventDate" columns="18" tag="pivot6-row1-columnstacked-date-all&#xD;&#xA;pivot6-title:&quot;What is the count attendances overtime&quot;&#xD;&#xA;&#xD;&#xA;pivot7-row1-line-date-all&#xD;&#xA;pivot7-title:&quot;What is the school's average daily attendance overtime&quot;&#xD;&#xA;pivot7-vaxisformat:&quot;percent&quot;&#xD;&#xA;pivot7-curve&#xD;&#xA;pivot7-large&#xD;&#xA;&#xD;&#xA;pivot8-row1-line-date-all&#xD;&#xA;pivot8-title:&quot;What is the school's GL ADA Overtime&quot;&#xD;&#xA;pivot8-vaxisformat:&quot;percent&quot;&#xD;&#xA;pivot8-curve&#xD;&#xA;pivot8-large" />
-        <dataField fieldName="Status" columns="12" tag="pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;What is the attendance status distribution&quot;" />
-        <dataField fieldName="Reason" columns="20" tag="pivot3-row1-pie-top10-sortdescbyvalue-other&#xD;&#xA;pivot3-title:&quot;What is the top 10 common reasons for attendance&quot;&#xD;&#xA;" />
-        <dataField fieldName="PRN" columns="5" aggregate="Sum" />
-        <dataField fieldName="PA" columns="5" aggregate="Sum" />
-        <dataField fieldName="CUA" columns="5" />
-        <dataField fieldName="CEA" columns="5" />
-        <dataField fieldName="IA" columns="4" />
-        <dataField fieldName="ADA" columns="8" tag="pivot1-val1-AVG&#xD;&#xA;" aggregate="Average" />
-        <dataField fieldName="GLABS" columns="5" hidden="true" />
-        <dataField fieldName="GLDA" columns="5" />
-        <dataField fieldName="GADA" columns="8" tag="pivot2-val1-avg&#xD;&#xA;pivot4-val1-avg-sortbyvalue&#xD;&#xA;pivot7-val1-avg&#xD;&#xA;pivot8-val1-avg" />
-        <dataField fieldName="OnVerge" columns="8" />
-        <dataField fieldName="IsAtRisk" columns="8" />
-        <dataField fieldName="IsChrab" columns="8" />
-        <dataField fieldName="ChrabRate" columns="15" hidden="true" />
-        <dataField fieldName="GLEDAT" columns="15" hidden="true" />
-        <dataField fieldName="ChrabrateDerived" columns="15" hidden="true" />
-        <dataField fieldName="Year" columns="8" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;What is Average Daily Attendance (ADA) By Year&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Event Date&quot;&#xD;&#xA;pivot1-vaxisformat:&quot;percent&quot;&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="GLS" columns="15" hidden="true" />
-        <dataField fieldName="GLSGroup" hidden="true" />
-        <dataField fieldName="Organisation" hidden="true" />
-        <dataField fieldName="ChronicAbsence" tag="pivot5-col1&#xD;&#xA;&#xD;&#xA;pivot9-row1-pie&#xD;&#xA;pivot9-title:&quot;What is the school's chronic absence attendances&quot;&#xD;&#xA;pivot9-haxistitle:&quot;Grade Level&quot;&#xD;&#xA;pivot9-small" hidden="true" />
-        <dataField fieldName="AtRiskCheck" tag="pivot10-row1-pie&#xD;&#xA;pivot10-title:&quot;What is the school's students at risk of dropout&quot;&#xD;&#xA;pivot10-haxistitle:&quot;Grade Level&quot;&#xD;&#xA;pivot10-small" hidden="true" />
-        <dataField fieldName="OnTheVerge" tag="pivot11-row1-pie&#xD;&#xA;pivot11-title:&quot;What is the distribution students On The Verge Chronic Absenteeism&quot;&#xD;&#xA;pivot11-haxistitle:&quot;Grade Level&quot;&#xD;&#xA;pivot11-small" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="all_attendance_statuses" type="Grid" commandId="command1" label="Attendance Statuses Report" groupExpression="GLSGroup, Name, UPN" sortExpression="GLSO ASC" reportTemplate="true">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="PersonID" columns="15" hidden="true" />
-        <dataField fieldName="Name" hidden="true" />
-        <dataField fieldName="FirstName" columns="18" />
-        <dataField fieldName="LastName" columns="18" />
-        <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="GradeLevel" columns="5" tag="pivot4-row1-columnstacked&#xD;&#xA;pivot4-title:&quot;What is the school's attendances by grade level&quot;&#xD;&#xA;pivot4-haxistitle:&quot;Grade Level&quot;&#xD;&#xA;pivot4-vaxisformat:&quot;percent&quot;&#xD;&#xA;pivot4-small&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked&#xD;&#xA;pivot5-title:&quot;What is the average daily attendance (ADA) By GL xxx&quot;&#xD;&#xA;" />
-        <dataField fieldName="GLSO" columns="15" hidden="true" />
-        <dataField fieldName="Stream" columns="6" />
-        <dataField fieldName="Sex" columns="4" />
-        <dataField fieldName="EventDate" columns="18" tag="pivot6-row1-columnstacked-date-all&#xD;&#xA;pivot6-title:&quot;What is the count attendances overtime&quot;&#xD;&#xA;&#xD;&#xA;pivot7-row1-line-date-all&#xD;&#xA;pivot7-title:&quot;What is the school's average daily attendance overtime&quot;&#xD;&#xA;pivot7-vaxisformat:&quot;percent&quot;&#xD;&#xA;pivot7-curve&#xD;&#xA;pivot7-large&#xD;&#xA;&#xD;&#xA;pivot8-row1-line-date-all&#xD;&#xA;pivot8-title:&quot;What is the school's GL ADA Overtime&quot;&#xD;&#xA;pivot8-vaxisformat:&quot;percent&quot;&#xD;&#xA;pivot8-curve&#xD;&#xA;pivot8-large" />
-        <dataField fieldName="Status" columns="12" tag="pivot2-row1-pie-sortascbyvalue&#xD;&#xA;pivot2-title:&quot;What is the attendance status distribution&quot;" />
-        <dataField fieldName="Reason" columns="20" tag="pivot3-row1-pie-top10-sortdescbyvalue-other&#xD;&#xA;pivot3-title:&quot;What are the top 10 common excuses for attendance&quot;&#xD;&#xA;" />
-        <dataField fieldName="PRN" columns="5" aggregate="Sum" />
-        <dataField fieldName="PA" columns="5" aggregate="Sum" />
-        <dataField fieldName="CUA" columns="5" />
-        <dataField fieldName="CEA" columns="5" />
-        <dataField fieldName="IA" columns="4" />
-        <dataField fieldName="ADA" columns="8" tag="pivot1-val1-AVG&#xD;&#xA;" aggregate="Average" />
-        <dataField fieldName="GLABS" columns="5" hidden="true" />
-        <dataField fieldName="GLDA" columns="5" />
-        <dataField fieldName="GADA" columns="8" tag="pivot2-val1-avg&#xD;&#xA;pivot4-val1-avg-sortbyvalue&#xD;&#xA;pivot7-val1-avg&#xD;&#xA;pivot8-val1-avg" />
-        <dataField fieldName="OnVerge" columns="8" />
-        <dataField fieldName="IsAtRisk" columns="8" />
-        <dataField fieldName="IsChrab" columns="8" />
-        <dataField fieldName="ChrabRate" columns="15" hidden="true" />
-        <dataField fieldName="GLEDAT" columns="15" hidden="true" />
-        <dataField fieldName="ChrabrateDerived" columns="15" hidden="true" />
-        <dataField fieldName="Year" columns="8" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;What is Average Daily Attendance (ADA) By Year&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Event Date&quot;&#xD;&#xA;pivot1-vaxisformat:&quot;percent&quot;&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="GLS" columns="15" hidden="true" />
-        <dataField fieldName="GLSGroup" hidden="true" />
-        <dataField fieldName="Organisation" hidden="true" />
-        <dataField fieldName="ChronicAbsence" tag="pivot5-col1&#xD;&#xA;&#xD;&#xA;pivot9-row1-pie&#xD;&#xA;pivot9-title:&quot;What is the school's chronic absence attendances&quot;&#xD;&#xA;pivot9-haxistitle:&quot;Grade Level&quot;&#xD;&#xA;pivot9-small" hidden="true" />
-        <dataField fieldName="AtRiskCheck" tag="pivot10-row1-pie&#xD;&#xA;pivot10-title:&quot;What is the school's students at risk of dropout&quot;&#xD;&#xA;pivot10-haxistitle:&quot;Grade Level&quot;&#xD;&#xA;pivot10-small" hidden="true" />
-        <dataField fieldName="OnTheVerge" tag="pivot11-row1-pie&#xD;&#xA;pivot11-title:&quot;What is the distribution students On The Verge Chronic Absenteeism&quot;&#xD;&#xA;pivot11-haxistitle:&quot;Grade Level&quot;&#xD;&#xA;pivot11-small" hidden="true" />
+        <dataField fieldName="GradeLevel" />
+        <dataField fieldName="GLSO" columns="15" />
+        <dataField fieldName="Stream" />
+        <dataField fieldName="Sex" />
+        <dataField fieldName="EventDate" columns="10" />
+        <dataField fieldName="Status" />
+        <dataField fieldName="Reason" />
+        <dataField fieldName="PRN" columns="15" />
+        <dataField fieldName="PA" columns="15" />
+        <dataField fieldName="CUA" columns="15" />
+        <dataField fieldName="CEA" columns="15" />
+        <dataField fieldName="IA" columns="15" />
+        <dataField fieldName="GLDA" columns="15" />
+        <dataField fieldName="GLABS" columns="15" />
+        <dataField fieldName="Year" columns="15" />
+        <dataField fieldName="Organisation" />
+        <dataField fieldName="ADA" columns="15" />
+        <dataField fieldName="GADA" columns="15" />
+        <dataField fieldName="OnVerge" columns="15" />
+        <dataField fieldName="IsChrab" columns="15" />
+        <dataField fieldName="IsAtRisk" columns="15" />
+        <dataField fieldName="ChrabRate" columns="15" />
+        <dataField fieldName="GLEDAT" columns="15" />
+        <dataField fieldName="ChrabrateDerived" columns="15" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="GLS" columns="15" />
+        <dataField fieldName="GLSGroup" />
+        <dataField fieldName="ChronicAbsence" />
+        <dataField fieldName="AtRiskCheck" />
+        <dataField fieldName="OnTheVerge" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Chronic Absentee Report">
@@ -320,30 +264,12 @@ END</formula>
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="SQL" headerText="Update Attendance Repo" cssClass="material-icon-reduce_capacity" id="a100">
-        <data><![CDATA[EXECUTE zusp_etl_zvw_metric_attendances_base_hist 
-SET @Result_ExecuteOnClient = '$appfactory.find("ChronicAbsenteeReport", "Controller").sync();'
-SET @Result_ShowMessage = 'The student attendance update ' + CONVERT(NVARCHAR(12), GETDATE()) + ' ' + 'has completed successfully' 
-
-]]></data>
-      </action>
-      <action commandName="Custom" headerText="Option 2 : Update Attendance (LDS)" cssClass="material-icon-sports" id="a101" commandArgument="UpdateAttendanceRepo" confirmation="This action would refresh the latest attendance records using large dataset model. Do you want to continue ?">
-        <data />
-      </action>
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a102" commandName="ReportAsPdf" headerText="Print Certificate Report" />
-      <action id="a104" commandName="ReportAsPdf" headerText="Print Status Report">
-        <data><![CDATA[_controller=ChronicAbsenteeReport
-_view=all_attendance_statuses
-_template=ChronicAbsenteeReport_all_attendance_statuses.rdlc
-]]></data>
-      </action>
-      <action id="a105" />
-      <action id="a103" commandName="ReportAsExcel" headerText="Print To Excel" />
-      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a4" commandName="ReportAsWord" headerText="Excport To Word" />
-      <action id="a106" commandName="ExportRss" headerText="Send To RSS API" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
     </actionGroup>
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />
@@ -352,10 +278,10 @@ _template=ChronicAbsenteeReport_all_attendance_statuses.rdlc
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a103" />
+      <action id="a1" commandName="ReportAsPdf" />
       <action id="a2" commandName="ReportAsImage" />
-      <action id="a7" commandName="DataSheet" />
-      <action id="a8" commandName="Grid" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

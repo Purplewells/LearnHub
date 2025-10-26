@@ -32,34 +32,25 @@ from "dbo"."zlkpBudgetName" "zlkpBudgetName"
     <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Budget Names" filter="IsActive = 1">
+    <view id="grid1" type="Grid" commandId="command1" label="Budget Name">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="BudgetName" columns="35" />
-        <dataField fieldName="BudgetTypeID" aliasFieldName="BudgetType" columns="20" />
-        <dataField fieldName="IsActive" columns="10" />
-        <dataField fieldName="Description" columns="500" textMode="Note" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_budgets" type="Grid" commandId="command1" label="All Budget Names">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="BudgetName" columns="35" />
-        <dataField fieldName="BudgetTypeID" aliasFieldName="BudgetType" columns="20" />
-        <dataField fieldName="IsActive" columns="10" />
-        <dataField fieldName="Description" columns="250" />
+        <dataField fieldName="BudgetName" columns="50" />
+        <dataField fieldName="Description" />
+        <dataField fieldName="BudgetTypeID" aliasFieldName="BudgetType" />
+        <dataField fieldName="IsActive" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Budget Name">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Budget Name" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="BudgetName" columns="50" />
+            <dataField fieldName="Description" />
             <dataField fieldName="BudgetTypeID" aliasFieldName="BudgetType" />
             <dataField fieldName="IsActive" />
-            <dataField fieldName="Description" />
           </dataFields>
         </category>
       </categories>
@@ -71,8 +62,8 @@ from "dbo"."zlkpBudgetName" "zlkpBudgetName"
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="BudgetName" columns="50" />
-            <dataField fieldName="BudgetTypeID" aliasFieldName="BudgetType" />
             <dataField fieldName="Description" />
+            <dataField fieldName="BudgetTypeID" aliasFieldName="BudgetType" />
             <dataField fieldName="IsActive" />
           </dataFields>
         </category>

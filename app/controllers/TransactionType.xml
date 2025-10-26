@@ -35,32 +35,17 @@ from "dbo"."zlkpTransactionType" "zlkpTransactionType"
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Transaction Types" filter="IsActive = 1">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="TransactionType" columns="20" />
-        <dataField fieldName="TransactionTypeCode" columns="20">
-          <headerText>Code</headerText>
-        </dataField>
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="SortOrder" columns="15" />
-        <dataField fieldName="CreatedDate" columns="20" />
-        <dataField fieldName="ModifiedDate" columns="20" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-      </dataFields>
-    </view>
-    <view id="all_transaction_types" type="Grid" commandId="command1" label="All Transaction Types">
+    <view id="grid1" type="Grid" commandId="command1" label="Transaction Type">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="TransactionType" columns="20" />
         <dataField fieldName="TransactionTypeCode" columns="20" />
         <dataField fieldName="IsActive" />
         <dataField fieldName="SortOrder" columns="15" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Transaction Type">

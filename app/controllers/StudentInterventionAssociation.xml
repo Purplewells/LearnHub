@@ -42,7 +42,7 @@ from "dbo"."StudentInterventionAssociation" "StudentInterventionAssociation"
     <field name="InterventionID" type="Int32" label="Intervention ID" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Intervention Diagnosis">
+    <view id="grid1" type="Grid" commandId="command1" label="Student Intervention Association">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="InterventionEffectiveness" columns="50" />
@@ -56,38 +56,40 @@ from "dbo"."StudentInterventionAssociation" "StudentInterventionAssociation"
         <dataField fieldName="InterventionID" columns="15" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Intervention Diagnosis">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Student Intervention Association">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c1" headerText="Student Intervention Association" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="DiagnosisStatement" />
             <dataField fieldName="InterventionEffectiveness" columns="50" />
+            <dataField fieldName="DiagnosisStatement" />
             <dataField fieldName="OrganisationalPersonRoleID" columns="15" />
             <dataField fieldName="OrganisationalPersonRoleOrganisationID" columns="15" />
             <dataField fieldName="Name" />
             <dataField fieldName="UPN" columns="10" />
             <dataField fieldName="FirstName" columns="35" />
             <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="InterventionID" columns="15" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Intervention Diagnosis">
+    <view id="createForm1" type="Form" commandId="command1" label="New Student Intervention Association">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="DiagnosisStatement" />
             <dataField fieldName="InterventionEffectiveness" columns="50" />
+            <dataField fieldName="DiagnosisStatement" />
             <dataField fieldName="OrganisationalPersonRoleID" columns="15" />
             <dataField fieldName="OrganisationalPersonRoleOrganisationID" columns="15" />
             <dataField fieldName="Name" />
             <dataField fieldName="UPN" columns="10" />
             <dataField fieldName="FirstName" columns="35" />
             <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="InterventionID" columns="15" />
           </dataFields>
         </category>
       </categories>

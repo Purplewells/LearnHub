@@ -23,24 +23,17 @@ from "dbo"."zlkp_AttendanceEventCategory" "zlkp_AttendanceEventCategory"
     <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Attendance Category" filter="IsActive = 1">
+    <view id="grid1" type="Grid" commandId="command1" label="Attendance Category">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="AttendanceEventCategory" columns="25" />
-        <dataField fieldName="IsActive" />
-      </dataFields>
-    </view>
-    <view id="all_attendance_events_category" type="Grid" commandId="command1" label="All Attendance Category">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="AttendanceEventCategory" columns="25" />
+        <dataField fieldName="AttendanceEventCategory" columns="15" />
         <dataField fieldName="IsActive" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Attendance Category">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Attendance Category" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="AttendanceEventCategory" columns="15" />

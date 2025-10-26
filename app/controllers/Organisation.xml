@@ -156,10 +156,4 @@ from "dbo"."Organisation" "Organisation"
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r100" commandName="Insert|Update" type="Sql" phase="After" name="setSchoolNameFromName"><![CDATA[update School
-SET SchoolName = Name
-FROM Organisation ORG
-where ORG.OrganizationID = @OrganizationID]]></rule>
-  </businessRules>
 </dataController>

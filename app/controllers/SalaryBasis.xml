@@ -47,7 +47,7 @@ from "dbo"."salary_basis" "salary_basis"
     <field name="SalaryBasisTypeID" type="Int32" dataFormatString="c" label="Salary Basis Type ID" showInSummary="true">
       <items style="Lookup" dataController="SalaryBasisType" newDataView="createForm1" dataValueField="SalaryBasisTypeID" dataTextField="SalaryBasisType" />
     </field>
-    <field name="SalaryBasisType" type="String" readOnly="true" dataFormatString="c" label="Salary Basis Type" length="20" />
+    <field name="SalaryBasisType" type="String" readOnly="true" dataFormatString="c" label="Salary Basis Type" length="50" />
     <field name="InputValueID" type="Int32" label="Input Value ID" showInSummary="true" />
     <field name="InputName" type="String" readOnly="true" label="Input Name" length="50" />
     <field name="EffectiveFrom" type="DateTime" label="Effective From" showInSummary="true" />
@@ -77,26 +77,26 @@ from "dbo"."salary_basis" "salary_basis"
         <dataField fieldName="BasisName" columns="50" />
         <dataField fieldName="Code" columns="10" />
         <dataField fieldName="SalaryBasisTypeID" aliasFieldName="SalaryBasisType" />
-        <dataField fieldName="InputValueID" aliasFieldName="InputName" hidden="true" />
+        <dataField fieldName="InputValueID" aliasFieldName="InputName" />
         <dataField fieldName="EffectiveFrom" columns="10" />
         <dataField fieldName="EffectiveTo" columns="10" />
-        <dataField fieldName="GradeStepRateID" columns="15" hidden="true" />
+        <dataField fieldName="GradeStepRateID" columns="15" />
         <dataField fieldName="StatusID" aliasFieldName="Status" />
         <dataField fieldName="IsActive" />
         <dataField fieldName="BaseAmount" columns="15" />
         <dataField fieldName="AnnualisationFactor" columns="15" />
         <dataField fieldName="FrequencyID" aliasFieldName="Frequency" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiefBy" columns="50" hidden="true" />
-        <dataField fieldName="ComponentsUsage" columns="10" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiefBy" columns="50" />
+        <dataField fieldName="ComponentsUsage" columns="10" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Salary Basis">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Salary Basis" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="BasisName" columns="50" />
@@ -105,15 +105,17 @@ from "dbo"."salary_basis" "salary_basis"
             <dataField fieldName="InputValueID" aliasFieldName="InputName" />
             <dataField fieldName="EffectiveFrom" columns="10" />
             <dataField fieldName="EffectiveTo" columns="10" />
+            <dataField fieldName="GradeStepRateID" columns="15" />
             <dataField fieldName="StatusID" aliasFieldName="Status" />
             <dataField fieldName="IsActive" />
             <dataField fieldName="BaseAmount" columns="15" />
             <dataField fieldName="AnnualisationFactor" columns="15" />
             <dataField fieldName="FrequencyID" aliasFieldName="Frequency" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-            <dataField fieldName="ModifiefBy" columns="50" hidden="true" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiefBy" columns="50" />
+            <dataField fieldName="ComponentsUsage" columns="10" />
           </dataFields>
         </category>
       </categories>

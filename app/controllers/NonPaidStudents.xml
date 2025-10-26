@@ -46,19 +46,19 @@ from "dbo"."vw_fee_collection_summaries_no_payment_latest" "vw_fee_collection_su
     <view id="grid1" type="Grid" commandId="command1" label="Non Paid Students">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="PersonID" columns="15" hidden="true" />
-        <dataField fieldName="FullName" columns="25" />
-        <dataField fieldName="YearGroup" columns="5" />
-        <dataField fieldName="Description" columns="20" />
+        <dataField fieldName="PersonID" columns="15" />
+        <dataField fieldName="FullName" />
+        <dataField fieldName="YearGroup" />
+        <dataField fieldName="Description" columns="50" />
         <dataField fieldName="FeeType" columns="20" />
-        <dataField fieldName="EffectiveFrom" columns="20" />
-        <dataField fieldName="Debit" columns="10" />
-        <dataField fieldName="Credit" columns="10" />
-        <dataField fieldName="Balance" columns="10" />
-        <dataField fieldName="GuardianName" columns="25" />
-        <dataField fieldName="ContactPoint" columns="20" />
+        <dataField fieldName="EffectiveFrom" columns="10" />
+        <dataField fieldName="Debit" columns="15" />
+        <dataField fieldName="Credit" columns="15" />
+        <dataField fieldName="Balance" columns="15" />
+        <dataField fieldName="GuardianName" />
+        <dataField fieldName="ContactPoint" columns="30" />
         <dataField fieldName="HowRelated" columns="20" />
-        <dataField fieldName="IsPrimary" columns="10" />
+        <dataField fieldName="IsPrimary" columns="1" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Non Paid Students">

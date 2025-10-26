@@ -26,7 +26,7 @@ from "dbo"."rep_usp_term_basis_person_centred_evaluation" "rep_usp_term_basis_pe
     </command>
   </commands>
   <fields>
-    <field name="PersonID" type="Int32" label="Person ID" showInSummary="true" isPrimaryKey="true" isVirtual="true" />
+    <field name="PersonID" type="Int32" label="Person ID" showInSummary="true" />
     <field name="FirstName" type="String" label="Firstname" length="50" showInSummary="true" />
     <field name="LastName" type="String" label="Lastname" length="50" showInSummary="true" />
     <field name="AcademicYear" type="String" label="Year" length="20" showInSummary="true" />
@@ -57,34 +57,30 @@ from "dbo"."rep_usp_term_basis_person_centred_evaluation" "rep_usp_term_basis_pe
     </field>
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Term Based Attendance Evaluation">
+    <view id="grid1" type="Grid" commandId="command1" label="Term Basis Person Centred Evaluation">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="PersonID" columns="15" hidden="true" />
-        <dataField fieldName="FirstName" columns="20" />
-        <dataField fieldName="LastName" columns="20" />
-        <dataField fieldName="AcademicYear" columns="12" />
-        <dataField fieldName="AcademicTerm" columns="12" tag="pivot4-row1-columnstacked&#xD;&#xA;pivot4-title:&quot;Students evaluated to be Chronically Absent&quot;" />
-        <dataField fieldName="IsAtRisk" columns="15" hidden="true" />
-        <dataField fieldName="AtRisk" tag="pivot1-row1-donut&#xD;&#xA;pivot1-title:&quot;Count of Students evaluated to be At Risk of Absence Impact&quot;&#xD;&#xA;&#xD;&#xA;pivot4-col1" columns="8" />
-        <dataField fieldName="OnTheVerge" columns="15" hidden="true" />
-        <dataField fieldName="IsOnTheVerge" tag="pivot2-row1-donut&#xD;&#xA;pivot2-title:&quot;Students evaluated to be OnTheVerge of adverse impact of absence&quot;" columns="10">
-          <headerText>OnTheVerge</headerText>
-        </dataField>
-        <dataField fieldName="IsChrab" columns="15" hidden="true" />
-        <dataField fieldName="CHRAB" columns="8" tag="pivot3-row1-donut&#xD;&#xA;pivot3-title:&quot;Students evaluated to be Chronically Absent&quot;" />
-        <dataField fieldName="IsPerfect" columns="12" />
-        <dataField fieldName="PerfectattenanceCount" columns="12" hidden="true">
-          <headerText />
-        </dataField>
+        <dataField fieldName="PersonID" columns="15" />
+        <dataField fieldName="FirstName" columns="50" />
+        <dataField fieldName="LastName" columns="50" />
+        <dataField fieldName="AcademicYear" columns="20" />
+        <dataField fieldName="AcademicTerm" columns="20" />
+        <dataField fieldName="IsAtRisk" columns="15" />
+        <dataField fieldName="IsChrab" columns="15" />
+        <dataField fieldName="OnTheVerge" columns="15" />
+        <dataField fieldName="PerfectattenanceCount" columns="15" />
         <dataField fieldName="AttendanceRate" columns="15" />
-        <dataField fieldName="PrevisatriskCount" columns="15" hidden="true" />
-        <dataField fieldName="PrevischrabCount" columns="15" hidden="true" />
-        <dataField fieldName="PrevonthevergeCount" columns="15" hidden="true" />
-        <dataField fieldName="TermIsatriskChange" columns="15" hidden="true" />
-        <dataField fieldName="TermIschrabChange" columns="15" hidden="true" />
-        <dataField fieldName="TermOnthevergeChange" columns="15" hidden="true" />
-        <dataField fieldName="SSIA" columns="15" hidden="true" />
+        <dataField fieldName="PrevisatriskCount" columns="15" />
+        <dataField fieldName="PrevischrabCount" columns="15" />
+        <dataField fieldName="PrevonthevergeCount" columns="15" />
+        <dataField fieldName="TermIsatriskChange" columns="15" />
+        <dataField fieldName="TermIschrabChange" columns="15" />
+        <dataField fieldName="TermOnthevergeChange" columns="15" />
+        <dataField fieldName="SSIA" columns="15" />
+        <dataField fieldName="AtRisk" />
+        <dataField fieldName="CHRAB" />
+        <dataField fieldName="IsOnTheVerge" />
+        <dataField fieldName="IsPerfect" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Term Basis Person Centred Evaluation">
@@ -183,17 +179,10 @@ from "dbo"."rep_usp_term_basis_person_centred_evaluation" "rep_usp_term_basis_pe
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action commandName="SQL" headerText="Refresh Dataset" id="a103">
-        <data><![CDATA[ EXEC [dbo].[usp_term_basis_person_centred_evaluation]]]></data>
-      </action>
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
-      <action id="a100" commandName="ReportAsPdf" headerText="Export To PDF" />
-      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a102" commandName="ReportAsWord" headerText="Export To Word" />
-      <action id="a104" />
       <action id="a3" commandName="ExportRowset" />
-      <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a7" commandName="DataSheet" />
       <action id="a8" commandName="Grid" />
     </actionGroup>
@@ -204,7 +193,10 @@ from "dbo"."rep_usp_term_basis_person_centred_evaluation" "rep_usp_term_basis_pe
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
       <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

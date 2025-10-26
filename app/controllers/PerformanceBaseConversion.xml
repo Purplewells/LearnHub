@@ -44,7 +44,7 @@ from "dbo"."zlkpPerformanceBaseConversion" "zlkpPerformanceBaseConversion"
     <field name="GradeScaleTypeID" type="Int32" label="Grade Scale Type ID">
       <items style="Lookup" dataController="GradeScaleType" newDataView="createForm1" dataValueField="GradeScaleTypeID" dataTextField="GradeScaleType" />
     </field>
-    <field name="GradeScaleTypeGradeScaleType" type="String" readOnly="true" label="Scale Type" length="20" />
+    <field name="GradeScaleTypeGradeScaleType" type="String" readOnly="true" label="Scale Type" length="25" />
     <field name="AssessmentElementTypeID" type="Int32" label="Assessment Element Type ID">
       <items style="Lookup" dataController="AssessmentElementType" newDataView="createForm1" dataValueField="AssessmentElementTypeID" dataTextField="AssessmentElementType" />
     </field>
@@ -53,33 +53,16 @@ from "dbo"."zlkpPerformanceBaseConversion" "zlkpPerformanceBaseConversion"
     <field name="GradeLevelDependent" type="Boolean" label="GLD" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Grade Scales" filter="IsActive = 1">
+    <view id="grid1" type="Grid" commandId="command1" label="Performance Base Conversion">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="PerformanceBaseConversion" columns="30" />
-        <dataField fieldName="MinScore" columns="10" />
-        <dataField fieldName="MaxScore" columns="10" />
-        <dataField fieldName="Grade" columns="5" />
-        <dataField fieldName="GradeName" columns="5" />
-        <dataField fieldName="Passing" columns="10" />
-        <dataField fieldName="Description" columns="25" />
-        <dataField fieldName="GradeRank" columns="10" />
-        <dataField fieldName="GradeScaleTypeID" aliasFieldName="GradeScaleTypeGradeScaleType" />
-        <dataField fieldName="AssessmentElementTypeID" aliasFieldName="AssessmentElementType" />
-        <dataField fieldName="IsActive" />
-        <dataField fieldName="GradeLevelDependent" />
-      </dataFields>
-    </view>
-    <view id="grid1_all_gradescales" type="Grid" commandId="command1" label="All Grade Scales">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="PerformanceBaseConversion" columns="30" />
-        <dataField fieldName="MinScore" columns="10" />
-        <dataField fieldName="MaxScore" columns="10" />
-        <dataField fieldName="Grade" columns="5" />
-        <dataField fieldName="GradeName" columns="5" />
-        <dataField fieldName="Passing" columns="10" />
-        <dataField fieldName="Description" columns="25" />
+        <dataField fieldName="MinScore" columns="15" />
+        <dataField fieldName="MaxScore" columns="15" />
+        <dataField fieldName="Grade" columns="20" />
+        <dataField fieldName="GradeName" columns="20" />
+        <dataField fieldName="Passing" />
+        <dataField fieldName="Description" />
         <dataField fieldName="GradeRank" columns="15" />
         <dataField fieldName="GradeScaleTypeID" aliasFieldName="GradeScaleTypeGradeScaleType" />
         <dataField fieldName="AssessmentElementTypeID" aliasFieldName="AssessmentElementType" />
@@ -87,10 +70,10 @@ from "dbo"."zlkpPerformanceBaseConversion" "zlkpPerformanceBaseConversion"
         <dataField fieldName="GradeLevelDependent" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Grade Scale">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Performance Base Conversion">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Performance Base Conversion" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="PerformanceBaseConversion" columns="30" />
@@ -109,7 +92,7 @@ from "dbo"."zlkpPerformanceBaseConversion" "zlkpPerformanceBaseConversion"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Grade Scale">
+    <view id="createForm1" type="Form" commandId="command1" label="New Performance Base Conversion">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">

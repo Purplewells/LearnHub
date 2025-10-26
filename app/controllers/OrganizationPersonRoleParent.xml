@@ -60,63 +60,55 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
     <field name="RoleID" type="Int32" label="Role ID">
       <items style="Lookup" dataController="Role" newDataView="createForm1" dataValueField="RoleID" dataTextField="RoleName" />
     </field>
-    <field name="Role" type="String" readOnly="true" label="Role" length="10" />
+    <field name="Role" type="String" readOnly="true" label="Role" length="50" />
     <field name="Town" type="String" readOnly="true" label="Town" length="30" />
     <field name="Occupation" type="String" readOnly="true" label="Occupation" length="100" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Parents" filter="Role = 'Parent'">
+    <view id="grid1" type="Grid" commandId="command1" label="Organization Person Role Parent">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Fullname" tag="header-text" hidden="true" />
-        <dataField fieldName="FirstName" columns="18" />
-        <dataField fieldName="LastName" columns="18" />
+        <dataField fieldName="Fullname" />
+        <dataField fieldName="OrganisationID" aliasFieldName="Organisation" />
         <dataField fieldName="PersonID" aliasFieldName="UPN" />
-        <dataField fieldName="Occupation" columns="20" />
-        <dataField fieldName="EntryDate" columns="20" />
-        <dataField fieldName="ExitDate" columns="18" hidden="true" />
-        <dataField fieldName="RoleID" aliasFieldName="Role" hidden="true" />
-        <dataField fieldName="OrganisationID" aliasFieldName="Organisation" hidden="true" />
-        <dataField fieldName="PhoneNo" columns="15" hidden="true" />
-        <dataField fieldName="Email" columns="50" hidden="true" />
-        <dataField fieldName="Address" columns="50" hidden="true" />
-        <dataField fieldName="SuiteNumber" columns="5" hidden="true" />
-        <dataField fieldName="Town" columns="30" hidden="true" />
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="PhoneNo" columns="15" />
+        <dataField fieldName="Email" columns="50" />
+        <dataField fieldName="Address" columns="50" />
+        <dataField fieldName="SuiteNumber" columns="5" />
+        <dataField fieldName="EntryDate" columns="10" />
+        <dataField fieldName="ExitDate" columns="10" />
+        <dataField fieldName="RoleID" aliasFieldName="Role" />
+        <dataField fieldName="Town" columns="30" />
+        <dataField fieldName="Occupation" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Parent">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Organization Person Role Parent">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Organization Person Role Parent" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="Fullname" />
+            <dataField fieldName="OrganisationID" aliasFieldName="Organisation" />
             <dataField fieldName="PersonID" aliasFieldName="UPN" />
-            <dataField fieldName="EntryDate" columns="10" />
-            <dataField fieldName="ExitDate" columns="10" />
-            <dataField fieldName="Occupation" />
-          </dataFields>
-        </category>
-        <category id="c3" flow="NewColumn">
-          <description />
-          <dataFields>
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="PhoneNo" columns="15" />
+            <dataField fieldName="Email" columns="50" />
             <dataField fieldName="Address" columns="50" />
             <dataField fieldName="SuiteNumber" columns="5" />
-            <dataField fieldName="Town" columns="30" />
-            <dataField fieldName="Email" columns="50" />
-            <dataField fieldName="PhoneNo" columns="15" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Other Details" collapsed="true" flow="NewRow">
-          <description />
-          <dataFields>
+            <dataField fieldName="EntryDate" columns="10" />
+            <dataField fieldName="ExitDate" columns="10" />
             <dataField fieldName="RoleID" aliasFieldName="Role" />
-            <dataField fieldName="OrganisationID" aliasFieldName="Organisation" />
+            <dataField fieldName="Town" columns="30" />
+            <dataField fieldName="Occupation" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Parent">
+    <view id="createForm1" type="Form" commandId="command1" label="New Organization Person Role Parent">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">

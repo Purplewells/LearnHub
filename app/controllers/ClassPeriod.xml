@@ -50,7 +50,7 @@ from "dbo"."ClassPeriod" "ClassPeriod"
         <dataField fieldName="PeriodDescriptor" />
         <dataField fieldName="IsActive" />
         <dataField fieldName="ClassPeriodTypeID" aliasFieldName="ClassPeriodType" />
-        <dataField fieldName="EffectiveFrom" columns="20" />
+        <dataField fieldName="EffectiveFrom" columns="10" />
         <dataField fieldName="TimeBlock" columns="20" />
       </dataFields>
     </view>

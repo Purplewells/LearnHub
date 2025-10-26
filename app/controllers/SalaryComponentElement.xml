@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="SalaryComponentElement" conflictDetection="overwriteChanges" label="Salary Component Element" plugIn="zLearnHub.Data.AnnotationPlugIn" handler="zLearnHub.Rules.SalaryComponentElementBusinessRules" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="SalaryComponentElement" conflictDetection="overwriteChanges" label="Salary Component Element" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands>
     <command id="command1" type="Text">
       <text><![CDATA[
@@ -49,28 +49,26 @@ order by "Element"."SortOrder" asc]]></text>
       <items style="Lookup" dataController="ListOfSalaries" newDataView="createForm1" dataValueField="SalaryID" dataTextField="SalaryName" />
     </field>
     <field name="SalaryName" type="String" readOnly="true" dataFormatString="c" label="Salary Name" length="30" />
-    <field name="Amount" type="Decimal" dataFormatString="c" label="Amount" showInSummary="true" causesCalculate="true" />
-    <field name="IsPercentBased" type="Boolean" label="Percent Based" showInSummary="true" causesCalculate="true">
-      <items style="DropDownList" />
-    </field>
-    <field name="AdjustmentFactor" type="Decimal" dataFormatString="p" label="Adj. Factor" showInSummary="true" causesCalculate="true" />
+    <field name="Amount" type="Decimal" dataFormatString="c" label="Amount" showInSummary="true" />
+    <field name="IsPercentBased" type="Boolean" label="Percent Based" showInSummary="true" />
+    <field name="AdjustmentFactor" type="Decimal" dataFormatString="p" label="Adj. Factor" showInSummary="true" />
     <field name="AmountValue" type="Decimal" dataFormatString="" label="Amount Value" showInSummary="true" />
     <field name="IsActive" type="Boolean" label="Active" />
-    <field name="IsApproved" type="Boolean" label="Approved" causesCalculate="true" />
-    <field name="IsTaxable" type="Boolean" label="Taxable" causesCalculate="true" />
-    <field name="IsEarnings" type="Boolean" label="Earnings" causesCalculate="true" />
-    <field name="TaxRate" type="Decimal" dataFormatString="p" label="Tax Rate" causesCalculate="true" />
+    <field name="IsApproved" type="Boolean" label="Approved" />
+    <field name="IsTaxable" type="Boolean" label="Taxable" />
+    <field name="IsEarnings" type="Boolean" label="Earnings" />
+    <field name="TaxRate" type="Decimal" dataFormatString="p" label="Tax Rate" />
     <field name="StartDate" type="DateTime" label="Start Date" />
     <field name="EndDate" type="DateTime" label="End Date" />
     <field name="IsShowOnPayslip" type="Boolean" label="Show On Payslip" />
     <field name="CurrencyID" type="Int32" label="Currency ID">
       <items style="Lookup" dataController="Currency" newDataView="createForm1" dataValueField="CurrencyID" dataTextField="CurrencyName" />
     </field>
-    <field name="CurrencyName" type="String" readOnly="true" label="CURR" length="7" />
+    <field name="CurrencyName" type="String" readOnly="true" label="CURR" length="20" />
     <field name="ElementID" type="Int32" label="Element ID">
       <items style="Lookup" dataController="SalaryComponent" newDataView="createForm1" dataValueField="ElementID" dataTextField="ElementName" copy="ElementSortOrder=SortOrder, ComponentType=ComponentType" />
     </field>
-    <field name="ElementName" type="String" readOnly="true" label="Element Name" length="25" />
+    <field name="ElementName" type="String" readOnly="true" label="Element Name" length="50" />
     <field name="ElementSortOrder" type="Int32" readOnly="true" label="ESO" />
     <field name="ComponentType" type="String" readOnly="true" label="Element Type" length="20" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
@@ -82,69 +80,52 @@ order by "Element"."SortOrder" asc]]></text>
     <view id="grid1" type="Grid" commandId="command1" label="Salary Component Element" sortExpression="ElementSortOrder asc">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="ElementID" aliasFieldName="ElementName" />
-        <dataField fieldName="ComponentType" columns="20" />
-        <dataField fieldName="Amount" columns="10" />
         <dataField fieldName="SalaryID" aliasFieldName="SalaryName" />
-        <dataField fieldName="IsPercentBased">
-          <headerText>% Based</headerText>
-        </dataField>
-        <dataField fieldName="AdjustmentFactor" columns="10" />
+        <dataField fieldName="Amount" columns="15" />
+        <dataField fieldName="IsPercentBased" />
+        <dataField fieldName="AdjustmentFactor" columns="15" />
         <dataField fieldName="AmountValue" columns="15" />
-        <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
         <dataField fieldName="IsActive" />
         <dataField fieldName="IsApproved" />
         <dataField fieldName="IsTaxable" />
-        <dataField fieldName="TaxRate" columns="10" />
         <dataField fieldName="IsEarnings" />
+        <dataField fieldName="TaxRate" columns="15" />
         <dataField fieldName="StartDate" columns="10" />
         <dataField fieldName="EndDate" columns="10" />
-        <dataField fieldName="IsShowOnPayslip" hidden="true" />
-        <dataField fieldName="ElementSortOrder" columns="5" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="IsShowOnPayslip" />
+        <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
+        <dataField fieldName="ElementID" aliasFieldName="ElementName" />
+        <dataField fieldName="ElementSortOrder" columns="15" />
+        <dataField fieldName="ComponentType" columns="20" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Salary Component">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Salary Component Element">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Salary Component Element" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="SalaryID" aliasFieldName="SalaryName" />
-            <dataField fieldName="ElementID" aliasFieldName="ElementName" />
             <dataField fieldName="Amount" columns="15" />
-            <dataField fieldName="IsPercentBased" columns="2" tag="lookup-null-value-none" />
+            <dataField fieldName="IsPercentBased" />
             <dataField fieldName="AdjustmentFactor" columns="15" />
             <dataField fieldName="AmountValue" columns="15" />
-            <dataField fieldName="IsTaxable" />
-            <dataField fieldName="TaxRate" columns="15" />
-            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
-            <dataField fieldName="IsEarnings" />
-            <dataField fieldName="StartDate" columns="10" />
-            <dataField fieldName="EndDate" columns="10" />
-            <dataField fieldName="ElementSortOrder" columns="15" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Flag Attributes" collapsed="true">
-          <description />
-          <dataFields>
             <dataField fieldName="IsActive" />
             <dataField fieldName="IsApproved" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Other" collapsed="true">
-          <description />
-          <dataFields>
+            <dataField fieldName="IsTaxable" />
+            <dataField fieldName="IsEarnings" />
+            <dataField fieldName="TaxRate" columns="15" />
+            <dataField fieldName="StartDate" columns="10" />
+            <dataField fieldName="EndDate" columns="10" />
             <dataField fieldName="IsShowOnPayslip" />
+            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
+            <dataField fieldName="ElementID" aliasFieldName="ElementName" />
+            <dataField fieldName="ElementSortOrder" columns="15" />
             <dataField fieldName="ComponentType" columns="20" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="Audit" collapsed="true" floating="true">
-          <description />
-          <dataFields>
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
@@ -153,44 +134,29 @@ order by "Element"."SortOrder" asc]]></text>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Component">
+    <view id="createForm1" type="Form" commandId="command1" label="New Salary Component Element">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description />
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
             <dataField fieldName="SalaryID" aliasFieldName="SalaryName" />
-            <dataField fieldName="ElementID" aliasFieldName="ElementName" />
             <dataField fieldName="Amount" columns="15" />
-            <dataField fieldName="IsPercentBased" columns="2" tag="lookup-null-value-none" />
+            <dataField fieldName="IsPercentBased" />
             <dataField fieldName="AdjustmentFactor" columns="15" />
             <dataField fieldName="AmountValue" columns="15" />
-            <dataField fieldName="IsTaxable" />
-            <dataField fieldName="TaxRate" columns="15" />
-            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
-            <dataField fieldName="IsEarnings" />
-            <dataField fieldName="StartDate" columns="10" />
-            <dataField fieldName="EndDate" columns="10" />
-            <dataField fieldName="ElementSortOrder" columns="15" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Flag Attributes" collapsed="true">
-          <description />
-          <dataFields>
             <dataField fieldName="IsActive" />
             <dataField fieldName="IsApproved" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Other" collapsed="true">
-          <description />
-          <dataFields>
+            <dataField fieldName="IsTaxable" />
+            <dataField fieldName="IsEarnings" />
+            <dataField fieldName="TaxRate" columns="15" />
+            <dataField fieldName="StartDate" columns="10" />
+            <dataField fieldName="EndDate" columns="10" />
             <dataField fieldName="IsShowOnPayslip" />
+            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyName" />
+            <dataField fieldName="ElementID" aliasFieldName="ElementName" />
+            <dataField fieldName="ElementSortOrder" columns="15" />
             <dataField fieldName="ComponentType" columns="20" />
-          </dataFields>
-        </category>
-        <category id="c3" headerText="Audit" collapsed="true" floating="true">
-          <description />
-          <dataFields>
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
@@ -234,13 +200,9 @@ order by "Element"."SortOrder" asc]]></text>
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
-      <action id="a102" commandName="ReportAsPdf" headerText="Export To PDF" />
-      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a100" commandName="ReportAsWord" headerText="Export To Word" />
       <action id="a2" />
-      <action id="a104" />
-      <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
-      <action id="a4" commandName="ExportRss" headerText="Send To API" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
       <action id="a5" />
       <action id="a6" commandName="Import" commandArgument="createForm1" />
       <action id="a7" commandName="DataSheet" />
@@ -253,7 +215,10 @@ order by "Element"."SortOrder" asc]]></text>
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
       <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
@@ -262,31 +227,4 @@ order by "Element"."SortOrder" asc]]></text>
       <action id="a7" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
   </actions>
-  <businessRules>
-    <rule id="r102" commandName="New" type="Sql" phase="Execute" name="setDefaultComponentValues"><![CDATA[SET @IsActive = 1
-SET @IsApproved = 1
-SET @IsTaxable = 0
-SET @IsEarnings = 0
-SET @IsShowOnPayslip = 1
-SET @IsPercentBased = 0]]></rule>
-    <rule id="r101" commandName="Insert|Update|Calculate" type="Code" phase="Before" name="setAmount" />
-    <rule id="r104" commandName="New|Update|Calculate" type="Sql" phase="Execute" name="setStartDate"><![CDATA[-- perform validation
---DECLARE @ExitDate DATE
-
-IF @StartDate IS NULL 
-BEGIN
-SET @StartDate = CAST(GETDATE() AS DATE)
-END
-
-]]></rule>
-    <rule id="r105" commandName="Insert|Update|Calculate" type="Sql" phase="Execute" name="setEndDate"><![CDATA[IF @EndDate IS NULL 
-BEGIN
-   SET @EndDate = DATEADD(YEAR, 10, GETDATE())
-  
-END]]></rule>
-    <rule id="r100" commandName="Calculate" type="Code" phase="Execute" name="calculateAmountValue" />
-    <rule id="r103" commandName="Save|Insert|Update" type="Sql" phase="After" name="refreshSalaryValues"><![CDATA[EXEC [dbo].[zusp_ops_salary_p1_prepare_information_specific] @SalaryID
-SET @Result_ExecuteOnClient = '$appfactory.find("Salaries", "Controller").sync();'
-SET @Result_ShowMessage = 'Salary computation setup and processing ' + ' ' + 'has completed successfully' ]]></rule>
-  </businessRules>
 </dataController>

@@ -29,20 +29,12 @@ from "dbo"."zlkpAbsentAttendanceCategory" "zlkpAbsentAttendanceCategory"
     <field name="IsActive" type="Boolean" default="((1))" label="Is Active" showInSummary="true" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Absence Reason" filter="IsActive = 1" sortExpression="Description ASC">
-      <headerText>$DefaultGridViewDescription</headerText>
-      <dataFields>
-        <dataField fieldName="Description" columns="30" />
-        <dataField fieldName="Code" columns="10" />
-        <dataField fieldName="SortOrder" columns="10" />
-        <dataField fieldName="IsActive" />
-      </dataFields>
-    </view>
-    <view id="all_absence_reasons" type="Grid" commandId="command1" label="All Absence Reason">
+    <view id="grid1" type="Grid" commandId="command1" label="Absence Reason">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Description" />
         <dataField fieldName="Code" columns="50" />
+        <dataField fieldName="Definition" rows="5" />
         <dataField fieldName="SortOrder" columns="15" />
         <dataField fieldName="IsActive" />
       </dataFields>
@@ -50,11 +42,12 @@ from "dbo"."zlkpAbsentAttendanceCategory" "zlkpAbsentAttendanceCategory"
     <view id="editForm1" type="Form" commandId="command1" label="Review Absence Reason">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Absence Reason" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="Description" />
             <dataField fieldName="Code" columns="50" />
+            <dataField fieldName="Definition" rows="5" />
             <dataField fieldName="SortOrder" columns="15" />
             <dataField fieldName="IsActive" />
           </dataFields>
@@ -69,6 +62,7 @@ from "dbo"."zlkpAbsentAttendanceCategory" "zlkpAbsentAttendanceCategory"
           <dataFields>
             <dataField fieldName="Description" />
             <dataField fieldName="Code" columns="50" />
+            <dataField fieldName="Definition" rows="5" />
             <dataField fieldName="SortOrder" columns="15" />
             <dataField fieldName="IsActive" />
           </dataFields>

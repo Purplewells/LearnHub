@@ -49,29 +49,29 @@ from "dbo"."StudentSectionAttendanceEvents" "StudentSectionAttendanceEvents"
     <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
     <field name="GL" type="String" readOnly="true" label="GL" length="10" />
     <field name="RefAbsentAttendanceCategoryID" type="Int32" label="Ref Absent Attendance Category ID" showInSummary="true">
-      <items style="DropDownList" dataController="AbsenceReason" dataValueField="RefAbsentAttendanceCategoryID" dataTextField="Description" />
+      <items style="Lookup" dataController="AbsenceReason" newDataView="createForm1" dataValueField="RefAbsentAttendanceCategoryID" dataTextField="Description" />
     </field>
-    <field name="RefAbsentAttendanceCategoryDescription" type="String" readOnly="true" label="Absence Reason" length="20" />
+    <field name="RefAbsentAttendanceCategoryDescription" type="String" readOnly="true" label="Reason" length="100" />
     <field name="RefAttendanceStatusID" type="Int32" label="Ref Attendance Status ID" showInSummary="true">
-      <items style="RadioButtonList" dataController="AttendanceStatus" dataValueField="RefAttendanceStatusID" dataTextField="Description" dataView="grid1" />
+      <items style="Lookup" dataController="AttendanceStatus" newDataView="createForm1" dataValueField="RefAttendanceStatusID" dataTextField="Description" />
     </field>
-    <field name="AttendanceStatus" type="String" readOnly="true" label="Status" length="15" />
+    <field name="AttendanceStatus" type="String" readOnly="true" label="Status" length="100" />
     <field name="RefPresentAttendanceCategoryID" type="Int32" label="Ref Present Attendance Category Id" showInSummary="true">
       <items style="Lookup" dataController="PresentAttendanceCategory" newDataView="createForm1" dataValueField="RefPresentAttendanceCategoryID" dataTextField="Description" />
     </field>
-    <field name="RefPresentAttendanceCategoryDescription" type="String" readOnly="true" label="HowTimeSpent" length="18" />
+    <field name="RefPresentAttendanceCategoryDescription" type="String" readOnly="true" label="HowTimeSpent" length="100" />
     <field name="AttendanceEventID" type="Int32" allowNulls="false" label="Attendance Event ID" showInSummary="true">
       <items style="Lookup" dataController="AttendanceEvent" newDataView="createForm1" dataValueField="AttendanceEventID" />
     </field>
     <field name="AttendanceEventDurationCode" type="String" readOnly="true" label="Attendance Event Duration Code" length="10" />
     <field name="OrganizationPersonRoleID" type="Int32" label="Organization Person Role ID" showInSummary="true">
-      <items style="Lookup" dataController="zlkpCurrentStudentOrganisationPersonRoleID" newDataView="createForm1" dataValueField="OrganizationPersonRoleID" dataTextField="StudentGradeName" copy="FirstName=FirstName, LastName=LastName, UPN=UPN, " dataView="grid1" />
+      <items style="Lookup" dataController="OnboardReset" newDataView="createForm1" dataValueField="OrganizationPersonRoleID" dataTextField="OrganisationID" copy="FirstName=FirstName, LastName=LastName, UPN=UPN, " />
     </field>
     <field name="OrganizationPersonRoleOrganisationID" type="Int32" readOnly="true" label="Organization Person Role Organisation ID" />
     <field name="RefSchoolStreamID" type="Int32" label="Ref School Stream ID">
-      <items style="DropDownList" dataController="SchoolStream" dataValueField="RefSchoolStreamID" dataTextField="Description" dataView="grid1" />
+      <items style="Lookup" dataController="SchoolStream" newDataView="createForm1" dataValueField="RefSchoolStreamID" dataTextField="Description" />
     </field>
-    <field name="Stream" type="String" readOnly="true" label="Stream" length="10" />
+    <field name="Stream" type="String" readOnly="true" label="Stream" length="100" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
     <field name="CreatedBy" type="String" label="Created By" length="50" />
@@ -84,74 +84,69 @@ from "dbo"."StudentSectionAttendanceEvents" "StudentSectionAttendanceEvents"
     <view id="grid1" type="Grid" commandId="command1" label="Student Section Attendance Events">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Fullname" />
-        <dataField fieldName="OrganizationPersonRoleID" aliasFieldName="Fullname" />
-        <dataField fieldName="FirstName" columns="18" hidden="true" />
-        <dataField fieldName="LastName" columns="18" hidden="true" />
-        <dataField fieldName="UPN" columns="10" hidden="true" />
-        <dataField fieldName="RefAttendanceStatusID" aliasFieldName="AttendanceStatus">
-          <headerText>Status</headerText>
-        </dataField>
+        <dataField fieldName="FirstName" columns="35" />
+        <dataField fieldName="LastName" columns="35" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="GL" columns="10" />
         <dataField fieldName="RefAbsentAttendanceCategoryID" aliasFieldName="RefAbsentAttendanceCategoryDescription" />
-        <dataField fieldName="RefPresentAttendanceCategoryID" aliasFieldName="RefPresentAttendanceCategoryDescription" columns="18" hidden="true" />
-        <dataField fieldName="AttendanceEventID" aliasFieldName="AttendanceEventDurationCode" hidden="true" />
-        <dataField fieldName="GL" columns="5" />
+        <dataField fieldName="RefAttendanceStatusID" aliasFieldName="AttendanceStatus" />
+        <dataField fieldName="RefPresentAttendanceCategoryID" aliasFieldName="RefPresentAttendanceCategoryDescription" />
+        <dataField fieldName="AttendanceEventID" aliasFieldName="AttendanceEventDurationCode" />
+        <dataField fieldName="OrganizationPersonRoleID" aliasFieldName="OrganizationPersonRoleOrganisationID" />
         <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="Fullname" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Attendance Log">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Student Section Attendance Events">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Student Section Attendance Events" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="FirstName" columns="35" hidden="true" />
-            <dataField fieldName="LastName" columns="35" hidden="true" />
-            <dataField fieldName="Fullname" />
-            <dataField fieldName="OrganizationPersonRoleID" aliasFieldName="Fullname" />
-            <dataField fieldName="UPN" columns="10" hidden="true" />
-            <dataField fieldName="GL" columns="10" hidden="true" />
-            <dataField fieldName="RefAttendanceStatusID" aliasFieldName="AttendanceStatus" columns="2" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="GL" columns="10" />
             <dataField fieldName="RefAbsentAttendanceCategoryID" aliasFieldName="RefAbsentAttendanceCategoryDescription" />
-            <dataField fieldName="RefPresentAttendanceCategoryID" aliasFieldName="RefPresentAttendanceCategoryDescription" hidden="true" />
-            <dataField fieldName="AttendanceEventID" aliasFieldName="AttendanceEventDurationCode" hidden="true" />
-            <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" textMode="Static" />
-          </dataFields>
-        </category>
-        <category id="c2" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
-          <description />
-          <dataFields>
+            <dataField fieldName="RefAttendanceStatusID" aliasFieldName="AttendanceStatus" />
+            <dataField fieldName="RefPresentAttendanceCategoryID" aliasFieldName="RefPresentAttendanceCategoryDescription" />
+            <dataField fieldName="AttendanceEventID" aliasFieldName="AttendanceEventDurationCode" />
+            <dataField fieldName="OrganizationPersonRoleID" aliasFieldName="OrganizationPersonRoleOrganisationID" />
+            <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" />
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="Fullname" />
           </dataFields>
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Attendance Log">
+    <view id="createForm1" type="Form" commandId="command1" label="New Student Section Attendance Events">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
           <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="OrganizationPersonRoleID" aliasFieldName="Fullname" />
-            <dataField fieldName="UPN" columns="10" hidden="true" />
-            <dataField fieldName="GL" columns="10" hidden="true" />
+            <dataField fieldName="FirstName" columns="35" />
+            <dataField fieldName="LastName" columns="35" />
+            <dataField fieldName="UPN" columns="10" />
+            <dataField fieldName="GL" columns="10" />
             <dataField fieldName="RefAbsentAttendanceCategoryID" aliasFieldName="RefAbsentAttendanceCategoryDescription" />
             <dataField fieldName="RefAttendanceStatusID" aliasFieldName="AttendanceStatus" />
             <dataField fieldName="RefPresentAttendanceCategoryID" aliasFieldName="RefPresentAttendanceCategoryDescription" />
             <dataField fieldName="AttendanceEventID" aliasFieldName="AttendanceEventDurationCode" />
-            <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" textMode="Static" />
-            <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-            <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-            <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-            <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-            <dataField fieldName="Fullname" hidden="true" />
+            <dataField fieldName="OrganizationPersonRoleID" aliasFieldName="OrganizationPersonRoleOrganisationID" />
+            <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="CreatedBy" columns="50" />
+            <dataField fieldName="ModifiedBy" columns="50" />
+            <dataField fieldName="Fullname" />
           </dataFields>
         </category>
       </categories>
@@ -182,13 +177,14 @@ from "dbo"."StudentSectionAttendanceEvents" "StudentSectionAttendanceEvents"
       <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
     </actionGroup>
-    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true" />
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a100" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
       <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
       <action id="a3" commandName="ExportRowset" />

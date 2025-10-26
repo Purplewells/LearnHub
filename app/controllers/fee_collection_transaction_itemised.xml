@@ -77,9 +77,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
     <field name="CurrentBalance" type="Decimal" label="Current Balance" showInSummary="true" />
     <field name="Description" type="String" label="Description" length="50" showInSummary="true" />
     <field name="FeeType" type="String" label="Fee Type" length="20" />
-    <field name="PersonID" type="Int32" label="Person ID">
-      <items style="DropDownList" dataController="Contact" dataView="grid1" dataTextField="LastName" dataValueField="PersonID" />
-    </field>
+    <field name="PersonID" type="Int32" label="Person ID" />
     <field name="PaymentMethodID" type="Int32" label="Payment Method ID">
       <items style="Lookup" dataController="PaymentMethod" newDataView="createForm1" dataValueField="PaymentMethodID" dataTextField="PaymentMethod" />
     </field>
@@ -95,7 +93,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
     <field name="CreatedBy" type="String" label="Created By" length="50" />
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
     <field name="ReceiptNo" type="String" label="Receipt No" length="50" />
-    <field name="Note" type="String" label="Note" length="40" />
+    <field name="Note" type="String" label="Note" length="50" />
     <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
     <field name="GL" type="String" readOnly="true" label="GL" length="10" />
     <field name="Firstname" type="String" readOnly="true" label="Firstname" length="35" />
@@ -114,120 +112,92 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
     </field>
     <field name="Logo" type="Byte[]" readOnly="true" onDemand="true" sourceFields="" onDemandHandler="SchoolOrganisationLogo" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Logo" />
     <field name="TransactionTypeID" type="Int32" label="Transaction Type ID">
-      <items style="Lookup" dataController="TransactionType" dataValueField="TransactionTypeID" dataTextField="TransactionType" dataView="grid1" />
+      <items style="Lookup" dataController="TransactionType" newDataView="createForm1" dataValueField="TransactionTypeID" dataTextField="TransactionType" />
     </field>
-    <field name="TransactionType" type="String" readOnly="true" label="Trans Type" length="20" />
+    <field name="TransactionType" type="String" readOnly="true" label="Transaction Type" length="20" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Itemised Collections" reportTemplate="true" reportLabel="Fee Collections Itemised" group="PersonID, FeeID, TransactionID" sortExpression="CreatedDate DESC, ModifiedDate DESC">
+    <view id="grid1" type="Grid" commandId="command1" label="Fee Collection Transaction Itemised">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Firstname" columns="20" />
-        <dataField fieldName="Lastname" columns="20" />
-        <dataField fieldName="FeesDescription" columns="25">
-          <headerText>Description</headerText>
-        </dataField>
-        <dataField fieldName="UPN" columns="10" aggregate="Count" />
-        <dataField fieldName="GL" columns="5" tag="pivot5-row1-bar&#xD;&#xA;pivot5-title:&quot;Total Amount Received By Grade Level&quot;" />
-        <dataField fieldName="Sex" columns="5" />
-        <dataField fieldName="Description" columns="50" hidden="true" />
-        <dataField fieldName="FeeDescription" columns="30" hidden="true" />
-        <dataField fieldName="TransDate" columns="18" tag="pivot3-row1-line-date&#xD;&#xA;pivot3-title:&quot;Count of Transaction over time&quot;" />
-        <dataField fieldName="FeeAmount" columns="10" />
-        <dataField fieldName="BillAmount" columns="15" hidden="true" />
-        <dataField fieldName="AmountPaid" columns="10" aggregate="Sum" tag="pivot1-val1-sum&#xD;&#xA;pivot4-val1-sum&#xD;&#xA;pivot5-val1-sum" />
+        <dataField fieldName="TransDate" columns="10" />
+        <dataField fieldName="FeeID" aliasFieldName="Status" />
+        <dataField fieldName="BillAmount" columns="15" />
+        <dataField fieldName="FeeDescription" columns="30" />
+        <dataField fieldName="AmountPaid" columns="15" />
+        <dataField fieldName="CurrentBalance" columns="15" />
+        <dataField fieldName="Description" columns="50" />
+        <dataField fieldName="FeeType" columns="20" />
+        <dataField fieldName="PersonID" textMode="Static" columns="15" />
+        <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" />
+        <dataField fieldName="TransactionStatusCode" columns="20" />
+        <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" />
+        <dataField fieldName="NameOfPayee" columns="25" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="ModifiedDate" columns="20" />
+        <dataField fieldName="CreatedBy" columns="50" />
+        <dataField fieldName="ModifiedBy" columns="50" />
+        <dataField fieldName="ReceiptNo" columns="50" />
+        <dataField fieldName="Note" columns="50" />
+        <dataField fieldName="UPN" columns="10" />
+        <dataField fieldName="GL" columns="10" />
+        <dataField fieldName="Firstname" columns="35" />
+        <dataField fieldName="Lastname" columns="35" />
+        <dataField fieldName="Sex" columns="50" />
+        <dataField fieldName="FeesDescription" columns="50" />
+        <dataField fieldName="FeeAmount" columns="15" />
+        <dataField fieldName="EffectiveDate" columns="10" />
+        <dataField fieldName="EffectiveTo" columns="10" />
         <dataField fieldName="CurrencyCode" columns="5" />
-        <dataField fieldName="TransactionStatusCode" columns="12" hidden="true" />
-        <dataField fieldName="ReceiptNo" columns="10" />
-        <dataField fieldName="CalendarCode" columns="12" tag="pivot4-row1-column&#xD;&#xA;pivot4-title:&quot;Sum of Amount Paid By Transaction Type&quot;" />
-        <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" hidden="true">
-          <headerText>P. Method</headerText>
-        </dataField>
-        <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" tag="pivot2-row1-pie&#xD;&#xA;pivot2-title:&quot;Total Amount Paid By Relation Type&quot;&#xD;&#xA;&#xD;&#xA;pivot6-row1-donut&#xD;&#xA;pivot6-title:&quot;Count of Transactions via Realtion Type&quot;" />
-        <dataField fieldName="FeeID" aliasFieldName="Status" hidden="true" />
-        <dataField fieldName="NameOfPayee" columns="25" hidden="true" />
-        <dataField fieldName="Note" columns="50" hidden="true" />
-        <dataField fieldName="School" columns="50" hidden="true" />
-        <dataField fieldName="CurrentBalance" columns="8" hidden="true">
-          <headerText>CBL</headerText>
-        </dataField>
-        <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" columns="8" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;Sum of Amount Paid By Transaction Type&quot;" hidden="true">
-          <headerText>TransType</headerText>
-        </dataField>
-        <dataField fieldName="FeeType" columns="15" hidden="true" />
-        <dataField fieldName="PersonID" textMode="Static" columns="15" hidden="true" />
-        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
-        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
-        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
-        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
-        <dataField fieldName="EffectiveDate" columns="10" hidden="true" />
-        <dataField fieldName="EffectiveTo" columns="10" hidden="true" />
-        <dataField fieldName="Address" hidden="true" />
-        <dataField fieldName="HeaderInfo" hidden="true" tag="header-text" />
-        <dataField fieldName="Logo" columns="15" hidden="true" />
+        <dataField fieldName="CalendarCode" columns="30" />
+        <dataField fieldName="School" columns="50" />
+        <dataField fieldName="Address" />
+        <dataField fieldName="HeaderInfo" />
+        <dataField fieldName="Logo" columns="15" />
+        <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Payment" reportTemplate="true" group="PersonID, FeeID, TransactionID">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Fee Collection Transaction Itemised">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" headerText="Fee Details" flow="NewColumn">
-          <description />
+        <category id="c1" headerText="Fee Collection Transaction Itemised" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
-            <dataField fieldName="ReceiptNo" columns="50" />
             <dataField fieldName="TransDate" columns="10" />
-            <dataField fieldName="AmountPaid" columns="15" />
-            <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" />
-            <dataField fieldName="TransactionStatusCode" columns="20" hidden="true" />
-            <dataField fieldName="FeeID" aliasFieldName="Status" hidden="true" />
-            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" />
-            <dataField fieldName="FeeDescription" columns="30" hidden="true" />
-            <dataField fieldName="Description" columns="50" />
-            <dataField fieldName="FeeType" columns="20" hidden="true" />
-            <dataField fieldName="PersonID" textMode="Static" columns="15" hidden="true" />
-            <dataField fieldName="HeaderInfo" hidden="true" />
-          </dataFields>
-        </category>
-        <category id="c2" flow="NewColumn">
-          <description />
-          <dataFields>
+            <dataField fieldName="FeeID" aliasFieldName="Status" />
             <dataField fieldName="BillAmount" columns="15" />
-            <dataField fieldName="FeeAmount" columns="15" hidden="true" />
+            <dataField fieldName="FeeDescription" columns="30" />
+            <dataField fieldName="AmountPaid" columns="15" />
             <dataField fieldName="CurrentBalance" columns="15" />
-            <dataField fieldName="CurrencyCode" columns="5" />
+            <dataField fieldName="Description" columns="50" />
+            <dataField fieldName="FeeType" columns="20" />
+            <dataField fieldName="PersonID" textMode="Static" columns="15" />
+            <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" />
+            <dataField fieldName="TransactionStatusCode" columns="20" />
             <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" />
             <dataField fieldName="NameOfPayee" columns="25" />
-            <dataField fieldName="EffectiveDate" columns="10" hidden="true" />
-            <dataField fieldName="EffectiveTo" columns="10" />
-          </dataFields>
-        </category>
-        <category id="c3" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="FeesDescription" columns="50" hidden="true" />
-            <dataField fieldName="CalendarCode" columns="30" />
-          </dataFields>
-          <visibility>
-            <expression test="[1]==[2]" type="ClientScript" />
-          </visibility>
-        </category>
-        <category id="c5" wrap="true" collapsed="true" headerText="Notes" flow="NewRow">
-          <description />
-          <dataFields>
-            <dataField fieldName="Note" columns="50" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Audit" collapsed="true" flow="NewRow">
-          <description />
-          <dataFields>
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedBy" columns="50" />
-            <dataField fieldName="Firstname" columns="35" />
-            <dataField fieldName="Lastname" columns="35" />
+            <dataField fieldName="ReceiptNo" columns="50" />
+            <dataField fieldName="Note" columns="50" />
             <dataField fieldName="UPN" columns="10" />
             <dataField fieldName="GL" columns="10" />
+            <dataField fieldName="Firstname" columns="35" />
+            <dataField fieldName="Lastname" columns="35" />
             <dataField fieldName="Sex" columns="50" />
+            <dataField fieldName="FeesDescription" columns="50" />
+            <dataField fieldName="FeeAmount" columns="15" />
+            <dataField fieldName="EffectiveDate" columns="10" />
+            <dataField fieldName="EffectiveTo" columns="10" />
+            <dataField fieldName="CurrencyCode" columns="5" />
+            <dataField fieldName="CalendarCode" columns="30" />
+            <dataField fieldName="School" columns="50" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="HeaderInfo" />
+            <dataField fieldName="Logo" columns="15" />
+            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" />
           </dataFields>
         </category>
       </categories>
@@ -236,55 +206,43 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category id="c1" flow="NewColumn">
-          <description />
+          <description><![CDATA[$DefaultNewDescription]]></description>
           <dataFields>
-            <dataField fieldName="ReceiptNo" columns="50" />
             <dataField fieldName="TransDate" columns="10" />
+            <dataField fieldName="FeeID" aliasFieldName="Status" />
+            <dataField fieldName="BillAmount" columns="15" />
+            <dataField fieldName="FeeDescription" columns="30" />
             <dataField fieldName="AmountPaid" columns="15" />
-            <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" />
-            <dataField fieldName="TransactionStatusCode" columns="20" />
-            <dataField fieldName="FeeID" aliasFieldName="Status" hidden="true" />
-            <dataField fieldName="FeeDescription" columns="30" hidden="true" />
             <dataField fieldName="CurrentBalance" columns="15" />
             <dataField fieldName="Description" columns="50" />
             <dataField fieldName="FeeType" columns="20" />
-            <dataField fieldName="PersonID" textMode="Static" columns="15" hidden="true" />
-            <dataField fieldName="HeaderInfo" hidden="true" />
-            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" />
-          </dataFields>
-        </category>
-        <category id="c2" flow="NewColumn">
-          <description />
-          <dataFields>
-            <dataField fieldName="BillAmount" columns="15" />
-            <dataField fieldName="FeeAmount" columns="15" />
-            <dataField fieldName="CurrencyCode" columns="5" />
+            <dataField fieldName="PersonID" textMode="Static" columns="15" />
+            <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" />
+            <dataField fieldName="TransactionStatusCode" columns="20" />
             <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" />
             <dataField fieldName="NameOfPayee" columns="25" />
-          </dataFields>
-        </category>
-        <category id="c3">
-          <description />
-          <dataFields>
-            <dataField fieldName="Sex" columns="50" />
-            <dataField fieldName="FeesDescription" columns="50" hidden="true" />
-            <dataField fieldName="EffectiveDate" columns="10" />
-            <dataField fieldName="EffectiveTo" columns="10" />
-            <dataField fieldName="CalendarCode" columns="30" />
-            <dataField fieldName="Note" columns="50" />
-          </dataFields>
-        </category>
-        <category id="c4" headerText="Audit" collapsed="true" flow="NewRow">
-          <description />
-          <dataFields>
             <dataField fieldName="CreatedDate" columns="20" />
             <dataField fieldName="ModifiedDate" columns="20" />
             <dataField fieldName="CreatedBy" columns="50" />
             <dataField fieldName="ModifiedBy" columns="50" />
-            <dataField fieldName="Firstname" columns="35" />
-            <dataField fieldName="Lastname" columns="35" />
+            <dataField fieldName="ReceiptNo" columns="50" />
+            <dataField fieldName="Note" columns="50" />
             <dataField fieldName="UPN" columns="10" />
             <dataField fieldName="GL" columns="10" />
+            <dataField fieldName="Firstname" columns="35" />
+            <dataField fieldName="Lastname" columns="35" />
+            <dataField fieldName="Sex" columns="50" />
+            <dataField fieldName="FeesDescription" columns="50" />
+            <dataField fieldName="FeeAmount" columns="15" />
+            <dataField fieldName="EffectiveDate" columns="10" />
+            <dataField fieldName="EffectiveTo" columns="10" />
+            <dataField fieldName="CurrencyCode" columns="5" />
+            <dataField fieldName="CalendarCode" columns="30" />
+            <dataField fieldName="School" columns="50" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="HeaderInfo" />
+            <dataField fieldName="Logo" columns="15" />
+            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" />
           </dataFields>
         </category>
       </categories>
@@ -300,12 +258,6 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
       <action id="a9" />
       <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
-      <action id="a103" commandName="ReportAsPdf" headerText="Print Receipt" whenKeySelected="true" key="CTRL + P" cssClass="material-icon-print">
-        <data><![CDATA[_controller=fee_collection_transaction_itemised
-_view=editForm1
-_template=fee_collection_transaction_itemised_editForm1.rdlc
-TransactionID=TransactionID]]></data>
-      </action>
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
@@ -320,37 +272,17 @@ TransactionID=TransactionID]]></data>
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
       <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
       <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
-      <action id="a101" commandName="ReportAsPdf" headerText="Print Receipt" whenKeySelected="true" key="CTRL + P" cssClass="material-icon-print">
-        <data><![CDATA[_controller=fee_collection_transaction_itemised
-_view=editForm1
-_template=fee_collection_transaction_itemised_editForm1.rdlc
-TransactionID=TransactionID]]></data>
-      </action>
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" whenView="grid1000" />
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
-      <action id="a103" commandName="ReportAsPdf" headerText="Print Receipt" whenKeySelected="true" key="CTRL + P" cssClass="material-icon-print">
-        <data><![CDATA[_controller=fee_collection_transaction_itemised
-_view=editForm1
-_template=fee_collection_transaction_itemised_editForm1.rdlc
-TransactionID=TransactionID]]></data>
-      </action>
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a103" commandName="ReportAsPdf" headerText="Print Receipt" whenKeySelected="true" key="CTRL + P" cssClass="material-icon-print">
-        <data><![CDATA[_controller=fee_collection_transaction_itemised
-_view=editForm1
-_template=fee_collection_transaction_itemised_editForm1.rdlc
-TransactionID=TransactionID]]></data>
-      </action>
+      <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
-      <action id="a102" commandName="ReportAsWord" headerText="Export To Word" />
-      <action id="a101" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a1" commandName="ExportCsv" headerText="Print To CSV" />
       <action id="a3" commandName="ExportRowset" />
       <action id="a4" commandName="ExportRss" />
       <action id="a5" />
@@ -363,6 +295,12 @@ TransactionID=TransactionID]]></data>
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

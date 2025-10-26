@@ -29,7 +29,7 @@ from "dbo"."vw_fee_collection_accounting_ledger_mini" "vw_fee_collection_account
     </command>
   </commands>
   <fields>
-    <field name="PersonID" type="Int32" label="Person ID" readOnly="true" />
+    <field name="PersonID" type="Int32" isPrimaryKey="true" label="Person ID" readOnly="true" />
     <field name="Fullname" type="String" label="Fullname" readOnly="true" length="71" showInSummary="true" />
     <field name="UPN" type="String" label="UPN" length="10" showInSummary="true" />
     <field name="NameOfPayee" type="String" label="Payee" readOnly="true" length="25" showInSummary="true" />
@@ -49,33 +49,28 @@ from "dbo"."vw_fee_collection_accounting_ledger_mini" "vw_fee_collection_account
   </fields>
   <views>
     <view id="grid1" type="Grid" commandId="command1" label="Fee Collection Accounting Ledger Mini">
-      <headerText>The Bills &amp; Balances shows a chronological view of fee bills and related payments over time.</headerText>
+      <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="NameOfPayee" columns="15" hidden="true" />
-        <dataField fieldName="Name" />
-        <dataField fieldName="Fullname" columns="25" />
+        <dataField fieldName="Fullname" />
         <dataField fieldName="UPN" columns="10" />
-        <dataField fieldName="YearGroup" columns="5" />
-        <dataField fieldName="FeeType" columns="12" />
-        <dataField fieldName="Description" columns="20" />
-        <dataField fieldName="TransactionDate" columns="18" tag="pivot1-row1-column-year&#xD;&#xA;pivot1-row2-Quarter&#xD;&#xA;pivot1-title:&quot;Total Amount Paid By Relation Type&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" />
-        <dataField fieldName="Debit" columns="10" aggregate="Sum" tag="pivot1-val1-sum" />
-        <dataField fieldName="Credit" columns="10" aggregate="Sum" tag="pivot1-val2-sum" />
-        <dataField fieldName="Balance" columns="10" />
-        <dataField fieldName="Currency" columns="10" />
-        <dataField fieldName="ReceiptNo" columns="12" hidden="true" />
-        <dataField fieldName="CalendarCode" columns="12" />
+        <dataField fieldName="NameOfPayee" columns="25" />
+        <dataField fieldName="YearGroup" />
+        <dataField fieldName="Description" columns="50" />
+        <dataField fieldName="FeeType" columns="20" />
+        <dataField fieldName="TransactionDate" columns="10" />
+        <dataField fieldName="Debit" columns="15" />
+        <dataField fieldName="Credit" columns="15" />
+        <dataField fieldName="Balance" columns="15" />
+        <dataField fieldName="Currency" columns="5" />
+        <dataField fieldName="ReceiptNo" columns="50" />
+        <dataField fieldName="CalendarCode" columns="30" />
+        <dataField fieldName="Name" />
       </dataFields>
-      <styles>
-        <expression type="ClientScript" result="student-credit-payment" test="$row.Credit&gt;0" />
-        <expression type="ClientScript" result="student-in-arrears" test="$row.Balance &lt; 0" />
-        <expression type="ClientScript" result="student-in-credit" test="$row.Balance &gt; 0" />
-      </styles>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Fee Collection Accounting Ledger Mini">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category id="c1" flow="NewColumn">
+        <category id="c1" headerText="Fee Collection Accounting Ledger Mini" flow="NewColumn">
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="Fullname" />
