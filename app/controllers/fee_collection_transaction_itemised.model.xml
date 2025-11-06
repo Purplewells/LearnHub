@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="fee_collection_transaction" alias="fee_collection_transaction" created="2024-01-29T09:19:49" modified="2025-03-11T09:35:30" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="fee_collection_transaction" alias="fee_collection_transaction" created="2024-01-29T09:19:49" modified="2025-10-19T07:15:27" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="FeePerson" parentTableSchema="dbo" parentTableName="student_fees" x="353" y="20">
       <foreignKeyColumn columnName="FeeID" parentColumnName="FeeID" />
@@ -11,10 +11,10 @@
     <foreignKey id="PaymentBy" parentTableSchema="dbo" parentTableName="zlkpPaymentBy" x="353" y="647">
       <foreignKeyColumn columnName="PaymentByID" parentColumnName="PaymentByID" />
     </foreignKey>
-    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="726" y="206" baseForeignKey="FeePerson">
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="630" y="137" baseForeignKey="FeePerson">
       <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
     </foreignKey>
-    <foreignKey id="RefSex" parentTableSchema="dbo" parentTableName="zlkpSex" x="747" y="502" baseForeignKey="Person">
+    <foreignKey id="RefSex" parentTableSchema="dbo" parentTableName="zlkpSex" x="967" y="499" baseForeignKey="Person">
       <foreignKeyColumn columnName="RefSexID" parentColumnName="GenderID" />
     </foreignKey>
     <foreignKey id="Fee" parentTableSchema="dbo" parentTableName="Fees" x="1100" y="20" baseForeignKey="FeePerson">

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="K12StaffAssignment" alias="K12StaffAssignment" created="2024-02-22T14:47:31" modified="2025-10-09T21:12:09" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="K12StaffAssignment" alias="K12StaffAssignment" created="2024-02-22T14:47:31" modified="2025-10-19T07:23:12" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="StaffClassification" parentTableSchema="dbo" parentTableName="zlkpStaffClassification" x="438" y="20">
       <foreignKeyColumn columnName="StaffClassificationID" parentColumnName="RefEducationStaffClassificationId" />
@@ -49,7 +49,7 @@
     <column name="Description" fieldName="AssignedRole" label="Assigned Role" foreignKey="RefTeachingAssignmentRole" />
     <column name="PositionTypeID" fieldName="PositionTypeID" label="Position Type ID" aliasColumnName="Description" aliasForeignKey="PositionType" />
     <column name="Description" fieldName="PositionType" label="Position Type" foreignKey="PositionType" />
-    <column name="HighlyQualifiedTeacherIndicator" fieldName="QTS" label="QTS" />
+    <column name="HighlyQualifiedTeacherIndicator" fieldName="QTS" label="Qualified Teacher Status" />
     <column name="StartDate" fieldName="StartDate" label="Start Date" />
     <column name="EndDate" fieldName="EndDate" label="End Date" />
     <column name="OrganizationPersonRoleID" fieldName="OrganizationPersonRoleID" label="Organization Person Role ID" />
@@ -58,6 +58,6 @@
     <column name="DepartmentID" fieldName="DepartmentID" label="Department ID" aliasColumnName="DepartmentName" aliasForeignKey="Department" />
     <column name="DepartmentName" fieldName="Department" label="Department" foreignKey="Department" />
     <column name="CountryFiscalPeriodID" fieldName="CountryFiscalPeriodID" label="Country Fiscal Period ID" aliasColumnName="CountryName" aliasForeignKey="CountryFiscalPeriod" />
-    <column name="CountryName" fieldName="CountryFiscalPeriod" label="Country Fiscal Period" foreignKey="CountryFiscalPeriod" />
+    <column name="CountryName" fieldName="CountryFiscalPeriod" label="Fiscal Period Country" foreignKey="CountryFiscalPeriod" />
   </columns>
 </dataModel>

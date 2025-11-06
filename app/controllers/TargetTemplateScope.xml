@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="TargetTemplateScope" conflictDetection="overwriteChanges" label="Target Template Scope" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"zlkpTargetTemplateScope"."TargetTemplateScopeID" "TargetTemplateScopeID"
+	,"zlkpTargetTemplateScope"."TargetTemplateID" "TargetTemplateID"
+	,"TargetTemplate"."TargetName" "TargetTemplateTargetName"
+	,"TargetTemplateTargetLevel"."TargetLevel" "TargetLevel"
+	,"zlkpTargetTemplateScope"."EntityType" "EntityType"
+	,"zlkpTargetTemplateScope"."TargetEntityID" "TargetEntityID"
+	,"TargetEntity"."EntityDisplayName" "TargetEntity"
+	,"TargetEntity"."EntityCode" "TargetEntityCode"
+	,"zlkpTargetTemplateScope"."IsGlobalScope" "IsGlobalScope"
+	,"zlkpTargetTemplateScope"."IsActive" "IsActive"
+	,"zlkpTargetTemplateScope"."EffectiveStartDate" "EffectiveStartDate"
+	,"zlkpTargetTemplateScope"."EffectiveEndDate" "EffectiveEndDate"
+	,"zlkpTargetTemplateScope"."TargetEntityTypeID" "TargetEntityTypeID"
+	,"TargetEntityType"."EntityTypeName" "EntityTypeName"
+	,"TargetEntityType"."EntityTableName" "EntityTableName"
+	,"TargetEntityType"."EntityKeyColumn" "EntityKeyColumn"
+	,"zlkpTargetTemplateScope"."CreatedDate" "CreatedDate"
+	,"zlkpTargetTemplateScope"."CreatedBy" "CreatedBy"
+	,"zlkpTargetTemplateScope"."ModifiedBy" "ModifiedBy"
+	,"zlkpTargetTemplateScope"."ModifiedDate" "ModifiedDate"
+from "dbo"."zlkpTargetTemplateScope" "zlkpTargetTemplateScope"
+	left join "dbo"."zlkpTargetTemplate" "TargetTemplate" on "zlkpTargetTemplateScope"."TargetTemplateID" = "TargetTemplate"."TargetTemplateID"
+	left join "dbo"."zlkpTargetLevel" "TargetTemplateTargetLevel" on "TargetTemplate"."TargetLevelID" = "TargetTemplateTargetLevel"."TargetLevelID"
+	left join "dbo"."zlkpTargetEntity" "TargetEntity" on "zlkpTargetTemplateScope"."TargetEntityID" = "TargetEntity"."TargetEntityID"
+	left join "dbo"."zlkpEntityType" "TargetEntityType" on "zlkpTargetTemplateScope"."TargetEntityTypeID" = "TargetEntityType"."EntityTypeID"
+]]></text>
+    </command>
+    <command id="TargetTemplateScopeIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="TargetTemplateScopeID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="TargetTemplateScopeID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Target Template Scope ID" readOnly="true" />
+    <field name="TargetTemplateID" type="Int32" allowNulls="false" label="Target Template ID" showInSummary="true">
+      <items style="Lookup" dataController="TargetTemplate" newDataView="createForm1" dataValueField="TargetTemplateID" dataTextField="TargetName" copy="TargetLevel=TargetLevel" />
+    </field>
+    <field name="TargetTemplateTargetName" type="String" readOnly="true" label="Target Template" length="50" />
+    <field name="TargetLevel" type="String" readOnly="true" label="Target Level" length="20" />
+    <field name="EntityType" type="String" label="Entity Type" length="50" showInSummary="true" />
+    <field name="TargetEntityID" type="Int32" label="Target Entity ID" showInSummary="true">
+      <items style="Lookup" dataController="TargetEntity" newDataView="createForm1" dataValueField="TargetEntityID" dataTextField="EntityDisplayName" copy="TargetEntityCode=EntityCode" />
+    </field>
+    <field name="TargetEntity" type="String" readOnly="true" label="Target Entity" length="25" />
+    <field name="TargetEntityCode" type="String" readOnly="true" label="Target Entity Code" length="50" />
+    <field name="IsGlobalScope" type="Boolean" default="((0))" label="Is GlobalScope" showInSummary="true" />
+    <field name="IsActive" type="Boolean" default="((1))" label="Active" showInSummary="true" />
+    <field name="EffectiveStartDate" type="DateTime" dataFormatString="d" default="(getdate())" label="Effective Start Date" />
+    <field name="EffectiveEndDate" type="DateTime" dataFormatString="d" default="(dateadd(year,(99),getdate()))" label="Effective End Date" />
+    <field name="TargetEntityTypeID" type="Int32" label="Target Entity Type ID">
+      <items style="Lookup" dataController="EntityType" newDataView="createForm1" dataValueField="EntityTypeID" dataTextField="EntityTypeName" copy="EntityTableName=EntityTableName, EntityKeyColumn=EntityKeyColumn" />
+    </field>
+    <field name="EntityTypeName" type="String" readOnly="true" label="Entity Type Name" length="25" />
+    <field name="EntityTableName" type="String" readOnly="true" label="Entity Table Name" length="128" />
+    <field name="EntityKeyColumn" type="String" readOnly="true" label="Entity Key Column" length="128" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Created Date" />
+    <field name="CreatedBy" type="String" default="(suser_sname())" label="Created By" length="100" />
+    <field name="ModifiedBy" type="String" label="Modified By" length="100" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Target Template Scope">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="TargetTemplateID" aliasFieldName="TargetTemplateTargetName" />
+        <dataField fieldName="TargetLevel" columns="20" />
+        <dataField fieldName="EntityType" columns="25" />
+        <dataField fieldName="TargetEntityTypeID" aliasFieldName="EntityTypeName" />
+        <dataField fieldName="TargetEntityID" aliasFieldName="TargetEntity" />
+        <dataField fieldName="TargetEntityCode" columns="20" />
+        <dataField fieldName="EntityTableName" columns="20" />
+        <dataField fieldName="EntityKeyColumn" columns="20" />
+        <dataField fieldName="IsGlobalScope" columns="20" />
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="EffectiveStartDate" columns="20" />
+        <dataField fieldName="EffectiveEndDate" columns="20" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" hidden="true" />
+        <dataField fieldName="ModifiedBy" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Target Template Scope">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="TargetTemplateID" aliasFieldName="TargetTemplateTargetName" />
+            <dataField fieldName="TargetLevel" columns="20" />
+            <dataField fieldName="TargetEntityID" aliasFieldName="TargetEntity" />
+            <dataField fieldName="TargetEntityCode" columns="50" />
+            <dataField fieldName="TargetEntityTypeID" aliasFieldName="EntityTypeName" />
+            <dataField fieldName="EntityTableName" />
+            <dataField fieldName="EntityKeyColumn" />
+          </dataFields>
+        </category>
+        <category id="c2" flow="NewColumn">
+          <description />
+          <dataFields>
+            <dataField fieldName="IsGlobalScope" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="EntityType" columns="50" />
+            <dataField fieldName="EffectiveEndDate" columns="10" />
+            <dataField fieldName="EffectiveStartDate" columns="10" />
+          </dataFields>
+        </category>
+        <category id="c3" headerText="Audit" collapsed="true" floating="true" flow="NewRow">
+          <description />
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="CreatedBy" />
+            <dataField fieldName="ModifiedBy" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Target Template Scope">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="TargetTemplateID" aliasFieldName="TargetTemplateTargetName" />
+            <dataField fieldName="TargetLevel" columns="20" />
+            <dataField fieldName="EntityType" columns="50" />
+            <dataField fieldName="TargetEntityID" aliasFieldName="TargetEntity" />
+            <dataField fieldName="TargetEntityCode" columns="50" />
+            <dataField fieldName="IsGlobalScope" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="EffectiveStartDate" columns="10" />
+            <dataField fieldName="EffectiveEndDate" columns="10" />
+            <dataField fieldName="TargetEntityTypeID" aliasFieldName="EntityTypeName" />
+            <dataField fieldName="EntityTableName" />
+            <dataField fieldName="EntityKeyColumn" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="CreatedBy" />
+            <dataField fieldName="ModifiedBy" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

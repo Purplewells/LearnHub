@@ -104,7 +104,7 @@ namespace zLearnHub.Rules
             }
 
             //detail access controll formulation
-            if ((controllerName == "fee_collection_transaction" || controllerName == "fee_collection_transaction_itemised" || controllerName == "znfee_collection_transaction_itemised_detail") && !UserIsInRole("Administrators"))
+            if ((controllerName == "fee_collection_transaction" || controllerName == "fee_collection_transaction_itemised" || controllerName == "znfee_collection_transaction_itemised_detail" || controllerName == "fee_collection_transaction_extra") && !UserIsInRole("Administrators"))
             {
                 // make the controller read-only by removing editing actions
                 NodeSet("view[@id='grid1']").SelectActions("Delete").Delete();
@@ -117,6 +117,11 @@ namespace zLearnHub.Rules
                 NodeSet("view[@id='grid1']").SelectView("grid1").SelectActions("New, Edit, Delete")
                     .Delete();
 
+            }
+
+            else if (controllerName == "Contact" && UserIsInRole("AccountManagers"))
+            {
+                NodeSet("view[@id='grid1']").SelectView("grid1").SelectActions("New, Edit, Delete").Delete();
             }
 
             if ((controllerName == "WorkBenchTheStock" || controllerName == "MovementMode" && !UserIsInRole("Administrators")))
@@ -133,16 +138,19 @@ namespace zLearnHub.Rules
                 NodeSet().SelectAction("Delete").Delete();
             }
 
+            if (ControllerName == "fee_collection_transaction_extra")
+            {
+                NodeSet().SelectAction("Delete").Delete();
 
+            }
         }
-
 
 
         protected override void BeforeSqlAction(ActionArgs args, ActionResult result)
         {
             base.BeforeSqlAction(args, result);
             // Check if the request is trying to delete a payment in FeeCollections
-            if (args.Controller == "fee_collection_transaction" && args.CommandName == "Delete")
+            if (args.Controller == "fee_collection_transaction_extra" && args.CommandName == "Delete")
             {
                 if (!UserIsInRole("Administrators, HeadTeachers"))
                 {
@@ -152,6 +160,22 @@ namespace zLearnHub.Rules
 
                 }
             }
+
+            // Always call base AFTER your logic, not before — so your validation can cancel the action if needed
+            if (args.Controller == "fee_collection_transaction_extra" && args.CommandName.Equals("Delete", StringComparison.OrdinalIgnoreCase))
+            {
+                // Check if the current user has one of the allowed roles
+                if (!(UserIsInRole("Administrators") || UserIsInRole("HeadTeachers")))
+                {
+                    // Block the delete command
+                    result.Canceled = true;
+
+                    // Show a clear message to the user
+                    result.ShowAlert("You do not have permission to delete payment records. Escalate to a higher authority.");
+                }
+            }
+
+            base.BeforeSqlAction(args, result);
 
             if (args.Controller == "account_general_ledger" && args.CommandName == "Delete")
             {
@@ -181,8 +205,22 @@ namespace zLearnHub.Rules
                     if (status == "Received")
                     {
                         //throw new Exception("Received purchase orders cannot be edited.");
-                        result.ShowAlert("You do not have permission to edit financial records. Please discuss with administrative head.");
+                        result.ShowAlert("You do not have permission to edit PO record in already received. Please discuss with administrative head.");
                     }
+                }
+            }
+
+            if (args.Controller == "Contact" && args.CommandName == "New")
+            {
+                if (UserIsInRole("AccountManagers"))
+                {
+
+                    //var status = Convert.ToString(SelectFieldValue("Status"));
+                    //if (status == "Received")
+                    //{
+                        //throw new Exception("Received purchase orders cannot be edited.");
+                        result.ShowAlert("You do not have permission to create new student record. Please discuss with administrative head.");
+                    //}
                 }
             }
 
@@ -210,7 +248,7 @@ namespace zLearnHub.Rules
             }
         }
 
-
+     
         [ControllerAction("StockTransactions", "Insert, Update, Calculate", ActionPhase.After)]
         public void AddOrUpdateStockTransaction()
         {
@@ -382,29 +420,86 @@ namespace zLearnHub.Rules
         }
 
         [ControllerAction("fee_collection_transaction", "Custom, ProcessRefund", ActionPhase.After)]
-        public void ProcessFeeRefund(int OriginalTransactionID, decimal RefundAmountToProcess)
+        //public void ProcessFeeRefund(int OriginalTransactionID, decimal RefundAmountToProcess)
+            public void ProcessFeeRefund(int OriginalTransactionID, decimal RefundAmountToProcess, string RefundReason, string NameOfRecepient)
         {
+                
             // Get connection string from configuration
             string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+            string ActionedBy = Context.User.Identity.Name;
 
+            try { 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand("usp_ops_p9_create_fee_refund_transaction_revised_2", connection))
+                using (SqlCommand command = new SqlCommand("usp_ops_auto_p4_post_fee_transaction_refund", connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@TransactionID", OriginalTransactionID);
                     command.Parameters.AddWithValue("@RefundAmountToProcess", RefundAmountToProcess);
+                    command.Parameters.AddWithValue("@RefundReason", RefundReason);
+                    command.Parameters.AddWithValue("@NameOfRecepient", NameOfRecepient);
+                    // ADD this line to pass the user's name to the stored procedure
+                    command.Parameters.AddWithValue("@ActionedBy", ActionedBy);
                     command.ExecuteNonQuery();
                 }
             }
 
             // Optional: Add a user notification
+            Result.Canceled = true;
+            // 2. Refresh parent/related views (This should be placed AFTER setting Canceled=true or in a separate hook if needed, but often works here)
             Result.Refresh();
             Result.RefreshChildren();
             Result.ShowAlert("Refund processed successfully.");
+            }
+            catch (Exception ex)
+            {
+                Result.Canceled = false; // Keep the screen open on error
+                Result.ShowAlert("ERROR processing refund: " + ex.Message);
+            }
         }
 
+
+        [ControllerAction("fee_collection_transaction_extra", "Custom, ProcessRefundTransaction", ActionPhase.After)]
+        //public void ProcessFeeRefund(int OriginalTransactionID, decimal RefundAmountToProcess)
+        public void ProcessMultiFeeRefund(int OriginalTransactionID, decimal RefundAmountToProcess, string RefundReason, string NameOfRecepient)
+        {
+
+            // Get connection string from configuration
+            string connectionString = ConfigurationManager.ConnectionStrings["zLearnHub"].ConnectionString;
+            string ActionedBy = Context.User.Identity.Name;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("usp_ops_auto_p4_post_fee_transaction_refund", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@TransactionID", OriginalTransactionID);
+                        command.Parameters.AddWithValue("@RefundAmountToProcess", RefundAmountToProcess);
+                        command.Parameters.AddWithValue("@RefundReason", RefundReason);
+                        command.Parameters.AddWithValue("@NameOfRecepient", NameOfRecepient);
+                        // ADD this line to pass the user's name to the stored procedure
+                        command.Parameters.AddWithValue("@ActionedBy", ActionedBy);
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                // Optional: Add a user notification
+                Result.Canceled = true;
+                // 2. Refresh parent/related views (This should be placed AFTER setting Canceled=true or in a separate hook if needed, but often works here)
+                Result.Refresh();
+                Result.RefreshChildren();
+                Result.ShowAlert("Refund processed successfully.");
+            }
+            catch (Exception ex)
+            {
+                Result.Canceled = false; // Keep the screen open on error
+                Result.ShowAlert("ERROR processing refund: " + ex.Message);
+            }
+        }
 
         [ControllerAction("ProcessPurchaseOrder", "Insert, Update, Calculate", ActionPhase.After)]
         public void process_purchase_order_from_order_details(int purchaseOrderID)

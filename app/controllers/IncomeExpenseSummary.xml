@@ -48,14 +48,14 @@ from "dbo"."vw_metric_income_expense_summary" "vw_metric_income_expense_summary"
       <dataFields>
         <dataField fieldName="BudgetID" columns="15" hidden="true" />
         <dataField fieldName="BudgetDescriptor" columns="30" />
-        <dataField fieldName="BudgetName" columns="25" tag="pivot6-row1-pie&#xD;&#xA;pivot6-title:&quot;Overview of Budget distribution By Indicator&quot;" />
-        <dataField fieldName="Category" columns="20" />
-        <dataField fieldName="Indicator" columns="10" tag="pivot1-col1&#xD;&#xA;&#xD;&#xA;pivot3-row1-bar-year&#xD;&#xA;pivot3-row2-bar-quarter&#xD;&#xA;pivot3-title:&quot;Overview of Net Income Value By Transaction Type&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot5-row1-column&#xD;&#xA;pivot5-title:&quot;Overview of net Income Value By Transaction Indicator&quot;&#xD;&#xA;&#xD;&#xA;pivot7-row1-pie&#xD;&#xA;pivot7-title:&quot;Overview of Budget Allocation By Transaction Indicator&quot;&#xD;&#xA;pivot7-maximize" />
-        <dataField fieldName="EventDate" columns="10" tag="pivot1-row1-bar-year&#xD;&#xA;pivot1-row2-bar-quarter&#xD;&#xA;pivot1-title:&quot;Overview of Budget Value By Quarter&quot;&#xD;&#xA;&#xD;&#xA;pivot2-row1-bar-year&#xD;&#xA;pivot2-row2-bar-quarter&#xD;&#xA;pivot2-title:&quot;Overview of Net Income Value By Quarter&quot;&#xD;&#xA;&#xD;&#xA;pivot4-row1-column-year&#xD;&#xA;pivot4-row2-month&#xD;&#xA;pivot4-title:&quot;Overview of Net Income By Year Month&quot;&#xD;&#xA;pivot4-medium&#xD;&#xA;" />
-        <dataField fieldName="BudgetValue" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot6-val1-sum&#xD;&#xA;pivot7-val1-sum" />
-        <dataField fieldName="TotalIncome" columns="15" aggregate="Sum" />
-        <dataField fieldName="TotalExpense" columns="15" aggregate="Sum" />
-        <dataField fieldName="NetIncome" columns="15" aggregate="Sum" tag="pivot2-val2-sum&#xD;&#xA;pivot3-val1-sum&#xD;&#xA;pivot4-val1-sum&#xD;&#xA;pivot5-val1-sum" />
+        <dataField fieldName="BudgetName" columns="25" tag="pivot6-row1-pie&#xD;&#xA;pivot6-title:&quot;Overview of Budget distribution By Indicator&quot;&#xD;&#xA;&#xD;&#xA;pivot8-row1-barstacked&#xD;&#xA;pivot8-title:&quot;Budget Performance Chart&quot;" />
+        <dataField fieldName="Category" columns="20" tag="pivot10-row1-donut&#xD;&#xA;pivot10-title:&quot;Total Income breakdown by Indicator Category&quot;&#xD;&#xA;&#xD;&#xA;pivot11-row1-donut&#xD;&#xA;pivot11-title:&quot;Total Expense breakdown by Indicator Category&quot;&#xD;&#xA;pivot11: hideblank" />
+        <dataField fieldName="Indicator" columns="10" tag="pivot3-col1&#xD;&#xA;&#xD;&#xA;pivot1-row1-bar-year&#xD;&#xA;pivot1-row2-bar-quarter&#xD;&#xA;pivot1-title:&quot;Overview of Allocated Budget Value By Transaction Type&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot2-row1-column&#xD;&#xA;pivot2-title:&quot;Total Net Income Value By Transaction Indicator&quot;&#xD;&#xA;&#xD;&#xA;pivot7-row1-pie&#xD;&#xA;pivot7-title:&quot;Overview of Budget Allocation By Transaction Indicator&quot;&#xD;&#xA;&#xD;&#xA;pivot9-row1-column&#xD;&#xA;pivot9-title:&quot;Total of Budget Value, Total of Net Income by Indicator&quot;&#xD;&#xA;&#xD;&#xA;" />
+        <dataField fieldName="EventDate" columns="10" tag="pivot3-row1-bar-year&#xD;&#xA;pivot3-row2-bar-quarter&#xD;&#xA;pivot3-title:&quot;Overview of Income &amp; Expenses OverTime&quot;&#xD;&#xA;&#xD;&#xA;pivot5-row1-bar-year&#xD;&#xA;pivot5-row2-bar-quarter&#xD;&#xA;pivot5-title:&quot;Overview of Net Income OverTime&quot;&#xD;&#xA;&#xD;&#xA;pivot4-row1-column-year&#xD;&#xA;pivot4-row2-month&#xD;&#xA;pivot4-title:&quot;Overview of Net Income By Year Month&quot;&#xD;&#xA;&#xD;&#xA;" />
+        <dataField fieldName="BudgetValue" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot6-val1-sum&#xD;&#xA;pivot7-val1-sum&#xD;&#xA;pivot8-val1-sum&#xD;&#xA;pivot9-val1-sum" />
+        <dataField fieldName="TotalIncome" columns="15" aggregate="Sum" tag="pivot8-val2-sum&#xD;&#xA;pivot10-val2-sum" />
+        <dataField fieldName="TotalExpense" columns="15" aggregate="Sum" tag="pivot8-val3-sum&#xD;&#xA;pivot11-val1-sum" />
+        <dataField fieldName="NetIncome" columns="15" aggregate="Sum" tag="pivot5-val2-sum&#xD;&#xA;pivot3-val1-sum&#xD;&#xA;pivot4-val1-sum&#xD;&#xA;pivot2-val1-sum&#xD;&#xA;pivot9-val2-sum" />
         <dataField fieldName="CurrencyName" columns="7">
           <headerText>Curr</headerText>
         </dataField>

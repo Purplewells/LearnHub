@@ -65,14 +65,14 @@ FROM (
       <dataFields>
         <dataField fieldName="BudgetID" columns="15" hidden="true" />
         <dataField fieldName="Description" columns="50" />
-        <dataField fieldName="Category" columns="20" />
-        <dataField fieldName="BudgetName" columns="30" />
+        <dataField fieldName="Category" columns="20" tag="pivot3-row1-pie&#xD;&#xA;pivot3-title:&quot;Percentage of total expenses dedicated to each Category&quot;&#xD;&#xA;&#xD;&#xA;pivot5-row1-pie&#xD;&#xA;pivot5-title:&quot;Income Breakdown by Category&quot;" />
+        <dataField fieldName="BudgetName" columns="30" tag="pivot6-row1-pie&#xD;&#xA;pivot6-title:&quot;Percentage of total amount spent on each Budget&quot;&#xD;&#xA;&#xD;&#xA;pivot4-row1-pie&#xD;&#xA;pivot4-title:&quot;Percentage of total income generated under each Budget&quot;" />
         <dataField fieldName="RecordTypeID" columns="15" hidden="true" />
-        <dataField fieldName="Date" columns="18">
+        <dataField fieldName="Date" columns="18" tag="pivot1-row1-columnstacked-Year&#xD;&#xA;pivot1-title:&quot;Total Income vs. Total Expense&quot;&#xD;&#xA;&#xD;&#xA;pivot2-row1-columnstacked-Year&#xD;&#xA;pivot2-row2-Month&#xD;&#xA;pivot2-title:&quot;Total Income vs. Total Expense Overtime&quot;">
           <headerText>Event Date</headerText>
         </dataField>
-        <dataField fieldName="Income" columns="15" aggregate="Sum" />
-        <dataField fieldName="Expense" columns="15" aggregate="Sum" />
+        <dataField fieldName="Income" columns="15" aggregate="Sum" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum&#xD;&#xA;pivot5-val1-sum&#xD;&#xA;pivot4-val1-sum" />
+        <dataField fieldName="Expense" columns="15" aggregate="Sum" tag="pivot1-val2-sum&#xD;&#xA;pivot2-val2-sum&#xD;&#xA;pivot3-val1-sum&#xD;&#xA;pivot6-val1-sum" />
         <dataField fieldName="Curr" columns="7" />
         <dataField fieldName="CreatedDate" columns="10" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="10" hidden="true" />

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpTargetTemplateScope" alias="zlkpTargetTemplateScope" created="2025-10-30T09:00:51" modified="2025-10-30T12:44:25" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="TargetTemplate" parentTableSchema="dbo" parentTableName="zlkpTargetTemplate" x="369" y="20">
+      <foreignKeyColumn columnName="TargetTemplateID" parentColumnName="TargetTemplateID" />
+    </foreignKey>
+    <foreignKey id="TargetTemplateTargetLevel" parentTableSchema="dbo" parentTableName="zlkpTargetLevel" baseForeignKey="TargetTemplate" x="693" y="30">
+      <foreignKeyColumn columnName="TargetLevelID" parentColumnName="TargetLevelID" />
+    </foreignKey>
+    <foreignKey id="TargetEntity" parentTableSchema="dbo" parentTableName="zlkpTargetEntity" x="369" y="250">
+      <foreignKeyColumn columnName="TargetEntityID" parentColumnName="TargetEntityID" />
+    </foreignKey>
+    <foreignKey id="TargetEntityType" parentTableSchema="dbo" parentTableName="zlkpEntityType" x="776" y="228">
+      <foreignKeyColumn columnName="TargetEntityTypeID" parentColumnName="EntityTypeID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="TargetTemplateScopeID" fieldName="TargetTemplateScopeID" label="Target Template Scope ID" />
+    <column name="TargetTemplateID" fieldName="TargetTemplateID" label="Target Template ID" aliasColumnName="TargetName" aliasForeignKey="TargetTemplate" />
+    <column name="TargetName" fieldName="TargetTemplateTargetName" label="Target Template" foreignKey="TargetTemplate" />
+    <column name="TargetLevel" fieldName="TargetLevel" label="Target Level" foreignKey="TargetTemplateTargetLevel" />
+    <column name="EntityType" fieldName="EntityType" label="Entity Type" />
+    <column name="TargetEntityID" fieldName="TargetEntityID" label="Target Entity ID" aliasColumnName="EntityDisplayName" aliasForeignKey="TargetEntity" />
+    <column name="EntityDisplayName" fieldName="TargetEntity" label="Target Entity" foreignKey="TargetEntity" />
+    <column name="EntityCode" fieldName="TargetEntityCode" label="Target Entity Code" foreignKey="TargetEntity" />
+    <column name="IsGlobalScope" fieldName="IsGlobalScope" label="Is GlobalScope" />
+    <column name="IsActive" fieldName="IsActive" label="Active" />
+    <column name="EffectiveStartDate" fieldName="EffectiveStartDate" label="Effective Start Date" format="d" />
+    <column name="EffectiveEndDate" fieldName="EffectiveEndDate" label="Effective End Date" format="d" />
+    <column name="TargetEntityTypeID" fieldName="TargetEntityTypeID" label="Target Entity Type ID" aliasColumnName="EntityTypeName" aliasForeignKey="TargetEntityType" />
+    <column name="EntityTypeName" fieldName="EntityTypeName" label="Entity Type Name" foreignKey="TargetEntityType" />
+    <column name="EntityTableName" fieldName="EntityTableName" label="Entity Table Name" foreignKey="TargetEntityType" />
+    <column name="EntityKeyColumn" fieldName="EntityKeyColumn" label="Entity Key Column" foreignKey="TargetEntityType" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+  </columns>
+</dataModel>

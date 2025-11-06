@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="TargetAssignment" alias="TargetAssignment" created="2025-10-30T09:11:41" modified="2025-10-30T09:13:32" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Target" parentTableSchema="dbo" parentTableName="AssessmentTarget" x="337" y="20">
+      <foreignKeyColumn columnName="TargetID" parentColumnName="AssessmentTargetID" />
+    </foreignKey>
+    <foreignKey id="TargetLevel" parentTableSchema="dbo" parentTableName="zlkpTargetLevel" baseForeignKey="Target" x="660" y="20">
+      <foreignKeyColumn columnName="TargetLevelID" parentColumnName="TargetLevelID" />
+    </foreignKey>
+    <foreignKey id="TargetTemplate" parentTableSchema="dbo" parentTableName="zlkpTargetTemplate" baseForeignKey="Target" x="350" y="482">
+      <foreignKeyColumn columnName="TargetTemplateID" parentColumnName="TargetTemplateID" />
+    </foreignKey>
+    <foreignKey id="Session" parentTableSchema="dbo" parentTableName="Session" x="33" y="293">
+      <foreignKeyColumn columnName="CalendarSessionID" parentColumnName="CalendarSessionID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="AssignmentID" fieldName="AssignmentID" label="Assignment ID" />
+    <column name="TargetID" fieldName="TargetID" label="Target ID" aliasColumnName="TargetLevel" aliasForeignKey="Target" />
+    <column name="TargetLevel" fieldName="TargetLevel" label="Target Level" foreignKey="Target" />
+    <column name="TargetName" fieldName="TargetName1" label="Target Name" foreignKey="Target" />
+    <column name="TargetLevel" fieldName="TargetLevel1" label="Target Level" foreignKey="TargetLevel" />
+    <column name="TargetName" fieldName="TargetName" label="Target Name" foreignKey="TargetTemplate" />
+    <column name="EntityType" fieldName="EntityType" label="Entity Type" />
+    <column name="EntityID" fieldName="EntityID" label="Entity ID" />
+    <column name="CalendarSessionID" fieldName="CalendarSessionID" label="Calendar Session ID" aliasColumnName="SessionCode" aliasForeignKey="Session" />
+    <column name="SessionCode" fieldName="SessionCode" label="Session Code" foreignKey="Session" />
+    <column name="SessionName" fieldName="SessionName" label="Session Name" foreignKey="Session" />
+    <column name="Weighting" fieldName="Weighting" label="Weighting" />
+    <column name="StatusID" fieldName="StatusID" label="Status ID" />
+    <column name="AssignedBy" fieldName="AssignedBy" label="Assigned By" />
+    <column name="AssignedDate" fieldName="AssignedDate" label="Assigned Date" format="g" />
+    <column name="Comments" fieldName="Comments" label="Comments" />
+  </columns>
+</dataModel>

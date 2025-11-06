@@ -8,7 +8,6 @@ select
 	,"OrganizationPersonRole"."OrganisationID" "OrganisationID"
 	,"Organisation"."Name" "Organisation"
 	,"OrganizationPersonRole"."PersonID" "PersonID"
-	,"Person"."IdentificationCode" "UPN"
 	,"Person"."FirstName" "FirstName"
 	,"Person"."LastName" "LastName"
 	,"Person"."PhoneNo" "PhoneNo"
@@ -16,6 +15,9 @@ select
 	,"Person"."PhotoUrl" "PhotoUrl"
 	,"Person"."SocialSecurityNumber" "SSNo"
 	,"Person"."BankName" "BankName"
+	,"Person"."Owner" "PersonOwner"
+	,"Person"."IdentificationCode" "IdentificationCode"
+	,"Person"."AccountNo" "AccountNo"
 	,"OrganizationPersonRole"."EntryDate" "EntryDate"
 	,"OrganizationPersonRole"."ExitDate" "ExitDate"
 	,"OrganizationPersonRole"."RoleID" "RoleID"
@@ -45,9 +47,8 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
     </field>
     <field name="Organisation" type="String" readOnly="true" label="Organisation" length="60" />
     <field name="PersonID" type="Int32" label="Person ID" showInSummary="true">
-      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="UPN" copy="FirstName=FirstName, LastName=LastName, PhoneNo=PhoneNo, Email=Email, PhotoUrl=PhotoUrl, SSNo=SSNo, BankName=Bank, Occupation=Occupation" />
+      <items style="Lookup" dataController="Contact" newDataView="createForm1" dataValueField="PersonID" dataTextField="FirstName" copy="LastName=LastName, PhoneNo=PhoneNo, Email=Email, PhotoUrl=PhotoUrl, SSNo=SSNo, BankName=Bank, IdentificationCode=UPN, AccountNo=AccountNo, Occupation=Occupation" />
     </field>
-    <field name="UPN" type="String" readOnly="true" label="UPN" length="10" />
     <field name="FirstName" type="String" readOnly="true" label="First Name" length="35" />
     <field name="LastName" type="String" readOnly="true" label="Last Name" length="35" />
     <field name="PhoneNo" type="String" readOnly="true" label="Phone No" length="15" />
@@ -55,6 +56,9 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
     <field name="PhotoUrl" type="Byte[]" readOnly="true" onDemand="true" sourceFields="PersonID" onDemandHandler="PersonPhotoUrl" onDemandStyle="Thumbnail" allowQBE="false" allowSorting="false" label="Photo" />
     <field name="SSNo" type="String" readOnly="true" label="Social Security Number" length="20" />
     <field name="BankName" type="String" readOnly="true" label="Bank Name" length="50" />
+    <field name="PersonOwner" type="String" readOnly="true" label="Person Owner" length="50" />
+    <field name="IdentificationCode" type="String" readOnly="true" label="Staff Number" length="10" />
+    <field name="AccountNo" type="String" readOnly="true" label="Account No" length="20" />
     <field name="EntryDate" type="DateTime" label="Hired Date" showInSummary="true" />
     <field name="ExitDate" type="DateTime" label="Exit Date" showInSummary="true" />
     <field name="RoleID" type="Int32" label="Role ID">
@@ -69,11 +73,13 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
       <dataFields>
         <dataField fieldName="Fullname" tag="header-text" />
         <dataField fieldName="LastName" columns="18" />
-        <dataField fieldName="FirstName" columns="18" />
-        <dataField fieldName="PersonID" aliasFieldName="UPN" tag="item-aside" />
+        <dataField fieldName="PersonID" aliasFieldName="FirstName" tag="item-aside" />
         <dataField fieldName="PhotoUrl" columns="15" />
         <dataField fieldName="SSNo" columns="20" hidden="true" />
         <dataField fieldName="BankName" columns="50" hidden="true" />
+        <dataField fieldName="PersonOwner" columns="50" />
+        <dataField fieldName="IdentificationCode" columns="10" />
+        <dataField fieldName="AccountNo" columns="20" />
         <dataField fieldName="EntryDate" columns="10" />
         <dataField fieldName="ExitDate" columns="10" hidden="true" />
         <dataField fieldName="PhoneNo" columns="15" />
@@ -90,10 +96,13 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="Fullname" />
-            <dataField fieldName="PersonID" aliasFieldName="UPN" />
+            <dataField fieldName="PersonID" aliasFieldName="FirstName" />
             <dataField fieldName="PhoneNo" columns="15" />
             <dataField fieldName="Email" columns="50" />
             <dataField fieldName="BankName" columns="50" />
+            <dataField fieldName="PersonOwner" columns="50" />
+            <dataField fieldName="IdentificationCode" columns="10" />
+            <dataField fieldName="AccountNo" columns="20" />
             <dataField fieldName="Occupation" />
           </dataFields>
         </category>
@@ -122,12 +131,15 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
           <description><![CDATA[$DefaultEditDescription]]></description>
           <dataFields>
             <dataField fieldName="Fullname" />
-            <dataField fieldName="PersonID" aliasFieldName="UPN" />
+            <dataField fieldName="PersonID" aliasFieldName="FirstName" />
             <dataField fieldName="PhoneNo" columns="15" />
             <dataField fieldName="Email" columns="50" />
             <dataField fieldName="PhotoUrl" columns="15" />
             <dataField fieldName="SSNo" columns="20" />
             <dataField fieldName="BankName" columns="50" />
+            <dataField fieldName="PersonOwner" columns="50" />
+            <dataField fieldName="IdentificationCode" columns="10" />
+            <dataField fieldName="AccountNo" columns="20" />
             <dataField fieldName="EntryDate" columns="10" />
             <dataField fieldName="ExitDate" columns="10" />
             <dataField fieldName="Occupation" />

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpEntityType" alias="zlkpEntityType" created="2025-10-30T12:49:33" modified="2025-10-30T12:50:09" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="EntityTypeID" fieldName="EntityTypeID" label="Entity Type ID" />
+    <column name="EntityTypeName" fieldName="EntityTypeName" label="Entity Type" />
+    <column name="EntityTableName" fieldName="EntityTableName" label="Entity Table" />
+    <column name="EntityKeyColumn" fieldName="EntityKeyColumn" label="Key Column" />
+    <column name="EntityDisplayColumn" fieldName="EntityDisplayColumn" label="Display Column" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+  </columns>
+</dataModel>

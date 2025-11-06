@@ -366,7 +366,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
         <dataField fieldName="Lastname" columns="18" />
         <dataField fieldName="Fullname" hidden="true" />
         <dataField fieldName="UPN" columns="10" readOnly="true" />
-        <dataField fieldName="GradeLevel" columns="5" tag="pivot2-row1-column&#xD;&#xA;pivot2-title:&quot;What is the averge score across grade levels&quot;" />
+        <dataField fieldName="GradeLevel" columns="5" tag="pivot2-row1-column&#xD;&#xA;pivot2-title:&quot;What is the averge score across grade levels&quot;&#xD;&#xA;&#xD;&#xA;pivot12-col1" />
         <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" columns="5" tag="pivot7-row1-column-sortbyvalue&#xD;&#xA;pivot7-title:&quot;What is the average cumulative weighted score by stream&quot;&#xD;&#xA;pivot7-format: &quot;p&quot;" />
         <dataField fieldName="Course" columns="20" tag="pivot1-row1-column&#xD;&#xA;pivot1-title:&quot;What is the averge score by subject&quot;&#xD;&#xA;pivot1-haxistitle:&quot;Subject&quot;&#xD;&#xA;pivot1-vaxistitle:&quot;Earned Score&quot;&#xD;&#xA;pivot1-medium&#xD;&#xA;&#xD;&#xA;pivot5-row1-columnstacked-top10-sortdescbyvalue&#xD;&#xA;pivot5-title:&quot;What is the top 10 performing subject areas&quot;&#xD;&#xA;&#xD;&#xA;pivot8-row1-column&#xD;&#xA;pivot8-title:&quot;What is the average cumulative weighted Score by Subject and Year&quot;&#xD;&#xA;pivot8-haxistitle:&quot;Subject&quot;&#xD;&#xA;pivot8-vaxistitle:&quot;Earned Score&quot;&#xD;&#xA;pivot8-small&#xD;&#xA;pivot8-format: &quot;p&quot;&#x9;&#xD;&#xA;&#xD;&#xA;pivot10-row1-column&#xD;&#xA;pivot10-title:&quot;What is the average cumulative weighted Score by subject and term&quot;&#xD;&#xA;pivot10-haxistitle:&quot;Subject&quot;&#xD;&#xA;pivot10-vaxistitle:&quot;Earned Score&quot;&#xD;&#xA;&#xD;&#xA;" />
         <dataField fieldName="GradeBookEntryID" aliasFieldName="GradeBookTitle" columns="15" tag="pivot6-row1-columnstacked-other-sortbyvalue&#xD;&#xA;pivot6-title:&quot;What is the distribution avg score by gradebook&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Gradebook&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;Computed Score&quot;&#x9;" />
@@ -383,7 +383,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
         <dataField fieldName="ExtOWS" columns="5" hidden="true">
           <headerText>OWS</headerText>
         </dataField>
-        <dataField fieldName="CWS" columns="5" tag="pivot2-val1-AVG&#xD;&#xA;pivot7-val1-AVG&#xD;&#xA;pivot8-val1-AVG&#xD;&#xA;pivot10-val1-AVG" />
+        <dataField fieldName="CWS" columns="5" tag="pivot2-val1-AVG&#xD;&#xA;pivot7-val1-AVG&#xD;&#xA;pivot8-val1-AVG&#xD;&#xA;pivot10-val1-AVG&#xD;&#xA;pivot12-val1-AVG" />
         <dataField fieldName="StudentCourseSectionID" aliasFieldName="StudentCourseSectionCreatedBy" hidden="true" />
         <dataField fieldName="GradeBookEntryTypeID" aliasFieldName="GBEntryType" hidden="true" />
         <dataField fieldName="SubmittedDate" columns="10" hidden="true" />
@@ -409,7 +409,7 @@ WHERE StudentGradeBookEntry.StudentCourseSectionID = StudentCourseSection.Studen
         <dataField fieldName="ExtCalendarSessionID" columns="15" hidden="true" />
         <dataField fieldName="GLSO" columns="15" hidden="true" />
         <dataField fieldName="GradingPeriodID" aliasFieldName="GradingPeriod" columns="12" />
-        <dataField fieldName="Session" columns="50" hidden="true" tag="pivot10-col1" />
+        <dataField fieldName="Session" columns="50" hidden="true" tag="pivot10-col1&#xD;&#xA;&#xD;&#xA;pivot12-row1-column-top10-other-sortbyvalue&#xD;&#xA;pivot12-title:&quot;What is the distribution of average weighted score&quot;" />
         <dataField fieldName="calYear" columns="15" hidden="true" tag="pivot8-col1" />
         <dataField fieldName="CSY" hidden="true" />
         <dataField fieldName="SGID" columns="8" textMode="Static" tag="import-duplicate-accept" />

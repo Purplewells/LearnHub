@@ -9,7 +9,6 @@ select
 	,"zlkpSalaryComponentType"."ComponentCode" "ComponentCode"
 	,"zlkpSalaryComponentType"."IsActive" "IsActive"
 	,"zlkpSalaryComponentType"."Taxable" "Taxable"
-	,"zlkpSalaryComponentType"."TaxRate" "TaxRate"
 	,"zlkpSalaryComponentType"."SortOrder" "SortOrder"
 from "dbo"."zlkpSalaryComponentType" "zlkpSalaryComponentType"
 ]]></text>
@@ -27,8 +26,7 @@ from "dbo"."zlkpSalaryComponentType" "zlkpSalaryComponentType"
     <field name="ComponentCode" type="String" label="Component Code" length="20" showInSummary="true" />
     <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
     <field name="Taxable" type="Boolean" default="((0))" label="Taxable" showInSummary="true" />
-    <field name="TaxRate" type="Decimal" label="Tax Rate" showInSummary="true" />
-    <field name="SortOrder" type="Int32" label="Sort Order" />
+    <field name="SortOrder" type="Int32" label="Sort Order" showInSummary="true" />
     <field name="SalaryComponent" type="DataView" label="Salary Component">
       <dataView controller="SalaryComponent" view="grid1" filterFields="ComponentTypeID" />
     </field>
@@ -41,7 +39,6 @@ from "dbo"."zlkpSalaryComponentType" "zlkpSalaryComponentType"
         <dataField fieldName="ComponentCode" columns="20" />
         <dataField fieldName="IsActive" />
         <dataField fieldName="Taxable" hidden="true" />
-        <dataField fieldName="TaxRate" columns="15" hidden="true" />
         <dataField fieldName="SortOrder" columns="15" />
       </dataFields>
     </view>
@@ -55,7 +52,6 @@ from "dbo"."zlkpSalaryComponentType" "zlkpSalaryComponentType"
             <dataField fieldName="ComponentCode" columns="20" />
             <dataField fieldName="IsActive" />
             <dataField fieldName="Taxable" hidden="true" />
-            <dataField fieldName="TaxRate" columns="15" hidden="true" />
             <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>
@@ -77,7 +73,6 @@ from "dbo"."zlkpSalaryComponentType" "zlkpSalaryComponentType"
             <dataField fieldName="ComponentCode" columns="20" />
             <dataField fieldName="IsActive" />
             <dataField fieldName="Taxable" />
-            <dataField fieldName="TaxRate" columns="15" />
             <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>

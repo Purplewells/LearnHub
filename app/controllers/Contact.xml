@@ -203,8 +203,8 @@ from "dbo"."Person" "Person"
         <dataField fieldName="RefCitizenshipStatusID" aliasFieldName="Ethnicity" />
         <dataField fieldName="LanguageID" aliasFieldName="Language" tag="pivot6-row1-columnstacked-month&#xD;&#xA;pivot6-title:&quot;What is the count of home languages spoken&quot;&#xD;&#xA;pivot6-vaxistitle:&quot;Number of Occurrences&quot;&#xD;&#xA;pivot6-haxistitle:&quot;Language&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;pivot7-row1-pie-top5&#xD;&#xA;pivot7-title:&quot;What is the top 5 most home spoken languages&quot;" />
         <dataField fieldName="RefProofOfResidencyTypeID" aliasFieldName="ProofOfResidency" hidden="true" />
-        <dataField fieldName="Email" columns="50" hidden="true" />
-        <dataField fieldName="PhoneNo" columns="15" hidden="true" />
+        <dataField fieldName="Email" columns="50" hidden="true" tag="action-email" />
+        <dataField fieldName="PhoneNo" columns="15" hidden="true" tag="action-call" />
         <dataField fieldName="CYS" columns="7">
           <headerText>CSY</headerText>
         </dataField>
@@ -409,8 +409,8 @@ from "dbo"."Person" "Person"
             <dataField fieldName="ReligionID" aliasFieldName="Religion" />
             <dataField fieldName="RefCitizenshipStatusID" aliasFieldName="Ethnicity" tag="lookup-auto-advance " />
             <dataField fieldName="RefProofOfResidencyTypeID" aliasFieldName="ProofOfResidency" tag="lookup-auto-advance " />
-            <dataField fieldName="Email" columns="50" />
-            <dataField fieldName="PhoneNo" columns="15" />
+            <dataField fieldName="Email" columns="50" tag="action-email" />
+            <dataField fieldName="PhoneNo" columns="15" tag="action-call" />
             <dataField fieldName="RefOccupationID" aliasFieldName="Occupation" />
             <dataField fieldName="MarkedForDeletion" />
           </dataFields>
@@ -635,8 +635,9 @@ from "dbo"."Person" "Person"
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Edit" commandArgument="editForm1" whenLastCommandName="Any" headerText="Select To Review" cssClass="material-icon-comment" />
       <action id="a2" commandName="Edit" headerText="Edit In-Line" cssClass="editicon" />
-      <action id="a3" commandName="Delete" />
       <action id="a6" />
+      <action id="a3" commandName="Delete" />
+      <action id="a100" />
       <action id="a7" commandName="New" commandArgument="grid1" />
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" headerText="Clone To Create" />
       <action id="a9" />

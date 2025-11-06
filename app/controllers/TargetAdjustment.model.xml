@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="TargetAdjustment" alias="TargetAdjustment" created="2025-10-28T13:10:31" modified="2025-10-28T13:10:57" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="Assignment" parentTableSchema="dbo" parentTableName="TargetAssignment" x="351" y="20">
+      <foreignKeyColumn columnName="AssignmentID" parentColumnName="AssignmentID" />
+    </foreignKey>
+    <foreignKey id="AssignmentTarget" parentTableSchema="dbo" parentTableName="AssessmentTarget" baseForeignKey="Assignment" x="675" y="180">
+      <foreignKeyColumn columnName="TargetID" parentColumnName="AssessmentTargetID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="AdjustmentID" fieldName="AdjustmentID" label="Adjustment ID" />
+    <column name="AssignmentID" fieldName="AssignmentID" label="Assignment ID" aliasColumnName="EntityType" aliasForeignKey="Assignment" />
+    <column name="EntityType" fieldName="AssignmentEntityType" label="Assignment Entity Type" foreignKey="Assignment" />
+    <column name="TargetLevel" fieldName="AssignmentTargetLevel" label="Assignment Target Level" foreignKey="AssignmentTarget" />
+    <column name="AdjustedTargetValue" fieldName="AdjustedTargetValue" label="Adjusted Target Value" />
+    <column name="AdjustedWeighting" fieldName="AdjustedWeighting" label="Adjusted Weighting" />
+    <column name="AdjustmentReason" fieldName="AdjustmentReason" label="Adjustment Reason" />
+    <column name="AdjustmentReasonID" fieldName="AdjustmentReasonID" label="Adjustment Reason ID" />
+    <column name="ApprovedBy" fieldName="ApprovedBy" label="Approved By" />
+    <column name="ApprovedDate" fieldName="ApprovedDate" label="Approved Date" format="g" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+  </columns>
+</dataModel>

@@ -72,7 +72,7 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
       <items style="Lookup" dataController="ClassroomPositionType" newDataView="createForm1" dataValueField="RefClassroomPositionTypeID" dataTextField="Description" />
     </field>
     <field name="PositionType" type="String" readOnly="true" label="Position Type" length="100" />
-    <field name="QTS" type="Boolean" label="QTS" />
+    <field name="QTS" type="Boolean" label="Qualified Teacher Status" />
     <field name="StartDate" type="DateTime" label="Start Date" />
     <field name="EndDate" type="DateTime" label="End Date" />
     <field name="OrganizationPersonRoleID" type="Int32" label="Organization Person Role ID">
@@ -87,7 +87,7 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
     <field name="CountryFiscalPeriodID" type="Int32" label="Country Fiscal Period ID">
       <items style="Lookup" dataController="CountryFiscalPeriods" newDataView="createForm1" dataValueField="CountryFiscalPeriodID" dataTextField="CountryName" />
     </field>
-    <field name="CountryFiscalPeriod" type="String" readOnly="true" label="Country Fiscal Period" length="30" />
+    <field name="CountryFiscalPeriod" type="String" readOnly="true" label="Fiscal Period Country" length="30" />
     <field name="Salaries" type="DataView" label="Salaries">
       <dataView controller="Salaries" view="grid1" filterFields="AssignmentID" />
     </field>

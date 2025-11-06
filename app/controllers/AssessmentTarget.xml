@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="AssessmentTarget" conflictDetection="overwriteChanges" label="Assessment Target" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"AssessmentTarget"."AssessmentTargetID" "AssessmentTargetID"
+	,"AssessmentTarget"."TargetTemplateID" "TargetTemplateID"
+	,"TargetTemplate"."TargetName" "TargetTemplateTargetName"
+	,"TargetTemplateMeasurementType"."MeasurementType" "TargetTemplateMeasurementType"
+	,"TargetTemplateTargetLevel"."TargetLevel" "TargetTemplateTargetLevel"
+	,"AssessmentTarget"."TargetLevelID" "TargetLevelID"
+	,"TargetLevel"."TargetLevel" "TargetLevel"
+	,"AssessmentTarget"."TargetName" "TargetName"
+	,"AssessmentTarget"."Description" "Description"
+	,"AssessmentTarget"."TargetValue" "TargetValue"
+	,"AssessmentTarget"."MeasurementTypeID" "MeasurementTypeID"
+	,"MeasurementType"."MeasurementType" "MeasurementType"
+	,"AssessmentTarget"."CourseID" "CourseID"
+	,"Course"."CourseTitle" "CourseTitle"
+	,"AssessmentTarget"."CalendarSessionID" "CalendarSessionID"
+	,"Session"."SessionCode" "SessionCode"
+	,"Session"."SessionName" "SessionName"
+	,"AssessmentTarget"."EffectiveDate" "EffectiveDate"
+	,"AssessmentTarget"."EffectiveEndDate" "EffectiveEndDate"
+	,"AssessmentTarget"."IsActive" "IsActive"
+	,"AssessmentTarget"."CreatedBy" "CreatedBy"
+	,"AssessmentTarget"."CreatedDate" "CreatedDate"
+	,"AssessmentTarget"."ModifiedDate" "ModifiedDate"
+	,"AssessmentTarget"."TargetType" "TargetType"
+	,"AssessmentTarget"."Weighting" "Weighting"
+	,"AssessmentTarget"."TargetLevel" "extTargetLevel"
+from "dbo"."AssessmentTarget" "AssessmentTarget"
+	left join "dbo"."zlkpTargetTemplate" "TargetTemplate" on "AssessmentTarget"."TargetTemplateID" = "TargetTemplate"."TargetTemplateID"
+	left join "dbo"."zlkpMeasurementType" "TargetTemplateMeasurementType" on "TargetTemplate"."MeasurementTypeID" = "TargetTemplateMeasurementType"."MeasurementTypeID"
+	left join "dbo"."zlkpTargetLevel" "TargetTemplateTargetLevel" on "TargetTemplate"."TargetLevelID" = "TargetTemplateTargetLevel"."TargetLevelID"
+	left join "dbo"."zlkpTargetLevel" "TargetLevel" on "AssessmentTarget"."TargetLevelID" = "TargetLevel"."TargetLevelID"
+	left join "dbo"."zlkpMeasurementType" "MeasurementType" on "AssessmentTarget"."MeasurementTypeID" = "MeasurementType"."MeasurementTypeID"
+	left join "dbo"."Session" "Session" on "AssessmentTarget"."CalendarSessionID" = "Session"."CalendarSessionID"
+	left join "dbo"."Course" "Course" on "AssessmentTarget"."CourseID" = "Course"."CourseID"
+]]></text>
+    </command>
+    <command id="AssessmentTargetIDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="AssessmentTargetID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="AssessmentTargetID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Assessment Target ID" readOnly="true" />
+    <field name="TargetTemplateID" type="Int32" label="Target Template ID" showInSummary="true">
+      <items style="Lookup" dataController="TargetTemplate" newDataView="createForm1" dataValueField="TargetTemplateID" dataTextField="TargetName" copy="TargetTemplateMeasurementType=MeasurementType, TargetTemplateTargetLevel=TargetLevel" />
+    </field>
+    <field name="TargetTemplateTargetName" type="String" readOnly="true" label="Target Name" length="35" />
+    <field name="TargetTemplateMeasurementType" type="String" readOnly="true" label="Measurement Type" length="50" />
+    <field name="TargetTemplateTargetLevel" type="String" readOnly="true" label="Target Level" length="20" />
+    <field name="TargetLevelID" type="Int32" label="Target Level ID" showInSummary="true">
+      <items style="Lookup" dataController="TargetLevel" newDataView="createForm1" dataValueField="TargetLevelID" dataTextField="TargetLevel" />
+    </field>
+    <field name="TargetLevel" type="String" readOnly="true" label="Target Level" length="20" />
+    <field name="TargetName" type="String" label="Target Name" length="50" showInSummary="true" />
+    <field name="Description" type="String" label="Description" length="255" showInSummary="true" />
+    <field name="TargetValue" type="Decimal" label="Target Value" showInSummary="true" />
+    <field name="MeasurementTypeID" type="Int32" label="Measurement Type ID">
+      <items style="Lookup" dataController="MeasurementType" newDataView="createForm1" dataValueField="MeasurementTypeID" dataTextField="MeasurementType" />
+    </field>
+    <field name="MeasurementType" type="String" readOnly="true" label="Measurement Type" length="20" />
+    <field name="CourseID" type="Int32" label="Course ID">
+      <items style="Lookup" dataController="Course" newDataView="createForm1" dataValueField="CourseID" dataTextField="Course" />
+    </field>
+    <field name="CourseTitle" type="String" readOnly="true" label="Course" length="20" />
+    <field name="CalendarSessionID" type="Int32" label="Calendar Session ID">
+      <items style="Lookup" dataController="Session" newDataView="createForm1" dataValueField="CalendarSessionID" dataTextField="SessionCode" copy="SessionName=SessionName" />
+    </field>
+    <field name="SessionCode" type="String" readOnly="true" label="Session Code" length="20" />
+    <field name="SessionName" type="String" readOnly="true" label="Session Name" length="50" />
+    <field name="EffectiveDate" type="DateTime" default="(getdate())" label="Effective Date" />
+    <field name="EffectiveEndDate" type="DateTime" label="Effective End Date" />
+    <field name="IsActive" type="Boolean" default="((1))" label="Is Active" />
+    <field name="CreatedBy" type="String" label="Created By" length="100" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Created Date" />
+    <field name="ModifiedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Modified Date" />
+    <field name="TargetType" type="String" label="Target Type" length="50" />
+    <field name="Weighting" type="Decimal" label="Weighting" />
+    <field name="extTargetLevel" type="String" label="extTarget Level" length="30" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Assessment Target">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="TargetTemplateID" aliasFieldName="TargetTemplateTargetName" />
+        <dataField fieldName="TargetName" columns="20" hidden="true" />
+        <dataField fieldName="TargetLevelID" aliasFieldName="TargetLevel" />
+        <dataField fieldName="TargetType" columns="20" />
+        <dataField fieldName="CourseID" aliasFieldName="CourseTitle" />
+        <dataField fieldName="MeasurementTypeID" aliasFieldName="MeasurementType" />
+        <dataField fieldName="TargetValue" columns="15" />
+        <dataField fieldName="CalendarSessionID" aliasFieldName="SessionCode" />
+        <dataField fieldName="SessionName" columns="50" hidden="true" />
+        <dataField fieldName="EffectiveDate" columns="20">
+          <headerText>Start Date</headerText>
+        </dataField>
+        <dataField fieldName="EffectiveEndDate" columns="20">
+          <headerText>End Date</headerText>
+        </dataField>
+        <dataField fieldName="IsActive" />
+        <dataField fieldName="Weighting" columns="5">
+          <headerText>% Wt</headerText>
+        </dataField>
+        <dataField fieldName="extTargetLevel" columns="30" hidden="true" />
+        <dataField fieldName="Description" columns="30" hidden="true" />
+        <dataField fieldName="CreatedBy" hidden="true" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Assessment Target">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Assessment Target" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="TargetTemplateID" aliasFieldName="TargetTemplateTargetName" />
+            <dataField fieldName="TargetTemplateMeasurementType" columns="50" />
+            <dataField fieldName="TargetTemplateTargetLevel" columns="20" />
+            <dataField fieldName="TargetLevelID" aliasFieldName="TargetLevel" />
+            <dataField fieldName="TargetName" columns="50" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="TargetValue" columns="15" />
+            <dataField fieldName="MeasurementTypeID" aliasFieldName="MeasurementType" />
+            <dataField fieldName="CourseID" aliasFieldName="CourseTitle" />
+            <dataField fieldName="CalendarSessionID" aliasFieldName="SessionCode" />
+            <dataField fieldName="SessionName" columns="50" />
+            <dataField fieldName="EffectiveDate" columns="10" />
+            <dataField fieldName="EffectiveEndDate" columns="10" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="CreatedBy" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="TargetType" columns="50" />
+            <dataField fieldName="Weighting" columns="15" />
+            <dataField fieldName="extTargetLevel" columns="30" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Assessment Target">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="TargetTemplateID" aliasFieldName="TargetTemplateTargetName" />
+            <dataField fieldName="TargetTemplateMeasurementType" columns="50" />
+            <dataField fieldName="TargetTemplateTargetLevel" columns="20" />
+            <dataField fieldName="TargetLevelID" aliasFieldName="TargetLevel" />
+            <dataField fieldName="TargetName" columns="50" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="TargetValue" columns="15" />
+            <dataField fieldName="MeasurementTypeID" aliasFieldName="MeasurementType" />
+            <dataField fieldName="CourseID" aliasFieldName="CourseTitle" />
+            <dataField fieldName="CalendarSessionID" aliasFieldName="SessionCode" />
+            <dataField fieldName="SessionName" columns="50" />
+            <dataField fieldName="EffectiveDate" columns="10" />
+            <dataField fieldName="EffectiveEndDate" columns="10" />
+            <dataField fieldName="IsActive" />
+            <dataField fieldName="CreatedBy" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="ModifiedDate" columns="20" />
+            <dataField fieldName="TargetType" columns="50" />
+            <dataField fieldName="Weighting" columns="15" />
+            <dataField fieldName="extTargetLevel" columns="30" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

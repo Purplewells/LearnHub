@@ -117,6 +117,35 @@ from "dbo"."PaymentRecords" "PaymentRecords"
         </dataField>
       </dataFields>
     </view>
+    <view id="bank_manifest" type="Grid" commandId="command1" label="Current Period Manifest" sortExpression="BatchID DESC" filter="IsCurrent = 1" reportTemplate="true" showInSelector="false">
+      <headerText>&lt;strong&gt;To run the payroll please specify the pay period in the General Parameters module. &lt;/strong&gt;</headerText>
+      <dataFields>
+        <dataField fieldName="EmployeeID" columns="15" hidden="true" />
+        <dataField fieldName="FirstName" columns="20" />
+        <dataField fieldName="LastName" columns="20" />
+        <dataField fieldName="UPN" columns="15" />
+        <dataField fieldName="Ssno" columns="20" hidden="true" />
+        <dataField fieldName="PeriodType" columns="12" />
+        <dataField fieldName="PaymentDate" columns="10" tag="pivot1-row1-column-date&#xD;&#xA;pivot1-title:&quot;Gross Earnings By Payment  Period&quot;&#xD;&#xA;&#xD;&#xA;pivot2-row1-column-date&#xD;&#xA;pivot2-title:&quot;Gross Earnings By Payment  Period&quot;" />
+        <dataField fieldName="BaseSalary" columns="15" />
+        <dataField fieldName="TotalEarnings" columns="10" aggregate="Sum" />
+        <dataField fieldName="GrossEarnings" columns="15" aggregate="Sum" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum" />
+        <dataField fieldName="TaxAmount" columns="15" tag="pivot2-val2-sum" />
+        <dataField fieldName="TotalDeductions" columns="10" aggregate="Sum" />
+        <dataField fieldName="NetSalary" columns="15" aggregate="Sum" />
+        <dataField fieldName="NextRunDate" columns="10" />
+        <dataField fieldName="CreatedDate" columns="20" hidden="true" />
+        <dataField fieldName="ModifiedDate" columns="20" hidden="true" />
+        <dataField fieldName="CreatedBy" columns="50" hidden="true" />
+        <dataField fieldName="ModifiedBy" columns="50" hidden="true" />
+        <dataField fieldName="IsCurrent" columns="5">
+          <headerText>ISC</headerText>
+        </dataField>
+        <dataField fieldName="BatchID" columns="8">
+          <headerText>BID</headerText>
+        </dataField>
+      </dataFields>
+    </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Payment Records">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
@@ -244,6 +273,12 @@ Version		Date			Note
 EXEC zusp_ops_salary_p3_prepare_payroll]]></data>
       </action>
       <action id="a101" commandName="ReportAsPdf" headerText="Print To Bank" />
+      <action id="a104" commandName="ReportAsPdf" headerText="Print To Current Bank">
+        <data><![CDATA[_controller=PaymentRecords
+_view=grid1_historical_runs
+_template=PaymentRecords_grid1.rdlc
+]]></data>
+      </action>
       <action id="a2" />
       <action id="a1" commandName="ExportCsv" />
       <action id="a102" commandName="ReportAsExcel" headerText="Export To Excel" />

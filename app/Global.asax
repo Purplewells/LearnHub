@@ -19,8 +19,7 @@ void Application_End(object sender, EventArgs e)
 
 void Application_Error(object sender, EventArgs e)
 {
-    
-    // Fires when an unhandled error occurs (default from CodeOnTime)
+    // Fires when an unhandled error occurs
     zLearnHub.Services.ApplicationServices.Error();
 }
 
@@ -38,6 +37,4 @@ void Session_End(object sender, EventArgs e)
     // or SQLServer, the event is not raised.
     zLearnHub.Services.ApplicationServices.SessionStop();
 }
-
-
 </script>

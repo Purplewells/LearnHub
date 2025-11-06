@@ -28,7 +28,7 @@
     <field name="ShowOnReport" type="Boolean" label="Show On Report" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Fee Debtors Full" reportLabel="List Debtors Report" reportTemplate="true">
+    <view id="grid1" type="Grid" commandId="command1" label="Fee Debtors Full" reportLabel="List Debtors Report" reportTemplate="true" showInSelector="false">
       <headerText>This debtor's report shows the full transactions of bills and payments over a period of time.</headerText>
       <dataFields>
         <dataField fieldName="PersonID" columns="15" hidden="true" />

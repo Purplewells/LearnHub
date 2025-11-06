@@ -38,12 +38,12 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
     <field name="JournalEntryID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Journal Entry ID" readOnly="true" />
     <field name="TransactionDate" type="DateTime" default="(getdate())" label="Transaction Date" showInSummary="true" />
     <field name="DebitAccountID" type="Int32" label="Debit Account ID" showInSummary="true">
-      <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" copy="DebitAccountType=AccountType" />
+      <items style="Lookup" dataController="ChartOfAccounts" dataValueField="AccountID" dataTextField="AccountName" copy="DebitAccountType=AccountType" dataView="grid1" />
     </field>
     <field name="DebitAccountName" type="String" readOnly="true" label="Debit Account" length="35" />
     <field name="DebitAccountType" type="String" readOnly="true" label="Debit Account Type" length="20" />
     <field name="CreditAccountID" type="Int32" label="Credit Account ID" showInSummary="true">
-      <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" copy="CreditAccountType=AccountType" />
+      <items style="Lookup" dataController="ChartOfAccounts" dataValueField="AccountID" dataTextField="AccountName" copy="CreditAccountType=AccountType" dataView="grid1" />
     </field>
     <field name="CreditAccountName" type="String" readOnly="true" label="Credit Account" length="30" />
     <field name="CreditAccountType" type="String" readOnly="true" label="Credit Account Type" length="20" />
@@ -79,10 +79,10 @@ from "dbo"."manual_account_journal_entries" "manual_account_journal_entries"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Description" tag="header-text" columns="40" />
-        <dataField fieldName="TransactionDate" columns="20" />
-        <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" />
-        <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" />
-        <dataField fieldName="Amount" columns="20" dataFormatString="D" />
+        <dataField fieldName="TransactionDate" columns="20" tag="pivot1-row1-line-date&#xD;&#xA;pivot1-title:&quot;Count of transactions by Transaction Date&quot;&#xD;&#xA;pivot1: hideblank" />
+        <dataField fieldName="DebitAccountID" aliasFieldName="DebitAccountName" tag="pivot2-row1-line-date&#xD;&#xA;pivot2-title:&quot;Count of transactions by Debit Account&quot;&#xD;&#xA;pivot2: hideblank&#xD;&#xA;&#xD;&#xA;pivot4-row1-columnstacked&#xD;&#xA;pivot4-title:&quot;Total amount of transactions by Debit Account&quot;&#xD;&#xA;pivot4: hideblank" />
+        <dataField fieldName="CreditAccountID" aliasFieldName="CreditAccountName" tag="pivot3-row1-column&#xD;&#xA;pivot3-title:&quot;Total Amount of transactions by Credit Account&quot;&#xD;&#xA;pivot3: hideblank" />
+        <dataField fieldName="Amount" columns="20" dataFormatString="D" tag="pivot3-val1-sum&#xD;&#xA;pivot4-val1-sum" />
         <dataField fieldName="Currency" columns="10" />
         <dataField fieldName="EnteredBy" columns="30" hidden="true" />
         <dataField fieldName="ModifiedDate" columns="20" hidden="true" />

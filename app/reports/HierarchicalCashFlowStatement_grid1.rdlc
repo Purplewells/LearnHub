@@ -52,13 +52,13 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.11458in</Width>
+                  <Width>1.22569in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>4.63542in</Width>
+                  <Width>3.79861in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.38542in</Width>
+                  <Width>1.31945in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -265,6 +265,7 @@
                                   <Value>=Sum(Fields!NetCashFlow.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
+                                    <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -280,9 +281,6 @@
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
-                            <RightBorder>
-                              <Width>0.5pt</Width>
-                            </RightBorder>
                             <BackgroundColor>=IIf(Fields!LineType.Value = "Total","LightGreen","White")</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -291,6 +289,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -313,10 +312,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>HierarchicalCashFlowStatement</DataSetName>
-            <Top>0.14166in</Top>
+            <Top>0.06666in</Top>
             <Left>0.10416in</Left>
             <Height>0.5in</Height>
-            <Width>7.13542in</Width>
+            <Width>6.34375in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -324,13 +323,13 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>0.79791in</Height>
+        <Height>0.62083in</Height>
         <Style />
       </Body>
-      <Width>7.47917in</Width>
+      <Width>6.5625in</Width>
       <Page>
         <PageHeader>
-          <Height>0.72792in</Height>
+          <Height>0.55084in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -352,7 +351,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>textbox5</rd:DefaultName>
-              <Top>0.50271cm</Top>
+              <Top>0.18521cm</Top>
               <Left>3.83646cm</Left>
               <Height>0.375in</Height>
               <Width>4.34375in</Width>
@@ -361,45 +360,6 @@
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
                 <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="FilterDetailsTextbox">
-              <CanGrow>true</CanGrow>
-              <CanShrink>true</CanShrink>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=Parameters!FilterDetails.Value</Value>
-                      <Style>
-                        <FontStyle>Italic</FontStyle>
-                        <FontSize>8pt</FontSize>
-                        <Color>Navy</Color>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <Top>0.82021cm</Top>
-              <Left>0.42333cm</Left>
-              <Height>0.25in</Height>
-              <Width>0.9375in</Width>
-              <ZIndex>1</ZIndex>
-              <Visibility>
-                <Hidden>=String.IsNullOrEmpty(Parameters!FilterDetails.Value)</Hidden>
-              </Visibility>
-              <Style>
-                <BottomBorder>
-                  <Style>=IIf(String.IsNullOrEmpty(Parameters!FilterDetails.Value), "", "Solid")</Style>
-                </BottomBorder>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>5pt</PaddingBottom>
               </Style>
             </Textbox>
           </ReportItems>
@@ -469,7 +429,7 @@
           <Style />
         </PageFooter>
         <PageHeight>11.69in</PageHeight>
-        <PageWidth>8.27in</PageWidth>
+        <PageWidth>7.7in</PageWidth>
         <LeftMargin>0.5in</LeftMargin>
         <RightMargin>0.5in</RightMargin>
         <TopMargin>0.5in</TopMargin>

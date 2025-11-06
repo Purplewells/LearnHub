@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpTargetTemplate" alias="zlkpTargetTemplate" created="2025-10-28T12:48:28" modified="2025-10-30T11:51:58" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="TargetLevel" parentTableSchema="dbo" parentTableName="zlkpTargetLevel" x="352" y="20">
+      <foreignKeyColumn columnName="TargetLevelID" parentColumnName="TargetLevelID" />
+    </foreignKey>
+    <foreignKey id="MeasurementType" parentTableSchema="dbo" parentTableName="zlkpMeasurementType" x="352" y="181">
+      <foreignKeyColumn columnName="MeasurementTypeID" parentColumnName="MeasurementTypeID" />
+    </foreignKey>
+    <foreignKey id="MeasurementUnit" parentTableSchema="dbo" parentTableName="zlkpMeasurementUnit" x="350" y="336">
+      <foreignKeyColumn columnName="MeasurementUnitID" parentColumnName="MeasurementUnitID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="TargetTemplateID" fieldName="TargetTemplateID" label="Target Template ID" />
+    <column name="TargetName" fieldName="TargetName" label="Target Name" />
+    <column name="TargetType" fieldName="TargetType" label="Target Type" />
+    <column name="TargetLevelID" fieldName="TargetLevelID" label="Target Level ID" aliasColumnName="TargetLevel" aliasForeignKey="TargetLevel" />
+    <column name="TargetLevel" fieldName="TargetLevel" label="Target Level" foreignKey="TargetLevel" />
+    <column name="MeasurementTypeID" fieldName="MeasurementTypeID" label="Measurement Type ID" aliasColumnName="MeasurementType" aliasForeignKey="MeasurementType" />
+    <column name="MeasurementType" fieldName="MeasurementType" label="Measurement Type" foreignKey="MeasurementType" />
+    <column name="MeasurementCode" fieldName="MeasurementCode" label="Measurement Code" foreignKey="MeasurementType" />
+    <column name="MeasurementUnitID" fieldName="MeasurementUnitID" label="Measurement Unit ID" aliasColumnName="MeasurementUnitName" aliasForeignKey="MeasurementUnit" />
+    <column name="MeasurementUnitName" fieldName="MeasurementUnitName" label="Unit Name" foreignKey="MeasurementUnit" />
+    <column name="MeasurementSymbol" fieldName="Symbol" label="Symbol" foreignKey="MeasurementUnit" />
+    <column name="DefaultTargetValue" fieldName="DefaultTargetValue" label="Default Target" />
+    <column name="DefaultWeighting" fieldName="DefaultWeighting" label="Default Weight" />
+    <column name="IsActive" fieldName="IsActive" label="Active" />
+    <column name="AppliesToCourse" fieldName="AppliesToCourse" label="Applies To Course" />
+    <column name="AppliesToSession" fieldName="AppliesToSession" label="Applies To Session" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+  </columns>
+  <details>
+    <detail fieldName="zlkpTargetTemplateScope" model="TargetTemplateScopeDetail" filterFields="TargetTemplateID" create="true" edit="true" />
+  </details>
+</dataModel>

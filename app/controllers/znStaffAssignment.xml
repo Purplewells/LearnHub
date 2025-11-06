@@ -53,12 +53,12 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
     <field name="JobClassificationID" type="Int32" label="Job Classification ID" showInSummary="true">
       <items style="Lookup" dataController="EducationJobClassification" newDataView="createForm1" dataValueField="RefProfessionalEducationJobClassificationID" dataTextField="Description" />
     </field>
-    <field name="JobClass" type="String" readOnly="true" label="Job Class" length="30" />
+    <field name="JobClass" type="String" readOnly="true" label="Job Class" length="25" />
     <field name="PositionTypeID" type="Int32" label="Position Type ID" showInSummary="true">
       <items style="Lookup" dataController="ClassroomPositionType" newDataView="createForm1" dataValueField="RefClassroomPositionTypeID" dataTextField="Description" />
     </field>
-    <field name="PositionType" type="String" readOnly="true" label="Position Type" length="30" />
-    <field name="QTS" type="Boolean" label="QTS" showInSummary="true" />
+    <field name="PositionType" type="String" readOnly="true" label="Position Type" length="25" />
+    <field name="QTS" type="Boolean" label="Qualified Teacher Status" showInSummary="true" />
     <field name="StartDate" type="DateTime" label="Start Date" showInSummary="true" />
     <field name="EndDate" type="DateTime" label="End Date" />
     <field name="OrganizationPersonRoleID" type="Int32" label="Organization Person Role ID">
@@ -73,7 +73,7 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
     <field name="CountryFiscalPeriodID" type="Int32" label="Country Fiscal Period ID">
       <items style="Lookup" dataController="CountryFiscalPeriods" newDataView="createForm1" dataValueField="CountryFiscalPeriodID" dataTextField="CountryName" />
     </field>
-    <field name="CountryFiscalPeriod" type="String" readOnly="true" label="Country Fiscal Period" length="30" />
+    <field name="CountryFiscalPeriod" type="String" readOnly="true" label="Country Fiscal Period" length="20" />
     <field name="Salaries" type="DataView" label="Salaries" roles="Administrators, AccountManagers" writeRoles="Administrators, AccountManagers">
       <dataView controller="Salaries" view="grid1" filterFields="AssignmentID" />
     </field>
@@ -92,14 +92,14 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
         <dataField fieldName="Title" columns="15" hidden="true" />
         <dataField fieldName="JobClassificationID" aliasFieldName="JobClass" />
         <dataField fieldName="PositionTypeID" aliasFieldName="PositionType" />
-        <dataField fieldName="QTS" />
         <dataField fieldName="StartDate" columns="10" />
         <dataField fieldName="EndDate" columns="10" />
+        <dataField fieldName="QTS" columns="20" />
+        <dataField fieldName="DepartmentID" aliasFieldName="Department" />
+        <dataField fieldName="CountryFiscalPeriodID" aliasFieldName="CountryFiscalPeriod" />
         <dataField fieldName="OrganizationPersonRoleID" columns="15" />
         <dataField fieldName="OrganizationPersonRoleOrganisationID" columns="15" />
         <dataField fieldName="Organisation" />
-        <dataField fieldName="DepartmentID" aliasFieldName="Department" />
-        <dataField fieldName="CountryFiscalPeriodID" aliasFieldName="CountryFiscalPeriod" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Contract">
@@ -115,9 +115,9 @@ from "dbo"."K12StaffAssignment" "K12StaffAssignment"
             <dataField fieldName="Title" columns="15" hidden="true" />
             <dataField fieldName="JobClassificationID" aliasFieldName="JobClass" />
             <dataField fieldName="PositionTypeID" aliasFieldName="PositionType" />
-            <dataField fieldName="QTS" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
+            <dataField fieldName="QTS" />
             <dataField fieldName="OrganizationPersonRoleID" columns="15" />
             <dataField fieldName="OrganizationPersonRoleOrganisationID" columns="15" />
             <dataField fieldName="Organisation" />

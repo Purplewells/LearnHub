@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpMeasurementType" alias="zlkpMeasurementType" created="2025-10-28T13:11:17" modified="2025-10-28T13:11:34" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="MeasurementTypeID" fieldName="MeasurementTypeID" label="Measurement Type ID" />
+    <column name="MeasurementType" fieldName="MeasurementType" label="Measurement Type" />
+    <column name="MeasurementCode" fieldName="MeasurementCode" label="Code" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="IsActive" fieldName="IsActive" label="Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+  </columns>
+</dataModel>

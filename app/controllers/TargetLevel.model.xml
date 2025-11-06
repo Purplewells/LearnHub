@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpTargetLevel" alias="zlkpTargetLevel" created="2025-10-28T12:48:13" modified="2025-10-30T10:40:26" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys />
+  <columns>
+    <column name="TargetLevelID" fieldName="TargetLevelID" label="Target Level ID" />
+    <column name="TargetLevel" fieldName="TargetLevel" label="Target Level" />
+    <column name="TargetLevelCode" fieldName="TargetLevelCode" label="Code" />
+    <column name="IsActive" fieldName="IsActive" label="Active" />
+    <column name="SortOrder" fieldName="SortOrder" label="Sort Order" />
+  </columns>
+</dataModel>

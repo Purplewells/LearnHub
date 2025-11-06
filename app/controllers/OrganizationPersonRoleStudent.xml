@@ -98,7 +98,7 @@ from "dbo"."OrganizationPersonRole" "OrganizationPersonRole"
     <view id="grid1" type="Grid" commandId="command1" label="Students" filter="GETDATE() BETWEEN EntryDate AND ExitDate AND CYS &lt;&gt; 'No' AND&#xD;&#xA;Role = 'Student'">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Fullname" tag="header-text" hidden="true" />
+        <dataField fieldName="Fullname" hidden="true" />
         <dataField fieldName="FirstName" columns="18" />
         <dataField fieldName="LastName" columns="18" />
         <dataField fieldName="PersonID" aliasFieldName="UPN" />

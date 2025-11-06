@@ -35,7 +35,7 @@ from "dbo"."zlkpTransactionType" "zlkpTransactionType"
     <field name="ModifiedBy" type="String" label="Modified By" length="50" />
   </fields>
   <views>
-    <view id="grid1" type="Grid" commandId="command1" label="Active Transaction Types" filter="IsActive = 1">
+    <view id="grid1" type="Grid" commandId="command1" label="Active Transaction Types" filter="IsActive = 1&#xD;&#xA;AND TransactionTypeCode != 'REFUND'">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="TransactionType" columns="20" />

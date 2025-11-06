@@ -222,7 +222,7 @@ from "dbo"."Product" "Product"
         <expression type="ClientScript" result="ReOrderChecks" test="$row.Quantity &lt;= $row.ReOrderQty" />
       </styles>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Item">
+    <view id="editForm1" type="Form" commandId="command1" label="Enter &amp; Maintain Item">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category id="c2" headerText="Basic Details" flow="NewColumn">
@@ -282,10 +282,10 @@ from "dbo"."Product" "Product"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Item">
+    <view id="createForm1" type="Form" commandId="command1" label="Add New Item">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
-        <category id="c2" headerText="Product Detail" flow="NewColumn">
+        <category id="c2" flow="NewColumn">
           <description />
           <dataFields>
             <dataField fieldName="ProductName" />
@@ -297,16 +297,20 @@ from "dbo"."Product" "Product"
             <dataField fieldName="ConversionFactor" columns="5">
               <headerText>Quantity Per Unit</headerText>
             </dataField>
+            <dataField fieldName="Sellable" />
+            <dataField fieldName="IsActive" />
           </dataFields>
         </category>
-        <category id="c3" headerText="Cost &amp; Price" floating="true">
+        <category id="c3" headerText="Pricing" floating="true">
           <description />
           <dataFields>
             <dataField fieldName="CostPrice" columns="15" />
             <dataField fieldName="UnitPrice" columns="15" />
-            <dataField fieldName="SellingPrice" columns="15" />
-            <dataField fieldName="Sellable" />
-            <dataField fieldName="IsActive" />
+            <dataField fieldName="SellingPrice" columns="15">
+              <visibility>
+                <expression test="[Sellable] == 1" type="ClientScript" />
+              </visibility>
+            </dataField>
           </dataFields>
         </category>
         <category id="c4" headerText="Quantities &amp; Thresholds" floating="true" flow="NewColumn">
@@ -358,9 +362,9 @@ from "dbo"."Product" "Product"
       <action id="a1" commandName="Edit" />
       <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
-      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" headerText="Confirm &amp; Save" cssClass="material-icon-draft_orders" confirmation="This action would commit changes to your item details. Do you want to continue ?" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
-      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" headerText="Confirm &amp; Save" cssClass="material-icon-save" confirmation="This action will register a new item in your inventory. Do you want to continue ?" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />

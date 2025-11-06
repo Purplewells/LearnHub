@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="OrganizationPersonRole" alias="OrganizationPersonRole" created="2024-02-06T22:13:50" modified="2024-12-23T10:14:43" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="OrganizationPersonRole" alias="OrganizationPersonRole" created="2024-02-06T22:13:50" modified="2025-10-19T07:34:41" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
     <foreignKey id="Organisation" parentTableSchema="dbo" parentTableName="Organisation" x="367" y="20">
       <foreignKeyColumn columnName="OrganisationID" parentColumnName="OrganizationID" />
@@ -21,8 +21,7 @@
     </column>
     <column name="OrganisationID" fieldName="OrganisationID" label="Organisation ID" aliasColumnName="Name" aliasForeignKey="Organisation" />
     <column name="Name" fieldName="Organisation" label="Organisation" foreignKey="Organisation" />
-    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="IdentificationCode" aliasForeignKey="Person" />
-    <column name="IdentificationCode" fieldName="UPN" label="UPN" foreignKey="Person" />
+    <column name="PersonID" fieldName="PersonID" label="Person ID" aliasColumnName="FirstName" aliasForeignKey="Person" />
     <column name="FirstName" fieldName="FirstName" label="First Name" foreignKey="Person" />
     <column name="LastName" fieldName="LastName" label="Last Name" foreignKey="Person" />
     <column name="PhoneNo" fieldName="PhoneNo" label="Phone No" foreignKey="Person" />
@@ -30,6 +29,9 @@
     <column name="PhotoUrl" fieldName="PhotoUrl" label="Photo" foreignKey="Person" />
     <column name="SocialSecurityNumber" fieldName="SSNo" label="Social Security Number" foreignKey="Person" />
     <column name="BankName" fieldName="BankName" label="Bank Name" foreignKey="Person" />
+    <column name="Owner" fieldName="PersonOwner" label="Person Owner" foreignKey="Person" />
+    <column name="IdentificationCode" fieldName="IdentificationCode" label="Staff Number" foreignKey="Person" />
+    <column name="AccountNo" fieldName="AccountNo" label="Account No" foreignKey="Person" />
     <column name="EntryDate" fieldName="EntryDate" label="Hired Date" />
     <column name="ExitDate" fieldName="ExitDate" label="Exit Date" />
     <column name="RoleID" fieldName="RoleID" label="Role ID" aliasColumnName="RoleName" aliasForeignKey="Role" />

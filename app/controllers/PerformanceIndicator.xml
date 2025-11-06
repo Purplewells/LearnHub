@@ -69,20 +69,20 @@ from "dbo"."PerformanceIndicator" "PerformanceIndicator"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Code" columns="25" />
+        <dataField fieldName="StandardNo" columns="20" />
         <dataField fieldName="Strand" tag="header-text" />
         <dataField fieldName="StrandCode" columns="20" />
         <dataField fieldName="Substrand" />
         <dataField fieldName="Subject" columns="20" />
-        <dataField fieldName="PerformanceDescription" rows="5" tag="item-desc" />
         <dataField fieldName="SuccessStatement" tag="import-duplicate-accept" hidden="true" />
-        <dataField fieldName="StandardNo" columns="20" />
-        <dataField fieldName="ICode" columns="30" tag="import-duplicate-accept" />
+        <dataField fieldName="ICode" columns="30" tag="import-duplicate-accept" hidden="true" />
         <dataField fieldName="IsActive" />
         <dataField fieldName="ExtIsActive" hidden="true" />
         <dataField fieldName="SubjectLearningOutcome" hidden="true" />
         <dataField fieldName="ExtTerm" columns="15" />
         <dataField fieldName="GradeLevelID" aliasFieldName="GL" />
         <dataField fieldName="GLSO" columns="15" hidden="true" />
+        <dataField fieldName="PerformanceDescription" rows="5" tag="item-desc" />
         <dataField fieldName="PerformanceIndicator" hidden="true" />
         <dataField fieldName="ExtContentStandard" rows="5" hidden="true" />
         <dataField fieldName="ExtLearningStandard" rows="5" hidden="true" />

@@ -73,7 +73,7 @@ from "dbo"."AttendanceEvent" "AttendanceEvent"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="AttendanceEventCategoryID" aliasFieldName="EventCategory" />
-        <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" tag="pivot1-row1-column-top10-other-sortbyvalue&#xD;&#xA;pivot1-title:&quot;What is the distribution of attendance&quot;" />
+        <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" tag="pivot1-row1-column-top10-other-sortbyvalue&#xD;&#xA;pivot1-title:&quot;What is the distribution of attendance&quot;&#xD;&#xA;&#xD;&#xA;pivot5-row1-column-top10-other-sortbyvalue&#xD;&#xA;pivot5-title:&quot;What is the distribution of attendance by GradeLevel&quot;" />
         <dataField fieldName="EventDate" columns="18" tag="pivot2-row1-column-year&#xD;&#xA;pivot2-title:&quot;What is the distribution of attendance check by week&quot;" />
         <dataField fieldName="AttendanceEventReasonID" aliasFieldName="EventReason" hidden="true" />
         <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" />
@@ -89,7 +89,7 @@ from "dbo"."AttendanceEvent" "AttendanceEvent"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="AttendanceEventCategoryID" aliasFieldName="EventCategory" />
-        <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" tag="pivot1-row1-column-top10-other-sortbyvalue&#xD;&#xA;pivot1-title:&quot;What is the distribution of attendance&quot;&#xD;&#xA;&#xD;&#xA;pivot2-col1" />
+        <dataField fieldName="RefGradeLevelID" aliasFieldName="GradeLevel" tag="pivot1-row1-column-top10-other-sortbyvalue&#xD;&#xA;pivot1-title:&quot;What is the distribution of attendance&quot;&#xD;&#xA;&#xD;&#xA;pivot5-row1-pie-top10-other-sortbyvalue&#xD;&#xA;pivot5-title:&quot;What is the distribution of attendance by GradeLevel&quot;&#xD;&#xA;&#xD;&#xA;pivot2-col1" />
         <dataField fieldName="EventDate" columns="20" tag="pivot2-row1-columnstacked-year&#xD;&#xA;pivot2-title:&quot;What is the distribution of attendance check by week&quot;&#xD;&#xA;&#xD;&#xA;pivot4-row1-columnstacked-date&#xD;&#xA;pivot4-title:&quot;What is the comparative attendance by Stream&quot;" />
         <dataField fieldName="AttendanceEventReasonID" aliasFieldName="EventReason" hidden="true" />
         <dataField fieldName="RefSchoolStreamID" aliasFieldName="Stream" columns="10" tag="pivot3-row1-columnstacked&#xD;&#xA;pivot3-title:&quot;What is the distribution of attendance by Stream&quot;&#xD;&#xA;&#xD;&#xA;pivot4-col1" />

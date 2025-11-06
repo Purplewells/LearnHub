@@ -203,6 +203,7 @@ from "dbo"."student_fees" "student_fees"
           <dataFields>
             <dataField fieldName="EffectiveDate" columns="10" />
             <dataField fieldName="DueDate" columns="10" />
+            <dataField fieldName="CalendarCode" columns="30" />
             <dataField fieldName="CurrencyCode" columns="5" />
           </dataFields>
         </category>
@@ -225,7 +226,6 @@ from "dbo"."student_fees" "student_fees"
           <dataFields>
             <dataField fieldName="YearEndDate" columns="10" />
             <dataField fieldName="YearStartDate" columns="10" />
-            <dataField fieldName="CalendarCode" columns="30" />
             <dataField fieldName="FeeTypes" columns="20" hidden="true" />
             <dataField fieldName="Sex" columns="50" />
             <dataField fieldName="CSY" />

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="WorkBenchAssessmentTargets" conflictDetection="overwriteChanges" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <fields>
+    <field name="TargetTemplate" type="DataView" label="Target Template">
+      <dataView controller="TargetTemplate" view="grid1" />
+    </field>
+    <field name="TargetLevel" type="DataView" label="Target Level">
+      <dataView controller="TargetLevel" view="grid1" />
+    </field>
+    <field name="TargetAssignment" type="DataView" label="Target Assignment">
+      <dataView controller="TargetAssignment" view="grid1" />
+    </field>
+    <field name="TargetAdjustment" type="DataView" label="Target Adjustment">
+      <dataView controller="TargetAdjustment" view="grid1" />
+    </field>
+    <field name="MeasurementTypeUnitMapping" type="DataView" label="Measurement Type Unit Mapping">
+      <dataView controller="MeasurementTypeUnitMapping" view="grid1" />
+    </field>
+    <field name="MeasurementType" type="DataView" label="Measurement Type">
+      <dataView controller="MeasurementType" view="grid1" />
+    </field>
+    <field name="MeasurementUnit" type="DataView" label="Measurement Unit">
+      <dataView controller="MeasurementUnit" view="grid1" />
+    </field>
+    <field name="AssessmentTarget" type="DataView" label="Assessment Target">
+      <dataView controller="AssessmentTarget" view="grid1" />
+    </field>
+    <field name="TargetEntity" type="DataView" label="Target Entity">
+      <dataView controller="TargetEntity" view="grid1" />
+    </field>
+    <field name="TargetTemplateScope" type="DataView" label="Target Template Scope" causesCalculate="true">
+      <dataView controller="TargetTemplateScope" view="grid1" filterSource="TargetTemplate" filterFields="TargetTemplateID" />
+    </field>
+  </fields>
+  <views>
+    <view id="AssessmentForm" type="Form" label="Academic Target &amp; Assessment Framework (ATAF)" tags="material-icon-spa">
+      <categories>
+        <category id="c2" tab="TARGET LEVEL" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="TargetLevel" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content" />
+          </dataFields>
+        </category>
+        <category id="c9" tab="TARGET ENTITY">
+          <dataFields>
+            <dataField fieldName="TargetEntity" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content" />
+          </dataFields>
+        </category>
+        <category id="c1" tab="TARGETS TEMPLATE">
+          <dataFields>
+            <dataField fieldName="TargetTemplate" columns="15" tag="modal-fullscren&#xD;&#xA;modal-fit-content" />
+            <dataField fieldName="TargetTemplateScope" columns="15" tag="modal-max-SM&#xD;&#xA;modal-fit-content&#xD;&#xA;modal-stub-content-none" />
+          </dataFields>
+        </category>
+        <category id="c8" tab="ASSESSMENT TARGETS  ">
+          <dataFields>
+            <dataField fieldName="AssessmentTarget" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content" />
+          </dataFields>
+        </category>
+        <category id="c3" tab="TARGET ASSIGNMENT">
+          <dataFields>
+            <dataField fieldName="TargetAssignment" columns="15" tag="modal-max-sm&#xD;&#xA;modal-fit-content" />
+          </dataFields>
+        </category>
+        <category id="c4" tab="TARGET ADJUSTMENT">
+          <dataFields>
+            <dataField fieldName="TargetAdjustment" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content" />
+          </dataFields>
+        </category>
+        <category id="c5" tab="MEASUREMENT UNIT">
+          <dataFields>
+            <dataField fieldName="MeasurementUnit" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content" />
+          </dataFields>
+        </category>
+        <category id="c6" tab="MEASUREMENT TYPE">
+          <dataFields>
+            <dataField fieldName="MeasurementType" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content" />
+          </dataFields>
+        </category>
+        <category id="c7" tab="MEASUREMENT TYPE MAPPING">
+          <dataFields>
+            <dataField fieldName="MeasurementTypeUnitMapping" columns="15" tag="modal-max-xs&#xD;&#xA;modal-fit-content" />
+          </dataFields>
+        </category>
+        <category id="c10" tab="TARGETS TEMPLATE SCOPE">
+          <dataFields />
+          <description><![CDATA[The TargetTemplateScope is a bridge/lookup table that defines where and to whom a particular target template applies.]]></description>
+        </category>
+      </categories>
+      <headerText>A structured system for defining, assigning, and tracking learning and performance targets across students, teachers, and courses.</headerText>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag100" scope="ActionBar" headerText="TargetAction" flat="false" />
+  </actions>
+</dataController>

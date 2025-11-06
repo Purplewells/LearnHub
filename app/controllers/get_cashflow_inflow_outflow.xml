@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="get_cashflow_inflow_outflow" conflictDetection="overwriteChanges" label="get_cashflow_inflow_outflow" plugIn="zLearnHub.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands />
+  <fields>
+    <field name="CashFlowCategory" type="String" label="Cash Flow Category" readOnly="true" length="50" showInSummary="true" />
+    <field name="AccountName" type="String" label="Account Name" readOnly="true" length="100" showInSummary="true" />
+    <field name="TransactionDate" type="DateTime" label="Transaction Date" readOnly="true" showInSummary="true" />
+    <field name="TransactionDescription" type="String" label="Transaction Description" readOnly="true" length="255" showInSummary="true" />
+    <field name="InflowAmount" type="Decimal" label="Inflow Amount" readOnly="true" showInSummary="true" />
+    <field name="OutflowAmount" type="Decimal" label="Outflow Amount" readOnly="true" />
+    <field name="FlowType" type="String" allowNulls="false" label="Flow Type" readOnly="true" length="7" />
+    <field name="CashEffect" type="String" allowNulls="false" label="Cash Effect" readOnly="true" length="14" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Cash Inflow &amp; Outflow" reportLabel="Cashflow Inflow/Outflow" reportTemplate="true" sortExpression="TransactionDate DESC">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="AccountName" columns="30" tag="pivot5-row1-barstacked&#xD;&#xA;pivot5-title:&quot;Identifying top inflow/outflow accounts&quot;" />
+        <dataField fieldName="CashFlowCategory" columns="30" tag="pivot2-row1-columnstacked&#xD;&#xA;pivot2-title:&quot;Comparison cashflows composition across categories&quot;&#xD;&#xA;&#xD;&#xA;pivot3-row1-pie&#xD;&#xA;pivot3-title:&quot;Cash Flow Breakdown by Category&quot;&#xD;&#xA;&#xD;&#xA;pivot4-row1-pie&#xD;&#xA;pivot4-title:&quot;Cash Outflow Breakdown by Category&quot;&#xD;&#xA;&#xD;&#xA;pivot6-row1-columnstacked&#xD;&#xA;pivot6-title:&quot;Comparison cashflows effect composition&quot;&#xD;&#xA;">
+          <headerText>Category</headerText>
+        </dataField>
+        <dataField fieldName="TransactionDate" columns="20" tag="pivot1-row1-column-year&#xD;&#xA;pivot1-row2-month&#xD;&#xA;pivot1-title:&quot;Cash Inflows and Outflows Overtime&quot;&#xD;&#xA;" />
+        <dataField fieldName="InflowAmount" columns="15" tag="pivot1-val1-sum&#xD;&#xA;pivot2-val1-sum&#xD;&#xA;pivot3-val1-sum&#xD;&#xA;pivot5-val1-sum" />
+        <dataField fieldName="OutflowAmount" columns="15" tag="pivot1-val2-sum&#xD;&#xA;pivot2-val2-sum&#xD;&#xA;pivot4-val2-sum&#xD;&#xA;pivot5-val2-sum" />
+        <dataField fieldName="FlowType" columns="15" />
+        <dataField fieldName="CashEffect" columns="14" tag="pivot6-col1" />
+        <dataField fieldName="TransactionDescription" columns="80">
+          <headerText>Description</headerText>
+        </dataField>
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Get Cashflow Inflow Outflow">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Get Cashflow Inflow Outflow" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="CashFlowCategory" columns="50" />
+            <dataField fieldName="AccountName" />
+            <dataField fieldName="TransactionDate" columns="10" />
+            <dataField fieldName="TransactionDescription" />
+            <dataField fieldName="InflowAmount" columns="15" />
+            <dataField fieldName="OutflowAmount" columns="15" />
+            <dataField fieldName="FlowType" columns="7" />
+            <dataField fieldName="CashEffect" columns="14" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Get Cashflow Inflow Outflow">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="New Get Cashflow Inflow Outflow" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields />
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a9" />
+      <action id="a10" commandName="BatchEdit" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule type="Sql" id="enableResultSet" commandName="Select" phase="Before"><![CDATA[set @BusinessRules_EnableResultSet = 1
+-- Enable caching of the result set. Duration is specified in seconds.
+-- set @BusinessRules_ResultSetCacheDuration = 30 ]]></rule>
+    <rule type="Sql" id="getData" commandName="Select" phase="Before"><![CDATA[EXEC zusp_get_cashflow_inflow_outflow]]></rule>
+    <rule type="Sql" id="insert" commandName="Insert" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement insert here]]></rule>
+    <rule type="Sql" id="update" commandName="Update" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement update here]]></rule>
+    <rule type="Sql" id="delete" commandName="Delete" phase="Before"><![CDATA[set @BusinessRules_PreventDefault = 1
+-- implement delete here]]></rule>
+  </businessRules>
+</dataController>

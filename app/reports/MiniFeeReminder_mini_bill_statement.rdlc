@@ -372,7 +372,7 @@
                                                     <Value>=  ReportItems!AmountPaid.Value - ReportItems!AmountBilled.Value</Value>
                                                     <Style>
                                                       <FontSize>8pt</FontSize>
-                                                      <Format>'GH₵'#,0;('GH₵'#,0);'-'</Format>
+                                                      <Format>'GH₵'#,0.00;('GH₵'#,0.00);'-'</Format>
                                                       <Color>=IIf(ReportItems!AmountPaid.Value - ReportItems!AmountBilled.Value  &lt; 0, "Red", "DarkBlue")</Color>
                                                     </Style>
                                                   </TextRun>
@@ -885,7 +885,7 @@
                                                         <Value>=Sum(Fields!AmountBilled.Value)</Value>
                                                         <Style>
                                                           <FontSize>8pt</FontSize>
-                                                          <Format>'GH₵' #,0;('GH₵' #,0);'-'</Format>
+                                                          <Format>'GH₵' #,0.00;('GH₵' #,0.00);'-'</Format>
                                                         </Style>
                                                       </TextRun>
                                                     </TextRuns>
@@ -961,7 +961,7 @@
                                                         <Value>=Sum(Fields!AmountPaid.Value)</Value>
                                                         <Style>
                                                           <FontSize>8pt</FontSize>
-                                                          <Format>'GH₵' #,0;('GH₵' #,0);'-'</Format>
+                                                          <Format>'GH₵' #,0.00;('GH₵' #,0.00);'-'</Format>
                                                         </Style>
                                                       </TextRun>
                                                     </TextRuns>
@@ -1037,7 +1037,7 @@
                                                         <Style>
                                                           <FontSize>8pt</FontSize>
                                                           <FontWeight>Bold</FontWeight>
-                                                          <Format>'GH₵' #,0;('GH₵' #,0);'-'</Format>
+                                                          <Format>'GH₵' #,0.00;('GH₵' #,0.00);'-'</Format>
                                                           <Color>=IIf(ReportItems!tblSummary.Value &lt; 0, "Red", "DarkBlue")</Color>
                                                         </Style>
                                                       </TextRun>
@@ -1196,7 +1196,7 @@
                 <Direction>Descending</Direction>
               </SortExpression>
             </SortExpressions>
-            <Top>0.11389in</Top>
+            <Top>0.05139in</Top>
             <Left>0.0688in</Left>
             <Height>3.87166in</Height>
             <Width>6.03879in</Width>
@@ -1213,7 +1213,7 @@
       <Width>6.22604in</Width>
       <Page>
         <PageHeader>
-          <Height>0.96028in</Height>
+          <Height>0.80403in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1252,7 +1252,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>FEE PAYMENT ADVISORY NOTE</Value>
+                      <Value>FEES ADVISORY NOTE</Value>
                       <Style>
                         <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
@@ -1268,7 +1268,7 @@
               <rd:DefaultName>textbox5</rd:DefaultName>
               <Top>0.23354cm</Top>
               <Left>0.48576cm</Left>
-              <Height>0.77639in</Height>
+              <Height>0.63056in</Height>
               <Width>5.79134in</Width>
               <Style>
                 <PaddingLeft>2pt</PaddingLeft>

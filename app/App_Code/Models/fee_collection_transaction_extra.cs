@@ -13,6 +13,8 @@ namespace zLearnHub.Models
 
         TransDate,
 
+        DueDate,
+
         FeeID,
 
         Status,
@@ -104,6 +106,9 @@ namespace zLearnHub.Models
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private DateTime? _transDate;
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        private DateTime? _dueDate;
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         private int? _feeID;
@@ -260,6 +265,19 @@ namespace zLearnHub.Models
             {
                 _transDate = value;
                 UpdateFieldValue("TransDate", value);
+            }
+        }
+
+        public DateTime? DueDate
+        {
+            get
+            {
+                return _dueDate;
+            }
+            set
+            {
+                _dueDate = value;
+                UpdateFieldValue("DueDate", value);
             }
         }
 

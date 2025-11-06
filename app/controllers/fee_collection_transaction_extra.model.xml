@@ -1,38 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataModel baseSchema="dbo" baseTable="fee_collection_transaction" alias="fee_collection_transaction" created="2024-01-29T09:19:49" modified="2025-10-12T16:17:47" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+<dataModel baseSchema="dbo" baseTable="fee_collection_transaction" alias="fee_collection_transaction" created="2024-01-29T09:19:49" modified="2025-10-19T07:09:46" x="20" y="37" xmlns="urn:schemas-codeontime-com:data-model">
   <foreignKeys>
-    <foreignKey id="FeePerson" parentTableSchema="dbo" parentTableName="student_fees" x="354" y="20">
+    <foreignKey id="FeePerson" parentTableSchema="dbo" parentTableName="student_fees" x="656" y="50">
       <foreignKeyColumn columnName="FeeID" parentColumnName="FeeID" />
       <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
     </foreignKey>
-    <foreignKey id="PaymentMethod" parentTableSchema="dbo" parentTableName="zlkpPaymentMethod" x="355" y="427">
+    <foreignKey id="PaymentMethod" parentTableSchema="dbo" parentTableName="zlkpPaymentMethod" x="355" y="444">
       <foreignKeyColumn columnName="PaymentMethodID" parentColumnName="PaymentMethodID" />
     </foreignKey>
-    <foreignKey id="PaymentBy" parentTableSchema="dbo" parentTableName="zlkpPaymentBy" x="358" y="540">
+    <foreignKey id="PaymentBy" parentTableSchema="dbo" parentTableName="zlkpPaymentBy" x="358" y="558">
       <foreignKeyColumn columnName="PaymentByID" parentColumnName="PaymentByID" />
     </foreignKey>
-    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="733" y="20" baseForeignKey="FeePerson">
+    <foreignKey id="Person" parentTableSchema="dbo" parentTableName="Person" x="1088" y="43" baseForeignKey="FeePerson">
       <foreignKeyColumn columnName="PersonID" parentColumnName="PersonID" />
     </foreignKey>
-    <foreignKey id="Organization" parentTableSchema="dbo" parentTableName="Organisation" x="1102" y="20" baseForeignKey="Person">
+    <foreignKey id="Organization" parentTableSchema="dbo" parentTableName="Organisation" x="1447" y="20" baseForeignKey="Person">
       <foreignKeyColumn columnName="OrganizationID" parentColumnName="OrganizationID" />
     </foreignKey>
-    <foreignKey id="TransactionType" parentTableSchema="dbo" parentTableName="zlkpTransactionType" x="33" y="677">
+    <foreignKey id="TransactionType" parentTableSchema="dbo" parentTableName="zlkpTransactionType" x="33" y="695">
       <foreignKeyColumn columnName="TransactionTypeID" parentColumnName="TransactionTypeID" />
     </foreignKey>
-    <foreignKey id="TransactionStatus" parentTableSchema="dbo" parentTableName="zlkpTransactionStatus" x="354" y="319">
+    <foreignKey id="TransactionStatus" parentTableSchema="dbo" parentTableName="zlkpTransactionStatus" x="354" y="336">
       <foreignKeyColumn columnName="TransactionStatusID" parentColumnName="TransactionStatusID" />
     </foreignKey>
-    <foreignKey id="DebitAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="363" y="652">
+    <foreignKey id="DebitAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="363" y="670">
       <foreignKeyColumn columnName="DebitAccountID" parentColumnName="AccountID" />
     </foreignKey>
-    <foreignKey id="CreditAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="364" y="792">
+    <foreignKey id="CreditAccount" parentTableSchema="dbo" parentTableName="chart_of_accounts" x="364" y="810">
       <foreignKeyColumn columnName="CreditAccountID" parentColumnName="AccountID" />
     </foreignKey>
   </foreignKeys>
   <columns>
     <column name="TransactionID" fieldName="TransactionID" label="Transaction ID" />
     <column name="TransDate" fieldName="TransDate" label="Trans Date" />
+    <column name="DueDate" fieldName="DueDate" label="Due Date" foreignKey="FeePerson" format="d" />
     <column name="FeeID" fieldName="FeeID" label="Fee ID" aliasColumnName="FeeStatusCode" aliasForeignKey="FeePerson" />
     <column name="FeeStatusCode" fieldName="Status" label="Status" foreignKey="FeePerson" />
     <column name="FeeAmount" fieldName="BillAmount" label="Bill Amount" foreignKey="FeePerson" format="" />

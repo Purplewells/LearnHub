@@ -74,13 +74,13 @@
         <dataField fieldName="Attribute1" rows="5" hidden="true" />
         <dataField fieldName="Attribute2" hidden="true" />
         <dataField fieldName="ShowOnReport" hidden="true" />
-        <dataField fieldName="OverallBilled" columns="10">
+        <dataField fieldName="OverallBilled" columns="10" hidden="true">
           <headerText>Billed</headerText>
         </dataField>
-        <dataField fieldName="OverallPaid" columns="10">
+        <dataField fieldName="OverallPaid" columns="10" hidden="true">
           <headerText>Overall Paid</headerText>
         </dataField>
-        <dataField fieldName="OverallOutstanding" columns="12" tag="pivot3-val1-sum&#xD;&#xA;">
+        <dataField fieldName="OverallOutstanding" columns="18" tag="pivot3-val1-sum&#xD;&#xA;" hidden="true">
           <headerText>Oustanding</headerText>
         </dataField>
         <dataField fieldName="HasOutstanding" columns="12" tag="pivot3-col1&#xD;&#xA;">
@@ -135,13 +135,13 @@
         <dataField fieldName="Attribute1" rows="5" hidden="true" />
         <dataField fieldName="Attribute2" hidden="true" />
         <dataField fieldName="ShowOnReport" hidden="true" />
-        <dataField fieldName="OverallBilled" columns="10">
+        <dataField fieldName="OverallBilled" columns="10" hidden="true">
           <headerText>Billed</headerText>
         </dataField>
-        <dataField fieldName="OverallPaid" columns="10">
+        <dataField fieldName="OverallPaid" columns="10" hidden="true">
           <headerText>Overall Paid</headerText>
         </dataField>
-        <dataField fieldName="OverallOutstanding" columns="12" tag="pivot3-val1-sum&#xD;&#xA;">
+        <dataField fieldName="OverallOutstanding" columns="12" tag="pivot3-val1-sum&#xD;&#xA;" hidden="true">
           <headerText>Oustanding</headerText>
         </dataField>
         <dataField fieldName="HasOutstanding" columns="12" tag="pivot3-col1&#xD;&#xA;">
@@ -196,13 +196,13 @@
         <dataField fieldName="Attribute1" rows="5" hidden="true" />
         <dataField fieldName="Attribute2" hidden="true" />
         <dataField fieldName="ShowOnReport" hidden="true" />
-        <dataField fieldName="OverallBilled" columns="10">
+        <dataField fieldName="OverallBilled" columns="10" hidden="true">
           <headerText>Billed</headerText>
         </dataField>
-        <dataField fieldName="OverallPaid" columns="10">
+        <dataField fieldName="OverallPaid" columns="10" hidden="true">
           <headerText>Overall Paid</headerText>
         </dataField>
-        <dataField fieldName="OverallOutstanding" columns="12" tag="pivot3-val1-sum&#xD;&#xA;">
+        <dataField fieldName="OverallOutstanding" columns="12" tag="pivot3-val1-sum&#xD;&#xA;" hidden="true">
           <headerText>Oustanding</headerText>
         </dataField>
         <dataField fieldName="HasOutstanding" columns="12" tag="pivot3-col1&#xD;&#xA;">
@@ -258,13 +258,13 @@
         <dataField fieldName="Attribute1" rows="5" hidden="true" />
         <dataField fieldName="Attribute2" hidden="true" />
         <dataField fieldName="ShowOnReport" hidden="true" />
-        <dataField fieldName="OverallBilled" columns="10">
+        <dataField fieldName="OverallBilled" columns="10" hidden="true">
           <headerText>Billed</headerText>
         </dataField>
-        <dataField fieldName="OverallPaid" columns="10">
+        <dataField fieldName="OverallPaid" columns="10" hidden="true">
           <headerText>Overall Paid</headerText>
         </dataField>
-        <dataField fieldName="OverallOutstanding" columns="12" tag="pivot3-val1-sum&#xD;&#xA;">
+        <dataField fieldName="OverallOutstanding" columns="12" tag="pivot3-val1-sum&#xD;&#xA;" hidden="true">
           <headerText>Oustanding</headerText>
         </dataField>
         <dataField fieldName="HasOutstanding" columns="12" tag="pivot3-col1&#xD;&#xA;">
@@ -398,34 +398,32 @@
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
+      <action id="a100" commandName="ReportAsPdf" headerText="Print Fee Balances Statement" cssClass="material-icon-print" whenKeySelected="true">
+        <data><![CDATA[_controller = znCustomFeeDebtorsReminderNoteV2
+_view =grid1
+_template = znCustomFeeDebtorsReminderNoteV2_grid1.rdlc
+PersonID = @Arguments_SelectedValues]]></data>
+      </action>
+      <action id="a101" commandName="ReportAsPdf" headerText="Print Fee Statement (Totals)" cssClass="material-icon-spa">
+        <data />
+      </action>
+      <action id="a102" commandName="ReportAsPdf" headerText="Print Compact Statement (Totals)" cssClass="material-icon-picture_as_pdf" whenLastCommandName="Any">
+        <data><![CDATA[_controller = znCustomFeeDebtorsReminderNoteV2
+_view =grid1_totals_compact
+_template = znCustomFeeDebtorsReminderNoteV2_grid1_totals_compact.rdlc]]></data>
+      </action>
       <action id="a2" />
+      <action id="a1" commandName="ExportCsv" headerText="Export To CSV" />
       <action id="a3" commandName="ExportRowset" headerText="Export To IPY" />
       <action id="a4" commandName="ExportRss" headerText="Send To RSS API" />
+      <action id="a103" commandName="ReportAsExcel" headerText="Export To Excel" />
+      <action id="a104" commandName="ReportAsWord" headerText="Export To Word" />
     </actionGroup>
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
-    </actionGroup>
-    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" headerText="Print Fee Balances Statement" cssClass="material-icon-print" whenKeySelected="true">
-        <data><![CDATA[_controller = znCustomFeeDebtorsReminderNoteV2
-_view =grid1
-_template = znCustomFeeDebtorsReminderNoteV2_grid1.rdlc
-PersonID = @Arguments_SelectedValues]]></data>
-      </action>
-      <action id="a100" commandName="ReportAsPdf" headerText="Print Fee Statement (Totals)" cssClass="material-icon-spa">
-        <data />
-      </action>
-      <action id="a101" commandName="ReportAsPdf" headerText="Print Compact Statement (Totals)" cssClass="material-icon-picture_as_pdf" whenLastCommandName="Any">
-        <data><![CDATA[_controller = znCustomFeeDebtorsReminderNoteV2
-_view =grid1_totals_compact
-_template = znCustomFeeDebtorsReminderNoteV2_grid1_totals_compact.rdlc]]></data>
-      </action>
-      <action id="a3" commandName="ReportAsExcel" headerText="Export To Excel" />
-      <action id="a4" commandName="ReportAsWord" headerText="Export To Word" />
     </actionGroup>
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />

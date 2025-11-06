@@ -81,14 +81,14 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
     <field name="PaymentMethodID" type="Int32" label="Payment Method ID" allowLEV="true">
       <items style="RadioButtonList" dataController="PaymentMethod" dataValueField="PaymentMethodID" dataTextField="PaymentMethod" dataView="grid1" />
     </field>
-    <field name="PaymentMethod" type="String" readOnly="true" label="Payment Method" length="15" />
+    <field name="PaymentMethod" type="String" readOnly="true" label="Payment Method" length="20" />
     <field name="TransactionStatusCode" type="String" label="Transaction Status Code" length="20">
       <items style="RadioButtonList" dataView="grid1" />
     </field>
     <field name="PaymentByID" type="Int32" label="Payment By ID">
       <items style="DropDownList" dataController="PaymentBy" newDataView="createForm1" dataValueField="PaymentByID" dataTextField="PaymentRelation" />
     </field>
-    <field name="PaymentRelation" type="String" readOnly="true" label="Relationship" length="18" />
+    <field name="PaymentRelation" type="String" readOnly="true" label="Relationship" length="20" />
     <field name="NameOfPayee" type="String" label="Payee Name" length="25" />
     <field name="CreatedDate" type="DateTime" dataFormatString="g" label="Created Date" />
     <field name="ModifiedDate" type="DateTime" dataFormatString="g" label="Modified Date" />
@@ -109,7 +109,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
       <formula>COALESCE(Person.FirstName + ' ' + Person.LastName + ' &gt;&gt; ' + fee_collection_transaction.Description, 'UNKNOWN')</formula>
     </field>
     <field name="TransactionTypeID" type="Int32" label="Transaction Type ID" allowLEV="true" causesCalculate="true">
-      <items style="RadioButtonList" dataController="TransactionType" dataValueField="TransactionTypeID" dataTextField="TransactionType" copy="TransactionTypeCode=TransactionTypeCode" dataView="grid1" />
+      <items style="RadioButtonList" dataController="TransactionTypeRefund" dataValueField="TransactionTypeID" dataTextField="TransactionType" copy="TransactionTypeCode=TransactionTypeCode" dataView="grid1" />
     </field>
     <field name="TransactionType" type="String" readOnly="true" label="Transaction Type" length="20" />
     <field name="TransactionTypeCode" type="String" readOnly="true" label="Transaction Type Code" length="20">
@@ -144,9 +144,9 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
         <dataField fieldName="UPN" columns="10" />
         <dataField fieldName="GL" columns="8" />
         <dataField fieldName="FeeDescription" columns="30" />
-        <dataField fieldName="FeeType" columns="15" hidden="true" />
         <dataField fieldName="Description" columns="20" />
-        <dataField fieldName="TransDate" columns="10" />
+        <dataField fieldName="FeeType" columns="20" />
+        <dataField fieldName="TransDate" columns="20" />
         <dataField fieldName="FeeID" aliasFieldName="Status" />
         <dataField fieldName="BillAmount" columns="15" hidden="true" />
         <dataField fieldName="AmountPaid" columns="20" />
@@ -159,10 +159,10 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
         <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod">
           <headerText>MOPS</headerText>
         </dataField>
-        <dataField fieldName="TransactionStatusID" aliasFieldName="TransactionStatus">
+        <dataField fieldName="TransactionStatusID" aliasFieldName="TransactionStatus" hidden="true">
           <headerText>Status</headerText>
         </dataField>
-        <dataField fieldName="ReceiptNo" columns="15" />
+        <dataField fieldName="ReceiptNo" columns="15" textMode="Static" />
         <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" />
         <dataField fieldName="NameOfPayee" columns="25" hidden="true" />
         <dataField fieldName="CurrentBalance" columns="15" hidden="true">
@@ -192,7 +192,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
         <category id="c1" flow="NewColumn">
           <description />
           <dataFields>
-            <dataField fieldName="ReceiptNo" columns="50" />
+            <dataField fieldName="ReceiptNo" columns="50" textMode="Static" />
             <dataField fieldName="TransDate" columns="10" />
             <dataField fieldName="FeeID" aliasFieldName="Status" />
             <dataField fieldName="BillAmount" columns="15" />
@@ -200,9 +200,9 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
             <dataField fieldName="AmountPaid" columns="15" tag="focus-auto" />
             <dataField fieldName="Description" columns="50" hidden="true" />
             <dataField fieldName="FeeType" columns="20" hidden="true" />
-            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" rows="3" columns="4" />
-            <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" columns="3" />
-            <dataField fieldName="TransactionStatusID" aliasFieldName="TransactionStatus" rows="2" columns="4" />
+            <dataField fieldName="TransactionTypeID" aliasFieldName="TransactionType" rows="3" />
+            <dataField fieldName="PaymentMethodID" aliasFieldName="PaymentMethod" rows="3" />
+            <dataField fieldName="TransactionStatusID" aliasFieldName="TransactionStatus" rows="2" columns="4" hidden="true" />
             <dataField fieldName="PaymentByID" aliasFieldName="PaymentRelation" />
             <dataField fieldName="PersonID" textMode="Static" columns="15" />
             <dataField fieldName="TransactionStatusCode" columns="20" tag="lookup-null-value-none" hidden="true" />
@@ -325,7 +325,7 @@ from "dbo"."fee_collection_transaction" "fee_collection_transaction"
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Edit" commandArgument="editForm1" headerText="Review" cssClass="material-icon-recommend" />
       <action id="a101" />
-      <action commandName="Select" commandArgument="editForm1_Refund" headerText="Issue Refund" id="a104" description="Refund Process Alert" cssClass="material-icon-refresh" />
+      <action commandName="Edit" commandArgument="editForm1_Refund" headerText="Issue Refund" id="a104" description="Refund Process Alert" cssClass="material-icon-refresh" />
       <action commandName="ReportAsPdf" headerText="Print Receipt" id="a100" whenKeySelected="true" cssClass="material-icon-print">
         <data><![CDATA[_controller=fee_collection_transaction_itemised
 _view=editForm1
@@ -335,7 +335,7 @@ TransactionID=TransactionID]]></data>
       <action id="a102" />
       <action id="a2" commandName="Edit" headerText="Edit Inline" cssClass="material-icon-brush" description="material-icon-filter_alt" />
       <action id="a6" />
-      <action id="a3" commandName="Delete" />
+      <action id="a3" commandName="Delete" roles="Administrators" />
       <action id="a7" commandName="New" commandArgument="grid1" />
       <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
       <action id="a9" />
@@ -343,11 +343,11 @@ TransactionID=TransactionID]]></data>
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" headerText="Review" />
-      <action id="a2" commandName="Delete" />
+      <action id="a2" commandName="Delete" roles="Administrators" />
       <action id="a3" commandName="Cancel" />
-      <action commandName="Custom" commandArgument="ProcessRefundTransaction" headerText="Process Refund Transaction" id="a102" whenLastCommandName="Edit" whenKeySelected="true" />
+      <action commandName="Custom" commandArgument="ProcessRefundTransaction" headerText="Process Refund Transaction" id="a102" whenLastCommandName="Edit" whenKeySelected="true" whenView="editForm1_Refund" />
       <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
-      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" headerText="Click To Close" />
       <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
@@ -373,9 +373,9 @@ _view=editForm1
 _template=fee_collection_transaction_itemised_editForm1.rdlc
 TransactionID=TransactionID]]></data>
       </action>
-      <action commandName="Select" commandArgument="editForm1_Refund" headerText="Issue Refund" id="a104" description="Refund Process Alert" cssClass="material-icon-refresh" whenKeySelected="true" />
+      <action commandName="Edit" commandArgument="editForm1_Refund" headerText="Issue Refund" id="a104" description="Refund Process Alert" cssClass="material-icon-refresh" whenKeySelected="true" />
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="material-icon-brush" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" roles="Administrators" />
       <action commandName="Search" cssClass="material-icon-filter_alt" id="a101" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">

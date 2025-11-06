@@ -679,7 +679,7 @@
                               </TablixRowHierarchy>
                               <KeepTogether>true</KeepTogether>
                               <DataSetName>MiniFeeReminder</DataSetName>
-                              <Top>0.59944in</Top>
+                              <Top>0.69944in</Top>
                               <Left>0.14166in</Left>
                               <Height>0.525in</Height>
                               <Width>5.8112in</Width>
@@ -712,7 +712,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Greetings! We wanted to bring to your attention that there are outstanding fees remaining for </Value>
+                                      <Value>We wish to remind you that the school fees </Value>
                                       <Style>
                                         <FontStyle>Normal</FontStyle>
                                         <FontFamily>arial</FontFamily>
@@ -769,7 +769,7 @@
                                       </Style>
                                     </TextRun>
                                     <TextRun>
-                                      <Value>class</Value>
+                                      <Value>class remain outstanding</Value>
                                       <Style>
                                         <FontStyle>Normal</FontStyle>
                                         <FontFamily>arial</FontFamily>
@@ -791,7 +791,23 @@
                                       </Style>
                                     </TextRun>
                                     <TextRun>
-                                      <Value> Kindly ensure the settlement of this balance at your earliest convenience. We appreciate your cooperation in keeping the accounts up-to-date.</Value>
+                                      <Value> Kindly arrange to settle the outstanding balance at your earliest convenience to ensure uninterrupted access to school services. Please disregard this notice if payment has already been made.</Value>
+                                      <Style>
+                                        <FontStyle>Normal</FontStyle>
+                                        <FontFamily>arial</FontFamily>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                        <TextDecoration>None</TextDecoration>
+                                        <Color>#000000</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>We sincerely appreciate your continued cooperation and support.</Value>
                                       <Style>
                                         <FontStyle>Normal</FontStyle>
                                         <FontFamily>arial</FontFamily>
@@ -808,7 +824,7 @@
                               <rd:DefaultName>Textbox12</rd:DefaultName>
                               <Top>0.025in</Top>
                               <Left>0.06666in</Left>
-                              <Height>0.52583in</Height>
+                              <Height>0.65083in</Height>
                               <Width>5.85699in</Width>
                               <ZIndex>1</ZIndex>
                               <Style>
@@ -1105,7 +1121,7 @@
                                 </Tablix>
                               </ReportItems>
                               <KeepTogether>true</KeepTogether>
-                              <Top>1.18in</Top>
+                              <Top>1.28in</Top>
                               <Left>1.89051in</Left>
                               <Height>0.92583in</Height>
                               <Width>4.03736in</Width>
@@ -1140,7 +1156,7 @@
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>Attribute1</rd:DefaultName>
-                              <Top>2.28197in</Top>
+                              <Top>2.34447in</Top>
                               <Left>1.89051in</Left>
                               <Height>0.79938in</Height>
                               <Width>4.02327in</Width>

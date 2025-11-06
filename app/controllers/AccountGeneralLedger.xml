@@ -41,7 +41,7 @@ from "dbo"."account_general_ledger" "account_general_ledger"
     <field name="AccountID" type="Int32" label="Account ID" showInSummary="true">
       <items style="Lookup" dataController="ChartOfAccounts" newDataView="createForm1" dataValueField="AccountID" dataTextField="AccountName" copy="AccountNumber=AccountNumber, LFT=LFT, RGT=RGT, AccountType=AccountType" />
     </field>
-    <field name="AccountName" type="String" readOnly="true" label="Account Name" length="20" />
+    <field name="AccountName" type="String" readOnly="true" label="Account Name" length="35" />
     <field name="AccountNumber" type="String" readOnly="true" label="Account No." length="20" />
     <field name="LFT" type="Int32" readOnly="true" label="LFT" />
     <field name="RGT" type="Int32" readOnly="true" label="RGT" />
@@ -69,10 +69,10 @@ from "dbo"."account_general_ledger" "account_general_ledger"
         <dataField fieldName="ReferenceNumber" columns="8">
           <headerText>Ref No.</headerText>
         </dataField>
-        <dataField fieldName="DebitAmount" columns="10" aggregate="Sum" dataFormatString="N">
+        <dataField fieldName="DebitAmount" columns="20" aggregate="Sum" dataFormatString="N">
           <headerText>Debit</headerText>
         </dataField>
-        <dataField fieldName="CreditAmount" columns="12" aggregate="Sum" dataFormatString="N">
+        <dataField fieldName="CreditAmount" columns="20" aggregate="Sum" dataFormatString="N">
           <headerText>Credit</headerText>
         </dataField>
         <dataField fieldName="LFT" columns="5" hidden="true" />

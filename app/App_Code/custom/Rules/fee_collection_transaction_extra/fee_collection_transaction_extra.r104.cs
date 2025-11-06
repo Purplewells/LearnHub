@@ -21,7 +21,7 @@ namespace zLearnHub.Rules
         public void r104Implementation(fee_collection_transaction_extraModel instance)
         {
             // This is the placeholder for method implementation.
-            instance.Description = instance.FeeDescription + '-' + "test";
+            instance.Description = instance.FeeDescription;
         }
     }
 }

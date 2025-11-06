@@ -213,7 +213,7 @@ from "dbo"."student_fees" "student_fees"
         </category>
         <category id="c5" tab="CORE PAYMENT " flow="NewRow">
           <dataFields>
-            <dataField fieldName="fee_collection_transaction_extra" columns="15" tag="modal-fit-content&#xD;&#xA;modal-max-xs&#xD;&#xA;" />
+            <dataField fieldName="fee_collection_transaction_extra" columns="15" tag="material-icon-savings&#xD;&#xA;modal-max-xs&#xD;&#xA;modal-fit-content&#xD;&#xA;content-stub-none&#xD;&#xA;header-title-none&#xD;&#xA;&#xD;&#xA;" />
           </dataFields>
         </category>
         <category id="d1" tab="PAYMENT STUB" flow="NewRow">

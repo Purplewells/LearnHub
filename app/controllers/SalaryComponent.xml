@@ -10,6 +10,7 @@ select
 	,"zlkpSalaryComponents"."IsActive" "IsActive"
 	,"zlkpSalaryComponents"."ComponentTypeID" "ComponentTypeID"
 	,"ComponentType"."ComponentType" "ComponentType"
+	,"ComponentType"."ComponentCode" "ComponentTypeCode"
 	,"zlkpSalaryComponents"."SortOrder" "SortOrder"
 from "dbo"."zlkpSalaryComponents" "zlkpSalaryComponents"
 	left join "dbo"."zlkpSalaryComponentType" "ComponentType" on "zlkpSalaryComponents"."ComponentTypeID" = "ComponentType"."ComponentTypeID"
@@ -28,9 +29,10 @@ from "dbo"."zlkpSalaryComponents" "zlkpSalaryComponents"
     <field name="Code" type="String" label="Code" length="20" showInSummary="true" />
     <field name="IsActive" type="Boolean" label="Is Active" showInSummary="true" />
     <field name="ComponentTypeID" type="Int32" label="Component Type ID" showInSummary="true">
-      <items style="Lookup" dataController="SalaryComponentType" newDataView="createForm1" dataValueField="ComponentTypeID" dataTextField="ComponentType" />
+      <items style="Lookup" dataController="SalaryComponentType" newDataView="createForm1" dataValueField="ComponentTypeID" dataTextField="ComponentType" copy="ComponentTypeCode=ComponentCode" />
     </field>
     <field name="ComponentType" type="String" readOnly="true" label="Component Type" length="20" />
+    <field name="ComponentTypeCode" type="String" readOnly="true" label="Component Type Code" length="20" />
     <field name="SortOrder" type="Int32" label="Sort Order" showInSummary="true" />
   </fields>
   <views>
@@ -41,6 +43,7 @@ from "dbo"."zlkpSalaryComponents" "zlkpSalaryComponents"
         <dataField fieldName="Code" columns="20" />
         <dataField fieldName="IsActive" />
         <dataField fieldName="ComponentTypeID" aliasFieldName="ComponentType" hidden="true" />
+        <dataField fieldName="ComponentTypeCode" columns="20" />
         <dataField fieldName="SortOrder" columns="15" />
       </dataFields>
     </view>
@@ -51,6 +54,7 @@ from "dbo"."zlkpSalaryComponents" "zlkpSalaryComponents"
         <dataField fieldName="Code" columns="20" />
         <dataField fieldName="IsActive" />
         <dataField fieldName="ComponentTypeID" aliasFieldName="ComponentType" hidden="true" />
+        <dataField fieldName="ComponentTypeCode" columns="20" />
         <dataField fieldName="SortOrder" columns="15" />
       </dataFields>
     </view>
@@ -64,6 +68,7 @@ from "dbo"."zlkpSalaryComponents" "zlkpSalaryComponents"
             <dataField fieldName="Code" columns="20" />
             <dataField fieldName="IsActive" />
             <dataField fieldName="ComponentTypeID" aliasFieldName="ComponentType" hidden="true" />
+            <dataField fieldName="ComponentTypeCode" columns="20" />
             <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>
@@ -79,6 +84,7 @@ from "dbo"."zlkpSalaryComponents" "zlkpSalaryComponents"
             <dataField fieldName="Code" columns="20" />
             <dataField fieldName="IsActive" />
             <dataField fieldName="ComponentTypeID" aliasFieldName="ComponentType" hidden="true" />
+            <dataField fieldName="ComponentTypeCode" columns="20" />
             <dataField fieldName="SortOrder" columns="15" />
           </dataFields>
         </category>

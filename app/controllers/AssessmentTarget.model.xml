@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="AssessmentTarget" alias="AssessmentTarget" created="2025-10-28T12:52:20" modified="2025-10-30T09:10:53" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="TargetTemplate" parentTableSchema="dbo" parentTableName="zlkpTargetTemplate" x="351" y="20">
+      <foreignKeyColumn columnName="TargetTemplateID" parentColumnName="TargetTemplateID" />
+    </foreignKey>
+    <foreignKey id="TargetTemplateMeasurementType" parentTableSchema="dbo" parentTableName="zlkpMeasurementType" baseForeignKey="TargetTemplate" x="683" y="20">
+      <foreignKeyColumn columnName="MeasurementTypeID" parentColumnName="MeasurementTypeID" />
+    </foreignKey>
+    <foreignKey id="TargetTemplateTargetLevel" parentTableSchema="dbo" parentTableName="zlkpTargetLevel" baseForeignKey="TargetTemplate" x="683" y="198">
+      <foreignKeyColumn columnName="TargetLevelID" parentColumnName="TargetLevelID" />
+    </foreignKey>
+    <foreignKey id="TargetLevel" parentTableSchema="dbo" parentTableName="zlkpTargetLevel" x="351" y="228">
+      <foreignKeyColumn columnName="TargetLevelID" parentColumnName="TargetLevelID" />
+    </foreignKey>
+    <foreignKey id="MeasurementType" parentTableSchema="dbo" parentTableName="zlkpMeasurementType" x="348" y="340">
+      <foreignKeyColumn columnName="MeasurementTypeID" parentColumnName="MeasurementTypeID" />
+    </foreignKey>
+    <foreignKey id="Session" parentTableSchema="dbo" parentTableName="Session" x="32" y="567">
+      <foreignKeyColumn columnName="CalendarSessionID" parentColumnName="CalendarSessionID" />
+    </foreignKey>
+    <foreignKey id="Course" parentTableSchema="dbo" parentTableName="Course" x="346" y="458">
+      <foreignKeyColumn columnName="CourseID" parentColumnName="CourseID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="AssessmentTargetID" fieldName="AssessmentTargetID" label="Assessment Target ID" />
+    <column name="TargetTemplateID" fieldName="TargetTemplateID" label="Target Template ID" aliasColumnName="TargetName" aliasForeignKey="TargetTemplate" />
+    <column name="TargetName" fieldName="TargetTemplateTargetName" label="Target Name" foreignKey="TargetTemplate" />
+    <column name="MeasurementType" fieldName="TargetTemplateMeasurementType" label="Measurement Type" foreignKey="TargetTemplateMeasurementType" />
+    <column name="TargetLevel" fieldName="TargetTemplateTargetLevel" label="Target Level" foreignKey="TargetTemplateTargetLevel" />
+    <column name="TargetLevelID" fieldName="TargetLevelID" label="Target Level ID" aliasColumnName="TargetLevel" aliasForeignKey="TargetLevel" />
+    <column name="TargetLevel" fieldName="TargetLevel" label="Target Level" foreignKey="TargetLevel" />
+    <column name="TargetName" fieldName="TargetName" label="Target Name" />
+    <column name="Description" fieldName="Description" label="Description" />
+    <column name="TargetValue" fieldName="TargetValue" label="Target Value" />
+    <column name="MeasurementTypeID" fieldName="MeasurementTypeID" label="Measurement Type ID" aliasColumnName="MeasurementType" aliasForeignKey="MeasurementType" />
+    <column name="MeasurementType" fieldName="MeasurementType" label="Measurement Type" foreignKey="MeasurementType" />
+    <column name="CourseID" fieldName="CourseID" label="Course ID" aliasColumnName="CourseTitle" aliasForeignKey="Course" />
+    <column name="CourseTitle" fieldName="CourseTitle" label="Course" foreignKey="Course" />
+    <column name="CalendarSessionID" fieldName="CalendarSessionID" label="Calendar Session ID" aliasColumnName="SessionCode" aliasForeignKey="Session" />
+    <column name="SessionCode" fieldName="SessionCode" label="Session Code" foreignKey="Session" />
+    <column name="SessionName" fieldName="SessionName" label="Session Name" foreignKey="Session" />
+    <column name="EffectiveDate" fieldName="EffectiveDate" label="Effective Date" />
+    <column name="EffectiveEndDate" fieldName="EffectiveEndDate" label="Effective End Date" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+    <column name="TargetType" fieldName="TargetType" label="Target Type" />
+    <column name="Weighting" fieldName="Weighting" label="Weighting" />
+    <column name="TargetLevel" fieldName="extTargetLevel" label="extTarget Level" />
+  </columns>
+</dataModel>

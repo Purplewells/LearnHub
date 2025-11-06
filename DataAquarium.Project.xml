@@ -58,6 +58,6 @@ Created On Date           = CreatedDate</auditing>
   <layout name="Classic" menuStyle="MultiLevel" />
   <theme name="Aquarium" />
   <publish mode="FileSystem">
-    <fileSystem external="false">{"path":"C:\\Users\\adub\\Documents\\Code OnTime\\Publish\\LearnHub\\V08920250904","previewUrl":"","webConfigCustomizations":{"DebugMode":"false","SMTPDelivery":"network","SMTPFrom":"b.adu@dekakis.com","SMTPDefaultCredentials":"false","SMTPNetworkUserName":"b.adu@dekakis.com","SMTPNetworkPassword":"nanakillo,1970","SMTPEnableSSL":"true","SMTPNetworkPort":"465","SMTPClientDomain":"mail.ntchosting.com"}}</fileSystem>
+    <fileSystem external="false">{"path":"C:\\Users\\adub\\Documents\\Code OnTime\\Publish\\LearnHub\\V08920251018","previewUrl":"","webConfigCustomizations":{"DebugMode":"false","CustomErrors":"Off","SMTPDelivery":"network","SMTPFrom":"b.adu@dekakis.com","SMTPDefaultCredentials":"false","SMTPNetworkUserName":"b.adu@dekakis.com","SMTPNetworkPassword":"nanakillo,1970","SMTPEnableSSL":"true","SMTPNetworkPort":"465","SMTPClientDomain":"mail.ntchosting.com"}}</fileSystem>
   </publish>
 </project>

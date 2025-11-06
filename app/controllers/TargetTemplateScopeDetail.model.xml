@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="zlkpTargetTemplateScope" alias="zlkpTargetTemplateScope" created="2025-10-30T11:51:59" modified="2025-10-30T11:53:14" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="TargetTemplate" parentTableSchema="dbo" parentTableName="zlkpTargetTemplate" x="369" y="20">
+      <foreignKeyColumn columnName="TargetTemplateID" parentColumnName="TargetTemplateID" />
+    </foreignKey>
+    <foreignKey id="TargetTemplateMeasurementType" parentTableSchema="dbo" parentTableName="zlkpMeasurementType" baseForeignKey="TargetTemplate" x="701" y="20">
+      <foreignKeyColumn columnName="MeasurementTypeID" parentColumnName="MeasurementTypeID" />
+    </foreignKey>
+    <foreignKey id="TargetTemplateMeasurementUnit" parentTableSchema="dbo" parentTableName="zlkpMeasurementUnit" baseForeignKey="TargetTemplate" x="701" y="197">
+      <foreignKeyColumn columnName="MeasurementUnitID" parentColumnName="MeasurementUnitID" />
+    </foreignKey>
+    <foreignKey id="TargetTemplateTargetLevel" parentTableSchema="dbo" parentTableName="zlkpTargetLevel" baseForeignKey="TargetTemplate" x="701" y="374">
+      <foreignKeyColumn columnName="TargetLevelID" parentColumnName="TargetLevelID" />
+    </foreignKey>
+    <foreignKey id="TargetEntity" parentTableSchema="dbo" parentTableName="zlkpTargetEntity" x="369" y="250">
+      <foreignKeyColumn columnName="TargetEntityID" parentColumnName="TargetEntityID" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="TargetTemplateScopeID" fieldName="TargetTemplateScopeID" label="Target Template Scope ID" />
+    <column name="TargetTemplateID" fieldName="TargetTemplateID" label="Target Template ID" aliasColumnName="TargetName" aliasForeignKey="TargetTemplate" />
+    <column name="TargetName" fieldName="TargetTemplateTargetName" label="Target Name" foreignKey="TargetTemplate" />
+    <column name="MeasurementType" fieldName="TargetTemplateMeasurementType" label="Measurement Type" foreignKey="TargetTemplateMeasurementType" />
+    <column name="MeasurementUnitName" fieldName="TargetTemplateMeasurementUnitName" label="Measurement Unit" foreignKey="TargetTemplateMeasurementUnit" />
+    <column name="TargetLevel" fieldName="TargetTemplateTargetLevel" label="Target Level" foreignKey="TargetTemplateTargetLevel" />
+    <column name="EntityType" fieldName="EntityType" label="Entity Type" />
+    <column name="TargetEntityID" fieldName="TargetEntityID" label="Target Entity ID" aliasColumnName="EntityCode" aliasForeignKey="TargetEntity" />
+    <column name="EntityCode" fieldName="TargetEntityCode" label="Entity Code" foreignKey="TargetEntity" />
+    <column name="IsGlobalScope" fieldName="IsGlobalScope" label="Is GlobalScope" />
+    <column name="IsActive" fieldName="IsActive" label="Is Active" />
+    <column name="EffectiveStartDate" fieldName="EffectiveStartDate" label="Effective Start Date" format="d" />
+    <column name="EffectiveEndDate" fieldName="EffectiveEndDate" label="Effective End Date" format="d" />
+    <column name="CreatedBy" fieldName="CreatedBy" label="Created By" />
+    <column name="CreatedDate" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="ModifiedBy" fieldName="ModifiedBy" label="Modified By" />
+    <column name="ModifiedDate" fieldName="ModifiedDate" label="Modified Date" format="g" />
+  </columns>
+</dataModel>
